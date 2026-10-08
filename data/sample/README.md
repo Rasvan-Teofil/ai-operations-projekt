@@ -2,6 +2,6 @@
 
 `sentiment_sample.csv` sind **handgeschriebene Beispielsätze**, keine Nachrichten und kein Benchmark. Spalte `origin` ist überall `dummy`.
 
-Zweck: Split, TF-IDF-Training, API und Tests laufen, bevor ein echter Datensatz gewählt ist. Pro Klasse sechs kurze Sätze, Deutsch und Englisch gemischt, Labels `negative`, `neutral`, `positive`.
+Zweck: Tests und CI (`SENTIMENT_DATA=dummy`). Pro Klasse sechs kurze Sätze, Deutsch und Englisch, Labels `negative`, `neutral`, `positive`. Der echte Lauf nimmt die aufbereiteten Splits aus `python -m src.prepare_data`, siehe `data/README.md`.
 
-Diese Datei nicht mit echten Artikeln auffüllen. Den echten gelabelten Nachrichten-Datensatz (DE/EN) für Meilenstein 1 separat ablegen, in `data/README.md` Herkunft und Lizenz notieren und `src/data.py` darauf umstellen. Der Test `test_sample_is_marked_as_dummy` erwartet bis dahin `origin=dummy`.
+Diese Datei nicht mit echten Artikeln auffüllen. Der Test `test_sample_is_marked_as_dummy` erwartet `origin=dummy`.

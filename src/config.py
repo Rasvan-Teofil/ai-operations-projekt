@@ -1,7 +1,8 @@
 """Pfade, Seeds und der gemeinsame Drei-Klassen-Vertrag.
 
-Training, Vergleich und API lesen dieselben Werte. Der Datensatz unter
-``data/sample`` ist ein handgeschriebener Dummy, kein Benchmark.
+Training, Vergleich und API lesen dieselben Werte. ``data/sample`` bleibt
+die Dummy-Stichprobe für Tests und CI. Der Standardlauf liest die
+aufbereiteten Splits unter ``data/processed`` (nicht im Git).
 """
 
 import os
@@ -10,6 +11,11 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
 SAMPLE_DATA_PATH = DATA_DIR / "sample" / "sentiment_sample.csv"
+PREPARED_DIR = DATA_DIR / "processed"
+PREPARED_TRAIN_PATH = PREPARED_DIR / "train.csv"
+PREPARED_VAL_PATH = PREPARED_DIR / "val.csv"
+PREPARED_TEST_PATH = PREPARED_DIR / "test.csv"
+PREPARED_META_PATH = PREPARED_DIR / "metadata.json"
 MODELS_DIR = PROJECT_ROOT / "models"
 REPORTS_DIR = PROJECT_ROOT / "reports"
 NOTEBOOKS_DIR = PROJECT_ROOT / "notebooks"
@@ -18,6 +24,14 @@ FINETUNED_SMOKE_DIR = MODELS_DIR / "finetuned-smoke"
 
 RANDOM_SEED = 42
 TEST_SIZE = 0.2
+# Echte Splits: 70 % Train, 15 % Val, 15 % Test, stratifiziert nach Label und Sprache.
+PREPARE_TEST_SIZE = 0.15
+PREPARE_VAL_SIZE = 0.15
+MIN_TEXT_CHARS = 20
+
+DATASET_ID_EN = "takala/financial_phrasebank"
+DATASET_CONFIG_EN = "sentences_75agree"
+DATASET_ID_DE = "Kenpache/multilingual-financial-sentiment"
 
 TEXT_COLUMN = "text"
 LABEL_COLUMN = "label"

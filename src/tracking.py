@@ -19,7 +19,7 @@ from pathlib import Path
 import mlflow
 
 from src.config import MLFLOW_EXPERIMENT_NAME, MLFLOW_TRACKING_DIR
-from src.data import PLACEHOLDER_DATASET
+from src.data import dataset_log_params
 from src.evaluate import classification_metrics, confusion_frame
 from src.interface import SentimentModel
 
@@ -35,16 +35,15 @@ def setup_mlflow() -> None:
     mlflow.set_experiment(MLFLOW_EXPERIMENT_NAME)
 
 
-def shared_dataset_params(n_train: int, n_test: int, random_seed: int, test_size: float) -> dict:
-    return {
-        "dataset": PLACEHOLDER_DATASET,
-        "dataset_kind": "dummy_placeholder",
-        "random_seed": random_seed,
-        "test_size": test_size,
-        "n_train": int(n_train),
-        "n_test": int(n_test),
-        "label_space": "negative|neutral|positive",
-    }
+def shared_dataset_params(n_train: int, n_test: int, n_val: int | None = None) -> dict:
+    """Herkunft kommt aus ``dataset_log_params``, damit Dummy und Echtlauf nicht vermischt werden."""
+    params = dataset_log_params()
+    params["n_train"] = int(n_train)
+    params["n_test"] = int(n_test)
+    if n_val is not None:
+        params["n_val"] = int(n_val)
+    params["label_space"] = "negative|neutral|positive"
+    return params
 
 
 def evaluate_model(model: SentimentModel, texts: Sequence[str], y_true: Sequence[str]) -> dict:

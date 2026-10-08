@@ -20,10 +20,11 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Lokale Experimente (MLflow) und Vergleichstabellen.
+# Lokale Experimente (MLflow). Die Vergleichstabelle mit Diskussion bleibt im Repo.
 mlruns/
 mlartifacts/
-reports/
+reports/*
+!reports/model_comparison.md
 
 # Geheimnisse und lokale Konfiguration
 .env

@@ -86,6 +86,9 @@ class HuggingFaceSentimentModel(SentimentModel):
             from transformers import AutoModelForSequenceClassification, AutoTokenizer
         except ImportError as exc:
             raise RuntimeError(_missing_dependency_message()) from exc
+        import os
+
+        os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
         self._tokenizer = AutoTokenizer.from_pretrained(self.model_id)
         self._model = AutoModelForSequenceClassification.from_pretrained(self.model_id)
         self._model.eval()
@@ -94,7 +97,54 @@ class HuggingFaceSentimentModel(SentimentModel):
     def predict_proba(self, texts: Sequence[str]) -> list[dict[str, float]]:
         if self._model is None or self._tokenizer is None:
             self.load()
-        return [self._scores_for_text(str(text)) for text in texts]
+        cleaned = [str(text).strip() for text in texts]
+        if any(not text for text in cleaned):
+            raise ValueError("Leerer Text.")
+        if not cleaned:
+            return []
+        assert self._tokenizer is not None
+        max_length = effective_max_length(self._tokenizer, self.max_length)
+        special = int(self._tokenizer.num_special_tokens_to_add(pair=False))
+        budget = max_length - special
+        raw_ids = self._tokenizer(
+            cleaned,
+            add_special_tokens=False,
+            truncation=False,
+            padding=False,
+        )["input_ids"]
+        if all(len(ids) <= budget for ids in raw_ids):
+            return self._scores_for_short_batch(cleaned, max_length)
+        return [self._scores_for_text(text) for text in cleaned]
+
+    def _scores_for_short_batch(self, texts: list[str], max_length: int, batch_size: int = 16) -> list[dict[str, float]]:
+        """Ein Fenster pro Text. Dasselbe Softmax wie der Einzelpfad, nur gebündelt."""
+        import torch
+
+        assert self._tokenizer is not None and self._model is not None
+        names = None
+        rows: list[dict[str, float]] = []
+        total = len(texts)
+        for start in range(0, total, batch_size):
+            chunk = texts[start : start + batch_size]
+            batch = self._tokenizer(
+                chunk,
+                truncation=True,
+                padding=True,
+                max_length=max_length,
+                return_tensors="pt",
+            )
+            allowed = ("input_ids", "attention_mask", "token_type_ids")
+            inputs = {key: batch[key] for key in allowed if key in batch}
+            with torch.no_grad():
+                probabilities = torch.softmax(self._model(**inputs).logits, dim=-1).detach().cpu()
+            if names is None:
+                names = _id2label_names(self._model.config.id2label, int(probabilities.shape[-1]))
+            for row in probabilities.tolist():
+                rows.append(complete_scores(collapse_probabilities(names, row)))
+            done = min(start + batch_size, total)
+            if total > batch_size and (start == 0 or done == total or start % (batch_size * 20) == 0):
+                print(f"{self.name}: {done}/{total}", flush=True)
+        return rows
 
     def _scores_for_text(self, text: str) -> dict[str, float]:
         import torch
@@ -165,6 +215,8 @@ def load_finetuned(directory: Path = FINETUNED_DIR) -> HuggingFaceSentimentModel
         )
     version = "finetuned"
     max_length = HF_MAX_TOKENS
+    trained_on = None
+    cap = None
     meta_path = directory / "training_meta.json"
     if meta_path.exists():
         import json
@@ -176,13 +228,21 @@ def load_finetuned(directory: Path = FINETUNED_DIR) -> HuggingFaceSentimentModel
             version += ":smoke"
         if meta.get("max_length"):
             max_length = min(HF_MAX_TOKENS, int(meta["max_length"]))
+        trained_on = meta.get("n_train")
+        cap = meta.get("max_samples")
+    notes = "Eigenes Fine-Tuning auf dem Trainings-Split. Inferenz chunked lange Artikel."
+    if cap:
+        notes += (
+            f" Trainiert auf {trained_on or cap} stratifizierten Trainingssätzen"
+            " (CPU-Subset), bewertet auf dem vollen Testsplit."
+        )
     model = HuggingFaceSentimentModel(
         name="finetuned",
         model_version=version,
         model_id=str(directory),
         max_length=max_length,
         role="finetuned",
-        notes="Eigenes Fine-Tuning auf dem Trainings-Split. Inferenz chunked lange Artikel.",
+        notes=notes,
     )
     return model.load()
 

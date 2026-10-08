@@ -1,7 +1,7 @@
 """Split und Dummy-Datensatz."""
 
 from src.config import LABEL_COLUMN, LABELS_3, LANGUAGE_COLUMN, ORIGIN_COLUMN, TEST_SIZE, TEXT_COLUMN
-from src.data import load_dataset, split_dataset
+from src.data import load_dataset, load_work_splits, split_dataset
 
 
 def test_sample_is_marked_as_dummy():
@@ -28,3 +28,15 @@ def test_split_is_complete_and_reproducible():
     assert x_test.index.equals(x_test_again.index)
     assert set(y_train) == set(LABELS_3)
     assert set(y_test) <= set(LABELS_3)
+
+
+def test_dummy_work_splits_follow_the_same_80_20_rule(monkeypatch):
+    monkeypatch.setenv("SENTIMENT_DATA", "dummy")
+    train, val, test = load_work_splits()
+    frame = load_dataset()
+    x_train, x_test, y_train, y_test = split_dataset(frame)
+    assert len(val) == 0
+    assert train[TEXT_COLUMN].tolist() == x_train[TEXT_COLUMN].astype(str).tolist()
+    assert train[LABEL_COLUMN].tolist() == y_train.astype(str).tolist()
+    assert test[TEXT_COLUMN].tolist() == x_test[TEXT_COLUMN].astype(str).tolist()
+    assert test[LABEL_COLUMN].tolist() == y_test.astype(str).tolist()

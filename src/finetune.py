@@ -11,6 +11,11 @@ Echtes Training auf einer GPU, zum Beispiel Google Colab
     pip install -r requirements.txt -r requirements-transformer.txt
     python -m src.finetune --epochs 3 --lr 2e-5 --batch-size 16 --max-length 256
 
+CPU-Subset, wenn keine GPU da ist (stratifizierte Stichprobe, eine Epoche).
+Bewertet wird trotzdem der volle Testsplit. Das volle Training bleibt GPU/Colab:
+
+    python -m src.finetune --epochs 1 --lr 2e-5 --batch-size 8 --max-length 128 --max-samples 2000
+
 Gewichte liegen danach in ``models/finetuned`` (nicht im Git).
 ``--smoke`` schreibt nach ``models/finetuned-smoke`` und überschreibt
 das echte Artefakt nicht. Die API liest nur ``models/finetuned``.
@@ -31,12 +36,12 @@ from src.config import (
     DEFAULT_FINETUNE_BASE,
     FINETUNED_DIR,
     FINETUNED_SMOKE_DIR,
+    LABEL_COLUMN,
     LABELS_3,
     RANDOM_SEED,
-    TEST_SIZE,
     TEXT_COLUMN,
 )
-from src.data import load_dataset, split_dataset
+from src.data import load_work_splits
 from src.evaluate import classification_metrics, confusion_frame
 from src.tracking import setup_mlflow, shared_dataset_params
 
@@ -63,6 +68,12 @@ def config_from_args(argv: list[str] | None = None) -> FinetuneConfig:
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--max-length", type=int, default=256)
     parser.add_argument("--base-model", default=DEFAULT_FINETUNE_BASE)
+    parser.add_argument(
+        "--max-samples",
+        type=int,
+        default=None,
+        help="Stratifizierte Obergrenze der Trainingssätze. Leer heißt: der ganze Train-Split.",
+    )
     args = parser.parse_args(argv)
     if args.smoke:
         return FinetuneConfig(
@@ -78,6 +89,8 @@ def config_from_args(argv: list[str] | None = None) -> FinetuneConfig:
         )
     if args.epochs < 1 or args.batch_size < 1 or args.max_length < 8 or args.lr <= 0:
         raise ValueError("epochs, batch-size und max-length müssen positiv sein, max-length mindestens 8.")
+    if args.max_samples is not None and args.max_samples < 1:
+        raise ValueError("max-samples muss mindestens 1 sein.")
     return FinetuneConfig(
         base_model=args.base_model,
         epochs=args.epochs,
@@ -85,32 +98,55 @@ def config_from_args(argv: list[str] | None = None) -> FinetuneConfig:
         batch_size=args.batch_size,
         max_length=args.max_length,
         max_steps=-1,
-        max_samples=None,
+        max_samples=args.max_samples,
         smoke=False,
         output_dir=FINETUNED_DIR,
     )
 
 
 def limit_samples(texts: list[str], labels: list[str], max_samples: int | None) -> tuple[list[str], list[str]]:
-    if max_samples is None:
-        return list(texts), list(labels)
-    return list(texts)[:max_samples], list(labels)[:max_samples]
+    """Nimmt höchstens ``max_samples`` Zeilen, stratifiziert nach Label, Seed 42.
+
+    Die ersten n Zeilen wären eine Klasse, wenn der Frame sortiert ist.
+    Klappt die Stratifizierung nicht (zu wenige Zeilen je Klasse), fallen
+    wir auf den Präfix zurück. Das betrifft nur den Smoke-Lauf.
+    """
+    texts = list(texts)
+    labels = list(labels)
+    if max_samples is None or max_samples >= len(texts):
+        return texts, labels
+    import pandas as pd
+    from sklearn.model_selection import train_test_split
+
+    frame = pd.DataFrame({TEXT_COLUMN: texts, LABEL_COLUMN: labels})
+    counts = frame[LABEL_COLUMN].value_counts()
+    if int(counts.min()) < 2 or max_samples < int(counts.shape[0]):
+        return texts[:max_samples], labels[:max_samples]
+    try:
+        sampled, _ = train_test_split(
+            frame,
+            train_size=max_samples,
+            random_state=RANDOM_SEED,
+            stratify=frame[LABEL_COLUMN],
+        )
+    except ValueError:
+        return texts[:max_samples], labels[:max_samples]
+    return sampled[TEXT_COLUMN].astype(str).tolist(), sampled[LABEL_COLUMN].astype(str).tolist()
 
 
 def finetune(config: FinetuneConfig | None = None) -> dict:
     """Trainiert und schreibt Metriken nach MLflow. Der schwere Teil steckt in ``_run_trainer``."""
     config = config or config_from_args([])
-    frame = load_dataset()
-    x_train, x_test, y_train, y_test = split_dataset(frame)
+    train_frame, _val_frame, test_frame = load_work_splits()
     train_texts, train_labels = limit_samples(
-        x_train[TEXT_COLUMN].astype(str).tolist(),
-        y_train.astype(str).tolist(),
+        train_frame[TEXT_COLUMN].astype(str).tolist(),
+        train_frame[LABEL_COLUMN].astype(str).tolist(),
         config.max_samples,
     )
     test_cap = config.max_samples if config.smoke else None
     test_texts, test_labels = limit_samples(
-        x_test[TEXT_COLUMN].astype(str).tolist(),
-        y_test.astype(str).tolist(),
+        test_frame[TEXT_COLUMN].astype(str).tolist(),
+        test_frame[LABEL_COLUMN].astype(str).tolist(),
         test_cap,
     )
     result = _run_trainer(config, train_texts, train_labels, test_texts, test_labels)
@@ -126,7 +162,7 @@ def _log_finetune(config: FinetuneConfig, result: dict, n_train: int, n_test: in
     import mlflow
 
     setup_mlflow()
-    shared = shared_dataset_params(n_train, n_test, RANDOM_SEED, TEST_SIZE)
+    shared = shared_dataset_params(n_train, n_test)
     with mlflow.start_run(run_name="finetuned-smoke" if config.smoke else "finetuned"):
         mlflow.log_params(
             {
@@ -137,6 +173,7 @@ def _log_finetune(config: FinetuneConfig, result: dict, n_train: int, n_test: in
                 "batch_size": config.batch_size,
                 "max_length": config.max_length,
                 "max_steps": config.max_steps,
+                "max_samples": -1 if config.max_samples is None else config.max_samples,
                 "smoke": str(config.smoke).lower(),
             }
         )
@@ -205,7 +242,8 @@ def _run_trainer(
     }
     if config.max_steps > 0:
         argument_kwargs["max_steps"] = config.max_steps
-    if config.smoke:
+    torch.set_num_threads(max(1, os.cpu_count() or 1))
+    if config.smoke or not torch.cuda.is_available():
         argument_kwargs["use_cpu"] = True
 
     config.output_dir.mkdir(parents=True, exist_ok=True)
@@ -225,6 +263,8 @@ def _run_trainer(
         "learning_rate": config.learning_rate,
         "batch_size": config.batch_size,
         "max_steps": config.max_steps,
+        "max_samples": config.max_samples,
+        "n_train": len(texts),
     }
     (config.output_dir / "training_meta.json").write_text(
         json.dumps(meta, indent=2),
@@ -282,7 +322,7 @@ def _training_arguments(training_arguments_cls, kwargs: dict, smoke: bool):
     try:
         return training_arguments_cls(**kwargs)
     except TypeError:
-        if not smoke or "use_cpu" not in kwargs:
+        if "use_cpu" not in kwargs:
             raise
         fallback = dict(kwargs)
         fallback.pop("use_cpu", None)

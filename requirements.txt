@@ -4,8 +4,13 @@
 #
 # Transformer (Zero-Shot, Fine-Tuning) sind bewusst getrennt, weil PyTorch
 # mehrere hundert MB bis über 1 GB zieht. Siehe requirements-transformer.txt.
+#
+# datasets und huggingface_hub braucht nur `python -m src.prepare_data`.
+# Die CI setzt SENTIMENT_DATA=dummy und lädt nichts herunter.
 
 pandas==3.0.6
+datasets==5.1.0
+huggingface_hub==1.33.0
 scikit-learn==1.9.1
 mlflow==3.17.0
 fastapi==0.143.0

@@ -2,7 +2,7 @@
 
 import sys
 
-from src.config import FINETUNED_SMOKE_DIR
+from src.config import FINETUNED_DIR, FINETUNED_SMOKE_DIR
 from src.finetune import config_from_args, finetune
 
 
@@ -26,6 +26,21 @@ def test_full_config_keeps_the_requested_budget():
     assert config.max_length == 128
     assert config.max_steps == -1
     assert config.max_samples is None
+
+
+def test_max_samples_caps_the_full_run():
+    config = config_from_args(["--max-samples", "32", "--epochs", "1", "--max-length", "128"])
+    assert config.smoke is False
+    assert config.max_samples == 32
+    assert config.epochs == 1
+    assert config.max_length == 128
+    assert config.output_dir == FINETUNED_DIR
+
+
+def test_smoke_ignores_the_sample_cap():
+    config = config_from_args(["--smoke", "--max-samples", "100"])
+    assert config.max_samples == 4
+    assert config.output_dir == FINETUNED_SMOKE_DIR
 
 
 def test_smoke_finetune_does_not_load_transformers(monkeypatch):

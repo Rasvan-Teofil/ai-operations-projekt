@@ -15,8 +15,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.config import RANDOM_SEED, REPORTS_DIR, TEST_SIZE, TEXT_COLUMN
-from src.data import load_dataset, split_dataset
+from src.config import LABEL_COLUMN, REPORTS_DIR, TEXT_COLUMN
+from src.data import dataset_log_params, load_work_splits
 from src.interface import SentimentModel
 from src.tracking import attach_artifact_paths, evaluate_model, log_evaluation, setup_mlflow, shared_dataset_params
 
@@ -25,8 +25,8 @@ Auswahl für Meilenstein 2: Primär gewinnt das höchste macro-F1 auf diesem
 gemeinsamen Testsplit (jede Klasse zählt gleich). Liegen zwei Modelle nah
 beieinander, entscheiden Inferenzzeit (ms pro Text) und Modellgröße.
 Das ist ein fachlicher Trade-off, kein automatisches Deployment: die API
-lädt das Modell aus der Variable SENTIMENT_MODEL, Standard ist tfidf_logreg.
-Solange der Datensatz der Dummy-Platzhalter ist, sind die Kennzahlen nicht belastbar.
+lädt das Modell aus der Variable SENTIMENT_MODEL.
+Die gemessene Empfehlung steht in reports/model_comparison.md.
 """
 
 
@@ -46,34 +46,71 @@ def run_comparison(
     log_mlflow: bool = True,
 ) -> list[dict]:
     """Bewertet jedes Modell auf dem einen Testsplit und schreibt die Tabelle."""
-    frame = load_dataset()
-    x_train, x_test, y_train, y_test = split_dataset(frame)
-    test_texts = x_test[TEXT_COLUMN].astype(str).tolist()
-    test_labels = y_test.astype(str).tolist()
+    train_frame, val_frame, test_frame = load_work_splits()
+    test_texts = test_frame[TEXT_COLUMN].astype(str).tolist()
+    test_labels = test_frame[LABEL_COLUMN].astype(str).tolist()
     skipped: list[str] = []
     if models is None:
-        models, skipped = build_default_models(
-            x_train[TEXT_COLUMN].astype(str).tolist(),
-            y_train.astype(str).tolist(),
-        )
-
-    rows = []
-    for model in models:
-        row = evaluate_model(model, test_texts, test_labels)
-        attach_artifact_paths(row, model)
-        rows.append(row)
+        rows, skipped = _evaluate_default(train_frame, test_texts, test_labels)
+    else:
+        rows = []
+        for model in models:
+            row = evaluate_model(model, test_texts, test_labels)
+            attach_artifact_paths(row, model)
+            rows.append(row)
 
     destination = output_dir or REPORTS_DIR
-    csv_path, markdown_path = write_comparison(rows, skipped, destination, len(x_train), len(x_test))
+    csv_path, markdown_path = write_comparison(
+        rows,
+        skipped,
+        destination,
+        len(train_frame),
+        len(test_frame),
+        n_val=len(val_frame),
+    )
     _print_table(csv_path, skipped)
 
     if log_mlflow:
         setup_mlflow()
-        shared = shared_dataset_params(len(x_train), len(x_test), RANDOM_SEED, TEST_SIZE)
+        shared = shared_dataset_params(len(train_frame), len(test_frame), n_val=len(val_frame))
         for row in rows:
             log_evaluation(row, shared)
         _log_comparison_artifact(csv_path, markdown_path, shared)
     return rows
+
+
+def _evaluate_default(train_frame: pd.DataFrame, test_texts: list[str], test_labels: list[str]):
+    """Ein Modell nach dem anderen, damit nicht alle Transformer gleichzeitig im Speicher liegen."""
+    import gc
+
+    from src.hf_models import finetuned_is_ready, load_finetuned, load_pretrained
+    from src.hf_models import PRETRAINED_SPECS
+    from src.sklearn_models import train_sklearn_models
+
+    rows = []
+    skipped: list[str] = []
+    sklearn_models = train_sklearn_models(
+        train_frame[TEXT_COLUMN].astype(str).tolist(),
+        train_frame[LABEL_COLUMN].astype(str).tolist(),
+    )
+    for model in sklearn_models:
+        print(f"Bewerte {model.name} ...", flush=True)
+        rows.append(attach_artifact_paths(evaluate_model(model, test_texts, test_labels), model))
+    for name in PRETRAINED_SPECS:
+        print(f"Bewerte {name} ...", flush=True)
+        model = load_pretrained(name)
+        rows.append(attach_artifact_paths(evaluate_model(model, test_texts, test_labels), model))
+        del model
+        gc.collect()
+    if finetuned_is_ready():
+        print("Bewerte finetuned ...", flush=True)
+        model = load_finetuned()
+        rows.append(attach_artifact_paths(evaluate_model(model, test_texts, test_labels), model))
+        del model
+        gc.collect()
+    else:
+        skipped.append("finetuned")
+    return rows, skipped
 
 
 def write_comparison(
@@ -82,6 +119,7 @@ def write_comparison(
     directory: Path,
     n_train: int,
     n_test: int,
+    n_val: int | None = None,
 ) -> tuple[Path, Path]:
     directory.mkdir(parents=True, exist_ok=True)
     table = _table(rows)
@@ -89,7 +127,7 @@ def write_comparison(
     markdown_path = directory / "comparison.md"
     table.to_csv(csv_path, index=False)
     markdown_path.write_text(
-        _markdown(table, rows, skipped, n_train, n_test),
+        _markdown(table, rows, skipped, n_train, n_test, n_val),
         encoding="utf-8",
     )
     return csv_path, markdown_path
@@ -120,14 +158,23 @@ def _table(rows: list[dict]) -> pd.DataFrame:
     ).reset_index(drop=True)
 
 
-def _markdown(table: pd.DataFrame, rows: list[dict], skipped: list[str], n_train: int, n_test: int) -> str:
+def _markdown(
+    table: pd.DataFrame,
+    rows: list[dict],
+    skipped: list[str],
+    n_train: int,
+    n_test: int,
+    n_val: int | None = None,
+) -> str:
+    info = dataset_log_params()
+    val_text = "—" if n_val is None else str(n_val)
     lines = [
         "# Modellvergleich",
         "",
-        f"Gemeinsamer Split: Seed {RANDOM_SEED}, Testanteil {TEST_SIZE}, "
-        f"n_train={n_train}, n_test={n_test}.",
+        f"Datensatz: {info['dataset']} ({info['dataset_kind']}).",
+        f"Split: {info['split_rule']}, Seed {info['random_seed']}, "
+        f"n_train={n_train}, n_val={val_text}, n_test={n_test}.",
         "Labelraum: negative, neutral, positive.",
-        "Datensatz: data/sample/sentiment_sample.csv (Dummy, kein Benchmark).",
         "",
         _markdown_table(table),
         "",

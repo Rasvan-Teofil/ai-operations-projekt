@@ -10,6 +10,10 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      # Dummy-Stichprobe und TF-IDF. Kein Hugging-Face-Download, kein Fine-Tuning.
+      SENTIMENT_MODEL: tfidf_logreg
+      SENTIMENT_DATA: dummy
     steps:
       - name: Repository auschecken
         uses: actions/checkout@v4
@@ -27,11 +31,7 @@ jobs:
 
       # Bewusst nur die TF-IDF-Modelle. --all und src.finetune laden Transformer.
       - name: Baseline trainieren
-        env:
-          SENTIMENT_MODEL: tfidf_logreg
         run: python -m src.train
 
       - name: Tests ausführen
-        env:
-          SENTIMENT_MODEL: tfidf_logreg
         run: pytest
