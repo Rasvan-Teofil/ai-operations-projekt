@@ -1,16 +1,18 @@
 """FastAPI-Dienst für die lokale Inferenz.
 
-Start vom Projektroot, nachdem die Baseline trainiert wurde:
+Start vom Projektroot, nachdem trainiert wurde:
 
+    python -m src.train
     uvicorn app.main:app --reload
 
-Anderes Modell, zum Beispiel nach einem echten Fine-Tuning:
+Standard ist ``tfidf_linearsvc`` (bestes macro-F1 im dokumentierten Vergleich,
+klein und schnell). Anderes Modell:
 
     SENTIMENT_MODEL=finetuned uvicorn app.main:app --reload
 
-Standard ist ``tfidf_logreg``, damit CI und lokale Tests keine
-Transformer-Gewichte laden. Fehlt das Artefakt, bleibt der Prozess oben:
-``/health`` meldet das, ``/predict`` antwortet mit HTTP 503.
+Die CI setzt ``SENTIMENT_MODEL=tfidf_logreg`` und lädt keine Transformer.
+Fehlt das Artefakt, bleibt der Prozess oben: ``/health`` meldet das,
+``/predict`` antwortet mit HTTP 503.
 """
 
 import logging

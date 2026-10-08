@@ -44,8 +44,9 @@ ALLOWED_LANGUAGES = frozenset({"de", "en"})
 MLFLOW_TRACKING_DIR = PROJECT_ROOT / "mlruns"
 MLFLOW_EXPERIMENT_NAME = "article-sentiment"
 
-# Standard der API und der CI. Transformer bleiben opt-in.
-DEFAULT_MODEL_NAME = "tfidf_logreg"
+# Praktische Wahl nach dem Vergleich auf dem echten Testsplit: höchstes macro-F1,
+# dazu klein und schnell. Die CI setzt SENTIMENT_MODEL=tfidf_logreg und bleibt leicht.
+DEFAULT_MODEL_NAME = "tfidf_linearsvc"
 
 HF_MAX_TOKENS = 512
 TABULARISAI_MODEL_ID = "tabularisai/multilingual-sentiment-analysis"
@@ -62,6 +63,6 @@ LINEARSVC_MAX_ITER = 2000
 
 
 def selected_model_name() -> str:
-    """Liest das Modell, das die API laden soll. Default: leichte Baseline."""
+    """Liest das Modell, das die API laden soll. Default: TF-IDF + LinearSVC."""
     raw = os.environ.get("SENTIMENT_MODEL", DEFAULT_MODEL_NAME).strip().lower()
     return raw or DEFAULT_MODEL_NAME

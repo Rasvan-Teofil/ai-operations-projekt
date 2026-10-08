@@ -112,9 +112,23 @@ class HuggingFaceSentimentModel(SentimentModel):
             truncation=False,
             padding=False,
         )["input_ids"]
-        if all(len(ids) <= budget for ids in raw_ids):
+        long_indexes = [index for index, ids in enumerate(raw_ids) if len(ids) > budget]
+        if not long_indexes:
             return self._scores_for_short_batch(cleaned, max_length)
-        return [self._scores_for_text(text) for text in cleaned]
+        scores: list[dict[str, float] | None] = [None] * len(cleaned)
+        short_indexes = [index for index in range(len(cleaned)) if index not in set(long_indexes)]
+        if short_indexes:
+            short_scores = self._scores_for_short_batch(
+                [cleaned[index] for index in short_indexes],
+                max_length,
+            )
+            for index, row in zip(short_indexes, short_scores, strict=True):
+                scores[index] = row
+        for index in long_indexes:
+            scores[index] = self._scores_for_text(cleaned[index])
+        if any(row is None for row in scores):
+            raise RuntimeError("Nicht jeder Text hat eine Vorhersage.")
+        return [row for row in scores if row is not None]
 
     def _scores_for_short_batch(self, texts: list[str], max_length: int, batch_size: int = 16) -> list[dict[str, float]]:
         """Ein Fenster pro Text. Dasselbe Softmax wie der Einzelpfad, nur gebündelt."""
@@ -157,16 +171,7 @@ class HuggingFaceSentimentModel(SentimentModel):
         raw_ids = self._tokenizer(cleaned, add_special_tokens=False, truncation=False)["input_ids"]
         special = int(self._tokenizer.num_special_tokens_to_add(pair=False))
         pieces = content_windows(raw_ids, max_length, special)
-        encoded_chunks = [
-            self._tokenizer.prepare_for_model(
-                piece,
-                add_special_tokens=True,
-                truncation=True,
-                max_length=max_length,
-            )
-            for piece in pieces
-        ]
-        batch = self._tokenizer.pad(encoded_chunks, padding=True, return_tensors="pt")
+        batch = self._encode_windows(pieces, max_length)
         input_ids = batch["input_ids"]
         if int(input_ids.shape[-1]) > max_length:
             raise RuntimeError(f"Chunk ist länger als {max_length} Tokens.")
@@ -178,6 +183,25 @@ class HuggingFaceSentimentModel(SentimentModel):
         names = _id2label_names(self._model.config.id2label, int(chunk_mean.shape[0]))
         collapsed = collapse_probabilities(names, chunk_mean.detach().cpu().tolist())
         return complete_scores(collapsed)
+
+    def _encode_windows(self, pieces: list[list[int]], max_length: int):
+        """Setzt CLS/SEP selbst. Transformers 5 hat ``prepare_for_model`` nicht mehr an jedem Tokenizer."""
+        assert self._tokenizer is not None
+        cls_id = self._tokenizer.cls_token_id
+        sep_id = self._tokenizer.sep_token_id
+        if cls_id is None or sep_id is None:
+            raise RuntimeError("Tokenizer ohne CLS- und SEP-Id, Chunking ist nicht möglich.")
+        needs_types = "token_type_ids" in getattr(self._tokenizer, "model_input_names", [])
+        encoded = []
+        for piece in pieces:
+            ids = [int(cls_id), *[int(token) for token in piece], int(sep_id)]
+            if len(ids) > max_length:
+                ids = ids[: max_length - 1] + [int(sep_id)]
+            row = {"input_ids": ids, "attention_mask": [1] * len(ids)}
+            if needs_types:
+                row["token_type_ids"] = [0] * len(ids)
+            encoded.append(row)
+        return self._tokenizer.pad(encoded, padding=True, return_tensors="pt")
 
     def tracking_params(self) -> dict[str, str | int | float | bool]:
         return {
