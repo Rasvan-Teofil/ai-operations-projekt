@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.config import LABEL_COLUMN, RANDOM_SEED, REPORTS_DIR, TEST_SIZE, TEXT_COLUMN
+from src.config import RANDOM_SEED, REPORTS_DIR, TEST_SIZE, TEXT_COLUMN
 from src.data import load_dataset, split_dataset
 from src.interface import SentimentModel
 from src.tracking import attach_artifact_paths, evaluate_model, log_evaluation, setup_mlflow, shared_dataset_params

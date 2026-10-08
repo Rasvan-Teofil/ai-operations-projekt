@@ -48,7 +48,7 @@ def _print_summary(rows: list[dict]) -> None:
         )
     print("API-Standard: tfidf_logreg (SENTIMENT_MODEL zum Umschalten).")
     print("Vollständiger Vergleich inklusive Transformer: python -m src.train --all")
-    print("MLflow: mlflow ui --backend-store-uri ./mlruns")
+    print("MLflow: MLFLOW_ALLOW_FILE_STORE=true mlflow ui --backend-store-uri ./mlruns")
 
 
 def main(argv: list[str] | None = None) -> None:

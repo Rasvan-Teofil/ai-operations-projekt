@@ -4,6 +4,13 @@ Metriken sind für jeden Lauf dieselben: Accuracy, macro-F1, F1 je Klasse,
 Inferenzzeit. Die Konfusionsmatrix liegt als CSV-Artefakt im Lauf.
 """
 
+import os
+
+# Vor dem Import: aktuelles MLflow blockiert den lokalen Ordner sonst,
+# und der Hinweis auf interne Skills gehört nicht in die Trainingsausgabe.
+os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
+os.environ.setdefault("MLFLOW_DISABLE_AGENT_HINT", "1")
+
 import tempfile
 import time
 from collections.abc import Sequence
@@ -11,12 +18,16 @@ from pathlib import Path
 
 import mlflow
 
-from src.config import MLFLOW_EXPERIMENT_NAME, MLFLOW_TRACKING_DIR, PLACEHOLDER_DATASET
+from src.config import MLFLOW_EXPERIMENT_NAME, MLFLOW_TRACKING_DIR
+from src.data import PLACEHOLDER_DATASET
 from src.evaluate import classification_metrics, confusion_frame
 from src.interface import SentimentModel
 
 
 def setup_mlflow() -> None:
+    """Lokaler Ordner ``mlruns/``. Aktuelles MLflow verlangt dafür eine Freigabe."""
+    os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
+    os.environ.setdefault("MLFLOW_DISABLE_AGENT_HINT", "1")
     MLFLOW_TRACKING_DIR.mkdir(parents=True, exist_ok=True)
     if mlflow.active_run() is not None:
         mlflow.end_run()

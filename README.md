@@ -131,7 +131,7 @@ Dasselbe ist `python -m src.compare`.
 MLflow-UI:
 
 ```bash
-mlflow ui --backend-store-uri ./mlruns --port 5000
+MLFLOW_ALLOW_FILE_STORE=true mlflow ui --backend-store-uri ./mlruns --port 5000
 ```
 
 Im Browser <http://127.0.0.1:5000>, Experiment `article-sentiment`.
