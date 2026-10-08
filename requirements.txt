@@ -1,0 +1,13 @@
+# AI Operations (HHN, WiSe 2026/27)
+# Installation: pip install -r requirements.txt
+
+pandas==3.0.6
+scikit-learn==1.9.1
+mlflow==3.17.0
+fastapi==0.143.0
+uvicorn==0.54.0
+pydantic==2.14.0
+joblib==1.6.0
+jupyter==1.1.1
+pytest==9.1.1
+httpx==0.28.1
