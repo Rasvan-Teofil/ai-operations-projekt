@@ -1,108 +1,118 @@
 """FastAPI-Dienst für die lokale Inferenz.
 
-Start vom Projektroot, nachdem ein Artefakt existiert:
+Start vom Projektroot, nachdem die Baseline trainiert wurde:
 
     uvicorn app.main:app --reload
 
-Das Modell wird beim Start geladen. Fehlt das Artefakt, bleibt der
-Prozess trotzdem oben: ``/health`` meldet das, ``/predict`` antwortet
-mit HTTP 503 statt mit einem Traceback.
+Anderes Modell, zum Beispiel nach einem echten Fine-Tuning:
+
+    SENTIMENT_MODEL=finetuned uvicorn app.main:app --reload
+
+Standard ist ``tfidf_logreg``, damit CI und lokale Tests keine
+Transformer-Gewichte laden. Fehlt das Artefakt, bleibt der Prozess oben:
+``/health`` meldet das, ``/predict`` antwortet mit HTTP 503.
 """
 
 import logging
 from contextlib import asynccontextmanager
 
-import joblib
-import pandas as pd
 from fastapi import FastAPI, HTTPException, Request
 
 from app.schemas import HealthResponse, PredictRequest, PredictResponse
-from src.config import MODEL_PATH
+from src.config import selected_model_name
+from src.labels import label_from_scores
+from src.scraping import EmptyArticleError, FetchError, RobotsDenied, fetch_article_text
 
 logger = logging.getLogger("ai_operations.api")
 
 
-def read_artifact(path=MODEL_PATH) -> tuple[dict | None, str | None]:
-    """Lädt das gespeicherte Artefakt.
-
-    Rückgabe: ``(artefakt, None)`` oder ``(None, fehlercode)``.
-    Fehlercodes: ``missing``, ``unreadable``, ``invalid``.
-    """
-    if not path.exists():
-        return None, "missing"
+def load_predictor():
+    """Lädt das konfigurierte Modell. Transformer nur, wenn sie ausdrücklich gewählt sind."""
+    name = selected_model_name()
     try:
-        artifact = joblib.load(path)
+        from src.registry import load_model
+
+        return load_model(name), name, None
+    except FileNotFoundError as exc:
+        logger.warning("Modell nicht geladen: %s", exc)
+        return None, name, "missing"
     except Exception:
-        logger.exception("Modellartefakt konnte nicht gelesen werden: %s", path)
-        return None, "unreadable"
-    if not isinstance(artifact, dict) or "estimator" not in artifact:
-        logger.error("Modellartefakt hat nicht die erwartete Struktur: %s", path)
-        return None, "invalid"
-    feature_columns = artifact.get("feature_columns")
-    class_labels = artifact.get("class_labels")
-    if not feature_columns or not isinstance(class_labels, dict):
-        return None, "invalid"
-    return artifact, None
+        logger.exception("Modell %s konnte nicht geladen werden", name)
+        return None, name, "unavailable"
 
 
-def _error_detail(load_error: str | None) -> str:
+def _missing_detail(load_error: str | None, model_name: str) -> str:
     if load_error == "missing":
         return (
-            "Kein Modellartefakt gefunden. "
+            f"Modell '{model_name}' ist nicht auf der Platte. "
             "Bitte im Projektroot `python -m src.train` ausführen."
         )
     return (
-        "Modellartefakt ist beschädigt oder unvollständig. "
-        "Bitte `python -m src.train` erneut ausführen."
+        f"Modell '{model_name}' konnte nicht geladen werden. "
+        "Namen prüfen oder bei Transformern requirements-transformer.txt installieren."
     )
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    artifact, load_error = read_artifact()
-    app.state.artifact = artifact
+    model, name, load_error = load_predictor()
+    app.state.model = model
+    app.state.model_name = model.name if model is not None else name
+    app.state.model_version = model.model_version if model is not None else None
     app.state.load_error = load_error
     if load_error:
-        logger.warning("API startet ohne Modell (%s). Pfad: %s", load_error, MODEL_PATH)
+        logger.warning("API startet ohne Modell (%s): %s", load_error, name)
     else:
-        logger.info("Modell geladen: %s", artifact.get("model_name"))
+        logger.info("Modell geladen: %s (%s)", model.name, model.model_version)
     yield
 
 
 app = FastAPI(
-    title="AI Operations – Inferenz (Platzhalter)",
-    summary="Lokaler Vorhersagedienst. Der Datenvertrag ist noch der Iris-Platzhalter.",
+    title="Artikel-Sentiment",
+    summary="Stimmung eines Nachrichtentexts oder einer einzelnen Artikel-URL.",
     lifespan=lifespan,
 )
 
 
 @app.get("/health", response_model=HealthResponse)
 def health(request: Request) -> HealthResponse:
-    loaded = request.app.state.artifact is not None
-    return HealthResponse(status="ok" if loaded else "model_missing", model_loaded=loaded)
+    loaded = request.app.state.model is not None
+    return HealthResponse(
+        status="ok" if loaded else "model_missing",
+        model_loaded=loaded,
+        model_name=request.app.state.model_name,
+        model_version=request.app.state.model_version,
+    )
+
+
+def _text_from_request(payload: PredictRequest) -> str:
+    if payload.text is not None:
+        return payload.text.strip()
+    try:
+        return fetch_article_text(str(payload.url))
+    except RobotsDenied as exc:
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except EmptyArticleError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except FetchError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
 
 
 @app.post("/predict", response_model=PredictResponse)
 def predict(payload: PredictRequest, request: Request) -> PredictResponse:
-    artifact = request.app.state.artifact
-    if artifact is None:
-        raise HTTPException(status_code=503, detail=_error_detail(request.app.state.load_error))
-
-    features = payload.model_dump()
-    columns = list(artifact["feature_columns"])
-    missing = [column for column in columns if column not in features]
-    if missing:
+    model = request.app.state.model
+    if model is None:
         raise HTTPException(
-            status_code=500,
-            detail="Artefakt und Eingabevertrag passen nicht zusammen. Training und Schema prüfen.",
+            status_code=503,
+            detail=_missing_detail(request.app.state.load_error, request.app.state.model_name),
         )
-
+    text = _text_from_request(payload)
+    if not text.strip():
+        raise HTTPException(status_code=422, detail="Kein Text zur Bewertung.")
     try:
-        row = pd.DataFrame([{column: features[column] for column in columns}])
-        predicted = int(artifact["estimator"].predict(row)[0])
-        label = artifact["class_labels"][predicted]
+        scores = model.predict_proba([text])[0]
+        label = label_from_scores(scores)
     except Exception as exc:
         logger.exception("Vorhersage fehlgeschlagen")
         raise HTTPException(status_code=500, detail="Vorhersage fehlgeschlagen.") from exc
-
-    return PredictResponse(prediction=str(label), model_name=str(artifact["model_name"]))
+    return PredictResponse(label=label, scores=scores, model_version=model.model_version)

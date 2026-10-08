@@ -1,0 +1,13 @@
+# Schwere Zusatzinstallation für Zero-Shot-Modelle und eigenes Fine-Tuning.
+# Nicht in der CI. Das CPU-Wheel von PyTorch ist groß; die Modellgewichte
+# kommen beim ersten Lauf zusätzlich von Hugging Face.
+#
+#   pip install -r requirements-transformer.txt
+#
+# GPU (Colab/CUDA): dieses CPU-Index nicht verwenden, sondern das passende
+# CUDA-Wheel von PyTorch installieren und danach transformers und accelerate.
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1+cpu
+transformers==5.19.0
+accelerate==1.15.0

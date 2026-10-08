@@ -1,4 +1,4 @@
-"""Trainingscode des Semesterprojekts.
+"""Trainings- und Vergleichscode für das Artikel-Sentiment.
 
-Ausführung der Baseline vom Projektroot: ``python -m src.train``.
+Leichter Einstieg ohne Transformer: ``python -m src.train``.
 """

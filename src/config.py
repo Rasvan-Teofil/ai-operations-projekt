@@ -1,35 +1,53 @@
-"""Zentrale Pfade, Seeds und der Platzhalter-Datenvertrag.
+"""Pfade, Seeds und der gemeinsame Drei-Klassen-Vertrag.
 
-Training und Inferenz lesen dieselben Werte, damit Split, Artefakt
-und API nicht auseinanderlaufen. Sobald das echte Problem feststeht,
-werden Spalten, Zielvariable und Pfade hier angepasst.
+Training, Vergleich und API lesen dieselben Werte. Der Datensatz unter
+``data/sample`` ist ein handgeschriebener Dummy, kein Benchmark.
 """
 
+import os
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
+SAMPLE_DATA_PATH = DATA_DIR / "sample" / "sentiment_sample.csv"
 MODELS_DIR = PROJECT_ROOT / "models"
+REPORTS_DIR = PROJECT_ROOT / "reports"
 NOTEBOOKS_DIR = PROJECT_ROOT / "notebooks"
+FINETUNED_DIR = MODELS_DIR / "finetuned"
+FINETUNED_SMOKE_DIR = MODELS_DIR / "finetuned-smoke"
 
-# Wird von `python -m src.train` geschrieben und von der API gelesen.
-MODEL_FILENAME = "baseline.joblib"
-MODEL_PATH = MODELS_DIR / MODEL_FILENAME
-
-# Eine Stelle für den Zufall: Split und Modellinitialisierung.
 RANDOM_SEED = 42
 TEST_SIZE = 0.2
 
-MLFLOW_TRACKING_DIR = PROJECT_ROOT / "mlruns"
-MLFLOW_EXPERIMENT_NAME = "ai-operations-baseline"
+TEXT_COLUMN = "text"
+LABEL_COLUMN = "label"
+LANGUAGE_COLUMN = "language"
+ORIGIN_COLUMN = "origin"
 
-# PLACEHOLDER: Feature-Reihenfolge des Iris-Datensatzes aus scikit-learn.
-# Dieselbe Reihenfolge nutzt der Input-Vertrag in app/schemas.py.
-FEATURE_COLUMNS = [
-    "sepal_length_cm",
-    "sepal_width_cm",
-    "petal_length_cm",
-    "petal_width_cm",
-]
-TARGET_COLUMN = "species"
-TARGET_NAMES = ["setosa", "versicolor", "virginica"]
+LABELS_3 = ("negative", "neutral", "positive")
+ALLOWED_LANGUAGES = frozenset({"de", "en"})
+
+MLFLOW_TRACKING_DIR = PROJECT_ROOT / "mlruns"
+MLFLOW_EXPERIMENT_NAME = "article-sentiment"
+
+# Standard der API und der CI. Transformer bleiben opt-in.
+DEFAULT_MODEL_NAME = "tfidf_logreg"
+
+HF_MAX_TOKENS = 512
+TABULARISAI_MODEL_ID = "tabularisai/multilingual-sentiment-analysis"
+CARDIFFNLP_MODEL_ID = "cardiffnlp/twitter-xlm-roberta-base-sentiment"
+DEFAULT_FINETUNE_BASE = "distilbert-base-multilingual-cased"
+
+REQUEST_TIMEOUT_SECONDS = 15.0
+USER_AGENT = "AIOpsSentimentBot/0.1 (HHN AI Operations coursework; single-article fetch)"
+
+TFIDF_NGRAM_RANGE = (1, 2)
+TFIDF_MIN_DF = 1
+LOGREG_MAX_ITER = 1000
+LINEARSVC_MAX_ITER = 2000
+
+
+def selected_model_name() -> str:
+    """Liest das Modell, das die API laden soll. Default: leichte Baseline."""
+    raw = os.environ.get("SENTIMENT_MODEL", DEFAULT_MODEL_NAME).strip().lower()
+    return raw or DEFAULT_MODEL_NAME

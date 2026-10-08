@@ -20,9 +20,10 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Lokale Experimente (MLflow). Läufe werden neu erzeugt, nicht committed.
+# Lokale Experimente (MLflow) und Vergleichstabellen.
 mlruns/
 mlartifacts/
+reports/
 
 # Geheimnisse und lokale Konfiguration
 .env
@@ -32,10 +33,13 @@ mlartifacts/
 # Betriebssystem
 .DS_Store
 
-# Große Rohdaten bleiben lokal. Struktur und Erklärung bleiben im Repo.
+# Große Rohdaten bleiben lokal. Dummy-Stichprobe und Erklärung bleiben im Repo.
 data/*
 !data/.gitkeep
 !data/README.md
+!data/sample/
+!data/sample/**
 
-# Trainierte Modellartefakte werden lokal erzeugt (`python -m src.train`).
-models/*.joblib
+# Trainierte Gewichte und joblib-Artefakte (`python -m src.train`, Fine-Tuning).
+models/*
+!models/.gitkeep

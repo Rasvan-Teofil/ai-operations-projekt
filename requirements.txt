@@ -1,5 +1,9 @@
 # AI Operations (HHN, WiSe 2026/27)
-# Installation: pip install -r requirements.txt
+# Leichte Installation für Baseline, API, Tests und CI:
+#   pip install -r requirements.txt
+#
+# Transformer (Zero-Shot, Fine-Tuning) sind bewusst getrennt, weil PyTorch
+# mehrere hundert MB bis über 1 GB zieht. Siehe requirements-transformer.txt.
 
 pandas==3.0.6
 scikit-learn==1.9.1
@@ -11,3 +15,6 @@ joblib==1.6.0
 jupyter==1.1.1
 pytest==9.1.1
 httpx==0.28.1
+requests==2.34.2
+beautifulsoup4==4.15.0
+trafilatura==2.3.1

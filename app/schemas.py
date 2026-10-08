@@ -1,47 +1,58 @@
 """Input- und Output-Vertrag der Inferenz-API.
 
-Die Felder sind ein PLACEHOLDER und spiegeln den Iris-Datensatz.
-Gültige Anfragen erfüllen dieses Schema; alles andere lehnt FastAPI
-mit HTTP 422 ab, bevor ein Modell aufgerufen wird. Wenn der echte
-Datensatz feststeht, wird der Vertrag hier ersetzt – zusammen mit
-``FEATURE_COLUMNS`` in ``src/config.py``.
+Genau eines von ``text`` oder ``url``. Die Antwort ist immer das
+Drei-Klassen-Sentiment plus die Verteilung und die Modellversion.
 """
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AnyHttpUrl, BaseModel, ConfigDict, Field, model_validator
 
 
 class PredictRequest(BaseModel):
-    """Eine Zeile Merkmale, für die eine Klasse vorhergesagt werden soll."""
+    """Ein Artikel als Rohtext oder als einzelne URL."""
 
     model_config = ConfigDict(
         extra="forbid",
         json_schema_extra={
             "examples": [
-                {
-                    "sepal_length_cm": 5.1,
-                    "sepal_width_cm": 3.5,
-                    "petal_length_cm": 1.4,
-                    "petal_width_cm": 0.2,
-                }
+                {"text": "The clinic reported fewer infections after the new treatment."},
+                {"url": "https://example.com/news/library"},
             ]
         },
     )
 
-    sepal_length_cm: float = Field(..., description="PLACEHOLDER: Kelchblattlänge in cm.")
-    sepal_width_cm: float = Field(..., description="PLACEHOLDER: Kelchblattbreite in cm.")
-    petal_length_cm: float = Field(..., description="PLACEHOLDER: Kronblattlänge in cm.")
-    petal_width_cm: float = Field(..., description="PLACEHOLDER: Kronblattbreite in cm.")
+    text: str | None = Field(
+        default=None,
+        max_length=20_000,
+        description="Artikeltext. Genau eines von text oder url.",
+    )
+    url: AnyHttpUrl | None = Field(
+        default=None,
+        description="URL genau eines Artikels. Genau eines von text oder url.",
+    )
+
+    @model_validator(mode="after")
+    def exactly_one_source(self):
+        has_text = self.text is not None
+        has_url = self.url is not None
+        if has_text == has_url:
+            raise ValueError("Genau eines von text oder url angeben.")
+        if has_text and not self.text.strip():
+            raise ValueError("text darf nicht leer sein.")
+        return self
 
 
 class PredictResponse(BaseModel):
-    """Antwort einer erfolgreichen Vorhersage."""
+    """Vorhersage im gemeinsamen Drei-Klassen-Raum."""
 
-    prediction: str = Field(..., description="Vorhergesagte Klasse (Platzhalter: Iris-Art).")
-    model_name: str = Field(..., description="Name des geladenen Modells.")
+    label: str = Field(..., description="negative, neutral oder positive.")
+    scores: dict[str, float] = Field(..., description="Verteilung über die drei Klassen.")
+    model_version: str = Field(..., description="Version oder Checkpoint des geladenen Modells.")
 
 
 class HealthResponse(BaseModel):
-    """Zustand des Prozesses, unabhängig davon, ob schon trainiert wurde."""
+    """Prozesszustand. model_loaded ist falsch, solange das Artefakt fehlt."""
 
     status: str
     model_loaded: bool
+    model_name: str | None = None
+    model_version: str | None = None
