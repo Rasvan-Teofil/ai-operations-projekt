@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      # Dummy-Stichprobe und TF-IDF. Kein Hugging-Face-Download, kein Fine-Tuning.
+      SENTIMENT_MODEL: tfidf_logreg
+      SENTIMENT_DATA: dummy
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Abhängigkeiten installieren
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      # Bewusst nur die TF-IDF-Modelle. --all und src.finetune laden Transformer.
+      - name: Baseline trainieren
+        run: python -m src.train
+
+      - name: Tests ausführen
+        run: pytest

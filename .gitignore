@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtuelle Umgebungen
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Lokale Experimente (MLflow). Die Vergleichstabelle mit Diskussion bleibt im Repo.
+mlruns/
+mlartifacts/
+reports/*
+!reports/model_comparison.md
+
+# Geheimnisse und lokale Konfiguration
+.env
+.env.*
+!.env.example
+
+# Betriebssystem
+.DS_Store
+
+# Große Rohdaten bleiben lokal. Dummy-Stichprobe und Erklärung bleiben im Repo.
+data/*
+!data/.gitkeep
+!data/README.md
+!data/sample/
+!data/sample/**
+
+# Trainierte Gewichte und joblib-Artefakte (`python -m src.train`, Fine-Tuning).
+models/*
+!models/.gitkeep

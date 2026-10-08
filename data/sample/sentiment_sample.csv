@@ -1,0 +1,19 @@
+text,label,language,origin
+"The plant shut down overnight and two hundred workers lost their jobs.",negative,en,dummy
+"Investigators said the spill poisoned the river and killed the fish.",negative,en,dummy
+"The airline cancelled every flight after a safety failure.",negative,en,dummy
+"Das Werk schloss über Nacht und zweihundert Beschäftigte verloren ihre Arbeit.",negative,de,dummy
+"Nach dem Unfall liegen mehrere Menschen verletzt im Krankenhaus.",negative,de,dummy
+"Der Sturm zerstörte die Ernte und ließ die Höfe ohne Einkommen.",negative,de,dummy
+"The council published the agenda for Tuesday's meeting.",neutral,en,dummy
+"The report lists the exchange rate at the end of the quarter.",neutral,en,dummy
+"The museum opens at ten and closes at six.",neutral,en,dummy
+"Der Ausschuss tagt am Dienstag und veröffentlicht danach das Protokoll.",neutral,de,dummy
+"Die Behörde nennt die Öffnungszeiten ohne Bewertung.",neutral,de,dummy
+"Im Anhang steht die Tabelle mit den monatlichen Mittelwerten.",neutral,de,dummy
+"The clinic reported fewer infections after the new treatment.",positive,en,dummy
+"Volunteers raised enough money to reopen the library.",positive,en,dummy
+"The company hired fifty apprentices and extended the training program.",positive,en,dummy
+"Die Klinik meldet deutlich weniger Infektionen nach der neuen Behandlung.",positive,de,dummy
+"Freiwillige haben genug Geld gesammelt um die Bibliothek wieder zu öffnen.",positive,de,dummy
+"Die Stadt pflanzt tausend Bäume und erweitert die Grünflächen.",positive,de,dummy
