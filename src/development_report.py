@@ -75,6 +75,11 @@ def main():
     (folder/'development.md').write_text('\n'.join(lines)+'\n')
     if (folder/'branch_comparison.json').exists():
         branch_report(folder)
+    # Matplotlib path lines contain trailing spaces; keep generated text diffs clean.
+    for name in ['development_curve.svg','branch_comparison.svg']:
+        svg=folder/name
+        if svg.exists():
+            svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
     print('Measured chart and development.md written')
 
 def branch_report(folder):
