@@ -1,5 +1,6 @@
 import json
 import logging
+import math
 import os
 import threading
 from contextlib import asynccontextmanager
@@ -18,7 +19,7 @@ def load_predictor():
         path = Path(override)
     else:
         selection = json.loads((MODELS / 'selected.json').read_text())
-        if selection['model'] not in ('frozen', 'finetuned', 'centroid', 'majority'):
+        if selection['model'] not in ('frozen', 'finetuned', 'centroid', 'majority', 'development/release'):
             raise ValueError('Unknown selected model')
         path = MODELS / selection['model']
     return Predictor(path)
@@ -60,7 +61,7 @@ class Prediction(BaseModel):
     model_version: str
 
 
-def create_app():
+def create_app(queue_timeout=None):
     @asynccontextmanager
     async def lifespan(app):
         try:
@@ -71,7 +72,10 @@ def create_app():
         yield
     app = FastAPI(title='Article sentiment — second path', lifespan=lifespan)
     app.state.predictor = None
-    inference_lock = threading.Lock()
+    inference_lock = threading.BoundedSemaphore(1)
+    wait_limit = float(os.getenv('SENTIMENT_QUEUE_TIMEOUT', '2.0')) if queue_timeout is None else queue_timeout
+    if wait_limit < 0:
+        raise ValueError('Queue timeout must be nonnegative')
 
     @app.get('/health')
     def health():
@@ -85,14 +89,28 @@ def create_app():
         if p is None:
             raise HTTPException(503, 'Local model artifact unavailable; run the documented training pipeline')
         try:
-            text = payload.text if payload.text is not None else article_text(payload.url)
+            if payload.text is not None:
+                text = payload.text
+            elif getattr(p, 'meta', {}).get('improved_article', False):
+                text = article_text(payload.url, improved=True)
+            else:
+                text = article_text(payload.url)
         except FetchError as e:
             raise HTTPException(e.status, e.detail) from e
         try:
-            with inference_lock:
-                probabilities = p.predict_proba([text])[0]
-            return {'label': LABELS[int(probabilities.argmax())],
-                    'scores': dict(zip(LABELS, map(float, probabilities))), 'model_version': p.version}
+            if not inference_lock.acquire(timeout=wait_limit):
+                raise HTTPException(503, 'Inference queue busy; retry later', headers={'Retry-After': '1'})
+            try:
+                values = list(map(float, p.predict_proba([text])[0]))
+            finally:
+                inference_lock.release()
+            if (len(values) != 3 or any(not math.isfinite(v) or v < 0 or v > 1 for v in values)
+                    or not math.isclose(sum(values), 1., abs_tol=1e-4)):
+                raise ValueError('Invalid model score distribution')
+            return {'label': LABELS[max(range(3), key=lambda i: values[i])],
+                    'scores': dict(zip(LABELS, values)), 'model_version': p.version}
+        except HTTPException:
+            raise
         except Exception as e:
             logging.getLogger(__name__).exception('Local inference failed')
             raise HTTPException(503, 'Local model inference unavailable') from e

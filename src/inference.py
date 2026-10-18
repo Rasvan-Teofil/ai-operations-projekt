@@ -5,6 +5,7 @@ import torch
 from transformers import AutoModel, AutoTokenizer
 from src.config import LABELS, MAX_LENGTH
 from src.tokenization import token_chunks
+from src.aggregation import aggregate
 
 
 class SentimentNet(torch.nn.Module):
@@ -34,7 +35,8 @@ class Predictor:
             self.majority = self.meta['majority']
             return
         self.tokenizer = AutoTokenizer.from_pretrained(path / 'tokenizer', local_files_only=True)
-        self.net = SentimentNet(AutoModel.from_pretrained(path / 'encoder', local_files_only=True))
+        dtype = torch.bfloat16 if self.meta.get('precision') == 'bf16' and self.device == 'cuda' else torch.float32
+        self.net = SentimentNet(AutoModel.from_pretrained(path / 'encoder', local_files_only=True, dtype=dtype)).to(dtype=dtype)
         self.net.head.load_state_dict(torch.load(path / 'head.pt', map_location='cpu', weights_only=True))
         self.net.to(self.device).eval()
 
@@ -52,8 +54,8 @@ class Predictor:
             for start in range(0, len(chunks), 32):
                 rows = chunks[start:start+32]
                 tokens = self.tokenizer.pad(rows, padding=True, return_tensors='pt').to(self.device)
-                probs.append(self.net(tokens).softmax(-1).float().cpu())
-            results.append(torch.cat(probs).mean(0).numpy())
+                probs.append(self.net(tokens).float().softmax(-1).cpu())
+            results.append(aggregate(torch.cat(probs).numpy(), chunks, self.meta.get('aggregation', 'uniform')))
         return np.stack(results)
 
 
@@ -62,4 +64,4 @@ def save_model(path, net, tokenizer, meta):
     net.encoder.save_pretrained(path / 'encoder', safe_serialization=True)
     tokenizer.save_pretrained(path / 'tokenizer')
     torch.save(net.head.state_dict(), path / 'head.pt')
-    (path / 'artifact.json').write_text(json.dumps({**meta, 'labels': LABELS, 'max_length': MAX_LENGTH}, indent=2))
+    (path / 'artifact.json').write_text(json.dumps({**meta, 'labels': LABELS, 'max_length': meta.get('max_length', MAX_LENGTH)}, indent=2))

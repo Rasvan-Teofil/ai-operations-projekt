@@ -75,3 +75,41 @@ def test_inference_unavailable(client, monkeypatch):
         raise RuntimeError('device unavailable')
     monkeypatch.setattr(Stub, 'predict_proba', broken)
     assert client.post('/predict', json={'text':'hello'}).status_code == 503
+
+
+@pytest.mark.parametrize('values', [[float('nan'),.5,.5],[-.1,.5,.6],[.2,.2,.2],[.5,.5]])
+def test_invalid_model_distributions_are_503(client,monkeypatch,values):
+    monkeypatch.setattr(Stub,'predict_proba',lambda self,texts: np.array([values]))
+    assert client.post('/predict',json={'text':'Valid text'}).status_code==503
+
+
+def test_queue_timeout_is_bounded_and_recovers(monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    import threading,time
+    entered=threading.Event()
+    class Slow(Stub):
+        def predict_proba(self,texts):
+            entered.set()
+            time.sleep(.15)
+            return super().predict_proba(texts)
+    monkeypatch.setattr(api,'load_predictor',lambda: Slow())
+    with TestClient(api.create_app(queue_timeout=.01)) as c:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            first=pool.submit(c.post,'/predict',json={'text':'First request'})
+            assert entered.wait(2)
+            second=c.post('/predict',json={'text':'Second request'})
+            assert second.status_code==503
+            assert second.headers['retry-after']=='1'
+            assert first.result().status_code==200
+        assert c.post('/predict',json={'text':'Recovered'}).status_code==200
+
+
+def test_article_profile_uses_improved_extractor(client,monkeypatch):
+    monkeypatch.setattr(Stub,'meta',{'improved_article':True},raising=False)
+    calls=[]
+    def fetch(url,improved=False):
+        calls.append(improved)
+        return 'The company reports record profits and raises its forecast.'
+    monkeypatch.setattr(api,'article_text',fetch)
+    assert client.post('/predict',json={'url':'https://example.com/news'}).status_code==200
+    assert calls==[True]

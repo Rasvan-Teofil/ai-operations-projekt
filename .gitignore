@@ -9,3 +9,4 @@ mlflow.db*
 *.log
 .env
 reports/evaluation.lock
+data/development/

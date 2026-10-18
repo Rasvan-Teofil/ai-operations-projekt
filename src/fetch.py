@@ -83,7 +83,7 @@ def request(u, host, port, address, path):
         conn.close()
 
 
-def article_text(url):
+def article_text(url, improved=False):
     u, host, port, ip = public_target(url)
     status, _, robots = request(u, host, port, ip, '/robots.txt')
     if status == 200:
@@ -100,11 +100,31 @@ def article_text(url):
         raise FetchError(502, f'Article returned HTTP {status}')
     if content_type not in ('text/html', 'application/xhtml+xml'):
         raise FetchError(422, 'No readable HTML article')
+    return extract_article(html, improved=improved)
+
+
+def extract_article(html, improved=False):
     soup = BeautifulSoup(html, 'html.parser')
     for node in soup(['script', 'style', 'nav', 'footer', 'header', 'aside']):
         node.decompose()
-    container = soup.find('article') or soup.find('main') or soup.body
-    text = ' '.join(p.get_text(' ', strip=True) for p in container.find_all('p')) if container else ''
+    if improved:
+        for node in soup.select('[hidden], [aria-hidden="true"]'):
+            node.decompose()
+        containers = soup.find_all('article') or soup.find_all('main') or [soup.body]
+        container = max((c for c in containers if c is not None),
+                        key=lambda c: sum(len(p.get_text(' ', strip=True)) for p in c.find_all('p')), default=None)
+        elements = container.find_all(['h1', 'p']) if container else []
+        parts, seen = [], set()
+        for element in elements:
+            value = element.get_text(' ', strip=True)
+            key = ' '.join(value.split()).casefold()
+            if key and key not in seen:
+                seen.add(key)
+                parts.append(value)
+        text = ' '.join(parts)
+    else:
+        container = soup.find('article') or soup.find('main') or soup.body
+        text = ' '.join(p.get_text(' ', strip=True) for p in container.find_all('p')) if container else ''
     if len(text.strip()) < 40:
         raise FetchError(422, 'No readable article text')
     if len(text) > 20000:
