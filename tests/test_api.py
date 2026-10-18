@@ -85,21 +85,25 @@ def test_invalid_model_distributions_are_503(client,monkeypatch,values):
 
 def test_queue_timeout_is_bounded_and_recovers(monkeypatch):
     from concurrent.futures import ThreadPoolExecutor
-    import threading,time
+    import threading
     entered=threading.Event()
+    release=threading.Event()
     class Slow(Stub):
         def predict_proba(self,texts):
             entered.set()
-            time.sleep(.15)
+            assert release.wait(5), 'Test did not release held inference'
             return super().predict_proba(texts)
     monkeypatch.setattr(api,'load_predictor',lambda: Slow())
     with TestClient(api.create_app(queue_timeout=.01)) as c:
         with ThreadPoolExecutor(max_workers=2) as pool:
             first=pool.submit(c.post,'/predict',json={'text':'First request'})
             assert entered.wait(2)
-            second=c.post('/predict',json={'text':'Second request'})
-            assert second.status_code==503
-            assert second.headers['retry-after']=='1'
+            try:
+                second=c.post('/predict',json={'text':'Second request'})
+                assert second.status_code==503
+                assert second.headers['retry-after']=='1'
+            finally:
+                release.set()
             assert first.result().status_code==200
         assert c.post('/predict',json={'text':'Recovered'}).status_code==200
 

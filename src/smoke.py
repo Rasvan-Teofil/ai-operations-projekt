@@ -1,12 +1,13 @@
 """Live API verification with real local model. External URL behavior is date dependent."""
 import argparse
 import json
+from pathlib import Path
 from datetime import datetime, timezone
 import httpx
 from src.config import REPORTS, LABELS
 
 
-def main(base, missing_base):
+def main(base, missing_base, report=None):
     records = []
     with httpx.Client(timeout=60, trust_env=False) as client:
         health = client.get(base+'/health')
@@ -44,12 +45,14 @@ def main(base, missing_base):
         records.append({'case':'missing_model','status':res.status_code,'expected':503,'response':res.json()})
         assert res.status_code == 503
     result = {'checked_at_utc':datetime.now(timezone.utc).isoformat(),'api':base,'cases':records}
-    (REPORTS/'smoke.json').write_text(json.dumps(result,indent=2,ensure_ascii=False))
-    print('Live checks passed; reports/smoke.json written')
+    destination=report or REPORTS/'smoke.json'
+    destination.write_text(json.dumps(result,indent=2,ensure_ascii=False))
+    print(f'Live checks passed; {destination} written')
 
 if __name__ == '__main__':
     p=argparse.ArgumentParser()
     p.add_argument('--api',default='http://127.0.0.1:8000')
     p.add_argument('--missing-api',default='http://127.0.0.1:8001')
+    p.add_argument('--report',type=Path)
     args=p.parse_args()
-    main(args.api,args.missing_api)
+    main(args.api,args.missing_api,args.report)

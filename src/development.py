@@ -21,7 +21,7 @@ from src.inference import Predictor, SentimentNet, save_model
 from src.tracking import tracking, fingerprint
 from src.fetch import extract_article, FetchError
 
-DEV = REPORTS/'development'
+DEV = Path(os.getenv('SENTIMENT_DEV_REPORTS',str(REPORTS/'development'))).resolve()
 LOCAL = DATA.parent/'development'
 ART = MODELS/'development'
 STAGES = ['B0_frozen','R0_reference','R1_quality','R2_article','R3_deploy','R4_combined']
@@ -35,6 +35,9 @@ def setup():
     tracking()
     ART.mkdir(parents=True,exist_ok=True)
     LOCAL.mkdir(parents=True,exist_ok=True)
+    DEV.mkdir(parents=True,exist_ok=True)
+    if not (DEV/'protocol.json').exists():
+        shutil.copyfile(REPORTS/'development'/'protocol.json',DEV/'protocol.json')
     protocol = json.loads((DEV/'protocol.json').read_text())
     return protocol
 
@@ -211,7 +214,11 @@ def run(resume=False):
         raise SystemExit('v2 execution complete; preserve completed evidence')
     if (LOCAL/'started.json').exists() and not resume:
         raise SystemExit('v2 execution started; explicit --resume required after examining failure')
-    (LOCAL/'started.json').write_text(json.dumps({'protocol_sha256':hashlib.sha256((DEV/'protocol.json').read_bytes()).hexdigest()}))
+    digest=hashlib.sha256((DEV/'protocol.json').read_bytes()).hexdigest()
+    if (LOCAL/'started.json').exists():
+        assert json.loads((LOCAL/'started.json').read_text())['protocol_sha256']==digest, 'Protocol changed after starting'
+    else:
+        (LOCAL/'started.json').write_text(json.dumps({'protocol_sha256':digest}))
     cv=StratifiedGroupKFold(n_splits=3,shuffle=True,random_state=SEED)
     folds=list(cv.split(df,df.language+':'+df.label,df.source))
     manifest=[]
@@ -275,6 +282,8 @@ def run(resume=False):
 
 
 def summarize():
+    if (DEV/'decision.json').exists():
+        raise SystemExit('Selection already frozen; do not select again after final audit')
     setup()
     runs=json.loads((DEV/'runs.json').read_text())
     frame=pd.DataFrame(runs)
@@ -322,15 +331,25 @@ def release():
         mlflow.log_artifact(str(DEV/'decision.json'))
         mlflow.log_artifact(str(dest/'artifact.json'))
         # Keep original deployment selection alongside the new artifact for rollback.
-        shutil.copyfile(MODELS/'selected.json',ART/'previous_selected.json')
+        if (MODELS/'selected.json').exists():
+            shutil.copyfile(MODELS/'selected.json',ART/'previous_selected.json')
         (DEV/'release.json').write_text(json.dumps({'stage':selected,'run_id':run.info.run_id,'artifact_sha256':fingerprint(dest),
                                                   'model_version':metadata['model_version'],'original_test_evaluated':False},indent=2))
     print('Frozen full-train release',selected)
 
+def activate():
+    release=json.loads((DEV/'release.json').read_text())
+    if fingerprint(ART/'release')!=release['artifact_sha256']:
+        raise RuntimeError('Release differs from frozen selected artifact')
+    (MODELS/'selected.json').write_text(json.dumps({'model':'development/release',
+        'model_version':release['model_version']},indent=2))
+    print('Activated frozen release; restart uvicorn to load it')
+
+
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument('action',choices=['run','summarize','release'])
+    parser.add_argument('action',choices=['run','summarize','release','activate'])
     parser.add_argument('--resume',action='store_true')
     args=parser.parse_args()
     if args.action=='run': run(resume=args.resume)
-    else: {'summarize':summarize,'release':release}[args.action]()
+    else: {'summarize':summarize,'release':release,'activate':activate}[args.action]()

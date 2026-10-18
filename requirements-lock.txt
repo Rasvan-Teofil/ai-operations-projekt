@@ -94,9 +94,11 @@ pytz==2026.5
 PyYAML==6.0.3
 regex==2026.9.29
 requests==2.34.2
+sacremoses==0.1.1
 safetensors==0.7.0
 scikit-learn==1.8.0
 scipy==1.18.1
+sentencepiece==0.2.1
 setuptools==78.1.0
 six==1.17.0
 skops==0.16.0

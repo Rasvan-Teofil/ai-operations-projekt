@@ -2,11 +2,65 @@
 
 Eigenständiger Lösungsweg ab dem leeren Commit `830bba1`. Kein Code und kein Merge aus `main`.
 
+## Entwicklung v2 und aktueller API-Standard
+
+Auf ausdrücklichen Wunsch folgten getrennte Verbesserungsversuche und eine Kombination. Damit wurde die ursprüngliche Vorgabe „genau ein stärkeres Modell“ für diese **zusätzliche dokumentierte Entwicklungsphase** erweitert; der v1-Lauf bleibt unverändert erhalten. Die nachfolgenden v1-Abschnitte beschreiben den historischen ersten Stand. Aktuell wird der in v2 ausgewählte BF16-Stand ausgeliefert.
+
+**Ausgeliefert wird `R3_deploy`, weil sein mittleres Quellen-CV-macro-F1 von 0,6729 innerhalb der vorab definierten 0,005 zur besten Kombination (0,6740) liegt und die Tie-Regel die geringere gemessene Latenz bei rund 241 MiB wählt.** Das ist keine behauptete signifikante Überlegenheit: der Abstand beträgt nur 0,0011 F1 bzw. 0,037 ms zur Kombination. Gegenüber dem Referenz-Fine-Tune sinkt die vollständige Artefaktgröße von rund 465 auf 241 MiB.
+
+- **B0:** eingefrorene Baseline, je Fold ausschließlich auf dessen Fit-Zeilen neu gefittet.
+- **R0:** ursprüngliche Fine-Tune-Rezeptur, drei Epochen, je Fold neu trainiert.
+- **R1:** isoliert die Verlustgewichtung nach Sprache×Klasse.
+- **R2:** isoliert tokengewichtete Chunks und verbesserte HTML-Extraktion.
+- **R3:** isoliert BF16-Speicherung/-Inferenz; zusätzlich begrenztes Warten auf die API-Inferenz und Prüfung gültiger Scores.
+- **R4:** kombiniert R1, R2 und R3. Der beste mittlere CV-Punktwert führt wegen der vorab festgelegten Nähe-/Zeit-Regel nicht automatisch zur Auslieferung.
+
+**18 abgeschlossene Fold-Läufe:** identische drei `StratifiedGroupKFold`-Folds innerhalb der ursprünglichen 8.335 Train-Zeilen, Gruppe=`source`, Schicht=`language:label`, Seed `20261019`. Die Quelle eines Dev-Folds kommt nie in dessen Fit-Fold vor. Die alten Val- und Testdateien wurden weder für Entwicklung noch Auswahl neu geöffnet oder bewertet. Die beiden Trainingsrezepturen durchlaufen immer den gesamten jeweiligen Fit-Fold, beim Release alle 8.335 Train-Zeilen. Es gibt keine Hyperparametersuche auf Val/Test und kein Early Stopping.
+
+![Gemessene Entwicklung, keine vermischten Testzahlen](reports/development/development_curve.png)
+
+[Entwicklungsbericht und Trade-offs](reports/development/development.md) · [CV-Läufe](reports/development/runs.json) · [vorab festgelegtes Protokoll](reports/development/protocol.json) · [eingefrorene Entscheidung](reports/development/decision.json). Die synthetischen Artikeltexte und sechs HTML-Fixtures sind technische Kontrollfälle, **keine realen Artikellabels**. R2/R4 verbessern die HTML-Fixtures von 2/6 auf 6/6; diese Artikelverarbeitung ist nicht Teil des durch die Zeit-Tie-Regel gewählten R3-Standards. R2/R4 bleiben als getrennte lokale Fold-Artefakte nachvollziehbar. 51 netzfreie Tests prüfen API, Abruf, Chunk-Aggregation, Überlastbehandlung und ungültige Scores. `SENTIMENT_QUEUE_TIMEOUT` begrenzt die Wartezeit vor Inferenz (Standard 2 s, bei Überlast 503 plus `Retry-After`). Ein bewusst strenger 10-ms-Lasttest zeigt die Gegenleistung: schnelle Ablehnung statt mehr erfolgreich abgearbeiteter Anfragen; seine 503-Antworten sind keine erfolgreiche Inferenz und kein Durchsatzgewinn.
+
+### Abschließender Vergleich mit dem Kollegen — erst nach unserer Auswahl
+
+Ein frischer **gemeinsamer** Benchmark prüft die unverändert rekonstruierte Main-Standardmethode und unsere eingefrorenen v1-/v2-Artefakte. [Vollständiger Vergleich](reports/development/branch_comparison.md), [Maschinenwerte](reports/development/branch_comparison.json), [Benchmark-Herkunft/Filter/Lizenzen](reports/development/benchmark_manifest.json).
+
+| Lösung | macro-F1 EN nativ | macro-F1 DE maschinenübersetzt | ms/Text | MiB |
+| --- | ---: | ---: | ---: | ---: |
+| Main-Standard, unverändert rekonstruiert | 0,4524 | 0,4293 | 0,250 (CPU) | 4,08 |
+| Second-path v1 | 0,7360 | 0,6458 | 2,335 (CUDA) | 465,14 |
+| Second-path v2, vorab gewählt | 0,7293 | 0,6557 | 2,326 (CUDA) | 240,73 |
+
+Quelle: 600 neue [SEntFiN](https://github.com/pyRis/SEntFiN)-Headlines mit einstimmigen menschlichen Entitätslabels, je 200/Klasse, plus deren deutsche Übersetzungen mit [OPUS-MT](https://huggingface.co/Helsinki-NLP/opus-mt-en-de). Kein exakter normalisierter Überlapp mit beiden Trainingskorpora; keine Aussage über semantischen oder Vortrainingsüberlapp. **Deutsch ist ein MT-Transfercheck, kein nativer Goldtest; es sind 600 Titelpaare, keine 1.200 unabhängigen Artikel.** Die Labels/Benchmarkzahlen beeinflussten die bereits eingefrorene Auswahl nicht. Native EN-Differenz v2 minus Kollege: +0,2770 macro-F1, gepaarter Bootstrap-95-%-Perzentilbereich [0,2257; 0,3249] unter diesem Benchmark.
+
+V2 ist **kein pauschaler Genauigkeitsgewinn** gegenüber v1: auf nativen EN-Headlines fällt der Punktwert leicht, auf DE-MT steigt er leicht. Der klare v2-Gewinn ist die kleinere Verpackung bei ähnlicher CV-Qualität; die bessere Evidenz macht Grenzen und erfolglose/kleine Änderungen sichtbar. Main bleibt erheblich kleiner und schneller. Unterschiedliche Trainingskorpora bedeuten, dass dieser Vergleich gelieferte Verfahren prüft und keinen isolierten Architekturvorteil beweist. Die alten 0,720 und 0,7187 werden nicht als gemeinsame Rangliste verwendet.
+
+### Aktuellen Stand frisch reproduzieren
+
+Nach dem CUDA-/Python-Setup unten, in einem **frischen Clone**. Die historischen Messergebnisse bleiben unter `reports/development/`; neue Ergebnisse gehen nach `reports/reproduction/` (ignoriert):
+
+```bash
+export SENTIMENT_DEV_REPORTS=reports/reproduction
+python -m src.prepare
+python -m src.train frozen
+python -m src.development run
+python -m src.development summarize
+python -m src.development release
+python -m src.service_benchmark
+python -m src.development_report
+python -m src.development activate
+uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+Abgeschlossene Läufe und die Auswahl sind lokal gegen Wiederholung gesperrt. `--resume` ist ausschließlich für unvollständige Entwicklungsstufen vorgesehen und prüft den Protokollhash; ein Harness-Abbruch mit erhaltener fehlgeschlagener MLflow-Ausführung ist in `reports/development/harness_incident.json` dokumentiert. Keine neue Auswertung des ursprünglichen Tests. Die ursprünglichen Gewichte bleiben unter `models/finetuned`, der aktuelle vollständige Release unter `models/development/release`, der Rücksprungverweis unter `models/development/previous_selected.json`. Die API lädt nur das lokal ausgewählte Artefakt und lädt nichts herunter. Rücksprung zu v1: `cp models/development/previous_selected.json models/selected.json`, danach Uvicorn neu starten. Bei frischer v2-Reproduktion existiert noch kein v1-Release; entsprechend ist dessen Vergleich optional und wird mit der unten beschriebenen Referenz-v1-Initialisierung hergestellt, ohne den alten Test auszuführen.
+
+Für den **optionalen letzten** gemeinsamen Vergleich braucht man zusätzlich `requirements-evaluation.txt` und einen separaten detached Referenzcheckout. Niemals deren CPU-Transformer-Requirements installieren. Die tatsächlich benutzte Referenzumgebung steht in `reports/development/reference_requirements.txt`. Ausführbare Schritte stehen im [Vergleichsbericht](reports/development/branch_comparison.md). Der Adapter importiert unveränderte Methoden, enthält keine kopierte Modellimplementierung und schreibt ausschließlich in unser MLflow-Experiment. Modelle und Datentexte bleiben uncommittet. `main` bleibt unverändert.
+
 ## Problem und Entscheidung
 
 Medienbeobachtung und PR sollen deutsche oder englische Nachrichten nach `negative`, `neutral`, `positive` vorsortieren: Was muss wegen negativer Entwicklung geprüft werden, was ist eine sachliche Meldung, was ist positiv belegbar? Ziel ist das Sentiment des eingereichten Textes, keine Tatsachenprüfung, Dringlichkeitsmessung oder Anlageempfehlung. Fehlalarm und übersehene negative Meldung haben noch unbekannte Kosten. Deshalb ist **macro-F1** das vorab festgelegte Auswahlmaß: jede Klasse zählt gleich. Bei höchstens 0,005 absolutem Abstand entscheiden geringere Inferenzzeit, danach weniger Artefaktbytes. Es gibt keine Parametersuche auf Val oder Test.
 
-## Anderer Modellweg
+## Ursprünglicher Modellweg (v1, historischer Meilenstein)
 
 Ein mehrsprachiger semantischer Encoder ersetzt Wortzählvektoren: [paraphrase-multilingual-MiniLM-L12-v2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2), Apache-2.0, Revision `e8f8c211226b894fcb81acc59f3b34ba3efd5f42`. Maskiertes Mittel seiner 384-dimensionalen Tokenrepräsentationen. Die Modellkarte beschreibt 50 Sprachen und Kontext 128.
 
@@ -44,9 +98,9 @@ python -m pip check
 python -c 'import torch; assert torch.cuda.is_available(); print(torch.__version__, torch.version.cuda, torch.cuda.get_device_name())'
 ```
 
-`requirements-cuda.txt` pinnt `torch==2.11.0+cu128` vom offiziellen CUDA-Index. **requirements-transformer.txt aus main nicht verwenden.** Alle tatsächlich installierten transitiven Versionen stehen in `requirements-lock.txt`; alternativ für exakt diese Umgebung `python -m pip install -r requirements-lock.txt`. Training verweigert einen CPU-Fallback. Internet wird nur für Daten/Encoder-Download und später für ausdrücklich eingereichte URLs gebraucht. Ungefähr 8 GB venv plus Cache und ca. 1,5 GB lokale Modellartefakte einplanen.
+`requirements-cuda.txt` pinnt `torch==2.11.0+cu128` vom offiziellen CUDA-Index. **requirements-transformer.txt aus main nicht verwenden.** Alle tatsächlich installierten transitiven Versionen stehen in `requirements-lock.txt`; alternativ für exakt diese Umgebung `python -m pip install -r requirements-lock.txt`. Training verweigert einen CPU-Fallback. Internet wird nur für Daten/Encoder-Download und später für ausdrücklich eingereichte URLs gebraucht. Ungefähr 8 GB venv plus Cache einplanen; v1 braucht ca. 1,5 GB lokale Modellartefakte. Mit allen erhaltenen v2-Fold-Artefakten sind es auf diesem Tower insgesamt ca. 7,6 GB unter models/. Das ausgelieferte Einzelartefakt benötigt rund 241 MiB.
 
-## Reproduktion: Training zuerst, Test am Ende
+## Ursprünglichen v1-Lauf reproduzieren (optional)
 
 ```bash
 python -m src.prepare
@@ -65,7 +119,7 @@ Vor dem Test werden Existenz und SHA-256 aller vier Modellartefakte geprüft. Ei
 
 Training und Inferenz sind getrennt: selbstständige Artefakte unter `models/{frozen,finetuned,centroid,majority}/`, Tokenizer, Encoder und Kopf plus `artifact.json`. `models/selected.json` bestimmt den Standard. Alles unter `models/` und die Datentexte sind ignoriert. `src.inference` lädt ausschließlich lokale Dateien mit `local_files_only=True`; API-Start löst keinen Download oder Trainingslauf aus.
 
-## MLflow und gemessener Vergleich
+## MLflow und ursprünglicher v1-Vergleich
 
 Lokale SQLite-Datenbank `mlflow.db`, Artefakte unter `mlruns/`, Experiment **article-sentiment-second-path**. Beides bleibt lokal, keine Einträge in das Experiment von main.
 
@@ -82,7 +136,7 @@ mlflow ui --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000
 | centroid | 0.6402 | 0.6410 | 0.6758 | 0.6372 | 0.6100 | 2.563 | 465.14 |
 | majority | 0.4841 | 0.2174 | 0.0000 | 0.6523 | 0.0000 | 0.005 | 0.00 |
 
-**Ausgeliefert wird das eigene GPU-Fine-Tuning statt der eingefrorenen Baseline, weil es auf dem gemeinsamen Test macro-F1 von 0,6656 auf 0,7187 hebt (+0,0531) und dabei praktisch gleiche Artefaktgröße und Inferenzzeit hat.**
+**In v1 wurde das eigene GPU-Fine-Tuning statt der eingefrorenen Baseline ausgeliefert, weil es auf dem damaligen gemeinsamen Test macro-F1 von 0,6656 auf 0,7187 hebt (+0,0531) und dabei praktisch gleiche Artefaktgröße und Inferenzzeit hat.**
 
 Der Abstand liegt über der vorab festgelegten Nähegrenze 0,005; Latenz entscheidet hier also nicht. Beide Encoderartefakte brauchen rund 465 MiB, die zusätzliche Fine-Tuning-Zeit beträgt 40,3 s nach Laden der Initialisierung (Baseline-Training 11,3 s ohne Download/Laden). Die Mehrheitskontrolle ist kleiner und schneller, übersieht aber sämtliche negativen und positiven Texte. Centroid ist ähnlich teuer in der Inferenz und ungenauer.
 

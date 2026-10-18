@@ -10,3 +10,6 @@ mlflow.db*
 .env
 reports/evaluation.lock
 data/development/
+data/benchmark/
+reports/reproduction/
+reports/development/partial_runs.json
