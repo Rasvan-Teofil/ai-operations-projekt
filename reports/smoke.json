@@ -1,0 +1,229 @@
+{
+  "checked_at_utc": "2026-10-18T19:33:02.698366+00:00",
+  "api": "http://127.0.0.1:8000",
+  "cases": [
+    {
+      "case": "health",
+      "status": 200,
+      "response": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_version": "finetuned-20261018-v1"
+      }
+    },
+    {
+      "case": "text_de",
+      "request": {
+        "text": "Die Firma meldet einen Gewinneinbruch und muss Beschäftigte entlassen."
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "negative",
+        "scores": {
+          "negative": 0.9926285743713379,
+          "neutral": 0.0066825090907514095,
+          "positive": 0.00068897835444659
+        },
+        "model_version": "finetuned-20261018-v1"
+      }
+    },
+    {
+      "case": "text_en",
+      "request": {
+        "text": "The company reported record earnings and raised its outlook."
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "positive",
+        "scores": {
+          "negative": 0.0005644291522912681,
+          "neutral": 0.016281243413686752,
+          "positive": 0.9831543564796448
+        },
+        "model_version": "finetuned-20261018-v1"
+      }
+    },
+    {
+      "case": "text_neutral",
+      "request": {
+        "text": "Die Hauptversammlung findet am Dienstag in Berlin statt."
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "neutral",
+        "scores": {
+          "negative": 0.0004012896097265184,
+          "neutral": 0.9956990480422974,
+          "positive": 0.003899655770510435
+        },
+        "model_version": "finetuned-20261018-v1"
+      }
+    },
+    {
+      "case": "valid_url",
+      "request": {
+        "url": "https://www.bbc.com/news/articles/c687z8127302o"
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "positive",
+        "scores": {
+          "negative": 0.023960495367646217,
+          "neutral": 0.15592190623283386,
+          "positive": 0.8201175928115845
+        },
+        "model_version": "finetuned-20261018-v1"
+      }
+    },
+    {
+      "case": "missing_fields",
+      "request": {},
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body"
+            ],
+            "msg": "Value error, Provide exactly one of text or url; omit the other field",
+            "input": {},
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "both_fields",
+      "request": {
+        "text": "hi",
+        "url": "https://example.com"
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body"
+            ],
+            "msg": "Value error, Provide exactly one of text or url; omit the other field",
+            "input": {
+              "text": "hi",
+              "url": "https://example.com"
+            },
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "empty_text",
+      "request": {
+        "text": "  "
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body"
+            ],
+            "msg": "Value error, Input must contain 1–20000 non-blank characters",
+            "input": {
+              "text": "  "
+            },
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "wrong_type",
+      "request": {
+        "text": 42
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "string_type",
+            "loc": [
+              "body",
+              "text"
+            ],
+            "msg": "Input should be a valid string",
+            "input": 42
+          }
+        ]
+      }
+    },
+    {
+      "case": "private_url",
+      "request": {
+        "url": "http://127.0.0.1/"
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": "Non-public address is not allowed"
+      }
+    },
+    {
+      "case": "no_article",
+      "request": {
+        "url": "https://www.bbc.com/robots.txt"
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": "No readable HTML article"
+      }
+    },
+    {
+      "case": "robots_denied",
+      "request": {
+        "url": "https://www.google.com/search?q=sentiment"
+      },
+      "status": 403,
+      "expected": 403,
+      "response": {
+        "detail": "robots.txt forbids this article"
+      }
+    },
+    {
+      "case": "dns_failure",
+      "request": {
+        "url": "https://second-path-no-such-host.invalid/news"
+      },
+      "status": 502,
+      "expected": 502,
+      "response": {
+        "detail": "Host cannot be resolved"
+      }
+    },
+    {
+      "case": "missing_model",
+      "status": 503,
+      "expected": 503,
+      "response": {
+        "detail": "Local model artifact unavailable; run the documented training pipeline"
+      }
+    }
+  ]
+}

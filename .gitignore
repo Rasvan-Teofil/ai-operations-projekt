@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/raw/
+data/processed/
+models/*
+mlruns/
+mlflow.db*
+*.log
+.env
+reports/evaluation.lock
