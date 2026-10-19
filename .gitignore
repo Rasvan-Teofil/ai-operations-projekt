@@ -20,11 +20,32 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Lokale Experimente (MLflow). Die Vergleichstabelle mit Diskussion bleibt im Repo.
+# Lokale Experimente (MLflow). Berichte mit den gemessenen Zahlen bleiben im Repo.
 mlruns/
 mlartifacts/
+mlflow.db*
 reports/*
 !reports/model_comparison.md
+!reports/second_path_model_comparison.md
+!reports/comparison.csv
+!reports/comparison.json
+!reports/data_manifest.json
+!reports/protocol.json
+!reports/preflight_incident.json
+!reports/smoke.json
+!reports/training_evidence.json
+!reports/centroid_confusion_matrix.csv
+!reports/finetuned_confusion_matrix.csv
+!reports/frozen_confusion_matrix.csv
+!reports/majority_confusion_matrix.csv
+!reports/development/
+!reports/development/**
+reports/reproduction/
+reports/evaluation.lock
+reports/development/partial_runs.json
+
+# LaTeX-Zwischenbau. Das fertige PDF liegt daneben und bleibt versioniert.
+docs/**/build/
 
 # Geheimnisse und lokale Konfiguration
 .env

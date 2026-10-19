@@ -1,0 +1,52 @@
+{
+  "status": "aborted_in_warmup_before_any_test_prediction",
+  "test_sha256": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+  "candidates": {
+    "frozen": {
+      "kind": "frozen",
+      "model_version": "frozen-20261018-v1",
+      "run_id": "6f942a83f7c949b2a3a70d9036b2d12d",
+      "labels": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "max_length": 128
+    },
+    "finetuned": {
+      "kind": "finetuned",
+      "model_version": "finetuned-20261018-v1",
+      "run_id": "5b1864e1e45e49cc99a74c33a39b5660",
+      "labels": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "max_length": 128
+    },
+    "centroid": {
+      "kind": "centroid",
+      "model_version": "centroid-20261018-v1",
+      "run_id": "d130c7f51fe749a5a17326f5503f4d78",
+      "labels": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "max_length": 128
+    },
+    "majority": {
+      "kind": "majority",
+      "model_version": "majority-20261018-v1",
+      "run_id": "8a7d115af9d54edc83a2d029e034df35",
+      "labels": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "majority": 1
+    }
+  },
+  "test_predictions": 0,
+  "reason": "Generic Fast tokenizer prepare_for_model omitted special tokens; replaced with backend overflow tokenization; regression test added; all trained artifacts unchanged"
+}

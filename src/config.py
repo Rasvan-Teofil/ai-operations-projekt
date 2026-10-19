@@ -43,6 +43,9 @@ ALLOWED_LANGUAGES = frozenset({"de", "en"})
 
 MLFLOW_TRACKING_DIR = PROJECT_ROOT / "mlruns"
 MLFLOW_EXPERIMENT_NAME = "article-sentiment"
+# Gleicher Store wie der zweite Durchlauf. Der Tag trennt die Läufe in der UI.
+MLFLOW_ITERATION = "1-first-path"
+MLFLOW_COMPARISON_EXPERIMENT = "article-sentiment-comparison"
 
 # Praktische Wahl nach dem Vergleich auf dem echten Testsplit: höchstes macro-F1,
 # dazu klein und schnell. Die CI setzt SENTIMENT_MODEL=tfidf_logreg und bleibt leicht.

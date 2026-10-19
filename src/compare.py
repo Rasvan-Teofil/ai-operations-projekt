@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.config import LABEL_COLUMN, REPORTS_DIR, TEXT_COLUMN
+from src.config import LABEL_COLUMN, MLFLOW_ITERATION, REPORTS_DIR, TEXT_COLUMN
 from src.data import dataset_log_params, load_work_splits
 from src.interface import SentimentModel
 from src.tracking import attach_artifact_paths, evaluate_model, log_evaluation, setup_mlflow, shared_dataset_params
@@ -226,6 +226,8 @@ def _log_comparison_artifact(csv_path: Path, markdown_path: Path, shared: dict) 
 
     with mlflow.start_run(run_name="comparison"):
         mlflow.log_params(shared)
+        mlflow.set_tag("iteration", MLFLOW_ITERATION)
+        mlflow.set_tag("source", "live-training")
         mlflow.set_tag("role", "comparison")
         mlflow.log_artifact(str(csv_path))
         mlflow.log_artifact(str(markdown_path))

@@ -35,3 +35,28 @@ jobs:
 
       - name: Tests ausführen
         run: pytest
+
+  second-path:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: second_path/requirements.txt
+
+      # Kein CUDA-Torch. Die Tests prüfen API, Abruf und Tokenisierung, nicht das Training.
+      - name: Abhängigkeiten des zweiten Durchlaufs installieren
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r second_path/requirements.txt
+
+      - name: Transformer-Import prüfen
+        run: python -c "import transformers, tokenizers, fastapi, bs4, numpy"
+
+      - name: Tests des zweiten Durchlaufs
+        run: pytest tests/secondpath -q
