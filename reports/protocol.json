@@ -1,0 +1,14 @@
+{
+  "fixed_before_test": true,
+  "seed": 20261018,
+  "data": "Kenpache de/en, pinned revision, normalized exact-dedup, conflicting labels removed",
+  "split": "70/15/15 stratified language:label; stable sha256 text ordering before splitting",
+  "baseline": "frozen multilingual MiniLM, masked mean pooling, balanced logistic head C=1",
+  "stronger": "same encoder and baseline head initialization, all layers trainable, 3 final epochs, full train, bf16, AdamW encoder_lr=2e-5 head_lr=2e-4, weight_decay=.01, 10% warmup, linear decay, batch32, max128, inverse-frequency loss",
+  "additional": "nearest class centroid in frozen embeddings with squared Euclidean distance; train-only majority classifier, neutral class; neither tuned",
+  "validation": "not read, no hyperparameter/checkpoint selection",
+  "test": "one terminal evaluation after all artifacts frozen; no adaptation afterwards",
+  "selection": "highest macro-F1; within 0.005 absolute prefer latency then artifact bytes",
+  "latency": "CUDA, warmup20 independent example, batch1 entire test, tokenization and transfers included, synchronize each text; startup excluded",
+  "inference": "128 tokens, nonoverlapping article chunks, arithmetic mean of per-chunk softmax distributions"
+}

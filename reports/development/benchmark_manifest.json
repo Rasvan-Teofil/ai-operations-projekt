@@ -1,0 +1,39 @@
+{
+  "dataset": "pyRis/SEntFiN",
+  "revision": "eba43610fe3cb57a3e5773cd6c037da1f8992ad5",
+  "source_url": "https://raw.githubusercontent.com/pyRis/SEntFiN/eba43610fe3cb57a3e5773cd6c037da1f8992ad5/SEntFiN.csv",
+  "source_sha256": "570af7ba58f724f3fcc414dd5ba80da5b1a3b342134d76c6ebdf53a32c54a92f",
+  "license": "MIT, original repository; copyright Ankur Sinha, Satishwar Kedas, Rishu Kumar, Pekka Malo (2021)",
+  "raw_rows": 10753,
+  "unanimous_valid_length_rows": 9512,
+  "normalized_training_overlap_removed": 0,
+  "eligible_after_dedup_overlap": 9453,
+  "selection": "200 per class, random_state=20261019, no classifier predictions used",
+  "rows": 1200,
+  "native_english_rows": 600,
+  "translated_german_rows": 600,
+  "counts": {
+    "de:negative": 200,
+    "de:neutral": 200,
+    "de:positive": 200,
+    "en:negative": 200,
+    "en:neutral": 200,
+    "en:positive": 200
+  },
+  "translator": "Helsinki-NLP/opus-mt-en-de",
+  "translator_revision": "6183067f769a302e3861815543b9f312c71b0ca4",
+  "translator_license": "CC-BY-4.0",
+  "translation": "CUDA fp32, batch24, beam4, do_sample=False, encoder256, max_new_tokens128",
+  "translation_source_truncations": 0,
+  "sha256": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+  "our_selection_sha256": "14e9ca5c7b2ea14e14f66d60d4a31198baec9b9b0d2d11fc5041918d3e56a0dc",
+  "our_release_sha256": "d268b2d2507f23e544e3500d225cdcf03d35fe7ae7a3fb2bed7a0ea508aa7747",
+  "caveats": [
+    "Entity-level labels mapped only when all entities agree.",
+    "Exactly normalized training overlap removed; semantic/event overlap and pretraining contamination unknown.",
+    "German translations are a transfer check, not native German annotation.",
+    "600 paired headlines, not 1200 independent articles.",
+    "Balanced headline benchmark, not natural production prevalence or full-article gold."
+  ],
+  "reference_training_sha256": "e224bc21816d87bf5353b7c6e59656ce6ef2e5e4a93366e6201325d555ca15fc"
+}

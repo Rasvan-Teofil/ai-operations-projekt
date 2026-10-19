@@ -18,7 +18,7 @@ from pathlib import Path
 
 import mlflow
 
-from src.config import MLFLOW_EXPERIMENT_NAME, MLFLOW_TRACKING_DIR
+from src.config import MLFLOW_EXPERIMENT_NAME, MLFLOW_ITERATION, MLFLOW_TRACKING_DIR
 from src.data import dataset_log_params
 from src.evaluate import classification_metrics, confusion_frame
 from src.interface import SentimentModel
@@ -83,6 +83,8 @@ def log_evaluation(row: dict, shared_params: dict) -> None:
     with mlflow.start_run(run_name=row["model"]):
         mlflow.log_params({**shared_params, **row.get("params", {}), "model_version": row["model_version"]})
         mlflow.log_metrics(metrics)
+        mlflow.set_tag("iteration", MLFLOW_ITERATION)
+        mlflow.set_tag("source", "live-training")
         mlflow.set_tag("role", row["role"])
         mlflow.set_tag("model_name", row["model"])
         with tempfile.TemporaryDirectory() as tmp:

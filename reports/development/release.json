@@ -1,0 +1,7 @@
+{
+  "stage": "R3_deploy",
+  "run_id": "aa0beb824f2940f492b8818fe608b1be",
+  "artifact_sha256": "d268b2d2507f23e544e3500d225cdcf03d35fe7ae7a3fb2bed7a0ea508aa7747",
+  "model_version": "dev2-R3_deploy-foldrelease-20261019",
+  "original_test_evaluated": false
+}

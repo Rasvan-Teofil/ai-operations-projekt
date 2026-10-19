@@ -11,6 +11,23 @@ Das Werkzeug liest einen Nachrichtentext oder genau eine Artikel-URL und schätz
 
 Gedacht für Medienbeobachtung, PR- und Kommunikations-Teams und für Leute, die einen Text einordnen wollen, bevor sie ihn weitergeben. Später, hier noch ohne Label und ohne Modell: ein Score für wertende oder aufgeladene Sprache.
 
+## Zwei Durchläufe
+
+Beide Wege liegen in diesem Stand. Keiner ersetzt den anderen.
+
+| | Erster Durchlauf (`main`, Paket `src` / `app`) | Zweiter Durchlauf (Branch `second-path`, Paket `second_path`) |
+| --- | --- | --- |
+| Modelle | TF-IDF + LogReg, TF-IDF + LinearSVC, zwei HF-Zero-Shot-Modelle, DistilBERT-Fine-Tuning | MiniLM `paraphrase-multilingual-MiniLM-L12-v2`: frozen, Fine-Tune, Centroid, Majority; danach Ablationen B0 und R0–R4 |
+| Eigener Test | Finanzsätze, n = 1 270. Bestes macro-F1: **LinearSVC 0,7202** | Kenpache DE/EN, n = 1 787. Fine-Tune **0,7187** gegen frozen 0,6656 |
+| Auslieferung | API-Standard `tfidf_linearsvc` | v2 wählt **R3_deploy** (BF16, Quellen-CV-macro-F1 0,6729, rund 241 MiB) |
+| Training | CPU für TF-IDF. Transformer optional | CUDA, BF16. Ein CPU-Fallback wird verweigert |
+| API | `uvicorn app.main:app` | `uvicorn second_path.api:app` |
+| MLflow-Experiment | `article-sentiment`, Tag `iteration=1-first-path` | `article-sentiment-second-path`, Tag `iteration=2-second-path` |
+
+Der faire Vergleich beider Verfahren auf **denselben** 600 SEntFiN-Headlines steht in [`reports/development/branch_comparison.md`](reports/development/branch_comparison.md): rekonstruierter LinearSVC macro-F1 EN 0,4524, second-path v1 0,7360, v2 0,7293. Die alten Testzahlen 0,7202 und 0,7187 sind verschiedene Splits und werden nicht gegeneinander gerankt. Der Executive Pitch dazu liegt unter [`docs/executive-pitch/`](docs/executive-pitch/).
+
+Artefakte des zweiten Durchlaufs: Daten unter `data/second_path/processed/`, Gewichte unter `models/second_path/`. Der erste Durchlauf bleibt bei `data/processed/` und `models/`.
+
 ## Problem & Stakeholder
 
 | | |
@@ -101,13 +118,62 @@ python -m src.train --all
 
 Dasselbe ist `python -m src.compare`. Fehlt `models/finetuned`, läuft der Vergleich ohne das Fine-Tuning und schreibt das in die Tabelle.
 
-MLflow-UI:
+### MLflow: beide Durchläufe im selben Store
+
+Windows, Git Bash, Projektroot. Ein Store, `./mlruns`. Die UI ist `mlflow ui --backend-store-uri ./mlruns`.
 
 ```bash
-MLFLOW_ALLOW_FILE_STORE=true mlflow ui --backend-store-uri ./mlruns --port 5000
+python -m venv .venv
+source .venv/Scripts/activate
+python -m pip install -r requirements.txt
 ```
 
-Im Browser <http://127.0.0.1:5000>, Experiment `article-sentiment`. Ein Lauf je Modell (Accuracy, macro-F1, F1 je Klasse, `inference_ms_per_text`, Artefakt `confusion_matrix.csv`) und ein Lauf `comparison`.
+Lauf 1 live auf der CPU (TF-IDF, Dummy oder — nach `python -m src.prepare_data` — die echten Splits). Jeder Lauf bekommt den Tag `iteration=1-first-path`:
+
+```bash
+python -m src.train
+```
+
+Die veröffentlichten Kennzahlen **beider** Durchläufe, ohne GPU und ohne erneutes Training, aus den eingecheckten Berichten. Das ist der CPU-Weg für den zweiten Durchlauf, dessen Training CUDA verlangt und einen CPU-Fallback verweigert:
+
+```bash
+python -m src.import_recorded
+```
+
+UI:
+
+```bash
+export MLFLOW_ALLOW_FILE_STORE=true
+mlflow ui --backend-store-uri ./mlruns --host 127.0.0.1 --port 5000
+```
+
+Linux und macOS: `source .venv/bin/activate`, dieselben `python`-Aufrufe.
+
+Im Browser <http://127.0.0.1:5000>.
+
+| Experiment | Was drin liegt | Tag |
+| --- | --- | --- |
+| `article-sentiment` | Live-TF-IDF und die importierte Tabelle aus `reports/model_comparison.md` | `iteration=1-first-path` |
+| `article-sentiment-second-path` | Importierte v1-Tests, Quellen-CV R0–R4 und der externe Audit | `iteration=2-second-path` (der rekonstruierte LinearSVC im Audit: `iteration=1-first-path`) |
+| `article-sentiment-comparison` | Dieselben importierten Zeilen nebeneinander | beide Iteration-Tags |
+
+Zum Vergleich in der UI das Experiment `article-sentiment-comparison` öffnen und nach `comparable_group` filtern. `sentfin-external` ist der einzige Block, in dem der erste und der zweite Durchlauf auf denselben Texten stehen. `first-path-own-test`, `second-path-own-test` und `second-path-source-group-cv` sind getrennte Messungen. Spalte `f1_macro` ist in allen importierten Läufen gesetzt.
+
+Ein frischer Live-Lauf des zweiten Durchlaufs (nur mit NVIDIA-GPU, CUDA 12.8, viel Platte) schreibt in dasselbe `./mlruns` und dasselbe Experiment `article-sentiment-second-path`, Tag `iteration=2-second-path`:
+
+```bash
+python -m pip install -r second_path/requirements.txt -r requirements-cuda.txt
+python -m second_path.prepare
+python -m second_path.train frozen
+python -m second_path.train finetuned
+python -m second_path.train centroid
+python -m second_path.train majority
+python -m second_path.evaluate
+```
+
+Ablationen und Release, ebenfalls CUDA und BF16: `python -m second_path.development run`, danach `summarize`, `release`, `activate`. Historische Protokolle bleiben unter `reports/development/`. Frische Wiederholungen nach `export SENTIMENT_DEV_REPORTS=reports/reproduction`, damit die eingecheckten Berichte nicht überschrieben werden. API des zweiten Durchlaufs: `uvicorn second_path.api:app --host 127.0.0.1 --port 8000`. Der erste Durchlauf bleibt `uvicorn app.main:app`.
+
+Ein Live-Lauf im Experiment `article-sentiment` enthält Accuracy, macro-F1, F1 je Klasse, `inference_ms_per_text` und das Artefakt `confusion_matrix.csv`.
 
 API, Standardmodell `tfidf_linearsvc`:
 
@@ -199,7 +265,7 @@ SENTIMENT_DATA=dummy SENTIMENT_MODEL=tfidf_logreg python -m src.train
 pytest
 ```
 
-Die CI macht genau das.
+Die CI macht genau das im Job `test`. Der Job `second-path` installiert `second_path/requirements.txt` (ohne CUDA-Torch) und führt `pytest tests/secondpath` aus. Der Tokenizer-Test wird im leichten Job übersprungen, solange `transformers` fehlt.
 
 Exploration der echten Splits, mit gespeicherter Ausgabe: `notebooks/01_exploration.ipynb`.
 
@@ -208,18 +274,24 @@ Exploration der echten Splits, mit gespeicherter Ausgabe: `notebooks/01_explorat
 ```text
 .
 ├── README.md
-├── requirements.txt
-├── requirements-transformer.txt
-├── data/README.md                 # Lizenzen, Split, Grenzen
-├── data/sample/                   # Dummy, nur Tests und CI
-├── notebooks/01_exploration.ipynb
-├── notebooks/02_finetune_colab.ipynb
-├── src/                           # Prepare, Training, Vergleich, Fine-Tuning, Abruf
-├── models/                        # joblib und Fine-Tuning, lokal
-├── reports/model_comparison.md
-├── app/
-├── tests/
-└── .github/workflows/ci.yml
+├── requirements.txt                 # erster Durchlauf, CI-Job test
+├── requirements-transformer.txt     # Zero-Shot und DistilBERT
+├── requirements-cuda.txt            # zweiter Durchlauf, CUDA-Torch
+├── requirements-evaluation.txt
+├── requirements-lock.txt
+├── second_path/                     # MiniLM, Ablationen, zweite API
+│   └── requirements.txt
+├── src/                             # erster Durchlauf
+├── app/                             # FastAPI des ersten Durchlaufs
+├── data/README.md
+├── data/sample/                     # Dummy, Tests und CI
+├── notebooks/
+├── reports/model_comparison.md      # eigener Test, erster Durchlauf
+├── reports/second_path_model_comparison.md
+├── reports/development/             # Ablationen und externer Vergleich
+├── docs/executive-pitch/            # Pitch, TeX und PDF
+├── tests/secondpath/
+└── .github/workflows/ci.yml         # pytest für beide Wege
 ```
 
 ## Meilensteine
@@ -245,18 +317,21 @@ Exploration der echten Splits, mit gespeicherter Ausgabe: `notebooks/01_explorat
 - [x] Vertrag: genau Text oder URL, Antwort mit Label, Scores, Modellversion
 - [x] FastAPI lokal, gültige und ungültige Fälle
 - [x] README auf dem gemessenen Stand
-- [ ] Präsentation
+- [x] Executive Pitch unter `docs/executive-pitch/`
 
 ## Offene Punkte
 
 - Fehlerkosten (Fehlalarm gegen übersehenen negativen Text) sind noch offen.
 - Wertende oder aufgeladene Sprache bleibt ein späteres Ziel, ohne Label und ohne Modell.
-- Der GPU-Lauf aus dem Colab-Notebook ist beschrieben und auf diesem Stand nicht gemessen.
+- Der GPU-Lauf aus dem Colab-Notebook (DistilBERT, drei Epochen, voller Train-Split) ist beschrieben und auf diesem Stand nicht gemessen.
+- Der zweite Durchlauf ist gemessen und liegt unter `second_path/`. Sein Training braucht CUDA. Ohne GPU die schon aufgezeichneten Läufe mit `python -m src.import_recorded` in MLflow holen.
+- R2/R4 verbessern die HTML-Fixtures, sind aber nicht der nach der Zeit-Regel gewählte Standard (R3).
 - Die Trainingsdomäne ist der Finanzsatz. Ein allgemeiner Nachrichtenartikel kann danebenliegen.
-- Team und Präsentation sind noch offen.
+- 0,7202 und 0,7187 stammen aus verschiedenen Tests. Der gemeinsame Vergleich ist `reports/development/branch_comparison.md`.
 
 ## Team
 
 | Name | Kontakt | Verantwortung |
 | --- | --- | --- |
-| _offen_ | _offen_ | _offen_ |
+| Teofil Wetzel | twetzel@stud.hs-heilbronn.de | AI Operations, HHN |
+| Nick Fronius | nfronius@stud.hs-heilbronn.de | AI Operations, HHN |

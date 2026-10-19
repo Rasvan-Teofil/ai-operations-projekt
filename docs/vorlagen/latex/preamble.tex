@@ -1,0 +1,65 @@
+% Gemeinsame Präambel. Keine Hauptdatei. Die Dokumentklasse steht in bericht/document.tex.
+% Vier Berichte binden diese Datei ein, deshalb gibt es hier kein einzelnes
+% `% !TEX root = ...`. LaTeX Workshop sucht Wurzeln nur unter **/bericht/document.tex.
+
+% ------------------------------------------------
+% Sprache & Encoding
+% ------------------------------------------------
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% ------------------------------------------------
+% Layout & Typografie
+% ------------------------------------------------
+\usepackage[a4paper,left=30mm,top=25mm,right=25mm,bottom=25mm]{geometry}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+% ------------------------------------------------
+% Grafiken
+% ------------------------------------------------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+% Suchpfade der Vorlage, plus das gemeinsame Logo.
+% Aufgelöst relativ zum bericht/-Ordner (Arbeitsverzeichnis von latexmk).
+\graphicspath{{Pictures/}{bilder/}{../../vorlagen/latex/Pictures/}}
+
+% ------------------------------------------------
+% Tabellen
+% ------------------------------------------------
+\usepackage{booktabs}
+
+% ------------------------------------------------
+% Literatur
+% ------------------------------------------------
+\usepackage{csquotes}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{literatur.bib}
+
+% ------------------------------------------------
+% Links
+% ------------------------------------------------
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=blue,
+  urlcolor=blue
+]{hyperref}
+
+% ------------------------------------------------
+% Kopf- und Fußzeilen (aus Vorlage 2)
+% ------------------------------------------------
+\usepackage[headsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ihead{\hhnsubject: \reprttopic}
+\ohead{\pagemark}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+\renewcommand*{\chapterheadstartvskip}{}
+
+\input{../../vorlagen/latex/autoren.tex}

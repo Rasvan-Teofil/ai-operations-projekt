@@ -1,0 +1,39 @@
+{
+  "note": "Deliberately low 10ms bounded queue exposes backpressure; production default is 2s. Synthetic local workload; no URL/network latency or real traffic claim.",
+  "results": [
+    {
+      "profile": "reference",
+      "artifact": "models/development/fold0/R0_reference",
+      "queue_timeout_seconds": 60.0,
+      "steady_requests": 30,
+      "steady_p50_ms": 3.0603929999415413,
+      "steady_p95_ms": 4.19009800000367,
+      "burst_requests": 40,
+      "burst_concurrency": 12,
+      "burst_text_characters": 13800,
+      "burst_success_200": 40,
+      "burst_busy_503": 0,
+      "burst_p95_all_ms": 221.59276554980352,
+      "burst_elapsed_seconds": 0.7192345409998779,
+      "recovered": true,
+      "run_id": "7adfae3ce81343acbd920960aff7ae08"
+    },
+    {
+      "profile": "bounded_bf16",
+      "artifact": "models/development/fold0/R3_deploy",
+      "queue_timeout_seconds": 0.01,
+      "steady_requests": 30,
+      "steady_p50_ms": 3.0763469999328663,
+      "steady_p95_ms": 3.3763152497613187,
+      "burst_requests": 40,
+      "burst_concurrency": 12,
+      "burst_text_characters": 13800,
+      "burst_success_200": 5,
+      "burst_busy_503": 35,
+      "burst_p95_all_ms": 20.701961350027887,
+      "burst_elapsed_seconds": 0.05515840099997149,
+      "recovered": true,
+      "run_id": "162ddaeb907048eeae26e4db5bce229d"
+    }
+  ]
+}

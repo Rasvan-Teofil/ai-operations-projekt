@@ -16,9 +16,9 @@ def client():
     from src.config import MODELS_DIR
 
     if not (MODELS_DIR / "tfidf_logreg.joblib").exists():
-        from src.train import main
+        from src.train import train
 
-        main()
+        train()
 
     from app.main import app
 

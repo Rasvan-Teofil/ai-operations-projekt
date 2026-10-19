@@ -38,6 +38,7 @@ from src.config import (
     FINETUNED_SMOKE_DIR,
     LABEL_COLUMN,
     LABELS_3,
+    MLFLOW_ITERATION,
     RANDOM_SEED,
     TEXT_COLUMN,
 )
@@ -178,6 +179,8 @@ def _log_finetune(config: FinetuneConfig, result: dict, n_train: int, n_test: in
             }
         )
         mlflow.log_metrics(result["metrics"])
+        mlflow.set_tag("iteration", MLFLOW_ITERATION)
+        mlflow.set_tag("source", "live-training")
         mlflow.set_tag("role", "finetuned")
         mlflow.set_tag("smoke", "true" if config.smoke else "false")
         confusion = result.get("confusion")
