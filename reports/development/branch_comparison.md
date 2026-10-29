@@ -50,15 +50,15 @@ In einem frischen Clone nach den v2-Befehlen im README. Der v1-Trainingsaufruf e
 ```bash
 export SENTIMENT_DEV_REPORTS=reports/reproduction
 python -m pip install -r requirements-evaluation.txt
-python -m src.train finetuned
+python -m second_path.train finetuned
 git clone --no-checkout https://github.com/Rasvan-Teofil/ai-operations-projekt.git ../colleague-reference
 git -C ../colleague-reference checkout --detach a840bb7bc8f1656f1700ccabaa89837ce347ca2b
 python3.12 -m venv ../colleague-reference/.venv
 ../colleague-reference/.venv/bin/python -m pip install -r reports/development/reference_requirements.txt
-../colleague-reference/.venv/bin/python src/peer_reference.py prepare --checkout ../colleague-reference --report reports/reproduction/peer_provenance.json
-python -m src.branch_benchmark prepare
-python -m src.branch_benchmark audit
-python -m src.development_report
+../colleague-reference/.venv/bin/python second_path/peer_reference.py prepare --checkout ../colleague-reference --report reports/reproduction/peer_provenance.json
+python -m second_path.branch_benchmark prepare
+python -m second_path.branch_benchmark audit
+python -m second_path.development_report
 ```
 
 Referenzdaten werden durch den Adapter auf die protokollierten HF-Snapshots gepinnt; die originale Filter-/Split-/Modellimplementierung bleibt unangetastet. Der Benchmark besitzt eine exklusive lokale Audit-Sperre. Originale Test-/Val-Dateien werden von unserer Entwicklung nicht als Bewertungsdaten verwendet.

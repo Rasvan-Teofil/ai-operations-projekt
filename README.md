@@ -15,7 +15,7 @@ Gedacht für Medienbeobachtung, PR- und Kommunikations-Teams und für Leute, die
 
 Beide Wege liegen in diesem Stand. Keiner ersetzt den anderen.
 
-| | Erster Durchlauf (`main`, Paket `src` / `app`) | Zweiter Durchlauf (Branch `second-path`, Paket `second_path`) |
+| | Erster Durchlauf (Paket `src` / `app`) | Zweiter Durchlauf (aus Branch `second-path`, seit PR #2 auf `main`, Paket `second_path`) |
 | --- | --- | --- |
 | Modelle | TF-IDF + LogReg, TF-IDF + LinearSVC, zwei HF-Zero-Shot-Modelle, DistilBERT-Fine-Tuning | MiniLM `paraphrase-multilingual-MiniLM-L12-v2`: frozen, Fine-Tune, Centroid, Majority; danach Ablationen B0 und R0–R4 |
 | Eigener Test | Finanzsätze, n = 1 270. Bestes macro-F1: **LinearSVC 0,7202** | Kenpache DE/EN, n = 1 787. Fine-Tune **0,7187** gegen frozen 0,6656 |

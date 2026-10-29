@@ -26,7 +26,7 @@ Fine-Tune pro Sprache: DE macro-F1 0,7541 (Baseline 0,7008), EN 0,6913 (Baseline
 - `centroid`: `d130c7f51fe749a5a17326f5503f4d78`
 - `majority`: `8a7d115af9d54edc83a2d029e034df35`
 
-Experiment: `article-sentiment-second-path`, lokale SQLite-Datenbank `mlflow.db`. Konfusionsmatrizen: Zeilen wahr, Spalten vorhergesagt, Klassenfolge negative/neutral/positive. Latenz: 20 unabhängige Warmups, Batch 1, Tokenisierung und Transfer enthalten, CUDA-Synchronisierung, kein Laden oder Netzwerk. Alle vollständigen Modell- und Tokenizerdateien zählen zur Größe.
+Experiment: `article-sentiment-second-path`, lokale SQLite-Datenbank `mlflow.db`. (Stand Branch `second-path`. Auf `main` liegt der Store unter `./mlruns`; die Zahlen holt `python -m src.import_recorded`.) Konfusionsmatrizen: Zeilen wahr, Spalten vorhergesagt, Klassenfolge negative/neutral/positive. Latenz: 20 unabhängige Warmups, Batch 1, Tokenisierung und Transfer enthalten, CUDA-Synchronisierung, kein Laden oder Netzwerk. Alle vollständigen Modell- und Tokenizerdateien zählen zur Größe.
 
 Die Val-Datei wurde nur zur Integritätsprüfung gehasht. Es gab keine Val-Metriken oder Checkpoint-Auswahl. Fine-Tune-Endpunkt: Epoche 3, je 8.335 Zeilen; erste und letzte Encoderschicht zeigen gegenüber der eingefrorenen Baseline geänderte Gewichte (siehe training_evidence.json).
 
