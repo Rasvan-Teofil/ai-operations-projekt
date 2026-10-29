@@ -40,6 +40,8 @@ reports/*
 !reports/majority_confusion_matrix.csv
 !reports/development/
 !reports/development/**
+!reports/daily/
+!reports/daily/**
 reports/reproduction/
 reports/evaluation.lock
 reports/development/partial_runs.json
