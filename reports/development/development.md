@@ -13,7 +13,7 @@ Alle Werte stammen aus denselben drei Quellengruppen-Folds **innerhalb des urspr
 
 ![Gemessene Entwicklung](development_curve.png)
 
-**Vor dem Kollegenvergleich ausgewählt: `R3_deploy`.** Regel: höchstes mittleres Quellen-CV-macro-F1; innerhalb 0,005 gewinnen Latenz, dann Größe.
+**Vor dem Vergleich mit dem ersten Durchlauf ausgewählt: `R3_deploy`.** Regel: höchstes mittleres Quellen-CV-macro-F1; innerhalb 0,005 gewinnen Latenz, dann Größe.
 
 B0 ist je Fold neu gefittet; R0 ist der ursprüngliche Fine-Tune-Ansatz, ebenfalls ausschließlich auf dem jeweiligen Fit-Fold neu trainiert. Das ursprüngliche Volltrain-Modell wurde nicht auf Trainings-Folds bewertet. R1 ändert nur die Gewichtung von Klassen zu Sprache×Klasse; R2 nutzt R0-Gewichte mit tokengewichteter Chunk-Aggregation und verbesserter HTML-Extraktion; R3 speichert und rechnet R0 in BF16. R4 kombiniert R1, R2 und R3.
 

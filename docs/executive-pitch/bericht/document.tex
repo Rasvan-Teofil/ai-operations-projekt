@@ -38,7 +38,7 @@ Das Vorhaben ist bewusst als MLOps-Problem formuliert. Es reicht nicht, einmal e
 
 \section{Stakeholder}
 
-Drei Nutzergruppen profitieren unmittelbar. \textbf{Redaktionen} können eingehende Artikel schneller triageieren und Themen priorisieren, ohne jeden Text manuell zu lesen. \textbf{PR- und Kommunikationsabteilungen} erhalten ein Signal zur Reputationslage: Häufen sich negative Berichte zu einer Marke oder einem Ereignis, wird das früh sichtbar. \textbf{Analystinnen und Analysten} nutzen die Stimmung als zusätzlichen Indikator im Nachrichtenfluss, etwa für Markt- oder Themenbeobachtung.
+Drei Nutzergruppen profitieren unmittelbar. \textbf{Redaktionen} können eingehende Artikel schneller triagieren und Themen priorisieren, ohne jeden Text manuell zu lesen. \textbf{PR- und Kommunikationsabteilungen} erhalten ein Signal zur Reputationslage: Häufen sich negative Berichte zu einer Marke oder einem Ereignis, wird das früh sichtbar. \textbf{Analystinnen und Analysten} nutzen die Stimmung als zusätzlichen Indikator im Nachrichtenfluss, etwa für Markt- oder Themenbeobachtung.
 
 Was wir liefern, ist eine Dienstleistungsschnittstelle und der Nachweis, dass sie belastbar ist. Die FastAPI-Endpunkte nehmen entweder Text oder eine URL an (XOR): Bei einer URL wird der Artikelkörper mit Trafilatura extrahiert, vorverarbeitet und klassifiziert. Die Antwort enthält die vorhergesagte Klasse. Parallel dazu dokumentieren wir den Modellvergleich in MLflow, damit die Wahl des produktiven Modells nicht aus Bauchgefühl, sondern aus messbaren Metriken folgt.
 

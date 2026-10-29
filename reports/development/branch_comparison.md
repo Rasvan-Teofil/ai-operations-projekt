@@ -8,13 +8,15 @@
 | second_path_v1 | 0.7360 | 0.6458 | 0.6909 | 2.335 | 465.14 |
 | second_path_v2 | 0.7293 | 0.6557 | 0.6925 | 2.326 | 240.73 |
 
+`colleague_main_default` ist unser erster Durchlauf (TF-IDF + LinearSVC, Commit `a840bb7`), rekonstruiert. Der Name ist der Schlüssel in den JSON/CSV-Dateien.
+
 ![Gemeinsamer externer Vergleich](branch_comparison.png)
 
-Auf den 600 nativen englischen Headlines liegt v2 um +0.2770 macro-F1 vor dem rekonstruierten Kollegen-Standard. Ein gepaarter Bootstrap über diese 600 bereits vorhergesagten Headlines (1000 Ziehungen, Seed 20261019) ergibt ein 95-%-Perzentilintervall der Differenz [0.2257, 0.3249]. Keine zusätzlichen Modellvorhersagen oder Modellwahl durch Bootstrap.
+Auf den 600 nativen englischen Headlines liegt v2 um +0.2770 macro-F1 vor unserem rekonstruierten ersten Durchlauf (LinearSVC). Ein gepaarter Bootstrap über diese 600 bereits vorhergesagten Headlines (1000 Ziehungen, Seed 20261019) ergibt ein 95-%-Perzentilintervall der Differenz [0.2257, 0.3249]. Keine zusätzlichen Modellvorhersagen oder Modellwahl durch Bootstrap.
 
 **Kein pauschaler Genauigkeitsgewinn von v2 gegenüber v1 behauptet:** Englisch bewegt sich von 0.7360 auf 0.7293; übersetztes Deutsch von 0.6458 auf 0.6557. Die Artefaktgröße bewegt sich von 465.1 auf 240.7 MiB. Der Unterschied Englisch v1/v2 wird hier nicht als signifikant bezeichnet.
 
-Der Kollegen-Standard ist erheblich kleiner und schneller auf CPU. Unser Encoder nutzt CUDA und ist trotz BF16 größer und langsamer. Für das vorgegebene Qualitätsziel spricht dieser externe Benchmark für den Encoder; für enge CPU-/Speicherbudgets bleibt LinearSVC ein klarer Trade-off. Das ist keine allgemeine Rangliste für andere Nachrichtendomänen.
+Unser erster Durchlauf (LinearSVC) ist erheblich kleiner und schneller auf CPU. Unser Encoder nutzt CUDA und ist trotz BF16 größer und langsamer. Für das vorgegebene Qualitätsziel spricht dieser externe Benchmark für den Encoder; für enge CPU-/Speicherbudgets bleibt LinearSVC ein klarer Trade-off. Das ist keine allgemeine Rangliste für andere Nachrichtendomänen.
 
 ## Herkunft, Filter, Grenzen
 
@@ -28,7 +30,7 @@ Der Benchmark ist klassenbalanciert, besteht aus Headlines und hat 600 unterschi
 
 Der Referenzcode liegt ausschließlich in einem separaten detached Checkout auf `a840bb7bc8f1656f1700ccabaa89837ce347ca2b`. Der Adapter importiert `new_linearsvc` und die originale `prepare()`-Funktion. Er kopiert keine Modellimplementierung in second-path und ruft niemals `src.train` oder das ursprüngliche MLflow-Experiment auf. Referenz-Trainingsdaten: 5.923 Zeilen aus Phrasebank EN und Kenpache DE; pandas 3.0.6, scikit-learn 1.9.1 und joblib 1.6.0 wie in deren Requirements. Unsere Modelle trainieren auf 8.335 Kenpache-DE/EN-Zeilen. Der Vergleich trennt daher nicht den Effekt der Architektur von der Trainingsdatenwahl.
 
-Die ursprünglichen trainierten Gewichte des Kollegen waren nicht verfügbar. Das Ergebnis ist eine Rekonstruktion des gelieferten Standardverfahrens mit unverändertem Code und erneut hergestelltem Trainingssplit; es wird weder Bitgleichheit zum damaligen Artefakt noch zum damaligen Testsplit behauptet. Code-, Daten- und Artefakthashes stehen in `peer_provenance.json`, die Referenz-Abhängigkeiten in `reference_requirements.txt`.
+Die trainierten Gewichte des ersten Durchlaufs lagen nicht vor. Das Ergebnis ist eine Rekonstruktion des gelieferten Standardverfahrens mit unverändertem Code und erneut hergestelltem Trainingssplit; es wird weder Bitgleichheit zum damaligen Artefakt noch zum damaligen Testsplit behauptet. Code-, Daten- und Artefakthashes stehen in `peer_provenance.json`, die Referenz-Abhängigkeiten in `reference_requirements.txt`.
 
 Alle drei neuen gemeinsamen Auswertungen liegen ausschließlich im Experiment `article-sentiment-second-path`, Tag `phase=final-branch-comparison`. Die Hauptbranch-Referenz und ihr MLflow-Verzeichnis bleiben unverändert.
 
@@ -41,7 +43,7 @@ Alle drei neuen gemeinsamen Auswertungen liegen ausschließlich im Experiment `a
 | Artikelverarbeitung | R2/R4 bestehen sechs statt zwei HTML-Fixtures; technische Verbesserung, kein menschlich gelabelter Artikelnachweis. Nicht Bestandteil des nach Zeit-Tie-Regel gewählten R3-Standards. |
 | Betrieb | R3/BF16 liefert ca. 241 statt 465 MiB; begrenztes Warten und Prüfung endlicher Scores verhindern zwei konkrete Betriebsfehler. Geringe Latenzunterschiede sind keine Signifikanzbehauptung. |
 | Kombination / Auswahl | Höchster CV-Punktwert: R4_combined mit 0.6740. Gewählt nach der vorab erklärten Nähe-/Latenzregel: R3_deploy mit 0.6729 und 2.381 ms. Kein nachträgliches Umdefinieren, um alles kombiniert auszuliefern. |
-| Kollege vs. second-path | Auf diesem gemeinsamen nativen EN-Benchmark bessere Encoder-Qualität gegen deutlich kleineren/schnelleren CPU-Standard. Andere Daten, Kosten und Sprachdomänen können die Entscheidung ändern. |
+| Erster vs. zweiter Durchlauf | Auf diesem gemeinsamen nativen EN-Benchmark bessere Encoder-Qualität gegen deutlich kleineren/schnelleren CPU-Standard. Andere Daten, Kosten und Sprachdomänen können die Entscheidung ändern. |
 
 ## Frisch reproduzieren (erst nach v2-Auswahl)
 

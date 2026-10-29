@@ -10,7 +10,7 @@ In der UI liegen die Läufe im Store ``./mlruns``:
 
 - Experiment ``article-sentiment``, Tag ``iteration=1-first-path``
 - Experiment ``article-sentiment-second-path``, Tag ``iteration=2-second-path``
-  (der rekonstruierte Kollegen-Standard im externen Audit trägt
+  (der rekonstruierte erste Durchlauf im externen Audit trägt
   ``iteration=1-first-path``)
 - Experiment ``article-sentiment-comparison`` mit beiden Tags, zum
   direkten Nebeneinander. ``comparable_group`` trennt Tests, die nicht

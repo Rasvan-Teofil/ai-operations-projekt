@@ -9,7 +9,7 @@ Das Werkzeug liest einen Nachrichtentext oder genau eine Artikel-URL und schätz
 
 ## Kurzbeschreibung
 
-Gedacht für Medienbeobachtung, PR- und Kommunikations-Teams und für Leute, die einen Text einordnen wollen, bevor sie ihn weitergeben. Später, hier noch ohne Label und ohne Modell: ein Score für wertende oder aufgeladene Sprache.
+Gedacht für Redaktionen, PR- und Kommunikationsabteilungen sowie Analystinnen und Analysten. Später, hier noch ohne Label und ohne Modell: ein Score für wertende oder aufgeladene Sprache.
 
 ## Zwei Durchläufe
 
@@ -34,7 +34,7 @@ Artefakte des zweiten Durchlaufs: Daten unter `data/second_path/processed/`, Gew
 | --- | --- |
 | Geschäftsproblem | Eingehende Artikel nach Stimmung sortieren, ohne jeden Text von Hand zu lesen |
 | Entscheidung | Was ist dringend negativ, was ist eine neutrale Meldung, was ist positiv belegbar |
-| Stakeholder | Medienbeobachtung, PR/Kommunikation, kritische Leserinnen und Leser |
+| Stakeholder | Redaktionen, PR/Kommunikation, Analystinnen und Analysten |
 | Sprachen | Deutsch und Englisch |
 | Fehler | Ein Fehlalarm und ein übersehener negativer Text kosten unterschiedlich viel. Die Kosten sind noch offen. Auswahlmaß ist deshalb macro-F1 |
 
