@@ -1,7 +1,7 @@
-"""Lädt das Modell, das die API ausliefern soll.
+"""Loads the model the API should serve.
 
-Sklearn-Artefakte kommen von der Platte. Transformer werden erst importiert,
-wenn der Name eines solchen Modells gewählt ist.
+Sklearn artefacts are read from disk. Transformers are imported only
+when the name of such a model is selected.
 """
 
 from src.config import DEFAULT_MODEL_NAME, selected_model_name
@@ -16,13 +16,13 @@ def known_model_names() -> list[str]:
 
 
 def load_model(name: str | None = None) -> SentimentModel:
-    """Baut das gewählte Modell. Unbekannte Namen und fehlende Dateien fallen laut auf."""
+    """Builds the selected model. Unknown names and missing files fail loudly."""
     chosen = (name or selected_model_name()).strip().lower()
     if chosen in MODEL_SPECS:
         return load_sklearn_model(chosen)
     if chosen not in TRANSFORMER_NAMES:
         known = ", ".join(known_model_names())
-        raise ValueError(f"Unbekanntes Modell '{chosen}'. Bekannt: {known}")
+        raise ValueError(f"Unknown model '{chosen}'. Known: {known}")
     from src.hf_models import load_finetuned, load_pretrained
 
     if chosen == "finetuned":

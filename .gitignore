@@ -12,7 +12,7 @@ build/
 .coverage
 htmlcov/
 
-# Virtuelle Umgebungen
+# Virtual environments
 .venv/
 venv/
 env/
@@ -20,7 +20,7 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Lokale Experimente (MLflow). Berichte mit den gemessenen Zahlen bleiben im Repo.
+# Local experiments (MLflow). Reports with the measured numbers stay in the repo.
 mlruns/
 mlartifacts/
 mlflow.db*
@@ -44,24 +44,24 @@ reports/reproduction/
 reports/evaluation.lock
 reports/development/partial_runs.json
 
-# LaTeX-Zwischenbau. Das fertige PDF liegt daneben und bleibt versioniert.
+# LaTeX build files. The finished PDF sits next to them and stays versioned.
 docs/**/build/
 
-# Geheimnisse und lokale Konfiguration
+# Secrets and local configuration
 .env
 .env.*
 !.env.example
 
-# Betriebssystem
+# Operating system
 .DS_Store
 
-# Große Rohdaten bleiben lokal. Dummy-Stichprobe und Erklärung bleiben im Repo.
+# Large raw data stays local. Dummy sample and description stay in the repo.
 data/*
 !data/.gitkeep
 !data/README.md
 !data/sample/
 !data/sample/**
 
-# Trainierte Gewichte und joblib-Artefakte (`python -m src.train`, Fine-Tuning).
+# Trained weights and joblib artefacts (`python -m src.train`, fine-tuning).
 models/*
 !models/.gitkeep

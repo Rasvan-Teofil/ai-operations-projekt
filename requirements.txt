@@ -1,12 +1,12 @@
 # AI Operations (HHN, WiSe 2026/27)
-# Leichte Installation für Baseline, API, Tests und CI:
+# Lightweight install for baseline, API, tests and CI:
 #   pip install -r requirements.txt
 #
-# Transformer (Zero-Shot, Fine-Tuning) sind bewusst getrennt, weil PyTorch
-# mehrere hundert MB bis über 1 GB zieht. Siehe requirements-transformer.txt.
+# Transformers (zero-shot, fine-tuning) are kept separate on purpose, because
+# PyTorch pulls several hundred MB to over 1 GB. See requirements-transformer.txt.
 #
-# datasets und huggingface_hub braucht nur `python -m src.prepare_data`.
-# Die CI setzt SENTIMENT_DATA=dummy und lädt nichts herunter.
+# datasets and huggingface_hub are only needed by `python -m src.prepare_data`.
+# CI sets SENTIMENT_DATA=dummy and downloads nothing.
 
 pandas==3.0.6
 datasets==5.1.0

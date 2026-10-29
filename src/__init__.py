@@ -1,4 +1,4 @@
-"""Trainings- und Vergleichscode für das Artikel-Sentiment.
+"""Training and comparison code for article sentiment.
 
-Leichter Einstieg ohne Transformer: ``python -m src.train``.
+Lightweight entry point without transformers: ``python -m src.train``.
 """

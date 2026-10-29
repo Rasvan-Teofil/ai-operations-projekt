@@ -1,4 +1,4 @@
-"""Vertrag predict_proba für die beiden TF-IDF-Modelle."""
+"""predict_proba contract for both TF-IDF models."""
 
 from src.config import LABELS_3
 from src.data import load_dataset, split_dataset

@@ -1,4 +1,4 @@
-# Zweiter Durchlauf (Paket second_path). Nicht zusammen mit requirements-transformer.txt mischen.
-# Training verweigert einen CPU-Fallback. CPU-Vergleich der schon gemessenen Läufe: python -m src.import_recorded
+# Second iteration (package second_path). Do not mix with requirements-transformer.txt.
+# Training refuses a CPU fallback. CPU comparison of the already measured runs: python -m src.import_recorded
 --index-url https://download.pytorch.org/whl/cu128
 torch==2.11.0+cu128

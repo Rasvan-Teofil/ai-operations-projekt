@@ -1,7 +1,7 @@
-# Dummy-Stichprobe
+# Dummy sample
 
-`sentiment_sample.csv` sind **handgeschriebene Beispielsätze**, keine Nachrichten und kein Benchmark. Spalte `origin` ist überall `dummy`.
+`sentiment_sample.csv` contains **hand-written example sentences**, not news and not a benchmark. The `origin` column is `dummy` everywhere.
 
-Zweck: Tests und CI (`SENTIMENT_DATA=dummy`). Pro Klasse sechs kurze Sätze, Deutsch und Englisch, Labels `negative`, `neutral`, `positive`. Der echte Lauf nimmt die aufbereiteten Splits aus `python -m src.prepare_data`, siehe `data/README.md`.
+Purpose: tests and CI (`SENTIMENT_DATA=dummy`). Six short sentences per class, German and English, labels `negative`, `neutral`, `positive`. The real run uses the prepared splits from `python -m src.prepare_data`, see `data/README.md`.
 
-Diese Datei nicht mit echten Artikeln auffüllen. Der Test `test_sample_is_marked_as_dummy` erwartet `origin=dummy`.
+Do not fill this file with real articles. The test `test_sample_is_marked_as_dummy` expects `origin=dummy`.

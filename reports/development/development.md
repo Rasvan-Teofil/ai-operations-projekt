@@ -1,8 +1,8 @@
-# Entwicklung v2: getrennte Ablationen und Kombination
+# Development v2: separate ablations and combination
 
-Alle Werte stammen aus denselben drei Quellengruppen-Folds **innerhalb des ursprünglichen Train-Splits**. Die alten Testzahlen werden nicht in diese Kurve gemischt. Val und ursprünglicher Test blieben unberührt.
+All values come from the same three source-group folds **inside the original train split**. The old test scores are not mixed into this curve. Validation and the original test stayed untouched.
 
-| Stufe | macro-F1 Mittel ± Fold-SD | DE | EN | Negativ-Recall | ms/Text | MiB | HTML exakt |
+| Stage | macro-F1 mean ± fold SD | DE | EN | Negative recall | ms/text | MiB | HTML exact |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | B0_frozen | 0.6306 ± 0.0214 | 0.6566 | 0.6059 | 0.7029 | 2.497 | 465.1 | 33% |
 | R0_reference | 0.6724 ± 0.0159 | 0.7053 | 0.6425 | 0.7183 | 2.519 | 465.1 | 33% |
@@ -11,33 +11,33 @@ Alle Werte stammen aus denselben drei Quellengruppen-Folds **innerhalb des urspr
 | R3_deploy | 0.6729 ± 0.0158 | 0.7062 | 0.6427 | 0.7188 | 2.381 | 240.7 | 33% |
 | R4_combined | 0.6740 ± 0.0144 | 0.7065 | 0.6441 | 0.7220 | 2.419 | 240.7 | 100% |
 
-![Gemessene Entwicklung](development_curve.png)
+![Measured development](development_curve.png)
 
-**Vor dem Vergleich mit dem ersten Durchlauf ausgewählt: `R3_deploy`.** Regel: höchstes mittleres Quellen-CV-macro-F1; innerhalb 0,005 gewinnen Latenz, dann Größe.
+**Selected before the comparison with the first iteration: `R3_deploy`.** Rule: highest mean source-CV macro-F1; within 0.005, latency wins, then size.
 
-B0 ist je Fold neu gefittet; R0 ist der ursprüngliche Fine-Tune-Ansatz, ebenfalls ausschließlich auf dem jeweiligen Fit-Fold neu trainiert. Das ursprüngliche Volltrain-Modell wurde nicht auf Trainings-Folds bewertet. R1 ändert nur die Gewichtung von Klassen zu Sprache×Klasse; R2 nutzt R0-Gewichte mit tokengewichteter Chunk-Aggregation und verbesserter HTML-Extraktion; R3 speichert und rechnet R0 in BF16. R4 kombiniert R1, R2 und R3.
+B0 is refitted per fold; R0 is the original fine-tuning approach, also retrained only on the respective fit fold. The original full-train model was not evaluated on training folds. R1 only changes the weighting from class to language×class; R2 uses R0 weights with token-weighted chunk aggregation and improved HTML extraction; R3 stores and computes R0 in BF16. R4 combines R1, R2 and R3.
 
-- `R0_reference` gegenüber `B0_frozen`: Δmacro-F1 +0.0418, Δms/Text +0.022. Kein automatischer Vorteil durch Kombination unterstellt.
-- `R1_quality` gegenüber `R0_reference`: Δmacro-F1 +0.0014, Δms/Text -0.030. Kein automatischer Vorteil durch Kombination unterstellt.
-- `R2_article` gegenüber `R0_reference`: Δmacro-F1 +0.0003, Δms/Text -0.011. Kein automatischer Vorteil durch Kombination unterstellt.
-- `R3_deploy` gegenüber `R0_reference`: Δmacro-F1 +0.0004, Δms/Text -0.138. Kein automatischer Vorteil durch Kombination unterstellt.
-- `R4_combined` gegenüber `R0_reference`: Δmacro-F1 +0.0016, Δms/Text -0.101. Kein automatischer Vorteil durch Kombination unterstellt.
+- `R0_reference` vs. `B0_frozen`: Δmacro-F1 +0.0418, Δms/text +0.022. No automatic benefit from combining is assumed.
+- `R1_quality` vs. `R0_reference`: Δmacro-F1 +0.0014, Δms/text -0.030. No automatic benefit from combining is assumed.
+- `R2_article` vs. `R0_reference`: Δmacro-F1 +0.0003, Δms/text -0.011. No automatic benefit from combining is assumed.
+- `R3_deploy` vs. `R0_reference`: Δmacro-F1 +0.0004, Δms/text -0.138. No automatic benefit from combining is assumed.
+- `R4_combined` vs. `R0_reference`: Δmacro-F1 +0.0016, Δms/text -0.101. No automatic benefit from combining is assumed.
 
-Die 18 synthetischen Artikeltexte und sechs HTML-Fixtures sind kontrollierte technische Prüfungen, keine unabhängig von Menschen gelabelten Nachrichtenartikel. Deshalb trägt deren hohe Trefferquote keinen Anspruch auf reale Artikelqualität. Quellen-CV verhindert dieselbe Quelle in Fit/Dev, aber nicht dasselbe Ereignis über verschiedene Verlage. Drei Folds mit einem festen Seed ergeben Fold-Streuung, keinen Signifikanznachweis. Ein unabhängiger Benchmark folgt erst nach dieser Auswahl.
+The 18 synthetic article texts and six HTML fixtures are controlled technical checks, not news articles labelled independently by humans. Their high hit rate therefore makes no claim about real-world article quality. Source CV keeps the same source out of both fit and dev, but not the same event across different publishers. Three folds with one fixed seed give fold spread, not a significance test. An independent benchmark follows only after this selection.
 
-Der ursprüngliche v1-Test und seine einmalige Auswertung bleiben als historischer Meilenstein erhalten. Zusätzliche Fine-Tuning-Ablationen sind die ausdrücklich angeforderte Erweiterung des ursprünglichen Ein-Modell-Protokolls. Der Harness-Abbruch ist in `harness_incident.json` dokumentiert und als fehlgeschlagener MLflow-Lauf erhalten.
+The original v1 test and its one-off evaluation are kept as a historical milestone. The additional fine-tuning ablations are the explicitly requested extension of the original single-model protocol. The harness abort is documented in `harness_incident.json` and kept as a failed MLflow run.
 
-Reproduktion: `python -m second_path.development run`, danach `summarize`, `release`, `activate`, `python -m second_path.service_benchmark` und `python -m second_path.development_report`. Auf diesem Tower sind abgeschlossene Läufe gesperrt; ein frischer Clone hat keine lokalen Daten/Modelle. Vorher Daten und die ursprüngliche eingefrorene Baseline mit `second_path.prepare` / `second_path.train frozen` herstellen. Für frische Reproduktionen `SENTIMENT_DEV_REPORTS=reports/reproduction` exportieren; so bleiben eingecheckte historische Messergebnisse unberührt. Die ursprünglichen v1-Test- und Fine-Tuning-Befehle sind für v2 nicht nötig.
+Reproduction: `python -m second_path.development run`, then `summarize`, `release`, `activate`, `python -m second_path.service_benchmark` and `python -m second_path.development_report`. On this tower, completed runs are locked; a fresh clone has no local data or models. First create the data and the original frozen baseline with `second_path.prepare` / `second_path.train frozen`. For fresh reproductions export `SENTIMENT_DEV_REPORTS=reports/reproduction` so the committed historical results stay untouched. The original v1 test and fine-tuning commands are not needed for v2.
 
-MLflow: Experiment `article-sentiment-second-path`, Tags `phase=development-v2`, `stage`, `fold`. Jede Fold-Auswertung enthält Accuracy, Klassen-F1, macro-F1, Sprachwerte, Negativ-Precision/Recall, Latenz, Bytes und Konfusionsmatrix. `decision.json`, `runs.json`, `curve.csv`, `folds.json` und vollständige lokale Modellartefakte machen jede Entscheidung nachvollziehbar.
+MLflow: experiment `article-sentiment-second-path`, tags `phase=development-v2`, `stage`, `fold`. Every fold evaluation contains accuracy, per-class F1, macro-F1, per-language scores, negative precision/recall, latency, bytes and confusion matrix. `decision.json`, `runs.json`, `curve.csv`, `folds.json` and complete local model artefacts make every decision traceable.
 
-Methodische Referenzen: [StratifiedGroupKFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedGroupKFold.html), [PyTorch mixed precision](https://docs.pytorch.org/docs/stable/amp.html).
+Methodological references: [StratifiedGroupKFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedGroupKFold.html), [PyTorch mixed precision](https://docs.pytorch.org/docs/stable/amp.html).
 
-## Lokaler Last- und Erholungstest
+## Local load and recovery test
 
 Deliberately low 10ms bounded queue exposes backpressure; production default is 2s. Synthetic local workload; no URL/network latency or real traffic claim.
 
-| Profil | Steady p50/p95 ms | Burst 200 / 503 | Burst p95 ms | Erholt |
+| Profile | Steady p50/p95 ms | Burst 200 / 503 | Burst p95 ms | Recovered |
 | --- | ---: | ---: | ---: | --- |
 | reference | 3.06 / 4.19 | 40 / 0 | 221.59 | True |
 | bounded_bf16 | 3.08 / 3.38 | 5 / 35 | 20.70 | True |

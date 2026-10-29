@@ -1,7 +1,7 @@
-"""Gemeinsame Metriken für den Modellvergleich.
+"""Shared metrics for the model comparison.
 
-Alle Modelle werden damit auf demselben Testsplit und im selben
-Drei-Klassen-Raum bewertet.
+All models are evaluated with these on the same test split and in the
+same three-class space.
 """
 
 import numpy as np
@@ -12,10 +12,10 @@ from src.config import LABELS_3
 
 
 def classification_metrics(y_true, y_pred) -> dict[str, float]:
-    """Accuracy, macro-F1 und F1 je Klasse.
+    """Accuracy, macro-F1 and per-class F1.
 
-    Fehlende Klassen im Split zählen als 0, damit die Schlüssel in jedem
-    Lauf dieselben sind.
+    Classes missing from the split count as 0, so the keys are the same
+    in every run.
     """
     y_true = np.asarray(y_true)
     y_pred = np.asarray(y_pred)

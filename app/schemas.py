@@ -1,14 +1,14 @@
-"""Input- und Output-Vertrag der Inferenz-API.
+"""Input and output contract of the inference API.
 
-Genau eines von ``text`` oder ``url``. Die Antwort ist immer das
-Drei-Klassen-Sentiment plus die Verteilung und die Modellversion.
+Exactly one of ``text`` or ``url``. The response is always the
+three-class sentiment plus the distribution and the model version.
 """
 
 from pydantic import AnyHttpUrl, BaseModel, ConfigDict, Field, model_validator
 
 
 class PredictRequest(BaseModel):
-    """Ein Artikel als Rohtext oder als einzelne URL."""
+    """One article as raw text or as a single URL."""
 
     model_config = ConfigDict(
         extra="forbid",
@@ -23,11 +23,11 @@ class PredictRequest(BaseModel):
     text: str | None = Field(
         default=None,
         max_length=20_000,
-        description="Artikeltext. Genau eines von text oder url.",
+        description="Article text. Exactly one of text or url.",
     )
     url: AnyHttpUrl | None = Field(
         default=None,
-        description="URL genau eines Artikels. Genau eines von text oder url.",
+        description="URL of exactly one article. Exactly one of text or url.",
     )
 
     @model_validator(mode="after")
@@ -35,22 +35,22 @@ class PredictRequest(BaseModel):
         has_text = self.text is not None
         has_url = self.url is not None
         if has_text == has_url:
-            raise ValueError("Genau eines von text oder url angeben.")
+            raise ValueError("Provide exactly one of text or url.")
         if has_text and not self.text.strip():
-            raise ValueError("text darf nicht leer sein.")
+            raise ValueError("text must not be empty.")
         return self
 
 
 class PredictResponse(BaseModel):
-    """Vorhersage im gemeinsamen Drei-Klassen-Raum."""
+    """Prediction in the shared three-class space."""
 
-    label: str = Field(..., description="negative, neutral oder positive.")
-    scores: dict[str, float] = Field(..., description="Verteilung über die drei Klassen.")
-    model_version: str = Field(..., description="Version oder Checkpoint des geladenen Modells.")
+    label: str = Field(..., description="negative, neutral or positive.")
+    scores: dict[str, float] = Field(..., description="Distribution over the three classes.")
+    model_version: str = Field(..., description="Version or checkpoint of the loaded model.")
 
 
 class HealthResponse(BaseModel):
-    """Prozesszustand. model_loaded ist falsch, solange das Artefakt fehlt."""
+    """Process state. model_loaded is false while the artefact is missing."""
 
     status: str
     model_loaded: bool

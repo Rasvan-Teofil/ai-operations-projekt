@@ -1,15 +1,15 @@
-"""Transformer-Modelle. Torch und Transformers werden erst beim Laden importiert.
+"""Transformer models. Torch and Transformers are imported only on load.
 
-Geprüfte Labelkarten (Hugging-Face-config, ohne die Gewichte zu laden):
+Checked label maps (Hugging Face config, without loading the weights):
 
 - ``tabularisai/multilingual-sentiment-analysis``: 0 Very Negative, 1 Negative,
-  2 Neutral, 3 Positive, 4 Very Positive. Wird auf drei Klassen gefaltet.
+  2 Neutral, 3 Positive, 4 Very Positive. Folded into three classes.
 - ``cardiffnlp/twitter-xlm-roberta-base-sentiment``: 0 negative, 1 neutral,
-  2 positive. Bleibt im Drei-Klassen-Raum.
+  2 positive. Stays in the three-class space.
 
-Lange Texte werden in Stücke mit höchstens 512 Tokens zerlegt (Tokenizer
-inklusive Sonderzeichen). Die Chunk-Verteilungen werden gemittelt, danach
-auf drei Klassen abgebildet.
+Long texts are split into chunks of at most 512 tokens (tokenizer,
+including special tokens). The chunk distributions are averaged and then
+mapped to three classes.
 """
 
 from collections.abc import Mapping, Sequence
@@ -31,22 +31,22 @@ PRETRAINED_SPECS = {
         "version": TABULARISAI_MODEL_ID,
         "role": "pretrained_zero_shot",
         "max_length": HF_MAX_TOKENS,
-        "notes": "Mehrsprachiger DistilBERT, fünf Klassen auf drei gefaltet, auf 512 Tokens gechunked.",
+        "notes": "Multilingual DistilBERT, five classes folded into three, chunked at 512 tokens.",
     },
     "cardiffnlp": {
         "model_id": CARDIFFNLP_MODEL_ID,
         "version": CARDIFFNLP_MODEL_ID,
         "role": "pretrained_zero_shot",
         "max_length": HF_MAX_TOKENS,
-        "notes": "XLM-RoBERTa auf Tweets, bereits drei Klassen. Domäne ist Twitter, nicht Nachrichten.",
+        "notes": "XLM-RoBERTa trained on tweets, already three classes. Domain is Twitter, not news.",
     },
 }
 
 
 def _missing_dependency_message() -> str:
     return (
-        "PyTorch oder Transformers fehlen. "
-        "Bitte `pip install -r requirements-transformer.txt` ausführen."
+        "PyTorch or Transformers is missing. "
+        "Please run `pip install -r requirements-transformer.txt`."
     )
 
 
@@ -58,12 +58,12 @@ def _id2label_names(id2label: Mapping, width: int) -> list[str]:
         elif str(index) in id2label:
             names.append(str(id2label[str(index)]))
         else:
-            raise ValueError(f"id2label enthält keinen Eintrag für Klasse {index}.")
+            raise ValueError(f"id2label has no entry for class {index}.")
     return names
 
 
 def effective_max_length(tokenizer, requested: int) -> int:
-    """Obergrenze je Chunk: Wunsch, Tokenizer-Limit und 512."""
+    """Upper bound per chunk: requested value, tokenizer limit and 512."""
     model_max = getattr(tokenizer, "model_max_length", requested)
     if not isinstance(model_max, int) or model_max > 100_000:
         model_max = requested
@@ -99,7 +99,7 @@ class HuggingFaceSentimentModel(SentimentModel):
             self.load()
         cleaned = [str(text).strip() for text in texts]
         if any(not text for text in cleaned):
-            raise ValueError("Leerer Text.")
+            raise ValueError("Empty text.")
         if not cleaned:
             return []
         assert self._tokenizer is not None
@@ -127,11 +127,11 @@ class HuggingFaceSentimentModel(SentimentModel):
         for index in long_indexes:
             scores[index] = self._scores_for_text(cleaned[index])
         if any(row is None for row in scores):
-            raise RuntimeError("Nicht jeder Text hat eine Vorhersage.")
+            raise RuntimeError("Not every text has a prediction.")
         return [row for row in scores if row is not None]
 
     def _scores_for_short_batch(self, texts: list[str], max_length: int, batch_size: int = 16) -> list[dict[str, float]]:
-        """Ein Fenster pro Text. Dasselbe Softmax wie der Einzelpfad, nur gebündelt."""
+        """One window per text. Same softmax as the single path, just batched."""
         import torch
 
         assert self._tokenizer is not None and self._model is not None
@@ -165,7 +165,7 @@ class HuggingFaceSentimentModel(SentimentModel):
 
         cleaned = text.strip()
         if not cleaned:
-            raise ValueError("Leerer Text.")
+            raise ValueError("Empty text.")
         assert self._tokenizer is not None and self._model is not None
         max_length = effective_max_length(self._tokenizer, self.max_length)
         raw_ids = self._tokenizer(cleaned, add_special_tokens=False, truncation=False)["input_ids"]
@@ -174,7 +174,7 @@ class HuggingFaceSentimentModel(SentimentModel):
         batch = self._encode_windows(pieces, max_length)
         input_ids = batch["input_ids"]
         if int(input_ids.shape[-1]) > max_length:
-            raise RuntimeError(f"Chunk ist länger als {max_length} Tokens.")
+            raise RuntimeError(f"Chunk is longer than {max_length} tokens.")
         allowed = ("input_ids", "attention_mask", "token_type_ids")
         inputs = {key: batch[key] for key in allowed if key in batch}
         with torch.no_grad():
@@ -185,12 +185,12 @@ class HuggingFaceSentimentModel(SentimentModel):
         return complete_scores(collapsed)
 
     def _encode_windows(self, pieces: list[list[int]], max_length: int):
-        """Setzt CLS/SEP selbst. Transformers 5 hat ``prepare_for_model`` nicht mehr an jedem Tokenizer."""
+        """Adds CLS/SEP itself. Transformers 5 no longer has ``prepare_for_model`` on every tokenizer."""
         assert self._tokenizer is not None
         cls_id = self._tokenizer.cls_token_id
         sep_id = self._tokenizer.sep_token_id
         if cls_id is None or sep_id is None:
-            raise RuntimeError("Tokenizer ohne CLS- und SEP-Id, Chunking ist nicht möglich.")
+            raise RuntimeError("Tokenizer has no CLS and SEP id, chunking is not possible.")
         needs_types = "token_type_ids" in getattr(self._tokenizer, "model_input_names", [])
         encoded = []
         for piece in pieces:
@@ -234,8 +234,8 @@ def load_pretrained(name: str) -> HuggingFaceSentimentModel:
 def load_finetuned(directory: Path = FINETUNED_DIR) -> HuggingFaceSentimentModel:
     if not (directory / "config.json").exists():
         raise FileNotFoundError(
-            "Kein Fine-Tuning unter models/finetuned. "
-            "Bitte `python -m src.finetune` ausführen (GPU) oder den Colab-Ordner hierher kopieren."
+            "No fine-tuned model in models/finetuned. "
+            "Please run `python -m src.finetune` (GPU) or copy the Colab folder here."
         )
     version = "finetuned"
     max_length = HF_MAX_TOKENS
@@ -254,11 +254,11 @@ def load_finetuned(directory: Path = FINETUNED_DIR) -> HuggingFaceSentimentModel
             max_length = min(HF_MAX_TOKENS, int(meta["max_length"]))
         trained_on = meta.get("n_train")
         cap = meta.get("max_samples")
-    notes = "Eigenes Fine-Tuning auf dem Trainings-Split. Inferenz chunked lange Artikel."
+    notes = "Our own fine-tuning on the training split. Inference chunks long articles."
     if cap:
         notes += (
-            f" Trainiert auf {trained_on or cap} stratifizierten Trainingssätzen"
-            " (CPU-Subset), bewertet auf dem vollen Testsplit."
+            f" Trained on {trained_on or cap} stratified training sentences"
+            " (CPU subset), evaluated on the full test split."
         )
     model = HuggingFaceSentimentModel(
         name="finetuned",
@@ -276,7 +276,7 @@ def finetuned_is_ready(directory: Path = FINETUNED_DIR) -> bool:
 
 
 def iter_transformer_models() -> tuple[list[HuggingFaceSentimentModel], list[str]]:
-    """Lädt die beiden Zero-Shot-Modelle. Fine-Tuning nur, wenn der Ordner existiert."""
+    """Loads both zero-shot models. The fine-tuned model only if its folder exists."""
     loaded = [load_pretrained(name) for name in ("tabularisai", "cardiffnlp")]
     skipped: list[str] = []
     if finetuned_is_ready():
@@ -287,7 +287,7 @@ def iter_transformer_models() -> tuple[list[HuggingFaceSentimentModel], list[str
 
 
 def label_maps_for_docs() -> dict[str, list[str]]:
-    """Die geprüften Namen, in Indexreihenfolge. Nur Dokumentation und Tests."""
+    """The checked names, in index order. Documentation and tests only."""
     return {
         TABULARISAI_MODEL_ID: [
             "Very Negative",

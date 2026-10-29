@@ -1,7 +1,7 @@
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
-# Getrennt vom ersten Durchlauf (data/processed, models/), damit beide
-# Pipelines lokal nebeneinander laufen können.
+# Kept apart from the first iteration (data/processed, models/) so both
+# pipelines can run side by side locally.
 DATA = ROOT / 'data' / 'second_path' / 'processed'
 MODELS = ROOT / 'models' / 'second_path'
 REPORTS = ROOT / 'reports'

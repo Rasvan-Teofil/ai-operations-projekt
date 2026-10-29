@@ -1,13 +1,13 @@
-"""Laden und Aufteilen der Texte.
+"""Loading and splitting the texts.
 
-Zwei Wege, eine Regel je Weg:
+Two paths, one rule per path:
 
-- ``SENTIMENT_DATA=dummy`` (Tests, CI): die handgeschriebene Stichprobe,
-  stratifiziert 80/20 nur nach Label, Seed 42. Kein Validierungssplit.
-- Standard ``prepared``: die drei Dateien aus ``python -m src.prepare_data``.
-  Die werden hier nicht noch einmal gemischt.
+- ``SENTIMENT_DATA=dummy`` (tests, CI): the hand-written sample,
+  stratified 80/20 by label only, seed 42. No validation split.
+- Default ``prepared``: the three files from ``python -m src.prepare_data``.
+  They are not reshuffled here.
 
-Baseline, LinearSVC, Zero-Shot und Fine-Tuning lesen ``load_work_splits``.
+Baseline, LinearSVC, zero-shot and fine-tuning all read ``load_work_splits``.
 """
 
 import os
@@ -35,26 +35,26 @@ from src.config import (
     TEXT_COLUMN,
 )
 
-# Relativer Pfad für Logs. Die Datei ist Dummy-Text, kein Nachrichtendatensatz.
+# Relative path for logs. The file is dummy text, not a news dataset.
 PLACEHOLDER_DATASET = "data/sample/sentiment_sample.csv"
 
 
 def load_dataset(path: Path = SAMPLE_DATA_PATH) -> pd.DataFrame:
-    """Lädt die gelabelten Texte.
+    """Loads the labelled texts.
 
-    PLACEHOLDER: ``data/sample/sentiment_sample.csv`` enthält wenige
-    handgeschriebene DE/EN-Sätze mit ``origin=dummy``. Für Meilenstein 1
-    muss ein echter gelabelter Nachrichten-Datensatz her und diese
-    Funktion darauf zeigen. Spaltenvertrag: text, label, language.
+    PLACEHOLDER: ``data/sample/sentiment_sample.csv`` contains a few
+    hand-written DE/EN sentences with ``origin=dummy``. For milestone 1 a
+    real labelled news dataset is needed and this function has to point
+    to it. Column contract: text, label, language.
     """
     if not path.exists():
-        raise FileNotFoundError(f"Datensatz nicht gefunden: {path}")
+        raise FileNotFoundError(f"Dataset not found: {path}")
 
     frame = pd.read_csv(path, encoding="utf-8")
     required = [TEXT_COLUMN, LABEL_COLUMN, LANGUAGE_COLUMN]
     missing = [column for column in required if column not in frame.columns]
     if missing:
-        raise ValueError(f"Datensatz enthält nicht die erwarteten Spalten: {missing}")
+        raise ValueError(f"Dataset does not contain the expected columns: {missing}")
 
     frame = frame.copy()
     frame[TEXT_COLUMN] = frame[TEXT_COLUMN].astype(str).str.strip()
@@ -62,35 +62,35 @@ def load_dataset(path: Path = SAMPLE_DATA_PATH) -> pd.DataFrame:
     frame[LANGUAGE_COLUMN] = frame[LANGUAGE_COLUMN].astype(str).str.strip().str.lower()
 
     if frame[TEXT_COLUMN].eq("").any():
-        raise ValueError("Datensatz enthält leere Texte.")
+        raise ValueError("Dataset contains empty texts.")
     if len(frame) < 2:
-        raise ValueError("Datensatz braucht mindestens zwei Zeilen für einen Split.")
+        raise ValueError("Dataset needs at least two rows for a split.")
 
     unknown_labels = sorted(set(frame[LABEL_COLUMN]) - set(LABELS_3))
     if unknown_labels:
-        raise ValueError(f"Unbekannte Labels: {unknown_labels}. Erlaubt: {list(LABELS_3)}")
+        raise ValueError(f"Unknown labels: {unknown_labels}. Allowed: {list(LABELS_3)}")
     unknown_languages = sorted(set(frame[LANGUAGE_COLUMN]) - set(ALLOWED_LANGUAGES))
     if unknown_languages:
         raise ValueError(
-            f"Unbekannte Sprachen: {unknown_languages}. Erlaubt: {sorted(ALLOWED_LANGUAGES)}"
+            f"Unknown languages: {unknown_languages}. Allowed: {sorted(ALLOWED_LANGUAGES)}"
         )
 
     counts = frame[LABEL_COLUMN].value_counts()
     too_small = [label for label in LABELS_3 if int(counts.get(label, 0)) < 2]
     if too_small:
-        raise ValueError(f"Zu wenige Beispiele für einen stratifizierten Split: {too_small}")
+        raise ValueError(f"Too few examples for a stratified split: {too_small}")
     return frame.reset_index(drop=True)
 
 
 def split_dataset(
     frame: pd.DataFrame,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
-    """Stratifizierter 80/20-Split auf dem Stimmungslabel, fester Seed.
+    """Stratified 80/20 split on the sentiment label, fixed seed.
 
-    Das passt zu unabhängigen Beispielsätzen. Echte Artikel brauchen
-    vermutlich eine andere Regel: gleicher Vorgang, dasselbe Medium oder
-    dasselbe Datum darf nicht in Train und Test zugleich liegen.
-    Die Regel wird hier ersetzt, nicht im Notebook und nicht je Modell.
+    This suits independent example sentences. Real articles probably need
+    a different rule: the same story, outlet or date must not appear in
+    both train and test. The rule is replaced here, not in the notebook
+    and not per model.
     """
     features = frame.loc[:, [TEXT_COLUMN, LANGUAGE_COLUMN]]
     target = frame.loc[:, LABEL_COLUMN]
@@ -104,17 +104,17 @@ def split_dataset(
 
 
 def data_mode() -> str:
-    """``dummy`` für Tests und CI, sonst die aufbereiteten Splits."""
+    """``dummy`` for tests and CI, otherwise the prepared splits."""
     raw = os.environ.get("SENTIMENT_DATA", "prepared").strip().lower()
     if raw in {"dummy", "sample"}:
         return "dummy"
     if raw in {"", "prepared", "real"}:
         return "prepared"
-    raise ValueError(f"SENTIMENT_DATA unbekannt: {raw!r}. Erlaubt: prepared, dummy.")
+    raise ValueError(f"Unknown SENTIMENT_DATA: {raw!r}. Allowed: prepared, dummy.")
 
 
 def dataset_log_params() -> dict:
-    """Herkunft für MLflow und die Vergleichstabelle. Keine Textzeilen."""
+    """Provenance for MLflow and the comparison table. No text rows."""
     if data_mode() == "dummy":
         return {
             "dataset": PLACEHOLDER_DATASET,
@@ -134,10 +134,10 @@ def dataset_log_params() -> dict:
 
 
 def load_work_splits() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """Train, Val, Test. Bei der Dummy-Stichprobe ist Val leer.
+    """Train, val, test. For the dummy sample, val is empty.
 
-    Die aufbereiteten Dateien sind schon gesplittet. Hier kein zweiter Zufallssplit,
-    sonst wären Vergleich und Fine-Tuning nicht mehr dieselben Zeilen.
+    The prepared files are already split. No second random split here,
+    otherwise comparison and fine-tuning would no longer use the same rows.
     """
     if data_mode() == "dummy":
         return _dummy_work_splits()
@@ -148,9 +148,9 @@ def load_work_splits() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     ]
     if missing:
         raise FileNotFoundError(
-            "Aufbereitete Splits fehlen "
-            f"({', '.join(missing)}). Bitte im Projektroot `python -m src.prepare_data` ausführen. "
-            "Tests setzen SENTIMENT_DATA=dummy und brauchen diesen Schritt nicht."
+            "Prepared splits are missing "
+            f"({', '.join(missing)}). Please run `python -m src.prepare_data` in the project root. "
+            "Tests set SENTIMENT_DATA=dummy and do not need this step."
         )
     return (
         _read_prepared(PREPARED_TRAIN_PATH),
@@ -177,16 +177,16 @@ def _read_prepared(path: Path) -> pd.DataFrame:
     required = [TEXT_COLUMN, LABEL_COLUMN, LANGUAGE_COLUMN]
     missing = [column for column in required if column not in frame.columns]
     if missing:
-        raise ValueError(f"{path.name} enthält nicht die erwarteten Spalten: {missing}")
+        raise ValueError(f"{path.name} does not contain the expected columns: {missing}")
     frame = frame.copy()
     frame[TEXT_COLUMN] = frame[TEXT_COLUMN].astype(str).str.strip()
     frame[LABEL_COLUMN] = frame[LABEL_COLUMN].astype(str).str.strip().str.lower()
     frame[LANGUAGE_COLUMN] = frame[LANGUAGE_COLUMN].astype(str).str.strip().str.lower()
     if frame[TEXT_COLUMN].eq("").any():
-        raise ValueError(f"{path.name} enthält leere Texte.")
+        raise ValueError(f"{path.name} contains empty texts.")
     unknown_labels = sorted(set(frame[LABEL_COLUMN]) - set(LABELS_3))
     if unknown_labels:
-        raise ValueError(f"{path.name}: unbekannte Labels {unknown_labels}.")
+        raise ValueError(f"{path.name}: unknown labels {unknown_labels}.")
     unknown_languages = sorted(set(frame[LANGUAGE_COLUMN]) - set(ALLOWED_LANGUAGES))
     if unknown_languages:
         raise ValueError(f"{path.name}: unbekannte Sprachen {unknown_languages}.")

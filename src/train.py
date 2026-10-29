@@ -1,12 +1,12 @@
-"""Trainiert die beiden TF-IDF-Modelle und protokolliert sie in MLflow.
+"""Trains both TF-IDF models and logs them to MLflow.
 
-Vom Projektroot:
+From the project root:
 
     python -m src.train
     python -m src.train --all
 
-Ohne ``--all`` bleiben Hugging Face und Torch außen vor. ``--all`` ist
-der vollständige Vergleich und delegiert an ``src.compare``.
+Without ``--all``, Hugging Face and Torch are not used. ``--all`` is
+the full comparison and delegates to ``src.compare``.
 """
 
 import argparse
@@ -18,7 +18,7 @@ from src.tracking import attach_artifact_paths, evaluate_model, log_evaluation, 
 
 
 def train() -> list[dict]:
-    """Baseline und LinearSVC, derselbe Split, ein MLflow-Experiment."""
+    """Baseline and LinearSVC, same split, one MLflow experiment."""
     train_frame, val_frame, test_frame = load_work_splits()
     models = train_sklearn_models(
         train_frame[TEXT_COLUMN].astype(str).tolist(),
@@ -37,8 +37,8 @@ def train() -> list[dict]:
 
 
 def _print_summary(rows: list[dict]) -> None:
-    kind = "Dummy-Stichprobe" if data_mode() == "dummy" else "aufbereiteter Testsplit"
-    print(f"TF-IDF-Modelle auf dem Testdatensatz ({kind}):")
+    kind = "dummy sample" if data_mode() == "dummy" else "prepared test split"
+    print(f"TF-IDF models on the test set ({kind}):")
     for row in rows:
         metrics = row["metrics"]
         print(
@@ -46,17 +46,17 @@ def _print_summary(rows: list[dict]) -> None:
             f"f1_macro={metrics['f1_macro']:.3f}, "
             f"inference_ms_per_text={row['inference_ms_per_text']:.2f}"
         )
-    print(f"API-Standard: {DEFAULT_MODEL_NAME} (SENTIMENT_MODEL zum Umschalten).")
-    print("Vollständiger Vergleich inklusive Transformer: python -m src.train --all")
+    print(f"API default: {DEFAULT_MODEL_NAME} (switch with SENTIMENT_MODEL).")
+    print("Full comparison including transformers: python -m src.train --all")
     print("MLflow: MLFLOW_ALLOW_FILE_STORE=true mlflow ui --backend-store-uri ./mlruns")
 
 
 def main(argv: list[str] | None = None) -> None:
-    parser = argparse.ArgumentParser(description="TF-IDF-Baseline trainieren oder alle Modelle vergleichen.")
+    parser = argparse.ArgumentParser(description="Train the TF-IDF baseline or compare all models.")
     parser.add_argument(
         "--all",
         action="store_true",
-        help="Alle Modelle auf demselben Testsplit vergleichen (lädt Transformer).",
+        help="Compare all models on the same test split (loads transformers).",
     )
     args = parser.parse_args(argv)
     if args.all:

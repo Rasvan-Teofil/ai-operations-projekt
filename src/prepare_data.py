@@ -1,22 +1,22 @@
-"""Lädt die beiden öffentlichen Datensätze und schreibt Train/Val/Test.
+"""Downloads the two public datasets and writes train/val/test.
 
-Vom Projektroot:
+From the project root:
 
     python -m src.prepare_data
 
-Die Rohtexte bleiben unter ``data/processed/`` und sind gitignoriert.
-Die Dummy-Datei unter ``data/sample/`` wird nicht angefasst.
+The raw texts stay in ``data/processed/`` and are git-ignored.
+The dummy file in ``data/sample/`` is not touched.
 
-Englisch: ``takala/financial_phrasebank``, Datei
-``Sentences_75Agree.txt`` aus ``data/FinancialPhraseBank-v1.0.zip``.
-``datasets.load_dataset`` scheitert an diesem Stand, weil das Repo noch
-ein Legacy-Script enthält. Die Zip-Datei ist die veröffentlichte Quelle.
+English: ``takala/financial_phrasebank``, file
+``Sentences_75Agree.txt`` from ``data/FinancialPhraseBank-v1.0.zip``.
+``datasets.load_dataset`` fails at this revision because the repo still
+contains a legacy script. The zip file is the published source.
 
-Deutsch: ``Kenpache/multilingual-financial-sentiment``, nur ``language=de``.
+German: ``Kenpache/multilingual-financial-sentiment``, ``language=de`` only.
 
-Split, einmal, für alle Modelle: stratifiziert nach ``label|language``,
-Seed 42. Zuerst 15 % Test, aus dem Rest dann Val so, dass Val 15 % der
-Gesamtheit ist (15/85 des Rests). Train sind die übrigen 70 %.
+Split, once, for all models: stratified by ``label|language``, seed 42.
+First 15 % test, then val from the rest so that val is 15 % of the
+total (15/85 of the rest). Train is the remaining 70 %.
 """
 
 import json
@@ -58,20 +58,20 @@ def stratified_train_val_test(
     test_size: float = PREPARE_TEST_SIZE,
     val_size: float = PREPARE_VAL_SIZE,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """70/15/15, stratifiziert nach Label und Sprache.
+    """70/15/15, stratified by label and language.
 
-    Jede Schicht ``label|language`` muss mindestens zwei Zeilen haben,
-    sonst kann sklearn nicht in beide Teile stratifizieren.
+    Every stratum ``label|language`` needs at least two rows, otherwise
+    sklearn cannot stratify into both parts.
     """
     if test_size <= 0 or val_size <= 0 or test_size + val_size >= 1:
-        raise ValueError("test_size und val_size müssen positiv sein und zusammen unter 1 liegen.")
+        raise ValueError("test_size and val_size must be positive and sum to less than 1.")
     work = frame.reset_index(drop=True).copy()
     work["_stratum"] = work[LABEL_COLUMN].astype(str) + "|" + work[LANGUAGE_COLUMN].astype(str)
     counts = work["_stratum"].value_counts()
     tiny = counts[counts < 2]
     if not tiny.empty:
         raise ValueError(
-            "Zu wenige Zeilen für eine stratifizierte Drei-Teilung: "
+            "Too few rows for a stratified three-way split: "
             + ", ".join(f"{name}={int(count)}" for name, count in tiny.items())
         )
     rest, test = train_test_split(
@@ -95,7 +95,7 @@ def _without_stratum(part: pd.DataFrame) -> pd.DataFrame:
 
 
 def prepare() -> dict:
-    """Download, Filter, Split, drei CSVs plus metadata.json. Rückgabe ohne Texte."""
+    """Download, filter, split, three CSVs plus metadata.json. Returns no texts."""
     english, english_meta = _load_phrasebank()
     german, german_meta = _load_kenpache_german()
     english, english_stats = _clean_source(english)
@@ -118,9 +118,9 @@ def prepare() -> dict:
         "stratify": "label|language",
         "min_chars": MIN_TEXT_CHARS,
         "split_steps": [
-            "Zuerst Test als 15 % stratifiziert nach label|language, Seed 42.",
-            "Aus dem Rest Val mit Anteil 0.15/0.85, ebenfalls stratifiziert, Seed 42.",
-            "Train ist der Rest, etwa 70 %.",
+            "First test as 15 %, stratified by label|language, seed 42.",
+            "From the rest, val with a share of 0.15/0.85, also stratified, seed 42.",
+            "Train is the rest, about 70 %.",
         ],
         "cross_source_duplicates_dropped": int(before_cross - len(combined)),
         "sources": [
@@ -219,7 +219,7 @@ def _download(repo_id: str, filename: str) -> str:
         from huggingface_hub import hf_hub_download
     except ImportError as exc:
         raise RuntimeError(
-            "huggingface_hub fehlt. Bitte `pip install -r requirements.txt` ausführen."
+            "huggingface_hub is missing. Please run `pip install -r requirements.txt`."
         ) from exc
     return hf_hub_download(repo_id, filename, repo_type="dataset")
 
@@ -244,10 +244,10 @@ def _assert_partition(
     test: pd.DataFrame,
 ) -> None:
     if len(train) + len(val) + len(test) != len(combined):
-        raise RuntimeError("Split verliert oder verdoppelt Zeilen.")
+        raise RuntimeError("Split loses or duplicates rows.")
     texts = [set(part[TEXT_COLUMN]) for part in (train, val, test)]
     if texts[0] & texts[1] or texts[0] & texts[2] or texts[1] & texts[2]:
-        raise RuntimeError("Derselbe Text liegt in mehr als einem Split.")
+        raise RuntimeError("The same text appears in more than one split.")
 
 
 def main() -> None:

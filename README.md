@@ -1,80 +1,80 @@
-# Artikel-Sentiment
+# Article Sentiment
 
-**Lehrveranstaltung:** AI Operations  
-**Hochschule:** HHN Hochschule Heilbronn  
-**Studiengang:** Master Wirtschaftsinformatik  
-**Semester:** WiSe 2026/27
+**Course:** AI Operations  
+**University:** HHN Hochschule Heilbronn (Heilbronn University of Applied Sciences)  
+**Programme:** M.Sc. Business Informatics (Wirtschaftsinformatik)  
+**Semester:** Winter 2026/27
 
-Das Werkzeug liest einen Nachrichtentext oder genau eine Artikel-URL und schätzt die Stimmung: negativ, neutral oder positiv. Deutsch und Englisch.
+The tool reads a news text or exactly one article URL and estimates its sentiment: negative, neutral or positive. German and English.
 
-## Kurzbeschreibung
+## Summary
 
-Gedacht für Redaktionen, PR- und Kommunikationsabteilungen sowie Analystinnen und Analysten. Später, hier noch ohne Label und ohne Modell: ein Score für wertende oder aufgeladene Sprache.
+Built for newsrooms, PR & communications teams and analysts. Later, not yet labelled or modelled here: a score for judgemental or loaded language.
 
-## Zwei Durchläufe
+## Two iterations
 
-Beide Wege liegen in diesem Stand. Keiner ersetzt den anderen.
+Both paths live in this state of the repo. Neither replaces the other.
 
-| | Erster Durchlauf (Paket `src` / `app`) | Zweiter Durchlauf (aus Branch `second-path`, seit PR #2 auf `main`, Paket `second_path`) |
+| | First iteration (packages `src` / `app`) | Second iteration (from branch `second-path`, on `main` since PR #2, package `second_path`) |
 | --- | --- | --- |
-| Modelle | TF-IDF + LogReg, TF-IDF + LinearSVC, zwei HF-Zero-Shot-Modelle, DistilBERT-Fine-Tuning | MiniLM `paraphrase-multilingual-MiniLM-L12-v2`: frozen, Fine-Tune, Centroid, Majority; danach Ablationen B0 und R0–R4 |
-| Eigener Test | Finanzsätze, n = 1 270. Bestes macro-F1: **LinearSVC 0,7202** | Kenpache DE/EN, n = 1 787. Fine-Tune **0,7187** gegen frozen 0,6656 |
-| Auslieferung | API-Standard `tfidf_linearsvc` | v2 wählt **R3_deploy** (BF16, Quellen-CV-macro-F1 0,6729, rund 241 MiB) |
-| Training | CPU für TF-IDF. Transformer optional | CUDA, BF16. Ein CPU-Fallback wird verweigert |
+| Models | TF-IDF + LogReg, TF-IDF + LinearSVC, two HF zero-shot models, DistilBERT fine-tuning | MiniLM `paraphrase-multilingual-MiniLM-L12-v2`: frozen, fine-tuned, centroid, majority; then ablations B0 and R0–R4 |
+| Own test | Financial sentences, n = 1,270. Best macro-F1: **LinearSVC 0.7202** | Kenpache DE/EN, n = 1,787. Fine-tuned **0.7187** vs. frozen 0.6656 |
+| Serving | API default `tfidf_linearsvc` | v2 selects **R3_deploy** (BF16, source-CV macro-F1 0.6729, about 241 MiB) |
+| Training | CPU for TF-IDF. Transformers optional | CUDA, BF16. A CPU fallback is refused |
 | API | `uvicorn app.main:app` | `uvicorn second_path.api:app` |
-| MLflow-Experiment | `article-sentiment`, Tag `iteration=1-first-path` | `article-sentiment-second-path`, Tag `iteration=2-second-path` |
+| MLflow experiment | `article-sentiment`, tag `iteration=1-first-path` | `article-sentiment-second-path`, tag `iteration=2-second-path` |
 
-Der faire Vergleich beider Verfahren auf **denselben** 600 SEntFiN-Headlines steht in [`reports/development/branch_comparison.md`](reports/development/branch_comparison.md): rekonstruierter LinearSVC macro-F1 EN 0,4524, second-path v1 0,7360, v2 0,7293. Die alten Testzahlen 0,7202 und 0,7187 sind verschiedene Splits und werden nicht gegeneinander gerankt. Der Executive Pitch dazu liegt unter [`docs/executive-pitch/`](docs/executive-pitch/).
+The fair comparison of both approaches on the **same** 600 SEntFiN headlines is in [`reports/development/branch_comparison.md`](reports/development/branch_comparison.md): reconstructed LinearSVC macro-F1 EN 0.4524, second-path v1 0.7360, v2 0.7293. The earlier test scores 0.7202 and 0.7187 come from different splits and are not ranked against each other. The executive pitch is in [`docs/executive-pitch/`](docs/executive-pitch/).
 
-Artefakte des zweiten Durchlaufs: Daten unter `data/second_path/processed/`, Gewichte unter `models/second_path/`. Der erste Durchlauf bleibt bei `data/processed/` und `models/`.
+Second-iteration artefacts: data under `data/second_path/processed/`, weights under `models/second_path/`. The first iteration stays in `data/processed/` and `models/`.
 
-## Problem & Stakeholder
-
-| | |
-| --- | --- |
-| Geschäftsproblem | Eingehende Artikel nach Stimmung sortieren, ohne jeden Text von Hand zu lesen |
-| Entscheidung | Was ist dringend negativ, was ist eine neutrale Meldung, was ist positiv belegbar |
-| Stakeholder | Redaktionen, PR/Kommunikation, Analystinnen und Analysten |
-| Sprachen | Deutsch und Englisch |
-| Fehler | Ein Fehlalarm und ein übersehener negativer Text kosten unterschiedlich viel. Die Kosten sind noch offen. Auswahlmaß ist deshalb macro-F1 |
-
-Die Idee ist mit dem Professor abgestimmt. Er erwartet einen Vergleich mehrerer Modelle und ein eigenes Fine-Tuning.
-
-## Vorhersageziel
+## Problem & stakeholders
 
 | | |
 | --- | --- |
-| Ziel | Stimmung eines Textes |
-| Klassen | `negative`, `neutral`, `positive` |
-| Fünf Stufen bei Zero-Shot | Very Negative und Negative → `negative`, Neutral → `neutral`, Positive und Very Positive → `positive` |
-| Auswahl | höchstes macro-F1 auf dem gemeinsamen Testsplit, bei knappem Abstand Inferenzzeit und Modellgröße |
+| Business problem | Sort incoming articles by sentiment without reading every text by hand |
+| Decision | What is urgently negative, what is a neutral report, what is demonstrably positive |
+| Stakeholders | Newsrooms, PR & Communications, Analysts |
+| Languages | German and English |
+| Errors | A false alarm and a missed negative text cost different amounts. The costs are still open, so the selection metric is macro-F1 |
 
-Die Abbildung läuft über die Label-Namen (`src/labels.py`).
+The idea was agreed with the lecturer. He expects a comparison of several models and our own fine-tuning.
 
-## Datensatz
+## Prediction target
 
-Eine Zeile ist ein Satz aus einer Finanznachricht. Die Sammlung ist akademisch nutzbar und bleibt lokal: `python -m src.prepare_data` lädt sie, `.gitignore` hält die Texte aus dem Git. Die Dummy-Datei `data/sample/sentiment_sample.csv` (18 handgeschriebene Sätze, `origin=dummy`) gilt nur für Tests und CI (`SENTIMENT_DATA=dummy`).
+| | |
+| --- | --- |
+| Target | Sentiment of a text |
+| Classes | `negative`, `neutral`, `positive` |
+| Five levels in zero-shot | Very Negative and Negative → `negative`, Neutral → `neutral`, Positive and Very Positive → `positive` |
+| Selection | Highest macro-F1 on the shared test split; if close, inference time and model size |
 
-| Sprache | Quelle | Ausschnitt | Lizenz | Zeilen nach Filter |
+The mapping uses the label names (`src/labels.py`).
+
+## Dataset
+
+One row is one sentence from a financial news item. The collection is usable for academic purposes and stays local: `python -m src.prepare_data` downloads it, `.gitignore` keeps the texts out of Git. The dummy file `data/sample/sentiment_sample.csv` (18 hand-written sentences, `origin=dummy`) is only for tests and CI (`SENTIMENT_DATA=dummy`).
+
+| Language | Source | Subset | Licence | Rows after filtering |
 | --- | --- | --- | --- | --- |
-| Englisch | [takala/financial_phrasebank](https://huggingface.co/datasets/takala/financial_phrasebank) | `Sentences_75Agree.txt` (≥ 75 % Annotator-Einigkeit) | [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) | 3 440 |
-| Deutsch | [Kenpache/multilingual-financial-sentiment](https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment) | nur `language=de` | akademisch / nicht-kommerziell; die Karte nennt zusätzlich Apache-2.0, hier gilt die engere Lesart | 5 023 |
+| English | [takala/financial_phrasebank](https://huggingface.co/datasets/takala/financial_phrasebank) | `Sentences_75Agree.txt` (≥ 75 % annotator agreement) | [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) | 3,440 |
+| German | [Kenpache/multilingual-financial-sentiment](https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment) | `language=de` only | academic / non-commercial; the card also lists Apache-2.0, we apply the stricter reading | 5,023 |
 
-Phrasebank-Labels sind die Sicht einer Investorin oder eines Investors: würde der Satz den Kurs eher heben, senken oder unverändert lassen. Kenpache sind kürzere Sätze aus deutschsprachigen Finanzmedien; die Labels sind brauchbar und gröber (Glossarzeilen, gelegentlich zusammengeklebte Meldungen). Beide Quellen liefern die drei Klassennamen bereits. Zusammen 8 463 Sätze.
+Phrasebank labels take an investor's view: would the sentence rather raise, lower or not move the share price. Kenpache contains shorter sentences from German-language financial media; its labels are usable but coarser (glossary rows, occasionally merged reports). Both sources already provide the three class names. 8,463 sentences in total.
 
-**Split** (nur in `src/prepare_data.py`, Seed 42, Schicht `label|language`): zuerst 15 % Test, aus dem Rest Val als 15 % der Gesamtheit (`0.15/0.85`), Train der Rest.
+**Split** (only in `src/prepare_data.py`, seed 42, strata `label|language`): first 15 % test, from the rest validation as 15 % of the total (`0.15/0.85`), train is the remainder.
 
-| Split | Zeilen |
+| Split | Rows |
 | --- | --- |
-| Train | 5 923 |
-| Val | 1 270 |
-| Test | 1 270 |
+| Train | 5,923 |
+| Val | 1,270 |
+| Test | 1,270 |
 
-Val bleibt unangetastet. Alle fünf Modelle sehen denselben Testsplit. Es gibt keine Artikel-ID, deshalb können Sätze derselben Meldung in Train und Test liegen. Herkunft, Labelabbildung und Grenzen stehen in `data/README.md`.
+Validation stays untouched. All five models see the same test split. There is no article ID, so sentences from the same report can end up in both train and test. Provenance, label mapping and limits are in `data/README.md`.
 
-## Schnellstart
+## Quick start
 
-Python 3.12, Projektroot.
+Python 3.12, project root.
 
 ```bash
 python3 -m venv .venv
@@ -82,45 +82,45 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Windows (PowerShell): `.venv\Scripts\Activate.ps1`, danach derselbe pip-Aufruf.
+Windows (PowerShell): `.venv\Scripts\Activate.ps1`, then the same pip call.
 
-Zero-Shot und Fine-Tuning brauchen zusätzlich PyTorch (CPU-Wheel) und Transformers. Die CI installiert diese Datei nicht:
+Zero-shot and fine-tuning additionally need PyTorch (CPU wheel) and Transformers. CI does not install this file:
 
 ```bash
 python -m pip install -r requirements-transformer.txt
 ```
 
-Daten holen und aufteilen (lädt die beiden Hugging-Face-Dateien, schreibt `data/processed/`, committet sie nicht):
+Fetch and split the data (downloads the two Hugging Face files, writes `data/processed/`, does not commit it):
 
 ```bash
 python -m src.prepare_data
 ```
 
-Die beiden TF-IDF-Modelle trainieren und in MLflow schreiben:
+Train both TF-IDF models and log them to MLflow:
 
 ```bash
 python -m src.train
 ```
 
-Eigenes Fine-Tuning. Ohne GPU ist der belegte Lauf dieses Repos das CPU-Subset: eine Epoche, 2 000 stratifizierte Trainingssätze, Kontext 128. Die Bewertung nutzt den vollen Testsplit. Das dauert auf einer kleinen CPU wenige Minuten, sobald `distilbert-base-multilingual-cased` im Cache liegt.
+Our own fine-tuning. Without a GPU, the recorded run in this repo is the CPU subset: one epoch, 2,000 stratified training sentences, context 128. Evaluation uses the full test split. On a small CPU this takes a few minutes once `distilbert-base-multilingual-cased` is cached.
 
 ```bash
 python -m src.finetune --epochs 1 --lr 2e-5 --batch-size 8 --max-length 128 --max-samples 2000
 ```
 
-Voller Lauf auf einer GPU (Google Colab, Laufzeit → GPU): `notebooks/02_finetune_colab.ipynb`. Dort drei Epochen, der ganze Train-Split, Kontext 256, CUDA-PyTorch statt des CPU-Wheels. Den Ordner `models/finetuned` danach lokal an dieselbe Stelle legen.
+Full run on a GPU (Google Colab, Runtime → GPU): `notebooks/02_finetune_colab.ipynb`. Three epochs there, the whole train split, context 256, CUDA PyTorch instead of the CPU wheel. Afterwards put the `models/finetuned` folder in the same place locally.
 
-Alle fünf Modelle auf demselben Testsplit, eine Tabelle unter `reports/`:
+All five models on the same test split, one table under `reports/`:
 
 ```bash
 python -m src.train --all
 ```
 
-Dasselbe ist `python -m src.compare`. Fehlt `models/finetuned`, läuft der Vergleich ohne das Fine-Tuning und schreibt das in die Tabelle.
+`python -m src.compare` does the same. If `models/finetuned` is missing, the comparison runs without the fine-tuned model and says so in the table.
 
-### MLflow: beide Durchläufe im selben Store
+### MLflow: both iterations in one store
 
-Windows, Git Bash, Projektroot. Ein Store, `./mlruns`. Die UI ist `mlflow ui --backend-store-uri ./mlruns`.
+Windows, Git Bash, project root. One store, `./mlruns`. The UI is `mlflow ui --backend-store-uri ./mlruns`.
 
 ```bash
 python -m venv .venv
@@ -128,13 +128,13 @@ source .venv/Scripts/activate
 python -m pip install -r requirements.txt
 ```
 
-Lauf 1 live auf der CPU (TF-IDF, Dummy oder — nach `python -m src.prepare_data` — die echten Splits). Jeder Lauf bekommt den Tag `iteration=1-first-path`:
+Iteration 1 live on CPU (TF-IDF, dummy or, after `python -m src.prepare_data`, the real splits). Every run gets the tag `iteration=1-first-path`:
 
 ```bash
 python -m src.train
 ```
 
-Die veröffentlichten Kennzahlen **beider** Durchläufe, ohne GPU und ohne erneutes Training, aus den eingecheckten Berichten. Das ist der CPU-Weg für den zweiten Durchlauf, dessen Training CUDA verlangt und einen CPU-Fallback verweigert:
+The published metrics of **both** iterations, without a GPU and without retraining, from the committed reports. This is the CPU route for the second iteration, whose training requires CUDA and refuses a CPU fallback:
 
 ```bash
 python -m src.import_recorded
@@ -147,19 +147,19 @@ export MLFLOW_ALLOW_FILE_STORE=true
 mlflow ui --backend-store-uri ./mlruns --host 127.0.0.1 --port 5000
 ```
 
-Linux und macOS: `source .venv/bin/activate`, dieselben `python`-Aufrufe.
+Linux and macOS: `source .venv/bin/activate`, same `python` calls.
 
-Im Browser <http://127.0.0.1:5000>.
+Open <http://127.0.0.1:5000> in the browser.
 
-| Experiment | Was drin liegt | Tag |
+| Experiment | Contents | Tag |
 | --- | --- | --- |
-| `article-sentiment` | Live-TF-IDF und die importierte Tabelle aus `reports/model_comparison.md` | `iteration=1-first-path` |
-| `article-sentiment-second-path` | Importierte v1-Tests, Quellen-CV R0–R4 und der externe Audit | `iteration=2-second-path` (der rekonstruierte LinearSVC im Audit: `iteration=1-first-path`) |
-| `article-sentiment-comparison` | Dieselben importierten Zeilen nebeneinander | beide Iteration-Tags |
+| `article-sentiment` | Live TF-IDF and the imported table from `reports/model_comparison.md` | `iteration=1-first-path` |
+| `article-sentiment-second-path` | Imported v1 tests, source CV R0–R4 and the external audit | `iteration=2-second-path` (the reconstructed LinearSVC in the audit: `iteration=1-first-path`) |
+| `article-sentiment-comparison` | The same imported rows side by side | both iteration tags |
 
-Zum Vergleich in der UI das Experiment `article-sentiment-comparison` öffnen und nach `comparable_group` filtern. `sentfin-external` ist der einzige Block, in dem der erste und der zweite Durchlauf auf denselben Texten stehen. `first-path-own-test`, `second-path-own-test` und `second-path-source-group-cv` sind getrennte Messungen. Spalte `f1_macro` ist in allen importierten Läufen gesetzt.
+To compare in the UI, open the experiment `article-sentiment-comparison` and filter by `comparable_group`. `sentfin-external` is the only block where the first and second iteration are scored on the same texts. `first-path-own-test`, `second-path-own-test` and `second-path-source-group-cv` are separate measurements. Column `f1_macro` is set in all imported runs.
 
-Ein frischer Live-Lauf des zweiten Durchlaufs (nur mit NVIDIA-GPU, CUDA 12.8, viel Platte) schreibt in dasselbe `./mlruns` und dasselbe Experiment `article-sentiment-second-path`, Tag `iteration=2-second-path`:
+A fresh live run of the second iteration (NVIDIA GPU only, CUDA 12.8, lots of disk) writes to the same `./mlruns` and the same experiment `article-sentiment-second-path`, tag `iteration=2-second-path`:
 
 ```bash
 python -m pip install -r second_path/requirements.txt -r requirements-cuda.txt
@@ -171,30 +171,30 @@ python -m second_path.train majority
 python -m second_path.evaluate
 ```
 
-Ablationen und Release, ebenfalls CUDA und BF16: `python -m second_path.development run`, danach `summarize`, `release`, `activate`. Historische Protokolle bleiben unter `reports/development/`. Frische Wiederholungen nach `export SENTIMENT_DEV_REPORTS=reports/reproduction`, damit die eingecheckten Berichte nicht überschrieben werden. API des zweiten Durchlaufs: `uvicorn second_path.api:app --host 127.0.0.1 --port 8000`. Der erste Durchlauf bleibt `uvicorn app.main:app`.
+Ablations and release, also CUDA and BF16: `python -m second_path.development run`, then `summarize`, `release`, `activate`. Historical logs stay under `reports/development/`. For fresh repetitions run `export SENTIMENT_DEV_REPORTS=reports/reproduction` first so the committed reports are not overwritten. Second-iteration API: `uvicorn second_path.api:app --host 127.0.0.1 --port 8000`. The first iteration stays `uvicorn app.main:app`.
 
-Ein Live-Lauf im Experiment `article-sentiment` enthält Accuracy, macro-F1, F1 je Klasse, `inference_ms_per_text` und das Artefakt `confusion_matrix.csv`.
+A live run in the experiment `article-sentiment` contains accuracy, macro-F1, per-class F1, `inference_ms_per_text` and the artefact `confusion_matrix.csv`.
 
-API, Standardmodell `tfidf_linearsvc`:
+API, default model `tfidf_linearsvc`:
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
 - Health: <http://127.0.0.1:8000/health>
-- Doku: <http://127.0.0.1:8000/docs>
+- Docs: <http://127.0.0.1:8000/docs>
 
-Anderes Modell: `SENTIMENT_MODEL=tfidf_logreg`, `tabularisai`, `cardiffnlp` oder `finetuned`. Transformer und das Fine-Tuning brauchen `requirements-transformer.txt` und die Gewichte auf der Platte.
+Other model: `SENTIMENT_MODEL=tfidf_logreg`, `tabularisai`, `cardiffnlp` or `finetuned`. Transformers and the fine-tuned model need `requirements-transformer.txt` and the weights on disk.
 
-### Beispielaufrufe
+### Example calls
 
-Health nach `python -m src.train`:
+Health after `python -m src.train`:
 
 ```json
 {"status":"ok","model_loaded":true,"model_name":"tfidf_linearsvc","model_version":"tfidf-linearsvc-v1"}
 ```
 
-Deutsch, Rohtext:
+German, raw text ("The share lost significant value after the profit warning."):
 
 ```bash
 curl -s -X POST http://127.0.0.1:8000/predict \
@@ -206,7 +206,7 @@ curl -s -X POST http://127.0.0.1:8000/predict \
 {"label":"negative","scores":{"negative":0.7077840993250278,"neutral":0.14219203378102802,"positive":0.15002386689394404},"model_version":"tfidf-linearsvc-v1"}
 ```
 
-Englisch, Rohtext:
+English, raw text:
 
 ```bash
 curl -s -X POST http://127.0.0.1:8000/predict \
@@ -218,7 +218,7 @@ curl -s -X POST http://127.0.0.1:8000/predict \
 {"label":"positive","scores":{"negative":0.2651965190241689,"neutral":0.2732371307859462,"positive":0.4615663501898849},"model_version":"tfidf-linearsvc-v1"}
 ```
 
-Artikel-URL (genau eine, am 8. Oktober 2026 abgerufen). BBC: „AI chip boom pushes Samsung profits to record $80bn“, <https://www.bbc.com/news/articles/c687z8127302o>.
+Article URL (exactly one, fetched on 8 October 2026). BBC: "AI chip boom pushes Samsung profits to record $80bn", <https://www.bbc.com/news/articles/c687z8127302o>.
 
 ```bash
 curl -s -X POST http://127.0.0.1:8000/predict \
@@ -230,33 +230,33 @@ curl -s -X POST http://127.0.0.1:8000/predict \
 {"label":"positive","scores":{"negative":0.20056848069748298,"neutral":0.20885450235096512,"positive":0.590577016951552},"model_version":"tfidf-linearsvc-v1"}
 ```
 
-Die LinearSVC-Scores sind ein Softmax der Entscheidungsfunktion, keine kalibrierte Wahrscheinlichkeit. Text und URL zusammen, oder keins von beiden, ergibt HTTP 422.
+The LinearSVC scores are a softmax of the decision function, not a calibrated probability. Text and URL together, or neither, returns HTTP 422.
 
 | Situation | HTTP |
 | --- | --- |
-| Text oder URL fehlt, beides gesetzt, leerer Text, falscher Typ | 422 |
-| Seite ohne lesbaren Artikeltext | 422 |
-| `robots.txt` verbietet den Abruf | 403 |
-| Timeout, HTTP-Fehler, Weiterleitung, Host nicht auflösbar | 502 |
-| Modelldatei fehlt | 503 |
+| Text or URL missing, both set, empty text, wrong type | 422 |
+| Page without readable article text | 422 |
+| `robots.txt` forbids fetching | 403 |
+| Timeout, HTTP error, redirect, host cannot be resolved | 502 |
+| Model file missing | 503 |
 
-`src/scraping.py` holt genau eine http(s)-URL. Keine Links weiterverfolgen, keine Redirects. Timeout 15 Sekunden. User-Agent `AIOpsSentimentBot/0.1`. Fehlt `robots.txt` (404), ist der einzelne Abruf erlaubt; ein Lesefehler bricht ab. Lokale und nicht-öffentliche Adressen werden nicht geholt. Trotzdem die Nutzungsbedingungen der Seite lesen.
+`src/scraping.py` fetches exactly one http(s) URL. It follows no links and no redirects. Timeout 15 seconds. User agent `AIOpsSentimentBot/0.1`. If `robots.txt` is missing (404), the single fetch is allowed; a read error aborts. Local and non-public addresses are not fetched. Still read the site's terms of use.
 
-## Modellvergleich
+## Model comparison
 
-Die gemessene Tabelle, die Trade-off-Diskussion und die Empfehlung stehen in [`reports/model_comparison.md`](reports/model_comparison.md). Kurz, CPU, gemeinsamer Test von 1 270 Sätzen:
+The measured table, the trade-off discussion and the recommendation are in [`reports/model_comparison.md`](reports/model_comparison.md). In short, CPU, shared test set of 1,270 sentences:
 
-| Modell | macro-F1 | ms pro Text | Größe |
+| Model | macro-F1 | ms per text | Size |
 | --- | --- | --- | --- |
 | TF-IDF + LinearSVC | 0.720 | 0.02 | 4 MB |
 | TF-IDF + LogisticRegression | 0.656 | 0.03 | 4 MB |
-| Fine-Tuning, CPU-Subset (2 000 Sätze, 1 Epoche, Kontext 128) | 0.614 | 8.3 | 516 MB |
-| cardiffnlp/twitter-xlm-roberta-base-sentiment | 0.486 | 19.0 | 1 061 MB |
+| Fine-tuning, CPU subset (2,000 sentences, 1 epoch, context 128) | 0.614 | 8.3 | 516 MB |
+| cardiffnlp/twitter-xlm-roberta-base-sentiment | 0.486 | 19.0 | 1,061 MB |
 | tabularisai/multilingual-sentiment-analysis (5→3) | 0.364 | 8.8 | 516 MB |
 
-**Empfehlung und API-Standard: `tfidf_linearsvc`.** Höchstes macro-F1, klein, schnell, läuft mit `requirements.txt`. Der volle GPU-Lauf (3 Epochen, alle 5 923 Trainingssätze, Kontext 256) ist vorbereitet und hier nicht gemessen. Die CI setzt `SENTIMENT_MODEL=tfidf_logreg` und `SENTIMENT_DATA=dummy`, installiert nur `requirements.txt` und ruft kein Netz auf.
+**Recommendation and API default: `tfidf_linearsvc`.** Highest macro-F1, small, fast, runs with `requirements.txt`. The full GPU run (3 epochs, all 5,923 training sentences, context 256) is prepared but not measured here. CI sets `SENTIMENT_MODEL=tfidf_logreg` and `SENTIMENT_DATA=dummy`, installs only `requirements.txt` and makes no network calls.
 
-Jedes Modell hat `predict_proba(texts)` (`src/interface.py`). TF-IDF sieht den ganzen Text. Transformer zerlegen ihn in Stücke à höchstens 512 Tokens und mitteln die Verteilungen. Das Fine-Tuning kürzt beim Training auf `--max-length` und chunkt bei der Inferenz mit dieser Länge.
+Every model has `predict_proba(texts)` (`src/interface.py`). TF-IDF sees the whole text. Transformers split it into chunks of at most 512 tokens and average the distributions. Fine-tuning truncates to `--max-length` during training and chunks with that length at inference.
 
 ## Tests
 
@@ -265,73 +265,73 @@ SENTIMENT_DATA=dummy SENTIMENT_MODEL=tfidf_logreg python -m src.train
 pytest
 ```
 
-Die CI macht genau das im Job `test`. Der Job `second-path` installiert `second_path/requirements.txt` (ohne CUDA-Torch) und führt `pytest tests/secondpath` aus. Der Tokenizer-Test wird im leichten Job übersprungen, solange `transformers` fehlt.
+CI does exactly this in the `test` job. The `second-path` job installs `second_path/requirements.txt` (without CUDA torch) and runs `pytest tests/secondpath`. The tokenizer test is skipped in the light job as long as `transformers` is missing.
 
-Exploration der echten Splits, mit gespeicherter Ausgabe: `notebooks/01_exploration.ipynb`.
+Exploration of the real splits, with saved output: `notebooks/01_exploration.ipynb`.
 
-## Repository-Struktur
+## Repository structure
 
 ```text
 .
 ├── README.md
-├── requirements.txt                 # erster Durchlauf, CI-Job test
-├── requirements-transformer.txt     # Zero-Shot und DistilBERT
-├── requirements-cuda.txt            # zweiter Durchlauf, CUDA-Torch
+├── requirements.txt                 # first iteration, CI job test
+├── requirements-transformer.txt     # zero-shot and DistilBERT
+├── requirements-cuda.txt            # second iteration, CUDA torch
 ├── requirements-evaluation.txt
 ├── requirements-lock.txt
-├── second_path/                     # MiniLM, Ablationen, zweite API
+├── second_path/                     # MiniLM, ablations, second API
 │   └── requirements.txt
-├── src/                             # erster Durchlauf
-├── app/                             # FastAPI des ersten Durchlaufs
+├── src/                             # first iteration
+├── app/                             # FastAPI of the first iteration
 ├── data/README.md
-├── data/sample/                     # Dummy, Tests und CI
+├── data/sample/                     # dummy, tests and CI
 ├── notebooks/
-├── reports/model_comparison.md      # eigener Test, erster Durchlauf
+├── reports/model_comparison.md      # own test, first iteration
 ├── reports/second_path_model_comparison.md
-├── reports/development/             # Ablationen und externer Vergleich
-├── docs/executive-pitch/            # Pitch, TeX und PDF
+├── reports/development/             # ablations and external comparison
+├── docs/executive-pitch/            # pitch, TeX and PDF
 ├── tests/secondpath/
-└── .github/workflows/ci.yml         # pytest für beide Wege
+└── .github/workflows/ci.yml         # pytest for both paths
 ```
 
-## Meilensteine
+## Milestones
 
-### M1 – Problem, Daten, Baseline
+### M1 – Problem, data, baseline
 
-- [x] Geschäftsidee abgestimmt (Artikel-Stimmung, DE/EN)
-- [x] Vorhersageziel: negative / neutral / positive
-- [x] Gelabelte Nachrichten-Sätze gewählt, Herkunft und Lizenz notiert
-- [x] Split-Regel festgehalten (70/15/15, Label und Sprache, Seed 42; keine Artikel-ID)
-- [x] TF-IDF-Baseline auf dem echten Train-Split
+- [x] Business idea agreed (article sentiment, DE/EN)
+- [x] Prediction target: negative / neutral / positive
+- [x] Labelled news sentences chosen, provenance and licence recorded
+- [x] Split rule recorded (70/15/15, label and language, seed 42; no article ID)
+- [x] TF-IDF baseline on the real train split
 
-### M2 – Vergleich und Auswahl
+### M2 – Comparison and selection
 
-- [x] Fünf Modelle, gleiche Metriken, ein MLflow-Experiment
-- [x] Vergleich auf dem echten Testsplit, inklusive CPU-Fine-Tuning
-- [x] Auswahl: `tfidf_linearsvc` (macro-F1, Latenz, Größe)
+- [x] Five models, same metrics, one MLflow experiment
+- [x] Comparison on the real test split, including CPU fine-tuning
+- [x] Selection: `tfidf_linearsvc` (macro-F1, latency, size)
 - [x] Trade-off in `reports/model_comparison.md`
 
-### M3 – Artefakt, Vertrag, lokales Deployment
+### M3 – Artefact, contract, local deployment
 
-- [x] Training und Inferenz getrennt, gemeinsames `predict_proba`
-- [x] Vertrag: genau Text oder URL, Antwort mit Label, Scores, Modellversion
-- [x] FastAPI lokal, gültige und ungültige Fälle
-- [x] README auf dem gemessenen Stand
-- [x] Executive Pitch unter `docs/executive-pitch/`
+- [x] Training and inference separated, shared `predict_proba`
+- [x] Contract: exactly text or URL, response with label, scores, model version
+- [x] FastAPI locally, valid and invalid cases
+- [x] README reflects the measured state
+- [x] Executive pitch under `docs/executive-pitch/`
 
-## Offene Punkte
+## Open points
 
-- Fehlerkosten (Fehlalarm gegen übersehenen negativen Text) sind noch offen.
-- Wertende oder aufgeladene Sprache bleibt ein späteres Ziel, ohne Label und ohne Modell.
-- Der GPU-Lauf aus dem Colab-Notebook (DistilBERT, drei Epochen, voller Train-Split) ist beschrieben und auf diesem Stand nicht gemessen.
-- Der zweite Durchlauf ist gemessen und liegt unter `second_path/`. Sein Training braucht CUDA. Ohne GPU die schon aufgezeichneten Läufe mit `python -m src.import_recorded` in MLflow holen.
-- R2/R4 verbessern die HTML-Fixtures, sind aber nicht der nach der Zeit-Regel gewählte Standard (R3).
-- Die Trainingsdomäne ist der Finanzsatz. Ein allgemeiner Nachrichtenartikel kann danebenliegen.
-- 0,7202 und 0,7187 stammen aus verschiedenen Tests. Der gemeinsame Vergleich ist `reports/development/branch_comparison.md`.
+- Error costs (false alarm vs. missed negative text) are still open.
+- Judgemental or loaded language remains a later goal, without labels or a model.
+- The GPU run from the Colab notebook (DistilBERT, three epochs, full train split) is described but not measured in this state.
+- The second iteration is measured and lives under `second_path/`. Its training needs CUDA. Without a GPU, load the already recorded runs into MLflow with `python -m src.import_recorded`.
+- R2/R4 improve the HTML fixtures but are not the default chosen by the time rule (R3).
+- The training domain is financial sentences. A general news article can be off.
+- 0.7202 and 0.7187 come from different tests. The shared comparison is `reports/development/branch_comparison.md`.
 
 ## Team
 
-| Name | Kontakt | Verantwortung |
+| Name | Contact | Role |
 | --- | --- | --- |
 | Teofil Wetzel | twetzel@stud.hs-heilbronn.de | AI Operations, HHN |
 | Nick Fronius | nfronius@stud.hs-heilbronn.de | AI Operations, HHN |

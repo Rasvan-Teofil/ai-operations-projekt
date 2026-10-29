@@ -5,100 +5,100 @@
 \graphicspath{{figures/}{Pictures/}{bilder/}{../../vorlagen/latex/Pictures/}}
 
 % ------------------------------------------------
-% Dokumentinformationen
+% Document information
 % ------------------------------------------------
 \newcommand{\hhnfaculty}{Fakultät Wirtschaft und Verkehr}
-\newcommand{\hhncourse}{Master Wirtschaftsinformatik}
-\newcommand{\hhnprogram}{WiSe 2026/27}
+\newcommand{\hhncourse}{Master Wirtschaftsinformatik (Business Information Systems)}
+\newcommand{\hhnprogram}{Winter semester 2026/27}
 
 \newcommand{\hhnsubject}{AI Operations}
 \newcommand{\hhnsubjectnum}{}
 \newcommand{\hhnlecturer}{Pranav Sharma}
 
-\newcommand{\reprttopic}{News-Sentimentanalyse per URL}
+\newcommand{\reprttopic}{News Sentiment Analysis by URL}
 \newcommand{\reprttype}{Executive Pitch}
-% Autor:innen stehen in vorlagen/latex/autoren.tex.
+% Authors are listed in vorlagen/latex/autoren.tex.
 
 \begin{document}
 
 \input{../../vorlagen/latex/titlepage.tex}
 
-% scrreprt beginnt jedes \chapter auf einer neuen Seite.
-% Abschnitte deshalb als \section, damit der Pitch fortlaufend gesetzt wird.
+% scrreprt starts every \chapter on a new page.
+% Sections are therefore \section, so the pitch runs continuously.
 \renewcommand{\thesection}{\arabic{section}}
 \pagenumbering{arabic}
 
 \section{Problem}
 
-Die manuelle Einschätzung der Stimmung von Nachrichtenartikeln ist langsam, teuer und subjektiv. Redaktionen, PR-Teams und Analystinnen und Analysten müssen täglich große Mengen an Beiträgen sichten und beurteilen, ob die Berichterstattung eher negativ, neutral oder positiv ausfällt. Unterschiedliche Lesende kommen dabei oft zu unterschiedlichen Einschätzungen; eine nachvollziehbare, wiederholbare Bewertung fehlt.
+Judging the sentiment of news articles by hand is slow, expensive and subjective. Newsrooms, PR teams and analysts have to screen large numbers of articles every day and decide whether the coverage is negative, neutral or positive. Different readers often reach different conclusions, and there is no traceable, repeatable assessment.
 
-Unser Geschäftsziel im Modul AI Operations lautet deshalb: Aus einer URL oder aus Freitext (Deutsch und Englisch) soll automatisch eine von drei Klassen zurückgegeben werden --- negativ, neutral oder positiv. Der Anwendungsrahmen ist Media Monitoring und Reputationsbeobachtung: Wer schnell erkennt, wie ein Thema in der Berichterstattung gefärbt ist, kann früher reagieren und Ressourcen gezielter einsetzen.
+Our business goal in the AI Operations module is therefore: given a URL or free text (German and English), automatically return one of three classes --- negative, neutral or positive. The use case is media monitoring and reputation tracking: whoever sees quickly how a topic is coloured in the coverage can react earlier and use resources in a more targeted way.
 
-Das Vorhaben ist bewusst als MLOps-Problem formuliert. Es reicht nicht, einmal ein Modell zu trainieren. Wir brauchen eine reproduzierbare Pipeline vom Rohartikel bis zur API-Antwort, einen fairen Modellvergleich auf demselben Testdatensatz und eine nachvollziehbare Experimentdokumentation.
+We framed the project as an MLOps problem on purpose. Training a model once is not enough. We need a reproducible pipeline from the raw article to the API response, a fair model comparison on the same test set, and traceable experiment documentation.
 
-\section{Stakeholder}
+\section{Stakeholders}
 
-Drei Nutzergruppen profitieren unmittelbar. \textbf{Redaktionen} können eingehende Artikel schneller triagieren und Themen priorisieren, ohne jeden Text manuell zu lesen. \textbf{PR- und Kommunikationsabteilungen} erhalten ein Signal zur Reputationslage: Häufen sich negative Berichte zu einer Marke oder einem Ereignis, wird das früh sichtbar. \textbf{Analystinnen und Analysten} nutzen die Stimmung als zusätzlichen Indikator im Nachrichtenfluss, etwa für Markt- oder Themenbeobachtung.
+Three user groups benefit directly. \textbf{Newsrooms} can triage incoming articles faster and prioritise topics without reading every text by hand. \textbf{PR \& Communications} teams get a signal on their reputation: if negative reports about a brand or an event pile up, this becomes visible early. \textbf{Analysts} use sentiment as an additional indicator in the news flow, for example for market or topic monitoring.
 
-Was wir liefern, ist eine Dienstleistungsschnittstelle und der Nachweis, dass sie belastbar ist. Die FastAPI-Endpunkte nehmen entweder Text oder eine URL an (XOR): Bei einer URL wird der Artikelkörper mit Trafilatura extrahiert, vorverarbeitet und klassifiziert. Die Antwort enthält die vorhergesagte Klasse. Parallel dazu dokumentieren wir den Modellvergleich in MLflow, damit die Wahl des produktiven Modells nicht aus Bauchgefühl, sondern aus messbaren Metriken folgt.
+What we deliver is a service interface and evidence that it holds up. The FastAPI endpoints accept either text or a URL (XOR): for a URL, the article body is extracted with Trafilatura, preprocessed and classified. The response contains the predicted class. In parallel, we document the model comparison in MLflow, so that the choice of the production model follows from measurable metrics rather than gut feeling.
 
-\section{Methoden}
+\section{Methods}
 
-Die Pipeline folgt drei Schritten: Scraping bzw.\ Texteingabe, Vorverarbeitung (Bereinigung, Tokenisierung je Modellfamilie) und Klassifikation in drei Sentimentklassen. Leitmetrik ist Macro-F1, damit keine Klasse systematisch vernachlässigt wird. Beide Durchläufe bleiben im Repository lauffähig: der erste unter \path{src}/ und \path{app}/, der zweite als Paket \path{second_path}.
+The pipeline has three steps: scraping or text input, preprocessing (cleaning, tokenisation per model family) and classification into three sentiment classes. The lead metric is macro-F1, so that no class is systematically neglected. Both iterations remain runnable in the repository: the first in \path{src}/ and \path{app}/, the second as the package \path{second_path}.
 
-Im ersten Durchlauf stehen fünf Ansätze auf demselben Finanzsatz-Test (PhraseBank Englisch und Kenpache Deutsch, Split 70\,\% / 15\,\% / 15\,\%, Seed~42, $n=1\,270$):
+In the first iteration, five approaches are evaluated on the same financial-sentence test set (PhraseBank English and Kenpache German, split 70\,\% / 15\,\% / 15\,\%, seed~42, $n=1{,}270$):
 
 \begin{itemize}
-  \item \textbf{TF-IDF + Logistic Regression} als klassische Baseline (Macro-F1 0{,}6562),
-  \item \textbf{TF-IDF + LinearSVC} als bester Wert dieses Tests (Macro-F1 0{,}7202, etwa 0{,}02\,ms pro Text, rund 4\,MB),
-  \item \textbf{\path{tabularisai/multilingual-sentiment-analysis}} als Hugging-Face-Zero-Shot-Modell (Macro-F1 0{,}3636),
-  \item \textbf{\path{cardiffnlp/twitter-xlm-roberta-base-sentiment}} ebenfalls als Zero-Shot-Vergleich (Macro-F1 0{,}4859),
-  \item \textbf{DistilBERT-Fine-Tuning}, gemessen als CPU-Subset (2\,000 Sätze, eine Epoche, Kontext 128; Macro-F1 0{,}6142). Der volle GPU-Lauf im Colab-Notebook ist beschrieben und nicht gemessen.
+  \item \textbf{TF-IDF + Logistic Regression} as the classic baseline (macro-F1 0.6562),
+  \item \textbf{TF-IDF + LinearSVC} as the best score on this test (macro-F1 0.7202, about 0.02\,ms per text, roughly 4\,MB),
+  \item \textbf{\path{tabularisai/multilingual-sentiment-analysis}} as a Hugging Face zero-shot model (macro-F1 0.3636),
+  \item \textbf{\path{cardiffnlp/twitter-xlm-roberta-base-sentiment}}, also as a zero-shot comparison (macro-F1 0.4859),
+  \item \textbf{DistilBERT fine-tuning}, measured as a CPU subset (2{,}000 sentences, one epoch, context 128; macro-F1 0.6142). The full GPU run in the Colab notebook is described but not measured.
 \end{itemize}
 
-Der zweite Durchlauf tauscht die Wortzählvektoren gegen den mehrsprachigen Encoder \path{paraphrase-multilingual-MiniLM-L12-v2}. Zuerst ein eingefrorener Kopf (Macro-F1 0{,}6656 auf dem eigenen Test mit $n=1\,787$), dann genau ein Fine-Tuning aller Encodergewichte: drei Epochen, Batch 32, Kontext 128, BF16, AdamW, klassengewichtete Kreuzentropie. Das hebt denselben Test auf Macro-F1 0{,}7187. Danach folgen getrennte Ablationen innerhalb des Train-Splits (Quellengruppen-CV, Seed 20261019), ohne den alten Test erneut zu öffnen: R1 gewichtet nach Sprache und Klasse, R2 ändert Chunk-Aggregation und HTML-Extraktion, R3 speichert und rechnet in BF16, R4 kombiniert die drei. Ausgeliefert wird R3, weil sein CV-Mittel 0{,}6729 innerhalb der vorab festgelegten 0{,}005 am besten liegenden R4 (0{,}6740) liegt und die Tie-Regel die geringere Latenz wählt (2{,}381\,ms gegen 2{,}419\,ms) bei rund 241 statt 465\,MiB.
+The second iteration replaces the word-count vectors with the multilingual encoder \path{paraphrase-multilingual-MiniLM-L12-v2}. First a frozen head (macro-F1 0.6656 on its own test set with $n=1{,}787$), then exactly one fine-tuning of all encoder weights: three epochs, batch 32, context 128, BF16, AdamW, class-weighted cross-entropy. This raises the same test to macro-F1 0.7187. After that come separate ablations within the train split (source-group CV, seed 20261019), without reopening the old test set: R1 weights by language and class, R2 changes chunk aggregation and HTML extraction, R3 stores and computes in BF16, R4 combines the three. R3 is shipped because its CV mean of 0.6729 lies within the pre-defined 0.005 of the best, R4 (0.6740), and the tie rule picks the lower latency (2.381\,ms vs.\ 2.419\,ms) at about 241 instead of 465\,MiB.
 
-Serving und Betrieb: FastAPI mit \texttt{/predict} (Text oder URL, Trafilatura im ersten Durchlauf), GitHub Actions für beide Testpfade, MLflow-Store \path{./mlruns} mit den Tags \path{iteration=1-first-path} und \path{iteration=2-second-path}. Repository: \url{https://github.com/Rasvan-Teofil/ai-operations-projekt}.
+Serving and operations: FastAPI with \texttt{/predict} (text or URL, Trafilatura in the first iteration), GitHub Actions for both test paths, MLflow store \path{./mlruns} with the tags \path{iteration=1-first-path} and \path{iteration=2-second-path}. Repository: \url{https://github.com/Rasvan-Teofil/ai-operations-projekt}.
 
-\section{Vom ersten zum zweiten Durchlauf}
+\section{From the first to the second iteration}
 
-Im ersten Durchlauf war der klassische LinearSVC auf seinem Finanzsatz-Test stark. Die Transformer-Versuche waren es nicht: Zero-Shot bleibt bei 0{,}36 und 0{,}49 Macro-F1, das CPU-Fine-Tuning bei 0{,}61 und damit unter beiden TF-IDF-Modellen. Ein allgemeineres Nachrichtenstück war damit nicht belegt, und der volle DistilBERT-Lauf fehlte.
+In the first iteration, the classic LinearSVC was strong on its financial-sentence test. The transformer attempts were not: zero-shot stays at 0.36 and 0.49 macro-F1, CPU fine-tuning at 0.61, below both TF-IDF models. Performance on more general news was therefore not shown, and the full DistilBERT run was missing.
 
-Im zweiten Durchlauf haben wir das Vorgehen geändert, nicht nur eine Zahl nachgezogen. Statt TF-IDF ein mehrsprachiges MiniLM, statt eines kurzen CPU-Subsets ein festes Fine-Tuning auf dem vollen Train-Split, danach einzelne Parameter- und Betriebsänderungen mit einer vorab festgelegten Auswahlregel. Auf dem eigenen Test des zweiten Durchlaufs steigt das Fine-Tuning gegenüber dem eingefrorenen Encoder um 0{,}0531 Macro-F1 (0{,}6656 auf 0{,}7187) bei praktisch gleicher Inferenzzeit. Die Quellen-CV in Tabelle~\ref{tab:ablation} zeigt, wo die Änderung trägt und wo nicht: der Sprung liegt zwischen der eingefrorenen Baseline B0 (0{,}6306) und dem Referenz-Fine-Tune R0 (0{,}6724, $\Delta +0{,}0418$). R1 bis R4 bewegen das CV-Mittel nur noch in der dritten Nachkommastelle. Der klare Betriebsgewinn von R3 ist die halbierte Artefaktgröße.
+In the second iteration we changed the approach, not just one number. Instead of TF-IDF a multilingual MiniLM, instead of a short CPU subset a fixed fine-tuning on the full train split, followed by single parameter and operations changes under a selection rule fixed in advance. On the second iteration's own test set, fine-tuning improves on the frozen encoder by 0.0531 macro-F1 (0.6656 to 0.7187) at practically the same inference time. The source CV in Table~\ref{tab:ablation} shows where the change helps and where it does not: the jump lies between the frozen baseline B0 (0.6306) and the reference fine-tune R0 (0.6724, $\Delta +0.0418$). R1 to R4 only move the CV mean in the third decimal place. The clear operational gain of R3 is the halved artefact size.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Quellen-CV im zweiten Durchlauf, Mittel über drei Folds.}
+\caption{Source CV in the second iteration, mean over three folds.}
 \label{tab:ablation}
 \begin{tabular}{lrrrr}
 \toprule
-Stufe & Macro-F1 & DE & EN & MiB \\
+Stage & Macro-F1 & DE & EN & MiB \\
 \midrule
-B0 frozen & 0{,}6306 & 0{,}6566 & 0{,}6059 & 465{,}1 \\
-R0 Referenz-Fine-Tune & 0{,}6724 & 0{,}7053 & 0{,}6425 & 465{,}1 \\
-R1 Sprache$\times$Klasse & 0{,}6739 & 0{,}7076 & 0{,}6430 & 465{,}1 \\
-R2 Artikelverarbeitung & 0{,}6727 & 0{,}7053 & 0{,}6430 & 465{,}1 \\
-R3 BF16, ausgewählt & 0{,}6729 & 0{,}7062 & 0{,}6427 & 240{,}7 \\
-R4 Kombination & 0{,}6740 & 0{,}7065 & 0{,}6441 & 240{,}7 \\
+B0 frozen & 0.6306 & 0.6566 & 0.6059 & 465.1 \\
+R0 reference fine-tune & 0.6724 & 0.7053 & 0.6425 & 465.1 \\
+R1 language$\times$class & 0.6739 & 0.7076 & 0.6430 & 465.1 \\
+R2 article processing & 0.6727 & 0.7053 & 0.6430 & 465.1 \\
+R3 BF16, selected & 0.6729 & 0.7062 & 0.6427 & 240.7 \\
+R4 combination & 0.6740 & 0.7065 & 0.6441 & 240.7 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Diese CV-Zahlen und die beiden eigenen Tests (0{,}7202 bzw.\ 0{,}7187) sind keine gemeinsame Rangliste. Der Vergleich, der beide Verfahren auf denselben Texten sieht, ist der externe Audit nach der bereits eingefrorenen Auswahl: 600 englische SEntFiN-Headlines mit einstimmigem Entitätslabel und deren deutsche OPUS-MT-Übersetzung. Deutsch ist dort ein Transfercheck, kein nativer Goldtest. Tabelle~\ref{tab:branch} und Abbildung~\ref{fig:branch} geben die Werte aus \path{reports/development/branch_comparison.md} wieder.
+These CV figures and the two own test sets (0.7202 and 0.7187) are not one shared ranking. The comparison that sees both approaches on the same texts is the external audit run after the selection had already been frozen: 600 English SEntFiN headlines with a unanimous entity label and their German OPUS-MT translation. German is a transfer check there, not a native gold test. Table~\ref{tab:branch} and Figure~\ref{fig:branch} reproduce the values from \path{reports/development/branch_comparison.md}.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Gemeinsamer externer Benchmark auf 600 Titelpaaren.}
+\caption{Shared external benchmark on 600 headline pairs.}
 \label{tab:branch}
 \begin{tabular}{lrrrr}
 \toprule
-Lösung & Macro-F1 EN & Macro-F1 DE & ms/Text & MiB \\
+Solution & Macro-F1 EN & Macro-F1 DE & ms/text & MiB \\
 \midrule
-Erster Durchlauf, rekonstruiert & 0{,}4524 & 0{,}4293 & 0{,}250 & 4{,}08 \\
-Zweiter Durchlauf v1 & 0{,}7360 & 0{,}6458 & 2{,}335 & 465{,}14 \\
-Zweiter Durchlauf v2 (R3) & 0{,}7293 & 0{,}6557 & 2{,}326 & 240{,}73 \\
+First iteration, reconstructed & 0.4524 & 0.4293 & 0.250 & 4.08 \\
+Second iteration v1 & 0.7360 & 0.6458 & 2.335 & 465.14 \\
+Second iteration v2 (R3) & 0.7293 & 0.6557 & 2.326 & 240.73 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -106,18 +106,18 @@ Zweiter Durchlauf v2 (R3) & 0{,}7293 & 0{,}6557 & 2{,}326 & 240{,}73 \\
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{../../../reports/development/branch_comparison.png}
-\caption{Externer Vergleich auf den 600 Titelpaaren.}
+\caption{External comparison on the 600 headline pairs.}
 \label{fig:branch}
 \end{figure}
 
-Auf den nativen englischen Headlines liegt v2 um 0{,}2770 Macro-F1 vor dem rekonstruierten ersten Standard. Ein gepaarter Bootstrap über diese 600 bereits vorhergesagten Titel (1\,000 Ziehungen, Seed 20261019) ergibt ein 95\,\%-Perzentilintervall der Differenz von 0{,}2257 bis 0{,}3249. v2 ist gegenüber v1 kein pauschaler Genauigkeitsgewinn: Englisch geht von 0{,}7360 auf 0{,}7293, übersetztes Deutsch von 0{,}6458 auf 0{,}6557. Der Gewinn von v2 ist die kleinere Verpackung bei ähnlicher CV-Qualität. Der erste Standard bleibt deutlich kleiner und auf der CPU schneller. Unterschiedliche Trainingskorpora bedeuten, dass der Audit gelieferte Verfahren prüft und keinen isolierten Architekturvorteil beweist.
+On the native English headlines, v2 is 0.2770 macro-F1 ahead of the reconstructed first default. A paired bootstrap over these 600 already predicted headlines (1{,}000 resamples, seed 20261019) gives a 95\,\% percentile interval for the difference of 0.2257 to 0.3249. v2 is not an across-the-board accuracy gain over v1: English goes from 0.7360 to 0.7293, translated German from 0.6458 to 0.6557. The gain of v2 is the smaller package at similar CV quality. The first default remains much smaller and faster on the CPU. Because the training corpora differ, the audit tests delivered approaches and does not prove an isolated architectural advantage.
 
-\section{Nächste Schritte}
+\section{Next steps}
 
-Der zweite Durchlauf ist gemessen und neben dem ersten im Repository dokumentiert. Offen bleibt der volle DistilBERT-GPU-Lauf des ersten Wegs; solange er nicht auf dem Test mit $n=1\,270$ steht, bleibt dort LinearSVC die belegte Wahl. R2 und R4 bestehen die HTML-Fixtures (sechs von sechs statt zwei von sechs), sind aber nicht der nach der Latenzregel gewählte API-Standard.
+The second iteration is measured and documented next to the first in the repository. The full DistilBERT GPU run of the first path is still open; until it is on the test set with $n=1{,}270$, LinearSVC remains the evidenced choice there. R2 and R4 pass the HTML fixtures (six of six instead of two of six), but they are not the API default chosen by the latency rule.
 
-Die Fehlerkosten von Fehlalarm und übersehener negativer Meldung sind weiter nicht beziffert. Die Trainingsdomäne bleibt der Finanzsatz; allgemeine Berichterstattung, Ironie und lange Artikel sind nicht belegt. Eine Bias-Analyse nach Sprache oder Themenfeld bleibt nachrangig. Für die Modellwahl genügen die lokalen MLflow-Läufe: live über \texttt{python -m src.train}, die schon aufgezeichneten GPU-Kennzahlen ohne erneutes Training über \texttt{python -m src.import\_recorded}, beide im Store \path{./mlruns}.
+The error costs of a false alarm and of a missed negative report are still not quantified. The training domain remains financial sentences; general coverage, irony and long articles are not covered by evidence. A bias analysis by language or topic remains a lower priority. The local MLflow runs are sufficient for the model choice: live via \texttt{python -m src.train}, and the already recorded GPU metrics without retraining via \texttt{python -m src.import\_recorded}, both in the store \path{./mlruns}.
 
-Zusammengefasst: Der erste Durchlauf liefert einen schnellen, kleinen Standard und zeigt, dass Zero-Shot und das kurze CPU-Fine-Tuning ihn nicht schlagen. Der zweite Durchlauf verbessert die Encoder-Qualität auf dem gemeinsamen Headline-Benchmark und halbiert mit BF16 die Artefaktgröße, ohne die Auswahlregel nachträglich umzudefinieren.
+In summary: the first iteration delivers a fast, small default and shows that zero-shot and the short CPU fine-tuning do not beat it. The second iteration improves encoder quality on the shared headline benchmark and halves the artefact size with BF16, without redefining the selection rule afterwards.
 
 \end{document}

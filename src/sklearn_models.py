@@ -1,9 +1,9 @@
-"""TF-IDF-Modelle: Baseline und klassische Alternative.
+"""TF-IDF models: baseline and classic alternative.
 
-Beide implementieren ``predict_proba``. LinearSVC hat keine echten
-Wahrscheinlichkeiten; die Entscheidungsfunktion wird per Softmax in
-eine Verteilung über die drei Klassen übersetzt. Argmax bleibt dabei
-gleich zum ``predict`` von LinearSVC.
+Both implement ``predict_proba``. LinearSVC has no real probabilities;
+the decision function is turned into a distribution over the three
+classes with a softmax. The argmax stays identical to LinearSVC's
+``predict``.
 """
 
 from collections.abc import Sequence
@@ -31,12 +31,12 @@ MODEL_SPECS = {
     "tfidf_logreg": {
         "version": "tfidf-logreg-v1",
         "role": "baseline",
-        "notes": "TF-IDF und logistische Regression. Klein, auf CPU trainierbar, wenig Semantik.",
+        "notes": "TF-IDF and logistic regression. Small, trainable on CPU, little semantics.",
     },
     "tfidf_linearsvc": {
         "version": "tfidf-linearsvc-v1",
         "role": "classic",
-        "notes": "TF-IDF und LinearSVC. Ähnlich leicht, andere Entscheidungsgrenze. Scores sind ein Softmax der Entscheidungsfunktion.",
+        "notes": "TF-IDF and LinearSVC. Similarly light, different decision boundary. Scores are a softmax of the decision function.",
     },
 }
 
@@ -53,7 +53,7 @@ def _softmax(row: np.ndarray) -> np.ndarray:
 class SklearnSentimentModel(SentimentModel):
     def __init__(self, name: str, classifier):
         if name not in MODEL_SPECS:
-            raise ValueError(f"Unbekanntes sklearn-Modell: {name}")
+            raise ValueError(f"Unknown sklearn model: {name}")
         spec = MODEL_SPECS[name]
         self.name = name
         self.model_version = spec["version"]
@@ -86,7 +86,7 @@ class SklearnSentimentModel(SentimentModel):
         else:
             scores = np.atleast_2d(np.asarray(self.pipeline.decision_function(rows), dtype=float))
             if scores.shape[1] != len(class_names):
-                raise RuntimeError("Entscheidungsfunktion passt nicht zur Klassenzahl.")
+                raise RuntimeError("Decision function does not match the number of classes.")
             matrix = np.vstack([_softmax(row) for row in scores])
         distributions = []
         for probabilities in matrix:
@@ -151,7 +151,7 @@ def new_linearsvc() -> SklearnSentimentModel:
 
 
 def train_sklearn_models(texts: Sequence[str], labels: Sequence[str]) -> list[SklearnSentimentModel]:
-    """Trainiert Baseline und LinearSVC auf denselben Texten und speichert beide."""
+    """Trains baseline and LinearSVC on the same texts and saves both."""
     models = [new_logreg(), new_linearsvc()]
     for model in models:
         model.fit(texts, labels)
@@ -163,6 +163,6 @@ def load_sklearn_model(name: str, directory: Path = MODELS_DIR) -> SklearnSentim
     path = directory / f"{name}.joblib"
     if not path.exists():
         raise FileNotFoundError(
-            f"Modelldatei fehlt: {path}. Bitte zuerst `python -m src.train` ausführen."
+            f"Model file missing: {path}. Please run `python -m src.train` first."
         )
     return SklearnSentimentModel.from_artifact(path)

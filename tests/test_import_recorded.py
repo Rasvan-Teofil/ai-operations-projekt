@@ -1,4 +1,4 @@
-"""Der CPU-Import legt beide Durchläufe in denselben MLflow-Store."""
+"""The CPU import puts both iterations into the same MLflow store."""
 
 import mlflow
 

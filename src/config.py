@@ -1,8 +1,8 @@
-"""Pfade, Seeds und der gemeinsame Drei-Klassen-Vertrag.
+"""Paths, seeds and the shared three-class contract.
 
-Training, Vergleich und API lesen dieselben Werte. ``data/sample`` bleibt
-die Dummy-Stichprobe für Tests und CI. Der Standardlauf liest die
-aufbereiteten Splits unter ``data/processed`` (nicht im Git).
+Training, comparison and API read the same values. ``data/sample`` stays
+the dummy sample for tests and CI. The default run reads the prepared
+splits in ``data/processed`` (not in Git).
 """
 
 import os
@@ -24,7 +24,7 @@ FINETUNED_SMOKE_DIR = MODELS_DIR / "finetuned-smoke"
 
 RANDOM_SEED = 42
 TEST_SIZE = 0.2
-# Echte Splits: 70 % Train, 15 % Val, 15 % Test, stratifiziert nach Label und Sprache.
+# Real splits: 70 % train, 15 % val, 15 % test, stratified by label and language.
 PREPARE_TEST_SIZE = 0.15
 PREPARE_VAL_SIZE = 0.15
 MIN_TEXT_CHARS = 20
@@ -43,12 +43,12 @@ ALLOWED_LANGUAGES = frozenset({"de", "en"})
 
 MLFLOW_TRACKING_DIR = PROJECT_ROOT / "mlruns"
 MLFLOW_EXPERIMENT_NAME = "article-sentiment"
-# Gleicher Store wie der zweite Durchlauf. Der Tag trennt die Läufe in der UI.
+# Same store as the second iteration. The tag separates the runs in the UI.
 MLFLOW_ITERATION = "1-first-path"
 MLFLOW_COMPARISON_EXPERIMENT = "article-sentiment-comparison"
 
-# Praktische Wahl nach dem Vergleich auf dem echten Testsplit: höchstes macro-F1,
-# dazu klein und schnell. Die CI setzt SENTIMENT_MODEL=tfidf_logreg und bleibt leicht.
+# Practical choice after the comparison on the real test split: highest macro-F1,
+# and small and fast. CI sets SENTIMENT_MODEL=tfidf_logreg and stays lightweight.
 DEFAULT_MODEL_NAME = "tfidf_linearsvc"
 
 HF_MAX_TOKENS = 512
@@ -66,6 +66,6 @@ LINEARSVC_MAX_ITER = 2000
 
 
 def selected_model_name() -> str:
-    """Liest das Modell, das die API laden soll. Default: TF-IDF + LinearSVC."""
+    """Reads the model the API should load. Default: TF-IDF + LinearSVC."""
     raw = os.environ.get("SENTIMENT_MODEL", DEFAULT_MODEL_NAME).strip().lower()
     return raw or DEFAULT_MODEL_NAME

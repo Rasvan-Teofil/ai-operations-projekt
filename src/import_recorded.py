@@ -1,20 +1,19 @@
-"""Schreibt bereits gemessene Kennzahlen beider Durchläufe nach ``./mlruns``.
+"""Writes the already measured metrics of both iterations to ``./mlruns``.
 
-CPU, ohne Training und ohne GPU. Die Werte werden aus den eingecheckten
-Berichten gelesen, nicht neu berechnet. Ein zweiter Aufruf legt keine
-doppelten Läufe an.
+CPU only, no training and no GPU. The values are read from the committed
+reports, not recomputed. A second call does not create duplicate runs.
 
     python -m src.import_recorded
 
-In der UI liegen die Läufe im Store ``./mlruns``:
+In the UI the runs are in the store ``./mlruns``:
 
 - Experiment ``article-sentiment``, Tag ``iteration=1-first-path``
 - Experiment ``article-sentiment-second-path``, Tag ``iteration=2-second-path``
-  (der rekonstruierte erste Durchlauf im externen Audit trägt
+  (the reconstructed first iteration in the external audit carries
   ``iteration=1-first-path``)
-- Experiment ``article-sentiment-comparison`` mit beiden Tags, zum
-  direkten Nebeneinander. ``comparable_group`` trennt Tests, die nicht
-  gegeneinander gerankt werden dürfen.
+- Experiment ``article-sentiment-comparison`` with both tags, for a
+  direct side-by-side view. ``comparable_group`` separates tests that must
+  not be ranked against each other.
 """
 
 from __future__ import annotations
@@ -45,14 +44,14 @@ SOURCE = "recorded-report"
 
 def _require(text: str, needle: str, source: str) -> None:
     if needle not in text:
-        raise RuntimeError(f"{needle!r} fehlt in {source}; Import bricht ab, statt Zahlen zu erfinden.")
+        raise RuntimeError(f"{needle!r} missing in {source}; aborting the import instead of inventing numbers.")
 
 
 def _parse_markdown_table(text: str, header_prefix: str) -> list[dict[str, str]]:
     lines = text.splitlines()
     header_idx = next((i for i, line in enumerate(lines) if line.startswith(header_prefix)), None)
     if header_idx is None:
-        raise RuntimeError(f"Tabelle {header_prefix!r} nicht gefunden.")
+        raise RuntimeError(f"Table {header_prefix!r} not found.")
     headers = [cell.strip() for cell in lines[header_idx].strip().strip("|").split("|")]
     rows: list[dict[str, str]] = []
     for line in lines[header_idx + 2 :]:
@@ -61,7 +60,7 @@ def _parse_markdown_table(text: str, header_prefix: str) -> list[dict[str, str]]
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
         rows.append(dict(zip(headers, cells, strict=True)))
     if not rows:
-        raise RuntimeError(f"Tabelle {header_prefix!r} ist leer.")
+        raise RuntimeError(f"Table {header_prefix!r} is empty.")
     return rows
 
 
@@ -111,7 +110,7 @@ def _log_pair(
     metrics: dict[str, float],
     extra_tags: dict[str, str],
 ) -> dict[str, str]:
-    """Natives Experiment plus das gemeinsame Vergleichsexperiment."""
+    """Native experiment plus the shared comparison experiment."""
     native = _log_once(
         native_experiment, recorded_key, run_name, iteration, params, metrics, extra_tags
     )
@@ -128,7 +127,7 @@ def _log_pair(
 
 
 def import_recorded(store: Path | None = None) -> dict[str, int]:
-    """Liest die Berichte und legt die Läufe im Datei-Store an."""
+    """Reads the reports and creates the runs in the file store."""
     root = PROJECT_ROOT
     tracking = (store or MLFLOW_TRACKING_DIR).resolve()
     tracking.mkdir(parents=True, exist_ok=True)
@@ -176,8 +175,8 @@ def import_recorded(store: Path | None = None) -> dict[str, int]:
             counts[status] += 1
 
     second_note = (root / "reports" / "second_path_model_comparison.md").read_text(encoding="utf-8")
-    _require(second_note, "1.787", "reports/second_path_model_comparison.md")
-    _require(second_note, "0,7187", "reports/second_path_model_comparison.md")
+    _require(second_note, "1,787", "reports/second_path_model_comparison.md")
+    _require(second_note, "0.7187", "reports/second_path_model_comparison.md")
     own = json.loads((root / "reports" / "comparison.json").read_text(encoding="utf-8"))
     for row in own["results"]:
         metrics = _metrics(
@@ -311,12 +310,12 @@ def import_recorded(store: Path | None = None) -> dict[str, int]:
 
 
 def main(argv: list[str] | None = None) -> None:
-    parser = argparse.ArgumentParser(description="Gemessene Kennzahlen beider Durchläufe nach MLflow übernehmen.")
+    parser = argparse.ArgumentParser(description="Import the measured metrics of both iterations into MLflow.")
     parser.add_argument(
         "--store",
         type=Path,
         default=None,
-        help="MLflow-Dateiordner. Standard: ./mlruns im Projektroot.",
+        help="MLflow file store folder. Default: ./mlruns in the project root.",
     )
     args = parser.parse_args(argv)
     counts = import_recorded(args.store)
