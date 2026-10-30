@@ -151,6 +151,8 @@ Linux and macOS: `source .venv/bin/activate`, same `python` calls.
 
 Open <http://127.0.0.1:5000> in the browser.
 
+Screenshots of this view (all runs, SEntFiN chart, run comparison): [`docs/mlflow/`](docs/mlflow/README.md).
+
 | Experiment | Contents | Tag |
 | --- | --- | --- |
 | `article-sentiment` | Live TF-IDF and the imported table from `reports/model_comparison.md` | `iteration=1-first-path` |

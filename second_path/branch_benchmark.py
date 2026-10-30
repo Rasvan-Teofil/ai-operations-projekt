@@ -202,6 +202,6 @@ def audit(reference):
 if __name__=='__main__':
     p=argparse.ArgumentParser()
     p.add_argument('action',choices=['prepare','audit'])
-    p.add_argument('--reference-checkout',type=Path,default=ROOT.parent/'colleague-reference')
+    p.add_argument('--reference-checkout',type=Path,default=ROOT.parent/'iteration1-reference')
     args=p.parse_args()
     {'prepare':prepare,'audit':audit}[args.action](args.reference_checkout.resolve())

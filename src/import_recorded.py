@@ -320,10 +320,10 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
     counts = import_recorded(args.store)
     print(
-        f"MLflow-Import: {counts['logged']} neu, {counts['skipped']} schon vorhanden. "
+        f"MLflow import: {counts['logged']} new, {counts['skipped']} already present. "
         "UI: MLFLOW_ALLOW_FILE_STORE=true mlflow ui --backend-store-uri ./mlruns --host 127.0.0.1 --port 5000"
     )
-    print(f"Experimente: {MLFLOW_EXPERIMENT_NAME}, {SECOND_EXPERIMENT}, {MLFLOW_COMPARISON_EXPERIMENT}")
+    print(f"Experiments: {MLFLOW_EXPERIMENT_NAME}, {SECOND_EXPERIMENT}, {MLFLOW_COMPARISON_EXPERIMENT}")
 
 
 if __name__ == "__main__":
