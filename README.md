@@ -188,6 +188,17 @@ uvicorn app.main:app --reload
 
 Other model: `SENTIMENT_MODEL=tfidf_logreg`, `tabularisai`, `cardiffnlp` or `finetuned`. Transformers and the fine-tuned model need `requirements-transformer.txt` and the weights on disk.
 
+### Container (Docker)
+
+Minimal image for the first-iteration API (`requirements-api.txt`, no MLflow or torch). Build after `python -m src.train`, because `models/` is not in git:
+
+```bash
+docker build -t article-sentiment-api .
+docker run --rm -p 8000:8000 article-sentiment-api
+```
+
+Health check and docs as above on port 8000. Without artefacts the container starts and `/health` reports `model_loaded: false`.
+
 ### Example calls
 
 Health after `python -m src.train`:
@@ -323,7 +334,8 @@ Exploration of the real splits, with saved output: `notebooks/01_exploration.ipy
 
 ## Open points
 
-- Error costs (false alarm vs. missed negative text) are still open.
+- Error costs (false alarm vs. missed negative text): draft with assumptions in [`docs/error-costs.md`](docs/error-costs.md); cost ratio not yet confirmed.
+- Container: minimal `Dockerfile` for the first-iteration API exists; monitoring is not built yet.
 - Judgemental or loaded language remains a later goal, without labels or a model.
 - The GPU run from the Colab notebook (DistilBERT, three epochs, full train split) is described but not measured in this state.
 - The second iteration is measured and lives under `second_path/`. Its training needs CUDA. Without a GPU, load the already recorded runs into MLflow with `python -m src.import_recorded`.

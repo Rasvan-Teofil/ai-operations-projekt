@@ -1,0 +1,14 @@
+.git
+.venv
+venv
+**/__pycache__
+.pytest_cache
+data
+mlruns
+mlartifacts
+notebooks
+reports
+docs
+tests
+second_path
+*.ipynb

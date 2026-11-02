@@ -1,0 +1,11 @@
+# Minimal runtime for the first-iteration API container (see Dockerfile).
+# Versions match requirements.txt. No MLflow, Jupyter, datasets or torch.
+fastapi==0.143.0
+uvicorn==0.54.0
+pydantic==2.14.0
+scikit-learn==1.9.1
+joblib==1.6.0
+numpy
+requests==2.34.2
+beautifulsoup4==4.15.0
+trafilatura==2.3.1
