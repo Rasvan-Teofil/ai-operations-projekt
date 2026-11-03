@@ -116,11 +116,11 @@ On the native English headlines, v2 is 0.2770 macro-F1 ahead of the reconstructe
 
 The second iteration is measured and documented next to the first in the repository. The full DistilBERT GPU run of the first path is still open; until it is on the test set with $n=1{,}270$, LinearSVC remains the evidenced choice there. R2 and R4 pass the HTML fixtures (six of six instead of two of six), but they are not the API default chosen by the latency rule.
 
-The error costs of a false alarm and of a missed negative report are still not quantified. The training domain remains financial sentences; general coverage, irony and long articles are not covered by evidence. A bias analysis by language or topic remains a lower priority. The local MLflow runs are sufficient for the model choice: live via \texttt{python -m src.train}, and the already recorded GPU metrics without retraining via \texttt{python -m src.import\_recorded}, both in the store \path{./mlruns}. Figure~\ref{fig:mlflow} shows the shared benchmark in the MLflow experiment \path{article-sentiment-comparison}; more screenshots are in \path{docs/mlflow/}.
+Error costs (draft, \path{docs/error-costs.md}): on the shared test of the fine-tuned model, 120 of 464 negatives are missed (25.9\,\%) and 30.4\,\% of negative alerts are false alarms; a miss costs more, the exact ratio still needs a stakeholder. A minimal API container (\path{Dockerfile}) is prepared. The training domain remains financial sentences; general coverage, irony and long articles are not covered by evidence. A bias analysis by language or topic remains a lower priority. The local MLflow runs are sufficient for the model choice: live via \texttt{python -m src.train}, and the already recorded GPU metrics without retraining via \texttt{python -m src.import\_recorded}, both in the store \path{./mlruns}. Figure~\ref{fig:mlflow} shows the shared benchmark in the MLflow experiment \path{article-sentiment-comparison}; more screenshots are in \path{docs/mlflow/}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{mlflow_sentfin_chart.png}
+\includegraphics[width=0.40\textwidth]{mlflow_sentfin_chart.png}
 \caption{MLflow UI (\texttt{article-sentiment-comparison}): SEntFiN macro-F1, iteration 1 vs.\ 2.}
 \label{fig:mlflow}
 \end{figure}
