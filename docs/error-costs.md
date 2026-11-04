@@ -16,4 +16,6 @@ Basis: confusion matrix of the second-iteration fine-tuned model on its own shar
 - **Lever without retraining:** lower the decision threshold for `negative` (score margin) and report recall/precision for negative on the shared test; pick the point that keeps false alarms per day acceptable for a newsroom.
 - **Human in the loop stays:** the model ranks and pre-filters; a person decides before any reaction. This caps the cost of a false alarm.
 
-Open: confirm cost ratio with a stakeholder example (e.g. daily article volume of one newsroom); measure the threshold curve on the shared SEntFiN benchmark.
+Threshold curve: `python -m second_path.threshold_curve` writes recall/precision/false alarms for `negative` per margin (0 to 0.40) to `reports/negative_threshold_curve_val.csv`. The margin is picked on the validation split only; the test split stays locked by the evaluation protocol and is reported once for the chosen margin. Needs the fine-tuned model locally (not on the repo/box), so it is not run yet.
+
+Open: confirm cost ratio with a stakeholder example (e.g. daily article volume of one newsroom); run the curve once on the validation split.
