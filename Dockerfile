@@ -30,7 +30,7 @@ RUN apt-get update \
 COPY requirements-docker-train.txt .
 RUN pip install --no-cache-dir -r requirements-docker-train.txt
 
-COPY src/__init__.py src/config.py src/data.py src/prepare_data.py \
+COPY src/__init__.py src/config.py src/data.py src/features.py src/prepare_data.py \
     src/sklearn_models.py src/interface.py src/labels.py src/
 COPY scripts/bake_sklearn_models.py scripts/bake_sklearn_models.py
 

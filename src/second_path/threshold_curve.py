@@ -8,12 +8,12 @@ locked by the evaluation protocol (reports/evaluation.lock), so test numbers
 for a chosen margin are reported once, never used for the choice.
 
 Usage (needs models/second_path/finetuned and data/second_path/processed):
-    python -m second_path.threshold_curve            # validation split
+    python -m src.second_path.threshold_curve            # validation split
 """
 import argparse
 import numpy as np
 import pandas as pd
-from second_path.config import DATA, MODELS, REPORTS, LABELS
+from src.second_path.config import DATA, MODELS, REPORTS, LABELS
 
 NEG = LABELS.index('negative')
 MARGINS = [0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40]
@@ -43,7 +43,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--device', default=None)
     args = ap.parse_args()
-    from second_path.inference import Predictor
+    from src.second_path.inference import Predictor
     val = pd.read_csv(DATA / 'val.csv')
     truth = [LABELS.index(v) for v in val.label]
     predictor = Predictor(MODELS / 'finetuned', device=args.device)

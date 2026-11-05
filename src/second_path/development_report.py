@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from second_path.config import REPORTS
+from src.second_path.config import REPORTS
 
 
 def main():
@@ -62,7 +62,7 @@ def main():
         lines.append(f"- `{stage}` vs. `{parent}`: Δmacro-F1 {delta:+.4f}, Δms/text {latency:+.3f}. No automatic benefit from combining is assumed.")
     lines+=['','The 18 synthetic article texts and six HTML fixtures are controlled technical checks, not news articles labelled independently by humans. Their high hit rate therefore makes no claim about real-world article quality. Source CV keeps the same source out of both fit and dev, but not the same event across different publishers. Three folds with one fixed seed give fold spread, not a significance test. An independent benchmark follows only after this selection.','',
        'The original v1 test and its one-off evaluation are kept as a historical milestone. The additional fine-tuning ablations are the explicitly requested extension of the original single-model protocol. The harness abort is documented in `harness_incident.json` and kept as a failed MLflow run.','',
-       'Reproduction: `python -m second_path.development run`, then `summarize`, `release`, `activate`, `python -m second_path.service_benchmark` and `python -m second_path.development_report`. On this tower, completed runs are locked; a fresh clone has no local data or models. First create the data and the original frozen baseline with `second_path.prepare` / `second_path.train frozen`. For fresh reproductions export `SENTIMENT_DEV_REPORTS=reports/reproduction` so the committed historical results stay untouched. The original v1 test and fine-tuning commands are not needed for v2.','',
+       'Reproduction: `python -m src.second_path.development run`, then `summarize`, `release`, `activate`, `python -m src.second_path.service_benchmark` and `python -m src.second_path.development_report`. On this tower, completed runs are locked; a fresh clone has no local data or models. First create the data and the original frozen baseline with `src.second_path.prepare` / `src.second_path.train frozen`. For fresh reproductions export `SENTIMENT_DEV_REPORTS=reports/reproduction` so the committed historical results stay untouched. The original v1 test and fine-tuning commands are not needed for v2.','',
        'MLflow: experiment `article-sentiment-second-path`, tags `phase=development-v2`, `stage`, `fold`. Every fold evaluation contains accuracy, per-class F1, macro-F1, per-language scores, negative precision/recall, latency, bytes and confusion matrix. `decision.json`, `runs.json`, `curve.csv`, `folds.json` and complete local model artefacts make every decision traceable.','',
        'Methodological references: [StratifiedGroupKFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedGroupKFold.html), [PyTorch mixed precision](https://docs.pytorch.org/docs/stable/amp.html).']
     if (folder/'service.json').exists():
@@ -152,15 +152,15 @@ def branch_report(folder):
         '```bash',
         'export SENTIMENT_DEV_REPORTS=reports/reproduction',
         'python -m pip install -r requirements-evaluation.txt',
-        'python -m second_path.train finetuned',
+        'python -m src.second_path.train finetuned',
         'git clone --no-checkout https://github.com/Rasvan-Teofil/ai-operations-projekt.git ../iteration1-reference',
         'git -C ../iteration1-reference checkout --detach a840bb7bc8f1656f1700ccabaa89837ce347ca2b',
         'python3.12 -m venv ../iteration1-reference/.venv',
         '../iteration1-reference/.venv/bin/python -m pip install -r reports/development/reference_requirements.txt',
-        '../iteration1-reference/.venv/bin/python second_path/peer_reference.py prepare --checkout ../iteration1-reference --report reports/reproduction/peer_provenance.json',
-        'python -m second_path.branch_benchmark prepare',
-        'python -m second_path.branch_benchmark audit',
-        'python -m second_path.development_report',
+        '../iteration1-reference/.venv/bin/python src/second_path/peer_reference.py prepare --checkout ../iteration1-reference --report reports/reproduction/peer_provenance.json',
+        'python -m src.second_path.branch_benchmark prepare',
+        'python -m src.second_path.branch_benchmark audit',
+        'python -m src.second_path.development_report',
         '```','',
         'The adapter pins reference data to the logged HF snapshots; the original filter/split/model implementation stays untouched. The benchmark has an exclusive local audit lock. Original test/val files are not used as evaluation data by our development.']
     (folder/'branch_comparison.md').write_text('\n'.join(lines)+'\n')

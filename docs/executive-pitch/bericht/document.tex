@@ -44,7 +44,7 @@ What we deliver is a service interface and evidence that it holds up. The FastAP
 
 \section{Methods}
 
-The pipeline has three steps: scraping or text input, preprocessing (cleaning, tokenisation per model family) and classification into three sentiment classes. The lead metric is macro-F1, so that no class is systematically neglected. Both iterations remain runnable in the repository: the first in \path{src}/ and \path{app}/, the second as the package \path{second_path}.
+The pipeline has three steps: scraping or text input, preprocessing (cleaning, tokenisation per model family) and classification into three sentiment classes. The lead metric is macro-F1, so that no class is systematically neglected. Both iterations remain runnable in the repository: the first in \path{src}/ and \path{app}/, the second under \path{src/second_path} with its API at \path{app/second_path.py}.
 
 In the first iteration, five approaches are evaluated on the same financial-sentence test set (PhraseBank English and Kenpache German, split 70\,\% / 15\,\% / 15\,\%, seed~42, $n=1{,}270$):
 

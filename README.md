@@ -15,13 +15,13 @@ Built for newsrooms, PR & communications teams and analysts. Later, not yet labe
 
 Both paths live in this state of the repo. Neither replaces the other.
 
-| | First iteration (packages `src` / `app`) | Second iteration (from branch `second-path`, on `main` since PR #2, package `second_path`) |
+| | First iteration (modules in `src/` and `app/main.py`) | Second iteration (MiniLM in `src/second_path/`, API `app/second_path.py`) |
 | --- | --- | --- |
 | Models | TF-IDF + LogReg, TF-IDF + LinearSVC, two HF zero-shot models, DistilBERT fine-tuning | MiniLM `paraphrase-multilingual-MiniLM-L12-v2`: frozen, fine-tuned, centroid, majority; then ablations B0 and R0–R4 |
 | Own test | Financial sentences, n = 1,270. Best macro-F1: **LinearSVC 0.7202** | Kenpache DE/EN, n = 1,787. Fine-tuned **0.7187** vs. frozen 0.6656 |
 | Serving | API default `tfidf_linearsvc` | v2 selects **R3_deploy** (BF16, source-CV macro-F1 0.6729, about 241 MiB) |
 | Training | CPU for TF-IDF. Transformers optional | CUDA, BF16. A CPU fallback is refused |
-| API | `uvicorn app.main:app` | `uvicorn second_path.api:app` |
+| API | `uvicorn app.main:app` | `uvicorn app.second_path:app` |
 | MLflow experiment | `article-sentiment`, tag `iteration=1-first-path` | `article-sentiment-second-path`, tag `iteration=2-second-path` |
 
 The fair comparison of both approaches on the **same** 600 SEntFiN headlines is in [`reports/development/branch_comparison.md`](reports/development/branch_comparison.md): reconstructed LinearSVC macro-F1 EN 0.4524, second-path v1 0.7360, v2 0.7293. The earlier test scores 0.7202 and 0.7187 come from different splits and are not ranked against each other. The executive pitch is in [`docs/executive-pitch/`](docs/executive-pitch/).
@@ -164,16 +164,16 @@ To compare in the UI, open the experiment `article-sentiment-comparison` and fil
 A fresh live run of the second iteration (NVIDIA GPU only, CUDA 12.8, lots of disk) writes to the same `./mlruns` and the same experiment `article-sentiment-second-path`, tag `iteration=2-second-path`:
 
 ```bash
-python -m pip install -r second_path/requirements.txt -r requirements-cuda.txt
-python -m second_path.prepare
-python -m second_path.train frozen
-python -m second_path.train finetuned
-python -m second_path.train centroid
-python -m second_path.train majority
-python -m second_path.evaluate
+python -m pip install -r requirements-second-path.txt -r requirements-cuda.txt
+python -m src.second_path.prepare
+python -m src.second_path.train frozen
+python -m src.second_path.train finetuned
+python -m src.second_path.train centroid
+python -m src.second_path.train majority
+python -m src.second_path.evaluate
 ```
 
-Ablations and release, also CUDA and BF16: `python -m second_path.development run`, then `summarize`, `release`, `activate`. Historical logs stay under `reports/development/`. For fresh repetitions run `export SENTIMENT_DEV_REPORTS=reports/reproduction` first so the committed reports are not overwritten. Second-iteration API: `uvicorn second_path.api:app --host 127.0.0.1 --port 8000`. The first iteration stays `uvicorn app.main:app`.
+Ablations and release, also CUDA and BF16: `python -m src.second_path.development run`, then `summarize`, `release`, `activate`. Historical logs stay under `reports/development/`. For fresh repetitions run `export SENTIMENT_DEV_REPORTS=reports/reproduction` first so the committed reports are not overwritten. Second-iteration API: `uvicorn app.second_path:app --host 127.0.0.1 --port 8000`. The first iteration stays `uvicorn app.main:app`.
 
 A live run in the experiment `article-sentiment` contains accuracy, macro-F1, per-class F1, `inference_ms_per_text` and the artefact `confusion_matrix.csv`.
 
@@ -183,8 +183,11 @@ API, default model `tfidf_linearsvc`:
 uvicorn app.main:app --reload
 ```
 
+- Demo: <http://127.0.0.1:8000/> (same page as <http://127.0.0.1:8000/demo>)
 - Health: <http://127.0.0.1:8000/health>
 - Docs: <http://127.0.0.1:8000/docs>
+
+The demo is one page under `app/static/`. Paste a URL or the article text, not both. It sends `{"text": "..."}` or `{"url": "..."}` to `POST /predict` and shows the label, the three scores and the model version. The loaded model name comes from `GET /health`. `docker compose up --build` serves the same page, because the UI is part of `app.main`.
 
 Other model: `SENTIMENT_MODEL=tfidf_logreg`, `tabularisai`, `cardiffnlp` or `finetuned`. Transformers and the fine-tuned model need `requirements-transformer.txt` and the weights on disk.
 
@@ -227,7 +230,7 @@ curl -s -X POST http://127.0.0.1:8000/predict \
   -d '{"text": "Samsung expects a nine-fold surge in quarterly profits, driven by demand for AI memory chips."}'
 ```
 
-Stop with Ctrl-C, then `docker compose down`. Docs stay at <http://127.0.0.1:8000/docs>. Another baked model: `SENTIMENT_MODEL=tfidf_logreg docker compose up`.
+Stop with Ctrl-C, then `docker compose down`. The demo is <http://127.0.0.1:8000/> and the docs stay at <http://127.0.0.1:8000/docs>. Another baked model: `SENTIMENT_MODEL=tfidf_logreg docker compose up`.
 
 An offline image that trains only on the committed 18-sentence sample (no dataset download) is not the pitch model:
 
@@ -314,34 +317,67 @@ SENTIMENT_DATA=dummy SENTIMENT_MODEL=tfidf_logreg python -m src.train
 pytest
 ```
 
-CI does exactly this in the `test` job. The `second-path` job installs `second_path/requirements.txt` (without CUDA torch) and runs `pytest tests/secondpath`. The tokenizer test is skipped in the light job as long as `transformers` is missing.
+CI does exactly this in the `test` job. The `second-path` job installs `requirements-second-path.txt` (without CUDA torch) and runs `pytest tests/secondpath`. The tokenizer test is skipped in the light job as long as `transformers` is missing.
 
 Exploration of the real splits, with saved output: `notebooks/01_exploration.ipynb`.
 
 ## Repository structure
 
+The lecture keynote requires this layout. Both iterations live inside it. There is no second top-level code package.
+
 ```text
-.
+projekt/
 ├── README.md
-├── requirements.txt                 # first iteration, CI job test
-├── requirements-transformer.txt     # zero-shot and DistilBERT
-├── requirements-cuda.txt            # second iteration, CUDA torch
-├── requirements-evaluation.txt
-├── requirements-lock.txt
-├── second_path/                     # MiniLM, ablations, second API
-│   └── requirements.txt
-├── src/                             # first iteration
-├── app/                             # FastAPI of the first iteration
-├── data/README.md
-├── data/sample/                     # dummy, tests and CI
-├── notebooks/
-├── reports/model_comparison.md      # own test, first iteration
-├── reports/second_path_model_comparison.md
-├── reports/development/             # ablations and external comparison
-├── docs/executive-pitch/            # pitch, TeX and PDF
-├── tests/secondpath/
-└── .github/workflows/ci.yml         # pytest for both paths
+├── requirements.txt
+├── data/               # raw data (large files not in git)
+├── notebooks/          # exploration
+├── src/
+│   ├── data.py         # loading and preprocessing
+│   ├── features.py     # feature engineering (TF-IDF pipeline)
+│   ├── train.py        # training and MLflow logging
+│   └── evaluate.py     # metrics, comparison with the baseline
+├── models/             # saved artefacts
+├── app/
+│   ├── main.py         # FastAPI app with /predict
+│   └── schemas.py      # input/output contract (Pydantic)
+└── tests/
 ```
+
+Iteration 1 (TF-IDF, zero-shot, DistilBERT) is the modules directly under `src/` plus `app/main.py` and `app/schemas.py`. The browser demo is static files in `app/static/`, served by that same app at `/` and `/demo`. Processed splits are `data/processed/`. Weights are `models/*.joblib` and `models/finetuned/`.
+
+Iteration 2 (MiniLM, ablations R0–R4) is the package `src/second_path/` (prepare, train, evaluate, tracking). Its API entry point is `app/second_path.py` (`uvicorn app.second_path:app`), still under `app/` rather than a sibling package. Processed data is `data/second_path/processed/`. Weights are `models/second_path/`. Its extra dependencies are `requirements-second-path.txt`.
+
+Beside the keynote tree, and not instead of it: `docs/` (pitch), `reports/`, `scripts/`, `Dockerfile` and `docker-compose.yml` (first-iteration image only), `.github/workflows/ci.yml`, and the extra `requirements-*.txt` files.
+
+### Commands
+
+Iteration 1, CPU, default API is TF-IDF + LinearSVC. The demo is on this API.
+
+```bash
+python -m pip install -r requirements.txt
+python -m src.prepare_data
+python -m src.train
+uvicorn app.main:app --reload
+```
+
+Open <http://127.0.0.1:8000/>. The same service from the baked image: `docker compose up --build`, then the same URL.
+
+Iteration 2 needs an NVIDIA GPU (CUDA 12.8). Training refuses a CPU fallback. Recorded metrics without a GPU: `python -m src.import_recorded`.
+
+```bash
+python -m pip install -r requirements-second-path.txt -r requirements-cuda.txt
+python -m src.second_path.prepare
+python -m src.second_path.train frozen
+python -m src.second_path.train finetuned
+python -m src.second_path.train centroid
+python -m src.second_path.train majority
+python -m src.second_path.evaluate
+uvicorn app.second_path:app --host 127.0.0.1 --port 8000
+```
+
+Ablations: `python -m src.second_path.development run`, then `summarize`, `release`, `activate`.
+
+MLflow comparison experiment: `article-sentiment-comparison`, tags `iteration=1-first-path` and `iteration=2-second-path`.
 
 ## Milestones
 
@@ -374,7 +410,7 @@ Exploration of the real splits, with saved output: `notebooks/01_exploration.ipy
 - Container: minimal `Dockerfile` for the first-iteration API exists; monitoring is not built yet.
 - Judgemental or loaded language remains a later goal, without labels or a model.
 - The GPU run from the Colab notebook (DistilBERT, three epochs, full train split) is described but not measured in this state.
-- The second iteration is measured and lives under `second_path/`. Its training needs CUDA. Without a GPU, load the already recorded runs into MLflow with `python -m src.import_recorded`.
+- The second iteration is measured and lives in `src/second_path/` (API: `app/second_path.py`). Its training needs CUDA. Without a GPU, load the already recorded runs into MLflow with `python -m src.import_recorded`.
 - R2/R4 improve the HTML fixtures but are not the default chosen by the time rule (R3).
 - The training domain is financial sentences. A general news article can be off.
 - 0.7202 and 0.7187 come from different tests. The shared comparison is `reports/development/branch_comparison.md`.

@@ -1,5 +1,6 @@
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]
+# File lives at src/second_path/config.py, so the repository root is parents[2].
+ROOT = Path(__file__).resolve().parents[2]
 # Kept apart from the first iteration (data/processed, models/) so both
 # pipelines can run side by side locally.
 DATA = ROOT / 'data' / 'second_path' / 'processed'

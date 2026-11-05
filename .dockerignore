@@ -19,7 +19,10 @@ notebooks
 reports
 docs
 tests
-second_path
+# Second-iteration training package and its API module. This image serves
+# app.main (TF-IDF) and app/static only.
+src/second_path
+app/second_path.py
 models
 *.ipynb
 *.md

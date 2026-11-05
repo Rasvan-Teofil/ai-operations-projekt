@@ -9,9 +9,9 @@ import time
 import httpx
 import mlflow
 import numpy as np
-from second_path.config import ROOT, MODELS, REPORTS
-from second_path.tracking import tracking, iteration_run
-from second_path.development import DEV
+from src.second_path.config import ROOT, MODELS, REPORTS
+from src.second_path.tracking import tracking, iteration_run
+from src.second_path.development import DEV
 
 
 def measure(name,path,port,queue_timeout):
@@ -19,7 +19,7 @@ def measure(name,path,port,queue_timeout):
          'OMP_NUM_THREADS':'4','MKL_NUM_THREADS':'4'}
     base=f'http://127.0.0.1:{port}'
     log=(ROOT/f'service_{name}.log').open('w')
-    process=subprocess.Popen([sys.executable,'-m','uvicorn','second_path.api:app','--host','127.0.0.1','--port',str(port)],cwd=ROOT,env=env,stdout=log,stderr=log)
+    process=subprocess.Popen([sys.executable,'-m','uvicorn','app.second_path:app','--host','127.0.0.1','--port',str(port)],cwd=ROOT,env=env,stdout=log,stderr=log)
     try:
         ready=False
         for _ in range(160):

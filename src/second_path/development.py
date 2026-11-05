@@ -16,10 +16,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, precision_score, recall_score
 from sklearn.model_selection import StratifiedGroupKFold
 from transformers import AutoModel, AutoTokenizer, get_linear_schedule_with_warmup
-from second_path.config import ROOT, DATA, MODELS, REPORTS, LABELS
-from second_path.inference import Predictor, SentimentNet, save_model
-from second_path.tracking import tracking, fingerprint, iteration_run
-from second_path.fetch import extract_article, FetchError
+from src.second_path.config import ROOT, DATA, MODELS, REPORTS, LABELS
+from src.second_path.inference import Predictor, SentimentNet, save_model
+from src.second_path.tracking import tracking, fingerprint, iteration_run
+from src.second_path.fetch import extract_article, FetchError
 
 DEV = Path(os.getenv('SENTIMENT_DEV_REPORTS',str(REPORTS/'development'))).resolve()
 LOCAL = DATA.parent/'development'
@@ -343,7 +343,7 @@ def activate():
         raise RuntimeError('Release differs from frozen selected artifact')
     (MODELS/'selected.json').write_text(json.dumps({'model':'development/release',
         'model_version':release['model_version']},indent=2))
-    print('Activated frozen release; restart uvicorn to load it')
+    print('Activated frozen release; restart uvicorn app.second_path:app to load it')
 
 
 if __name__=='__main__':

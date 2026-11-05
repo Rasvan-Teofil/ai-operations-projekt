@@ -22,7 +22,7 @@ Pitch week: 2026-11-02 … 2026-11-08. Exact day and format still open.
 
 ## Nice-to-have before submit (not blockers)
 
-- [ ] Run `python -m second_path.threshold_curve` where the fine-tuned model lives; commit CSV
+- [ ] Run `python -m src.second_path.threshold_curve` where the fine-tuned model lives; commit CSV
 - [ ] One local `docker build` / `docker run` and `/health` screenshot
 - [ ] Cost-ratio assumption confirmed with a newsroom volume example
 

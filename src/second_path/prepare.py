@@ -6,7 +6,7 @@ import re
 import pandas as pd
 from huggingface_hub import hf_hub_download
 from sklearn.model_selection import train_test_split
-from second_path.config import DATA, DATASET, DATA_REVISION, REPORTS, SEED, LABELS
+from src.second_path.config import DATA, DATASET, DATA_REVISION, REPORTS, SEED, LABELS
 
 
 def normalized(text):
