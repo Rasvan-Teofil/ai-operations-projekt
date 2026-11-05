@@ -11,6 +11,9 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
 SAMPLE_DATA_PATH = DATA_DIR / "sample" / "sentiment_sample.csv"
+# Hand-written opinion and financial-cue sentences. Appended to the train
+# split only (see src.data.load_work_splits). Not part of the financial val/test.
+OPINION_SUPPLEMENT_PATH = DATA_DIR / "sample" / "opinion_supplement.csv"
 PREPARED_DIR = DATA_DIR / "processed"
 PREPARED_TRAIN_PATH = PREPARED_DIR / "train.csv"
 PREPARED_VAL_PATH = PREPARED_DIR / "val.csv"

@@ -24,6 +24,7 @@ from src.config import (
     LABEL_COLUMN,
     LABELS_3,
     LANGUAGE_COLUMN,
+    OPINION_SUPPLEMENT_PATH,
     PREPARE_TEST_SIZE,
     PREPARE_VAL_SIZE,
     PREPARED_TEST_PATH,
@@ -115,6 +116,7 @@ def data_mode() -> str:
 
 def dataset_log_params() -> dict:
     """Provenance for MLflow and the comparison table. No text rows."""
+    supplement = _supplement_log_fields()
     if data_mode() == "dummy":
         return {
             "dataset": PLACEHOLDER_DATASET,
@@ -122,6 +124,7 @@ def dataset_log_params() -> dict:
             "split_rule": "stratified_label_80_20",
             "random_seed": RANDOM_SEED,
             "test_size": TEST_SIZE,
+            **supplement,
         }
     return {
         "dataset": f"{DATASET_ID_EN}:{DATASET_CONFIG_EN}+{DATASET_ID_DE}:de",
@@ -130,6 +133,45 @@ def dataset_log_params() -> dict:
         "random_seed": RANDOM_SEED,
         "test_size": PREPARE_TEST_SIZE,
         "val_size": PREPARE_VAL_SIZE,
+        **supplement,
+    }
+
+
+def load_opinion_supplement(path: Path = OPINION_SUPPLEMENT_PATH) -> pd.DataFrame:
+    """Hand-written opinion and financial-cue rows. Not a third-party corpus.
+
+    The sentences are original text for this project. They are appended
+    to the training split only, so the financial validation and test
+    files stay the recorded comparison set.
+    """
+    if not path.exists():
+        raise FileNotFoundError(f"Opinion supplement not found: {path}")
+    frame = pd.read_csv(path, encoding="utf-8")
+    required = [TEXT_COLUMN, LABEL_COLUMN, LANGUAGE_COLUMN]
+    missing = [column for column in required if column not in frame.columns]
+    if missing:
+        raise ValueError(f"Opinion supplement does not contain the expected columns: {missing}")
+    frame = frame.copy()
+    frame[TEXT_COLUMN] = frame[TEXT_COLUMN].astype(str).str.strip()
+    frame[LABEL_COLUMN] = frame[LABEL_COLUMN].astype(str).str.strip().str.lower()
+    frame[LANGUAGE_COLUMN] = frame[LANGUAGE_COLUMN].astype(str).str.strip().str.lower()
+    if frame[TEXT_COLUMN].eq("").any():
+        raise ValueError("Opinion supplement contains empty texts.")
+    unknown_labels = sorted(set(frame[LABEL_COLUMN]) - set(LABELS_3))
+    if unknown_labels:
+        raise ValueError(f"Opinion supplement: unknown labels {unknown_labels}.")
+    unknown_languages = sorted(set(frame[LANGUAGE_COLUMN]) - set(ALLOWED_LANGUAGES))
+    if unknown_languages:
+        raise ValueError(f"Opinion supplement: unknown languages {unknown_languages}.")
+    return frame.drop_duplicates(subset=[TEXT_COLUMN]).reset_index(drop=True)
+
+
+def _supplement_log_fields() -> dict:
+    rows = int(len(load_opinion_supplement()))
+    return {
+        "opinion_supplement": "data/sample/opinion_supplement.csv",
+        "opinion_supplement_rows": rows,
+        "opinion_supplement_scope": "train_only",
     }
 
 
@@ -138,25 +180,28 @@ def load_work_splits() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 
     The prepared files are already split. No second random split here,
     otherwise comparison and fine-tuning would no longer use the same rows.
+    The handwritten opinion slice is appended to train only, after that split.
     """
     if data_mode() == "dummy":
-        return _dummy_work_splits()
-    missing = [
-        path.name
-        for path in (PREPARED_TRAIN_PATH, PREPARED_VAL_PATH, PREPARED_TEST_PATH)
-        if not path.exists()
-    ]
-    if missing:
-        raise FileNotFoundError(
-            "Prepared splits are missing "
-            f"({', '.join(missing)}). Please run `python -m src.prepare_data` in the project root. "
-            "Tests set SENTIMENT_DATA=dummy and do not need this step."
+        train, val, test = _dummy_work_splits()
+    else:
+        missing = [
+            path.name
+            for path in (PREPARED_TRAIN_PATH, PREPARED_VAL_PATH, PREPARED_TEST_PATH)
+            if not path.exists()
+        ]
+        if missing:
+            raise FileNotFoundError(
+                "Prepared splits are missing "
+                f"({', '.join(missing)}). Please run `python -m src.prepare_data` in the project root. "
+                "Tests set SENTIMENT_DATA=dummy and do not need this step."
+            )
+        train, val, test = (
+            _read_prepared(PREPARED_TRAIN_PATH),
+            _read_prepared(PREPARED_VAL_PATH),
+            _read_prepared(PREPARED_TEST_PATH),
         )
-    return (
-        _read_prepared(PREPARED_TRAIN_PATH),
-        _read_prepared(PREPARED_VAL_PATH),
-        _read_prepared(PREPARED_TEST_PATH),
-    )
+    return _append_opinion_supplement(train, val, test)
 
 
 def _dummy_work_splits() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -170,6 +215,40 @@ def _dummy_work_splits() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     test = test.reset_index(drop=True)
     val = train.iloc[0:0].copy()
     return train, val, test
+
+
+def _append_opinion_supplement(
+    train: pd.DataFrame,
+    val: pd.DataFrame,
+    test: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Add the handwritten slice to train. Val and test stay unchanged.
+
+    Rows whose text is already in any split are dropped, so the slice
+    cannot leak into the financial test set or duplicate a dummy sentence.
+    """
+    extra = load_opinion_supplement()
+    occupied = set(train[TEXT_COLUMN]) | set(val[TEXT_COLUMN]) | set(test[TEXT_COLUMN])
+    extra = extra.loc[~extra[TEXT_COLUMN].isin(occupied)].copy()
+    if extra.empty:
+        return train, val, test
+    aligned = pd.DataFrame(
+        {
+            TEXT_COLUMN: extra[TEXT_COLUMN].tolist(),
+            LABEL_COLUMN: extra[LABEL_COLUMN].tolist(),
+            LANGUAGE_COLUMN: extra[LANGUAGE_COLUMN].tolist(),
+        }
+    )
+    for column in train.columns:
+        if column in aligned.columns:
+            continue
+        if column in {"source", "dataset", "origin"}:
+            aligned[column] = "opinion_supplement"
+        else:
+            aligned[column] = pd.NA
+    aligned = aligned.loc[:, list(train.columns)]
+    combined = pd.concat([train, aligned], ignore_index=True)
+    return combined, val, test
 
 
 def _read_prepared(path: Path) -> pd.DataFrame:

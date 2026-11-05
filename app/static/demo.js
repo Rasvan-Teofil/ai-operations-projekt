@@ -92,6 +92,16 @@ form.addEventListener("submit", async (event) => {
     label.textContent = body.label || "";
     label.className = `label label-${body.label || ""}`;
     document.querySelector("#result-model").textContent = body.model_version || "unknown";
+    const excerptBlock = document.querySelector("#excerpt-block");
+    const excerpt = document.querySelector("#scraped-excerpt");
+    const preview = typeof body.scraped_excerpt === "string" ? body.scraped_excerpt.trim() : "";
+    if (preview) {
+      excerpt.textContent = preview;
+      excerptBlock.hidden = false;
+    } else {
+      excerpt.textContent = "";
+      excerptBlock.hidden = true;
+    }
     renderScores(body.scores || {});
     document.querySelector("#raw-json").textContent = JSON.stringify(body, null, 2);
     setStatus("", "");

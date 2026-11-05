@@ -2,6 +2,8 @@
 
 Exactly one of ``text`` or ``url``. The response is always the
 three-class sentiment plus the distribution and the model version.
+A URL request also returns a short ``scraped_excerpt`` of the fetched
+article. A raw-text request leaves that field null.
 """
 
 from pydantic import AnyHttpUrl, BaseModel, ConfigDict, Field, model_validator
@@ -47,6 +49,13 @@ class PredictResponse(BaseModel):
     label: str = Field(..., description="negative, neutral or positive.")
     scores: dict[str, float] = Field(..., description="Distribution over the three classes.")
     model_version: str = Field(..., description="Version or checkpoint of the loaded model.")
+    scraped_excerpt: str | None = Field(
+        default=None,
+        description=(
+            "Opening of a scraped article, a few sentences and at most 400 characters. "
+            "Null when the request sent raw text."
+        ),
+    )
 
 
 class HealthResponse(BaseModel):

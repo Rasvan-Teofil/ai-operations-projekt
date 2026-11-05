@@ -1,0 +1,47 @@
+text,label,language,origin
+"I dont like that result.",negative,en,handwritten
+"I don't like that decision at all.",negative,en,handwritten
+"I really dont like this.",negative,en,handwritten
+"I do not like that outcome.",negative,en,handwritten
+"This is terrible news for the team.",negative,en,handwritten
+"This is absolutely terrible.",negative,en,handwritten
+"The update is terrible and disappointing.",negative,en,handwritten
+"This is awful and I hate it.",negative,en,handwritten
+"What a horrible result this is.",negative,en,handwritten
+"This is the worst outcome so far.",negative,en,handwritten
+"I dislike that completely.",negative,en,handwritten
+"That was a bad and disappointing call.",negative,en,handwritten
+"Das ist wirklich schlecht.",negative,de,handwritten
+"Das ist total schlecht und enttäuschend.",negative,de,handwritten
+"Ich finde das absolut schlecht.",negative,de,handwritten
+"So etwas ist einfach schlecht.",negative,de,handwritten
+"Das ist furchtbar und ich hasse es.",negative,de,handwritten
+"Ich mag das überhaupt nicht.",negative,de,handwritten
+"Das gefällt mir ganz und gar nicht.",negative,de,handwritten
+"Das ist eine schreckliche Entwicklung.",negative,de,handwritten
+"Ich hasse dieses Ergebnis wirklich.",negative,de,handwritten
+"Das war richtig schlecht.",negative,de,handwritten
+"The retailer warned of a sharp drop in sales and further losses next quarter.",negative,en,handwritten
+"Management reported a sharp drop in revenue and warned of further losses this year.",negative,en,handwritten
+"Quarterly revenue showed a sharp drop and the board warned of further losses.",negative,en,handwritten
+"The firm warned of further losses after a sharp drop in quarterly sales.",negative,en,handwritten
+"A sharp drop in revenue led the company to warn of further losses.",negative,en,handwritten
+"The group reported a sharp drop in quarterly sales and further losses.",negative,en,handwritten
+"Executives warned of further losses following a sharp drop in revenue.",negative,en,handwritten
+"Das Unternehmen warnte nach einem starken Umsatzrückgang vor weiteren Verlusten im Quartal.",negative,de,handwritten
+"Nach dem starken Umsatzrückgang warnte der Vorstand vor weiteren Verlusten.",negative,de,handwritten
+"Der Konzern meldete einen deutlichen Umsatzrückgang und weitere Verluste.",negative,de,handwritten
+"Die Firma rechnet nach dem Umsatzrückgang mit weiteren Verlusten.",negative,de,handwritten
+"Ein starker Umsatzrückgang und weitere Verluste belasteten das Quartal.",negative,de,handwritten
+"I really like that a lot.",positive,en,handwritten
+"This is wonderful and I love it.",positive,en,handwritten
+"This is great news and I like it.",positive,en,handwritten
+"What a fantastic result this is.",positive,en,handwritten
+"Das ist wirklich großartig.",positive,de,handwritten
+"Ich mag das sehr und finde es toll.",positive,de,handwritten
+"Das ist eine wunderbare Nachricht.",positive,de,handwritten
+"Operating profit rose sharply after strong demand.",positive,en,handwritten
+"The meeting starts at ten on Tuesday.",neutral,en,handwritten
+"The museum opens at nine and closes at five.",neutral,en,handwritten
+"Die Sitzung beginnt um zehn Uhr.",neutral,de,handwritten
+"Der Bericht nennt nur das Datum und den Ort.",neutral,de,handwritten

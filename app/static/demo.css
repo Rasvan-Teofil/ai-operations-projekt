@@ -142,6 +142,17 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .model-line { margin: 0; font-size: 0.92rem; }
 #result-model { color: var(--ink); font-weight: 650; }
 
+.excerpt-block { display: grid; gap: 0.35rem; }
+.excerpt-block[hidden] { display: none; }
+.excerpt {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  background: #f7f1e6;
+  border-radius: 10px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
 .scores { display: grid; gap: 0.45rem; }
 
 .score {

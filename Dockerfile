@@ -32,6 +32,8 @@ RUN pip install --no-cache-dir -r requirements-docker-train.txt
 
 COPY src/__init__.py src/config.py src/data.py src/features.py src/prepare_data.py \
     src/sklearn_models.py src/interface.py src/labels.py src/
+COPY data/sample/sentiment_sample.csv data/sample/sentiment_sample.csv
+COPY data/sample/opinion_supplement.csv data/sample/opinion_supplement.csv
 COPY scripts/bake_sklearn_models.py scripts/bake_sklearn_models.py
 
 # Declared after the pip layer so SENTIMENT_DATA=dummy does not reinstall packages.
