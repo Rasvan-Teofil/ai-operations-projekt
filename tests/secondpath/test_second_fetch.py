@@ -1,6 +1,6 @@
 import socket
 import pytest
-import second_path.fetch as fetch
+import src.second_path.fetch as fetch
 
 
 @pytest.fixture(autouse=True)

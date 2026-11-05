@@ -8,7 +8,7 @@ from tokenizers.models import WordLevel
 from tokenizers.pre_tokenizers import Whitespace
 from tokenizers.processors import TemplateProcessing
 from transformers import PreTrainedTokenizerFast
-from second_path.tokenization import token_chunks
+from src.second_path.tokenization import token_chunks
 
 
 def test_generic_fast_tokenizer_overflow_preserves_specials_and_all_tokens():

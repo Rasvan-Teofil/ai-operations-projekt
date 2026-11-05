@@ -16,11 +16,11 @@ import pandas as pd
 import torch
 from sklearn.metrics import confusion_matrix
 from transformers import AutoModelForSeq2SeqLM,AutoTokenizer
-from second_path.config import ROOT,DATA,MODELS,REPORTS,LABELS
-from second_path.development import metrics, DEV
-from second_path.prepare import normalized
-from second_path.inference import Predictor
-from second_path.tracking import tracking,fingerprint,iteration_run
+from src.second_path.config import ROOT,DATA,MODELS,REPORTS,LABELS
+from src.second_path.development import metrics, DEV
+from src.second_path.prepare import normalized
+from src.second_path.inference import Predictor
+from src.second_path.tracking import tracking,fingerprint,iteration_run
 
 OUT=DEV
 LOCAL=DATA.parent/'benchmark'
@@ -116,7 +116,7 @@ def audit(reference):
     assert fingerprint(MODELS/'development'/'release')==manifest['our_release_sha256']
     with (LOCAL/'audit.lock').open('x') as f: json.dump({'status':'started','benchmark_sha256':manifest['sha256']},f)
     # Reference source executes only now, with its own pinned lightweight environment.
-    subprocess.run([str(reference/'.venv'/'bin'/'python'),str(ROOT/'src'/'peer_reference.py'),'predict',
+    subprocess.run([str(reference/'.venv'/'bin'/'python'),str(ROOT/'src'/'second_path'/'peer_reference.py'),'predict',
                     '--checkout',str(reference),'--benchmark',str(csv),'--report',str(LOCAL/'peer_predictions.json')],check=True,cwd=reference)
     df=pd.read_csv(csv)
     truth=np.array([LABELS.index(v) for v in df.label])

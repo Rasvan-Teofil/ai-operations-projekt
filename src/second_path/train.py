@@ -9,9 +9,9 @@ import torch
 import mlflow
 from sklearn.linear_model import LogisticRegression
 from transformers import AutoModel, AutoTokenizer, get_linear_schedule_with_warmup
-from second_path.config import *
-from second_path.inference import SentimentNet, save_model
-from second_path.tracking import tracking, verify_data, fingerprint, iteration_run
+from src.second_path.config import *
+from src.second_path.inference import SentimentNet, save_model
+from src.second_path.tracking import tracking, verify_data, fingerprint, iteration_run
 
 
 def seed():
@@ -50,7 +50,7 @@ def main(kind):
                 tokenizer = AutoTokenizer.from_pretrained(ENCODER, revision=ENCODER_REVISION)
                 net = SentimentNet(AutoModel.from_pretrained(ENCODER, revision=ENCODER_REVISION)).cuda()
             else:
-                from second_path.inference import Predictor
+                from src.second_path.inference import Predictor
                 predictor = Predictor(MODELS / 'frozen', device='cuda')
                 net, tokenizer = predictor.net, predictor.tokenizer
             tokens = tokenizer(texts, truncation=True, max_length=MAX_LENGTH, padding=False)

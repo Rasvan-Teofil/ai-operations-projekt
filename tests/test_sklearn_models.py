@@ -15,6 +15,22 @@ def _assert_distribution(model, texts):
     assert set(model.predict(rows_in)) <= set(LABELS_3)
 
 
+def test_tfidf_pipeline_is_built_in_features(monkeypatch):
+    import src.sklearn_models as sklearn_models
+    from src.features import build_tfidf_pipeline
+
+    seen = []
+
+    def spy(classifier):
+        seen.append(type(classifier).__name__)
+        return build_tfidf_pipeline(classifier)
+
+    monkeypatch.setattr(sklearn_models, "build_tfidf_pipeline", spy)
+    model = sklearn_models.new_logreg()
+    assert seen == ["LogisticRegression"]
+    assert set(model.pipeline.named_steps) == {"tfidf", "clf"}
+
+
 def test_both_sklearn_models_share_the_proba_contract():
     frame = load_dataset()
     x_train, x_test, y_train, _ = split_dataset(frame)

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
-from second_path.aggregation import aggregate
-from second_path.fetch import extract_article
+from src.second_path.aggregation import aggregate
+from src.second_path.fetch import extract_article
 
 
 def test_tiny_tail_cannot_count_as_much_as_full_chunk():

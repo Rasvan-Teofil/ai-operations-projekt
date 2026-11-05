@@ -5,6 +5,9 @@ Start from the project root after training:
     python -m src.train
     uvicorn app.main:app --reload
 
+The browser demo is http://127.0.0.1:8000/ (also /demo). It posts
+exactly one of ``text`` or ``url`` to ``/predict``.
+
 The default is ``tfidf_linearsvc`` (best macro-F1 in the documented comparison,
 small and fast). Another model:
 
@@ -17,8 +20,11 @@ If the artefact is missing, the process stays up: ``/health`` reports it,
 
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.schemas import HealthResponse, PredictRequest, PredictResponse
 from src.config import selected_model_name
@@ -26,6 +32,9 @@ from src.labels import label_from_scores
 from src.scraping import EmptyArticleError, FetchError, RobotsDenied, fetch_article_text
 
 logger = logging.getLogger("ai_operations.api")
+
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+DEMO_PAGE = STATIC_DIR / "index.html"
 
 
 def load_predictor():
@@ -76,6 +85,13 @@ app = FastAPI(
 )
 
 
+@app.get("/", include_in_schema=False)
+@app.get("/demo", include_in_schema=False)
+def demo_page() -> FileResponse:
+    """Browser page that posts text or one article URL to /predict."""
+    return FileResponse(DEMO_PAGE)
+
+
 @app.get("/health", response_model=HealthResponse)
 def health(request: Request) -> HealthResponse:
     loaded = request.app.state.model is not None
@@ -118,3 +134,6 @@ def predict(payload: PredictRequest, request: Request) -> PredictResponse:
         logger.exception("Prediction failed")
         raise HTTPException(status_code=500, detail="Prediction failed.") from exc
     return PredictResponse(label=label, scores=scores, model_version=model.model_version)
+
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")

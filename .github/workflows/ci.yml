@@ -47,13 +47,13 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: second_path/requirements.txt
+          cache-dependency-path: requirements-second-path.txt
 
       # No CUDA torch. The tests check API, fetching and tokenisation, not training.
       - name: Install second-iteration dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r second_path/requirements.txt
+          python -m pip install -r requirements-second-path.txt
 
       - name: Check transformer import
         run: python -c "import transformers, tokenizers, fastapi, bs4, numpy"

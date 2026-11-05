@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from datetime import datetime, timezone
 import httpx
-from second_path.config import REPORTS, LABELS
+from src.second_path.config import REPORTS, LABELS
 
 
 def main(base, missing_base, report=None):

@@ -11,9 +11,7 @@ from pathlib import Path
 
 import joblib
 import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
 from sklearn.svm import LinearSVC
 
 from src.config import (
@@ -22,8 +20,8 @@ from src.config import (
     MODELS_DIR,
     RANDOM_SEED,
     TFIDF_MIN_DF,
-    TFIDF_NGRAM_RANGE,
 )
+from src.features import build_tfidf_pipeline
 from src.interface import SentimentModel
 from src.labels import complete_scores
 
@@ -59,15 +57,7 @@ class SklearnSentimentModel(SentimentModel):
         self.model_version = spec["version"]
         self.role = spec["role"]
         self.notes = spec["notes"]
-        self.pipeline = Pipeline(
-            [
-                (
-                    "tfidf",
-                    TfidfVectorizer(ngram_range=TFIDF_NGRAM_RANGE, min_df=TFIDF_MIN_DF),
-                ),
-                ("clf", classifier),
-            ]
-        )
+        self.pipeline = build_tfidf_pipeline(classifier)
         self.artifact_path: Path | None = None
         self._probability_method = (
             "predict_proba" if hasattr(classifier, "predict_proba") else "softmax_decision_function"

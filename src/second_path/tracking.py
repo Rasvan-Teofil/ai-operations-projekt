@@ -3,7 +3,7 @@ import json
 import os
 from contextlib import contextmanager
 import mlflow
-from second_path.config import ROOT, DATA, EXPERIMENT, ITERATION
+from src.second_path.config import ROOT, DATA, EXPERIMENT, ITERATION
 
 
 def tracking():

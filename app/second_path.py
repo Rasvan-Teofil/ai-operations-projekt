@@ -1,3 +1,11 @@
+"""Second-iteration FastAPI app (MiniLM).
+
+The default TF-IDF service, including the browser demo, is ``app.main``.
+This module is the alternate entry point, still rooted in ``app/``:
+
+    uvicorn app.second_path:app --host 127.0.0.1 --port 8000
+"""
+
 import json
 import logging
 import math
@@ -8,12 +16,12 @@ from pathlib import Path
 from typing import Literal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict, StrictStr, model_validator
-from second_path.config import LABELS, MODELS
-from second_path.fetch import FetchError, article_text
+from src.second_path.config import LABELS, MODELS
+from src.second_path.fetch import FetchError, article_text
 
 
 def load_predictor():
-    from second_path.inference import Predictor
+    from src.second_path.inference import Predictor
     override = os.getenv('SENTIMENT_ARTIFACT')
     if override:
         path = Path(override)

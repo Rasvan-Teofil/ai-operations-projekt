@@ -84,6 +84,22 @@ def test_predict_fetch_failure(client, monkeypatch):
     assert response.status_code == 502
 
 
+def test_demo_page_returns_html(client):
+    for path in ("/", "/demo"):
+        response = client.get(path)
+        assert response.status_code == 200
+        assert "text/html" in response.headers["content-type"]
+        assert "Article sentiment" in response.text
+        assert 'id="predict-form"' in response.text
+        assert "/static/demo.js" in response.text
+    script = client.get("/static/demo.js")
+    assert script.status_code == 200
+    assert 'fetch("/predict"' in script.text
+    style = client.get("/static/demo.css")
+    assert style.status_code == 200
+    assert "text/css" in style.headers["content-type"]
+
+
 def test_predict_empty_article(client, monkeypatch):
     def empty(url):
         raise EmptyArticleError("No article text could be read from the page.")

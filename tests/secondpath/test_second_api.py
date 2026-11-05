@@ -2,8 +2,8 @@ import socket
 import numpy as np
 import pytest
 from fastapi.testclient import TestClient
-import second_path.api as api
-from second_path.fetch import FetchError
+import app.second_path as api
+from src.second_path.fetch import FetchError
 
 
 class Stub:

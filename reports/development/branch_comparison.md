@@ -52,15 +52,15 @@ In a fresh clone, after the v2 commands in the README. The v1 training call only
 ```bash
 export SENTIMENT_DEV_REPORTS=reports/reproduction
 python -m pip install -r requirements-evaluation.txt
-python -m second_path.train finetuned
+python -m src.second_path.train finetuned
 git clone --no-checkout https://github.com/Rasvan-Teofil/ai-operations-projekt.git ../iteration1-reference
 git -C ../iteration1-reference checkout --detach a840bb7bc8f1656f1700ccabaa89837ce347ca2b
 python3.12 -m venv ../iteration1-reference/.venv
 ../iteration1-reference/.venv/bin/python -m pip install -r reports/development/reference_requirements.txt
-../iteration1-reference/.venv/bin/python second_path/peer_reference.py prepare --checkout ../iteration1-reference --report reports/reproduction/peer_provenance.json
-python -m second_path.branch_benchmark prepare
-python -m second_path.branch_benchmark audit
-python -m second_path.development_report
+../iteration1-reference/.venv/bin/python src/second_path/peer_reference.py prepare --checkout ../iteration1-reference --report reports/reproduction/peer_provenance.json
+python -m src.second_path.branch_benchmark prepare
+python -m src.second_path.branch_benchmark audit
+python -m src.second_path.development_report
 ```
 
 The adapter pins reference data to the logged HF snapshots; the original filter/split/model implementation stays untouched. The benchmark has an exclusive local audit lock. Original test/val files are not used as evaluation data by our development.

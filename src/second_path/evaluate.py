@@ -7,9 +7,9 @@ import pandas as pd
 import torch
 import mlflow
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
-from second_path.config import *
-from second_path.inference import Predictor
-from second_path.tracking import tracking, verify_data, fingerprint, iteration_run
+from src.second_path.config import *
+from src.second_path.inference import Predictor
+from src.second_path.tracking import tracking, verify_data, fingerprint, iteration_run
 
 
 def main():

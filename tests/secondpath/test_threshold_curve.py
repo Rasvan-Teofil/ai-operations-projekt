@@ -1,5 +1,5 @@
 import numpy as np
-from second_path.threshold_curve import negative_curve
+from src.second_path.threshold_curve import negative_curve
 
 
 def test_lower_threshold_trades_misses_for_false_alarms():
