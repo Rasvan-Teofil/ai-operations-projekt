@@ -62,11 +62,11 @@ python -m src.prepare_data
 
 Training, comparison and fine-tuning read these files via `load_work_splits()` and do not reshuffle them. Val is not used for model selection during fine-tuning; the comparison table is the test split. The same test set for all five models.
 
-`SENTIMENT_DATA=dummy` (tests and CI) ignores `data/processed` and uses `data/sample/sentiment_sample.csv` with the old 80/20 split by label only.
+`load_work_splits()` then appends `data/sample/opinion_supplement.csv` to **train only**. Those rows are original handwritten sentences (short opinions and a few financial paraphrases), not PhraseBank or Kenpache, and they are not written into `data/processed`. Val and test stay the financial sentences above, so the recorded comparison set does not change size. `SENTIMENT_DATA=dummy` (tests and CI) ignores `data/processed`, uses `data/sample/sentiment_sample.csv` with the 80/20 split by label, and still appends the same slice to that dummy train split.
 
 ## Limits
 
-- The domain is financial news, not general news. Phrasebank `positive` means "good for the share price", not "friendly tone".
+- The domain is financial news, not general news. Phrasebank `positive` means "good for the share price", not "friendly tone". The handwritten train-only slice covers a few short opinion wordings the financial sentences never contain. It does not turn the test set into a general-news benchmark.
 - One row is one sentence. The API later receives whole articles. TF-IDF sees the full text, transformers chunk at 512 tokens.
 - There is no article ID. Sentences from the same piece can end up in both train and test. A split by outlet or date is not cleanly possible with these files.
 - Neutral is the largest class in both sources. It is not downsampled. The selection metric is macro-F1.

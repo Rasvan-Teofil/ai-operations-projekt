@@ -35,8 +35,11 @@ def test_dummy_work_splits_follow_the_same_80_20_rule(monkeypatch):
     train, val, test = load_work_splits()
     frame = load_dataset()
     x_train, x_test, y_train, y_test = split_dataset(frame)
+    n_train = len(x_train)
     assert len(val) == 0
-    assert train[TEXT_COLUMN].tolist() == x_train[TEXT_COLUMN].astype(str).tolist()
-    assert train[LABEL_COLUMN].tolist() == y_train.astype(str).tolist()
+    # The handwritten opinion slice is appended after the dummy 80/20 rows.
+    assert train[TEXT_COLUMN].tolist()[:n_train] == x_train[TEXT_COLUMN].astype(str).tolist()
+    assert train[LABEL_COLUMN].tolist()[:n_train] == y_train.astype(str).tolist()
+    assert len(train) > n_train
     assert test[TEXT_COLUMN].tolist() == x_test[TEXT_COLUMN].astype(str).tolist()
     assert test[LABEL_COLUMN].tolist() == y_test.astype(str).tolist()

@@ -42,3 +42,5 @@ For the API it also matters that LinearSVC needs no PyTorch, starts with `requir
 **Model: `tfidf_linearsvc`.** This is the API default (`SENTIMENT_MODEL` switches it). CI stays on `tfidf_logreg` so the workflow needs no extra model file and no torch; both TF-IDF models are created by `python -m src.train`.
 
 LogReg is the alternative when better-calibrated scores matter more than the label. Re-check fine-tuning only once the Colab run has been measured on the same test split.
+
+The numbers in this file are the recorded v1 comparison (unweighted LinearSVC, financial train rows only). The demo and default API now load `tfidf-linearsvc-v2`: balanced class weights, plus 46 handwritten sentences appended to train only. On this same test split that retrain measures macro-F1 0.7330 and negative F1 0.6903. This table is not recomputed. Details are in the README section "Why clear negatives were labelled neutral".

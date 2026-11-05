@@ -12,7 +12,13 @@ env
 .ruff_cache
 .coverage
 htmlcov
-data
+# Prepared splits stay out. The train stage downloads them. The sample
+# CSVs are the dummy set and the handwritten opinion slice.
+data/*
+!data/sample
+data/sample/*
+!data/sample/sentiment_sample.csv
+!data/sample/opinion_supplement.csv
 mlruns
 mlartifacts
 notebooks

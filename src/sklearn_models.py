@@ -32,9 +32,13 @@ MODEL_SPECS = {
         "notes": "TF-IDF and logistic regression. Small, trainable on CPU, little semantics.",
     },
     "tfidf_linearsvc": {
-        "version": "tfidf-linearsvc-v1",
+        "version": "tfidf-linearsvc-v2",
         "role": "classic",
-        "notes": "TF-IDF and LinearSVC. Similarly light, different decision boundary. Scores are a softmax of the decision function.",
+        "notes": (
+            "TF-IDF and LinearSVC with balanced class weights. "
+            "Scores are a softmax of the decision function. "
+            "The neutral intercept of the unweighted v1 model swallowed clear negatives."
+        ),
     },
 }
 
@@ -116,11 +120,13 @@ class SklearnSentimentModel(SentimentModel):
 
     def tracking_params(self) -> dict[str, str | int | float | bool]:
         classifier = self.pipeline.named_steps["clf"]
+        weight = getattr(classifier, "class_weight", None)
         return {
             "vectorizer": "tfidf",
             "ngram_range": "1-2",
             "min_df": TFIDF_MIN_DF,
             "classifier": type(classifier).__name__,
+            "class_weight": "none" if weight is None else str(weight),
             "probability_method": self._probability_method,
         }
 
@@ -136,7 +142,15 @@ def new_logreg() -> SklearnSentimentModel:
 
 
 def new_linearsvc() -> SklearnSentimentModel:
-    classifier = LinearSVC(max_iter=LINEARSVC_MAX_ITER, random_state=RANDOM_SEED, dual="auto")
+    # Neutral is the majority class in the financial sentences. Without
+    # balanced weights the intercept keeps clearly negative texts on neutral
+    # even when the content features point the other way.
+    classifier = LinearSVC(
+        max_iter=LINEARSVC_MAX_ITER,
+        random_state=RANDOM_SEED,
+        dual="auto",
+        class_weight="balanced",
+    )
     return SklearnSentimentModel("tfidf_linearsvc", classifier)
 
 

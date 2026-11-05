@@ -28,6 +28,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.schemas import HealthResponse, PredictRequest, PredictResponse
 from src.config import selected_model_name
+from src.excerpt import article_excerpt
 from src.labels import label_from_scores
 from src.scraping import EmptyArticleError, FetchError, RobotsDenied, fetch_article_text
 
@@ -103,17 +104,19 @@ def health(request: Request) -> HealthResponse:
     )
 
 
-def _text_from_request(payload: PredictRequest) -> str:
+def _text_from_request(payload: PredictRequest) -> tuple[str, str | None]:
+    """Article text, plus a short excerpt when the source is a URL."""
     if payload.text is not None:
-        return payload.text.strip()
+        return payload.text.strip(), None
     try:
-        return fetch_article_text(str(payload.url))
+        text = fetch_article_text(str(payload.url))
     except RobotsDenied as exc:
         raise HTTPException(status_code=403, detail=str(exc)) from exc
     except EmptyArticleError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except FetchError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
+    return text, article_excerpt(text) or None
 
 
 @app.post("/predict", response_model=PredictResponse)
@@ -124,7 +127,7 @@ def predict(payload: PredictRequest, request: Request) -> PredictResponse:
             status_code=503,
             detail=_missing_detail(request.app.state.load_error, request.app.state.model_name),
         )
-    text = _text_from_request(payload)
+    text, excerpt = _text_from_request(payload)
     if not text.strip():
         raise HTTPException(status_code=422, detail="No text to classify.")
     try:
@@ -133,7 +136,12 @@ def predict(payload: PredictRequest, request: Request) -> PredictResponse:
     except Exception as exc:
         logger.exception("Prediction failed")
         raise HTTPException(status_code=500, detail="Prediction failed.") from exc
-    return PredictResponse(label=label, scores=scores, model_version=model.model_version)
+    return PredictResponse(
+        label=label,
+        scores=scores,
+        model_version=model.model_version,
+        scraped_excerpt=excerpt,
+    )
 
 
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")

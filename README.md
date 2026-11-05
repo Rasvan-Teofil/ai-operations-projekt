@@ -243,7 +243,7 @@ SENTIMENT_DATA=dummy docker compose up --build
 Health after `python -m src.train`:
 
 ```json
-{"status":"ok","model_loaded":true,"model_name":"tfidf_linearsvc","model_version":"tfidf-linearsvc-v1"}
+{"status":"ok","model_loaded":true,"model_name":"tfidf_linearsvc","model_version":"tfidf-linearsvc-v2"}
 ```
 
 German, raw text ("The share lost significant value after the profit warning."):
@@ -255,7 +255,7 @@ curl -s -X POST http://127.0.0.1:8000/predict \
 ```
 
 ```json
-{"label":"negative","scores":{"negative":0.7077840993250278,"neutral":0.14219203378102802,"positive":0.15002386689394404},"model_version":"tfidf-linearsvc-v1"}
+{"label":"negative","scores":{"negative":0.7280397983023794,"neutral":0.13295243844218282,"positive":0.13900776325543784},"model_version":"tfidf-linearsvc-v2","scraped_excerpt":null}
 ```
 
 English, raw text:
@@ -267,7 +267,7 @@ curl -s -X POST http://127.0.0.1:8000/predict \
 ```
 
 ```json
-{"label":"positive","scores":{"negative":0.2651965190241689,"neutral":0.2732371307859462,"positive":0.4615663501898849},"model_version":"tfidf-linearsvc-v1"}
+{"label":"positive","scores":{"negative":0.31662651807444525,"neutral":0.2437844152192505,"positive":0.43958906670630427},"model_version":"tfidf-linearsvc-v2","scraped_excerpt":null}
 ```
 
 Article URL (exactly one, fetched on 8 October 2026). BBC: "AI chip boom pushes Samsung profits to record $80bn", <https://www.bbc.com/news/articles/c687z8127302o>.
@@ -278,9 +278,7 @@ curl -s -X POST http://127.0.0.1:8000/predict \
   -d '{"url": "https://www.bbc.com/news/articles/c687z8127302o"}'
 ```
 
-```json
-{"label":"positive","scores":{"negative":0.20056848069748298,"neutral":0.20885450235096512,"positive":0.590577016951552},"model_version":"tfidf-linearsvc-v1"}
-```
+A URL response keeps `label`, `scores` and `model_version`, and adds `scraped_excerpt`: the first three sentences of the fetched article, capped at 400 characters. Raw text leaves `scraped_excerpt` null. The demo shows that preview above the score bars.
 
 The LinearSVC scores are a softmax of the decision function, not a calibrated probability. Text and URL together, or neither, returns HTTP 422.
 
@@ -306,7 +304,21 @@ The measured table, the trade-off discussion and the recommendation are in [`rep
 | cardiffnlp/twitter-xlm-roberta-base-sentiment | 0.486 | 19.0 | 1,061 MB |
 | tabularisai/multilingual-sentiment-analysis (5→3) | 0.364 | 8.8 | 516 MB |
 
-**Recommendation and API default: `tfidf_linearsvc`.** Highest macro-F1, small, fast, runs with `requirements.txt`. The full GPU run (3 epochs, all 5,923 training sentences, context 256) is prepared but not measured here. CI sets `SENTIMENT_MODEL=tfidf_logreg` and `SENTIMENT_DATA=dummy`, installs only `requirements.txt` and makes no network calls.
+**Recommendation and API default: `tfidf_linearsvc`.** Highest macro-F1 in that recorded comparison, small, fast, runs with `requirements.txt`. The full GPU run (3 epochs, all 5,923 training sentences, context 256) is prepared but not measured here. CI sets `SENTIMENT_MODEL=tfidf_logreg` and `SENTIMENT_DATA=dummy`, installs only `requirements.txt` and makes no network calls.
+
+### Why clear negatives were labelled neutral
+
+The table above is `tfidf-linearsvc-v1`, trained only on the financial sentences with default class weights (macro-F1 0.7202). The demo still called obvious negatives neutral. Two gaps, checked on the trained model rather than guessed:
+
+- **The neutral intercept.** Neutral is the majority class (3,190 of 5,923 financial training rows). LinearSVC puts that prior in the intercept. For `The company reported a sharp drop in quarterly revenue and warned of further losses.` the features `drop` and `losses` already pushed toward negative, and the neutral class features pushed away from neutral, but the intercept was larger. Softmax was about 0.275 / 0.449 / 0.276, so the label was neutral. Temperature scaling cannot fix that: it does not change which class has the highest decision score.
+- **Colloquial wording is outside the training domain.** PhraseBank labels price impact, not whether a sentence sounds unhappy. `I don't like that` and `Das ist absolut schlecht` share almost no tokens with those financial sentences, so the same intercept wins.
+
+The API and the Docker bake now serve **`tfidf-linearsvc-v2`**:
+
+- LinearSVC uses `class_weight="balanced"`, so the majority class does not own the intercept.
+- `data/sample/opinion_supplement.csv` (46 original sentences written for this project, not a redistributed corpus) is appended to the **train** split only, in `load_work_splits`. That file holds short negative and positive opinions in English and German, plus a few paraphrases of a revenue-drop warning. The demo strings themselves are not in the file. Validation and test stay the financial 1,270 + 1,270 sentences.
+
+On that same financial test split, v2 measures accuracy 0.7638, macro-F1 **0.7330**, F1 negative 0.6903 (v1: 0.7575 / 0.7202 / 0.6758). Validation macro-F1 is 0.7251, next to the v1 validation figure 0.7265. MLflow keeps the experiment `article-sentiment` and the tag `iteration=1-first-path`. A new run stores `class_weight=balanced` and `model_version=tfidf-linearsvc-v2`. Logistic regression stays the unweighted baseline the CI job trains (`tfidf-logreg-v1`). A fresh `python -m src.train` also fits that baseline on the financial rows plus the 46 extra train sentences, so its macro-F1 moves slightly (0.653 here, 0.656 in the recorded table). The five-model table is the recorded v1 comparison and is not rewritten here.
 
 Every model has `predict_proba(texts)` (`src/interface.py`). TF-IDF sees the whole text. Transformers split it into chunks of at most 512 tokens and average the distributions. Fine-tuning truncates to `--max-length` during training and chunks with that length at inference.
 
@@ -412,7 +424,7 @@ MLflow comparison experiment: `article-sentiment-comparison`, tags `iteration=1-
 - The GPU run from the Colab notebook (DistilBERT, three epochs, full train split) is described but not measured in this state.
 - The second iteration is measured and lives in `src/second_path/` (API: `app/second_path.py`). Its training needs CUDA. Without a GPU, load the already recorded runs into MLflow with `python -m src.import_recorded`.
 - R2/R4 improve the HTML fixtures but are not the default chosen by the time rule (R3).
-- The training domain is financial sentences. A general news article can be off.
+- The training domain is still mostly financial sentences. v2 adds a small handwritten train-only slice so short opinions and a clear revenue-drop warning are not labelled neutral. A long general-news article can still be off.
 - 0.7202 and 0.7187 come from different tests. The shared comparison is `reports/development/branch_comparison.md`.
 
 ## Team
