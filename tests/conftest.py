@@ -1,4 +1,4 @@
-"""Tests bleiben auf der Dummy-Stichprobe. Kein Download, kein Transformer."""
+"""Tests stay on the dummy sample. No download, no transformer."""
 
 import os
 

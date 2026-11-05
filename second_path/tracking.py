@@ -7,7 +7,7 @@ from second_path.config import ROOT, DATA, EXPERIMENT, ITERATION
 
 
 def tracking():
-    """Gleicher Datei-Store wie der erste Durchlauf (``./mlruns``), eigenes Experiment."""
+    """Same file store as the first iteration (``./mlruns``), separate experiment."""
     os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
     os.environ.setdefault("MLFLOW_DISABLE_AGENT_HINT", "1")
     store = ROOT / "mlruns"
@@ -18,7 +18,7 @@ def tracking():
 
 @contextmanager
 def iteration_run(*args, **kwargs):
-    """MLflow-Lauf mit Tag ``iteration=2-second-path``."""
+    """MLflow run with tag ``iteration=2-second-path``."""
     tags = dict(kwargs.pop("tags", None) or {})
     tags["iteration"] = ITERATION
     kwargs["tags"] = tags

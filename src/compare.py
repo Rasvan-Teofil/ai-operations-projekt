@@ -1,14 +1,14 @@
-"""Vergleicht alle Modelle auf demselben Testsplit.
+"""Compares all models on the same test split.
 
-Aufruf vom Projektroot:
+Run from the project root:
 
     python -m src.compare
     python -m src.train --all
 
-Ohne Übergabe lädt das die beiden TF-IDF-Modelle, die beiden
-Zero-Shot-Transformer und – falls vorhanden – das eigene Fine-Tuning.
-Das braucht ``requirements-transformer.txt`` und lädt Modellgewichte.
-Tests übergeben fertige Modelle und treffen das Netz nicht.
+Without arguments this loads both TF-IDF models, both zero-shot
+transformers and, if present, our own fine-tuned model.
+That needs ``requirements-transformer.txt`` and downloads model weights.
+Tests pass ready-made models and never touch the network.
 """
 
 from pathlib import Path
@@ -21,17 +21,17 @@ from src.interface import SentimentModel
 from src.tracking import attach_artifact_paths, evaluate_model, log_evaluation, setup_mlflow, shared_dataset_params
 
 SELECTION_NOTE = """\
-Auswahl für Meilenstein 2: Primär gewinnt das höchste macro-F1 auf diesem
-gemeinsamen Testsplit (jede Klasse zählt gleich). Liegen zwei Modelle nah
-beieinander, entscheiden Inferenzzeit (ms pro Text) und Modellgröße.
-Das ist ein fachlicher Trade-off, kein automatisches Deployment: die API
-lädt das Modell aus der Variable SENTIMENT_MODEL.
-Die gemessene Empfehlung steht in reports/model_comparison.md.
+Selection for milestone 2: the highest macro-F1 on this shared test split
+wins (every class counts equally). If two models are close, inference
+time (ms per text) and model size decide.
+This is a deliberate trade-off, not an automatic deployment: the API
+loads the model named in the SENTIMENT_MODEL variable.
+The measured recommendation is in reports/model_comparison.md.
 """
 
 
 def build_default_models(train_texts: list[str], train_labels: list[str]):
-    """Trainiert die sklearn-Modelle und lädt die Transformer. Kann Gewichte herunterladen."""
+    """Trains the sklearn models and loads the transformers. May download weights."""
     from src.hf_models import iter_transformer_models
     from src.sklearn_models import train_sklearn_models
 
@@ -45,7 +45,7 @@ def run_comparison(
     output_dir: Path | None = None,
     log_mlflow: bool = True,
 ) -> list[dict]:
-    """Bewertet jedes Modell auf dem einen Testsplit und schreibt die Tabelle."""
+    """Evaluates every model on the one test split and writes the table."""
     train_frame, val_frame, test_frame = load_work_splits()
     test_texts = test_frame[TEXT_COLUMN].astype(str).tolist()
     test_labels = test_frame[LABEL_COLUMN].astype(str).tolist()
@@ -80,7 +80,7 @@ def run_comparison(
 
 
 def _evaluate_default(train_frame: pd.DataFrame, test_texts: list[str], test_labels: list[str]):
-    """Ein Modell nach dem anderen, damit nicht alle Transformer gleichzeitig im Speicher liegen."""
+    """One model after another, so not all transformers sit in memory at once."""
     import gc
 
     from src.hf_models import finetuned_is_ready, load_finetuned, load_pretrained
@@ -169,12 +169,12 @@ def _markdown(
     info = dataset_log_params()
     val_text = "—" if n_val is None else str(n_val)
     lines = [
-        "# Modellvergleich",
+        "# Model comparison",
         "",
-        f"Datensatz: {info['dataset']} ({info['dataset_kind']}).",
+        f"Dataset: {info['dataset']} ({info['dataset_kind']}).",
         f"Split: {info['split_rule']}, Seed {info['random_seed']}, "
         f"n_train={n_train}, n_val={val_text}, n_test={n_test}.",
-        "Labelraum: negative, neutral, positive.",
+        "Label space: negative, neutral, positive.",
         "",
         _markdown_table(table),
         "",
@@ -182,10 +182,10 @@ def _markdown(
         "",
     ]
     if skipped:
-        lines.append("Nicht bewertet, weil das Artefakt fehlt: " + ", ".join(skipped) + ".")
-        lines.append("Fine-Tuning: `python -m src.finetune` (siehe README, GPU bzw. Colab).")
+        lines.append("Not evaluated because the artefact is missing: " + ", ".join(skipped) + ".")
+        lines.append("Fine-tuning: `python -m src.finetune` (see README, GPU or Colab).")
         lines.append("")
-    lines.append("## Kurznoten")
+    lines.append("## Short notes")
     lines.append("")
     notes = {row["model"]: row.get("notes", "") for row in rows}
     for _, record in table.iterrows():
@@ -217,8 +217,8 @@ def _markdown_table(table: pd.DataFrame) -> str:
 def _print_table(csv_path: Path, skipped: list[str]) -> None:
     print(csv_path.read_text(encoding="utf-8"))
     if skipped:
-        print("Übersprungen:", ", ".join(skipped))
-    print(f"Tabelle: {csv_path}")
+        print("Skipped:", ", ".join(skipped))
+    print(f"Table: {csv_path}")
 
 
 def _log_comparison_artifact(csv_path: Path, markdown_path: Path, shared: dict) -> None:
@@ -234,7 +234,7 @@ def _log_comparison_artifact(csv_path: Path, markdown_path: Path, shared: dict) 
 
 
 def main() -> None:
-    print("Vollständiger Vergleich. Transformer-Gewichte werden bei Bedarf geladen.")
+    print("Full comparison. Transformer weights are downloaded if needed.")
     run_comparison()
 
 

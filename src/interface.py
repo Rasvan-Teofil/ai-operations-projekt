@@ -1,8 +1,8 @@
-"""Gemeinsame Inferenz-Schnittstelle für alle Sentiment-Modelle.
+"""Shared inference interface for all sentiment models.
 
-Jedes Modell liefert ``predict_proba(texts)``: eine Verteilung über
-negative, neutral und positive. Die API und der Vergleich kennen
-keine modellspezifischen Aufrufe.
+Every model provides ``predict_proba(texts)``: a distribution over
+negative, neutral and positive. The API and the comparison know no
+model-specific calls.
 """
 
 from abc import ABC, abstractmethod
@@ -18,7 +18,7 @@ class SentimentModel(ABC):
 
     @abstractmethod
     def predict_proba(self, texts: Sequence[str]) -> list[dict[str, float]]:
-        """Wahrscheinlichkeiten je Text, Schlüssel sind die drei Klassen."""
+        """Probabilities per text; the keys are the three classes."""
 
     def predict(self, texts: Sequence[str]) -> list[str]:
         return [label_from_scores(scores) for scores in self.predict_proba(texts)]

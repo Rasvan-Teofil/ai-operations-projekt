@@ -1,4 +1,4 @@
-"""Metriken und Konfusionsmatrix im festen Klassenraum."""
+"""Metrics and confusion matrix in the fixed class space."""
 
 from src.evaluate import confusion_frame
 

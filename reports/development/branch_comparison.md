@@ -1,64 +1,66 @@
-# Abschließender Vergleich mit dem anderen Branch
+# Final comparison of the first and second iteration
 
-**Erst nach Abschluss der Ablationen, Auswahl und vollständigem Release-Training ausgeführt.** Die externe Bewertung änderte weder Auswahl noch Modelle.
+**Run only after the ablations, the selection and the full release training were finished.** The external evaluation changed neither the selection nor the models.
 
-| Lösung | macro-F1 EN nativ | macro-F1 DE übersetzt | macro-F1 gemeinsam (sekundär) | ms/Text | MiB |
+| Solution | macro-F1 EN native | macro-F1 DE translated | macro-F1 combined (secondary) | ms/text | MiB |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | colleague_main_default | 0.4524 | 0.4293 | 0.4410 | 0.250 | 4.08 |
 | second_path_v1 | 0.7360 | 0.6458 | 0.6909 | 2.335 | 465.14 |
 | second_path_v2 | 0.7293 | 0.6557 | 0.6925 | 2.326 | 240.73 |
 
-![Gemeinsamer externer Vergleich](branch_comparison.png)
+`colleague_main_default` is our first iteration (TF-IDF + LinearSVC, commit `a840bb7`), reconstructed. The name is the key in the JSON/CSV files.
 
-Auf den 600 nativen englischen Headlines liegt v2 um +0.2770 macro-F1 vor dem rekonstruierten Kollegen-Standard. Ein gepaarter Bootstrap über diese 600 bereits vorhergesagten Headlines (1000 Ziehungen, Seed 20261019) ergibt ein 95-%-Perzentilintervall der Differenz [0.2257, 0.3249]. Keine zusätzlichen Modellvorhersagen oder Modellwahl durch Bootstrap.
+![Shared external comparison](branch_comparison.png)
 
-**Kein pauschaler Genauigkeitsgewinn von v2 gegenüber v1 behauptet:** Englisch bewegt sich von 0.7360 auf 0.7293; übersetztes Deutsch von 0.6458 auf 0.6557. Die Artefaktgröße bewegt sich von 465.1 auf 240.7 MiB. Der Unterschied Englisch v1/v2 wird hier nicht als signifikant bezeichnet.
+On the 600 native English headlines, v2 is +0.2770 macro-F1 ahead of our reconstructed first iteration (LinearSVC). A paired bootstrap over these 600 already predicted headlines (1,000 resamples, seed 20261019) gives a 95 % percentile interval for the difference of [0.2257, 0.3249]. No additional model predictions or model selection via bootstrap.
 
-Der Kollegen-Standard ist erheblich kleiner und schneller auf CPU. Unser Encoder nutzt CUDA und ist trotz BF16 größer und langsamer. Für das vorgegebene Qualitätsziel spricht dieser externe Benchmark für den Encoder; für enge CPU-/Speicherbudgets bleibt LinearSVC ein klarer Trade-off. Das ist keine allgemeine Rangliste für andere Nachrichtendomänen.
+**No general accuracy gain of v2 over v1 is claimed:** English moves from 0.7360 to 0.7293; translated German from 0.6458 to 0.6557. Artefact size moves from 465.1 to 240.7 MiB. The English v1/v2 difference is not called significant here.
 
-## Herkunft, Filter, Grenzen
+Our first iteration (LinearSVC) is considerably smaller and faster on CPU. Our encoder uses CUDA and, despite BF16, is larger and slower. For the given quality goal this external benchmark favours the encoder; for tight CPU/memory budgets LinearSVC remains a clear trade-off. This is not a general ranking for other news domains.
 
-[SEntFiN](https://github.com/pyRis/SEntFiN), Revision `eba43610fe3cb57a3e5773cd6c037da1f8992ad5`, ursprüngliches Repo unter [MIT](https://github.com/pyRis/SEntFiN/blob/eba43610fe3cb57a3e5773cd6c037da1f8992ad5/LICENSE); Sinha, Kedas, Kumar, Malo. Von 10.753 englischen Headlines bleiben 9.512 mit einem einheitlichen Sentiment für sämtliche genannten Entitäten und gültiger Länge. Nach normalisierten Duplikaten und Prüfung gegen beide Trainingskorpora bleiben 9.453; kein exakter normalisierter Trainingsüberlapp wurde gefunden. Je 200 negative, neutrale und positive Headlines werden ohne Modellvorhersagen mit Seed 20261019 gezogen.
+## Provenance, filters, limits
 
-Die englischen Labels stammen aus der menschlichen Entitätsannotation. Das Übertragen auf den ganzen Titel erfolgt nur bei einstimmigen Entitätslabels; das bleibt eine Operationalisierung, keine neue Annotation. Die 600 deutschen Texte werden aus genau diesen Titeln mit [Helsinki-NLP/opus-mt-en-de](https://huggingface.co/Helsinki-NLP/opus-mt-en-de), CC-BY-4.0, Revision `6183067f769a302e3861815543b9f312c71b0ca4` übersetzt (Beam 4, kein Sampling, Kontext 256, max. 128 neue Token). Kein englischer Quelltext wurde durch den Kontext gekürzt. Deutsche Labels sind übernommen: Übersetzungsfehler und eine veränderte Tonalität wurden nicht unabhängig geprüft. **DE ist deshalb ein MT-Transfercheck, kein nativer deutscher Goldtest.**
+[SEntFiN](https://github.com/pyRis/SEntFiN), revision `eba43610fe3cb57a3e5773cd6c037da1f8992ad5`, original repo under [MIT](https://github.com/pyRis/SEntFiN/blob/eba43610fe3cb57a3e5773cd6c037da1f8992ad5/LICENSE); Sinha, Kedas, Kumar, Malo. Of 10,753 English headlines, 9,512 remain with one consistent sentiment for all mentioned entities and a valid length. After removing normalised duplicates and checking against both training corpora, 9,453 remain; no exact normalised training overlap was found. 200 negative, 200 neutral and 200 positive headlines are drawn without model predictions, seed 20261019.
 
-Der Benchmark ist klassenbalanciert, besteht aus Headlines und hat 600 unterschiedliche Titelpaare. Er repräsentiert weder natürliche Nachrichtenhäufigkeiten noch vollständig gelabelte Artikel. Semantischer Ereignisüberlapp und Vortrainingskontamination sind unbekannt. Die alte Testzahl 0,720 und die alte eigene Zahl 0,7187 werden nicht zur Rangbildung benutzt.
+The English labels come from human entity annotation. They are transferred to the whole headline only when all entity labels agree; this remains an operationalisation, not a new annotation. The 600 German texts are translated from exactly these headlines with [Helsinki-NLP/opus-mt-en-de](https://huggingface.co/Helsinki-NLP/opus-mt-en-de), CC-BY-4.0, revision `6183067f769a302e3861815543b9f312c71b0ca4` (beam 4, no sampling, context 256, max. 128 new tokens). No English source text was truncated by the context. German labels are carried over: translation errors and shifted tone were not checked independently. **DE is therefore an MT transfer check, not a native German gold test.**
 
-## Unveränderte Referenz, kein nachgetragener Lauf auf main
+The benchmark is class-balanced, consists of headlines and has 600 distinct headline pairs. It represents neither natural news frequencies nor fully labelled articles. Semantic event overlap and pre-training contamination are unknown. The old test score 0.720 and our old own score 0.7187 are not used for ranking.
 
-Der Referenzcode liegt ausschließlich in einem separaten detached Checkout auf `a840bb7bc8f1656f1700ccabaa89837ce347ca2b`. Der Adapter importiert `new_linearsvc` und die originale `prepare()`-Funktion. Er kopiert keine Modellimplementierung in second-path und ruft niemals `src.train` oder das ursprüngliche MLflow-Experiment auf. Referenz-Trainingsdaten: 5.923 Zeilen aus Phrasebank EN und Kenpache DE; pandas 3.0.6, scikit-learn 1.9.1 und joblib 1.6.0 wie in deren Requirements. Unsere Modelle trainieren auf 8.335 Kenpache-DE/EN-Zeilen. Der Vergleich trennt daher nicht den Effekt der Architektur von der Trainingsdatenwahl.
+## Unchanged reference, no retrofitted run on main
 
-Die ursprünglichen trainierten Gewichte des Kollegen waren nicht verfügbar. Das Ergebnis ist eine Rekonstruktion des gelieferten Standardverfahrens mit unverändertem Code und erneut hergestelltem Trainingssplit; es wird weder Bitgleichheit zum damaligen Artefakt noch zum damaligen Testsplit behauptet. Code-, Daten- und Artefakthashes stehen in `peer_provenance.json`, die Referenz-Abhängigkeiten in `reference_requirements.txt`.
+The reference code lives only in a separate detached checkout at `a840bb7bc8f1656f1700ccabaa89837ce347ca2b`. The adapter imports `new_linearsvc` and the original `prepare()` function. It copies no model implementation into second-path and never calls `src.train` or the original MLflow experiment. Reference training data: 5,923 rows from Phrasebank EN and Kenpache DE; pandas 3.0.6, scikit-learn 1.9.1 and joblib 1.6.0 as in its requirements. Our models train on 8,335 Kenpache DE/EN rows. The comparison therefore does not separate the effect of the architecture from the choice of training data.
 
-Alle drei neuen gemeinsamen Auswertungen liegen ausschließlich im Experiment `article-sentiment-second-path`, Tag `phase=final-branch-comparison`. Die Hauptbranch-Referenz und ihr MLflow-Verzeichnis bleiben unverändert.
+The trained weights of the first iteration were not available. The result is a reconstruction of the delivered default procedure with unchanged code and a re-created training split; bit-identity with the original artefact or test split is not claimed. Code, data and artefact hashes are in `peer_provenance.json`, the reference dependencies in `reference_requirements.txt`.
 
-## Entscheidungen nach Themen
+All three new shared evaluations live only in the experiment `article-sentiment-second-path`, tag `phase=final-branch-comparison`. The main-branch reference and its MLflow directory stay unchanged.
 
-| Thema | Beobachtung / Entscheidung |
+## Decisions by topic
+
+| Topic | Observation / decision |
 | --- | --- |
-| Qualität der Evidenz | Quellengetrennte Train-CV und zusätzlicher externer Audit statt eines weiteren Blicks auf den alten Test. Kein Beleg für allgemeine Artikelqualität. |
-| Trainingsgewichtung | Sprache×Klasse verändert die CV-Werte nur gering; kein belastbarer großer Genauigkeitsgewinn. |
-| Artikelverarbeitung | R2/R4 bestehen sechs statt zwei HTML-Fixtures; technische Verbesserung, kein menschlich gelabelter Artikelnachweis. Nicht Bestandteil des nach Zeit-Tie-Regel gewählten R3-Standards. |
-| Betrieb | R3/BF16 liefert ca. 241 statt 465 MiB; begrenztes Warten und Prüfung endlicher Scores verhindern zwei konkrete Betriebsfehler. Geringe Latenzunterschiede sind keine Signifikanzbehauptung. |
-| Kombination / Auswahl | Höchster CV-Punktwert: R4_combined mit 0.6740. Gewählt nach der vorab erklärten Nähe-/Latenzregel: R3_deploy mit 0.6729 und 2.381 ms. Kein nachträgliches Umdefinieren, um alles kombiniert auszuliefern. |
-| Kollege vs. second-path | Auf diesem gemeinsamen nativen EN-Benchmark bessere Encoder-Qualität gegen deutlich kleineren/schnelleren CPU-Standard. Andere Daten, Kosten und Sprachdomänen können die Entscheidung ändern. |
+| Quality of evidence | Source-separated train CV plus an external audit instead of another look at the old test. No evidence of general article quality. |
+| Training weights | Language×class changes the CV scores only slightly; no robust large accuracy gain. |
+| Article processing | R2/R4 pass six instead of two HTML fixtures; a technical improvement, not evidence from human-labelled articles. Not part of the R3 default chosen by the latency tie rule. |
+| Operations | R3/BF16 takes about 241 instead of 465 MiB; bounded waiting and a finite-score check prevent two concrete operational failures. Small latency differences are not a significance claim. |
+| Combination / selection | Highest CV point estimate: R4_combined with 0.6740. Chosen by the pre-declared tie/latency rule: R3_deploy with 0.6729 and 2.381 ms. No after-the-fact redefinition to ship everything combined. |
+| First vs. second iteration | On this shared native EN benchmark, better encoder quality vs. a much smaller/faster CPU default. Other data, costs and language domains can change the decision. |
 
-## Frisch reproduzieren (erst nach v2-Auswahl)
+## Reproduce from scratch (only after the v2 selection)
 
-In einem frischen Clone nach den v2-Befehlen im README. Der v1-Trainingsaufruf erzeugt nur den Vergleichsstand, keine alte Testbewertung. Auf dem aktuellen Tower sind die Artefakte bereits vorhanden und werden nicht überschrieben. Neue Berichte bleiben von den historischen getrennt.
+In a fresh clone, after the v2 commands in the README. The v1 training call only produces the comparison state, not an old test evaluation. On the current tower the artefacts already exist and are not overwritten. New reports stay separate from the historical ones.
 
 ```bash
 export SENTIMENT_DEV_REPORTS=reports/reproduction
 python -m pip install -r requirements-evaluation.txt
-python -m src.train finetuned
-git clone --no-checkout https://github.com/Rasvan-Teofil/ai-operations-projekt.git ../colleague-reference
-git -C ../colleague-reference checkout --detach a840bb7bc8f1656f1700ccabaa89837ce347ca2b
-python3.12 -m venv ../colleague-reference/.venv
-../colleague-reference/.venv/bin/python -m pip install -r reports/development/reference_requirements.txt
-../colleague-reference/.venv/bin/python src/peer_reference.py prepare --checkout ../colleague-reference --report reports/reproduction/peer_provenance.json
-python -m src.branch_benchmark prepare
-python -m src.branch_benchmark audit
-python -m src.development_report
+python -m second_path.train finetuned
+git clone --no-checkout https://github.com/Rasvan-Teofil/ai-operations-projekt.git ../iteration1-reference
+git -C ../iteration1-reference checkout --detach a840bb7bc8f1656f1700ccabaa89837ce347ca2b
+python3.12 -m venv ../iteration1-reference/.venv
+../iteration1-reference/.venv/bin/python -m pip install -r reports/development/reference_requirements.txt
+../iteration1-reference/.venv/bin/python second_path/peer_reference.py prepare --checkout ../iteration1-reference --report reports/reproduction/peer_provenance.json
+python -m second_path.branch_benchmark prepare
+python -m second_path.branch_benchmark audit
+python -m second_path.development_report
 ```
 
-Referenzdaten werden durch den Adapter auf die protokollierten HF-Snapshots gepinnt; die originale Filter-/Split-/Modellimplementierung bleibt unangetastet. Der Benchmark besitzt eine exklusive lokale Audit-Sperre. Originale Test-/Val-Dateien werden von unserer Entwicklung nicht als Bewertungsdaten verwendet.
+The adapter pins reference data to the logged HF snapshots; the original filter/split/model implementation stays untouched. The benchmark has an exclusive local audit lock. Original test/val files are not used as evaluation data by our development.

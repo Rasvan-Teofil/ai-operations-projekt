@@ -1,8 +1,8 @@
-"""Holt den Text genau eines Artikels.
+"""Fetches the text of exactly one article.
 
-Kein Crawlen: Links auf der Seite werden nicht verfolgt, Weiterleitungen
-auch nicht. ``robots.txt`` wird beachtet. Hosts, die auf loopback, private
-oder link-lokale Adressen zeigen, werden abgelehnt.
+No crawling: links on the page are not followed, and neither are
+redirects. ``robots.txt`` is respected. Hosts that resolve to loopback,
+private or link-local addresses are rejected.
 """
 
 import ipaddress
@@ -17,31 +17,31 @@ from src.config import REQUEST_TIMEOUT_SECONDS, USER_AGENT
 
 try:
     import trafilatura
-except ImportError:  # pragma: no cover - Abhängigkeit steht in requirements.txt
+except ImportError:  # pragma: no cover - dependency is listed in requirements.txt
     trafilatura = None
 
 
 class ScrapeError(Exception):
-    """Basisklasse für erwartbare Abrufprobleme."""
+    """Base class for expected fetch problems."""
 
 
 class FetchError(ScrapeError):
-    """Netzwerk, Statuscode oder unzulässige URL."""
+    """Network, status code or disallowed URL."""
 
 
 class RobotsDenied(ScrapeError):
-    """robots.txt verbietet diesen Abruf für unseren User-Agent."""
+    """robots.txt forbids this fetch for our user agent."""
 
 
 class EmptyArticleError(ScrapeError):
-    """Die Seite lieferte keinen lesbaren Haupttext."""
+    """The page returned no readable main text."""
 
 
 def fetch_article_text(url: str, timeout: float = REQUEST_TIMEOUT_SECONDS) -> str:
-    """Lädt eine http(s)-URL und gibt den Artikeltext zurück."""
+    """Downloads an http(s) URL and returns the article text."""
     parsed = _require_public_http_url(url)
     if not _robots_allow(parsed, timeout):
-        raise RobotsDenied("robots.txt verbietet den Abruf dieser URL.")
+        raise RobotsDenied("robots.txt forbids fetching this URL.")
     try:
         response = requests.get(
             url,
@@ -50,26 +50,26 @@ def fetch_article_text(url: str, timeout: float = REQUEST_TIMEOUT_SECONDS) -> st
             allow_redirects=False,
         )
     except requests.Timeout as exc:
-        raise FetchError("Abruf der URL hat das Zeitlimit überschritten.") from exc
+        raise FetchError("Fetching the URL timed out.") from exc
     except requests.RequestException as exc:
-        raise FetchError("Abruf der URL ist fehlgeschlagen.") from exc
+        raise FetchError("Fetching the URL failed.") from exc
     if response.is_redirect or response.is_permanent_redirect:
         raise FetchError(
-            "Weiterleitungen werden nicht verfolgt. Bitte die direkte Artikel-URL angeben."
+            "Redirects are not followed. Please provide the direct article URL."
         )
     try:
         response.raise_for_status()
     except requests.HTTPError as exc:
         status = exc.response.status_code if exc.response is not None else "?"
-        raise FetchError(f"Abruf der URL ist fehlgeschlagen (HTTP {status}).") from exc
+        raise FetchError(f"Fetching the URL failed (HTTP {status}).") from exc
     text = extract_main_text(response.text)
     if not text:
-        raise EmptyArticleError("Aus der Seite ließ sich kein Artikeltext lesen.")
+        raise EmptyArticleError("No article text could be read from the page.")
     return text
 
 
 def extract_main_text(html: str) -> str:
-    """Trafilatura, und wenn das nichts liefert, der sichtbare Text von article/main/body."""
+    """Trafilatura; if that returns nothing, the visible text of article/main/body."""
     if trafilatura is not None:
         try:
             extracted = trafilatura.extract(html)
@@ -93,17 +93,17 @@ def _beautifulsoup_text(html: str) -> str:
 def _require_public_http_url(url: str):
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"} or not parsed.hostname:
-        raise FetchError("Nur einzelne http- oder https-URLs sind erlaubt.")
+        raise FetchError("Only single http or https URLs are allowed.")
     host = parsed.hostname.lower().rstrip(".")
     if host in {"localhost", "localhost.localdomain"} or host.endswith((".local", ".internal")):
-        raise FetchError("Lokale Adressen werden nicht abgerufen.")
+        raise FetchError("Local addresses are not fetched.")
     try:
         literal = ipaddress.ip_address(host)
     except ValueError:
         literal = None
     if literal is not None:
         if not _is_public(literal):
-            raise FetchError("Nicht-öffentliche Adressen werden nicht abgerufen.")
+            raise FetchError("Non-public addresses are not fetched.")
         return parsed
     _reject_nonpublic_resolution(host)
     return parsed
@@ -113,16 +113,16 @@ def _reject_nonpublic_resolution(host: str) -> None:
     try:
         infos = socket.getaddrinfo(host, None)
     except socket.gaierror as exc:
-        raise FetchError("Host konnte nicht aufgelöst werden.") from exc
+        raise FetchError("Host could not be resolved.") from exc
     if not infos:
-        raise FetchError("Host konnte nicht aufgelöst werden.")
+        raise FetchError("Host could not be resolved.")
     for info in infos:
         try:
             address = ipaddress.ip_address(info[4][0])
         except ValueError:
             continue
         if not _is_public(address):
-            raise FetchError("Die URL zeigt auf eine nicht-öffentliche Adresse.")
+            raise FetchError("The URL points to a non-public address.")
 
 
 def _is_public(address: ipaddress.IPv4Address | ipaddress.IPv6Address) -> bool:
@@ -146,11 +146,11 @@ def _robots_allow(parsed, timeout: float) -> bool:
             allow_redirects=False,
         )
     except requests.RequestException as exc:
-        raise FetchError("robots.txt konnte nicht gelesen werden.") from exc
+        raise FetchError("robots.txt could not be read.") from exc
     if response.status_code == 404:
         return True
     if response.status_code >= 400 or response.is_redirect:
-        raise FetchError("robots.txt konnte nicht gelesen werden.")
+        raise FetchError("robots.txt could not be read.")
     parser = RobotFileParser()
     parser.parse(response.text.splitlines())
     return parser.can_fetch(USER_AGENT, parsed.geturl())

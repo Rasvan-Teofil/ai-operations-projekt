@@ -1,4 +1,4 @@
-"""Der Standardlauf bleibt bei den TF-IDF-Modellen."""
+"""The default run sticks to the TF-IDF models."""
 
 import sys
 

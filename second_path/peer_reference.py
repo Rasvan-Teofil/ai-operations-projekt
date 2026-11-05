@@ -1,6 +1,6 @@
 """Execute an unchanged reference checkout in its own Python environment.
 
-This adapter imports the colleague's implementation; it contains no copied model code.
+This adapter imports the first iteration's implementation (commit a840bb7); it contains no copied model code.
 Never call the reference src.train: that would evaluate its old test and log to its experiment.
 """
 import argparse

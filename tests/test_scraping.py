@@ -1,4 +1,4 @@
-"""Abruf eines einzelnen Artikels, ohne das Netz zu berühren."""
+"""Fetching a single article without touching the network."""
 
 import socket
 
@@ -41,7 +41,7 @@ def public_dns(monkeypatch):
 
 def test_localhost_is_rejected_without_a_request(monkeypatch):
     def boom(*args, **kwargs):
-        raise AssertionError("kein Netz")
+        raise AssertionError("no network")
 
     monkeypatch.setattr("src.scraping.requests.get", boom)
     with pytest.raises(FetchError):
@@ -56,7 +56,7 @@ def test_robots_disallow_does_not_fetch_the_article(monkeypatch, public_dns):
         assert timeout == 3
         if str(url).endswith("/robots.txt"):
             return DummyResponse(200, "User-agent: *\nDisallow: /\n")
-        raise AssertionError("Artikel darf bei Disallow nicht geladen werden")
+        raise AssertionError("article must not be fetched when disallowed")
 
     monkeypatch.setattr("src.scraping.requests.get", fake_get)
     with pytest.raises(RobotsDenied):

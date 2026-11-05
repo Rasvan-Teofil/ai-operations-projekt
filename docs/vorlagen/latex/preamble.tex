@@ -1,16 +1,16 @@
-% Gemeinsame Präambel. Keine Hauptdatei. Die Dokumentklasse steht in bericht/document.tex.
-% Vier Berichte binden diese Datei ein, deshalb gibt es hier kein einzelnes
-% `% !TEX root = ...`. LaTeX Workshop sucht Wurzeln nur unter **/bericht/document.tex.
+% Shared preamble. Not a main file. The document class is set in bericht/document.tex.
+% Four reports include this file, so there is no single `% !TEX root = ...` here.
+% LaTeX Workshop only looks for roots under **/bericht/document.tex.
 
 % ------------------------------------------------
-% Sprache & Encoding
+% Language & encoding
 % ------------------------------------------------
-\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
 % ------------------------------------------------
-% Layout & Typografie
+% Layout & typography
 % ------------------------------------------------
 \usepackage[a4paper,left=30mm,top=25mm,right=25mm,bottom=25mm]{geometry}
 \usepackage{lmodern}
@@ -19,22 +19,22 @@
 \onehalfspacing
 
 % ------------------------------------------------
-% Grafiken
+% Graphics
 % ------------------------------------------------
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{subcaption}
-% Suchpfade der Vorlage, plus das gemeinsame Logo.
-% Aufgelöst relativ zum bericht/-Ordner (Arbeitsverzeichnis von latexmk).
+% Template search paths, plus the shared logo.
+% Resolved relative to the bericht/ folder (latexmk working directory).
 \graphicspath{{Pictures/}{bilder/}{../../vorlagen/latex/Pictures/}}
 
 % ------------------------------------------------
-% Tabellen
+% Tables
 % ------------------------------------------------
 \usepackage{booktabs}
 
 % ------------------------------------------------
-% Literatur
+% Bibliography
 % ------------------------------------------------
 \usepackage{csquotes}
 \usepackage[backend=biber,style=authoryear]{biblatex}
@@ -52,7 +52,7 @@
 ]{hyperref}
 
 % ------------------------------------------------
-% Kopf- und Fußzeilen (aus Vorlage 2)
+% Headers and footers (from template 2)
 % ------------------------------------------------
 \usepackage[headsepline]{scrlayer-scrpage}
 \pagestyle{scrheadings}

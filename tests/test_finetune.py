@@ -1,4 +1,4 @@
-"""Smoke-Konfiguration, ohne Basismodell und ohne Netz."""
+"""Smoke configuration, without base model and without network."""
 
 import sys
 

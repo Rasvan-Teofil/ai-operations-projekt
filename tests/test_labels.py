@@ -1,4 +1,4 @@
-"""Abbildung auf drei Klassen und Chunk-Längen, ohne Modellgewichte."""
+"""Mapping to three classes and chunk lengths, without model weights."""
 
 import pytest
 

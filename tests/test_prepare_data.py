@@ -1,4 +1,4 @@
-"""Split-Helfer ohne Netz und ohne die echten Texte."""
+"""Split helpers without network and without the real texts."""
 
 import pandas as pd
 import pytest
@@ -50,5 +50,5 @@ def test_three_way_split_is_stratified_and_reproducible():
 
 def test_split_rejects_a_stratum_with_one_row():
     frame = _frame(1)
-    with pytest.raises(ValueError, match="stratifizierte Drei-Teilung"):
+    with pytest.raises(ValueError, match="stratified three-way split"):
         stratified_train_val_test(frame)

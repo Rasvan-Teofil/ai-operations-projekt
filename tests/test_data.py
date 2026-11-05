@@ -1,4 +1,4 @@
-"""Split und Dummy-Datensatz."""
+"""Split and dummy dataset."""
 
 from src.config import LABEL_COLUMN, LABELS_3, LANGUAGE_COLUMN, ORIGIN_COLUMN, TEST_SIZE, TEXT_COLUMN
 from src.data import load_dataset, load_work_splits, split_dataset

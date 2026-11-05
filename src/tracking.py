@@ -1,13 +1,13 @@
-"""Bewertet ein Modell und schreibt den Lauf nach MLflow.
+"""Evaluates a model and logs the run to MLflow.
 
-Metriken sind für jeden Lauf dieselben: Accuracy, macro-F1, F1 je Klasse,
-Inferenzzeit. Die Konfusionsmatrix liegt als CSV-Artefakt im Lauf.
+Metrics are the same for every run: accuracy, macro-F1, per-class F1,
+inference time. The confusion matrix is stored as a CSV artefact in the run.
 """
 
 import os
 
-# Vor dem Import: aktuelles MLflow blockiert den lokalen Ordner sonst,
-# und der Hinweis auf interne Skills gehört nicht in die Trainingsausgabe.
+# Before the import: current MLflow otherwise blocks the local folder,
+# and the hint about internal skills does not belong in the training output.
 os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
 os.environ.setdefault("MLFLOW_DISABLE_AGENT_HINT", "1")
 
@@ -25,7 +25,7 @@ from src.interface import SentimentModel
 
 
 def setup_mlflow() -> None:
-    """Lokaler Ordner ``mlruns/``. Aktuelles MLflow verlangt dafür eine Freigabe."""
+    """Local folder ``mlruns/``. Current MLflow requires an explicit opt-in for it."""
     os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
     os.environ.setdefault("MLFLOW_DISABLE_AGENT_HINT", "1")
     MLFLOW_TRACKING_DIR.mkdir(parents=True, exist_ok=True)
@@ -36,7 +36,7 @@ def setup_mlflow() -> None:
 
 
 def shared_dataset_params(n_train: int, n_test: int, n_val: int | None = None) -> dict:
-    """Herkunft kommt aus ``dataset_log_params``, damit Dummy und Echtlauf nicht vermischt werden."""
+    """Provenance comes from ``dataset_log_params`` so dummy and real runs are not mixed."""
     params = dataset_log_params()
     params["n_train"] = int(n_train)
     params["n_test"] = int(n_test)
@@ -47,11 +47,11 @@ def shared_dataset_params(n_train: int, n_test: int, n_val: int | None = None) -
 
 
 def evaluate_model(model: SentimentModel, texts: Sequence[str], y_true: Sequence[str]) -> dict:
-    """Misst Qualität und Inferenzzeit auf genau diesen Testtexten."""
+    """Measures quality and inference time on exactly these test texts."""
     texts = [str(text) for text in texts]
     y_true = [str(label) for label in y_true]
     if len(texts) != len(y_true):
-        raise ValueError("Texte und Labels sind unterschiedlich lang.")
+        raise ValueError("Texts and labels have different lengths.")
     started = time.perf_counter()
     predicted = model.predict(texts)
     elapsed = time.perf_counter() - started
@@ -72,7 +72,7 @@ def evaluate_model(model: SentimentModel, texts: Sequence[str], y_true: Sequence
 
 
 def log_evaluation(row: dict, shared_params: dict) -> None:
-    """Ein MLflow-Lauf pro Modell, plus Konfusionsmatrix."""
+    """One MLflow run per model, plus confusion matrix."""
     metrics = {
         **row["metrics"],
         "inference_seconds": row["inference_seconds"],

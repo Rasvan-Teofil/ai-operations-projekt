@@ -1,4 +1,4 @@
-"""Gültige und ungültige Anfragen. Kein Transformer, kein Netz."""
+"""Valid and invalid requests. No transformer, no network."""
 
 import os
 
@@ -77,7 +77,7 @@ def test_predict_url_uses_the_fetcher(client, monkeypatch):
 
 def test_predict_fetch_failure(client, monkeypatch):
     def boom(url):
-        raise FetchError("Abruf der URL ist fehlgeschlagen.")
+        raise FetchError("Fetching the URL failed.")
 
     monkeypatch.setattr("app.main.fetch_article_text", boom)
     response = client.post("/predict", json={"url": "https://example.com/missing"})
@@ -86,7 +86,7 @@ def test_predict_fetch_failure(client, monkeypatch):
 
 def test_predict_empty_article(client, monkeypatch):
     def empty(url):
-        raise EmptyArticleError("Aus der Seite ließ sich kein Artikeltext lesen.")
+        raise EmptyArticleError("No article text could be read from the page.")
 
     monkeypatch.setattr("app.main.fetch_article_text", empty)
     response = client.post("/predict", json={"url": "https://example.com/empty"})

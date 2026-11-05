@@ -1,0 +1,24 @@
+# First-iteration sentiment API. `docker compose up --build` trains
+# tfidf_linearsvc inside the image and serves it on port 8000.
+# Offline toy model: SENTIMENT_DATA=dummy docker compose up --build
+services:
+  api:
+    build:
+      context: .
+      args:
+        SENTIMENT_DATA: ${SENTIMENT_DATA:-prepared}
+    image: article-sentiment-api
+    ports:
+      - "8000:8000"
+    environment:
+      SENTIMENT_MODEL: ${SENTIMENT_MODEL:-tfidf_linearsvc}
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import json,urllib.request; body=json.load(urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=4)); raise SystemExit(0 if body.get('model_loaded') is True else 1)
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

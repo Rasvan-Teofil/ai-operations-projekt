@@ -1,18 +1,18 @@
-"""FastAPI-Dienst für die lokale Inferenz.
+"""FastAPI service for local inference.
 
-Start vom Projektroot, nachdem trainiert wurde:
+Start from the project root after training:
 
     python -m src.train
     uvicorn app.main:app --reload
 
-Standard ist ``tfidf_linearsvc`` (bestes macro-F1 im dokumentierten Vergleich,
-klein und schnell). Anderes Modell:
+The default is ``tfidf_linearsvc`` (best macro-F1 in the documented comparison,
+small and fast). Another model:
 
     SENTIMENT_MODEL=finetuned uvicorn app.main:app --reload
 
-Die CI setzt ``SENTIMENT_MODEL=tfidf_logreg`` und lädt keine Transformer.
-Fehlt das Artefakt, bleibt der Prozess oben: ``/health`` meldet das,
-``/predict`` antwortet mit HTTP 503.
+CI sets ``SENTIMENT_MODEL=tfidf_logreg`` and loads no transformers.
+If the artefact is missing, the process stays up: ``/health`` reports it,
+``/predict`` answers with HTTP 503.
 """
 
 import logging
@@ -29,29 +29,29 @@ logger = logging.getLogger("ai_operations.api")
 
 
 def load_predictor():
-    """Lädt das konfigurierte Modell. Transformer nur, wenn sie ausdrücklich gewählt sind."""
+    """Loads the configured model. Transformers only if explicitly selected."""
     name = selected_model_name()
     try:
         from src.registry import load_model
 
         return load_model(name), name, None
     except FileNotFoundError as exc:
-        logger.warning("Modell nicht geladen: %s", exc)
+        logger.warning("Model not loaded: %s", exc)
         return None, name, "missing"
     except Exception:
-        logger.exception("Modell %s konnte nicht geladen werden", name)
+        logger.exception("Model %s could not be loaded", name)
         return None, name, "unavailable"
 
 
 def _missing_detail(load_error: str | None, model_name: str) -> str:
     if load_error == "missing":
         return (
-            f"Modell '{model_name}' ist nicht auf der Platte. "
-            "Bitte im Projektroot `python -m src.train` ausführen."
+            f"Model '{model_name}' is not on disk. "
+            "Please run `python -m src.train` in the project root."
         )
     return (
-        f"Modell '{model_name}' konnte nicht geladen werden. "
-        "Namen prüfen oder bei Transformern requirements-transformer.txt installieren."
+        f"Model '{model_name}' could not be loaded. "
+        "Check the name, or install requirements-transformer.txt for transformers."
     )
 
 
@@ -63,15 +63,15 @@ async def lifespan(app: FastAPI):
     app.state.model_version = model.model_version if model is not None else None
     app.state.load_error = load_error
     if load_error:
-        logger.warning("API startet ohne Modell (%s): %s", load_error, name)
+        logger.warning("API starting without a model (%s): %s", load_error, name)
     else:
-        logger.info("Modell geladen: %s (%s)", model.name, model.model_version)
+        logger.info("Model loaded: %s (%s)", model.name, model.model_version)
     yield
 
 
 app = FastAPI(
     title="Artikel-Sentiment",
-    summary="Stimmung eines Nachrichtentexts oder einer einzelnen Artikel-URL.",
+    summary="Sentiment of a news text or a single article URL.",
     lifespan=lifespan,
 )
 
@@ -110,11 +110,11 @@ def predict(payload: PredictRequest, request: Request) -> PredictResponse:
         )
     text = _text_from_request(payload)
     if not text.strip():
-        raise HTTPException(status_code=422, detail="Kein Text zur Bewertung.")
+        raise HTTPException(status_code=422, detail="No text to classify.")
     try:
         scores = model.predict_proba([text])[0]
         label = label_from_scores(scores)
     except Exception as exc:
-        logger.exception("Vorhersage fehlgeschlagen")
-        raise HTTPException(status_code=500, detail="Vorhersage fehlgeschlagen.") from exc
+        logger.exception("Prediction failed")
+        raise HTTPException(status_code=500, detail="Prediction failed.") from exc
     return PredictResponse(label=label, scores=scores, model_version=model.model_version)

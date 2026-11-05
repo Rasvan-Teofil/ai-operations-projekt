@@ -1,28 +1,28 @@
-"""Fine-Tuning eines mehrsprachigen Transformers auf dem Trainings-Split.
+"""Fine-tuning a multilingual transformer on the training split.
 
-Smoke-Check auf der CPU, ein Schritt, wenige Sätze (lädt das Basismodell
-trotzdem einmal herunter, deshalb nicht in der CI):
+Smoke check on the CPU, one step, a few sentences (still downloads the base
+model once, so it is not part of CI):
 
     python -m src.finetune --smoke
 
-Echtes Training auf einer GPU, zum Beispiel Google Colab
-(Laufzeit → GPU ändern), im Projektroot:
+Real training on a GPU, for example Google Colab
+(Runtime → change to GPU), in the project root:
 
     pip install -r requirements.txt -r requirements-transformer.txt
     python -m src.finetune --epochs 3 --lr 2e-5 --batch-size 16 --max-length 256
 
-CPU-Subset, wenn keine GPU da ist (stratifizierte Stichprobe, eine Epoche).
-Bewertet wird trotzdem der volle Testsplit. Das volle Training bleibt GPU/Colab:
+CPU subset when no GPU is available (stratified sample, one epoch).
+Evaluation still uses the full test split. Full training stays on GPU/Colab:
 
     python -m src.finetune --epochs 1 --lr 2e-5 --batch-size 8 --max-length 128 --max-samples 2000
 
-Gewichte liegen danach in ``models/finetuned`` (nicht im Git).
-``--smoke`` schreibt nach ``models/finetuned-smoke`` und überschreibt
-das echte Artefakt nicht. Die API liest nur ``models/finetuned``.
+The weights then live in ``models/finetuned`` (not in Git).
+``--smoke`` writes to ``models/finetuned-smoke`` and does not overwrite
+the real artefact. The API only reads ``models/finetuned``.
 
-Basismodell ist ``distilbert-base-multilingual-cased``. Alternativ
-``--base-model tabularisai/multilingual-sentiment-analysis``; der
-Klassifikationskopf wird auf drei Labels neu aufgesetzt.
+The base model is ``distilbert-base-multilingual-cased``. Alternatively
+``--base-model tabularisai/multilingual-sentiment-analysis``; the
+classification head is re-initialised for three labels.
 """
 
 import argparse
@@ -61,9 +61,9 @@ class FinetuneConfig:
 
 
 def config_from_args(argv: list[str] | None = None) -> FinetuneConfig:
-    """Baut die Laufkonfiguration. ``--smoke`` setzt das Budget fest."""
-    parser = argparse.ArgumentParser(description="Fine-Tuning auf dem Trainings-Split.")
-    parser.add_argument("--smoke", action="store_true", help="Ein Schritt, vier Sätze, CPU, kurzer Kontext.")
+    """Builds the run configuration. ``--smoke`` fixes the budget."""
+    parser = argparse.ArgumentParser(description="Fine-tuning on the training split.")
+    parser.add_argument("--smoke", action="store_true", help="One step, four sentences, CPU, short context.")
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--lr", type=float, default=2e-5)
     parser.add_argument("--batch-size", type=int, default=8)
@@ -73,7 +73,7 @@ def config_from_args(argv: list[str] | None = None) -> FinetuneConfig:
         "--max-samples",
         type=int,
         default=None,
-        help="Stratifizierte Obergrenze der Trainingssätze. Leer heißt: der ganze Train-Split.",
+        help="Stratified cap on training sentences. Empty means the whole train split.",
     )
     args = parser.parse_args(argv)
     if args.smoke:
@@ -89,9 +89,9 @@ def config_from_args(argv: list[str] | None = None) -> FinetuneConfig:
             output_dir=FINETUNED_SMOKE_DIR,
         )
     if args.epochs < 1 or args.batch_size < 1 or args.max_length < 8 or args.lr <= 0:
-        raise ValueError("epochs, batch-size und max-length müssen positiv sein, max-length mindestens 8.")
+        raise ValueError("epochs, batch-size and max-length must be positive, max-length at least 8.")
     if args.max_samples is not None and args.max_samples < 1:
-        raise ValueError("max-samples muss mindestens 1 sein.")
+        raise ValueError("max-samples must be at least 1.")
     return FinetuneConfig(
         base_model=args.base_model,
         epochs=args.epochs,
@@ -106,11 +106,11 @@ def config_from_args(argv: list[str] | None = None) -> FinetuneConfig:
 
 
 def limit_samples(texts: list[str], labels: list[str], max_samples: int | None) -> tuple[list[str], list[str]]:
-    """Nimmt höchstens ``max_samples`` Zeilen, stratifiziert nach Label, Seed 42.
+    """Takes at most ``max_samples`` rows, stratified by label, seed 42.
 
-    Die ersten n Zeilen wären eine Klasse, wenn der Frame sortiert ist.
-    Klappt die Stratifizierung nicht (zu wenige Zeilen je Klasse), fallen
-    wir auf den Präfix zurück. Das betrifft nur den Smoke-Lauf.
+    The first n rows would be a single class if the frame is sorted.
+    If stratification fails (too few rows per class), we fall back to
+    the prefix. That only affects the smoke run.
     """
     texts = list(texts)
     labels = list(labels)
@@ -136,7 +136,7 @@ def limit_samples(texts: list[str], labels: list[str], max_samples: int | None) 
 
 
 def finetune(config: FinetuneConfig | None = None) -> dict:
-    """Trainiert und schreibt Metriken nach MLflow. Der schwere Teil steckt in ``_run_trainer``."""
+    """Trains and logs metrics to MLflow. The heavy part lives in ``_run_trainer``."""
     config = config or config_from_args([])
     train_frame, _val_frame, test_frame = load_work_splits()
     train_texts, train_labels = limit_samples(
@@ -201,7 +201,7 @@ def _run_trainer(
     test_texts: list[str],
     test_labels: list[str],
 ) -> dict:
-    """Lädt das Basismodell, trainiert einen 3-Klassen-Kopf, bewertet den Testsplit."""
+    """Loads the base model, trains a 3-class head, evaluates the test split."""
     if config.smoke:
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
     try:
@@ -215,8 +215,8 @@ def _run_trainer(
         )
     except ImportError as exc:
         raise RuntimeError(
-            "PyTorch oder Transformers fehlen. "
-            "Bitte `pip install -r requirements-transformer.txt` ausführen."
+            "PyTorch or Transformers is missing. "
+            "Please run `pip install -r requirements-transformer.txt`."
         ) from exc
 
     from src.hf_models import HuggingFaceSentimentModel
@@ -336,7 +336,7 @@ def _training_arguments(training_arguments_cls, kwargs: dict, smoke: bool):
 def main(argv: list[str] | None = None) -> None:
     config = config_from_args(argv)
     if config.smoke:
-        print("Smoke-Fine-Tuning: 1 Schritt, 4 Trainingssätze, CPU. Kein belastbares Modell.")
+        print("Smoke fine-tuning: 1 step, 4 training sentences, CPU. Not a usable model.")
     finetune(config)
 
 

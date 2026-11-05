@@ -11,52 +11,52 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      # Dummy-Stichprobe und TF-IDF. Kein Hugging-Face-Download, kein Fine-Tuning.
+      # Dummy sample and TF-IDF. No Hugging Face download, no fine-tuning.
       SENTIMENT_MODEL: tfidf_logreg
       SENTIMENT_DATA: dummy
     steps:
-      - name: Repository auschecken
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Python 3.12 einrichten
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
 
-      - name: Abhängigkeiten installieren
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
-      # Bewusst nur die TF-IDF-Modelle. --all und src.finetune laden Transformer.
-      - name: Baseline trainieren
+      # Deliberately only the TF-IDF models. --all and src.finetune load transformers.
+      - name: Train baseline
         run: python -m src.train
 
-      - name: Tests ausführen
+      - name: Run tests
         run: pytest
 
   second-path:
     runs-on: ubuntu-latest
     steps:
-      - name: Repository auschecken
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Python 3.12 einrichten
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: second_path/requirements.txt
 
-      # Kein CUDA-Torch. Die Tests prüfen API, Abruf und Tokenisierung, nicht das Training.
-      - name: Abhängigkeiten des zweiten Durchlaufs installieren
+      # No CUDA torch. The tests check API, fetching and tokenisation, not training.
+      - name: Install second-iteration dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r second_path/requirements.txt
 
-      - name: Transformer-Import prüfen
+      - name: Check transformer import
         run: python -c "import transformers, tokenizers, fastapi, bs4, numpy"
 
-      - name: Tests des zweiten Durchlaufs
+      - name: Second-iteration tests
         run: pytest tests/secondpath -q

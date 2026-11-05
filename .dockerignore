@@ -1,0 +1,27 @@
+# Host checkouts stay out of the build context. The train stage downloads
+# the sentence files itself and the runtime stage only receives joblib files.
+.git
+.github
+.venv
+venv
+env
+**/__pycache__
+**/*.py[cod]
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.coverage
+htmlcov
+data
+mlruns
+mlartifacts
+notebooks
+reports
+docs
+tests
+second_path
+models
+*.ipynb
+*.md
+.env
+.env.*

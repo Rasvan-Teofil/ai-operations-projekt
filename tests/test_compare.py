@@ -1,4 +1,4 @@
-"""Vergleich nutzt einen Testsplit, ohne Transformer zu laden."""
+"""The comparison uses one test split without loading transformers."""
 
 from src.config import TEXT_COLUMN
 from src.compare import SELECTION_NOTE, run_comparison
@@ -11,7 +11,7 @@ class FakeModel(SentimentModel):
         self.name = name
         self.model_version = f"{name}-v1"
         self.role = "test"
-        self.notes = f"Notiz {name}"
+        self.notes = f"Note {name}"
         self.seen: list[str] | None = None
 
     def predict_proba(self, texts):
