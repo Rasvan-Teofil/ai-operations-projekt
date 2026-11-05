@@ -1,5 +1,6 @@
 # Minimal runtime for the first-iteration API container (see Dockerfile).
 # Versions match requirements.txt. No MLflow, Jupyter, datasets or torch.
+# Training dependencies stay in requirements-docker-train.txt (build stage only).
 fastapi==0.143.0
 uvicorn==0.54.0
 pydantic==2.14.0

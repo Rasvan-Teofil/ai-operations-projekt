@@ -1,0 +1,9 @@
+# Builder stage only (see Dockerfile). Not installed in the runtime image.
+# Versions match requirements.txt. No MLflow, Jupyter, pytest, datasets or torch.
+# `python -m src.prepare_data` downloads dataset files via huggingface_hub;
+# it does not load Transformer weights.
+pandas==3.0.6
+huggingface_hub==1.33.0
+scikit-learn==1.9.1
+joblib==1.6.0
+numpy

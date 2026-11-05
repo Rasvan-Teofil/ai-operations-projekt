@@ -190,14 +190,50 @@ Other model: `SENTIMENT_MODEL=tfidf_logreg`, `tabularisai`, `cardiffnlp` or `fin
 
 ### Container (Docker)
 
-Minimal image for the first-iteration API (`requirements-api.txt`, no MLflow or torch). Build after `python -m src.train`, because `models/` is not in git:
+The image builds the first-iteration API and trains the default TF-IDF models while it builds, so a clean clone does not need a host-side `python -m src.train` or a bind-mount of `models/`. The build downloads the same two public sentence files as `python -m src.prepare_data` (not Transformer weights), fits `tfidf_linearsvc` and `tfidf_logreg`, and keeps only those joblib files. The running container installs `requirements-api.txt` and does not call Hugging Face.
+
+From the project root, with Docker Desktop:
+
+```bash
+docker compose up --build
+```
+
+Equivalent without Compose:
 
 ```bash
 docker build -t article-sentiment-api .
 docker run --rm -p 8000:8000 article-sentiment-api
 ```
 
-Health check and docs as above on port 8000. Without artefacts the container starts and `/health` reports `model_loaded: false`.
+Health (expect `model_loaded` true and `model_name` `tfidf_linearsvc`):
+
+```bash
+curl -s http://127.0.0.1:8000/health
+```
+
+German sentence:
+
+```bash
+curl -s -X POST http://127.0.0.1:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Die Aktie verlor nach der Gewinnwarnung deutlich an Wert."}'
+```
+
+English sentence:
+
+```bash
+curl -s -X POST http://127.0.0.1:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Samsung expects a nine-fold surge in quarterly profits, driven by demand for AI memory chips."}'
+```
+
+Stop with Ctrl-C, then `docker compose down`. Docs stay at <http://127.0.0.1:8000/docs>. Another baked model: `SENTIMENT_MODEL=tfidf_logreg docker compose up`.
+
+An offline image that trains only on the committed 18-sentence sample (no dataset download) is not the pitch model:
+
+```bash
+SENTIMENT_DATA=dummy docker compose up --build
+```
 
 ### Example calls
 
