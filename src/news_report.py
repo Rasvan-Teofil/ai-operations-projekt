@@ -75,6 +75,8 @@ def report():
     fig.text(.02, .02, f'{len(test)} held-out short news texts · native DE + EN · single AI annotation source · no human-gold accuracy claim', fontsize=10)
     fig.tight_layout(rect=(0, .07, 1, .92))
     fig.savefig(OUT / 'comparison.svg'); fig.savefig(OUT / 'comparison.png', dpi=160); plt.close(fig)
+    svg = OUT / 'comparison.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines()) + '\n')
     lines = ['# New Wikinews pilot — AI-labelled · Codex-reviewed', '',
         'This is a separate feasibility experiment, not a replacement for the historical human-labelled English benchmark. All figures measure agreement with one assistant’s reference annotations.', '',
         '| Model | Mean DE/EN F1 | DE F1 | EN F1 | Positive F1 | ms/text | MiB |',
