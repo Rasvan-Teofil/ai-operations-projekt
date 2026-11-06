@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import os
 import random
 import re
 import time
@@ -16,7 +17,7 @@ from bs4 import BeautifulSoup
 from src.config import ROOT, REPORTS
 
 LOCAL = ROOT / 'data/common_data_v3'
-OUT = REPORTS / 'common_data_v3'
+OUT = Path(os.getenv('SENTIMENT_NEWS_REPORTS', str(REPORTS / 'common_data_v3'))).resolve()
 SEED = 20261107
 USER_AGENT = 'AIOpsSecondPathDataReview/1.0 (https://github.com/Rasvan-Teofil/ai-operations-projekt)'
 
@@ -180,7 +181,38 @@ def collect(per_language=180):
     print('Collected', len(records), 'revision-pinned leads; no sentiment labels generated.', flush=True)
 
 
+def restore():
+    """Rebuild ignored inputs from the frozen public revisions and verify every byte."""
+    manifest = json.loads((OUT / 'source_manifest.json').read_text())
+    LOCAL.mkdir(parents=True, exist_ok=True)
+    (LOCAL / 'api_cache').mkdir(exist_ok=True)
+    rows = []
+    with httpx.Client(timeout=35, headers={'User-Agent': USER_AGENT}) as client:
+        for i, item in enumerate(manifest['articles']):
+            parsed = get_api(client, item['language'], {'action': 'parse', 'oldid': item['revision'],
+                'prop': 'text|externallinks|langlinks', 'disableeditsection': 1})['parse']
+            if parsed['revid'] != item['revision'] or parsed['pageid'] != item['page_id']:
+                raise RuntimeError('Restored revision mismatch')
+            text = lead_text(parsed['text'], item['title_key'].split(':', 1)[1])
+            if digest(text.encode()) != item['text_sha256']:
+                raise RuntimeError('Rendered lead changed; preserve evidence and inspect, do not silently substitute')
+            rows.append({'id': item['id'], 'language': item['language'], 'text': text, **item})
+            if i % 40 == 0:
+                print(f'Restored {i + 1}/{manifest["rows"]}', flush=True)
+    raw = ''.join(json.dumps(x, ensure_ascii=False) + '\n' for x in rows).encode()
+    if digest(raw) != manifest['sha256']:
+        raise RuntimeError('Collection bytes differ from frozen manifest')
+    path = LOCAL / 'articles.jsonl'
+    if path.exists() and path.read_bytes() != raw:
+        raise RuntimeError('Existing collection differs; refusing overwrite')
+    path.write_bytes(raw)
+    print('Original collection restored and SHA-256 verified.', flush=True)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--per-language', type=int, default=180)
-    collect(parser.parse_args().per_language)
+    parser.add_argument('--restore', action='store_true')
+    args = parser.parse_args()
+    if args.restore: restore()
+    else: collect(args.per_language)

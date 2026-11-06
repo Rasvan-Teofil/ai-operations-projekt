@@ -1,0 +1,28 @@
+Wikinews AI pilot v3 — attribution and scope
+
+Source: German and English Wikinews contributors.
+360 revision-pinned headline/lead inputs collected; 342 annotated items retained.
+Per-page source, revision, history/author credit, transformations and licences:
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/source_manifest.json
+
+German text: CC BY 2.5. English article-era licence: CC BY 2.5 for older
+material and CC BY 4.0 for material published after 16 December 2024.
+For later contributions to older English articles, retain both policy terms.
+We do not claim that a single licence overrides earlier contribution rights.
+
+Original texts retain their terms; images and quoted leads are excluded.
+Only the title and first substantive paragraph are used, with a complete-
+sentence lead cap of650characters and metadata removal. Original news text
+is kept outside Git; per-page credit and hashes are versioned.
+
+Reference annotations: AI-labelled / Codex-reviewed. The same Codex assistant
+created and reviewed these labels before candidate predictions. No human
+authorship, annotator consensus or human-gold verification is claimed.
+New annotation metadata is offered under CC0-1.0 to the extent project rights
+apply; this does not dedicate or relicense underlying Wikinews articles.
+Labels and rationales:
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/annotations.csv
+
+Model base MiniLM: Apache-2.0. New models were trained from the original
+pretrained base on this new dataset, without legacy restricted fine-tunes.
+Artifacts remain local, separate from the historical models.

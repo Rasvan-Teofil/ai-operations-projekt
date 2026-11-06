@@ -4,7 +4,7 @@ Reviewed **6 November 2026**. The website's [Data & licences page](http://127.0.
 
 The current Qwen zero-shot weights have an Apache-2.0 licence. Historical MiniLM and reconstructed LinearSVC use training data with non-commercial or unresolved permissions. We retain them as research artifacts pending clarification. A model's base licence does not resolve a separate training-data question. This is our conservative release policy, not a claim that every dataset condition automatically transfers to weights.
 
-The shortlist and comparison plan are in [the next-stage review](../docs/data-sources-next-stage.md). Candidate sources are **not used yet**. No corpus text or weights are included here. Publishing aggregate results, distributing source texts, using data commercially and distributing trained weights require separate scope checks.
+The shortlist and comparison plan are in [the next-stage review](../docs/data-sources-next-stage.md). **Wikinews now supplies a completed AI-labelled pilot**, with [new measured results](../reports/common_data_v3/comparison.md). GerNTSA and SENTiVENT are **not used yet**. No full source inputs or weights are included here; the source manifest retains bibliographic titles, attribution URLs and hashes. Publishing aggregate results, distributing source texts, using data commercially and distributing trained weights require separate scope checks.
 
 ## Retained notices and evidence
 
@@ -18,6 +18,8 @@ The shortlist and comparison plan are in [the next-stage review](../docs/data-so
 | [sentfin-MIT.txt](notices/sentfin-MIT.txt) | Exact SEntFiN repository licence; publisher text clearance not established |
 | [sentivent-scope.txt](notices/sentivent-scope.txt), [NOTICE](notices/sentivent-NOTICE.md) | Exact upstream scope and credits; third-party articles expressly excluded |
 | [kenpache-usage.txt](notices/kenpache-usage.txt), [wikinews-terms.txt](notices/wikinews-terms.txt) | Project-authored summaries linking the authoritative policies; not substitute grants |
+| [wikinews-ai-v3-ATTRIBUTION.txt](notices/wikinews-ai-v3-ATTRIBUTION.txt) | Actual new corpus credits, transformations and annotation provenance; per-page revisions in the source manifest |
+| [CC0-1.0.txt](notices/CC0-1.0.txt) | New AI annotation metadata offered under CC0 to the extent project rights apply; underlying Wikinews text retains its own CC BY terms |
 
 [notice_manifest.json](notice_manifest.json) records upstream URLs, retrieval date, transformations and SHA-256 hashes of retained files; extracted CC texts also record original response hashes. [source_checks.json](source_checks.json) records pinned model/dataset-card URLs and hashes. [gerntsa_audit.json](gerntsa_audit.json) contains only structural counts and a source hash; reviewed snippets stay in ignored `data/raw/license_review/`.
 

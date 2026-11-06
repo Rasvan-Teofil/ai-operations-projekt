@@ -86,5 +86,22 @@
     "bytes": 11358,
     "retrieved_on": "2026-11-06",
     "transform": "verbatim bytes"
+  },
+  {
+    "file": "CC0-1.0.txt",
+    "source_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.en",
+    "source_sha256": "b43732f4c1463b087cf10d4daf8d8766514b2bf8f21bc5ef50905f95be227726",
+    "sha256": "1fad692b4bed028174e80408883135298efd04afa404fad537b45b7957606941",
+    "bytes": 7999,
+    "retrieved_on": "2026-11-06",
+    "transform": "Official HTML legal-code body extracted as text; no substantive editing"
+  },
+  {
+    "file": "wikinews-ai-v3-ATTRIBUTION.txt",
+    "source_url": null,
+    "sha256": "e7ae4efdb8858e46a1040583c6d76b7af68e5b67d53b3f287a91aa697ebffea4",
+    "bytes": 1678,
+    "retrieved_on": "2026-11-06",
+    "transform": "Project-authored attribution and annotation-scope notice"
   }
 ]

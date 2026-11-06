@@ -106,7 +106,24 @@ def test_model_choice_is_cached_versioned_and_does_not_change_default(client, mo
     assert calls == ['minilm_v2']
     assert client.get('/health?model=minilm_v2').json()['model_loaded'] is True
     assert client.post('/predict', json={'text': 'Profits increased.'}).json()['model_version'] == 'sentence-test-v1'
-    assert set(row['id'] for row in client.get('/models').json()['models']) == {'minilm_v2', 'linearsvc_v2', 'qwen3_4b'}
+    models = client.get('/models').json()['models']
+    assert set(row['id'] for row in models) == {'minilm_v2', 'linearsvc_v2', 'qwen3_4b',
+        'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3'}
+    assert {row['id'] for row in models if row['experimental']} == {
+        'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3'}
+
+
+@pytest.mark.parametrize('model', ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3'])
+def test_experimental_model_choice_preserves_prediction_contract(client, monkeypatch, model):
+    def load(name):
+        predictor = SentenceStub()
+        predictor.version = 'ai-pilot-' + name
+        return predictor
+    monkeypatch.setattr(api, 'load_named_predictor', load)
+    data = client.post('/predict?model=' + model, json={'text': 'Profits increased.'}).json()
+    assert data['model_version'] == 'ai-pilot-' + model
+    assert set(data['scores']) == {'negative', 'neutral', 'positive'}
+    assert client.post('/predict', json={'text': 'Profits increased.'}).json()['model_version'] == 'sentence-test-v1'
 
 
 def test_unknown_or_unavailable_requested_model(client, monkeypatch):

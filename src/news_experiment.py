@@ -4,6 +4,7 @@ import csv
 import gc
 import hashlib
 import json
+import os
 import random
 import time
 from collections import Counter
@@ -26,7 +27,7 @@ from src.inference import SentimentNet, save_model
 from src.serving import load_artifact
 from src.tracking import tracking, fingerprint
 
-ART = MODELS / 'common_data_v3'
+ART = (ROOT / os.getenv('SENTIMENT_NEWS_MODELS', 'models/common_data_v3')).resolve()
 NAMES = {'frozen_news_v3': 'Frozen MiniLM · AI news pilot',
          'minilm_fp32_news_v3': 'MiniLM FP32 · v1 recipe / new AI data',
          'minilm_bf16_news_v3': 'MiniLM BF16 · v2 deployment / new AI data',
@@ -73,8 +74,9 @@ def groups(rows):
     return [rows[find(i)]['id'] for i in range(len(rows))]
 
 
-def prepare():
-    if (OUT / 'split_manifest.json').exists():
+def prepare(restore=False):
+    previous = read_json(OUT / 'split_manifest.json') if (OUT / 'split_manifest.json').exists() else None
+    if previous and not restore:
         raise RuntimeError('Splits already frozen; refusing to overwrite')
     source = read_json(OUT / 'source_manifest.json')
     assert digest((LOCAL / 'articles.jsonl').read_bytes()) == source['sha256']
@@ -118,12 +120,20 @@ def prepare():
                for lang in ['de', 'en'] for label in LABELS):
             raise ValueError(f'Insufficient cell coverage in fixed split: {split}, {counts}')
         raw = part.to_csv(index=False).encode()
-        (LOCAL / f'{split}.csv').write_bytes(raw)
+        if previous and digest(raw) != previous['splits'][split]['sha256']:
+            raise RuntimeError('Restored split differs from frozen bytes: ' + split)
+        split_path = LOCAL / f'{split}.csv'
+        if split_path.exists() and split_path.read_bytes() != raw:
+            raise RuntimeError('Existing split differs; refusing overwrite')
+        split_path.write_bytes(raw)
         manifest['splits'][split] = {'rows': len(part), 'sha256': digest(raw), 'language_label_counts': counts}
         manifest['membership'].extend({'id': r.id, 'group': r.group, 'split': split, 'text_sha256': r.text_sha256}
                                       for r in part.itertuples())
     assert not (set(df.iloc[test_ix]['group']) & set(df.iloc[val_ix]['group']))
-    write_json(OUT / 'split_manifest.json', manifest)
+    if previous and manifest != previous:
+        raise RuntimeError('Restored membership differs from frozen manifest')
+    if not previous:
+        write_json(OUT / 'split_manifest.json', manifest)
     print(json.dumps(manifest['splits'], indent=2), flush=True)
 
 
@@ -397,7 +407,8 @@ def evaluate(resume=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(); parser.add_argument('action', choices=['prepare', 'train', 'evaluate'])
-    parser.add_argument('--resume', action='store_true'); args = parser.parse_args()
-    if args.action == 'prepare': prepare()
+    parser.add_argument('--resume', action='store_true'); parser.add_argument('--restore', action='store_true')
+    args = parser.parse_args()
+    if args.action == 'prepare': prepare(args.restore)
     elif args.action == 'train': train()
     else: evaluate(args.resume)

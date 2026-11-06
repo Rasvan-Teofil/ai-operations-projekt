@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-06.1",
+  "version": "2026-11-06.2",
   "reviewed_on": "2026-11-06",
   "scope": "Current research demo and proposed next-stage data; not blanket commercial clearance or a licence for our own code.",
   "entries": [
@@ -130,19 +130,20 @@
     {
       "id": "wikinews",
       "name": "Wikinews · German and English",
-      "group": "candidate",
-      "use": "Recommended starting point for a new, human-labelled general-news corpus.",
+      "group": "current",
+      "use": "New AI-labelled news pilot: 360 native DE/EN title+lead inputs collected; 342 labelled, 244 Train /49 Val /49 Test.",
       "license": "DE text: CC-BY-2.5; EN text after 2024-12-16: CC-BY-4.0; older EN usually CC-BY-2.5",
-      "status": "Open-text candidate; sentiment labels still required.",
-      "scope": "Attribution licences permit commercial sharing and adaptation of covered text. Record each page revision, authors/history, source URL, licence and changes. Exclude images and unverified third-party quotations. The English date rule is not a German licence rule. No sentiment gold labels are supplied; neutral reporting style is not the neutral class. Treat this as an archive: the Wikimedia board announced read-only mode from 4 May 2026, not an ongoing news feed.",
+      "status": "Open-text AI-labelled pilot; single-assistant reference labels.",
+      "scope": "Attribution licences permit commercial sharing/adaptation of covered text. Per-page source/revision/history links, hashes and transformations are retained. German text CC BY2.5; English article-era policy CC BY2.5/4.0, with both terms preserved for later contributions to older articles. Images/quoted leads excluded. This is a small single-source short-news pilot; the same AI created and reviewed the labels, not a human annotation panel.",
       "attribution": "Wikinews / de.wikinews.org and article contributors, with original page/history links.",
-      "revision": "Policy snapshots: EN oldid=4991371; DE oldid=849219. Article revisions not selected yet.",
+      "revision": "Per-page revisions frozen in reports/common_data_v3/source_manifest.json; protocol commit cbf0d86.",
       "source_url": "https://en.wikinews.org/wiki/Main_Page",
       "license_url": "https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371",
       "notices": [
         "CC-BY-2.5.txt",
         "CC-BY-4.0.txt",
-        "wikinews-terms.txt"
+        "wikinews-terms.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
       ]
     },
     {
@@ -177,6 +178,103 @@
         "sentivent-scope.txt",
         "sentivent-NOTICE.md",
         "CC-BY-4.0.txt"
+      ]
+    },
+    {
+      "id": "frozen_news_v3",
+      "name": "Frozen MiniLM · AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_fp32_news_v3",
+      "name": "MiniLM v1 recipe · new AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_bf16_news_v3",
+      "name": "MiniLM v2 BF16 deployment · new AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "linearsvc_news_v3",
+      "name": "LinearSVC · new AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "codex_annotations",
+      "name": "New Wikinews reference annotations",
+      "group": "current",
+      "use": "342 three-class AI reference labels and18 recorded exclusions; created before model predictions.",
+      "license": "CC0-1.0 for new annotation metadata, to the extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed; single AI annotator.",
+      "scope": "The same assistant created and reviewed each label from the exact source input. No human annotator panel or consensus; exact serving-model revision is unavailable. Short rationales, text hashes and split membership are retained. CC0 does not cover original article text.",
+      "attribution": "Codex assistant in this project chat; annotations generated at user request.",
+      "revision": "Frozen in cbf0d86 before fitting and test inference.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/annotations.csv",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notices": [
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
       ]
     }
   ]

@@ -35,7 +35,7 @@ def test_inventory_is_same_as_git_and_available_without_weights(client):
     assert response.json() == json.loads((LICENCES / 'inventory.json').read_text())
     entries = response.json()['entries']
     assert set(api.MODEL_NAMES) <= {e['id'] for e in entries if e['group'] == 'current'}
-    assert {e['id'] for e in entries if e['group'] == 'candidate'} == {'wikinews', 'gerntsa', 'sentivent'}
+    assert {e['id'] for e in entries if e['group'] == 'candidate'} == {'gerntsa', 'sentivent'}
     for entry in entries:
         for key in ('source_url', 'license_url'):
             assert urlsplit(entry[key]).scheme == 'https'
@@ -59,7 +59,8 @@ def test_restricted_data_is_not_presented_as_permissive(client):
     assert entries['phrasebank']['license'] == 'CC-BY-NC-SA-3.0'
     assert 'source news explicitly excluded' in entries['sentivent']['license']
     assert 'publisher' in entries['sentfin']['status']
-    assert 'labels still required' in entries['wikinews']['status']
+    assert 'AI-labelled' in entries['wikinews']['status']
+    assert entries['codex_annotations']['group'] == 'current'
 
 
 def test_all_notices_serve_exact_verified_bytes(client):

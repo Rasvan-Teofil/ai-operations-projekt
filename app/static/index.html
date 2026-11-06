@@ -17,7 +17,7 @@
           <label for="model-choice">Model</label>
           <select id="model-choice"><option value="">Benchmark default</option></select>
           <p class="hint model-note">Choose a model for this request. The first use may take longer while its local weights load.</p>
-          <p class="licence-banner">Research demo: the older classifiers use restricted training data. <a href="/licenses">Data &amp; licences</a> lists every current model, source and the proposed replacement data.</p>
+          <p class="licence-banner">Research demo: new AI news pilot models are experimental; older classifiers use restricted training data. <a href="/licenses">Data &amp; licences</a> lists the sources and terms.</p>
           <fieldset><legend>Input source</legend>
             <label><input type="radio" name="source" value="text" checked> Text</label>
             <label><input type="radio" name="source" value="url"> Article URL</label></fieldset>
@@ -53,8 +53,17 @@
       <div id="highlighted-text" class="highlighted-text"></div>
       <p id="sentence-scores" class="hint" aria-live="polite">Select a coloured sentence to inspect its scores.</p>
     </section>
+    <section class="panel evidence" aria-labelledby="news-title">
+      <p class="eyebrow">NEW DATA / GPU TRAINING COMPLETED</p><h2 id="news-title">AI-labelled · Codex-reviewed</h2>
+      <p>New native German and English Wikinews headlines with short leads: 244 training items, 49 held-out test items. One AI annotator created and reviewed the reference labels without candidate predictions. Val was unused.</p>
+      <p id="news-status" role="status">Loading the new recorded comparison…</p>
+      <div class="table-scroll"><table><caption>Agreement with AI reference labels · mean DE/EN macro-F1 · not human-gold accuracy</caption><thead><tr><th scope="col">Model</th><th scope="col">Mean F1</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">ms/text</th><th scope="col">MiB</th></tr></thead><tbody id="news-rows"></tbody></table></div>
+      <img id="news-chart" src="/comparison/news-v3.svg" alt="New AI-labelled Wikinews pilot: measured agreement, latency and size for four newly fitted or derived classifier artifacts and unchanged zero-shot Qwen." loading="lazy">
+      <p class="licence-banner">The fine-tune did not beat the frozen baseline in this pilot. All four trained classifiers missed the positive class on this small test. Qwen remains the default. Experimental models can be selected above; this pilot does not establish an improvement over the older versions.</p>
+      <p class="hint">Only 4 DE and 6 EN positive test items. The FP32 and BF16 variants share the same new fine-tuning; BF16 is a storage/serving derivation. AI annotation errors, archive bias and pretraining overlap remain possible. <a href="/comparison/news-v3">Results JSON</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/comparison.md">Protocol, labels and MLflow run IDs</a>.</p>
+    </section>
     <section class="panel evidence" aria-labelledby="evidence-title">
-      <div class="evidence-header"><div><p class="eyebrow">MEASURED COMPARISON</p><h2 id="evidence-title">Why this model?</h2></div>
+      <div class="evidence-header"><div><p class="eyebrow">EARLIER SENTFIN BENCHMARK</p><h2 id="evidence-title">Why the current default?</h2></div>
         <a href="/docs">API documentation ↗</a></div>
       <p>All three models see the same fresh 600 English headlines and their German translations. Native English macro-F1 selects the model; within 0.005, latency and size decide.</p>
       <p id="selected-model" role="status">Loading recorded results…</p>

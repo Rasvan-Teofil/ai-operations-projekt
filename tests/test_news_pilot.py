@@ -68,3 +68,37 @@ def test_metrics_keep_all_three_classes_when_a_model_misses_one():
     assert result['f1_negative'] == 0
     assert result['accuracy'] == pytest.approx(2 / 3)
     assert result['macro_f1'] == pytest.approx((0 + 2 / 3 + 1) / 3)
+
+
+def test_completed_test_is_not_probed_again(tmp_path, monkeypatch):
+    (tmp_path / 'protocol.json').write_text('{}\n')
+    (tmp_path / 'trained.json').write_text(json.dumps({'models': [],
+        'protocol_sha256': digest((tmp_path / 'protocol.json').read_bytes())}))
+    (tmp_path / 'evaluation.lock').write_text(json.dumps({'status': 'complete'}))
+    monkeypatch.setattr(experiment, 'OUT', tmp_path)
+    monkeypatch.setattr(experiment, 'gpu', lambda: None)
+    monkeypatch.setattr(experiment, 'verified', lambda: {})
+    def forbidden(path):
+        raise AssertionError('A finished evaluation must stop before loading any model')
+    monkeypatch.setattr(experiment, 'load_artifact', forbidden)
+    with pytest.raises(RuntimeError, match='already started/completed'):
+        experiment.evaluate(resume=True)
+
+
+def test_reproduction_preserves_frozen_evidence_and_rejects_reused_name(tmp_path, monkeypatch):
+    from src import news_reproduce
+    reports, models = tmp_path / 'reports', tmp_path / 'models'
+    source = reports / 'common_data_v3'; source.mkdir(parents=True)
+    for name in ['protocol.json', 'source_manifest.json', 'split_manifest.json', 'annotations.csv', 'overlap_audit.json']:
+        (source / name).write_text('frozen-' + name)
+    monkeypatch.setattr(news_reproduce, 'ROOT', tmp_path)
+    monkeypatch.setattr(news_reproduce, 'REPORTS', reports)
+    monkeypatch.setattr(news_reproduce, 'MODELS', models)
+    env = news_reproduce.prepare('check-01')
+    assert env['SENTIMENT_NEWS_MODELS'] == 'models/reproduction/news-check-01'
+    assert (reports / 'reproduction/news-check-01/protocol.json').read_bytes() == (source / 'protocol.json').read_bytes()
+    with pytest.raises(RuntimeError, match='already exists'):
+        news_reproduce.prepare('check-01')
+    with pytest.raises(ValueError):
+        news_reproduce.prepare('../overwrite')
+    assert (source / 'protocol.json').read_text() == 'frozen-protocol.json'

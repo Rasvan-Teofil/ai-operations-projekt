@@ -141,6 +141,8 @@ def test_comparison_missing_is_explicit(client, monkeypatch, tmp_path):
     monkeypatch.setattr(src.config, 'REPORTS', tmp_path)
     assert client.get('/comparison').status_code == 503
     assert client.get('/comparison.svg').status_code == 503
+    assert client.get('/comparison/news-v3').status_code == 503
+    assert client.get('/comparison/news-v3.svg').status_code == 503
 
 
 def test_serving_selection_loads_same_artifact_and_version(monkeypatch, tmp_path):

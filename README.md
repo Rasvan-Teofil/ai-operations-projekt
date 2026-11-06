@@ -4,7 +4,56 @@ Eigenständiger Lösungsweg ab dem leeren Commit `830bba1`. Kein Code und kein M
 
 ## Current deployment: local LLM follow-up (6 November 2026)
 
-**Data and licences:** [website](http://127.0.0.1:8000/licenses) · [versioned inventory and retained licence texts](licenses/README.md) · [source shortlist and proposed shared-data comparison](docs/data-sources-next-stage.md). The homepage links this record. The current demo retains legacy classifiers trained with restricted data; this is not a blanket commercial release. Proposed replacement sources have not changed the weights, benchmark or winner. Source/annotation rights must be settled before a new training stage. The API serves the same inventory at `/licenses/inventory` without fetching external pages.
+**Data and licences:** [website](http://127.0.0.1:8000/licenses) · [versioned inventory and retained licence texts](licenses/README.md) · [source review and future human-labelled comparison](docs/data-sources-next-stage.md). The current demo retains legacy classifiers trained with restricted data alongside new, separate Wikinews AI-pilot artifacts. This is not a blanket commercial release. The API serves the shared inventory at `/licenses/inventory` without fetching external pages.
+
+### New data pilot completed: AI-labelled · Codex-reviewed
+
+At the user's request, this assistant read and labelled **360 native German/English Wikinews title+lead inputs**, with a short decision rationale for each. It excluded 18 ambiguous or broken extracts, leaving **342 labels: 189 negative, 88 neutral, 65 positive**. These are single-AI reference annotations with self-review, not a human annotator panel. No candidate predictions were used to create the labels. The exact assistant model serving revision is unavailable; no stronger-than-human claim is made.
+
+The frozen split is **244 Train / 49 Val / 49 Test**, seed `20261107`, approximately 5/7–1/7–1/7 using StratifiedGroupKFold on language:label. Linked language pages, common external source URLs and near-duplicates stay together; remaining event overlap is possible. No known normalized input/title matches against the old project splits or the earlier shared benchmarks were found. **Val was never opened for training or model choice; each candidate predicted each new Test text once.**
+
+| New-data condition | Mean DE/EN macro-F1 agreement | DE | EN | Warm ms/text | MiB |
+|---|---:|---:|---:|---:|---:|
+| Frozen MiniLM GPU baseline | 0.4042 | 0.4247 | 0.3837 | 3.215 | 465.14 |
+| New MiniLM fine-tune, v1 recipe / FP32 | 0.3970 | 0.3957 | 0.3983 | 3.203 | 465.14 |
+| Same new fine-tune, v2 deployment / BF16 | 0.3970 | 0.3957 | 0.3983 | 3.581 | 240.73 |
+| Newly fitted LinearSVC | 0.3197 | 0.2342 | 0.4051 | 0.310 | 0.87 |
+| Unchanged local Qwen3 zero-shot | 0.5728 | 0.6271 | 0.5185 | 77.670 | 7687.49 |
+
+The exact measured latency/size values are in [the report](reports/common_data_v3/comparison.md) and [JSON](reports/common_data_v3/comparison.json). These figures measure agreement with AI labels, not human-gold accuracy. **The new fine-tune did not beat the frozen baseline in this pilot. All four trained classifiers scored zero positive-class F1 on the ten positive test items; Qwen's positive F1 was only 0.1429.** With only 24 DE and 25 EN test examples, the ordering is uncertain; exploratory paired group-bootstrap intervals from saved predictions are provided without rerunning inference. They do not cover annotation error.
+
+The baseline and fine-tune start from the original pinned MiniLM base, not restricted legacy fine-tunes. Full Train is used for three fixed GPU epochs, BF16 autocast with FP32 master weights; the BF16 v2 artifact is a cast of the same new weights, **not another independent training fit**. LinearSVC independently implements the colleague-style balanced C=1 word/bigram recipe on the same new Train, without the old supplement. Qwen is unchanged zero-shot and did not create these labels. All five MLflow runs are in `article-sentiment-second-path`, tagged `phase=wikinews-ai-v3-pilot`, `human_gold=false`, with all required metrics, confusion matrices, parameters, hashes, timing and artifact sizes. Older runs are preserved.
+
+**Qwen remains the default because it leads this AI-labelled pilot and the earlier human-labelled English benchmark; this small pilot provides no reason to replace it with the new fine-tune.** Four new experimental choices are available on the [website](http://127.0.0.1:8000/), alongside the old models. The new bars and `/comparison/news-v3` are separate from the older `/comparison`; no numerical development curve joins tests with different data, labels or primary metrics. No claim is made that the old 0.720 or old Qwen score is comparable to this new table.
+
+Source texts are Wikinews CC BY 2.5/4.0 according to article era; both terms are retained for later contributions to older EN pages. Images and quoted leads are excluded, not external publisher articles fetched through links. Source declarations do not warrant every contribution. Per-page revisions, author/history credits, transformations and hashes are in [source_manifest.json](reports/common_data_v3/source_manifest.json). New AI label metadata is offered under CC0 to the extent project rights apply; underlying text terms remain unchanged. Corpus inputs and weights stay out of Git. The data is a small historical, single-source, short-news sample, not full-article newsroom validation; pretraining contamination remains unknown.
+
+Reproduce the inputs and split on the tower using the existing Python 3.12 CUDA environment (setup below):
+
+```bash
+source .venv/bin/activate
+python -m src.news_data --restore
+python -m src.news_experiment prepare --restore
+# Restore checks every input hash and split byte hash; never silently substitutes new text.
+python -m pytest -q
+```
+
+The completed artifact paths and immutable run IDs are in [trained.json](reports/common_data_v3/trained.json). `train` and `evaluate` intentionally refuse to overwrite completed artifacts or probe Test again. For a fresh independent reproduction, cache the clean original MiniLM base and Qwen weights first, then use separate output paths:
+
+```bash
+python - <<'CACHE'
+from transformers import AutoTokenizer, AutoModel
+model = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+revision = "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+AutoTokenizer.from_pretrained(model, revision=revision)
+AutoModel.from_pretrained(model, revision=revision)
+CACHE
+python -m src.local_llm prepare  # only if the pinned local Qwen artifact is absent
+# Stop the GPU API while benchmarking; do not allocate a second Qwen process.
+python -m src.news_reproduce --name tower-check-01 --run
+```
+
+The reproduction helper creates new ignored `models/reproduction/news-<name>/` and `reports/reproduction/news-<name>/` paths, retaining the frozen protocol/labels/splits while creating new MLflow runs. It never moves or replaces the tracked measured evidence. Use a new name for each reproduction. Omitting `--run` only prepares the separate output directory; no training or inference occurs. Original input restoration fails if Wikimedia rendering no longer yields the pinned hashes, rather than silently changing the dataset.
 
 **We now serve local Qwen3-4B-Instruct-2507 because its native-English macro-F1 of 0.7839 on the fresh common benchmark exceeds MiniLM v2 (0.6936) and reconstructed LinearSVC v2 (0.4720) by more than the predefined 0.005 close margin.** This is a quality choice with a substantial latency and memory cost, not an availability advantage over another locally hosted model.
 

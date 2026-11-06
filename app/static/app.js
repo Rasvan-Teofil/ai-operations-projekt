@@ -121,4 +121,21 @@ async function loadModels() {
     }
   } catch (_) { /* The default predictor still works when model discovery fails. */ }
 }
-checkHealth(); loadModels(); comparison();
+async function newsComparison() {
+  try {
+    const response = await fetch('/comparison/news-v3', {cache:'no-store'});
+    if (!response.ok) throw new Error('AI news pilot results unavailable.');
+    const data = await response.json();
+    $('news-status').textContent = `${data.test_rows} shared test texts · AI-labelled · Codex-reviewed. The serving default remains Qwen.`;
+    $('news-rows').replaceChildren();
+    for (const record of data.results) {
+      const row = document.createElement('tr');
+      row.dataset.selected = String(record.model === data.pilot_leader);
+      for (const value of [record.name, record.balanced_language_macro_f1.toFixed(4), record.macro_f1_de.toFixed(4), record.macro_f1_en.toFixed(4), record.inference_ms_per_text.toFixed(3), (record.model_size_bytes / 1048576).toFixed(2)]) {
+        const cell = document.createElement('td'); cell.textContent = value; row.append(cell);
+      }
+      $('news-rows').append(row);
+    }
+  } catch (error) { $('news-status').textContent = error.message; $('news-chart').hidden = true; }
+}
+checkHealth(); loadModels(); comparison(); newsComparison();

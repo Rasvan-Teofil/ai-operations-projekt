@@ -1,0 +1,252 @@
+{
+  "verified_on": "2026-11-06",
+  "all_checks_passed": true,
+  "offline_pytest_passed": 91,
+  "scope": "Live functionality and saved MLflow evidence only; no benchmark predictions repeated",
+  "checks": [
+    {
+      "case": "qwen3_4b/de",
+      "status": 200,
+      "model_version": "qwen3-4b-2507-bf16-prompt1",
+      "sentence_labels": [
+        "positive",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "qwen3_4b/en",
+      "status": 200,
+      "model_version": "qwen3-4b-2507-bf16-prompt1",
+      "sentence_labels": [
+        "negative",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "minilm_v2/de",
+      "status": 200,
+      "model_version": "dev2-R3_deploy-foldrelease-20261019",
+      "sentence_labels": [
+        "positive",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "minilm_v2/en",
+      "status": 200,
+      "model_version": "dev2-R3_deploy-foldrelease-20261019",
+      "sentence_labels": [
+        "negative",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "linearsvc_v2/de",
+      "status": 200,
+      "model_version": "tfidf-linearsvc-v2",
+      "sentence_labels": [
+        "positive",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "linearsvc_v2/en",
+      "status": 200,
+      "model_version": "tfidf-linearsvc-v2",
+      "sentence_labels": [
+        "neutral",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "frozen_news_v3/de",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-frozen",
+      "sentence_labels": [
+        "positive",
+        "negative"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "frozen_news_v3/en",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-frozen",
+      "sentence_labels": [
+        "negative",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "minilm_fp32_news_v3/de",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-minilm-fp32",
+      "sentence_labels": [
+        "positive",
+        "negative"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "minilm_fp32_news_v3/en",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-minilm-fp32",
+      "sentence_labels": [
+        "negative",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "minilm_bf16_news_v3/de",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-minilm-bf16",
+      "sentence_labels": [
+        "positive",
+        "negative"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "minilm_bf16_news_v3/en",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-minilm-bf16",
+      "sentence_labels": [
+        "negative",
+        "neutral"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "linearsvc_news_v3/de",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-linearsvc",
+      "sentence_labels": [
+        "negative",
+        "negative"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "linearsvc_news_v3/en",
+      "status": 200,
+      "model_version": "wikinews-ai-v3-linearsvc",
+      "sentence_labels": [
+        "negative",
+        "negative"
+      ],
+      "contract_and_offsets_valid": true
+    },
+    {
+      "case": "missing",
+      "status": 422
+    },
+    {
+      "case": "both",
+      "status": 422
+    },
+    {
+      "case": "private",
+      "status": 422
+    },
+    {
+      "case": "robots",
+      "status": 403
+    },
+    {
+      "case": "dns",
+      "status": 502
+    },
+    {
+      "case": "public_url",
+      "status": 200,
+      "model_version": "qwen3-4b-2507-bf16-prompt1"
+    },
+    {
+      "case": "/comparison",
+      "status": 200
+    },
+    {
+      "case": "/comparison.svg",
+      "status": 200
+    },
+    {
+      "case": "/comparison/news-v3",
+      "status": 200
+    },
+    {
+      "case": "/comparison/news-v3.svg",
+      "status": 200
+    },
+    {
+      "case": "/licenses",
+      "status": 200
+    },
+    {
+      "case": "/licenses/inventory",
+      "status": 200
+    },
+    {
+      "case": "/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "status": 200
+    },
+    {
+      "case": "isolated_missing_model_fault_injection",
+      "status": 503
+    },
+    {
+      "case": "mlflow/linearsvc_news_v3",
+      "status": "FINISHED",
+      "run_id": "92f6bc44fc02459190f274eb88878722",
+      "required_metrics_match": true,
+      "human_gold": false
+    },
+    {
+      "case": "mlflow/frozen_news_v3",
+      "status": "FINISHED",
+      "run_id": "7c4839810edc4d42884bb1bee7a36e4e",
+      "required_metrics_match": true,
+      "human_gold": false
+    },
+    {
+      "case": "mlflow/minilm_fp32_news_v3",
+      "status": "FINISHED",
+      "run_id": "43e28f08b2f64edcb3fe1df4ec50231f",
+      "required_metrics_match": true,
+      "human_gold": false
+    },
+    {
+      "case": "mlflow/minilm_bf16_news_v3",
+      "status": "FINISHED",
+      "run_id": "171e009888bf49e996c57e06b83a6bed",
+      "required_metrics_match": true,
+      "human_gold": false
+    },
+    {
+      "case": "mlflow/qwen3_4b",
+      "status": "FINISHED",
+      "run_id": "2e43a3ab04e74f759ef8717ffa23c976",
+      "required_metrics_match": true,
+      "human_gold": false
+    }
+  ],
+  "historical_comparison_runs_preserved": true,
+  "serving_default": "qwen3_4b",
+  "browser": {
+    "experimental_selector_tested": "minilm_bf16_news_v3",
+    "actual_version": "wikinews-ai-v3-minilm-bf16",
+    "highlighting_displayed": true,
+    "default_restored": "qwen3_4b",
+    "comparison_chart_displayed": true,
+    "mlflow_comparing_five_runs_displayed": true
+  },
+  "input_restore_sha256_verified": true,
+  "split_restore_sha256_verified": true
+}
