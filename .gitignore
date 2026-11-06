@@ -13,3 +13,4 @@ data/development/
 data/benchmark/
 reports/reproduction/
 reports/development/partial_runs.json
+data/local_llm/

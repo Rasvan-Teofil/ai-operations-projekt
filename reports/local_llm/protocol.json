@@ -1,0 +1,18 @@
+{
+  "protocol_version": "local-llm-20261106-v1",
+  "question": "Does a fixed-prompt local instruction LLM improve financial-news sentiment over our frozen MiniLM v2 release and the current colleague LinearSVC v2 recipe?",
+  "candidates": ["minilm_v2", "linearsvc_v2", "qwen3_4b"],
+  "reference_commit": "8668255ed7b94c24e16d52bec1d992f9ad507e87",
+  "llm_model": "Qwen/Qwen3-4B-Instruct-2507",
+  "llm_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "llm_prompt": "src/local_llm.py SYSTEM, copied into local artifact before evaluation; no prompt search",
+  "training": "No new MiniLM training. Reconstruct LinearSVC v2 using pinned reference source, original train plus opinion supplement. Qwen is zero-shot BF16, no fine-tuning or demonstrations.",
+  "data": "Pinned SEntFiN unanimous-entity native English headlines; 200 per class, seed 20261106. Exclude previous 600 paired ids, normalized duplicates and every available original train/val/test text from both approaches plus the v2 supplement. Translate selected EN to DE with the previous pinned Marian model.",
+  "primary_metric": "macro_f1_en on 600 fresh human-labelled native English headlines",
+  "secondary_metrics": ["macro_f1_de_mt", "pooled macro_f1 (descriptive only)", "accuracy", "F1 per class", "negative recall/precision", "confusion matrices overall and by language", "inference_ms_per_text", "p50/p95 latency", "model_size_bytes", "peak_cuda_allocated_bytes"],
+  "selection": "Highest native EN macro-F1; within 0.005 absolute of best prefer lower mean warm batch-one inference latency, then smaller artifact. German MT is a transfer diagnostic, not independent native-DE selection evidence.",
+  "latency": "Same tower, sequential candidates, 10 warm-up predictions on a non-benchmark text, batch one, tokenizer and CPU/GPU transfers included, CUDA synchronization; excludes model loading, HTML fetch and HTTP. CPU reference in separate pinned environment.",
+  "evaluation": "Freeze code, prompt, artifact hashes and benchmark before inference. Predict each benchmark text once per candidate. No tuning on this benchmark, no old tests re-evaluated. Save row ids/scores locally and aggregate evidence in Git/MLflow. Bootstrap cached paired predictions only, 1000 replicates seed 20261106.",
+  "deployment": "Activate only after completed comparison and offline/API tests. Keep previous selected.json untouched; use separate serving_selected.json. Website uses same predictor artifact and /predict contract as evaluation.",
+  "limitations": ["600 independent headlines plus their translations, not 1200 independent articles", "No native German gold or general long-article accuracy claim", "Public-corpus LLM pretraining contamination and semantic event overlap unknown", "Different training data; comparison is between deployable systems, not isolated architectures", "Local hosting removes a cloud inference dependency but does not guarantee availability during GPU, power, disk or process failure", "Constrained LLM scores are not calibrated probabilities"]
+}

@@ -1,0 +1,127 @@
+{
+  "reference_commit": "8668255ed7b94c24e16d52bec1d992f9ad507e87",
+  "original_weights_available": false,
+  "method": "Unmodified pinned prepare(), load_work_splits(), new_linearsvc().fit(train); no reference test evaluation",
+  "train_rows_including_supplement": 5969,
+  "val_rows_not_evaluated": 1270,
+  "test_rows_not_evaluated": 1270,
+  "training_seconds": 0.38238339591771364,
+  "model_version": "tfidf-linearsvc-v2",
+  "tracking_params": {
+    "vectorizer": "tfidf",
+    "ngram_range": "1-2",
+    "min_df": 1,
+    "classifier": "LinearSVC",
+    "class_weight": "balanced",
+    "probability_method": "softmax_decision_function"
+  },
+  "sklearn": "1.8.0",
+  "pandas": "2.3.3",
+  "python": "3.12.3",
+  "dataset_revisions": {
+    "takala/financial_phrasebank": "8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964",
+    "Kenpache/multilingual-financial-sentiment": "9d43950d151602f623f28bba62f30554b5d40dd2"
+  },
+  "data_metadata": {
+    "seed": 42,
+    "test_size": 0.15,
+    "val_size": 0.15,
+    "train_size": 0.7,
+    "stratify": "label|language",
+    "min_chars": 20,
+    "split_steps": [
+      "First test as 15 %, stratified by label|language, seed 42.",
+      "From the rest, val with a share of 0.15/0.85, also stratified, seed 42.",
+      "Train is the rest, about 70 %."
+    ],
+    "cross_source_duplicates_dropped": 0,
+    "sources": [
+      {
+        "id": "takala/financial_phrasebank",
+        "config": "sentences_75agree",
+        "language": "en",
+        "license": "CC BY-NC-SA 3.0",
+        "url": "https://huggingface.co/datasets/takala/financial_phrasebank",
+        "snapshot": "8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964",
+        "rows_parsed": 3453,
+        "rows_in": 3453,
+        "rows_after_filter": 3445,
+        "dropped_short_or_invalid": 8,
+        "dropped_duplicate_text": 5,
+        "rows_kept": 3440
+      },
+      {
+        "id": "Kenpache/multilingual-financial-sentiment",
+        "config": "language=de",
+        "language": "de",
+        "license": "academic-non-commercial (card also says Apache-2.0; stricter reading applies)",
+        "url": "https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment",
+        "snapshot": "9d43950d151602f623f28bba62f30554b5d40dd2",
+        "rows_parsed": 5023,
+        "rows_in": 5023,
+        "rows_after_filter": 5023,
+        "dropped_short_or_invalid": 0,
+        "dropped_duplicate_text": 0,
+        "rows_kept": 5023
+      }
+    ],
+    "rows_combined": 8463,
+    "splits": {
+      "train": {
+        "rows": 5923,
+        "by_language_label": {
+          "de|negative": 974,
+          "de|neutral": 1697,
+          "de|positive": 844,
+          "en|negative": 294,
+          "en|neutral": 1493,
+          "en|positive": 621
+        }
+      },
+      "val": {
+        "rows": 1270,
+        "by_language_label": {
+          "de|negative": 209,
+          "de|neutral": 364,
+          "de|positive": 181,
+          "en|negative": 63,
+          "en|neutral": 320,
+          "en|positive": 133
+        }
+      },
+      "test": {
+        "rows": 1270,
+        "by_language_label": {
+          "de|negative": 209,
+          "de|neutral": 364,
+          "de|positive": 181,
+          "en|negative": 63,
+          "en|neutral": 320,
+          "en|positive": 133
+        }
+      }
+    }
+  },
+  "supplement_sha256": "b1869ec88fd9c692e6be69a4556f93b225fb779afff8e7b29c88f3a639e32934",
+  "artifact_sha256": "d6aa6ea193e6f26732c46846518820f1f92b145ae42abea9ab0d32e932f24717",
+  "source_files": {
+    "src/__init__.py": "ba0ee1a87a219e699d285142c5f3aa48e1f2da719d0af6a1f13b76096007207a",
+    "src/compare.py": "93166150db0fd59a2fe8ac980209cd95c7195b3def385aa6cea77b48a564810d",
+    "src/config.py": "4aeb83e46d67f3826f50b7fd019027a3416bd993353f9941b13c1bc1b7895365",
+    "src/data.py": "2ba2252e431d2843da73e562bbe95b00513021b08e76ce462889be26424de6fa",
+    "src/evaluate.py": "06325b48c7f7d3a76066519621f8aa44c58dead6e027ccd8b6c5b3e6055083ee",
+    "src/excerpt.py": "c31563cf2582cbdc073c34da3aad292c1933b00d62f9cb80b147f7a3166df9a5",
+    "src/features.py": "4a1c2c349be6e3da3cc0e95ab0a720ad49aa3c06f41e215fc75ef8795198aee1",
+    "src/finetune.py": "c0a01319a502db6d50f8885c6889df7e9ab71b4674d2c52982d48e2103189a82",
+    "src/hf_models.py": "578b99323e666220cbc63e1c7808a2efa763601cb07a63461a7566ba5a96a0e9",
+    "src/import_recorded.py": "3c90a6840ea170e180a85d4d720a09d1c82bef0c3ff410805175ab22339abb3c",
+    "src/interface.py": "0285fc429cb2f85b6fde306a62466d593ccb9d41b25111d7b3b5b14c153ee86e",
+    "src/labels.py": "6faea8402137084a5b309c10b3dd8011ef9284ce7b65fef43c43730edbc219b2",
+    "src/prepare_data.py": "9716a3850ea6723e95b1a684cea20dfd898ff64b9cab6f9378feb0b6b8d5ba38",
+    "src/registry.py": "40a06857c7235c5ce1713702cd2742821331be254ea16fb41d0b757317cd849c",
+    "src/scraping.py": "73bd1919ff6b89d6dd24f7d98cd27849c4725a431cde787116653888ae4692b7",
+    "src/sklearn_models.py": "42b292f149139eacd67509fe51bf4025eed2c4d11ef05dda3a17efa73eeaa202",
+    "src/tracking.py": "5f87c1cf82ebf8eb9eded216dfafbd66b3fda70ee147c301b43d3b6159dab8d2",
+    "src/train.py": "684f69209ef0f5906086a6e1015d0de265b9d6dfd195fdcf8da8e3e4f6dec1ab"
+  }
+}
