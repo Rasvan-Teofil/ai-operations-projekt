@@ -362,10 +362,15 @@ def evaluate(resume=False):
             context = mlflow.start_run(run_name='AI news v3 · Unchanged Qwen zero-shot')
         with context as run:
             mlflow.set_tags(tags(name))
+            import subprocess
             mlflow.log_params({'test_rows': len(test), 'test_sha256': manifest['splits']['test']['sha256'],
                 'protocol_sha256': protocol_hash(), 'warmup_calls': 20, 'latency_batch_size': 1,
                 'model_version': p.version, 'evaluation_device': torch.cuda.get_device_name(),
+                'evaluation_git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+                'evaluation_seed': SEED, 'evaluation_cpu_threads': 4,
+                'annotation_source_sha256': manifest['annotation_sha256'],
                 'role': 'unchanged zero-shot comparator' if name == 'qwen3_4b' else 'new AI-data classifier'})
+            mlflow.log_dict(p.meta, 'evaluated_artifact_metadata.json')
             mlflow.log_metrics(metrics); mlflow.log_dict(matrices, 'confusion_matrix.json')
             mlflow.log_dict({'label_source': 'AI-labelled / Codex-reviewed', 'metrics': metrics}, 'test_metrics.json')
             mlflow.log_artifact(str(OUT / 'protocol.json')); mlflow.log_artifact(str(OUT / 'split_manifest.json'))

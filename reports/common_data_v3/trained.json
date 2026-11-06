@@ -1,0 +1,33 @@
+{
+  "protocol_sha256": "11ced4c1ae82e23147ec9d9ec4d4aec4ed22d359889be906efa2a9c2c9ca3c7c",
+  "models": [
+    {
+      "model": "linearsvc_news_v3",
+      "name": "LinearSVC · new AI news data",
+      "path": "models/common_data_v3/linearsvc_news_v3",
+      "run_id": "92f6bc44fc02459190f274eb88878722",
+      "artifact_sha256": "bfc872d5b8e89f53f29dcdffdf5ea8209847e2c283fe0bbe195160bb6f2e9030"
+    },
+    {
+      "model": "frozen_news_v3",
+      "name": "Frozen MiniLM · AI news pilot",
+      "path": "models/common_data_v3/frozen_news_v3",
+      "run_id": "7c4839810edc4d42884bb1bee7a36e4e",
+      "artifact_sha256": "1570ae382e61237d138ac702cc1d4fda5cb8019615cdc9fcbe3749911e7325ad"
+    },
+    {
+      "model": "minilm_fp32_news_v3",
+      "name": "MiniLM FP32 · v1 recipe / new AI data",
+      "path": "models/common_data_v3/minilm_fp32_news_v3",
+      "run_id": "43e28f08b2f64edcb3fe1df4ec50231f",
+      "artifact_sha256": "0eac414b787d5aaa61735fb954221b28d32a26236640cd76a3b41b2013b98fd9"
+    },
+    {
+      "model": "minilm_bf16_news_v3",
+      "name": "MiniLM BF16 · v2 deployment / new AI data",
+      "path": "models/common_data_v3/minilm_bf16_news_v3",
+      "run_id": "171e009888bf49e996c57e06b83a6bed",
+      "artifact_sha256": "414f21ddd80255456d82d742379f65a7e7c1ddd1be158ecf047d0d7e74f29561"
+    }
+  ]
+}
