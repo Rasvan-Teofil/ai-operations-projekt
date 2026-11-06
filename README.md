@@ -47,9 +47,16 @@ The **Model** selector offers Qwen3 4B, MiniLM v2 and reconstructed LinearSVC v2
 
 The JSON request body still accepts exactly one of `text` or `url`. The optional model is a **query parameter**, for example:
 
-```bash
-curl http://127.0.0.1:8000/predict?model=minilm_v2 -H 'Content-Type: application/json' -d '{"text":"The company reported record profits."}'
-curl http://127.0.0.1:8000/analyze?model=qwen3_4b -H 'Content-Type: application/json' -d '{"text":"Profits increased. Losses widened. The report is due Tuesday."}'
+```python
+import httpx
+
+with httpx.Client(base_url="http://127.0.0.1:8000", timeout=90) as client:
+    prediction = client.post("/predict", params={"model": "minilm_v2"},
+                             json={"text": "The company reported record profits."})
+    analysis = client.post("/analyze", params={"model": "qwen3_4b"},
+                           json={"text": "Profits increased. Losses widened. The report is due Tuesday."})
+    print(prediction.json())
+    print(analysis.json())
 ```
 
 **Highlight sentence sentiment** calls `/analyze`. It returns the overall prediction, the exact source text, and character offsets, labels and scores for each sentence. The page preserves the text and colours negative sentences red, neutral sentences grey and positive sentences green. Hover or keyboard-focus a sentence to inspect its scores. The first **80 sentences** are classified separately; any remainder stays visible and explicitly uncoloured, with a limit notice. Full-article classification still uses the original bounded model policy.
