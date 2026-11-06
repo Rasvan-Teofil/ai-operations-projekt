@@ -1,0 +1,33 @@
+{
+  "policy": "Exact normalized whole-input and title match against known original project train/Val/test and previous two shared benchmark views; no old scores used",
+  "matched_ids": [],
+  "known_normalized_texts": 14287,
+  "sources": [
+    {
+      "path": "data/processed/test.csv",
+      "sha256": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+      "rows": 1787
+    },
+    {
+      "path": "data/processed/train.csv",
+      "sha256": "86c27c18cd94b914ffbc9afe5876fa4fb0fc1784af8b6c408508748a258b18c4",
+      "rows": 8335
+    },
+    {
+      "path": "data/processed/val.csv",
+      "sha256": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+      "rows": 1787
+    },
+    {
+      "path": "data/benchmark/shared.csv",
+      "sha256": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+      "rows": 1200
+    },
+    {
+      "path": "data/local_llm/shared.csv",
+      "sha256": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+      "rows": 1200
+    }
+  ],
+  "limits": "Not a semantic event-overlap or LLM pretraining audit"
+}

@@ -1,0 +1,36 @@
+{
+  "version": "wikinews-ai-v3-pilot-1",
+  "created_on": "2026-11-06",
+  "seed": 20261107,
+  "authorized_change": "User requested new training, then explicitly asked this assistant to create and review labels. These are AI annotations, not human gold.",
+  "source": "360 native Wikinews title+lead items: 180 DE and 180 EN; selected before labels using seed from 1500 most-recent published memberships per language.",
+  "annotation": {
+    "display": "AI-labelled · Codex-reviewed",
+    "annotator": "Codex assistant in this chat; exact model serving revision unavailable",
+    "method": "Assistant reads every exact input, assigns class and short rationale without candidate predictions; same annotator checks consistency. No consensus or human validation claimed.",
+    "rubric": "Main reported outcome for the main affected subject/audience: negative=evidenced harm/loss/deterioration/material risk; positive=evidenced benefit/recovery/improvement; neutral=no clear directional outcome. Factual reporting is not automatically neutral. Exclude substantially ambiguous/mixed targets, missing context or broken extraction.",
+    "training_labeler_is_qwen": false,
+    "reference_label_quality": "Provisional single-AI reference annotations; errors and systematic preference biases remain possible."
+  },
+  "split": "7-fold StratifiedGroupKFold on language:label, shuffle=True seed20261107: fold0 Test, fold1 Val, other5 Train (approximately71/14/14); group linked DE/EN pages, identical source URLs, normalized duplicates, char4/5-gram TFIDF cosine>=.85. No post-score seed changes. Residual event overlap possible.",
+  "training": "Train only; Val never opened. Fixed final epoch, no cross-validation or hyperparameter search in this small feasibility pilot. Historical recipes adopted before labels/predictions.",
+  "candidates": {
+    "frozen_news_v3": "Clean original MiniLM pinned e8f8c211226b894fcb81acc59f3b34ba3efd5f42, max128, GPU frozen embeddings + balanced C1 logistic head, maxiter2000.",
+    "minilm_fp32_news_v3": "New frozen-head initialization, all encoder layers updated on full new Train for3epochs, batch32, AdamW encoder2e-5/head2e-4 weight_decay.01 warmup10%, inverse-class weighted CE, gradientclip1, BF16 autocast FP32master; FP32 serving.",
+    "minilm_bf16_news_v3": "Same newly trained MiniLM weights cast to BF16; v2 deployment recipe, not another independent training fit. Uniform chunk-mean inference as selected historical R3.",
+    "linearsvc_news_v3": "Independent reconstruction of C1 balanced word/bigram TFIDF min_df1 LinearSVC maxiter2000; fit only new Train without old46-row supplement.",
+    "qwen3_4b": "Unchanged pinned local Qwen3-4B-Instruct-2507 zero-shot prompt1; no training and not the label creator."
+  },
+  "evaluation": "After all classifier artifacts frozen, each candidate predicts every held-out Test input once; resume only from saved per-item predictions after interruption, never retune after Test. No old test re-evaluation.",
+  "metrics": "Accuracy, macro-F1, F1 each class, per-language metrics and confusion matrices, mean(DE_macro_F1,EN_macro_F1), warm ms/text, complete artifact bytes. All accuracy/F1 metrics measure agreement with AI annotations, not independent human correctness.",
+  "tie_rule": "Within0.005 absolute of best balanced-language macro-F1 prefer lower inference_ms_per_text then artifact bytes; descriptive pilot leader only.",
+  "latency": "Same RTX5060Ti, CPUthreads4, warmup20 calls using separate authored example, batch1, CUDA synchronized, tokenizer/transfers included; model load, network and file persistence excluded. API stopped during measurement to release its Qwen GPU allocation.",
+  "tracking": "article-sentiment-second-path; phase=wikinews-ai-v3-pilot; data_version/comparable_group/label_source/human_gold=false/deployment_eligible=false tags. Preserve all historical MLflow runs.",
+  "release": "Separate ignored models/common_data_v3; add explicitly experimental website choices and separate AI-labelled comparison. No automatic production default switch based only on AI-labelled evidence. Original Qwen default retained.",
+  "limits": [
+    "Small single-source title/lead sample, no full-article accuracy claim",
+    "Single AI annotator and self-review; AI mistakes and class/target ambiguity",
+    "Pretraining contamination and remaining same-event overlap unknown",
+    "Native DE/EN, not translations; not numerically comparable to historical test scores"
+  ]
+}
