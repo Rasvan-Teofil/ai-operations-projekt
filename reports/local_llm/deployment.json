@@ -1,0 +1,8 @@
+{
+  "model": "local_llm",
+  "candidate": "qwen3_4b",
+  "model_version": "qwen3-4b-2507-bf16-prompt1",
+  "benchmark_sha256": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+  "run_id": "6c07d33fa4804e9591305999917e34a6",
+  "selection_metric": "macro_f1_en"
+}

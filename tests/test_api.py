@@ -117,3 +117,46 @@ def test_article_profile_uses_improved_extractor(client,monkeypatch):
     monkeypatch.setattr(api,'article_text',fetch)
     assert client.post('/predict',json={'url':'https://example.com/news'}).status_code==200
     assert calls==[True]
+
+
+def test_demo_and_static_assets_are_available_without_network(client):
+    for path in ['/', '/demo']:
+        response = client.get(path)
+        assert response.status_code == 200
+        assert 'Article sentiment' in response.text
+    assert client.get('/static/app.js').status_code == 200
+    assert client.get('/static/style.css').status_code == 200
+
+
+def test_url_excerpt_and_text_null(client, monkeypatch):
+    monkeypatch.setattr(api, 'article_text', lambda url: 'Article body. ' * 100)
+    response = client.post('/predict', json={'url':'https://example.com/article'})
+    assert response.status_code == 200
+    assert len(response.json()['scraped_excerpt']) == 400
+    assert client.post('/predict', json={'text':'Some text'}).json()['scraped_excerpt'] is None
+
+
+def test_comparison_missing_is_explicit(client, monkeypatch, tmp_path):
+    import src.config
+    monkeypatch.setattr(src.config, 'REPORTS', tmp_path)
+    assert client.get('/comparison').status_code == 503
+    assert client.get('/comparison.svg').status_code == 503
+
+
+def test_serving_selection_loads_same_artifact_and_version(monkeypatch, tmp_path):
+    import json
+    import src.serving
+    calls = []
+    monkeypatch.setattr(api, 'MODELS', tmp_path)
+    monkeypatch.delenv('SENTIMENT_ARTIFACT', raising=False)
+    (tmp_path / 'selected.json').write_text(json.dumps({'model':'development/release', 'model_version':'historical'}))
+    (tmp_path / 'serving_selected.json').write_text(json.dumps({'model':'local_llm', 'model_version':Stub.version}))
+    def loader(path):
+        calls.append(path)
+        return Stub()
+    monkeypatch.setattr(src.serving, 'load_artifact', loader)
+    assert api.load_predictor().version == Stub.version
+    assert calls == [tmp_path / 'local_llm']
+    (tmp_path / 'serving_selected.json').write_text(json.dumps({'model':'local_llm', 'model_version':'wrong'}))
+    with pytest.raises(ValueError, match='version'):
+        api.load_predictor()

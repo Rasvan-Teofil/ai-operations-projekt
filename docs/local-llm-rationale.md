@@ -28,6 +28,8 @@ The selection rule is frozen before inference: highest native English macro-F1; 
 
 ## What local availability means
 
+The completed fresh benchmark selected Qwen: native EN macro-F1 **0.7839**, compared with **0.6936** for MiniLM v2 and **0.4720** for the reconstructed current LinearSVC v2. German-MT figures are 0.6715, 0.6132 and 0.4119 respectively. Qwen takes 56.190 ms per warm headline and about 7,687 MiB of local serving files, versus MiniLM's 2.398 ms and 241 MiB. This measured quality gain is why Qwen is now the default, while the other approaches remain available in the website's selector. The small-model work remains useful evidence about an operating trade-off, rather than a result we need to defend as the permanent winner.
+
 After the one-time pinned download, serving loads only files under `models/` with `local_files_only=True`. Text classification needs no cloud inference service or account. Fetching a user-supplied article URL still needs the network. GPU failures, lack of memory, power loss, disk loss and process crashes can still make either local system unavailable; the API reports 503 rather than promising it is always available. Keep local weight backups and a reproducible setup. A system service/restart policy is separate operational work.
 
 ## A defensible answer at the presentation

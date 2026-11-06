@@ -54,6 +54,11 @@ def prepare(reference):
     LOCAL.mkdir(parents=True, exist_ok=True)
     if (OUT / 'benchmark_manifest.json').exists():
         raise RuntimeError('Benchmark already frozen; use the existing data or an explicitly separate reproduction directory')
+    split_paths = [*[DATA / (split + '.csv') for split in ['train', 'val', 'test']],
+                   *[reference / 'data/processed' / (split + '.csv') for split in ['train', 'val', 'test']],
+                   reference / 'data/sample/opinion_supplement.csv']
+    if any(not p.is_file() for p in split_paths):
+        raise RuntimeError('All original splits and the reference supplement are required for overlap exclusion')
     from src.branch_benchmark import URL, REV, TRANSLATOR, TRANS_REV
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
     raw = urllib.request.urlopen(URL, timeout=30).read()
@@ -67,8 +72,6 @@ def prepare(reference):
     excluded_hashes = set(previous['normalized_text_sha256'])
     excluded_texts = set()
     excluded_sources = {}
-    split_paths = [*DATA.glob('*.csv'), *(reference / 'data/processed').glob('*.csv'),
-                   reference / 'data/sample/opinion_supplement.csv']
     for p in split_paths:
         frame = pd.read_csv(p)
         if 'text' in frame:
@@ -154,6 +157,29 @@ def select(records):
     return min(close, key=lambda r: (r['inference_ms_per_text'], r['model_size_bytes']))
 
 
+def candidate_params(name, path):
+    from importlib.metadata import version
+    meta = json.loads((path / 'artifact.json').read_text())
+    params = {'python_version': platform.python_version(),
+              **{library + '_version': version(library) for library in ['transformers', 'pandas']},
+              'sklearn_version': version('scikit-learn')}
+    if name == 'qwen3_4b':
+        params.update(model_id=meta['model_id'], model_revision=meta['revision'], precision='bf16',
+                      max_article_tokens=meta['max_article_tokens'],
+                      prompt_sha256=hashlib.sha256(meta['system_prompt'].encode()).hexdigest(),
+                      score_method=meta['score_method'], fine_tuning=False,
+                      model_training_seed='not_applicable_zero_shot')
+    elif name == 'linearsvc_v2':
+        reference = json.loads((path / 'provenance.json').read_text())
+        params.update(reference['tracking_params'])
+        params.update(train_rows=reference['train_rows_including_supplement'], model_training_seed=42,
+                      supplement_sha256=reference['supplement_sha256'])
+    else:
+        params.update(precision=meta['precision'], aggregation=meta['aggregation'], max_length=meta['max_length'],
+                      original_training_run_id=meta['run_id'], model_training_seed=20261019)
+    return params
+
+
 def audit():
     require_gpu()
     manifest = json.loads((OUT / 'benchmark_manifest.json').read_text())
@@ -187,6 +213,7 @@ def audit():
                 'training': 'reconstructed balanced LinearSVC with supplement' if name == 'linearsvc_v2'
                             else 'zero-shot; no fine-tuning' if name == 'qwen3_4b' else 'unchanged R3 fine-tuned release'})
             mlflow.log_dict(json.loads((path / 'artifact.json').read_text()), 'artifact_metadata.json')
+            mlflow.log_params(candidate_params(name, path))
             if name == 'linearsvc_v2':
                 mlflow.log_dict(json.loads((OUT / 'reference_provenance.json').read_text()), 'reference_provenance.json')
             start = time.perf_counter()
@@ -256,6 +283,10 @@ def audit():
     (LOCAL / 'evaluation.lock').write_text(json.dumps({'status': 'complete', 'selected': selected['model'],
                                                      'benchmark_sha256': manifest['sha256']}))
     report()
+    client = mlflow.MlflowClient()
+    for record in records:
+        for filename in ['comparison.json', 'comparison.csv', 'comparison.svg', 'comparison.md']:
+            client.log_artifact(record['run_id'], str(OUT / filename), 'comparison')
 
 
 def report():
@@ -289,6 +320,8 @@ def report():
     fig.suptitle('Local LLM comparison — 600 native EN headlines + 600 DE translations\nFresh 2026-11-06 benchmark; different from historical tests', fontsize=13)
     for suffix in ['svg', 'png']:
         fig.savefig(OUT / ('comparison.' + suffix), dpi=180)
+    svg = OUT / 'comparison.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines()) + '\n')
     plt.close(fig)
     lines = ['# Local LLM comparison (measured)', '',
              'Primary selection: native English macro-F1; close margin 0.005, then latency and artifact size.', '',
@@ -301,6 +334,47 @@ def report():
               'The LinearSVC is reconstructed from the pinned current-main v2 recipe, not the original supplied weights. See `reference_provenance.json` for source, dataset, supplement and environment hashes. Its old financial-test score 0.7330 and our earlier tests are not ranked against this benchmark.', '',
               '![Measured accuracy, latency and size](comparison.svg)', '']
     (OUT / 'comparison.md').write_text('\n'.join(lines))
+
+
+def restore_data():
+    """Recreate only the frozen evaluation texts; no candidate inference or selection."""
+    require_gpu()
+    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+    manifest = json.loads((OUT / 'benchmark_manifest.json').read_text())
+    LOCAL.mkdir(parents=True, exist_ok=True)
+    target = LOCAL / 'shared.csv'
+    if target.exists():
+        if digest(target) != manifest['sha256']:
+            raise RuntimeError('Existing benchmark differs; preserve it for inspection')
+        print('Frozen benchmark already present and verified')
+        return
+    raw = urllib.request.urlopen(manifest['source_url'], timeout=30).read()
+    if hashlib.sha256(raw).hexdigest() != manifest['source_sha256']:
+        raise RuntimeError('Pinned source differs')
+    source = pd.read_csv(io.BytesIO(raw))
+    source['paired_id'] = source['S No.'].map(lambda value: 'sentfin-' + str(value))
+    source = source.set_index('paired_id').loc[manifest['selected_ids']]
+    en = pd.DataFrame({'paired_id': source.index, 'text': source.Title.str.strip().to_numpy(),
+                       'label': [next(iter({str(label).lower().strip() for label in ast.literal_eval(v).values()})) for v in source.Decisions],
+                       'language': 'en'}).reset_index(drop=True)
+    tokenizer = AutoTokenizer.from_pretrained(manifest['translator'], revision=manifest['translator_revision'])
+    model = AutoModelForSeq2SeqLM.from_pretrained(manifest['translator'], revision=manifest['translator_revision']).cuda().eval()
+    translated = []
+    with torch.inference_mode():
+        for start in range(0, len(en), 24):
+            tokens = tokenizer(en.text.iloc[start:start + 24].tolist(), padding=True, return_tensors='pt').to('cuda')
+            translated.extend(tokenizer.batch_decode(model.generate(**tokens, num_beams=4, max_new_tokens=128,
+                                                                     do_sample=False), skip_special_tokens=True))
+    de = en.copy()
+    de['text'], de['language'] = translated, 'de'
+    frame = pd.concat([en, de], ignore_index=True)
+    frame['id'] = frame.paired_id + ':' + frame.language
+    temporary = LOCAL / 'restored.csv'
+    frame.to_csv(temporary, index=False)
+    if digest(temporary) != manifest['sha256']:
+        raise RuntimeError('Restored data hash differs; original report remains unchanged')
+    temporary.replace(target)
+    print('Restored frozen benchmark; exact CSV SHA-256 verified; no candidate predictions')
 
 
 def activate():
@@ -325,7 +399,7 @@ def activate():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('action', choices=['prepare', 'audit', 'report', 'activate'])
+    parser.add_argument('action', choices=['prepare', 'audit', 'report', 'activate', 'restore_data'])
     parser.add_argument('--reference-checkout', type=Path, default=ROOT.parent / 'colleague-v2-reference')
     parser.add_argument('--reports-dir', type=Path)
     parser.add_argument('--data-dir', type=Path)

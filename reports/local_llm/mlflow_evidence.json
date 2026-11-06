@@ -1,0 +1,23 @@
+{
+  "experiment_name": "article-sentiment-second-path",
+  "experiment_id": "1",
+  "store": "local SQLite mlflow.db (not committed)",
+  "total_runs_preserved": 38,
+  "new_measured_comparison_runs": [
+    {
+      "model": "minilm_v2",
+      "run_id": "e2ab0f5273b54fd9b7c2f81a751f4b6c",
+      "status": "FINISHED"
+    },
+    {
+      "model": "linearsvc_v2",
+      "run_id": "a3859fbfd0b041e5aedf7e28d0f85532",
+      "status": "FINISHED"
+    },
+    {
+      "model": "qwen3_4b",
+      "run_id": "6c07d33fa4804e9591305999917e34a6",
+      "status": "FINISHED"
+    }
+  ]
+}

@@ -2,11 +2,121 @@
 
 Eigenständiger Lösungsweg ab dem leeren Commit `830bba1`. Kein Code und kein Merge aus `main`.
 
-## Entwicklung v2 und aktueller API-Standard
+## Current deployment: local LLM follow-up (6 November 2026)
 
-Auf ausdrücklichen Wunsch folgten getrennte Verbesserungsversuche und eine Kombination. Damit wurde die ursprüngliche Vorgabe „genau ein stärkeres Modell“ für diese **zusätzliche dokumentierte Entwicklungsphase** erweitert; der v1-Lauf bleibt unverändert erhalten. Die nachfolgenden v1-Abschnitte beschreiben den historischen ersten Stand. Aktuell wird der in v2 ausgewählte BF16-Stand ausgeliefert.
+**We now serve local Qwen3-4B-Instruct-2507 because its native-English macro-F1 of 0.7839 on the fresh common benchmark exceeds MiniLM v2 (0.6936) and reconstructed LinearSVC v2 (0.4720) by more than the predefined 0.005 close margin.** This is a quality choice with a substantial latency and memory cost, not an availability advantage over another locally hosted model.
 
-**Ausgeliefert wird `R3_deploy`, weil sein mittleres Quellen-CV-macro-F1 von 0,6729 innerhalb der vorab definierten 0,005 zur besten Kombination (0,6740) liegt und die Tie-Regel die geringere gemessene Latenz bei rund 241 MiB wählt.** Das ist keine behauptete signifikante Überlegenheit: der Abstand beträgt nur 0,0011 F1 bzw. 0,037 ms zur Kombination. Gegenüber dem Referenz-Fine-Tune sinkt die vollständige Artefaktgröße von rund 465 auf 241 MiB.
+The original implementation, training runs, ablations and reports below remain historical evidence. No main code was merged here and no main runs were updated. The current colleague recipe is imported from a separate detached checkout for reconstruction only.
+
+| Current candidate | Native EN macro-F1 | German MT macro-F1 | Warm ms/text | Local artifact MiB |
+|---|---:|---:|---:|---:|
+| MiniLM v2, unchanged BF16 R3 release | 0.6936 | 0.6132 | 2.398 | 240.73 |
+| LinearSVC v2, reconstructed current-main recipe | 0.4720 | 0.4119 | 0.218 | 4.10 |
+| **Qwen3 4B, local fixed-prompt zero-shot** | **0.7839** | **0.6715** | 56.190 | 7687.49 |
+
+![Measured local LLM comparison](reports/local_llm/comparison.png)
+
+These are **600 new native English SEntFiN headlines, plus their German machine translations**. All candidates see identical texts. Old benchmark IDs, normalized duplicates and known original project split/supplement overlaps are excluded. Seed `20261106`, 200 headlines per class. No candidate or prompt was tuned on this set; each candidate predicted every text once. The primary selection metric is native English macro-F1; German MT is a diagnostic, not native German gold. Within 0.005 of best, warm batch-one latency then artifact size decide. The Qwen-minus-MiniLM native-English paired bootstrap 95% percentile interval is approximately **[+0.0471, +0.1347]** on this sample.
+
+This benchmark does not validate long general-news articles or natural newsroom prevalence. Public LLM pretraining contamination and semantic event overlap are unknown. Different training corpora prevent an isolated architecture claim. **Do not rank the old financial-test 0.7330, old 0.7202, our original 0.7187 or earlier SEntFiN figures against this table.** The LinearSVC v2 is reconstructed from commit `8668255` with its balanced weights and 46 training-only supplement rows; the original colleague weights were unavailable. Reconstruction uses this branch's pinned sklearn 1.8.0 / pandas 2.3.3, rather than claiming bit-identical weights from the colleague's environment.
+
+[Why we fine-tuned first, with an answer to the professor](docs/local-llm-rationale.md) · [Frozen protocol](reports/local_llm/protocol.json) · [Benchmark provenance and licenses](reports/local_llm/benchmark_manifest.json) · [Reference source/environment evidence](reports/local_llm/reference_provenance.json) · [Measured results and run IDs](reports/local_llm/comparison.md) · [Machine-readable metrics](reports/local_llm/comparison.json).
+
+### Run the local website on this tower
+
+The measured weights already exist under `models/local_llm/`; activation is recorded in `models/serving_selected.json`. Training and downloads are separate from the API. Start **one worker** (each worker would load its own model):
+
+```bash
+source .venv/bin/activate
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
+```
+
+Open <http://127.0.0.1:8000/> (also `/demo`). The page has text/URL inputs, real prediction score bars, the loaded model version and the measured comparison chart/table. It posts to the same `/predict` used in verification. `/docs`, `/health`, `/comparison` and `/comparison.svg` remain available. Exactly one of `text` or `url` is accepted. Responses retain `label`, all three `scores`, and `model_version`; `scraped_excerpt` is added for URLs and null for text. Invalid inputs return 422, robots denial 403, upstream errors 502, and missing/busy/failed inference 503.
+
+Qwen scores are the softmax of next-token logits restricted to A/B/C (negative/neutral/positive), **not calibrated confidence or generated percentages**. There is one fixed zero-shot prompt, no demonstrations and no new LLM fine-tuning. BF16, CUDA, 4 CPU threads, SDPA; first/last 1536 article tokens are kept if the article exceeds 3072 tokens. This truncation policy is part of the artifact and was frozen before evaluation. HTML fetching uses the previously tested improved extractor for this profile; the headline benchmark does not measure extraction accuracy.
+
+The service loads only local files. Text inference works with Hugging Face offline mode enabled; fetching an article URL still needs internet access. Local hosting removes a cloud inference dependency but cannot guarantee uptime through power/GPU/process failure. The earlier MiniLM selection is preserved in `models/selected.json`. To use it explicitly without changing the new selection:
+
+```bash
+SENTIMENT_ARTIFACT=models/development/release uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+### Choose a model and highlight the text
+
+The **Model** selector offers Qwen3 4B, MiniLM v2 and reconstructed LinearSVC v2. It changes the model for that request; the benchmark default remains Qwen. `/models` reports which local artifacts are available. Models load on first use, are cached, and share one bounded inference lock to avoid simultaneous GPU loads/inference. Missing artifacts are unavailable rather than downloaded. The response always gives the actual `model_version`.
+
+The JSON request body still accepts exactly one of `text` or `url`. The optional model is a **query parameter**, for example:
+
+```bash
+curl http://127.0.0.1:8000/predict?model=minilm_v2 -H 'Content-Type: application/json' -d '{"text":"The company reported record profits."}'
+curl http://127.0.0.1:8000/analyze?model=qwen3_4b -H 'Content-Type: application/json' -d '{"text":"Profits increased. Losses widened. The report is due Tuesday."}'
+```
+
+**Highlight sentence sentiment** calls `/analyze`. It returns the overall prediction, the exact source text, and character offsets, labels and scores for each sentence. The page preserves the text and colours negative sentences red, neutral sentences grey and positive sentences green. Hover or keyboard-focus a sentence to inspect its scores. The first **80 sentences** are classified separately; any remainder stays visible and explicitly uncoloured, with a limit notice. Full-article classification still uses the original bounded model policy.
+
+These are independent sentence predictions, **not word-level attribution, verified facts, or a calibrated explanation of the whole-article label**. Sentence-level accuracy has not been measured on human sentence annotations; synthetic controls and offset tests establish functionality only. A sentence can need context from another sentence. DE/EN sentence boundaries use a small deterministic rule with common abbreviation/decimal handling, so unusual punctuation can still split imperfectly. Extra inference runs only when the highlight button is clicked. The original `/predict` path stays one full-text prediction.
+
+### Setup from a fresh checkout
+
+Python **3.12** and the NVIDIA tower are required. `nvidia-smi` must show the GPU. Keep the CUDA wheel separate; do not use `requirements-transformer.txt` from main.
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-cuda.txt
+python -m pip install -r requirements.txt -r requirements-local-llm.txt
+python -m src.local_llm prepare
+# Serves the winner of the recorded comparison; does not pretend to run a new evaluation:
+SENTIMENT_ARTIFACT=models/local_llm HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
+```
+
+`prepare` downloads revision `cdbee75f17c01a7cc42f958dc650907174af0554` of [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), saves the fixed prompt and metadata, and needs approximately 7.5 GiB of weight storage. We chose this text-only, multilingual, non-thinking, Apache-2.0 model as a practical 4B local candidate that fits the 16 GB GPU without quantization or a gated initial download. This is not an exhaustive search over LLMs or a claim that Gemma is unsuitable. The measured benchmark peak CUDA allocation was about 7.57 GiB; longer articles can use more.
+
+### Reproduce the comparison, preserving recorded results
+
+On this tower the original MiniLM release is already available. A fresh machine must first reconstruct it using the historical setup/training and v2 reproduction instructions below; it is not downloaded by the API. Exact original weights are local and not in Git. Re-training can produce different weight hashes, which must be logged as a new reproduction rather than claimed identical.
+
+Reconstruct only the current colleague training recipe, without calling its test evaluator or MLflow logger:
+
+```bash
+git worktree add --detach ../colleague-v2-reference 8668255ed7b94c24e16d52bec1d992f9ad507e87
+python src/local_llm_reference.py --checkout ../colleague-v2-reference --output models/local_llm_reference
+python -m src.local_llm prepare
+```
+
+Reuse an existing clean reference checkout at that commit instead of running `worktree add` again. Data revisions are pinned by the adapter; the reference source is verified unchanged. It fits all 5,969 training rows including the supplement and records the source hashes and environment. Validation/test files are read only by the reference's original duplicate-exclusion loader, never scored or used to choose this model.
+
+Fresh evaluation outputs and locks must use separate directories (the committed reports are deliberately protected):
+
+```bash
+python -m src.llm_comparison prepare --reports-dir reports/reproduction/local_llm --data-dir data/local_llm/reproduction
+python -m src.llm_comparison audit --reports-dir reports/reproduction/local_llm --data-dir data/local_llm/reproduction
+# After reviewing tests/results, activate the winner of that reproduction:
+python -m src.llm_comparison activate --reports-dir reports/reproduction/local_llm --data-dir data/local_llm/reproduction
+```
+
+`prepare` excludes the earlier benchmark using committed IDs and normalized text hashes, and excludes original local train/val/test texts. It never uses candidate predictions. SEntFiN is pinned at `eba43610fe3cb57a3e5773cd6c037da1f8992ad5` (MIT); unanimous entity labels are mapped to one headline label, normalized duplicates and overlaps removed, then class-balanced sampling uses seed `20261106`. OPUS-MT EN→DE is pinned at `6183067f769a302e3861815543b9f312c71b0ca4` (CC-BY-4.0), beam4, no sampling or source truncation. The manifest contains all selected IDs, hashes and filters; texts stay ignored. For inspection alone, `python -m src.llm_comparison restore_data` recreates the committed benchmark CSV and verifies its exact hash without running any candidate. This needs CUDA and the pinned translator, not a new training run.
+
+The original audit has an exclusive completion lock. Do not delete it to test another prompt. If you change a candidate, create a new development protocol and a fresh future evaluation rather than optimizing against these labels.
+
+### MLflow and tests
+
+All three actual comparison runs are in **`article-sentiment-second-path`**, with `phase=local-llm-comparison`, `comparable_group=fresh-sentfin-20261106` and `source=measured-live`. They include parameters, artifact/prompt/data hashes, accuracy, macro-F1, F1 for every class, negative precision/recall, warm inference time, p50/p95, model size, GPU allocation, and confusion matrices overall/by language. The pooled score is descriptive; native EN is the selection metric. No old run was replaced. The local experiment has 38 runs including the original development history and these three new finished measurements.
+
+```bash
+mlflow ui --backend-store-uri sqlite:///"$(pwd)/mlflow.db" --host 127.0.0.1 --port 5000 --workers 1
+python -m pytest -q
+```
+
+Keep the venv activated when starting MLflow so its background job commands are on `PATH`. Open <http://127.0.0.1:5000/> and experiment `article-sentiment-second-path`; filter `tags.phase = 'local-llm-comparison'` and compare the three runs. `macro_f1_en` is the primary result, `macro_f1_de` is DE-MT, and `macro_f1` pools the two for description. The SQLite store, model weights, benchmark texts and venv are local, not in Git. Git contains exported metrics, confusion matrices, chart, protocol, provenance and run IDs. A fresh clone shows these reports; it does not magically contain the local MLflow database. Running the reproduction creates new real runs in its own store.
+
+**70 offline tests pass.** The offline tests exercise strict API inputs, inference failures, artifact/version selection, URL extraction/errors, the constrained-LLM adapter with stubs, the close-margin rule and benchmark tamper rejection. No network, large weights or GPU are required for pytest. GitHub's CPU-only runner installs CPU torch only for these stubbed tests; the tower uses the CUDA requirements above. Live verification uses the real local model and a public article URL; external sites can change. The exported smoke evidence omits article text.
+
+## Historische Entwicklung v2: MiniLM
+
+Auf ausdrücklichen Wunsch folgten getrennte Verbesserungsversuche und eine Kombination. Damit wurde die ursprüngliche Vorgabe „genau ein stärkeres Modell“ für diese **zusätzliche dokumentierte Entwicklungsphase** erweitert; der v1-Lauf bleibt unverändert erhalten. Die nachfolgenden v1-Abschnitte beschreiben den historischen ersten Stand. Dieser BF16-Stand war bis zum nachfolgenden Local-LLM-Vergleich der API-Standard; der aktuelle Standard steht oben.
+
+**Historische v2-Auswahl: `R3_deploy`, weil sein mittleres Quellen-CV-macro-F1 von 0,6729 innerhalb der vorab definierten 0,005 zur besten Kombination (0,6740) liegt und die Tie-Regel die geringere gemessene Latenz bei rund 241 MiB wählt.** Das ist keine behauptete signifikante Überlegenheit: der Abstand beträgt nur 0,0011 F1 bzw. 0,037 ms zur Kombination. Gegenüber dem Referenz-Fine-Tune sinkt die vollständige Artefaktgröße von rund 465 auf 241 MiB.
 
 - **B0:** eingefrorene Baseline, je Fold ausschließlich auf dessen Fit-Zeilen neu gefittet.
 - **R0:** ursprüngliche Fine-Tune-Rezeptur, drei Epochen, je Fold neu trainiert.
