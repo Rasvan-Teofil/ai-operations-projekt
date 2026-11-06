@@ -1,0 +1,90 @@
+[
+  {
+    "file": "qwen-Apache-2.0.txt",
+    "source_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/resolve/cdbee75f17c01a7cc42f958dc650907174af0554/LICENSE",
+    "source_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "bytes": 11343,
+    "retrieved_on": "2026-11-06",
+    "transform": "verbatim bytes"
+  },
+  {
+    "file": "sentfin-MIT.txt",
+    "source_url": "https://raw.githubusercontent.com/pyRis/SEntFiN/eba43610fe3cb57a3e5773cd6c037da1f8992ad5/LICENSE",
+    "source_sha256": "961d32986ac3fa2fe2e55ebc7bbae1ba8d632412e98493d73bdf59f0ad8fc65f",
+    "sha256": "961d32986ac3fa2fe2e55ebc7bbae1ba8d632412e98493d73bdf59f0ad8fc65f",
+    "bytes": 1110,
+    "retrieved_on": "2026-11-06",
+    "transform": "verbatim bytes"
+  },
+  {
+    "file": "CC-BY-4.0.txt",
+    "source_url": "https://raw.githubusercontent.com/cgoer/GerNTSA/a28ca5245fd35ce0e16baa516515c913eba3c834/LICENSE",
+    "source_sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f",
+    "sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f",
+    "bytes": 18658,
+    "retrieved_on": "2026-11-06",
+    "transform": "verbatim bytes"
+  },
+  {
+    "file": "sentivent-scope.txt",
+    "source_url": "https://huggingface.co/datasets/GillesJacobs/sentivent/resolve/6a9e8f9fc11ba7db3d8dffe3e5df9e7b062e6441/LICENSE",
+    "source_sha256": "9d53616cf32c93961cfbabb296ffd91baa54a5fd4929d4552e4b10802e45357d",
+    "sha256": "9d53616cf32c93961cfbabb296ffd91baa54a5fd4929d4552e4b10802e45357d",
+    "bytes": 2993,
+    "retrieved_on": "2026-11-06",
+    "transform": "verbatim bytes"
+  },
+  {
+    "file": "sentivent-NOTICE.md",
+    "source_url": "https://huggingface.co/datasets/GillesJacobs/sentivent/resolve/6a9e8f9fc11ba7db3d8dffe3e5df9e7b062e6441/LICENSES/NOTICE.md",
+    "source_sha256": "a85348750bc4cf6837388664118993bdd3c92c1a7f1fa5d8d645e6997e978659",
+    "sha256": "a85348750bc4cf6837388664118993bdd3c92c1a7f1fa5d8d645e6997e978659",
+    "bytes": 1832,
+    "retrieved_on": "2026-11-06",
+    "transform": "verbatim bytes"
+  },
+  {
+    "file": "CC-BY-2.5.txt",
+    "source_url": "https://creativecommons.org/licenses/by/2.5/legalcode",
+    "source_sha256": "6f53ec1584dd401724c1cae0fc1139249508ce24cf0891cc70fd6468f4d4b689",
+    "sha256": "07b935c2b1624e2a1c6daa593a9874b239164c7e6a2df125741225eea7a30c25",
+    "bytes": 16349,
+    "retrieved_on": "2026-11-06",
+    "transform": "HTML legal-code body extracted as UTF-8 text; no substantive editing"
+  },
+  {
+    "file": "CC-BY-NC-SA-3.0.txt",
+    "source_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/legalcode",
+    "source_sha256": "b8015126333e88b2ae5dee93ec09f94678a1c9c69aeb022d9a80fb6ba5299e50",
+    "sha256": "646588f454f0290f08633f812833b5ec13476fcfec35e41ad6f1e64f625a07c6",
+    "bytes": 25922,
+    "retrieved_on": "2026-11-06",
+    "transform": "HTML legal-code body extracted as UTF-8 text; no substantive editing"
+  },
+  {
+    "file": "kenpache-usage.txt",
+    "source_url": null,
+    "sha256": "8081d78db349559b92dc8dce3fc45ea1ca49c77bae860b5d62264b2f0939ef73",
+    "bytes": 609,
+    "retrieved_on": "2026-11-06",
+    "transform": "Project-authored scope summary; original terms linked within"
+  },
+  {
+    "file": "wikinews-terms.txt",
+    "source_url": null,
+    "sha256": "c7c8c4b2ef755e80b766713b8567d72a2ff65179e17d6b609fcead171f6b186e",
+    "bytes": 903,
+    "retrieved_on": "2026-11-06",
+    "transform": "Project-authored scope summary; original terms linked within"
+  },
+  {
+    "file": "Apache-2.0.txt",
+    "source_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "source_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "bytes": 11358,
+    "retrieved_on": "2026-11-06",
+    "transform": "verbatim bytes"
+  }
+]

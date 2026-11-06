@@ -1,0 +1,11 @@
+Kenpache multilingual financial sentiment — usage record
+
+This is a project summary, not a new licence grant.
+The pinned dataset card contains an Apache-2.0 badge but restricts the
+intended use to academic and non-commercial research and retains publisher
+copyright. Commercial users are directed to obtain original-source licences.
+We follow that restrictive statement pending clarification.
+
+Source and exact revision:
+https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment/blob/9d43950d151602f623f28bba62f30554b5d40dd2/README.md
+Source-card hash and review date: ../source_checks.json

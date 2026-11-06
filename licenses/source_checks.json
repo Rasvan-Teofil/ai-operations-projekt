@@ -1,0 +1,26 @@
+[
+  {
+    "id": "kenpache",
+    "source_url": "https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment/raw/9d43950d151602f623f28bba62f30554b5d40dd2/README.md",
+    "sha256": "92cf047e24f67d1c4fdb82382f372023c57acfd41b69f0c746b14ef5da6920ed",
+    "retrieved_on": "2026-11-06"
+  },
+  {
+    "id": "phrasebank",
+    "source_url": "https://huggingface.co/datasets/takala/financial_phrasebank/raw/8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964/README.md",
+    "sha256": "274523f90fee5ef947c24bd95388818a551dbd2c1d9ee55469446329cb6c82e0",
+    "retrieved_on": "2026-11-06"
+  },
+  {
+    "id": "minilm",
+    "source_url": "https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/raw/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md",
+    "sha256": "1e98ea05b0de579fcaad3d625b62ea55647142ed674d5f5ebf1440e4bbbb6f23",
+    "retrieved_on": "2026-11-06"
+  },
+  {
+    "id": "opus",
+    "source_url": "https://huggingface.co/Helsinki-NLP/opus-mt-en-de/raw/6183067f769a302e3861815543b9f312c71b0ca4/README.md",
+    "sha256": "7625de996b7c4c51c217095941cf2e27d2b5cc5b4cd695c382882679f2f53710",
+    "retrieved_on": "2026-11-06"
+  }
+]

@@ -1,0 +1,183 @@
+{
+  "version": "2026-11-06.1",
+  "reviewed_on": "2026-11-06",
+  "scope": "Current research demo and proposed next-stage data; not blanket commercial clearance or a licence for our own code.",
+  "entries": [
+    {
+      "id": "qwen3_4b",
+      "name": "Qwen3-4B-Instruct-2507",
+      "group": "current",
+      "use": "Default local zero-shot model; no project-data fine-tuning.",
+      "license": "Apache-2.0",
+      "status": "Permissive model licence; current default.",
+      "scope": "Commercial reuse and redistribution of the licensed model are permitted subject to Apache-2.0 conditions, including retained notices. This does not license submitted articles or certify the pretraining corpus.",
+      "attribution": "Qwen Team / Alibaba Cloud; retain upstream notices.",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "license_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/blob/cdbee75f17c01a7cc42f958dc650907174af0554/LICENSE",
+      "notices": [
+        "qwen-Apache-2.0.txt"
+      ]
+    },
+    {
+      "id": "minilm_v2",
+      "name": "MiniLM base and project fine-tunes v1/v2",
+      "group": "current",
+      "use": "Selectable MiniLM v2; original base encoder for historical classifiers.",
+      "license": "Apache-2.0 for the base model",
+      "status": "Legacy training data restricted; research comparison.",
+      "scope": "The base model card declares Apache-2.0. Kenpache training permissions are a separate issue. We retain the trained artifacts as research-only pending clarification; a future publication-oriented model must start again from the clean base, not the legacy fine-tune.",
+      "attribution": "Sentence Transformers / UKPLab contributors; project training documented separately.",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "source_url": "https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "license_url": "https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/blob/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md",
+      "notices": [
+        "Apache-2.0.txt"
+      ]
+    },
+    {
+      "id": "linearsvc_v2",
+      "name": "Reconstructed LinearSVC v2",
+      "group": "current",
+      "use": "Selectable reconstruction of the colleague recipe, not their original weights.",
+      "license": "No separate project artifact licence assigned",
+      "status": "Legacy training data restricted; research comparison.",
+      "scope": "Trained on Financial PhraseBank, German Kenpache and a 46-row original supplement. Do not treat public code or the sklearn implementation licence as permission to redistribute those data or as commercial clearance for this artifact. We keep it for research comparison.",
+      "attribution": "Colleague recipe from Rasvan-Teofil/ai-operations-projekt; reconstruction on second-path.",
+      "revision": "8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/local_llm/reference_provenance.json",
+      "notices": []
+    },
+    {
+      "id": "kenpache",
+      "name": "Kenpache multilingual financial sentiment",
+      "group": "current",
+      "use": "Historical MiniLM v1/v2 training; German training data for LinearSVC reconstruction.",
+      "license": "Conflicting card: Apache-2.0 badge; academic / non-commercial research usage section",
+      "status": "Restricted / unresolved; excluded from the proposed publication-oriented pool.",
+      "scope": "We follow the more restrictive usage statement. Original publisher rights are retained; commercial permission must be obtained from original sources. Neither a new licence page nor new benchmark results remove this issue.",
+      "attribution": "Kenpache dataset creator; respective publishers in the source field.",
+      "revision": "9d43950d151602f623f28bba62f30554b5d40dd2",
+      "source_url": "https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment",
+      "license_url": "https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment/blob/9d43950d151602f623f28bba62f30554b5d40dd2/README.md",
+      "notices": [
+        "kenpache-usage.txt"
+      ]
+    },
+    {
+      "id": "phrasebank",
+      "name": "Financial PhraseBank",
+      "group": "current",
+      "use": "English training data for reconstructed LinearSVC.",
+      "license": "CC-BY-NC-SA-3.0",
+      "status": "Non-commercial; excluded from the proposed pool without separate permission.",
+      "scope": "Research publication of aggregate results is distinct from commercial use or redistribution of corpus text. Retain attribution and share-alike where applicable. The source card directs commercial users to the authors for a separate licence.",
+      "attribution": "Malo, Sinha, Korhonen, Wallenius and Takala; Good debt or bad debt (2014).",
+      "revision": "8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964",
+      "source_url": "https://huggingface.co/datasets/takala/financial_phrasebank",
+      "license_url": "https://huggingface.co/datasets/takala/financial_phrasebank/blob/8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964/README.md",
+      "notices": [
+        "CC-BY-NC-SA-3.0.txt"
+      ]
+    },
+    {
+      "id": "sentfin",
+      "name": "SEntFiN 1.0",
+      "group": "current",
+      "use": "Fresh shared headline evaluation only; not project LLM training.",
+      "license": "MIT in repository",
+      "status": "Repository licence verified; publisher headline rights not independently established.",
+      "scope": "The MIT file grants rights in software and associated documentation. We have not established a separate grant from the underlying news publishers. We publish aggregate metrics and split hashes, not headline texts. Do not silently promote this benchmark to commercially cleared training data.",
+      "attribution": "Ankur Sinha, Satishwar Kedas, Rishu Kumar and Pekka Malo (2021 licence notice).",
+      "revision": "eba43610fe3cb57a3e5773cd6c037da1f8992ad5",
+      "source_url": "https://github.com/pyRis/SEntFiN",
+      "license_url": "https://github.com/pyRis/SEntFiN/blob/eba43610fe3cb57a3e5773cd6c037da1f8992ad5/LICENSE",
+      "notices": [
+        "sentfin-MIT.txt"
+      ]
+    },
+    {
+      "id": "opus",
+      "name": "OPUS-MT English → German",
+      "group": "current",
+      "use": "Creates the German translated benchmark diagnostic; not a sentiment model.",
+      "license": "CC-BY-4.0",
+      "status": "Permissive translation-model licence.",
+      "scope": "Credit the translator and mark output as machine-translated. Translation does not clear source headline rights or create independent native-German gold labels.",
+      "attribution": "Helsinki-NLP Research Group; OPUS-MT contributors.",
+      "revision": "6183067f769a302e3861815543b9f312c71b0ca4",
+      "source_url": "https://huggingface.co/Helsinki-NLP/opus-mt-en-de",
+      "license_url": "https://huggingface.co/Helsinki-NLP/opus-mt-en-de/blob/6183067f769a302e3861815543b9f312c71b0ca4/README.md",
+      "notices": [
+        "CC-BY-4.0.txt"
+      ]
+    },
+    {
+      "id": "supplement",
+      "name": "46 original training supplement rows",
+      "group": "current",
+      "use": "Training-only supplement in reconstructed colleague v2.",
+      "license": "No standalone data licence found at inspected source commit",
+      "status": "Unresolved for external reuse.",
+      "scope": "Original hand-written examples are not publisher-sourced news. Public GitHub availability alone is not a licence grant. Not included in the proposed new shared training set until its authors choose an explicit licence.",
+      "attribution": "Original project contributors.",
+      "revision": "8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/local_llm/reference_provenance.json",
+      "notices": []
+    },
+    {
+      "id": "wikinews",
+      "name": "Wikinews · German and English",
+      "group": "candidate",
+      "use": "Recommended starting point for a new, human-labelled general-news corpus.",
+      "license": "DE text: CC-BY-2.5; EN text after 2024-12-16: CC-BY-4.0; older EN usually CC-BY-2.5",
+      "status": "Open-text candidate; sentiment labels still required.",
+      "scope": "Attribution licences permit commercial sharing and adaptation of covered text. Record each page revision, authors/history, source URL, licence and changes. Exclude images and unverified third-party quotations. The English date rule is not a German licence rule. No sentiment gold labels are supplied; neutral reporting style is not the neutral class. Treat this as an archive: the Wikimedia board announced read-only mode from 4 May 2026, not an ongoing news feed.",
+      "attribution": "Wikinews / de.wikinews.org and article contributors, with original page/history links.",
+      "revision": "Policy snapshots: EN oldid=4991371; DE oldid=849219. Article revisions not selected yet.",
+      "source_url": "https://en.wikinews.org/wiki/Main_Page",
+      "license_url": "https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371",
+      "notices": [
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "wikinews-terms.txt"
+      ]
+    },
+    {
+      "id": "gerntsa",
+      "name": "GerNTSA · German news topic sentiment",
+      "group": "candidate",
+      "use": "Possible German labelled auxiliary source; not yet approved for training.",
+      "license": "CC-BY-4.0 declared for dataset",
+      "status": "Conditional: verify source-text rights and target-to-global label mapping.",
+      "scope": "Local inspection: 3,792 target-labelled rows, 3,632 distinct snippets; negative 573, neutral 2,255, positive 964. Publisher permissions were not independently established. Topic/target labels do not automatically equal article sentiment. Mixed targets must not be relabelled neutral; article grouping cannot be claimed from the supplied fields alone.",
+      "attribution": "GerNTSA contributors / cgoer; credit dataset URL and indicate filtering.",
+      "revision": "a28ca5245fd35ce0e16baa516515c913eba3c834",
+      "source_url": "https://github.com/cgoer/GerNTSA",
+      "license_url": "https://github.com/cgoer/GerNTSA/blob/a28ca5245fd35ce0e16baa516515c913eba3c834/LICENSE",
+      "notices": [
+        "CC-BY-4.0.txt"
+      ]
+    },
+    {
+      "id": "sentivent",
+      "name": "SENTiVENT · English financial events",
+      "group": "candidate",
+      "use": "Potential annotation/guideline reference; not a cleared replacement text corpus.",
+      "license": "CC-BY-4.0 annotations/content; Apache-2.0 software; source news explicitly excluded",
+      "status": "Conditional: obtain article permissions before including source text.",
+      "scope": "The licence expressly excludes third-party news articles. Structured target/event annotations need an audited mapping to our three global classes. Do not label every unannotated sentence neutral. Useful for investor-relevant factual sentiment and a later span task, not a drop-in publishable bilingual corpus.",
+      "attribution": "Gilles Jacobs; annotations and original guidelines: Gilles Jacobs and Ghent University. Dataset DOI 10.17605/OSF.IO/8JEC2.",
+      "revision": "6a9e8f9fc11ba7db3d8dffe3e5df9e7b062e6441",
+      "source_url": "https://huggingface.co/datasets/GillesJacobs/sentivent",
+      "license_url": "https://huggingface.co/datasets/GillesJacobs/sentivent/blob/6a9e8f9fc11ba7db3d8dffe3e5df9e7b062e6441/LICENSE",
+      "notices": [
+        "sentivent-scope.txt",
+        "sentivent-NOTICE.md",
+        "CC-BY-4.0.txt"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "reviewed_on": "2026-11-06",
+  "source_url": "https://raw.githubusercontent.com/cgoer/GerNTSA/a28ca5245fd35ce0e16baa516515c913eba3c834/GerNTSA.json",
+  "source_sha256": "8af4994288f0aaa7e3e68d058e19b5247c5c732e0bc4978e3d0a66400c888a15",
+  "rows": 3792,
+  "distinct_snippets": 3632,
+  "labels": {
+    "negative": 573,
+    "neutral": 2255,
+    "positive": 964
+  },
+  "fields": [
+    "id",
+    "opinion_snippet",
+    "target",
+    "target_anchor",
+    "sentiment"
+  ],
+  "article_or_event_id_present": false,
+  "texts_committed": false
+}

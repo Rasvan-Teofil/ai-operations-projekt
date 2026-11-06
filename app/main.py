@@ -126,6 +126,8 @@ def create_app(queue_timeout=None):
     app.state.default_id = None
     static = Path(__file__).resolve().parent / 'static'
     app.mount('/static', StaticFiles(directory=static), name='static')
+    licensing = Path(__file__).resolve().parents[1] / 'licenses'
+    app.mount('/licenses/notices', StaticFiles(directory=licensing / 'notices'), name='license-notices')
     inference_lock = threading.BoundedSemaphore(1)
     wait_limit = float(os.getenv('SENTIMENT_QUEUE_TIMEOUT', '2.0')) if queue_timeout is None else queue_timeout
     if wait_limit < 0:
@@ -159,6 +161,15 @@ def create_app(queue_timeout=None):
     @app.get('/demo', include_in_schema=False)
     def demo():
         return FileResponse(static / 'index.html')
+
+    @app.get('/licenses', include_in_schema=False)
+    def licenses_page():
+        return FileResponse(static / 'licenses.html')
+
+    @app.get('/licenses/inventory')
+    def license_inventory():
+        # Same reviewed inventory as Git; no network or model load for this route.
+        return json.loads((licensing / 'inventory.json').read_text(encoding='utf-8'))
 
     @app.get('/comparison', include_in_schema=False)
     def comparison():

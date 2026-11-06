@@ -4,6 +4,8 @@ Eigenständiger Lösungsweg ab dem leeren Commit `830bba1`. Kein Code und kein M
 
 ## Current deployment: local LLM follow-up (6 November 2026)
 
+**Data and licences:** [website](http://127.0.0.1:8000/licenses) · [versioned inventory and retained licence texts](licenses/README.md) · [source shortlist and proposed shared-data comparison](docs/data-sources-next-stage.md). The homepage links this record. The current demo retains legacy classifiers trained with restricted data; this is not a blanket commercial release. Proposed replacement sources have not changed the weights, benchmark or winner. Source/annotation rights must be settled before a new training stage. The API serves the same inventory at `/licenses/inventory` without fetching external pages.
+
 **We now serve local Qwen3-4B-Instruct-2507 because its native-English macro-F1 of 0.7839 on the fresh common benchmark exceeds MiniLM v2 (0.6936) and reconstructed LinearSVC v2 (0.4720) by more than the predefined 0.005 close margin.** This is a quality choice with a substantial latency and memory cost, not an availability advantage over another locally hosted model.
 
 The original implementation, training runs, ablations and reports below remain historical evidence. No main code was merged here and no main runs were updated. The current colleague recipe is imported from a separate detached checkout for reconstruction only.

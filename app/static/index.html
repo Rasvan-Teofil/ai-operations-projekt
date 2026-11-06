@@ -17,6 +17,7 @@
           <label for="model-choice">Model</label>
           <select id="model-choice"><option value="">Benchmark default</option></select>
           <p class="hint model-note">Choose a model for this request. The first use may take longer while its local weights load.</p>
+          <p class="licence-banner">Research demo: the older classifiers use restricted training data. <a href="/licenses">Data &amp; licences</a> lists every current model, source and the proposed replacement data.</p>
           <fieldset><legend>Input source</legend>
             <label><input type="radio" name="source" value="text" checked> Text</label>
             <label><input type="radio" name="source" value="url"> Article URL</label></fieldset>
@@ -61,7 +62,7 @@
       <img id="comparison-chart" src="/comparison.svg" alt="Measured macro-F1, warm inference time and artifact size for MiniLM v2, LinearSVC v2 and local Qwen3 4B." loading="lazy">
       <p class="hint">German is a translation transfer check, not native German gold. These are 600 independent headline pairs. General-news articles and public-corpus pretraining overlap remain unverified. Historical test scores use different data.</p>
     </section>
-    <footer>Inference runs on this machine using local weights. Article URLs still need internet access. Health: <a href="/health">/health</a> · Results: <a href="/comparison">JSON</a></footer>
+    <footer>Inference runs on this machine using local weights. Article URLs still need internet access. <a href="/licenses">Data &amp; licences</a> · Health: <a href="/health">/health</a> · Results: <a href="/comparison">JSON</a></footer>
   </main>
 </body>
 </html>
