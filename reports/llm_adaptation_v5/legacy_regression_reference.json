@@ -1,0 +1,83 @@
+{
+  "purpose": "Synthetic inference regression controls saved before shared-engine change; not held-out accuracy",
+  "cases": [
+    {
+      "text": "Die Firma meldet Rekordgewinne.",
+      "response": {
+        "label": "positive",
+        "scores": {
+          "negative": 8.258073180356443e-14,
+          "neutral": 2.2447771723041465e-13,
+          "positive": 1.0
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt": null
+      }
+    },
+    {
+      "text": "Ein Brand zerstörte die Fabrik.",
+      "response": {
+        "label": "negative",
+        "scores": {
+          "negative": 1.0,
+          "neutral": 2.825757392698391e-15,
+          "positive": 2.940077695190446e-11
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt": null
+      }
+    },
+    {
+      "text": "Die Konferenz beginnt am Dienstag.",
+      "response": {
+        "label": "neutral",
+        "scores": {
+          "negative": 7.433680407342713e-12,
+          "neutral": 1.0,
+          "positive": 2.020683967374204e-11
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt": null
+      }
+    },
+    {
+      "text": "The team won the championship.",
+      "response": {
+        "label": "positive",
+        "scores": {
+          "negative": 5.7893564074651405e-12,
+          "neutral": 1.6586784029604118e-12,
+          "positive": 1.0
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt": null
+      }
+    },
+    {
+      "text": "The factory closed after heavy losses.",
+      "response": {
+        "label": "negative",
+        "scores": {
+          "negative": 1.0,
+          "neutral": 5.564245721995e-16,
+          "positive": 2.2897348947448215e-11
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt": null
+      }
+    },
+    {
+      "text": "The report will be published on Tuesday.",
+      "response": {
+        "label": "neutral",
+        "scores": {
+          "negative": 6.5602007333354084e-12,
+          "neutral": 1.0,
+          "positive": 9.545034901359273e-12
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt": null
+      }
+    }
+  ]
+}
