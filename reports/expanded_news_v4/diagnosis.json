@@ -1,0 +1,16 @@
+{
+  "data_used": "v3 Train only; old Test errors inspected from saved predictions without rerunning Test",
+  "training_rows": 244,
+  "training_counts": {
+    "negative": 136,
+    "neutral": 63,
+    "positive": 45
+  },
+  "old_finetune_train_recall": {
+    "negative": 1.0,
+    "neutral": 0.9841269841269841,
+    "positive": 0.9555555555555556
+  },
+  "label_source": "AI-labelled / Codex-reviewed",
+  "decision": "Expand Train coverage; preserve old Test and Val outside future fitting"
+}

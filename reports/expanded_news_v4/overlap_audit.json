@@ -1,0 +1,15 @@
+{
+  "matched_ids": [],
+  "scanned_files": [
+    "data/processed/test.csv",
+    "data/processed/train.csv",
+    "data/processed/val.csv",
+    "data/local_llm/shared.csv",
+    "data/benchmark/shared.csv"
+  ],
+  "historical_rows_in_group_audit": 360,
+  "old_train_carried": 244,
+  "protected_old_rows": 116,
+  "train_test_component_overlap": [],
+  "limits": "Exact project text and conservative linked/source/near-duplicate groups; residual event and pretraining overlap unknown."
+}

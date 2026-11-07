@@ -15,3 +15,4 @@ reports/reproduction/
 reports/development/partial_runs.json
 data/local_llm/
 data/common_data_v3/
+data/expanded_news_v4/
