@@ -1,0 +1,370 @@
+{
+  "checked_at_utc": "2026-11-07T09:05:02.686096+00:00",
+  "api": "http://127.0.0.1:8000",
+  "all_passed": true,
+  "scope": "Synthetic functional and before/after legacy-score regression controls; public URL and controlled errors. No held-out Test reuse or accuracy claim.",
+  "cases": [
+    {
+      "case": "health",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "models",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_before_adapter_load_0",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_before_adapter_load_1",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_before_adapter_load_2",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_before_adapter_load_3",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_before_adapter_load_4",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_before_adapter_load_5",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "qwen3_4b_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-2507-bf16-prompt1"
+    },
+    {
+      "case": "qwen3_4b_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-2507-bf16-prompt1"
+    },
+    {
+      "case": "minilm_v2_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "dev2-R3_deploy-foldrelease-20261019"
+    },
+    {
+      "case": "minilm_v2_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "dev2-R3_deploy-foldrelease-20261019"
+    },
+    {
+      "case": "linearsvc_v2_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "tfidf-linearsvc-v2"
+    },
+    {
+      "case": "linearsvc_v2_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "tfidf-linearsvc-v2"
+    },
+    {
+      "case": "frozen_news_v3_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-frozen"
+    },
+    {
+      "case": "frozen_news_v3_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-frozen"
+    },
+    {
+      "case": "minilm_fp32_news_v3_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-minilm-fp32"
+    },
+    {
+      "case": "minilm_fp32_news_v3_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-minilm-fp32"
+    },
+    {
+      "case": "minilm_bf16_news_v3_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-minilm-bf16"
+    },
+    {
+      "case": "minilm_bf16_news_v3_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-minilm-bf16"
+    },
+    {
+      "case": "linearsvc_news_v3_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-linearsvc"
+    },
+    {
+      "case": "linearsvc_news_v3_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v3-linearsvc"
+    },
+    {
+      "case": "frozen_news_v4_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-frozen-fp32"
+    },
+    {
+      "case": "frozen_news_v4_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-frozen-fp32"
+    },
+    {
+      "case": "minilm_fp32_news_v4_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-finetuned-fp32"
+    },
+    {
+      "case": "minilm_fp32_news_v4_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-finetuned-fp32"
+    },
+    {
+      "case": "minilm_bf16_news_v4_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-finetuned-bf16"
+    },
+    {
+      "case": "minilm_bf16_news_v4_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-finetuned-bf16"
+    },
+    {
+      "case": "linearsvc_news_v4_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-linearsvc"
+    },
+    {
+      "case": "linearsvc_news_v4_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "wikinews-ai-v4-linearsvc"
+    },
+    {
+      "case": "qwen_news_v5_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-news-v5-news-bf16"
+    },
+    {
+      "case": "qwen_news_v5_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-news-v5-news-bf16"
+    },
+    {
+      "case": "qwen_fewshot_v5_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-news-v5-fewshot-bf16"
+    },
+    {
+      "case": "qwen_fewshot_v5_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-news-v5-fewshot-bf16"
+    },
+    {
+      "case": "qwen_lora_v5_de_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-news-v5-lora-bf16"
+    },
+    {
+      "case": "qwen_lora_v5_en_highlights",
+      "status": 200,
+      "expected": 200,
+      "model_version": "qwen3-4b-news-v5-lora-bf16"
+    },
+    {
+      "case": "legacy_after_adapter_and_prompt_switches_0",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_after_adapter_and_prompt_switches_1",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_after_adapter_and_prompt_switches_2",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_after_adapter_and_prompt_switches_3",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_after_adapter_and_prompt_switches_4",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "legacy_after_adapter_and_prompt_switches_5",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "valid_url",
+      "status": 200,
+      "expected": 200,
+      "excerpt_present": true,
+      "model_version": "qwen3-4b-news-v5-news-bf16"
+    },
+    {
+      "case": "missing",
+      "status": 422,
+      "expected": 422
+    },
+    {
+      "case": "both",
+      "status": 422,
+      "expected": 422
+    },
+    {
+      "case": "blank",
+      "status": 422,
+      "expected": 422
+    },
+    {
+      "case": "wrong_type",
+      "status": 422,
+      "expected": 422
+    },
+    {
+      "case": "private_address",
+      "status": 422,
+      "expected": 422
+    },
+    {
+      "case": "non_article",
+      "status": 422,
+      "expected": 422
+    },
+    {
+      "case": "robots_denial",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "case": "dns_failure",
+      "status": 502,
+      "expected": 502
+    },
+    {
+      "case": "/",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "/docs",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "/comparison/news-v5",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "/comparison/news-v5.svg",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "/comparison/news-v5-development.svg",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "/licenses",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "/licenses/inventory",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "case": "isolated_http_missing_artifact",
+      "status": 503,
+      "expected": 503
+    }
+  ],
+  "legacy_regression": [
+    {
+      "stage": "before_adapter_load",
+      "synthetic_controls": 6,
+      "max_absolute_score_delta": 0.0
+    },
+    {
+      "stage": "after_adapter_and_prompt_switches",
+      "synthetic_controls": 6,
+      "max_absolute_score_delta": 0.0
+    }
+  ],
+  "models_checked": 14,
+  "license_inventory_entries": 27,
+  "finished_new_mlflow_runs_checked": 19,
+  "run_ids": [
+    "495f917be97e403d8212dc52cc0029b9",
+    "78dac01469bd473ea8678abbb8a89a2c",
+    "57b35ea93e0948dead1d53f39ecaaaa8",
+    "a2a3a21eac744c17aa36ab4ab08d41ad",
+    "cb0e45f0ef36491a91f4f86b1a546eb1",
+    "a119d7a25d91431d934b629901dd702f",
+    "10859ec4c9bb40698d525934f6a5937f",
+    "32a67ea9f845499c9387768168d960cc",
+    "814bcf60b34c4a4d8156387779d90cd0",
+    "3990e6a4a69d41a38dc5b6781834d69f",
+    "3c149e3a7d9c4f7db89acbb6cdb455e4",
+    "16db82a2d0814078a53bdf037ec18eb0",
+    "2d8bfe6d589042cf9f5f5c262a234f3f",
+    "3ea0ec6aa6da43df82a4ddb80c6afdf4",
+    "c690381dd54545da956346dc195464ec",
+    "60e22de29d3e4933b2662fbe2a240ae2",
+    "27e920cdbd5e4efdb07708d5bb4eaa0c",
+    "ceeb96d388054ddcb7831dc28690bba0",
+    "4941680554f34b18bb30d66a3a1df5af"
+  ],
+  "default_preserved": "qwen3_4b"
+}

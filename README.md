@@ -2,9 +2,108 @@
 
 Eigenständiger Lösungsweg ab dem leeren Commit `830bba1`. Kein Code und kein Merge aus `main`.
 
-## Current deployment and data-expansion follow-up (7 November 2026)
+## Current deployment and measured follow-ups (7 November 2026)
 
 **Data and licences:** [website](http://127.0.0.1:8000/licenses) · [versioned inventory and retained licence texts](licenses/README.md) · [source review and future human-labelled comparison](docs/data-sources-next-stage.md). The current demo retains legacy classifiers trained with restricted data alongside new, separate Wikinews AI-pilot artifacts. This is not a blanket commercial release. The API serves the shared inventory at `/licenses/inventory` without fetching external pages.
+
+### Matched-task LLM adaptation completed: prompt, examples and own LoRA (v5)
+
+We addressed the suspected task mismatch instead of assigning the LLM a win. Seven frozen conditions were evaluated once on one **new common Test**, after twelve Train-only development runs and one full-Train LoRA fit. The task, data access, costs and remaining differences are explicit.
+
+| Condition on the SAME new v5 Test | Mean DE/EN macro-F1 | DE | EN | Positive recall | Warm ms/text | Full MiB |
+|---|---:|---:|---:|---:|---:|---:|
+| Frozen MiniLM · 692 Train | 0.6467 | 0.6117 | 0.6817 | 64.9% | 3.340 | 465.14 |
+| MiniLM BF16 · 692 Train | 0.7012 | 0.6832 | 0.7192 | 67.6% | 2.927 | 240.73 |
+| LinearSVC · 692 Train | 0.5710 | 0.5957 | 0.5463 | 51.4% | 0.272 | 2.14 |
+| Qwen · original financial prompt | 0.6422 | 0.6690 | 0.6153 | 29.7% | 82.125 | 7687.49 |
+| Qwen · news rubric zero-shot | 0.7235 | 0.7465 | 0.7005 | 70.3% | 106.665 | 7687.49 |
+| Qwen · news rubric + six examples | 0.7914 | 0.7656 | 0.8172 | 75.7% | 246.481 | 7687.50 |
+| Qwen · own LoRA on same Train | 0.8049 | 0.8392 | 0.7705 | 70.3% | 114.160 | 7698.77 |
+
+**The descriptive choice is Qwen · own LoRA on same Train because its mean DE/EN macro-F1 of 0.8049 wins the frozen quality/0.005-close-margin/latency/size rule, versus 0.6467 for the frozen baseline and 0.7012 for unchanged MiniLM BF16 on this same Test.** [Open the website with this experimental choice selected](http://127.0.0.1:8000/?model=qwen_lora_v5). The benchmark default remains historical Qwen under the predeclared AI-only policy; the selector changes the request, not the benchmark evidence.
+
+The whole news instruction changes Qwen mean F1 by **+0.0814** without weight training. Own LoRA versus MiniLM changes it by **+0.1037**. These are paired comparisons on this one Test, not cross-test progress claims. The result supports assessing task adaptation before concluding that an architecture is better. It does not prove that every LLM, more examples or fine-tuning always wins.
+
+- qwen3_4b → qwen_news_v5: F1 change +0.0814; exploratory paired 95% interval [+0.0022, +0.1581].
+- qwen_news_v5 → qwen_fewshot_v5: F1 change +0.0679; exploratory paired 95% interval [+0.0200, +0.1155].
+- qwen_news_v5 → qwen_lora_v5: F1 change +0.0813; exploratory paired 95% interval [+0.0262, +0.1379].
+- minilm_bf16_news_v4 → qwen_lora_v5: F1 change +0.1037; exploratory paired 95% interval [+0.0321, +0.1784].
+
+LoRA leads Few-Shot by 0.0134 F1 and runs at 114.160 versus 246.481 ms/text. This is a descriptive ordering, not a claim of established statistical superiority between those two. It catches 123/132 negatives versus 119/132, but only 26/37 positives versus 28/37: the choice does not improve every class. Few-Shot also reverses its development-fold pattern by beating the news prompt on this fresh Test; all variants had already been retained.
+
+LoRA full-Train fitting took **670.8 s**. The selected artifact uses **7698.77 MiB** and **114.160 ms/text**, compared with MiniLM's **240.73 MiB / 2.927 ms**. The compact classifier remains a meaningful latency/storage alternative. Full fit costs and sampling-only uncertainty are in the measured report.
+
+![One fresh Test: matched-task LLM adaptation](reports/llm_adaptation_v5/comparison.png)
+
+| Train-only Qwen development | Mean F1 ± fold SD | Positive recall ± fold SD |
+|---|---:|---:|
+| Qwen · original financial prompt | 0.6338 ± 0.0140 | 0.3593 ± 0.0229 |
+| Qwen · news rubric zero-shot | 0.8190 ± 0.0079 | 0.8302 ± 0.0210 |
+| Qwen · news rubric + six examples | 0.8055 ± 0.0241 | 0.8254 ± 0.0763 |
+| Qwen · own LoRA on same Train | 0.8387 ± 0.0194 | 0.8299 ± 0.0318 |
+
+The news prompt improves every development fold. Six examples are worse than that prompt in two folds; LoRA is worse in fold 3 despite leading the mean. These counterexamples are retained. Error bars are fold SD, not confidence intervals; the curve did not select a prompt, epoch or hyperparameter.
+
+![Same Train folds: task adaptation development](reports/llm_adaptation_v5/development.png)
+
+**Why this step:** v4 measured whether broader training coverage helped MiniLM. Its Qwen control still used a financial-news prompt without demonstrations or task-specific weight updates. That did not establish a general architecture ranking. We now test the whole task instruction, six fit-only demonstrations and an own LoRA adapter separately, retaining every condition regardless of its result. Both MiniLM and Qwen adapt pretrained models; neither is trained from scratch.
+
+**Same training data, different fresh Test:** all **692 v4 Train texts and labels are byte-identical** (Train SHA-256 `8556c0cab4e99dec48429ee180cd04f1b9b495b231abb814922f07635fbc90e7`). The new Test has **227 texts: 109 DE / 118 EN; 132 negative / 58 neutral / 37 positive**, SHA-256 `723673ee3c08fb7c2896aed0e14396623de25d9959f5c68382a4eb7971f48b93`. The previous v4 Test also had 227 rows but has a different hash (`6f02c3a6…`) and is not reused. Do not join scores from these different tests into one numerical learning curve or compare them with main's 0.720.
+
+Collection seed **20261109**: random 120 pages per language from the recent-1,500 published-category archive pool, without class hints or balancing. All 1,080 historical Wikinews inputs and observed linked-page/shared-source/char-4/5 near-duplicate groups (cosine ≥0.85) are protected. One source-group exclusion leaves 239 inputs; the assistant read all exact title+lead texts and excluded 12 broken or substantially ambiguous cases before candidate results. Status is **AI-labelled · Codex-reviewed**, with labels, reasons and input hashes in Git. Single-annotator self-review is not human consensus; exact assistant serving revision is unavailable. No project translations or linked publisher articles are included. Source history and pretraining overlap remain unknown.
+
+**Own GPU LoRA:** pinned Qwen3-4B-Instruct-2507 (`cdbee75f17c01a7cc42f958dc650907174af0554`), rank 8 / alpha 16 / dropout 0.05 on q_proj/v_proj; **2,949,120 trainable parameters**, frozen BF16 base, FP32 adapters/Adam states, microbatch 1 / accumulation 16, LR 1e-4, weight decay 0.01, warmup 10%, clip 1, non-reentrant gradient checkpointing. Three fixed full epochs use every Train row; no early stopping, prompt sweep, epoch selection, quantization or training truncation. The loss is inverse-class weighted conditional A/B/C next-token cross entropy, not free-text generation SFT. The discarded Train-only capacity probe fit the longest full input (533 tokens) at 8.34 GB peak allocated memory. It is engineering evidence, not an accuracy run. Small-model artifacts and the original Qwen control are unchanged.
+
+**Development uses Train only:** the same three full-size v4 source-group folds (seed 20261108, language:label stratification), four Qwen conditions each. Six demonstrations are seeded 20261109+fold, one per language/class, and checked to belong to fit, never dev; final demonstrations use full Train and seed 20261109. Historical small-model FP32 scores from those exact folds are reused as clearly marked references with original run IDs; final small-model serving uses the existing BF16 derivation of the same fit. No original Val or old Test is used for fitting or example selection. Recipes and labels were frozen at commit `8a81b9e`; after CV, the final full-Train adapter and all seven artifact/dependency hashes were committed at `dcebd48` before the fresh-Test audit. Each candidate predicted each fresh-Test text once, with per-item interruption checkpoints and an exclusive completion lock.
+
+The primary descriptive metric is **mean(DE macro-F1, EN macro-F1)**; within 0.005 of best, latency then full size decide. Accuracy, pooled/per-class F1, recalls, language results and confusion matrices remain available. Exploratory paired source-group bootstrap intervals use 1,000 resamples of saved predictions (seed 20261109), never new inference; they cover sampling variability, not annotation error or multiplicity. This matches task and training-label access, not parameter counts, compute, optimizers or context policies. Short historical leads and small positive-language cells limit conclusions about full articles and newsroom traffic.
+
+Full standalone size includes the shared Qwen base, profile and adapter. Incremental storage is separately reported. Few-shot context/tokenization cost is included in synchronized batch-one latency; loading and network are excluded. API was paused during GPU measurement; one RTX 5060 Ti worker used four CPU threads and 20 separate synthetic warmups. Historical small-model fit costs, new LoRA fit cost and no-new-weight prompt conditions are distinguished; pretraining cost is excluded for all methods. Serving shares one local Qwen base; adapter state changes are serialized and unadapted requests disable the adapter explicitly.
+
+All **19 new scored runs** use MLflow experiment `article-sentiment-second-path`, phase `wikinews-llm-adaptation-v5`, stage `cv` (12) or `final-test` (7). Required metrics, latency, full size, confusion matrices, hashes, runtime/Git parameters and training metrics are logged. Old run metrics are preserved. Git contains exported evidence; the SQLite store, raw articles, demonstration texts, weights and venv remain local/ignored.
+
+[Measured report, costs and intervals](reports/llm_adaptation_v5/comparison.md) · [Reasoning and method](docs/llm-adaptation-v5.md) · [Frozen protocol/prompt](reports/llm_adaptation_v5/protocol.json) · [AI labels/rationales](reports/llm_adaptation_v5/annotations.csv) · [Per-page credits](reports/llm_adaptation_v5/source_manifest.json) · [Split](reports/llm_adaptation_v5/split_manifest.json) · [CV membership/example IDs](reports/llm_adaptation_v5/cv_membership.json) · [CV runs](reports/llm_adaptation_v5/cv.json) · [Pinned final artifacts](reports/llm_adaptation_v5/trained.json) · [All final metrics/confusion matrices](reports/llm_adaptation_v5/comparison.json).
+
+**Tower setup/reproduction:** retain the existing Python 3.12 / CUDA environment. First install `requirements-cuda.txt`, then the project/local-LLM requirements as below, and add the adaptation dependencies without replacing torch:
+
+```bash
+nvidia-smi
+source .venv/bin/activate
+python -m pip install -r requirements-llm-adaptation.txt
+python -m pip check
+# Restore only: pinned extraction and every input/split hash must match.
+python -m src.news_data --restore
+python -m src.news_experiment prepare --restore
+python -m src.news_expand --restore
+python -m src.news_scaling prepare --restore
+python -m src.news_llm_data --restore
+python -m src.news_llm_experiment prepare --restore
+python -m pytest -q
+```
+
+The tower must retain pinned `models/local_llm/`, the three unchanged 692-Train controls under `models/expanded_news_v4/final/`, and original v4 membership/run evidence. A fresh clone contains credits/labels/reports, not measured weights or the MLflow database; newly reconstructed weights cannot silently be called identical controls. Stop only the GPU API while benchmarking. A separate named reproduction preserves the original evidence:
+
+```bash
+# Use a new name each time: real 12-fold-condition CV, full-Train LoRA, seven final audits.
+python -m src.news_llm_reproduce --name tower-llm-01 --run
+```
+
+This writes new ignored `models/reproduction/llm-adaptation-<name>/` and `reports/reproduction/llm-adaptation-<name>/` plus new MLflow runs. Omit `--run` to prepare paths only; an existing name is rejected. Reproduction repeats a disclosed fixed protocol on a now-known Test, rather than creating a new blind test. Restoration fails if pinned source rendering/hashes change. Never use main's CPU transformer requirements on the tower.
+
+Restart serving with one worker and run synthetic HTTP checks, without reusing Test:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
+# Another terminal:
+python -m src.news_llm_smoke
+```
+
+The selector now has **14 choices**, adding `qwen_news_v5`, `qwen_fewshot_v5` and `qwen_lora_v5`. They load only local artifacts under `models/llm_adaptation_v5/final/` and their pinned local base/adapter dependencies. `/comparison/news-v5`, `/comparison/news-v5.svg` and `/comparison/news-v5-development.svg` serve saved results without training or inference. `/predict` and `/analyze` preserve the input/label/score/version/offset contracts; missing artifacts are unavailable. The website and Git share the expanded licence inventory, including Qwen Apache-2.0, underlying Wikinews CC BY 2.5/4.0 attribution and CC0 annotation metadata to the extent project rights apply. Legacy restricted-data notices remain attached. [New attribution notice](licenses/notices/wikinews-llm-v5-ATTRIBUTION.txt).
+
+
+**Verification:** 115 offline pytest checks and **59 live HTTP checks** passed across all 14 models. All 19 new scored MLflow runs are FINISHED with required metrics and confusion matrices. Six synthetic legacy controls before and after loading/switching the adapter retain their scores (maximum absolute change 0). A public article URL, 422/403/502 and a separate missing-artifact HTTP process returning 503 were tested without held-out Test reuse. [Live evidence](reports/llm_adaptation_v5/live_verification.json).
+
+The local experiment now contains **88 runs** including history. [MLflow on this tower](http://127.0.0.1:5000/); GitHub contains the exported run IDs/metrics, not the database. Only `second-path` is changed.
 
 ### More data completed: original vs expanded on one fresh Test
 
@@ -29,7 +128,7 @@ All new examples are disjoint from the original 360 inputs by IDs, linked DE/EN 
 
 **The expanded fine-tune improves mean DE/EN macro-F1 by 0.1162 over the unchanged original-244 fine-tune on this same Test, and positive recall rises from 42.2% to 62.2%.** Its exploratory paired source-group-bootstrap 95% interval for the F1 change is **[+0.0538, +0.1827]**. The frozen baseline improves by +0.1020 and LinearSVC by +0.1502. Intervals use 1,000 resamples of saved predictions (seed `20261108`), not repeated inference, and cover sampling variability rather than AI annotation error. Quantity **and** class/topic coverage changed, so this is not a causal claim about quantity alone. These new values must not be ranked against the previous 49-item Test, 0.720, or historical SEntFiN scores.
 
-**We make the expanded BF16 MiniLM the best experimental website choice because it matches FP32 at 0.7591 mean F1, exceeds the expanded frozen baseline's 0.7350, and uses the faster, smaller artifact (2.901 ms, 240.73 MiB).** FP32/BF16 share one new full-Train fine-tuning; BF16 is a storage/serving derivation, not a second independent fit. The predeclared policy retains Qwen as the benchmark default established by the earlier human-labelled English test; AI-only agreement does not automatically override that choice. [Open the website with expanded MiniLM selected](http://127.0.0.1:8000/?model=minilm_bf16_news_v4). Changing the selector changes only that request.
+**Within the historical v4 study, we selected expanded BF16 MiniLM because it matches FP32 at 0.7591 mean F1, exceeds the expanded frozen baseline's 0.7350, and uses the faster, smaller artifact (2.901 ms, 240.73 MiB).** FP32/BF16 share one new full-Train fine-tuning; BF16 is a storage/serving derivation, not a second independent fit. The predeclared policy retains Qwen as the benchmark default established by the earlier human-labelled English test; AI-only agreement does not automatically override that choice. [Open the website with expanded MiniLM selected](http://127.0.0.1:8000/?model=minilm_bf16_news_v4). Changing the selector changes only that request.
 
 ![Same fresh Test: data expansion](reports/expanded_news_v4/comparison.png)
 
@@ -39,7 +138,7 @@ All new examples are disjoint from the original 360 inputs by IDs, linked DE/EN 
 
 Both GPU models start from the clean original pinned MiniLM base `e8f8c211226b894fcb81acc59f3b34ba3efd5f42`, not legacy fine-tunes. Frozen baseline: GPU mean embeddings + balanced C=1 logistic head. Own fine-tune: all encoder layers, max128, batch32, encoder LR2e-5 / head LR2e-4, AdamW weight decay0.01, warmup10%, inverse-class CE, gradient clip1, BF16 autocast with FP32 master weights, final epoch3. Additional LinearSVC: balanced C=1, word/bigrams, min_df1, max_iter2000; CPU fit on the GPU tower. Qwen and all original-244 control artifacts are unchanged. Each of the eight final conditions predicted each fresh Test text **once**, after all artifacts were pinned at commit `3ecda09`; completion locks refuse further probing. Controls receive new evaluation run IDs; no older MLflow metrics were changed.
 
-All **26 new runs** are in `article-sentiment-second-path`, phase `wikinews-ai-v4-expanded`, stage `cv` (18) or `final-test` (8), with parameters, hashes, GPU/runtime/Git provenance, Accuracy, macro/per-class F1, positive/negative recall, language metrics, `inference_ms_per_text`, `model_size_bytes` and `confusion_matrix.json`. Mean of DE/EN macro-F1 is the language-balanced descriptive selection metric; within 0.005, latency then size decide. The local store now has 69 runs including history. MLflow remains local at [port 5000](http://127.0.0.1:5000/); Git contains exported evidence, not the SQLite store.
+All **26 new runs** are in `article-sentiment-second-path`, phase `wikinews-ai-v4-expanded`, stage `cv` (18) or `final-test` (8), with parameters, hashes, GPU/runtime/Git provenance, Accuracy, macro/per-class F1, positive/negative recall, language metrics, `inference_ms_per_text`, `model_size_bytes` and `confusion_matrix.json`. Mean of DE/EN macro-F1 is the language-balanced descriptive selection metric; within 0.005, latency then size decide. At completion of v4, the local store had 69 runs including history. MLflow remains local at [port 5000](http://127.0.0.1:5000/); Git contains exported evidence, not the SQLite store.
 
 [Measured report and run IDs](reports/expanded_news_v4/comparison.md) · [Protocol frozen before fitting](reports/expanded_news_v4/protocol.json) · [Annotations](reports/expanded_news_v4/annotations.csv) · [Source credits](reports/expanded_news_v4/source_manifest.json) · [Split](reports/expanded_news_v4/split_manifest.json) · [CV membership](reports/expanded_news_v4/cv_membership.json) · [All CV runs](reports/expanded_news_v4/cv.json) · [Confusion matrices and paired intervals](reports/expanded_news_v4/comparison.json).
 
@@ -164,7 +263,7 @@ SENTIMENT_ARTIFACT=models/development/release uvicorn app.main:app --host 127.0.
 
 ### Choose a model and highlight the text
 
-The **Model** selector offers eleven choices: Qwen3 4B, legacy MiniLM v2 and reconstructed LinearSVC v2, four original-244 AI pilot artifacts, and four expanded-692 AI news artifacts. It changes the model for that request; the benchmark default remains Qwen. `/models` reports which local artifacts are available. Models load on first use, are cached, and share one bounded inference lock to avoid simultaneous GPU loads/inference. Missing artifacts are unavailable rather than downloaded. The response always gives the actual `model_version`.
+The **Model** selector offers fourteen choices: Qwen3 4B, legacy MiniLM v2 and reconstructed LinearSVC v2, four original-244 AI pilot artifacts, four expanded-692 AI news artifacts, and the three matched-task Qwen profiles above. It changes the model for that request; the benchmark default remains Qwen. `/models` reports which local artifacts are available. Models load on first use, are cached, and share one bounded inference lock to avoid simultaneous GPU loads/inference. Missing artifacts are unavailable rather than downloaded. The response always gives the actual `model_version`.
 
 The JSON request body still accepts exactly one of `text` or `url`. The optional model is a **query parameter**, for example:
 
