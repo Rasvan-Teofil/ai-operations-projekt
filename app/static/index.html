@@ -17,7 +17,7 @@
           <label for="model-choice">Model</label>
           <select id="model-choice"><option value="">Benchmark default</option></select>
           <p class="hint model-note">Choose a model for this request. The first use may take longer while its local weights load.</p>
-          <p class="licence-banner">Research demo: new AI news pilot models are experimental; older classifiers use restricted training data. <a href="/licenses">Data &amp; licences</a> lists the sources and terms.</p>
+          <p class="licence-banner">Research demo: expanded AI news models and earlier pilot models are experimental; older classifiers use restricted training data. <a href="/licenses">Data &amp; licences</a> lists the sources and terms.</p>
           <fieldset><legend>Input source</legend>
             <label><input type="radio" name="source" value="text" checked> Text</label>
             <label><input type="radio" name="source" value="url"> Article URL</label></fieldset>
@@ -53,8 +53,21 @@
       <div id="highlighted-text" class="highlighted-text"></div>
       <p id="sentence-scores" class="hint" aria-live="polite">Select a coloured sentence to inspect its scores.</p>
     </section>
+    <section class="panel evidence" aria-labelledby="expanded-title">
+      <p class="eyebrow">DATA EXPANSION / 26 NEW MEASURED RUNS</p><h2 id="expanded-title">Does more training data help?</h2>
+      <p>692 training texts instead of 244, including 206 positive examples instead of 45. Original and expanded models see the same fresh 227 native German/English test texts. Reference labels: <strong>AI-labelled · Codex-reviewed</strong>.</p>
+      <p id="expanded-status" role="status">Loading the expanded comparison…</p>
+      <p><a href="/?model=minilm_bf16_news_v4">Try expanded MiniLM BF16 ↗</a> · Select any model above for predictions and sentence highlighting.</p>
+      <div class="table-scroll"><table><caption>ONE fresh Test · mean DE/EN macro-F1 agreement · original vs expanded Train</caption><thead><tr><th scope="col">Model</th><th scope="col">Mean F1</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">Positive recall</th><th scope="col">ms/text</th><th scope="col">MiB</th></tr></thead><tbody id="expanded-rows"></tbody></table></div>
+      <img id="expanded-chart" src="/comparison/news-v4.svg" alt="Original244 and expanded692 training conditions compared on the same227-item test: measured agreement, inference latency and artifact size." loading="lazy">
+      <p class="licence-banner">The expanded fine-tune improves from 0.6428 to 0.7591 mean F1 on this shared test and beats the expanded frozen baseline (0.7350). Positive recall rises from 42.2% to 62.2%. FP32 and BF16 share one fit; BF16 is the faster, smaller deployment here. These experimental results do not automatically replace the Qwen default established by the earlier human-labelled English benchmark.</p>
+      <h3>Training-only learning curve</h3>
+      <p>18 separate GPU runs: three group folds × three nested data sizes × frozen baseline / own fine-tune. The largest fit subsets reach 0.7461 mean F1 for the fine-tune versus 0.7036 at the smallest size; the middle point is 0.7027. Error bars show variation across three folds. No Val or Test scores chose the final training recipe.</p>
+      <img id="learning-chart" src="/comparison/news-v4-learning.svg" alt="Train-only three-fold learning curve with nested data sizes: mean F1 and positive recall for frozen and fine-tuned models, with fold standard-deviation bars." loading="lazy">
+      <p class="hint">Data quantity and class/topic coverage both changed. This is one AI reference annotator, historical title+lead news and a small test; long articles and sentence-highlight accuracy are unmeasured. Old tests are preserved and their numbers are not joined to this curve. <a href="/comparison/news-v4">Results JSON</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/comparison.md">Protocol, labels, source credits and MLflow run IDs</a> · <a href="/licenses">Licences</a>.</p>
+    </section>
     <section class="panel evidence" aria-labelledby="news-title">
-      <p class="eyebrow">NEW DATA / GPU TRAINING COMPLETED</p><h2 id="news-title">AI-labelled · Codex-reviewed</h2>
+      <p class="eyebrow">EARLIER 244-TRAIN PILOT / SEPARATE OLD TEST</p><h2 id="news-title">AI-labelled · Codex-reviewed</h2>
       <p>New native German and English Wikinews headlines with short leads: 244 training items, 49 held-out test items. One AI annotator created and reviewed the reference labels without candidate predictions. Val was unused.</p>
       <p id="news-status" role="status">Loading the new recorded comparison…</p>
       <div class="table-scroll"><table><caption>Agreement with AI reference labels · mean DE/EN macro-F1 · not human-gold accuracy</caption><thead><tr><th scope="col">Model</th><th scope="col">Mean F1</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">ms/text</th><th scope="col">MiB</th></tr></thead><tbody id="news-rows"></tbody></table></div>

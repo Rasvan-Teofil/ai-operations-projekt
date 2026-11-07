@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-06.2",
-  "reviewed_on": "2026-11-06",
+  "version": "2026-11-07.1",
+  "reviewed_on": "2026-11-07",
   "scope": "Current research demo and proposed next-stage data; not blanket commercial clearance or a licence for our own code.",
   "entries": [
     {
@@ -275,6 +275,126 @@
       "notices": [
         "CC0-1.0.txt",
         "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "frozen_news_v4",
+      "name": "Frozen MiniLM · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_fp32_news_v4",
+      "name": "MiniLM FP32 · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_bf16_news_v4",
+      "name": "MiniLM BF16 · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "linearsvc_news_v4",
+      "name": "LinearSVC · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "wikinews_expanded",
+      "name": "Wikinews · additional data coverage",
+      "group": "current",
+      "use": "720 new revision-pinned DE/EN short news inputs: 448 new Train and 227 fresh Test accepted; 45 exclusions. Original 244 Train carried separately.",
+      "license": "CC-BY-2.5 / CC-BY-4.0, according to language and article era; retain both terms for later EN contributions.",
+      "status": "Used in completed data-expansion study; AI-labelled · Codex-reviewed.",
+      "scope": "Only Wikinews title and first substantive paragraph;650-character complete-sentence lead cap. No images, quoted leads or linked publisher articles. Source declarations do not warrant every contribution. Bibliographic title/credit metadata is in Git; raw inputs and weights remain local.",
+      "attribution": "German and English Wikinews contributors; every page revision and author-history link in the source manifest.",
+      "revision": "720 revisions and exact text hashes frozen at d1063df; sampling seed 20261108; no project-generated translations.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/source_manifest.json",
+      "license_url": "https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371",
+      "notices": [
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "wikinews-terms.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "codex_annotations_expanded",
+      "name": "Expanded Wikinews AI reference annotations",
+      "group": "current",
+      "use": "675 new three-class AI reference labels and 45 exclusion rationales; created before candidate predictions.",
+      "license": "CC0-1.0 for new annotation metadata, to the extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed; single AI annotator.",
+      "scope": "Same assistant read the exact title+lead text and reviewed consistency; no candidate predictions or title hints assigned labels. No human consensus or verified-ground-truth claim. Sampling role and hint hidden from annotation batches. CC0 does not cover underlying text.",
+      "attribution": "Codex assistant in this project chat, at user request; exact serving revision unavailable.",
+      "revision": "New ledger frozen at d1063df before fitting; original 244 labels reused unchanged from v3.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/annotations.csv",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notices": [
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt"
       ]
     }
   ]

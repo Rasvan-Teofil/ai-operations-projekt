@@ -1,10 +1,12 @@
 # Data and model licences
 
-Reviewed **6 November 2026**. The website's [Data & licences page](http://127.0.0.1:8000/licenses) reads [inventory.json](inventory.json) through `/licenses/inventory`. This is the shared record for currently used sources and proposed replacements; it is not a blanket commercial release statement.
+Reviewed **7 November 2026**. The website's [Data & licences page](http://127.0.0.1:8000/licenses) reads [inventory.json](inventory.json) through `/licenses/inventory`. This is the shared record for currently used sources and proposed replacements; it is not a blanket commercial release statement.
 
 The current Qwen zero-shot weights have an Apache-2.0 licence. Historical MiniLM and reconstructed LinearSVC use training data with non-commercial or unresolved permissions. We retain them as research artifacts pending clarification. A model's base licence does not resolve a separate training-data question. This is our conservative release policy, not a claim that every dataset condition automatically transfers to weights.
 
 The shortlist and comparison plan are in [the next-stage review](../docs/data-sources-next-stage.md). **Wikinews now supplies a completed AI-labelled pilot**, with [new measured results](../reports/common_data_v3/comparison.md). GerNTSA and SENTiVENT are **not used yet**. No full source inputs or weights are included here; the source manifest retains bibliographic titles, attribution URLs and hashes. Publishing aggregate results, distributing source texts, using data commercially and distributing trained weights require separate scope checks.
+
+The follow-up [expanded study](../reports/expanded_news_v4/comparison.md) adds448 training texts, a fresh227-item test and18 Train-only CV runs. Its [attribution notice](notices/wikinews-ai-v4-ATTRIBUTION.txt) and inventory entries retain the same Wikinews/annotation scope. All four expanded models are experimental selectable options. Earlier notices and restricted-model records remain preserved.
 
 ## Retained notices and evidence
 

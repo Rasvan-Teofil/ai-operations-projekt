@@ -190,7 +190,8 @@ def params(m):
 def tags(stage, group):
     return {'phase': 'wikinews-ai-v4-expanded', 'stage': stage, 'comparable_group': group,
         'label_source': 'AI-labelled / Codex-reviewed', 'human_gold': 'false',
-        'metric_interpretation': 'Agreement with one AI reference annotator', 'deployment_eligible': 'false'}
+        'metric_interpretation': 'Agreement with one AI reference annotator', 'deployment_eligible': 'false',
+        'reproduction': os.getenv('SENTIMENT_SCALING_REPRODUCTION', 'original-measurement')}
 
 
 def nested_subsets(fit, seed):

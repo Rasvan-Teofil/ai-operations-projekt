@@ -2,11 +2,81 @@
 
 Eigenständiger Lösungsweg ab dem leeren Commit `830bba1`. Kein Code und kein Merge aus `main`.
 
-## Current deployment: local LLM follow-up (6 November 2026)
+## Current deployment and data-expansion follow-up (7 November 2026)
 
 **Data and licences:** [website](http://127.0.0.1:8000/licenses) · [versioned inventory and retained licence texts](licenses/README.md) · [source review and future human-labelled comparison](docs/data-sources-next-stage.md). The current demo retains legacy classifiers trained with restricted data alongside new, separate Wikinews AI-pilot artifacts. This is not a blanket commercial release. The API serves the shared inventory at `/licenses/inventory` without fetching external pages.
 
-### New data pilot completed: AI-labelled · Codex-reviewed
+### More data completed: original vs expanded on one fresh Test
+
+The poor pilot prompted a data-coverage experiment, not relabelling of its test errors. The original fine-tune already fit its Train positives well (95.6% recall), so the failure was a generalization gap. We added **448 genuine Wikinews training inputs** to the original 244, giving **692 Train: 310 negative / 176 neutral / 206 positive**, compared with only 45 positive examples before. All 692 inputs were used in each of three GPU epochs.
+
+The assistant read all **720 additional title+lead inputs** before any candidate predictions, wrote a label/rationale for each, and excluded 45 broken or substantially ambiguous/mixed inputs. Display status: **AI-labelled · Codex-reviewed**. One AI annotator and self-review do not establish human consensus. Exact assistant serving revision is unavailable. No candidate model or title-hint rule generated these labels.
+
+**Collection/split seed `20261108`; training seed `20261107`.** From the same recent-1,500 published-category pool per language, the new **Test was sampled randomly first: 120 DE + 120 EN before labels**, with no class hints or balancing. Training-only sampling used positive/neutral title hints plus random fills to improve coverage; hints never assigned labels. After the same extraction/rights/group and annotation filters, 448 new Train and **227 fresh Test** remain. Test: **111 DE + 116 EN; 122 negative / 60 neutral / 45 positive**. Original 49 Val, 49 Test and 18 exclusions remain outside fitting; the old Test was inspected diagnostically from saved predictions and was not scored again.
+
+All new examples are disjoint from the original 360 inputs by IDs, linked DE/EN pages, shared external source URLs and transitive near-duplicate groups (char 4/5 TF-IDF cosine ≥0.85). Train/Test components cannot overlap. Known old project/benchmark exact normalized text matches are also checked. Residual event and pretraining overlap are unknown. Raw texts and weights stay ignored; per-page revisions, credits, licences, hashes, role assignments and annotation rationales are versioned. The 720-input collection and split were restored locally with exact SHA-256 verification before training.
+
+| Condition on the SAME fresh Test | Mean DE/EN macro-F1 | DE | EN | Positive recall | Warm ms/text | MiB |
+|---|---:|---:|---:|---:|---:|---:|
+| Original 244 · frozen baseline | 0.6330 | 0.6060 | 0.6599 | 44.4% | 3.359 | 465.14 |
+| Expanded frozen GPU baseline | 0.7350 | 0.6534 | 0.8165 | 57.8% | 3.324 | 465.14 |
+| Original 244 · own fine-tune FP32 | 0.6428 | 0.6410 | 0.6446 | 42.2% | 3.249 | 465.14 |
+| Expanded own fine-tune · FP32 | 0.7591 | 0.7128 | 0.8054 | 62.2% | 3.248 | 465.14 |
+| Same expanded fine-tune · BF16 | 0.7591 | 0.7128 | 0.8054 | 62.2% | 2.901 | 240.73 |
+| Original 244 · LinearSVC | 0.4390 | 0.3843 | 0.4936 | 15.6% | 0.263 | 0.87 |
+| Expanded LinearSVC | 0.5891 | 0.5455 | 0.6328 | 51.1% | 0.272 | 2.14 |
+| Unchanged Qwen3 4B · zero-shot | 0.6311 | 0.6132 | 0.6490 | 28.9% | 76.962 | 7687.49 |
+
+**The expanded fine-tune improves mean DE/EN macro-F1 by 0.1162 over the unchanged original-244 fine-tune on this same Test, and positive recall rises from 42.2% to 62.2%.** Its exploratory paired source-group-bootstrap 95% interval for the F1 change is **[+0.0538, +0.1827]**. The frozen baseline improves by +0.1020 and LinearSVC by +0.1502. Intervals use 1,000 resamples of saved predictions (seed `20261108`), not repeated inference, and cover sampling variability rather than AI annotation error. Quantity **and** class/topic coverage changed, so this is not a causal claim about quantity alone. These new values must not be ranked against the previous 49-item Test, 0.720, or historical SEntFiN scores.
+
+**We make the expanded BF16 MiniLM the best experimental website choice because it matches FP32 at 0.7591 mean F1, exceeds the expanded frozen baseline's 0.7350, and uses the faster, smaller artifact (2.901 ms, 240.73 MiB).** FP32/BF16 share one new full-Train fine-tuning; BF16 is a storage/serving derivation, not a second independent fit. The predeclared policy retains Qwen as the benchmark default established by the earlier human-labelled English test; AI-only agreement does not automatically override that choice. [Open the website with expanded MiniLM selected](http://127.0.0.1:8000/?model=minilm_bf16_news_v4). Changing the selector changes only that request.
+
+![Same fresh Test: data expansion](reports/expanded_news_v4/comparison.png)
+
+**Train-only learning curve:** 18 separate runs, three fixed `StratifiedGroupKFold` folds inside expanded Train, stratified by language:label and grouped by source component. Each fold has seeded nested 1/3, 2/3 and full fit-group subsets with the same development set at all sizes. The mean fit sizes are 153.7 / 307.7 / 461.3 rows. Fine-tune mean F1 is **0.7036 / 0.7027 / 0.7461**; frozen baseline is **0.6841 / 0.6880 / 0.7128**. More data is not better in every fold or at every step. Error bars are fold SD, not confidence intervals. At fixed three epochs, larger subsets also entail more optimizer steps. This diagnostic curve did not choose a hyperparameter, epoch or candidate; the final recipe was frozen before CV, and original Val remained unused.
+
+![Training-only learning curve](reports/expanded_news_v4/learning_curve.png)
+
+Both GPU models start from the clean original pinned MiniLM base `e8f8c211226b894fcb81acc59f3b34ba3efd5f42`, not legacy fine-tunes. Frozen baseline: GPU mean embeddings + balanced C=1 logistic head. Own fine-tune: all encoder layers, max128, batch32, encoder LR2e-5 / head LR2e-4, AdamW weight decay0.01, warmup10%, inverse-class CE, gradient clip1, BF16 autocast with FP32 master weights, final epoch3. Additional LinearSVC: balanced C=1, word/bigrams, min_df1, max_iter2000; CPU fit on the GPU tower. Qwen and all original-244 control artifacts are unchanged. Each of the eight final conditions predicted each fresh Test text **once**, after all artifacts were pinned at commit `3ecda09`; completion locks refuse further probing. Controls receive new evaluation run IDs; no older MLflow metrics were changed.
+
+All **26 new runs** are in `article-sentiment-second-path`, phase `wikinews-ai-v4-expanded`, stage `cv` (18) or `final-test` (8), with parameters, hashes, GPU/runtime/Git provenance, Accuracy, macro/per-class F1, positive/negative recall, language metrics, `inference_ms_per_text`, `model_size_bytes` and `confusion_matrix.json`. Mean of DE/EN macro-F1 is the language-balanced descriptive selection metric; within 0.005, latency then size decide. The local store now has 69 runs including history. MLflow remains local at [port 5000](http://127.0.0.1:5000/); Git contains exported evidence, not the SQLite store.
+
+[Measured report and run IDs](reports/expanded_news_v4/comparison.md) · [Protocol frozen before fitting](reports/expanded_news_v4/protocol.json) · [Annotations](reports/expanded_news_v4/annotations.csv) · [Source credits](reports/expanded_news_v4/source_manifest.json) · [Split](reports/expanded_news_v4/split_manifest.json) · [CV membership](reports/expanded_news_v4/cv_membership.json) · [All CV runs](reports/expanded_news_v4/cv.json) · [Confusion matrices and paired intervals](reports/expanded_news_v4/comparison.json).
+
+**Limits:** AI reference labels, historical single-source short news, training sampling enrichment, small per-language/class test cells and unknown pretraining/event overlap. German F1 remains lower than English for the expanded fine-tune. Full articles, live newsroom distribution and sentence-highlight accuracy are not established. Original data restrictions remain attached to the legacy artifacts. The expansion uses the same Wikinews CC BY 2.5/4.0 scope; metadata/images/quoted leads are excluded, attribution and transformations retained. New annotation metadata is CC0 to the extent project rights apply. See [the expansion notice](licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt) and [website licence inventory](http://127.0.0.1:8000/licenses).
+
+On the tower, restore and check the frozen inputs without training:
+
+```bash
+nvidia-smi
+source .venv/bin/activate  # Python3.12, CUDA wheel; setup below
+python -m src.news_data --restore
+python -m src.news_experiment prepare --restore
+python -m src.news_expand --restore
+python -m src.news_scaling prepare --restore
+python -m pytest -q
+```
+
+For a full reproduction on this tower, retain the pinned original-244 controls under `models/common_data_v3/` and pinned Qwen artifact under `models/local_llm/`, plus the clean MiniLM Hub cache (download commands below). The API never downloads or trains. Stop only the local API worker while benchmarking, then:
+
+```bash
+# New name each time: 18 CV runs, full-Train fitting, then eight Test conditions.
+python -m src.news_scaling_reproduce --name tower-expanded-01 --run
+```
+
+This creates new ignored `models/reproduction/expanded-<name>/` and `reports/reproduction/expanded-<name>/` paths and new real MLflow runs, preserving the tracked original evidence. A fresh clone has reports/labels/credits, not measured weights: unchanged historical control hashes are deliberately required, so newly reconstructed control weights cannot silently be called identical. Omit `--run` to prepare only. The original `cv`, `train` and `evaluate` commands refuse to overwrite completed experiments. If pinned Wikimedia rendering changes, restoration fails rather than silently replacing an input. Reproduction is a separately named repeat of the fixed protocol, not new model/prompt tuning on a known Test.
+
+Start the website with the existing local selection and one worker:
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
+# From another terminal: synthetic functional checks, no held-out Test reuse.
+python -m src.news_scaling_smoke
+```
+
+The four expanded choices load only `models/expanded_news_v4/final/<model-id>/`. `/comparison/news-v4`, `/comparison/news-v4.svg` and `/comparison/news-v4-learning.svg` serve saved results without model inference. All eleven choices retain `/predict` and `/analyze` contracts. [Live functional evidence](reports/expanded_news_v4/live_verification.json) records model/version/offset checks, a public article URL, 422/403/502 and a separate HTTP process with a deliberately missing artifact returning 503. These controls check functionality, not model accuracy. **101 offline pytest checks and 41 live HTTP checks passed; all 26 new MLflow runs are FINISHED with the required metrics and confusion matrices.**
+
+### Earlier 244-Train pilot: AI-labelled · Codex-reviewed
 
 At the user's request, this assistant read and labelled **360 native German/English Wikinews title+lead inputs**, with a short decision rationale for each. It excluded 18 ambiguous or broken extracts, leaving **342 labels: 189 negative, 88 neutral, 65 positive**. These are single-AI reference annotations with self-review, not a human annotator panel. No candidate predictions were used to create the labels. The exact assistant model serving revision is unavailable; no stronger-than-human claim is made.
 
@@ -94,7 +164,7 @@ SENTIMENT_ARTIFACT=models/development/release uvicorn app.main:app --host 127.0.
 
 ### Choose a model and highlight the text
 
-The **Model** selector offers Qwen3 4B, MiniLM v2 and reconstructed LinearSVC v2. It changes the model for that request; the benchmark default remains Qwen. `/models` reports which local artifacts are available. Models load on first use, are cached, and share one bounded inference lock to avoid simultaneous GPU loads/inference. Missing artifacts are unavailable rather than downloaded. The response always gives the actual `model_version`.
+The **Model** selector offers eleven choices: Qwen3 4B, legacy MiniLM v2 and reconstructed LinearSVC v2, four original-244 AI pilot artifacts, and four expanded-692 AI news artifacts. It changes the model for that request; the benchmark default remains Qwen. `/models` reports which local artifacts are available. Models load on first use, are cached, and share one bounded inference lock to avoid simultaneous GPU loads/inference. Missing artifacts are unavailable rather than downloaded. The response always gives the actual `model_version`.
 
 The JSON request body still accepts exactly one of `text` or `url`. The optional model is a **query parameter**, for example:
 
@@ -159,7 +229,7 @@ The original audit has an exclusive completion lock. Do not delete it to test an
 
 ### MLflow and tests
 
-All three actual comparison runs are in **`article-sentiment-second-path`**, with `phase=local-llm-comparison`, `comparable_group=fresh-sentfin-20261106` and `source=measured-live`. They include parameters, artifact/prompt/data hashes, accuracy, macro-F1, F1 for every class, negative precision/recall, warm inference time, p50/p95, model size, GPU allocation, and confusion matrices overall/by language. The pooled score is descriptive; native EN is the selection metric. No old run was replaced. The local experiment has 38 runs including the original development history and these three new finished measurements.
+All three actual comparison runs are in **`article-sentiment-second-path`**, with `phase=local-llm-comparison`, `comparable_group=fresh-sentfin-20261106` and `source=measured-live`. They include parameters, artifact/prompt/data hashes, accuracy, macro-F1, F1 for every class, negative precision/recall, warm inference time, p50/p95, model size, GPU allocation, and confusion matrices overall/by language. The pooled score is descriptive; native EN is the selection metric. No old run was replaced. At that stage, the local experiment had 38 runs including the original development history and those three finished measurements; subsequent pilot/expansion runs are documented above.
 
 ```bash
 mlflow ui --backend-store-uri sqlite:///"$(pwd)/mlflow.db" --host 127.0.0.1 --port 5000 --workers 1

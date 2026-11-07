@@ -14,9 +14,9 @@ from src.tracking import tracking
 
 ORDER = ['frozen_news_v3', 'frozen_news_v4', 'minilm_fp32_news_v3', 'minilm_fp32_news_v4',
          'minilm_bf16_news_v4', 'linearsvc_news_v3', 'linearsvc_news_v4', 'qwen3_4b']
-LABEL_NAMES = ['Frozen · original244', 'Frozen · expanded692', 'Fine-tune · original244',
-    'Fine-tune · expanded692 FP32', 'Same expanded fit · BF16', 'LinearSVC · original244',
-    'LinearSVC · expanded692', 'Qwen · unchanged zero-shot']
+LABEL_NAMES = ['Frozen · original 244', 'Frozen · expanded 692', 'Fine-tune · original 244',
+    'Fine-tune · expanded 692 FP32', 'Same expanded fit · BF16', 'LinearSVC · original 244',
+    'LinearSVC · expanded 692', 'Qwen · unchanged zero-shot']
 
 
 def fast_f1(y, pred):
@@ -100,7 +100,7 @@ def report():
             'recall_positive_delta': b['recall_positive'] - a['recall_positive'],
             'paired_group_bootstrap_95_delta': list(map(float, np.percentile(delta, [2.5, 97.5])))})
     comparison.update(results=records, paired_data_changes=changes,
-        uncertainty='1000 paired source-group bootstrap resamples, seed20261108; percentile95 intervals cover sampling only, not AI annotation error. No model inference repeated.',
+        uncertainty='1000 paired source-group bootstrap resamples, seed 20261108; percentile95 intervals cover sampling only, not AI annotation error. No model inference repeated.',
         train_rows=manifest['splits']['train']['rows'], original_train_rows=244,
         learning_curve='Three-fold nested Train-only diagnostic; full final recipe fixed in advance')
     write_json(OUT / 'comparison.json', comparison)
@@ -126,7 +126,7 @@ def report():
     fig.text(.02, .02, f'{len(test)} native DE/EN short news texts | AI-labelled · Codex-reviewed | quantity AND sampling enrichment changed', fontsize=10)
     fig.tight_layout(rect=(0, .07, 1, .92)); save_figure(fig, 'comparison')
     lines = ['# Expanded news data — AI-labelled · Codex-reviewed', '',
-        'The new collection adds448 accepted training examples to the original244:692 Train, including206 positives instead of45. A fresh227-item random Test is shared by all eight conditions. The original49 Val and49 Test remain outside fitting; the old Test is not evaluated again.', '',
+        'The new collection adds 448 accepted training examples to the original 244:692 Train, including 206 positives instead of 45. A fresh 227-item random Test is shared by all eight conditions. The original 49 Val and49 Test remain outside fitting; the old Test is not evaluated again.', '',
         '| Condition | Mean DE/EN F1 | DE F1 | EN F1 | Positive F1 | Positive recall | ms/text | MiB |',
         '|---|---:|---:|---:|---:|---:|---:|---:|']
     for r in records:
@@ -134,16 +134,16 @@ def report():
     lines += ['', '## Paired data changes on the same fresh Test', '']
     for r in changes:
         low, high = r['paired_group_bootstrap_95_delta']
-        lines.append(f'- {r["expanded"]}: mean-language F1 change {r["balanced_language_macro_f1_delta"]:+.4f}, exploratory paired95 interval [{low:+.4f}, {high:+.4f}]; positive recall change {r["recall_positive_delta"]:+.4f}.')
-    lines += ['', 'These measure quantity plus changed class/topic coverage, not a causal effect of quantity alone. All agreements use one assistant’s reference labels, not a human annotator panel. The larger Test has111 DE and116 EN items, with26 DE and19 EN positives. Label/source exclusions preceded fitting. Inputs are historical title+lead excerpts; long-article, sentence-highlight and real newsroom performance remain unmeasured. Unknown pretraining/event overlap and annotation errors remain possible.', '',
+        lines.append(f'- {r["expanded"]}: mean-language F1 change {r["balanced_language_macro_f1_delta"]:+.4f}, exploratory paired 95% interval [{low:+.4f}, {high:+.4f}]; positive recall change {r["recall_positive_delta"]:+.4f}.')
+    lines += ['', 'These measure quantity plus changed class/topic coverage, not a causal effect of quantity alone. All agreements use one assistant’s reference labels, not a human annotator panel. The larger Test has 111 DE and 116 EN items, with 26 DE and 19 EN positives. Label/source exclusions preceded fitting. Inputs are historical title+lead excerpts; long-article, sentence-highlight and real newsroom performance remain unmeasured. Unknown pretraining/event overlap and annotation errors remain possible.', '',
         f'Descriptive leader under the frozen mean-language F1 /0.005 latency-size rule: **{comparison["descriptive_leader"]}**. This AI-only study does not automatically change the Qwen serving default established by the earlier human-labelled English comparison. New expanded models are experimental selectable choices. The BF16 artifact is a storage/serving derivation of the same full-Train fit, not another independent training fit.', '',
         '## Train-only learning curve', '',
         '| Model | Mean fit rows | Mean DE/EN F1 ± fold SD | Positive recall ± fold SD |',
         '|---|---:|---:|---:|']
     for r in summary:
         lines.append(f'| {r["model"]} | {r["mean_train_rows"]:.1f} | {r["balanced_language_macro_f1_mean"]:.4f} ± {r["balanced_language_macro_f1_sd"]:.4f} | {r["recall_positive_mean"]:.4f} ± {r["recall_positive_sd"]:.4f} |')
-    lines += ['', 'Three fixed StratifiedGroupKFold folds inside expanded Train. Each fold has nested1/3,2/3,full fit-group subsets and the same development set for all sizes. Eighteen real MLflow runs compare the clean frozen GPU baseline and own GPU fine-tune. SD is variation across three folds, not a confidence interval. Final three-epoch recipe was frozen before CV; no candidate search or Val/Test selection. Larger subsets also mean more optimizer steps at a fixed epoch count. This curve uses development sets; its values are not joined to historic Test scores.', '',
-        'All26 new runs are in `article-sentiment-second-path`, phase=`wikinews-ai-v4-expanded`, stage=`cv` (18) or `final-test` (8). Required parameters, accuracy, macro/per-class F1, latency, full artifact size, and confusion matrices are logged. Old controls receive new evaluation runs; historical run metrics remain unchanged.', '',
+    lines += ['', 'Three fixed StratifiedGroupKFold folds inside expanded Train. Each fold has nested 1/3, 2/3, full fit-group subsets and the same development set for all sizes. Eighteen real MLflow runs compare the clean frozen GPU baseline and own GPU fine-tune. SD is variation across three folds, not a confidence interval. Final three-epoch recipe was frozen before CV; no candidate search or Val/Test selection. Larger subsets also mean more optimizer steps at a fixed epoch count. This curve uses development sets; its values are not joined to historic Test scores.', '',
+        'All 26 new runs are in `article-sentiment-second-path`, phase=`wikinews-ai-v4-expanded`, stage=`cv` (18) or `final-test` (8). Required parameters, accuracy, macro/per-class F1, latency, full artifact size, and confusion matrices are logged. Old controls receive new evaluation runs; historical run metrics remain unchanged.', '',
         '[Frozen protocol](protocol.json) · [New annotation ledger](annotations.csv) · [Source credits](source_manifest.json) · [Split and input hashes](split_manifest.json) · [CV membership](cv_membership.json) · [CV run IDs](cv.json) · [Final metrics, intervals and run IDs](comparison.json)', '',
         '![Same fresh Test](comparison.png)', '', '![Train-only curve](learning_curve.png)', '']
     (OUT / 'comparison.md').write_text('\n'.join(lines))

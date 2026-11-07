@@ -14,21 +14,28 @@ from src.config import LABELS, MODELS
 from src.fetch import FetchError, article_text
 
 ModelID = Literal['qwen3_4b', 'minilm_v2', 'linearsvc_v2', 'frozen_news_v3',
-                  'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3']
+                  'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
+                  'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4']
 MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · local zero-shot',
                'minilm_v2': 'MiniLM v2 · fine-tuned',
                'linearsvc_v2': 'LinearSVC v2 · reconstructed',
                'frozen_news_v3': 'Frozen MiniLM · AI news pilot',
                'minilm_fp32_news_v3': 'MiniLM v1 recipe · AI news pilot',
                'minilm_bf16_news_v3': 'MiniLM v2 recipe · AI news pilot',
-               'linearsvc_news_v3': 'LinearSVC · AI news pilot'}
+               'linearsvc_news_v3': 'LinearSVC · AI news pilot',
+               'frozen_news_v4': 'Frozen MiniLM · expanded AI news',
+               'minilm_fp32_news_v4': 'MiniLM FP32 · expanded AI news',
+               'minilm_bf16_news_v4': 'MiniLM BF16 · expanded AI news',
+               'linearsvc_news_v4': 'LinearSVC · expanded AI news'}
 
 
 def candidate_paths():
     return {'qwen3_4b': MODELS / 'local_llm', 'minilm_v2': MODELS / 'development/release',
             'linearsvc_v2': MODELS / 'local_llm_reference',
             **{name: MODELS / 'common_data_v3' / name for name in
-               ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3']}}
+               ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3']},
+            **{name: MODELS / 'expanded_news_v4/final' / name for name in
+               ['frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4']}}
 
 
 def load_named_predictor(name):
@@ -162,7 +169,7 @@ def create_app(queue_timeout=None):
             records.append({'id': name, 'name': MODEL_NAMES[name], 'model_version': version,
                             'available': available, 'loaded': name in app.state.predictors,
                             'is_default': name == app.state.default_id,
-                            'experimental': name.endswith('_news_v3')})
+                            'experimental': name.endswith(('_news_v3', '_news_v4'))})
         return {'default': app.state.default_id, 'models': records}
 
     @app.get('/', include_in_schema=False)
@@ -209,6 +216,30 @@ def create_app(queue_timeout=None):
         path = REPORTS / 'common_data_v3/comparison.svg'
         if not path.exists():
             raise HTTPException(503, 'AI-labelled news pilot has not been completed')
+        return FileResponse(path, media_type='image/svg+xml')
+
+    @app.get('/comparison/news-v4', include_in_schema=False)
+    def expanded_comparison():
+        from src.config import REPORTS
+        path = REPORTS / 'expanded_news_v4/comparison.json'
+        if not path.exists():
+            raise HTTPException(503, 'Expanded news comparison has not been completed')
+        return json.loads(path.read_text())
+
+    @app.get('/comparison/news-v4.svg', include_in_schema=False)
+    def expanded_chart():
+        from src.config import REPORTS
+        path = REPORTS / 'expanded_news_v4/comparison.svg'
+        if not path.exists():
+            raise HTTPException(503, 'Expanded news comparison has not been completed')
+        return FileResponse(path, media_type='image/svg+xml')
+
+    @app.get('/comparison/news-v4-learning.svg', include_in_schema=False)
+    def expanded_learning_chart():
+        from src.config import REPORTS
+        path = REPORTS / 'expanded_news_v4/learning_curve.svg'
+        if not path.exists():
+            raise HTTPException(503, 'Training-only learning curve has not been completed')
         return FileResponse(path, media_type='image/svg+xml')
 
     def input_text(payload, p):

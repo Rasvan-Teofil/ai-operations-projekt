@@ -119,6 +119,10 @@ async function loadModels() {
       option.textContent = model.name + (model.is_default ? ' · default' : '') + (!model.available ? ' · unavailable' : '');
       option.disabled = !model.available; $('model-choice').append(option);
     }
+    const requested = new URLSearchParams(window.location.search).get('model');
+    if (requested && data.models.some((model) => model.id === requested && model.available)) {
+      $('model-choice').value = requested; await checkHealth();
+    }
   } catch (_) { /* The default predictor still works when model discovery fails. */ }
 }
 async function newsComparison() {
@@ -138,4 +142,21 @@ async function newsComparison() {
     }
   } catch (error) { $('news-status').textContent = error.message; $('news-chart').hidden = true; }
 }
-checkHealth(); loadModels(); comparison(); newsComparison();
+async function expandedComparison() {
+  try {
+    const response = await fetch('/comparison/news-v4', {cache:'no-store'});
+    if (!response.ok) throw new Error('Expanded data results unavailable.');
+    const data = await response.json();
+    const winner = data.results.find((row) => row.model === data.descriptive_leader);
+    $('expanded-status').textContent = `${data.test_rows} shared test texts · best experimental choice: ${winner?.name || data.descriptive_leader}. Qwen remains the benchmark default.`;
+    $('expanded-rows').replaceChildren();
+    for (const record of data.results) {
+      const row = document.createElement('tr'); row.dataset.selected = String(record.model === data.descriptive_leader);
+      for (const value of [record.name, record.balanced_language_macro_f1.toFixed(4), record.macro_f1_de.toFixed(4), record.macro_f1_en.toFixed(4), (100 * record.recall_positive).toFixed(1) + '%', record.inference_ms_per_text.toFixed(3), (record.model_size_bytes / 1048576).toFixed(2)]) {
+        const cell = document.createElement('td'); cell.textContent = value; row.append(cell);
+      }
+      $('expanded-rows').append(row);
+    }
+  } catch (error) { $('expanded-status').textContent = error.message; $('expanded-chart').hidden = true; }
+}
+checkHealth(); loadModels(); comparison(); newsComparison(); expandedComparison();

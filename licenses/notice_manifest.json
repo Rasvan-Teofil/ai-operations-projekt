@@ -103,5 +103,13 @@
     "bytes": 1678,
     "retrieved_on": "2026-11-06",
     "transform": "Project-authored attribution and annotation-scope notice"
+  },
+  {
+    "file": "wikinews-ai-v4-ATTRIBUTION.txt",
+    "source_url": null,
+    "sha256": "3d7dcaad27348cc7f71bd3072b710e20df647b5b1c7589470f5559fc11d0528e",
+    "bytes": 2057,
+    "retrieved_on": "2026-11-07",
+    "transform": "Project-authored expansion attribution and annotation-scope notice"
   }
 ]

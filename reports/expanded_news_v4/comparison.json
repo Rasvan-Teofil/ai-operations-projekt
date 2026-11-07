@@ -1,0 +1,747 @@
+{
+  "data_version": "wikinews-ai-v4-expanded",
+  "label_status": "AI-labelled · Codex-reviewed",
+  "human_gold": false,
+  "test_rows": 227,
+  "test_counts": {
+    "de:negative": 63,
+    "en:negative": 59,
+    "en:neutral": 38,
+    "de:positive": 26,
+    "de:neutral": 22,
+    "en:positive": 19
+  },
+  "test_sha256": "6f02c3a6b06cbb6bf11a387ed5785919bedf0a805b158043c02a6685da29610a",
+  "descriptive_leader": "minilm_bf16_news_v4",
+  "serving_default_changed": false,
+  "results": [
+    {
+      "model": "frozen_news_v3",
+      "name": "Original 244 · frozen baseline",
+      "path": "models/common_data_v3/frozen_news_v3",
+      "run_id": "39558ab198ba4a18931769cd12520c21",
+      "artifact_sha256": "1570ae382e61237d138ac702cc1d4fda5cb8019615cdc9fcbe3749911e7325ad",
+      "original_run_id": "7c4839810edc4d42884bb1bee7a36e4e",
+      "accuracy": 0.7004405286343612,
+      "macro_f1": 0.6397512707784642,
+      "f1_negative": 0.8326180257510729,
+      "f1_neutral": 0.6268656716417911,
+      "f1_positive": 0.45977011494252873,
+      "recall_negative": 0.7950819672131147,
+      "recall_neutral": 0.7,
+      "recall_positive": 0.4444444444444444,
+      "accuracy_de": 0.6666666666666666,
+      "macro_f1_de": 0.6060326017199333,
+      "f1_negative_de": 0.8,
+      "f1_neutral_de": 0.5283018867924528,
+      "f1_positive_de": 0.4897959183673469,
+      "accuracy_en": 0.7327586206896551,
+      "macro_f1_en": 0.6598890978128157,
+      "f1_negative_en": 0.8672566371681416,
+      "f1_neutral_en": 0.691358024691358,
+      "f1_positive_en": 0.42105263157894735,
+      "balanced_language_macro_f1": 0.6329608497663746,
+      "inference_ms_per_text": 3.3593434350163007,
+      "latency_p50_ms": 3.034949069842696,
+      "latency_p95_ms": 4.374665720388293,
+      "model_size_bytes": 487730066,
+      "confusion_matrix": {
+        "all": [
+          [
+            97,
+            14,
+            11
+          ],
+          [
+            7,
+            42,
+            11
+          ],
+          [
+            7,
+            18,
+            20
+          ]
+        ],
+        "de": [
+          [
+            48,
+            8,
+            7
+          ],
+          [
+            4,
+            14,
+            4
+          ],
+          [
+            5,
+            9,
+            12
+          ]
+        ],
+        "en": [
+          [
+            49,
+            6,
+            4
+          ],
+          [
+            3,
+            28,
+            7
+          ],
+          [
+            2,
+            9,
+            8
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v3-frozen",
+      "balanced_language_macro_f1_ci_low": 0.5596271364065539,
+      "balanced_language_macro_f1_ci_high": 0.6942998699051215
+    },
+    {
+      "model": "frozen_news_v4",
+      "name": "Expanded frozen GPU baseline",
+      "path": "models/expanded_news_v4/final/frozen_news_v4",
+      "run_id": "83487ac1aced41b8822528e41dc8a5e1",
+      "artifact_sha256": "468f76f70291644f159c3baf785ab9d9deab24e8429bcfb8cc5fe7ed0ca0d83a",
+      "accuracy": 0.7797356828193832,
+      "macro_f1": 0.7383161473258272,
+      "f1_negative": 0.8607594936708861,
+      "f1_neutral": 0.7424242424242424,
+      "f1_positive": 0.611764705882353,
+      "recall_negative": 0.8360655737704918,
+      "recall_neutral": 0.8166666666666667,
+      "recall_positive": 0.5777777777777777,
+      "accuracy_de": 0.7027027027027027,
+      "macro_f1_de": 0.6534433235252908,
+      "f1_negative_de": 0.8032786885245902,
+      "f1_neutral_de": 0.6153846153846154,
+      "f1_positive_de": 0.5416666666666666,
+      "accuracy_en": 0.853448275862069,
+      "macro_f1_en": 0.8164806110458285,
+      "f1_negative_en": 0.9217391304347826,
+      "f1_neutral_en": 0.825,
+      "f1_positive_en": 0.7027027027027027,
+      "balanced_language_macro_f1": 0.7349619672855596,
+      "inference_ms_per_text": 3.323992132722084,
+      "latency_p50_ms": 2.9973990749567747,
+      "latency_p95_ms": 4.564115125685929,
+      "model_size_bytes": 487730074,
+      "confusion_matrix": {
+        "all": [
+          [
+            102,
+            11,
+            9
+          ],
+          [
+            6,
+            49,
+            5
+          ],
+          [
+            7,
+            12,
+            26
+          ]
+        ],
+        "de": [
+          [
+            49,
+            7,
+            7
+          ],
+          [
+            4,
+            16,
+            2
+          ],
+          [
+            6,
+            7,
+            13
+          ]
+        ],
+        "en": [
+          [
+            53,
+            4,
+            2
+          ],
+          [
+            2,
+            33,
+            3
+          ],
+          [
+            1,
+            5,
+            13
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-frozen-fp32",
+      "balanced_language_macro_f1_ci_low": 0.6686191339501135,
+      "balanced_language_macro_f1_ci_high": 0.793244723098022
+    },
+    {
+      "model": "minilm_fp32_news_v3",
+      "name": "Original 244 · own fine-tune FP32",
+      "path": "models/common_data_v3/minilm_fp32_news_v3",
+      "run_id": "2e993f04020c40dd8397e0ec7c22f71c",
+      "artifact_sha256": "0eac414b787d5aaa61735fb954221b28d32a26236640cd76a3b41b2013b98fd9",
+      "original_run_id": "43e28f08b2f64edcb3fe1df4ec50231f",
+      "accuracy": 0.7180616740088106,
+      "macro_f1": 0.6493726404619142,
+      "f1_negative": 0.8421052631578947,
+      "f1_neutral": 0.625,
+      "f1_positive": 0.4810126582278481,
+      "recall_negative": 0.8524590163934426,
+      "recall_neutral": 0.6666666666666666,
+      "recall_positive": 0.4222222222222222,
+      "accuracy_de": 0.7117117117117117,
+      "macro_f1_de": 0.6410029905682081,
+      "f1_negative_de": 0.8412698412698413,
+      "f1_neutral_de": 0.56,
+      "f1_positive_de": 0.5217391304347826,
+      "accuracy_en": 0.7241379310344828,
+      "macro_f1_en": 0.6446280991735537,
+      "f1_negative_en": 0.8429752066115702,
+      "f1_neutral_en": 0.6666666666666666,
+      "f1_positive_en": 0.42424242424242425,
+      "balanced_language_macro_f1": 0.6428155448708809,
+      "inference_ms_per_text": 3.24874177230481,
+      "latency_p50_ms": 2.9365948867052794,
+      "latency_p95_ms": 4.179830476641655,
+      "model_size_bytes": 487730074,
+      "confusion_matrix": {
+        "all": [
+          [
+            104,
+            11,
+            7
+          ],
+          [
+            12,
+            40,
+            8
+          ],
+          [
+            9,
+            17,
+            19
+          ]
+        ],
+        "de": [
+          [
+            53,
+            5,
+            5
+          ],
+          [
+            5,
+            14,
+            3
+          ],
+          [
+            5,
+            9,
+            12
+          ]
+        ],
+        "en": [
+          [
+            51,
+            6,
+            2
+          ],
+          [
+            7,
+            26,
+            5
+          ],
+          [
+            4,
+            8,
+            7
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v3-minilm-fp32",
+      "balanced_language_macro_f1_ci_low": 0.5686628248561822,
+      "balanced_language_macro_f1_ci_high": 0.705231274650807
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "name": "Expanded own fine-tune · FP32",
+      "path": "models/expanded_news_v4/final/minilm_fp32_news_v4",
+      "run_id": "16bd980816574ff785734af1e3c76ecd",
+      "artifact_sha256": "e5887a55d5f3b17c4cce12a08f4c8b59a7ad719320fb764ed10eb1aad00db350",
+      "accuracy": 0.8061674008810573,
+      "macro_f1": 0.763543855312487,
+      "f1_negative": 0.8888888888888888,
+      "f1_neutral": 0.7580645161290323,
+      "f1_positive": 0.6436781609195402,
+      "recall_negative": 0.8852459016393442,
+      "recall_neutral": 0.7833333333333333,
+      "recall_positive": 0.6222222222222222,
+      "accuracy_de": 0.7657657657657657,
+      "macro_f1_de": 0.7127621882086167,
+      "f1_negative_de": 0.859375,
+      "f1_neutral_de": 0.6666666666666666,
+      "f1_positive_de": 0.6122448979591837,
+      "accuracy_en": 0.8448275862068966,
+      "macro_f1_en": 0.8053587463430176,
+      "f1_negative_en": 0.9217391304347826,
+      "f1_neutral_en": 0.810126582278481,
+      "f1_positive_en": 0.6842105263157895,
+      "balanced_language_macro_f1": 0.7590604672758172,
+      "inference_ms_per_text": 3.247611348759301,
+      "latency_p50_ms": 2.9402219224721193,
+      "latency_p95_ms": 4.184947046451271,
+      "model_size_bytes": 487730080,
+      "confusion_matrix": {
+        "all": [
+          [
+            108,
+            6,
+            8
+          ],
+          [
+            7,
+            47,
+            6
+          ],
+          [
+            6,
+            11,
+            28
+          ]
+        ],
+        "de": [
+          [
+            55,
+            3,
+            5
+          ],
+          [
+            4,
+            15,
+            3
+          ],
+          [
+            6,
+            5,
+            15
+          ]
+        ],
+        "en": [
+          [
+            53,
+            3,
+            3
+          ],
+          [
+            3,
+            32,
+            3
+          ],
+          [
+            0,
+            6,
+            13
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-finetuned-fp32",
+      "balanced_language_macro_f1_ci_low": 0.6930579815610525,
+      "balanced_language_macro_f1_ci_high": 0.8120582353453557
+    },
+    {
+      "model": "minilm_bf16_news_v4",
+      "name": "Same expanded fine-tune · BF16",
+      "path": "models/expanded_news_v4/final/minilm_bf16_news_v4",
+      "run_id": "65bcf43545054dc09c0df4e05a98e0d6",
+      "artifact_sha256": "dd2e8e80d220ce6630cdae0533b53b4e0e131268277b75413db6e3b1abbe1874",
+      "accuracy": 0.8061674008810573,
+      "macro_f1": 0.763543855312487,
+      "f1_negative": 0.8888888888888888,
+      "f1_neutral": 0.7580645161290323,
+      "f1_positive": 0.6436781609195402,
+      "recall_negative": 0.8852459016393442,
+      "recall_neutral": 0.7833333333333333,
+      "recall_positive": 0.6222222222222222,
+      "accuracy_de": 0.7657657657657657,
+      "macro_f1_de": 0.7127621882086167,
+      "f1_negative_de": 0.859375,
+      "f1_neutral_de": 0.6666666666666666,
+      "f1_positive_de": 0.6122448979591837,
+      "accuracy_en": 0.8448275862068966,
+      "macro_f1_en": 0.8053587463430176,
+      "f1_negative_en": 0.9217391304347826,
+      "f1_neutral_en": 0.810126582278481,
+      "f1_positive_en": 0.6842105263157895,
+      "balanced_language_macro_f1": 0.7590604672758172,
+      "inference_ms_per_text": 2.900624126688237,
+      "latency_p50_ms": 2.7362729888409376,
+      "latency_p95_ms": 3.284640610218048,
+      "model_size_bytes": 252420515,
+      "confusion_matrix": {
+        "all": [
+          [
+            108,
+            6,
+            8
+          ],
+          [
+            7,
+            47,
+            6
+          ],
+          [
+            6,
+            11,
+            28
+          ]
+        ],
+        "de": [
+          [
+            55,
+            3,
+            5
+          ],
+          [
+            4,
+            15,
+            3
+          ],
+          [
+            6,
+            5,
+            15
+          ]
+        ],
+        "en": [
+          [
+            53,
+            3,
+            3
+          ],
+          [
+            3,
+            32,
+            3
+          ],
+          [
+            0,
+            6,
+            13
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-finetuned-bf16",
+      "balanced_language_macro_f1_ci_low": 0.6930579815610525,
+      "balanced_language_macro_f1_ci_high": 0.8120582353453557
+    },
+    {
+      "model": "linearsvc_news_v3",
+      "name": "Original 244 · LinearSVC",
+      "path": "models/common_data_v3/linearsvc_news_v3",
+      "run_id": "8e23b6b7fbbd4b448a5cd6fec32427c9",
+      "artifact_sha256": "bfc872d5b8e89f53f29dcdffdf5ea8209847e2c283fe0bbe195160bb6f2e9030",
+      "original_run_id": "92f6bc44fc02459190f274eb88878722",
+      "accuracy": 0.6167400881057269,
+      "macro_f1": 0.4581178118693548,
+      "f1_negative": 0.735202492211838,
+      "f1_neutral": 0.375,
+      "f1_positive": 0.2641509433962264,
+      "recall_negative": 0.9672131147540983,
+      "recall_neutral": 0.25,
+      "recall_positive": 0.15555555555555556,
+      "accuracy_de": 0.6036036036036037,
+      "macro_f1_de": 0.3843347583883923,
+      "f1_negative_de": 0.7349397590361446,
+      "f1_neutral_de": 0.16,
+      "f1_positive_de": 0.25806451612903225,
+      "accuracy_en": 0.6293103448275862,
+      "macro_f1_en": 0.49364613880742914,
+      "f1_negative_en": 0.7354838709677419,
+      "f1_neutral_en": 0.4727272727272727,
+      "f1_positive_en": 0.2727272727272727,
+      "balanced_language_macro_f1": 0.4389904485979107,
+      "inference_ms_per_text": 0.263481310646702,
+      "latency_p50_ms": 0.25949301198124886,
+      "latency_p95_ms": 0.3042324911803007,
+      "model_size_bytes": 916412,
+      "confusion_matrix": {
+        "all": [
+          [
+            118,
+            3,
+            1
+          ],
+          [
+            45,
+            15,
+            0
+          ],
+          [
+            36,
+            2,
+            7
+          ]
+        ],
+        "de": [
+          [
+            61,
+            1,
+            1
+          ],
+          [
+            20,
+            2,
+            0
+          ],
+          [
+            22,
+            0,
+            4
+          ]
+        ],
+        "en": [
+          [
+            57,
+            2,
+            0
+          ],
+          [
+            25,
+            13,
+            0
+          ],
+          [
+            14,
+            2,
+            3
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v3-linearsvc",
+      "balanced_language_macro_f1_ci_low": 0.36162173804202974,
+      "balanced_language_macro_f1_ci_high": 0.5132398116445475
+    },
+    {
+      "model": "linearsvc_news_v4",
+      "name": "Expanded LinearSVC",
+      "path": "models/expanded_news_v4/final/linearsvc_news_v4",
+      "run_id": "1cc7ff15880c4c23852680d7708a4a87",
+      "artifact_sha256": "0d4f00c57bc9f99daaebf02334eda0e7f8afa89725cd4ce1eef9d45fe80bec32",
+      "accuracy": 0.6828193832599119,
+      "macro_f1": 0.6127358620089306,
+      "f1_negative": 0.7955390334572491,
+      "f1_neutral": 0.49504950495049505,
+      "f1_positive": 0.5476190476190477,
+      "recall_negative": 0.8770491803278688,
+      "recall_neutral": 0.4166666666666667,
+      "recall_positive": 0.5111111111111111,
+      "accuracy_de": 0.6666666666666666,
+      "macro_f1_de": 0.5454911433172303,
+      "f1_negative_de": 0.7777777777777778,
+      "f1_neutral_de": 0.25,
+      "f1_positive_de": 0.6086956521739131,
+      "accuracy_en": 0.6982758620689655,
+      "macro_f1_en": 0.6327932875667429,
+      "f1_negative_en": 0.816,
+      "f1_neutral_en": 0.6086956521739131,
+      "f1_positive_en": 0.47368421052631576,
+      "balanced_language_macro_f1": 0.5891422154419865,
+      "inference_ms_per_text": 0.2723987560949005,
+      "latency_p50_ms": 0.26895105838775635,
+      "latency_p95_ms": 0.30474429950118065,
+      "model_size_bytes": 2240783,
+      "confusion_matrix": {
+        "all": [
+          [
+            107,
+            5,
+            10
+          ],
+          [
+            29,
+            25,
+            6
+          ],
+          [
+            11,
+            11,
+            23
+          ]
+        ],
+        "de": [
+          [
+            56,
+            2,
+            5
+          ],
+          [
+            17,
+            4,
+            1
+          ],
+          [
+            8,
+            4,
+            14
+          ]
+        ],
+        "en": [
+          [
+            51,
+            3,
+            5
+          ],
+          [
+            12,
+            21,
+            5
+          ],
+          [
+            3,
+            7,
+            9
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-linearsvc",
+      "balanced_language_macro_f1_ci_low": 0.5101229785390861,
+      "balanced_language_macro_f1_ci_high": 0.656673636459989
+    },
+    {
+      "model": "qwen3_4b",
+      "name": "Unchanged Qwen3 4B · zero-shot",
+      "path": "models/local_llm",
+      "run_id": "bb6c9d3794fa4e15947202027a0c8d68",
+      "artifact_sha256": "4a28bff16fc5b5b5cf24c0caf43442921f6ae5fb0d61055150d8613e606c5496",
+      "accuracy": 0.7180616740088106,
+      "macro_f1": 0.6327874818049491,
+      "f1_negative": 0.8733624454148472,
+      "f1_neutral": 0.625,
+      "f1_positive": 0.4,
+      "recall_negative": 0.819672131147541,
+      "recall_neutral": 0.8333333333333334,
+      "recall_positive": 0.28888888888888886,
+      "accuracy_de": 0.7207207207207207,
+      "macro_f1_de": 0.6132079950624317,
+      "f1_negative_de": 0.9152542372881356,
+      "f1_neutral_de": 0.5714285714285714,
+      "f1_positive_de": 0.35294117647058826,
+      "accuracy_en": 0.7155172413793104,
+      "macro_f1_en": 0.6490361329071006,
+      "f1_negative_en": 0.8288288288288288,
+      "f1_neutral_en": 0.6666666666666666,
+      "f1_positive_en": 0.45161290322580644,
+      "balanced_language_macro_f1": 0.6311220639847661,
+      "inference_ms_per_text": 76.96206250437227,
+      "latency_p50_ms": 64.60219621658325,
+      "latency_p95_ms": 99.35143471229821,
+      "model_size_bytes": 8060917225,
+      "confusion_matrix": {
+        "all": [
+          [
+            100,
+            22,
+            0
+          ],
+          [
+            3,
+            50,
+            7
+          ],
+          [
+            4,
+            28,
+            13
+          ]
+        ],
+        "de": [
+          [
+            54,
+            9,
+            0
+          ],
+          [
+            0,
+            20,
+            2
+          ],
+          [
+            1,
+            19,
+            6
+          ]
+        ],
+        "en": [
+          [
+            46,
+            13,
+            0
+          ],
+          [
+            3,
+            30,
+            5
+          ],
+          [
+            3,
+            9,
+            7
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-2507-bf16-prompt1",
+      "balanced_language_macro_f1_ci_low": 0.556111557262722,
+      "balanced_language_macro_f1_ci_high": 0.6992488378711604
+    }
+  ],
+  "interpretation": "Same fresh random Test for original and expanded artifacts. AI annotation agreement; quantity and enrichment both changed. Not comparable numerically to old Test scores.",
+  "paired_data_changes": [
+    {
+      "original": "frozen_news_v3",
+      "expanded": "frozen_news_v4",
+      "balanced_language_macro_f1_delta": 0.10200111751918506,
+      "recall_positive_delta": 0.1333333333333333,
+      "paired_group_bootstrap_95_delta": [
+        0.04098283460578944,
+        0.16906748150872966
+      ]
+    },
+    {
+      "original": "minilm_fp32_news_v3",
+      "expanded": "minilm_fp32_news_v4",
+      "balanced_language_macro_f1_delta": 0.11624492240493633,
+      "recall_positive_delta": 0.2,
+      "paired_group_bootstrap_95_delta": [
+        0.05380022700830685,
+        0.1826833902885965
+      ]
+    },
+    {
+      "original": "linearsvc_news_v3",
+      "expanded": "linearsvc_news_v4",
+      "balanced_language_macro_f1_delta": 0.15015176684407583,
+      "recall_positive_delta": 0.3555555555555555,
+      "paired_group_bootstrap_95_delta": [
+        0.0724958122762685,
+        0.2282020061533366
+      ]
+    }
+  ],
+  "uncertainty": "1000 paired source-group bootstrap resamples, seed 20261108; percentile95 intervals cover sampling only, not AI annotation error. No model inference repeated.",
+  "train_rows": 692,
+  "original_train_rows": 244,
+  "learning_curve": "Three-fold nested Train-only diagnostic; full final recipe fixed in advance"
+}

@@ -48,3 +48,20 @@ def test_metrics_expose_missed_positive_class_and_language_difference():
     assert result['recall_negative'] == .5
     assert result['macro_f1_de'] > result['macro_f1_en']
     assert result['balanced_language_macro_f1'] == pytest.approx((result['macro_f1_de'] + result['macro_f1_en']) / 2)
+
+
+def test_expansion_reproduction_preserves_original_evidence(tmp_path, monkeypatch):
+    from src import news_scaling_reproduce as reproduce
+    source = tmp_path / 'reports/expanded_news_v4'; source.mkdir(parents=True)
+    for name in ['protocol.json', 'source_manifest.json', 'split_manifest.json', 'annotations.csv', 'overlap_audit.json']:
+        (source / name).write_text('frozen-' + name)
+    monkeypatch.setattr(reproduce, 'ROOT', tmp_path)
+    env = reproduce.prepare('tower-01')
+    assert env['SENTIMENT_SCALING_MODELS'] == 'models/reproduction/expanded-tower-01'
+    assert env['SENTIMENT_SCALING_REPRODUCTION'] == 'tower-01'
+    assert (tmp_path / 'reports/reproduction/expanded-tower-01/protocol.json').read_text() == 'frozen-protocol.json'
+    with pytest.raises(RuntimeError, match='already exists'):
+        reproduce.prepare('tower-01')
+    with pytest.raises(ValueError):
+        reproduce.prepare('../replace')
+    assert (source / 'protocol.json').read_text() == 'frozen-protocol.json'

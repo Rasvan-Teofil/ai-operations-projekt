@@ -108,12 +108,15 @@ def test_model_choice_is_cached_versioned_and_does_not_change_default(client, mo
     assert client.post('/predict', json={'text': 'Profits increased.'}).json()['model_version'] == 'sentence-test-v1'
     models = client.get('/models').json()['models']
     assert set(row['id'] for row in models) == {'minilm_v2', 'linearsvc_v2', 'qwen3_4b',
-        'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3'}
+        'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
+        'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4'}
     assert {row['id'] for row in models if row['experimental']} == {
-        'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3'}
+        'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
+        'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4'}
 
 
-@pytest.mark.parametrize('model', ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3'])
+@pytest.mark.parametrize('model', ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
+                                 'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4'])
 def test_experimental_model_choice_preserves_prediction_contract(client, monkeypatch, model):
     def load(name):
         predictor = SentenceStub()
