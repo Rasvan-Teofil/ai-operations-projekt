@@ -26,7 +26,7 @@ def check(base):
         health = client.get('/health'); record('health', health)
         assert health.json()['model_loaded'] and health.json()['model_id'] == 'qwen3_4b'
         models = client.get('/models'); record('models', models)
-        available = models.json()['models']; assert len(available) == 11 and all(r['available'] for r in available)
+        available = models.json()['models']; assert len(available) >= 11 and all(r['available'] for r in available)
         samples = {'de': 'Die Firma meldet Rekordgewinne. Ein Brand zerstörte die Fabrik. Die Konferenz beginnt am Dienstag.',
                    'en': 'The team won the championship. The factory closed after heavy losses. The report will be published on Tuesday.'}
         for model in available:
@@ -59,7 +59,8 @@ def check(base):
         for path in ['/', '/docs', '/comparison/news-v4', '/comparison/news-v4.svg',
                      '/comparison/news-v4-learning.svg', '/licenses', '/licenses/inventory']:
             record(path, client.get(path))
-        for entry in client.get('/licenses/inventory').json()['entries']:
+        inventory = client.get('/licenses/inventory').json()['entries']
+        for entry in inventory:
             for notice in entry['notices']:
                 response = client.get('/licenses/notices/' + notice)
                 assert response.status_code == 200
@@ -104,7 +105,7 @@ def check(base):
     result = {'checked_at_utc': datetime.now(timezone.utc).isoformat(), 'api': base,
         'scope': 'Synthetic functional controls, public URL and controlled HTTP failures; no Test predictions repeated or accuracy claim.',
         'cases': records, 'all_passed': True, 'mlflow_finished_runs_checked': len(run_ids), 'run_ids': run_ids,
-        'models_checked': len(available), 'license_inventory_entries': 22, 'default_preserved': 'qwen3_4b'}
+        'models_checked': len(available), 'license_inventory_entries': len(inventory), 'default_preserved': 'qwen3_4b'}
     write_json(OUT / 'live_verification.json', result)
     print(f'{len(records)} live checks and {len(run_ids)} finished MLflow runs verified; no Test rerun.', flush=True)
 

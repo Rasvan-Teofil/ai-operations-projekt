@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-07.1",
+  "version": "2026-11-07.2",
   "reviewed_on": "2026-11-07",
   "scope": "Current research demo and proposed next-stage data; not blanket commercial clearance or a licence for our own code.",
   "entries": [
@@ -395,6 +395,108 @@
       "notices": [
         "CC0-1.0.txt",
         "wikinews-ai-v4-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "qwen_news_v5",
+      "name": "Qwen · matched news rubric",
+      "group": "current",
+      "use": "Same pretrained weights; general-news outcome rubric replacing financial-only context.",
+      "license": "Qwen base Apache-2.0; Wikinews inputs CC-BY-2.5/4.0 where used; AI annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Local artifact/profile with shared pinned Qwen dependency. Few-shot examples and LoRA use only the same 692 Train as the small classifiers, without restricted legacy corpora. AI-reference agreement does not constitute human-gold accuracy. Original data/model notices retained; this does not assign a blanket licence to project code.",
+      "attribution": "Qwen / Alibaba Cloud; Wikinews contributors with per-page revision/history credits; AI annotations from this Codex chat.",
+      "revision": "Qwen cdbee75f17c01a7cc42f958dc650907174af0554; exact prompt/protocol frozen at 8a81b9e; profile/base/adapter hashes in reports/llm_adaptation_v5/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-llm-v5-ATTRIBUTION.txt",
+      "notices": [
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "qwen_fewshot_v5",
+      "name": "Qwen · six Train examples",
+      "group": "current",
+      "use": "Same pretrained weights/news rubric; six seeded 692-Train demonstrations, one per language/class.",
+      "license": "Qwen base Apache-2.0; Wikinews inputs CC-BY-2.5/4.0 where used; AI annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Local artifact/profile with shared pinned Qwen dependency. Few-shot examples and LoRA use only the same 692 Train as the small classifiers, without restricted legacy corpora. AI-reference agreement does not constitute human-gold accuracy. Original data/model notices retained; this does not assign a blanket licence to project code.",
+      "attribution": "Qwen / Alibaba Cloud; Wikinews contributors with per-page revision/history credits; AI annotations from this Codex chat.",
+      "revision": "Qwen cdbee75f17c01a7cc42f958dc650907174af0554; exact prompt/protocol frozen at 8a81b9e; profile/base/adapter hashes in reports/llm_adaptation_v5/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-llm-v5-ATTRIBUTION.txt",
+      "notices": [
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "qwen_lora_v5",
+      "name": "Qwen · own LoRA fine-tuning",
+      "group": "current",
+      "use": "Own rank 8 LoRA, 2,949,120 trainable parameters, full 692 Train for three epochs; frozen BF16 Qwen base and FP32 adapters.",
+      "license": "Qwen base Apache-2.0; Wikinews inputs CC-BY-2.5/4.0 where used; AI annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Local artifact/profile with shared pinned Qwen dependency. Few-shot examples and LoRA use only the same 692 Train as the small classifiers, without restricted legacy corpora. AI-reference agreement does not constitute human-gold accuracy. Original data/model notices retained; this does not assign a blanket licence to project code.",
+      "attribution": "Qwen / Alibaba Cloud; Wikinews contributors with per-page revision/history credits; AI annotations from this Codex chat.",
+      "revision": "Qwen cdbee75f17c01a7cc42f958dc650907174af0554; exact prompt/protocol frozen at 8a81b9e; profile/base/adapter hashes in reports/llm_adaptation_v5/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/licenses/notices/wikinews-llm-v5-ATTRIBUTION.txt",
+      "notices": [
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "wikinews_llm_v5",
+      "name": "Wikinews · fresh matched-task LLM Test",
+      "group": "current",
+      "use": "239 random new title+lead inputs, 227 retained after 12 annotation exclusions; no class balancing/enrichment and no new Train rows.",
+      "license": "CC-BY-2.5 / CC-BY-4.0 by language/article era; both retained for later EN contributions.",
+      "status": "Used for matched-task LLM comparison / AI-labelled · Codex-reviewed.",
+      "scope": "Excludes all 1080 historical Wikinews inputs and conservative linked/source/near-duplicate groups. Same extraction, detected quote/media filtering and source declaration limits. No externally linked publisher articles fetched, no project-generated translations; source translation history not audited.",
+      "attribution": "German/English Wikinews contributors; per-page revision, history and transformation in source manifest.",
+      "revision": "Seed 20261109; 239 revisions/text hashes frozen at 8a81b9e. Existing 692 Train unchanged from v4.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/source_manifest.json",
+      "license_url": "https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371",
+      "notices": [
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "wikinews-terms.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "codex_annotations_llm_v5",
+      "name": "Fresh LLM-comparison AI reference annotations",
+      "group": "current",
+      "use": "227 new reference labels and 12 exclusion rationales, written before candidate results.",
+      "license": "CC0-1.0 for new annotation metadata, to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed; single AI annotator.",
+      "scope": "Same assistant read exact title+lead inputs and reviewed consistency, without candidate Test predictions. No human consensus or verified-ground-truth claim; exact serving revision unavailable. Original texts retain their terms.",
+      "attribution": "Codex assistant in this project chat, at user request.",
+      "revision": "Frozen ledger/text hashes at 8a81b9e before CV and full-Train fitting.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/annotations.csv",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notices": [
+        "CC0-1.0.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
       ]
     }
   ]

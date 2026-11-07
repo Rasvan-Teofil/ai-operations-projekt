@@ -1,0 +1,34 @@
+Matched-task LLM study v5 — attribution and scope
+
+New Test: 239 randomly sampled German/English Wikinews title+lead inputs;
+227 AI labels retained, 12 exclusions. All 1080 prior Wikinews inputs and their
+conservative source/linked-page/near-duplicate groups protected. No new Train:
+the 692 existing v4 training inputs/labels are reused unchanged.
+
+New Test page revisions, author-history credits, transformations and terms:
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/source_manifest.json
+Training source credits:
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/source_manifest.json
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/source_manifest.json
+
+German text: CC BY 2.5; English article-era terms: CC BY 2.5 for older material,
+CC BY 4.0 after 16 December 2024. Retain both for later contributions to older EN
+pages. Site declarations do not warrant every individual contribution. Images,
+metadata and detected quoted leads omitted; title plus first substantive paragraph,
+complete-sentence lead cap 650 characters. No external linked publisher articles
+fetched, no project-generated translations; source translation history not audited.
+Raw inputs and demonstration texts stay outside Git; bibliographic credit metadata,
+revisions, hashes, labels and rationales are versioned.
+
+AI-labelled / Codex-reviewed: same assistant wrote/reviewed exact-input labels
+before candidate results; one AI annotator, exact serving revision unavailable.
+No human consensus or verified-ground-truth claim. New annotation metadata is
+offered under CC0-1.0 to extent project rights apply; article terms unchanged.
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/annotations.csv
+
+Qwen3-4B-Instruct-2507 base: Apache-2.0, Alibaba Cloud. Pinned revision:
+cdbee75f17c01a7cc42f958dc650907174af0554. General-news rubric updates no weights.
+Few-shot uses six seeded examples from fit-only training rows (one/language/class).
+Own rank 8 LoRA uses only 692 Train rows, no legacy restricted fine-tune initialization.
+Standalone LLM dependencies include base weights plus profile/adapter, even when
+physical storage and GPU allocation are shared. Source/model notices retained.

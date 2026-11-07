@@ -111,5 +111,13 @@
     "bytes": 2057,
     "retrieved_on": "2026-11-07",
     "transform": "Project-authored expansion attribution and annotation-scope notice"
+  },
+  {
+    "file": "wikinews-llm-v5-ATTRIBUTION.txt",
+    "source_url": null,
+    "sha256": "ec7dfe19f6f90ec94a382137af18430083877b9ba00f590706495f67d4473d2b",
+    "bytes": 2358,
+    "retrieved_on": "2026-11-07",
+    "transform": "Project-authored matched-task LLM source/annotation/profile attribution notice"
   }
 ]

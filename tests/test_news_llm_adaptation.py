@@ -95,3 +95,46 @@ def test_profiles_preserve_example_provenance_and_unchanged_base(tmp_path, monke
     assert json.loads((base / 'artifact.json').read_text()) == original
     with pytest.raises(RuntimeError, match='already exists'):
         experiment.make_profile(target, 'news')
+
+
+def test_reproduction_keeps_frozen_evidence_and_rejects_path_escape(tmp_path, monkeypatch):
+    from src import news_llm_reproduce as reproduce
+    source = tmp_path / 'reports/llm_adaptation_v5'; source.mkdir(parents=True)
+    for name in ['protocol.json', 'source_manifest.json', 'split_manifest.json', 'annotations.csv', 'overlap_audit.json']:
+        (source / name).write_text('frozen-' + name)
+    monkeypatch.setattr(reproduce, 'ROOT', tmp_path)
+    env = reproduce.prepare('tower-01')
+    assert env['SENTIMENT_LLM_ADAPT_MODELS'] == 'models/reproduction/llm-adaptation-tower-01'
+    assert env['SENTIMENT_LLM_ADAPT_REPRODUCTION'] == 'tower-01'
+    with pytest.raises(RuntimeError, match='already exists'): reproduce.prepare('tower-01')
+    with pytest.raises(ValueError): reproduce.prepare('../overwrite')
+    assert (source / 'protocol.json').read_text() == 'frozen-protocol.json'
+
+
+@pytest.mark.parametrize('nested', [False, True])
+def test_standalone_size_includes_shared_base_and_counts_adapter_once(tmp_path, monkeypatch, nested):
+    base, profile = tmp_path / 'models/base', tmp_path / 'models/profile'
+    adapter = profile / 'adapter' if nested else tmp_path / 'models/adapter'
+    base.mkdir(parents=True); profile.mkdir(parents=True); adapter.mkdir(parents=True)
+    (base / 'weights.bin').write_bytes(b'b' * 1000)
+    (adapter / 'adapter.bin').write_bytes(b'a' * 100)
+    (profile / 'artifact.json').write_text(json.dumps({'base_artifact': 'models/base',
+        'adapter_path': str(adapter.relative_to(tmp_path))}))
+    monkeypatch.setattr(experiment, 'ROOT', tmp_path)
+    complete, incremental = experiment.full_size(profile)
+    assert complete == 1000 + incremental
+    assert incremental == (profile / 'artifact.json').stat().st_size + 100
+
+
+def test_pinned_profile_hash_also_detects_base_and_adapter_changes(tmp_path, monkeypatch):
+    base, profile, adapter = [tmp_path / 'models' / n for n in ['base', 'profile', 'adapter']]
+    for path in [base, profile, adapter]: path.mkdir(parents=True)
+    (base / 'weights.bin').write_bytes(b'base')
+    (adapter / 'adapter.bin').write_bytes(b'adapter')
+    (profile / 'artifact.json').write_text(json.dumps({'base_artifact': 'models/base', 'adapter_path': 'models/adapter'}))
+    monkeypatch.setattr(experiment, 'ROOT', tmp_path)
+    before = experiment.artifact_hash(profile)
+    (base / 'weights.bin').write_bytes(b'changed base')
+    middle = experiment.artifact_hash(profile)
+    (adapter / 'adapter.bin').write_bytes(b'changed adapter')
+    assert len({before, middle, experiment.artifact_hash(profile)}) == 3

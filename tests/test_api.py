@@ -146,21 +146,26 @@ def test_comparison_missing_is_explicit(client, monkeypatch, tmp_path):
     assert client.get('/comparison/news-v4').status_code == 503
     assert client.get('/comparison/news-v4.svg').status_code == 503
     assert client.get('/comparison/news-v4-learning.svg').status_code == 503
+    assert client.get('/comparison/news-v5').status_code == 503
+    assert client.get('/comparison/news-v5.svg').status_code == 503
+    assert client.get('/comparison/news-v5-development.svg').status_code == 503
 
 
-def test_expansion_comparison_routes_serve_saved_evidence_without_inference(client, monkeypatch, tmp_path):
+@pytest.mark.parametrize('folder,route,curve', [('expanded_news_v4', 'news-v4', 'learning'),
+                                              ('llm_adaptation_v5', 'news-v5', 'development')])
+def test_expansion_comparison_routes_serve_saved_evidence_without_inference(client, monkeypatch, tmp_path, folder, route, curve):
     import json
     import src.config
-    report = tmp_path / 'expanded_news_v4'; report.mkdir()
+    report = tmp_path / folder; report.mkdir()
     (report / 'comparison.json').write_text(json.dumps({'test_rows': 227, 'results': []}))
-    for name in ['comparison.svg', 'learning_curve.svg']:
+    for name in ['comparison.svg', 'learning_curve.svg' if curve == 'learning' else 'development.svg']:
         (report / name).write_text('<svg xmlns="http://www.w3.org/2000/svg"></svg>')
     monkeypatch.setattr(src.config, 'REPORTS', tmp_path)
     def forbidden(*args):
         raise AssertionError('Saved comparison route must not predict')
     monkeypatch.setattr(Stub, 'predict_proba', forbidden)
-    assert client.get('/comparison/news-v4').json()['test_rows'] == 227
-    for path in ['/comparison/news-v4.svg', '/comparison/news-v4-learning.svg']:
+    assert client.get('/comparison/' + route).json()['test_rows'] == 227
+    for path in ['/comparison/' + route + '.svg', '/comparison/' + route + '-' + curve + '.svg']:
         response = client.get(path)
         assert response.status_code == 200
         assert response.headers['content-type'].startswith('image/svg+xml')

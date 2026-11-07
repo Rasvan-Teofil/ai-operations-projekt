@@ -15,7 +15,8 @@ from src.fetch import FetchError, article_text
 
 ModelID = Literal['qwen3_4b', 'minilm_v2', 'linearsvc_v2', 'frozen_news_v3',
                   'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
-                  'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4']
+                  'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
+                  'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5']
 MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · local zero-shot',
                'minilm_v2': 'MiniLM v2 · fine-tuned',
                'linearsvc_v2': 'LinearSVC v2 · reconstructed',
@@ -26,7 +27,10 @@ MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · local zero-shot',
                'frozen_news_v4': 'Frozen MiniLM · expanded AI news',
                'minilm_fp32_news_v4': 'MiniLM FP32 · expanded AI news',
                'minilm_bf16_news_v4': 'MiniLM BF16 · expanded AI news',
-               'linearsvc_news_v4': 'LinearSVC · expanded AI news'}
+               'linearsvc_news_v4': 'LinearSVC · expanded AI news',
+               'qwen_news_v5': 'Qwen · matched news rubric',
+               'qwen_fewshot_v5': 'Qwen · six Train examples',
+               'qwen_lora_v5': 'Qwen · own LoRA fine-tuning'}
 
 
 def candidate_paths():
@@ -35,7 +39,9 @@ def candidate_paths():
             **{name: MODELS / 'common_data_v3' / name for name in
                ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3']},
             **{name: MODELS / 'expanded_news_v4/final' / name for name in
-               ['frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4']}}
+               ['frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4']},
+            **{name: MODELS / 'llm_adaptation_v5/final' / name for name in
+               ['qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5']}}
 
 
 def load_named_predictor(name):
@@ -169,7 +175,8 @@ def create_app(queue_timeout=None):
             records.append({'id': name, 'name': MODEL_NAMES[name], 'model_version': version,
                             'available': available, 'loaded': name in app.state.predictors,
                             'is_default': name == app.state.default_id,
-                            'experimental': name.endswith(('_news_v3', '_news_v4'))})
+                            'experimental': name.endswith(('_news_v3', '_news_v4')) or name in
+                                ('qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5')})
         return {'default': app.state.default_id, 'models': records}
 
     @app.get('/', include_in_schema=False)
@@ -240,6 +247,30 @@ def create_app(queue_timeout=None):
         path = REPORTS / 'expanded_news_v4/learning_curve.svg'
         if not path.exists():
             raise HTTPException(503, 'Training-only learning curve has not been completed')
+        return FileResponse(path, media_type='image/svg+xml')
+
+    @app.get('/comparison/news-v5', include_in_schema=False)
+    def llm_adaptation_comparison():
+        from src.config import REPORTS
+        path = REPORTS / 'llm_adaptation_v5/comparison.json'
+        if not path.exists():
+            raise HTTPException(503, 'Matched-task LLM comparison has not been completed')
+        return json.loads(path.read_text())
+
+    @app.get('/comparison/news-v5.svg', include_in_schema=False)
+    def llm_adaptation_chart():
+        from src.config import REPORTS
+        path = REPORTS / 'llm_adaptation_v5/comparison.svg'
+        if not path.exists():
+            raise HTTPException(503, 'Matched-task LLM comparison has not been completed')
+        return FileResponse(path, media_type='image/svg+xml')
+
+    @app.get('/comparison/news-v5-development.svg', include_in_schema=False)
+    def llm_adaptation_development_chart():
+        from src.config import REPORTS
+        path = REPORTS / 'llm_adaptation_v5/development.svg'
+        if not path.exists():
+            raise HTTPException(503, 'Train-only LLM development comparison has not been completed')
         return FileResponse(path, media_type='image/svg+xml')
 
     def input_text(payload, p):

@@ -158,7 +158,8 @@ def profile_params(path):
         'adaptation': meta.get('adaptation', 'unchanged financial zero-shot'),
         'demonstration_count': len(meta.get('demonstrations', [])) // 2,
         'max_article_tokens': meta['max_article_tokens'], 'score_method': meta['score_method'],
-        'adapter': meta.get('adapter_path', 'none')}
+        'adapter': meta.get('adapter_path', 'none'),
+        'example_ids_sha256': digest('\n'.join(r['id'] for r in meta.get('example_provenance', [])).encode())}
 
 
 def full_size(path):
@@ -322,7 +323,8 @@ def train():
     for name, mode in [('qwen_news_v5', 'news'), ('qwen_fewshot_v5', 'fewshot')]:
         path = make_profile(folder / name, mode, fit, SEED)
         records.append({'model': name, 'name': NAMES[name], 'path': str(path.relative_to(ROOT)),
-                        'run_id': None, 'artifact_sha256': artifact_hash(path)})
+                        'run_id': None, 'artifact_sha256': artifact_hash(path),
+                        'example_provenance': read_json(path / 'artifact.json').get('example_provenance', [])})
     with mlflow.start_run(run_name='LLM adaptation v5 · full692 LoRA') as run:
         mlflow.set_tags(tags('final-test', 'wikinews-v5-fresh-test')); mlflow.log_params(common(m))
         adapter = folder / 'adapter'; fit_adapter(fit, adapter)
@@ -363,6 +365,10 @@ def evaluate(resume=False):
             mlflow.set_tags(tags('final-test', 'wikinews-v5-fresh-test'))
             evaluation_params = common(m)
             if r['run_id']: evaluation_params.pop('git_commit')  # Preserve the fit commit on the resumed LoRA run.
+            if r['model'] not in QWEN:
+                from src.config import ENCODER, ENCODER_REVISION
+                evaluation_params['model_id'] = ENCODER if r['model'] != 'linearsvc_news_v4' else 'TFIDF + LinearSVC'
+                evaluation_params['revision'] = ENCODER_REVISION if r['model'] != 'linearsvc_news_v4' else 'sklearn1.8.0 C1 balanced'
             mlflow.log_params({**evaluation_params, 'test_rows': len(test), 'warmup_calls': 20, 'latency_batch_size': 1,
                 'artifact_sha256': r['artifact_sha256'], 'original_run_id': r.get('original_run_id', 'new LLM condition'),
                 'evaluation_git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()})

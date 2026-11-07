@@ -53,6 +53,20 @@
       <div id="highlighted-text" class="highlighted-text"></div>
       <p id="sentence-scores" class="hint" aria-live="polite">Select a coloured sentence to inspect its scores.</p>
     </section>
+    <section class="panel evidence" aria-labelledby="llm-title">
+      <p class="eyebrow">MATCHED TASK / PROMPT, EXAMPLES AND OWN LLM FINE-TUNING</p><h2 id="llm-title">Does adapting the LLM change the comparison?</h2>
+      <p>The previous LLM used a financial-news prompt while MiniLM learned our general-news labels. This follow-up compares the same Qwen weights with that original prompt, a matching news rubric, six Train-only examples and an own LoRA adapter. Supervised models use the same 692 training texts.</p>
+      <p id="llm-status" role="status">Loading the matched-task comparison…</p>
+      <p><a id="llm-try" href="/">Try the reported experimental choice ↗</a></p>
+      <div class="table-scroll"><table><caption>Different fresh Test · 227 DE/EN texts · SHA-256 starts 723673ee · AI-labelled · Codex-reviewed</caption><thead><tr><th scope="col">Model / adaptation</th><th scope="col">Mean F1</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">Positive recall</th><th scope="col">ms/text</th><th scope="col">Full MiB</th></tr></thead><tbody id="llm-rows"></tbody></table></div>
+      <img id="llm-chart" src="/comparison/news-v5.svg" alt="Matched-task comparison on one new 227-item test: frozen MiniLM, fine-tuned MiniLM, LinearSVC and four Qwen adaptation conditions, with measured agreement latency and standalone size." loading="lazy">
+      <p id="llm-interpretation" class="licence-banner"></p>
+      <h3>Development inside Train</h3>
+      <p>Four fixed Qwen conditions on the same three source-group folds: 12 new CV runs. Few-shot examples come only from each fold's fit rows. LoRA sees every fit row for three fixed epochs. Error bars show fold SD; the small-model FP32 references reuse the earlier identical folds. No prompt sweep or Val/Test model choice.</p>
+      <img id="llm-development-chart" src="/comparison/news-v5-development.svg" alt="Train-only development: financial prompt, matched news rubric, six examples and own LoRA, with three-fold SD and original small-model reference lines." loading="lazy">
+      <p id="llm-cost" class="hint"></p>
+      <p class="hint">This is a new Test, despite also having 227 texts. Do not compare its numbers directly with the earlier section's Test. One AI reference annotator, short archive news and unknown pretraining overlap limit conclusions; compute and context policies differ. The historical Qwen benchmark default is retained; new profiles are experimental selectable options. <a href="/comparison/news-v5">Results JSON</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/comparison.md">Measured report &amp; MLflow runs</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/docs/llm-adaptation-v5.md">Why repeat this comparison?</a> · <a href="/licenses">Licences</a>.</p>
+    </section>
     <section class="panel evidence" aria-labelledby="expanded-title">
       <p class="eyebrow">DATA EXPANSION / 26 NEW MEASURED RUNS</p><h2 id="expanded-title">Does more training data help?</h2>
       <p>692 training texts instead of 244, including 206 positive examples instead of 45. Original and expanded models see the same fresh 227 native German/English test texts. Reference labels: <strong>AI-labelled · Codex-reviewed</strong>.</p>

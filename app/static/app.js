@@ -148,7 +148,7 @@ async function expandedComparison() {
     if (!response.ok) throw new Error('Expanded data results unavailable.');
     const data = await response.json();
     const winner = data.results.find((row) => row.model === data.descriptive_leader);
-    $('expanded-status').textContent = `${data.test_rows} shared test texts · best experimental choice: ${winner?.name || data.descriptive_leader}. Qwen remains the benchmark default.`;
+    $('expanded-status').textContent = `${data.test_rows} shared v4 test texts · choice on that Test: ${winner?.name || data.descriptive_leader}. Qwen remains the benchmark default.`;
     $('expanded-rows').replaceChildren();
     for (const record of data.results) {
       const row = document.createElement('tr'); row.dataset.selected = String(record.model === data.descriptive_leader);
@@ -159,4 +159,28 @@ async function expandedComparison() {
     }
   } catch (error) { $('expanded-status').textContent = error.message; $('expanded-chart').hidden = true; }
 }
-checkHealth(); loadModels(); comparison(); newsComparison(); expandedComparison();
+async function llmComparison() {
+  try {
+    const response = await fetch('/comparison/news-v5', {cache:'no-store'});
+    if (!response.ok) throw new Error('Matched-task LLM results unavailable.');
+    const data = await response.json();
+    const chosen = data.results.find((row) => row.model === data.descriptive_leader);
+    $('llm-status').textContent = `${data.test_rows} new shared test texts · AI-labelled · Codex-reviewed · descriptive choice: ${chosen?.name || data.descriptive_leader}.`;
+    $('llm-try').href = '/?model=' + encodeURIComponent(data.descriptive_leader);
+    $('llm-rows').replaceChildren();
+    for (const record of data.results) {
+      const row = document.createElement('tr'); row.dataset.selected = String(record.model === data.descriptive_leader);
+      for (const value of [record.name, record.balanced_language_macro_f1.toFixed(4), record.macro_f1_de.toFixed(4), record.macro_f1_en.toFixed(4), (100 * record.recall_positive).toFixed(1) + '%', record.inference_ms_per_text.toFixed(3), (record.model_size_bytes / 1048576).toFixed(2)]) {
+        const cell = document.createElement('td'); cell.textContent = value; row.append(cell);
+      }
+      $('llm-rows').append(row);
+    }
+    const prompt = data.paired_changes.find((row) => row.from === 'qwen3_4b' && row.to === 'qwen_news_v5');
+    const tuned = data.paired_changes.find((row) => row.from === 'minilm_bf16_news_v4' && row.to === 'qwen_lora_v5');
+    const signed = (value) => (value >= 0 ? '+' : '') + value.toFixed(4);
+    $('llm-interpretation').textContent = `On this same Test: adapting the whole task prompt changes mean F1 by ${signed(prompt.mean_language_f1_delta)}; own Qwen LoRA versus unchanged MiniLM BF16 differs by ${signed(tuned.mean_language_f1_delta)}. The fixed rule chooses ${chosen?.name || data.descriptive_leader}; within 0.005 of best, latency then full size decide. Paired uncertainty intervals and all conditions remain in the report.`;
+    const lora = data.results.find((row) => row.model === 'qwen_lora_v5');
+    $('llm-cost').textContent = `LoRA updates 2.95 million parameters with a frozen 4B base; full-Train fitting took ${lora.training_seconds.toFixed(1)} seconds on this tower. Full size includes the base, profile and adapter, even though serving shares one base allocation. Six-example context cost is included in latency. These are normalized model scores, not calibrated confidence.`;
+  } catch (error) { $('llm-status').textContent = error.message; $('llm-chart').hidden = true; $('llm-development-chart').hidden = true; }
+}
+checkHealth(); loadModels(); comparison(); newsComparison(); expandedComparison(); llmComparison();

@@ -8,6 +8,8 @@ The shortlist and comparison plan are in [the next-stage review](../docs/data-so
 
 The follow-up [expanded study](../reports/expanded_news_v4/comparison.md) adds448 training texts, a fresh227-item test and18 Train-only CV runs. Its [attribution notice](notices/wikinews-ai-v4-ATTRIBUTION.txt) and inventory entries retain the same Wikinews/annotation scope. All four expanded models are experimental selectable options. Earlier notices and restricted-model records remain preserved.
 
+The [matched-task LLM follow-up](../reports/llm_adaptation_v5/comparison.md) adds three experimental Qwen profiles: news rubric, six Train examples and own LoRA. It reuses the same 692 Train inputs and has a different fresh Test. The [v5 attribution notice](notices/wikinews-llm-v5-ATTRIBUTION.txt) retains base, Train/Test source and annotation terms. Sharing base weights does not make an adapter a standalone LLM.
+
 ## Retained notices and evidence
 
 | File | Scope |

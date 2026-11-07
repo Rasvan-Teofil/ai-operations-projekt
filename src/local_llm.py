@@ -70,10 +70,11 @@ def local_dependency(value):
 def shared_engine(weights):
     key = str(weights.resolve())
     with _ENGINE_LOCK:
-        if key not in _ENGINES:
+        engine = _ENGINES.get(key)
+        if engine is None:
             engine = LocalEngine(weights)
             _ENGINES[key] = engine
-        return _ENGINES[key]
+        return engine
 
 
 def file_manifest(path):
