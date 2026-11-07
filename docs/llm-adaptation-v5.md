@@ -12,6 +12,22 @@ hypothesis, not a requirement. Every prespecified condition is retained.
 
 Neither approach trains a foundation model from scratch: MiniLM adapts a pretrained encoder; Qwen LoRA adapts a pretrained generative LLM. The comparison concerns task adaptation and deployment trade-offs.
 
+## Why begin with a small trained classifier?
+
+A compact multilingual encoder was a reasonable first hypothesis for a fixed
+three-class endpoint: cheap batch-one inference, small local artifacts, explicit
+class weighting and a reproducible supervised baseline. It also let us test the
+course requirements—data provenance, a split, own GPU training, MLflow and a
+versioned API—within a bounded experiment. These are engineering reasons to try
+it, not evidence that it must outperform an LLM. Both approaches can be hosted
+locally; availability alone does not favor one.
+
+The historical method remains useful even if the adapted LLM wins: it measures
+the latency/storage/label-use trade-off and records a negative or positive result
+without erasing the path. The missing step in v4 was task-matched LLM adaptation.
+This follow-up supplies that step rather than inventing a justification after
+choosing a preferred architecture.
+
 ## What each condition isolates
 
 | Pair | Change | What stays fixed |
