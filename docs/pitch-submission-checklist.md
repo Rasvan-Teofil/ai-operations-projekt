@@ -1,6 +1,6 @@
 # Executive Pitch – submission checklist (as of 2026-11-06)
 
-Pitch week: 2026-11-02 … 2026-11-08 (ends Sun 8 Nov). Exact day and format still open.
+Pitch week: 2026-11-02 … 2026-11-08 (ended Sun 8 Nov). As of 2026-11-09: submission status unconfirmed (was it submitted, which format?).
 
 ## Ready (repo / LaTeX)
 
@@ -16,7 +16,7 @@ Pitch week: 2026-11-02 … 2026-11-08 (ends Sun 8 Nov). Exact day and format sti
 
 ## Blocked on Teo
 
-- [ ] Confirm submission day + channel/format (PDF only? Canva link? both?) — pitch week ends Sun 8 Nov
+- [ ] Confirm whether the pitch was submitted / presented, and in which format (PDF, Canva link, both). Pitch week ended Sun 8 Nov
 - [ ] Roadmap “14 Jan / 21 Jan” on the Canva deck — keep or adjust (do not create a second deck)
 - [ ] OK before any further Canva edits (test-count + error-cost text already done)
 
