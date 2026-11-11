@@ -1,0 +1,3250 @@
+{
+  "seed": 20261110,
+  "extraction_version": "full-article-v4",
+  "status": "unlabelled pilot; rights/event review pending",
+  "sampling": "Seeded first eligible pages from the frozen recent-1500 published-category pool/language. New v4 frame excludes all 90 development-exposed v3 pages and long direct quotations (80 characters DE/EN, 40 JA) before new annotation. No sentiment hints or predictions. Native archive articles only.",
+  "prior_checkpoint_sha256": "cef0d0c433603f791035727be042ab43a20d2de1228e4335cfd1d170e14acf63",
+  "scope_limitation": "Quotation-length eligibility changes the source population and may change topic/class distribution. It is a feasibility rule for a publication-oriented pool, not blanket legal clearance. Do not generalize scores to all news articles.",
+  "exclusions": [
+    {
+      "id": "wikinews:de:81577",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:80634",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:86865",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79346",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85997",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:79506",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:79487",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:81827",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79113",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86741",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:83286",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:77945",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:82452",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:81652",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:77421",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:79929",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:83854",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82405",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80867",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:84747",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:80053",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:80559",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:79969",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:82522",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82787",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:78921",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85173",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85505",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:85692",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80197",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:79131",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79912",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83473",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:79881",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:81692",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:80692",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:85188",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80348",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:79297",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:77064",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:77568",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:83296",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:86649",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:86734",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:de:81491",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79320",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:82344",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:82834",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80775",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:79036",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:82410",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82334",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81497",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:85143",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81290",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86761",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80233",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:82297",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77092",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81935",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86548",
+      "reason": "1 validation error for ArticleRecord\ntext\n  String should have at least 40 characters [type=string_too_short, input_value='Die Welt begrüßt das neue Jahr 2025', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/string_too_short"
+    },
+    {
+      "id": "wikinews:de:82186",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83490",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83452",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:85948",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81058",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81004",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:85990",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83164",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83866",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:84933",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80301",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80534",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:77927",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81216",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:79806",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:83141",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:78863",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82183",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77099",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81835",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83067",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81066",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:79612",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:84936",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:80484",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82616",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81483",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82691",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81458",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:79094",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:83515",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:86755",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80495",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82263",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79909",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79939",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83225",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82451",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82375",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83391",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77267",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80961",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:84324",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:82489",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:82594",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79901",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79502",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:80877",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:78958",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:84546",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81094",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81897",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82465",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81736",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:84793",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80440",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79656",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83424",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83549",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77368",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82041",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:80971",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:86775",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82543",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83538",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:79357",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81415",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85017",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86092",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86144",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81950",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86142",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80890",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81301",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:85801",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86689",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:80823",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81257",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:81836",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:84940",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77209",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77805",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85969",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79092",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:77732",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79000",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80129",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79796",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80989",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82818",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77971",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77662",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81181",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:83760",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:86075",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83133",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:77948",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83363",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79744",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:86358",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:86608",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81270",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:78198",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82024",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79954",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80474",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82246",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85361",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:86725",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79914",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:84479",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:84596",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:de:77539",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3014824",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2871942",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2935205",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2918278",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2819841",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:3014780",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2972263",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2912426",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2824029",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2815642",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2834431",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2927091",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2886393",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2866259",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2926945",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2833007",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2848441",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3012307",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2879804",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2846378",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2893166",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2833898",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2825648",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2825775",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2985731",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:3011413",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2814034",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2823755",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3017543",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2867805",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2847653",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2995321",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2915751",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2843814",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2943372",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2949438",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2859514",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2964266",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2933301",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2994412",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2994614",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2944997",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2893471",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2978031",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:en:2813587",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2837166",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2860621",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2833915",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2839131",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2877717",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2818137",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3003184",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2824844",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2942288",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2931968",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2848204",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2821765",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2893319",
+      "reason": "Article exceeds 20000 characters; no text was truncated"
+    },
+    {
+      "id": "wikinews:en:2821524",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3020258",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3013713",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2815329",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3009271",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2880165",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2889487",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2935057",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2872659",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2982765",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2813904",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2838043",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2833365",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2940149",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2920166",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2842812",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2832842",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2827153",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2823413",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2878799",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2843606",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2995320",
+      "reason": "Observed historical held-out text/page/source overlap"
+    },
+    {
+      "id": "wikinews:en:2938462",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2949946",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2995026",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2879992",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2847750",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2891504",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2878361",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2916301",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2831355",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:85036",
+      "reason": "No readable article paragraphs were found"
+    },
+    {
+      "id": "wikinews:en:2955232",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2928309",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3045502",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2848132",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2942281",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2955285",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2967385",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2890697",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3008919",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2815298",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2868568",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2947195",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3004951",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2816359",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2825515",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2819055",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2923925",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2892035",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2845800",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3012537",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2854812",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2963597",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2878667",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2914316",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2967440",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2944752",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2819634",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3014303",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2945248",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2834317",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2978183",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2927385",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3014830",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2936286",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2848090",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2893569",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3008026",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2808357",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2817442",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2881171",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3018781",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2825547",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2824261",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2824484",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3000025",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2844974",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2846917",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2847443",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2840867",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3017207",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2911055",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2991803",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2928761",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2860143",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2845481",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2902986",
+      "reason": "Observed historical held-out text/page/source overlap"
+    },
+    {
+      "id": "wikinews:en:2945566",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2978906",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3013515",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3013008",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2816470",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2928226",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2882722",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2995172",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2939721",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2820095",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3054516",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3079772",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2816228",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2813852",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2946407",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2847947",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2996857",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2845416",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2833290",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3003233",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2819376",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2979655",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2971131",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2968054",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2977111",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2842818",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2935767",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2837373",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2965821",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2965939",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2836121",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2820091",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2848227",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2970280",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2947131",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2849105",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3078720",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2840616",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2861952",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2808229",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3082352",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2854232",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3013599",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2836384",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2891731",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2955476",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2877092",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2911293",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3005216",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2864327",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2847026",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3004870",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2916882",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2880351",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2848094",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2969441",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2969966",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2919675",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3013395",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2920860",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2903443",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2950435",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2900428",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2970498",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2883722",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2964480",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3013729",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3017783",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3010657",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2807821",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2996015",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2954817",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2850144",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2895271",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2845310",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2946128",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2808800",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2967525",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2816465",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2877720",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2927251",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2966367",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2921818",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2843999",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2807603",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2933435",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2846590",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2886819",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3083848",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2939199",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2814699",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2854680",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2914287",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2825212",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2818838",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2875261",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2823560",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2855230",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3013435",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2991980",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2919446",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2971578",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2813036",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2826259",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2890848",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3083587",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2859158",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2860573",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2897588",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2878617",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2880536",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2906704",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2868226",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2878448",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2974303",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3013408",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2824148",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2915113",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2841023",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2868116",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2928802",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2881994",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2965633",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2924411",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2951927",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2808464",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2955363",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2827834",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2909818",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3004254",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2884297",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2944006",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3016797",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2880569",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2897505",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3012306",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2906430",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2823702",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2878466",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2828842",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2939639",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2840302",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2831470",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3005166",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2809243",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3046568",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2818569",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2844454",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2926813",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3023057",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2952149",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3053968",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2834313",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2994955",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2906117",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2817384",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2816919",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2887304",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2810859",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2989630",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2846768",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2868115",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2896641",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3004483",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2955362",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2820932",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2865170",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2818168",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2886281",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2965933",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2815975",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2927960",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2846448",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3004659",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2843502",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2983645",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2809043",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3016574",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2963248",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2929811",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2922984",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2921149",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2898878",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2907331",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2817904",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2825857",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2993847",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2813543",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3009713",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2926792",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2942121",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2811393",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2832698",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2853845",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2971805",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3002129",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2943554",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2935247",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2834464",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2922059",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2909884",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2879225",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2926240",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2833350",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2926922",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2859576",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2858493",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2976856",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2965169",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2866493",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2896533",
+      "reason": "Article exceeds 20000 characters; no text was truncated"
+    },
+    {
+      "id": "wikinews:en:2969913",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3053603",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3060353",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3033849",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3012214",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2947867",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2900773",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2944907",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2973597",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2920292",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3008976",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2879694",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2845979",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2966291",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3052237",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2850478",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3007651",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2823019",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2961155",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3012486",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2843114",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2921672",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2819618",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2857173",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2861998",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2858106",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2831425",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2987153",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2826151",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2909052",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2922321",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2840141",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3013084",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2821089",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2842719",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2861483",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2812502",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2844039",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3044616",
+      "reason": "Article exceeds 20000 characters; no text was truncated"
+    },
+    {
+      "id": "wikinews:en:2852392",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2931883",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2934734",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2846275",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2934996",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2846285",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2890572",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2878894",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2879961",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2818028",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2944937",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3081737",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2875985",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2945898",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2880972",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2927381",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2973783",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2904357",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2947825",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3014957",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2819989",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3018876",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2897504",
+      "reason": "Article exceeds 20000 characters; no text was truncated"
+    },
+    {
+      "id": "wikinews:en:2883606",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2969617",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2933986",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2842657",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2971362",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2946586",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2885202",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2846104",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2880814",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2859919",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3019764",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2890005",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3013376",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2819057",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2934021",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2891974",
+      "reason": "Article exceeds 20000 characters; no text was truncated"
+    },
+    {
+      "id": "wikinews:en:2821397",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2935525",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2944686",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2816402",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3080600",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2808210",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3017904",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2825725",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3013976",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2854872",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2995563",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2911490",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2891395",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2956718",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2817997",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2861937",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2832710",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3013034",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2834211",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2918156",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2812489",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2875932",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3014227",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2847649",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2872726",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3018471",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2837072",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2944623",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2881274",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2809900",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2827100",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2860202",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2845893",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2926873",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2877046",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2915462",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2963446",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2849103",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3016239",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2969773",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2882697",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2859551",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2842158",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2968797",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3013728",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2877225",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2842807",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2861615",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2856529",
+      "reason": "Observed historical held-out text/page/source overlap"
+    },
+    {
+      "id": "wikinews:en:2886785",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2827598",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2882059",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2846057",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2969954",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2967470",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2859961",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2963435",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2811068",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2819056",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2814009",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2882263",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2919534",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2969146",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2879481",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2843449",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3010991",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3082524",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2837983",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2905310",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3022913",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3002071",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3009980",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2859448",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2840087",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2867867",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2949143",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2972075",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3083094",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2930271",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2843270",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2889270",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2974084",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3011649",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2890791",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2903047",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2816716",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:3020863",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2977293",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2963119",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2934701",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2842983",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2831581",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2919508",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2940389",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2834522",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:en:2995174",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2968806",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:ja:18744",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:18209",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:43824",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:17395",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:23294",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:18731",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:21323",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:36682",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:26950",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:18041",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:17056",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:42480",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:22140",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:18775",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:45147",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:45212",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:40201",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:18599",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:26053",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:19645",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:45224",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:21327",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:18789",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:29209",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:20944",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:22900",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:17396",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:22108",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:43814",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:20112",
+      "reason": "Previously reviewed v3 checkpoint; separate development exposure"
+    },
+    {
+      "id": "wikinews:ja:29826",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:25435",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:27243",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:21710",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:29179",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:21718",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:17041",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:25711",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:20935",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:16926",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:28832",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:27953",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:21280",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:25677",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:27950",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:17099",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:24626",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:28806",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:20084",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:17503",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:16996",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:19576",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:18696",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:20447",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:28396",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:19171",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:18180",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:20943",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:29204",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:19239",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:44392",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:35674",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:20005",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:16993",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:18713",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:26140",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:18814",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:22064",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:21411",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:25531",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:16430",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:16905",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:16795",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:21291",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:43875",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:22892",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:29186",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:29215",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:17057",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:25370",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:21720",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:37199",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:40733",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:29141",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:17670",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:16425",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:17522",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:26051",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:35671",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:25059",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:25491",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    },
+    {
+      "id": "wikinews:ja:21733",
+      "reason": "Outside predeclared v4 source frame: long direct quotation"
+    }
+  ],
+  "sites": {
+    "de": {
+      "rightsinfo": {
+        "url": "https://creativecommons.org/licenses/by/2.5/",
+        "text": "Creative Commons Attribution 2.5"
+      },
+      "readonly_observed": false,
+      "policy_revision_url": "https://de.wikinews.org/w/index.php?oldid=849219"
+    },
+    "en": {
+      "rightsinfo": {
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "text": "Creative Commons Attribution 4.0"
+      },
+      "readonly_observed": false,
+      "policy_revision_url": "https://en.wikinews.org/w/index.php?oldid=4991371"
+    },
+    "ja": {
+      "rightsinfo": {
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "text": "Creative Commons Attribution 4.0"
+      },
+      "readonly_observed": false,
+      "policy_revision_url": "https://ja.wikinews.org/w/index.php?oldid=184633"
+    }
+  },
+  "pool_hashes": {
+    "de": "a0b28a1a04e55a442ac5cd62789144ea7838646feae789febb5d07696deef281",
+    "en": "6de6a3fe707547a994b09f2cd0b8dcee7f15e50864f35b02c49900d2fb2b982b",
+    "ja": "ee717a5eebf692a4c5ec4fbf931bb5d078ba224791b4b8428f4ec748d4965e4a"
+  },
+  "protected_file_hashes": {
+    "data/processed/val.csv": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+    "data/processed/test.csv": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+    "data/benchmark/shared.csv": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+    "data/local_llm/shared.csv": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+    "data/common_data_v3/val.csv": "ce96b1cea8446df6ea029189fffc15c00551902120d3cd9199ca96dd8f7cb43a",
+    "data/common_data_v3/test.csv": "e885f65d5b430627e62b7c6980ad796b3829cc7ca5d7f39c0e5f1000b16fd970",
+    "data/expanded_news_v4/test.csv": "6f02c3a6b06cbb6bf11a387ed5785919bedf0a805b158043c02a6685da29610a",
+    "data/llm_adaptation_v5/test.csv": "723673ee3c08fb7c2896aed0e14396623de25d9959f5c68382a4eb7971f48b93"
+  },
+  "limits": "Category membership time is not publication time. Single archive, source declarations and native/translation flags require manual review. Pretraining overlap unknown.",
+  "language_counts": {
+    "de": 100,
+    "en": 100,
+    "ja": 100
+  },
+  "raw_file_sha256": "d977aec48dcf5637fbf64a38af86ad13d412fcd02ee13ee6f860f0c398c810d7"
+}

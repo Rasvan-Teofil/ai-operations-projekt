@@ -9,17 +9,21 @@ from typing import Literal
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, ConfigDict, StrictStr, model_validator
+from app.schemas import PredictRequest, Scores, Prediction, Highlight, Analysis
 from src.config import LABELS, MODELS
 from src.fetch import FetchError, article_text
+from src.article import ARTICLE_POLICY, ArticleError
 
 ModelID = Literal['qwen3_4b', 'minilm_v2', 'linearsvc_v2', 'frozen_news_v3',
                   'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
                   'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
-                  'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5']
-MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · local zero-shot',
-               'minilm_v2': 'MiniLM v2 · fine-tuned',
-               'linearsvc_v2': 'LinearSVC v2 · reconstructed',
+                  'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
+                  'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1']
+ARTICLE_MODELS = {'article_frozen_v1': 'frozen128', 'article_minilm_v1': 'minilm128',
+                  'article_qwen_zero_v1': 'qwen-zero', 'article_qwen_lora_v1': 'qwen-lora'}
+MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · financial rubric · historical zero-shot',
+               'minilm_v2': 'MiniLM · fine-tuned BF16 · legacy financial data',
+               'linearsvc_v2': 'TF-IDF + LinearSVC · legacy financial data',
                'frozen_news_v3': 'Frozen MiniLM · AI news pilot',
                'minilm_fp32_news_v3': 'MiniLM v1 recipe · AI news pilot',
                'minilm_bf16_news_v3': 'MiniLM v2 recipe · AI news pilot',
@@ -30,7 +34,11 @@ MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · local zero-shot',
                'linearsvc_news_v4': 'LinearSVC · expanded AI news',
                'qwen_news_v5': 'Qwen · matched news rubric',
                'qwen_fewshot_v5': 'Qwen · six Train examples',
-               'qwen_lora_v5': 'Qwen · own LoRA fine-tuning'}
+               'qwen_lora_v5': 'Qwen · own LoRA fine-tuning',
+               'article_frozen_v1': 'Full article · frozen MiniLM + trained head',
+               'article_minilm_v1': 'Full article · own MiniLM fine-tuning',
+               'article_qwen_zero_v1': 'Full article · Qwen news rubric',
+               'article_qwen_lora_v1': 'Full article · own Qwen LoRA'}
 
 
 def candidate_paths():
@@ -41,7 +49,8 @@ def candidate_paths():
             **{name: MODELS / 'expanded_news_v4/final' / name for name in
                ['frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4']},
             **{name: MODELS / 'llm_adaptation_v5/final' / name for name in
-               ['qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5']}}
+               ['qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5']},
+            **{name: MODELS / 'next_stage/final' / folder for name, folder in ARTICLE_MODELS.items()}}
 
 
 def load_named_predictor(name):
@@ -62,7 +71,8 @@ def load_predictor():
             selection_file = MODELS / 'selected.json'
         selection = json.loads(selection_file.read_text())
         if selection['model'] not in ('frozen', 'finetuned', 'centroid', 'majority', 'development/release',
-                                      'local_llm', 'local_llm_reference'):
+                                      'local_llm', 'local_llm_reference',
+                                      *(str(Path('next_stage/final') / folder) for folder in ARTICLE_MODELS.values())):
             raise ValueError('Unknown selected model')
         path = MODELS / selection['model']
     predictor = load_artifact(path)
@@ -70,57 +80,6 @@ def load_predictor():
         raise ValueError('Selected version differs from the local artifact')
     return predictor
 
-
-class PredictRequest(BaseModel):
-    model_config = ConfigDict(extra='forbid')
-    text: StrictStr | None = None
-    url: StrictStr | None = None
-
-    @model_validator(mode='after')
-    def exactly_one(self):
-        if len(self.model_fields_set) != 1:
-            raise ValueError('Provide exactly one of text or url; omit the other field')
-        value = self.text if self.text is not None else self.url
-        if not value or not value.strip() or len(value) > 20000:
-            raise ValueError('Input must contain 1–20000 non-blank characters')
-        if self.url is not None:
-            from urllib.parse import urlsplit
-            try:
-                u = urlsplit(self.url)
-                if (u.scheme not in ('http','https') or not u.hostname or u.username or u.password
-                    or any(c.isspace() for c in self.url) or u.port not in (None,80,443)):
-                    raise ValueError('Exactly one http(s) URL is required')
-            except (ValueError, UnicodeError) as e:
-                raise ValueError('Exactly one http(s) URL is required') from e
-        return self
-
-
-class Scores(BaseModel):
-    negative: float
-    neutral: float
-    positive: float
-
-
-class Prediction(BaseModel):
-    label: Literal['negative','neutral','positive']
-    scores: Scores
-    model_version: str
-    scraped_excerpt: str | None = None
-
-
-class Highlight(BaseModel):
-    start: int
-    end: int
-    text: str
-    label: Literal['negative', 'neutral', 'positive']
-    scores: Scores
-
-
-class Analysis(Prediction):
-    text: str
-    sentences: list[Highlight]
-    total_sentences: int
-    highlighting_limited: bool
 
 
 def create_app(queue_timeout=None):
@@ -140,7 +99,7 @@ def create_app(queue_timeout=None):
             except (OSError, ValueError, KeyError):
                 pass
         yield
-    app = FastAPI(title='Article sentiment — second path', lifespan=lifespan)
+    app = FastAPI(title='Article sentiment', lifespan=lifespan)
     app.state.predictor = None
     app.state.predictors = {}
     app.state.default_id = None
@@ -171,13 +130,27 @@ def create_app(queue_timeout=None):
                 meta = json.loads((path / 'artifact.json').read_text())
                 version, available = meta['model_version'], True
             except (OSError, ValueError, KeyError):
-                version, available = None, False
+                meta, version, available = {}, None, False
+            if meta.get('article_overflow') == 'reject':
+                context = f"Complete article up to {meta['max_article_tokens']} article tokens; overflow rejected, no truncation."
+            elif meta.get('kind') == 'local_llm':
+                context = f"Up to {meta.get('max_article_tokens', 'unknown')} article tokens; beginning/end retained above limit; middle omitted."
+            elif meta.get('max_length'):
+                context = f"{meta['max_length']}-token chunks; {meta.get('aggregation', 'uniform')} aggregation."
+            else:
+                context = 'See the recorded artifact policy.'
             records.append({'id': name, 'name': MODEL_NAMES[name], 'model_version': version,
                             'available': available, 'loaded': name in app.state.predictors,
+                            'input_policy': ARTICLE_POLICY, 'context_policy': context,
+                            'evaluated_scope': ('Native DE/EN/JA full Wikinews articles; AI-labelled · Codex-reviewed, one annotator; uncalibrated scores.'
+                                                if name in ARTICLE_MODELS else 'Historical short texts/headlines/leads; full-article and Japanese quality not established.'),
+                            'comparison_group': 'full-article-v1' if name in ARTICLE_MODELS else 'historical',
                             'is_default': name == app.state.default_id,
-                            'experimental': name.endswith(('_news_v3', '_news_v4')) or name in
+                            'experimental': name in ARTICLE_MODELS or name.endswith(('_news_v3', '_news_v4')) or name in
                                 ('qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5')})
-        return {'default': app.state.default_id, 'models': records}
+        return {'default': app.state.default_id, 'models': records,
+                'article_research_choice': 'article_qwen_lora_v1', 'article_fast_alternative': 'article_minilm_v1',
+                'v5_research_choice': 'qwen_lora_v5', 'v5_fast_alternative': 'minilm_bf16_news_v4'}
 
     @app.get('/', include_in_schema=False)
     @app.get('/demo', include_in_schema=False)
@@ -192,6 +165,54 @@ def create_app(queue_timeout=None):
     def license_inventory():
         # Same reviewed inventory as Git; no network or model load for this route.
         return json.loads((licensing / 'inventory.json').read_text(encoding='utf-8'))
+
+    @app.get('/project/{document}', include_in_schema=False)
+    def project_document(document: str):
+        root = Path(__file__).resolve().parents[1]
+        documents = {'readme': 'README.md', 'next-stage': 'docs/next-stage.md',
+                     'archive': 'docs/archive/project-history-through-v5.md',
+                     'protocol': 'reports/next_stage/protocol.json',
+                     'progress': 'reports/next_stage/progress.json',
+                     'final-report': 'reports/next_stage/comparison-v1.md',
+                     'model-cards': 'reports/next_stage/model-cards-v1.md',
+                     'reproduction': 'docs/reproduce-full-article.md',
+                     'structure': 'docs/repository-structure.md'}
+        if document not in documents:
+            raise HTTPException(404, 'Unknown project document')
+        path = root / documents[document]
+        if not path.is_file():
+            raise HTTPException(503, 'Project document unavailable')
+        return FileResponse(path, media_type='application/json' if document in ('protocol', 'progress') else 'text/plain; charset=utf-8')
+
+    @app.get('/comparison/full-article-development', include_in_schema=False)
+    def full_article_development():
+        path = Path(__file__).resolve().parents[1] / 'reports/next_stage/development-v1.json'
+        if not path.exists():
+            raise HTTPException(503, 'Full-article development has not completed')
+        return json.loads(path.read_text())
+
+    @app.get('/comparison/full-article-development.svg', include_in_schema=False)
+    def full_article_development_chart():
+        path = Path(__file__).resolve().parents[1] / 'reports/next_stage/development-summary.svg'
+        if not path.exists():
+            raise HTTPException(503, 'Full-article development chart unavailable')
+        return FileResponse(path, media_type='image/svg+xml')
+
+    @app.get('/comparison/full-article', include_in_schema=False)
+    def full_article_comparison():
+        from src.config import REPORTS
+        path = REPORTS / 'next_stage/comparison-v1.json'
+        if not path.exists():
+            raise HTTPException(503, 'Full-article final comparison has not completed')
+        return json.loads(path.read_text())
+
+    @app.get('/comparison/full-article.svg', include_in_schema=False)
+    def full_article_comparison_chart():
+        from src.config import REPORTS
+        path = REPORTS / 'next_stage/comparison-v1.svg'
+        if not path.exists():
+            raise HTTPException(503, 'Full-article final comparison chart unavailable')
+        return FileResponse(path, media_type='image/svg+xml')
 
     @app.get('/comparison', include_in_schema=False)
     def comparison():
@@ -273,16 +294,14 @@ def create_app(queue_timeout=None):
             raise HTTPException(503, 'Train-only LLM development comparison has not been completed')
         return FileResponse(path, media_type='image/svg+xml')
 
-    def input_text(payload, p):
+    def input_text(payload):
         try:
             if payload.text is not None:
                 text = payload.text
-            elif getattr(p, 'meta', {}).get('improved_article', False):
-                text = article_text(payload.url, improved=True)
             else:
-                text = article_text(payload.url)
+                text = article_text(payload.url, policy=ARTICLE_POLICY)
         except FetchError as e:
-            raise HTTPException(e.status, e.detail) from e
+            raise HTTPException(e.status, e.detail, headers={'X-Article-Error': e.code}) from e
         return text
 
     def predictions(p, texts):
@@ -306,6 +325,8 @@ def create_app(queue_timeout=None):
             return result
         except HTTPException:
             raise
+        except ArticleError as e:
+            raise HTTPException(422, str(e), headers={'X-Article-Error': e.code}) from e
         except Exception as e:
             logging.getLogger(__name__).exception('Local inference failed')
             raise HTTPException(503, 'Local model inference unavailable') from e
@@ -330,15 +351,16 @@ def create_app(queue_timeout=None):
     @app.post('/predict', response_model=Prediction)
     def predict(payload: PredictRequest, model: ModelID | None = None):
         p = available_predictor(model)
-        text = input_text(payload, p)
+        text = input_text(payload)
         return {**predictions(p, [text])[0],
+                'input_policy': ARTICLE_POLICY if payload.url is not None else 'text-verbatim-v1',
                 'scraped_excerpt': text[:400] if payload.url is not None else None}
 
     @app.post('/analyze', response_model=Analysis)
     def analyze(payload: PredictRequest, model: ModelID | None = None):
         from src.highlighting import MAX_SENTENCES, sentence_spans
         p = available_predictor(model)
-        text = input_text(payload, p)
+        text = input_text(payload)
         spans = sentence_spans(text)
         selected = spans[:MAX_SENTENCES]
         result = predictions(p, [text, *[text[start:end] for start, end in selected]])
@@ -346,6 +368,7 @@ def create_app(queue_timeout=None):
                        'label': row['label'], 'scores': row['scores']}
                       for (start, end), row in zip(selected, result[1:])]
         return {**result[0], 'text': text, 'sentences': highlights,
+                'input_policy': ARTICLE_POLICY if payload.url is not None else 'text-verbatim-v1',
                 'total_sentences': len(spans), 'highlighting_limited': len(spans) > MAX_SENTENCES,
                 'scraped_excerpt': text[:400] if payload.url is not None else None}
     return app

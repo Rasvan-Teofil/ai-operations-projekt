@@ -1,10 +1,10 @@
-"""Deterministic DE/EN sentence spans. Colours are predictions, not causal attribution."""
+"""Deterministic DE/EN/JA spans. Colours are predictions, not causal attribution."""
 import re
 
 MAX_SENTENCES = 80
 ABBREVIATIONS = {'dr.', 'prof.', 'mr.', 'mrs.', 'ms.', 'inc.', 'ltd.', 'corp.',
                  'e.g.', 'i.e.', 'u.s.', 'u.k.', 'z.b.', 'bzw.', 'ca.', 'nr.', 'mio.', 'mrd.'}
-BOUNDARY = re.compile(r'[.!?]+["”’»)]*(?=\s+|$)|\n\s*\n')
+BOUNDARY = re.compile(r'[。！？]+[」』）"”’»)]*|[.!?]+["”’»)]*(?=\s+|$)|\n\s*\n')
 
 
 def sentence_spans(text):

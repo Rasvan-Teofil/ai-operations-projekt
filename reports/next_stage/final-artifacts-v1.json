@@ -1,0 +1,38 @@
+{
+  "candidate_declaration_sha256": "7ca89a57ad4e17288f93974764a69ea77e05dd3dd45d49a33a8dd9f28d33c766",
+  "models": [
+    {
+      "model": "frozen128",
+      "path": "models/next_stage/final/frozen128",
+      "run_id": "b808b43f56ee40df9cfe43fcba550388",
+      "artifact_sha256": "20f82616bda02d9010f355d5ca8af0975b769aa19a4ddf88e30c476e895074ee",
+      "full_model_size_bytes": 252421041,
+      "full_train_rows": 240
+    },
+    {
+      "model": "minilm128",
+      "path": "models/next_stage/final/minilm128",
+      "run_id": "e2cc1ff6526f4068b010dc483a84c192",
+      "artifact_sha256": "67010650b8773720b62bc74ec9f2225c2a9e34febf1bc6a1895c5d948d26f433",
+      "full_model_size_bytes": 252421036,
+      "full_train_rows": 240
+    },
+    {
+      "model": "qwen-zero",
+      "path": "models/next_stage/final/qwen-zero",
+      "run_id": "3ffc1ff5bf794cf197ffe7e25ad1bf31",
+      "artifact_sha256": "697775af176554c97921fbea900f21075fecca93a22d41c1fe5099e7e8c368c1",
+      "full_model_size_bytes": 8060919707,
+      "full_train_rows": 240
+    },
+    {
+      "model": "qwen-lora",
+      "path": "models/next_stage/final/qwen-lora",
+      "run_id": "f8f41ca7c45c4c6fa31de94eed722792",
+      "artifact_sha256": "fd17ae277f926b5fd5828ba103a7d27e69546a7375ba7f8a2240450a64fb3ee9",
+      "full_model_size_bytes": 8072741766,
+      "full_train_rows": 240
+    }
+  ],
+  "final_test_predicted": false
+}

@@ -4,15 +4,14 @@ import json
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import mlflow
 from mlflow import MlflowClient
 import numpy as np
 import pandas as pd
 
-from src.config import LABELS
+from src.reporting import report_destination
+from src.config import LABELS, ROOT
 from src.news_llm_experiment import LOCAL, OUT, SEED, QWEN, NAMES, verified, read_json, write_json
 from src.news_scaling_report import fast_f1
-from src.tracking import tracking
 
 ORDER = ['frozen_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4', *QWEN]
 SHORT = ['Frozen MiniLM', 'MiniLM BF16 fine-tune', 'LinearSVC', 'Qwen · financial prompt',
@@ -72,6 +71,7 @@ def training_cost(store, record):
 
 
 def report():
+    report_destination(OUT)
     m = verified(); summary = development(); comparison = read_json(OUT / 'comparison.json')
     test = pd.read_csv(LOCAL / 'test.csv'); y = np.array([LABELS.index(x) for x in test.label])
     languages = test.language.to_numpy(); records = [next(r for r in comparison['results'] if r['model'] == name) for name in ORDER]
@@ -87,13 +87,10 @@ def report():
         parts = [ix[languages[ix] == lang] for lang in ['de', 'en']]
         if any(len(part) == 0 for part in parts): continue
         for name in ORDER: boot[name].append(np.mean([fast_f1(y[p], predictions[name][p]) for p in parts]))
-    tracking(); store = MlflowClient()
+    store = MlflowClient(tracking_uri=f'sqlite:///{ROOT / "mlflow.db"}')
     for r in records:
         low, high = map(float, np.percentile(boot[r['model']], [2.5, 97.5]))
         r.update(balanced_language_macro_f1_ci_low=low, balanced_language_macro_f1_ci_high=high, **training_cost(store, r))
-        with mlflow.start_run(run_id=r['run_id']):
-            mlflow.log_metrics({'balanced_language_macro_f1_ci_low': low, 'balanced_language_macro_f1_ci_high': high})
-            mlflow.set_tag('uncertainty', '1000 paired source-group bootstrap resamples of saved predictions; sampling variability only, not AI label error')
     changes = []
     for old, new in [('qwen3_4b', 'qwen_news_v5'), ('qwen_news_v5', 'qwen_fewshot_v5'),
                      ('qwen_news_v5', 'qwen_lora_v5'), ('minilm_bf16_news_v4', 'qwen_lora_v5')]:
@@ -155,9 +152,6 @@ def report():
         'Implementation sources: [official Qwen model card](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), [PEFT LoRA documentation](https://huggingface.co/docs/peft/v0.18.0/en/package_reference/lora), [PEFT precision/adapter guidance](https://huggingface.co/docs/peft/v0.18.0/en/developer_guides/troubleshooting). These document the method; project measurements above are from actual local runs.', '',
         '![Fresh Test comparison](comparison.png)', '', '![Train-only development](development.png)', '']
     (OUT / 'comparison.md').write_text('\n'.join(lines))
-    for r in records:
-        with mlflow.start_run(run_id=r['run_id']):
-            for name in ['comparison.svg', 'development.svg', 'comparison.md']: mlflow.log_artifact(str(OUT / name), 'comparison')
     print('Matched-task results and development rendered from saved predictions; no model rerun.', flush=True)
 
 

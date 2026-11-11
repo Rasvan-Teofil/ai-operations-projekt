@@ -1,0 +1,50 @@
+{
+  "version": "next-stage-progress-4",
+  "updated_on": "2026-11-11",
+  "authorization": "User requested sequential autonomous completion; ask only for an unexpected problem requiring user input.",
+  "steps": [
+    {
+      "step": 1,
+      "name": "Foundation and application contracts",
+      "status": "complete",
+      "evidence": "verification.json"
+    },
+    {
+      "step": 2,
+      "name": "Source pilot, rights and two-pass AI annotation",
+      "status": "complete",
+      "checkpoint": "300 v4 exact inputs read twice, 298 same-label self-reviews, 25 rights-unresolved and 1 label-unresolved. Exact v4 checkpoint preserved. V5 migration: 291 unchanged hashes, five changed compatible inputs read twice; four changed rights-blocked inputs remain unreviewed in v5."
+    },
+    {
+      "step": 3,
+      "name": "Pilot analysis and feasible data quantity",
+      "status": "complete",
+      "finding": "240 development inputs survive rights, target and conservative historical/event/translation checks: DE78, EN71, JA91. All nine language/class cells present; three group-disjoint CV folds and nested quantity subsets frozen. Small source-restricted sample, not proof of adequacy for production."
+    },
+    {
+      "step": 4,
+      "name": "Train-only context/capacity checks and development",
+      "status": "complete",
+      "checkpoint": "27 development evaluations and all four full-240-Train fits complete. Recipes and development-selected qwen-lora fixed before fresh Test collection."
+    },
+    {
+      "step": 5,
+      "name": "Freeze candidates and one common final test",
+      "status": "complete",
+      "checkpoint": "All 856 exact source inputs read twice and event-reviewed. Frozen Test 691 (DE273/EN118/JA300); one saved pass for each of four frozen candidates complete. References unchanged; no synthetic padding or post-Test selection."
+    },
+    {
+      "step": 6,
+      "name": "Release, application, README and licences",
+      "status": "complete",
+      "checkpoint": "Qwen LoRA selected before Test and released locally. Four final aliases, comparison, uncertainty/error reports, model cards, README, reproduction and source attribution complete. 181 offline tests, GPU/HTTP synthetic checks and final browser comparison verified."
+    },
+    {
+      "step": 7,
+      "name": "Lecture-template repository organization and future maintenance",
+      "status": "complete",
+      "checkpoint": "Template commit 6d1356a verified; five dependency files and 49 local logs preserved by relocation; HTTP schemas extracted; indexes/notebook/demo guide added; frozen paths retained and CI layout/frozen-runtime checks enforced."
+    }
+  ],
+  "stop_policy": "Resolve routine failures autonomously. Do not bypass source rights, test isolation or absent GPU."
+}

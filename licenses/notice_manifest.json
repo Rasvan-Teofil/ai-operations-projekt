@@ -119,5 +119,14 @@
     "bytes": 2358,
     "retrieved_on": "2026-11-07",
     "transform": "Project-authored matched-task LLM source/annotation/profile attribution notice"
+  },
+  {
+    "file": "wikinews-full-article-v1-ATTRIBUTION.txt",
+    "source_url": "Project-generated from reports/next_stage/train-provenance-v1.jsonl and final-test-v1/provenance.jsonl",
+    "source_sha256": null,
+    "sha256": "bb96831fc87a1fba1fbe58c008977f881a12dd78d99de74b207dd9283ad4eb42",
+    "bytes": 534919,
+    "retrieved_on": "2026-11-11",
+    "transform": "Generated bibliographic attribution and pinned revision/history links; no raw article body."
   }
 ]

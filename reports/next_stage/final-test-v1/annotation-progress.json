@@ -1,0 +1,31 @@
+{
+  "updated_at": "2026-11-11T22:18:44.811726+00:00",
+  "source_rows": 856,
+  "source_counts": {
+    "de": 350,
+    "en": 156,
+    "ja": 350
+  },
+  "explicit_reviews": {
+    "1": {
+      "rows": 856,
+      "by_language": {
+        "de": 350,
+        "en": 156,
+        "ja": 350
+      }
+    },
+    "2": {
+      "rows": 856,
+      "by_language": {
+        "de": 350,
+        "en": 156,
+        "ja": 350
+      }
+    }
+  },
+  "final_test_frozen": true,
+  "final_test_inference_started": true,
+  "note": "Annotation checkpoint retained: both complete source passes preceded prediction. Frozen Test and one inference pass per candidate are now complete; current verification in ../verification-final-v1.json.",
+  "final_test_inference_complete": true
+}

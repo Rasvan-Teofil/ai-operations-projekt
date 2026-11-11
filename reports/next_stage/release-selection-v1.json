@@ -1,0 +1,23 @@
+{
+  "version": "full-article-serving-v1",
+  "current": {
+    "model": "next_stage/final/qwen-lora",
+    "candidate": "article_qwen_lora_v1",
+    "model_version": "article-qwen-lora-v1",
+    "selection_metric": "Train-only equal-weight DE/EN OOF macro-F1",
+    "selection_source": "reports/next_stage/final-candidates-v1.json",
+    "selected_before_final_test": true,
+    "candidate_declaration_sha256": "7ca89a57ad4e17288f93974764a69ea77e05dd3dd45d49a33a8dd9f28d33c766",
+    "test_run_id": "c071020e208142c1a45fca0a49f7f971"
+  },
+  "historical_selection_preserved": {
+    "model": "local_llm",
+    "candidate": "qwen3_4b",
+    "model_version": "qwen3-4b-2507-bf16-prompt1",
+    "benchmark_sha256": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+    "run_id": "6c07d33fa4804e9591305999917e34a6",
+    "selection_metric": "macro_f1_en"
+  },
+  "rollback": "Copy models/serving_selected.before-full-article-v1.json to models/serving_selected.json and restart the single API worker. No artifact changes.",
+  "test_did_not_change_selection": true
+}

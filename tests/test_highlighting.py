@@ -73,7 +73,7 @@ def test_highlight_limit_keeps_unscored_remainder_visible(client):
 
 
 def test_analysis_url_and_validation(client, monkeypatch):
-    monkeypatch.setattr(api, 'article_text', lambda url: 'Profits increased. Losses widened.')
+    monkeypatch.setattr(api, 'article_text', lambda url, **kwargs: 'Profits increased. Losses widened.')
     assert client.post('/analyze', json={'url': 'https://example.com/news'}).status_code == 200
     for payload in [{}, {'text': ''}, {'text': 'x', 'url': 'https://example.com'}, {'text': 3}]:
         assert client.post('/analyze', json=payload).status_code == 422
@@ -81,7 +81,7 @@ def test_analysis_url_and_validation(client, monkeypatch):
 
 @pytest.mark.parametrize('status', [422, 403, 502])
 def test_analysis_fetch_errors(client, monkeypatch, status):
-    def fail(url):
+    def fail(url, **kwargs):
         raise FetchError(status, 'controlled')
     monkeypatch.setattr(api, 'article_text', fail)
     assert client.post('/analyze', json={'url': 'https://example.com/news'}).status_code == status
@@ -110,16 +110,19 @@ def test_model_choice_is_cached_versioned_and_does_not_change_default(client, mo
     assert set(row['id'] for row in models) == {'minilm_v2', 'linearsvc_v2', 'qwen3_4b',
         'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
         'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
-        'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5'}
+        'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
+        'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1'}
     assert {row['id'] for row in models if row['experimental']} == {
         'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
         'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
-        'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5'}
+        'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
+        'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1'}
 
 
 @pytest.mark.parametrize('model', ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
                                  'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
-                                 'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5'])
+                                 'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
+                                 'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1'])
 def test_experimental_model_choice_preserves_prediction_contract(client, monkeypatch, model):
     def load(name):
         predictor = SentenceStub()

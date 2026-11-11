@@ -4,13 +4,12 @@ import json
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import mlflow
 import numpy as np
 import pandas as pd
 
+from src.reporting import report_destination
 from src.config import LABELS
 from src.news_scaling import LOCAL, OUT, SPLIT_SEED, verified, read_json, write_json
-from src.tracking import tracking
 
 ORDER = ['frozen_news_v3', 'frozen_news_v4', 'minilm_fp32_news_v3', 'minilm_fp32_news_v4',
          'minilm_bf16_news_v4', 'linearsvc_news_v3', 'linearsvc_news_v4', 'qwen3_4b']
@@ -65,6 +64,7 @@ def learning_curve():
 
 
 def report():
+    report_destination(OUT)
     manifest = verified(); summary = learning_curve()
     comparison = read_json(OUT / 'comparison.json'); test = pd.read_csv(LOCAL / 'test.csv')
     records = [next(r for r in comparison['results'] if r['model'] == name) for name in ORDER]
@@ -83,13 +83,9 @@ def report():
         if any(len(part) == 0 for part in parts): continue
         for name, pred in predictions.items():
             boot[name].append(np.mean([fast_f1(y[part], pred[part]) for part in parts]))
-    tracking()
     for r in records:
         low, high = map(float, np.percentile(boot[r['model']], [2.5, 97.5]))
         r.update(balanced_language_macro_f1_ci_low=low, balanced_language_macro_f1_ci_high=high)
-        with mlflow.start_run(run_id=r['run_id']):
-            mlflow.log_metrics({'balanced_language_macro_f1_ci_low': low, 'balanced_language_macro_f1_ci_high': high})
-            mlflow.set_tag('uncertainty', '1000 paired source-group bootstrap resamples of saved predictions; sampling variability only, excludes AI label error')
     changes = []
     for old, new in [('frozen_news_v3', 'frozen_news_v4'), ('minilm_fp32_news_v3', 'minilm_fp32_news_v4'),
                      ('linearsvc_news_v3', 'linearsvc_news_v4')]:
@@ -147,10 +143,6 @@ def report():
         '[Frozen protocol](protocol.json) · [New annotation ledger](annotations.csv) · [Source credits](source_manifest.json) · [Split and input hashes](split_manifest.json) · [CV membership](cv_membership.json) · [CV run IDs](cv.json) · [Final metrics, intervals and run IDs](comparison.json)', '',
         '![Same fresh Test](comparison.png)', '', '![Train-only curve](learning_curve.png)', '']
     (OUT / 'comparison.md').write_text('\n'.join(lines))
-    for r in records:
-        with mlflow.start_run(run_id=r['run_id']):
-            for filename in ['comparison.svg', 'learning_curve.svg', 'comparison.md']:
-                mlflow.log_artifact(str(OUT / filename), 'comparison')
     print('Learning curve, paired intervals and comparison rendered from saved evidence only.', flush=True)
 
 

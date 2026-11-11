@@ -50,6 +50,14 @@ class Predictor:
         results = []
         for text in texts:
             chunks = token_chunks(text, self.tokenizer, self.meta['max_length'])
+            if self.meta.get('article_feature_pooling') == 'mean':
+                features = []
+                for start in range(0, len(chunks), 32):
+                    tokens = self.tokenizer.pad(chunks[start:start+32], padding=True, return_tensors='pt').to(self.device)
+                    features.append(self.net.features(tokens))
+                pooled = torch.cat(features).mean(0, keepdim=True)
+                results.append(self.net.head(pooled).float().softmax(-1).cpu().numpy()[0])
+                continue
             probs = []
             for start in range(0, len(chunks), 32):
                 rows = chunks[start:start+32]

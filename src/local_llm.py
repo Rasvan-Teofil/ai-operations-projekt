@@ -127,6 +127,9 @@ class LocalLLMPredictor:
         ids = self.tokenizer.encode(text, add_special_tokens=False)
         limit = self.meta['max_article_tokens']
         if len(ids) > limit:
+            if self.meta.get('article_overflow') == 'reject':
+                from src.article import ArticleError
+                raise ArticleError('article_context_exceeded', f'Article exceeds this model’s {limit}-token full-text limit; no text was truncated')
             half = limit // 2
             text = (self.tokenizer.decode(ids[:half]) + '\n[Middle omitted for length]\n'
                     + self.tokenizer.decode(ids[-half:]))

@@ -1,0 +1,86 @@
+{
+  "checked_on": "2026-11-10",
+  "scope": "First implementation package; synthetic engineering checks, no new sentiment benchmark",
+  "base_commit": "5b6fb3aef01cc25840825b89c5202024db9ef3fb",
+  "branch": "second-path",
+  "working_tree_uncommitted": true,
+  "offline_pytest": {
+    "passed": 145,
+    "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m pytest -q -p no:cacheprovider",
+    "warning": "Existing Starlette/httpx deprecation warning; no dependency changes"
+  },
+  "historical_protection": {
+    "files": 8,
+    "rows": 6526,
+    "frozen_hashes_verified": {
+      "data/processed/val.csv": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+      "data/processed/test.csv": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+      "data/benchmark/shared.csv": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+      "data/local_llm/shared.csv": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+      "data/common_data_v3/val.csv": "ce96b1cea8446df6ea029189fffc15c00551902120d3cd9199ca96dd8f7cb43a",
+      "data/common_data_v3/test.csv": "e885f65d5b430627e62b7c6980ad796b3829cc7ca5d7f39c0e5f1000b16fd970",
+      "data/expanded_news_v4/test.csv": "6f02c3a6b06cbb6bf11a387ed5785919bedf0a805b158043c02a6685da29610a",
+      "data/llm_adaptation_v5/test.csv": "723673ee3c08fb7c2896aed0e14396623de25d9959f5c68382a4eb7971f48b93"
+    },
+    "integrity_issues": []
+  },
+  "synthetic_checks": [
+    "Article layouts: article, main, articleBody microdata and Wikinews container; retain middle paragraphs",
+    "HTTP-200 access/login/challenge pages rejected before classification",
+    "Upstream 403 remains API 502 with diagnostic header",
+    "DE/EN/JA sentence spans and exact Unicode offsets",
+    "Two-pass intake schema, changed hash rejection, explicit unresolved labels",
+    "Transitive historical/event/source protection and missing/changed evidence rejection",
+    "Primary metric and 0.005 latency/size tie rule; mixed comparison groups rejected",
+    "Local MiniLM and Qwen CPU tokenizers tested on three synthetic language inputs",
+    "CLI audit succeeds with a synthetic complete record; incomplete annotations return exit 2",
+    "CLI profile reads existing Qwen tokenizer without downloading or loading model weights",
+    "Live DE /predict and JA /analyze with existing MiniLM verify contracts only, no quality claim",
+    "Browser: navigation, recommendation groups, private URL rejection, text-paste fallback and retained model selection"
+  ],
+  "live_service": {
+    "api": "http://127.0.0.1:8000/",
+    "api_worker_reloaded": true,
+    "default_model_unchanged": "qwen3_4b",
+    "models_available": 14,
+    "mlflow_health_ok": true,
+    "mlflow_run_count": 88,
+    "new_next_stage_runs": 0
+  },
+  "not_performed": [
+    "Real pilot collection or annotation",
+    "Training or final Test inference",
+    "Live publisher URL tests",
+    "Model downloads or dependency installation",
+    "Commit or push"
+  ],
+  "remaining_limits": [
+    "20,000-character input bound",
+    "Qwen omits middle above 3,072 article tokens",
+    "Full-article and Japanese quality unmeasured",
+    "Known access-page detection is not exhaustive",
+    "Semantic event/translation overlap requires additional review before splitting",
+    "Historical rights restrictions retained"
+  ],
+  "source_snapshot_sha256": {
+    "app/main.py": "01a9225d93a4c08b5fd6cebafa6b00c77116a96dd6a90ecb4833fefe48fc822e",
+    "app/static/app.js": "b103be8150ad7eb5320aac098afaf65666be97329085021a1c0ea727b305ba7e",
+    "app/static/index.html": "0ceffe5c4cfd62f4c585562df339262526d0ffc8e5a7d3a652d2089a00870d53",
+    "src/article.py": "76e05f88a58ebaeda714e5b360092eb8c2ca9a69a7a7cf12e5636f78eab8dbce",
+    "src/fetch.py": "1a127382adfaa754e56478fb9932684ada8cd904bb9bd2dfb98f20cf58c52279",
+    "src/highlighting.py": "0175f53a0447b25cff97c165ef3fd41885ba745811597c199462e1931fe4b3f0",
+    "src/next_stage.py": "6f6707bbabe0eff3f19222d54766e82a60e3d1432d5ac0502e01fbf53c0496f5",
+    "src/next_stage_protocol.py": "4c744e1d2f335da3aaab7bcab050fe1529516f0d95229b04215e013914e95f1f",
+    "src/reporting.py": "83f411ec06785b98ec4395657f8b56b8ead9bf4ea517056c6d26bd34a9146920",
+    "src/development_report.py": "741a3155a16c826f50819d65b9b775d2f21b8b086fe5eaaf5defbb235b408873",
+    "src/news_report.py": "f6dd48a9e5125a767b7b27c7dc76cbfc317d2871a6ce4a0ed0be98dea6ea8d53",
+    "src/news_scaling_report.py": "ecbc8f4215cb6846cfdf7389b9231f0cdb1f2b90b5d8ee6f6c5f49f901145b9f",
+    "src/news_llm_report.py": "5311f9eaa0125551429b8487841952c2673e7e9e24f1e216e478cb25b8afc421",
+    "tests/test_article_pilot.py": "f113ec7e794854ae42b53edd35441eff8a5177a73b35e998fe24fd0785005247",
+    "tests/test_api.py": "14a62f6f4f9124b836e55730eeca2690dcb69d0efa2accd79f5a8ed3b57ce6db",
+    "tests/test_highlighting.py": "1991ae24a30d40b55b1f1355fd8ce0e9833b496a91954b47ee78096209f61f2d",
+    "reports/next_stage/protocol.json": "4e61a5d20a42a0c9b50f41fec8532cd1db24dc3d9edfb776d1e49046178c383b",
+    "docs/next-stage.md": "8b2c5ecb41f474ffec8e6f2cf88f3e821180ba85103fa86a556887d6e005f71d"
+  },
+  "snapshot_note": "Hashes document this checked working tree, not a frozen final-test release or committed training artifact."
+}

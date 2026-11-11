@@ -1,0 +1,38 @@
+{
+  "engineering_only": true,
+  "discarded_fit": true,
+  "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 648 MiB",
+  "train_rows": 240,
+  "encoder": [
+    {
+      "window": 128,
+      "probe_id": "wikinews:de:77900",
+      "chunks": 8,
+      "seconds": 0.3099743099883199,
+      "peak_allocated_bytes": 965570560
+    },
+    {
+      "window": 256,
+      "probe_id": "wikinews:de:77900",
+      "chunks": 4,
+      "seconds": 0.018450937001034617,
+      "peak_allocated_bytes": 966356992
+    },
+    {
+      "window": 512,
+      "probe_id": "wikinews:de:77900",
+      "chunks": 2,
+      "seconds": 0.02103153010830283,
+      "peak_allocated_bytes": 963473408
+    }
+  ],
+  "lora": {
+    "probe_id": "wikinews:de:77900",
+    "sequence_tokens": 1545,
+    "max_article_tokens": 1226,
+    "seconds": 1.4216152119915932,
+    "peak_allocated_bytes": 8745517568,
+    "peak_reserved_bytes": 8862564352,
+    "trainable_parameters": 2949120
+  }
+}

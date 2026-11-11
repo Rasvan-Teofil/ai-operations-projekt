@@ -1,0 +1,21 @@
+{
+  "version": "fresh-test-source-supply-decision-v1",
+  "decision_date": "2026-11-11",
+  "user_accepted_recommendation": true,
+  "source_counts_before_manual_review": {
+    "de": 350,
+    "en": 156,
+    "ja": 350
+  },
+  "english_frame_exhausted": true,
+  "scope": "The preregistered frozen English source frame is exhausted; this is not a claim that no additional English news exists.",
+  "decision": "Keep genuine source articles in the common final Test; do not inflate counts using rewrites, translations or duplicates.",
+  "primary_metric": "(macroF1_DE + macroF1_EN) / 2; equal language weight independent of sample counts. JA remains separately reported.",
+  "uncertainty": "Report final eligible counts, whole-event-group bootstrap intervals and restricted-source/reference limitations. Synthetic rewrites would not create independent source events.",
+  "synthetic_data": "A separately declared paraphrase robustness set could be useful later, with parent IDs and separate results. It is not part of the frozen main Test and is not being generated in this phase.",
+  "source_references": [
+    "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html"
+  ],
+  "test_predictions_seen": false
+}

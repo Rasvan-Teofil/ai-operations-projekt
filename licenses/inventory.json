@@ -1,15 +1,15 @@
 {
-  "version": "2026-11-07.2",
-  "reviewed_on": "2026-11-07",
-  "scope": "Current research demo and proposed next-stage data; not blanket commercial clearance or a licence for our own code.",
+  "version": "2026-11-11.1",
+  "reviewed_on": "2026-11-11",
+  "scope": "Full-article research demo and preserved historical source records; no blanket commercial clearance or project-code licence.",
   "entries": [
     {
       "id": "qwen3_4b",
       "name": "Qwen3-4B-Instruct-2507",
       "group": "current",
-      "use": "Default local zero-shot model; no project-data fine-tuning.",
+      "use": "Historical zero-shot profile and pinned base of new full-article Qwen profiles.",
       "license": "Apache-2.0",
-      "status": "Permissive model licence; current default.",
+      "status": "Apache-2.0 base with retained notices; article and adaptation rights separate.",
       "scope": "Commercial reuse and redistribution of the licensed model are permitted subject to Apache-2.0 conditions, including retained notices. This does not license submitted articles or certify the pretraining corpus.",
       "attribution": "Qwen Team / Alibaba Cloud; retain upstream notices.",
       "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
@@ -498,6 +498,120 @@
         "CC0-1.0.txt",
         "wikinews-llm-v5-ATTRIBUTION.txt"
       ]
+    },
+    {
+      "id": "full_article_v1",
+      "name": "Full-article DE/EN/JA study and models",
+      "group": "current",
+      "use": "240 Train, one 691-article Test (DE273/EN118/JA300); four frozen candidates, Qwen LoRA selected before Test.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/second-path/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_frozen_v1",
+      "name": "Full article · frozen MiniLM + head",
+      "group": "current",
+      "use": "Full article · frozen MiniLM + head; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/second-path/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_minilm_v1",
+      "name": "Full article · own MiniLM fine-tuning",
+      "group": "current",
+      "use": "Full article · own MiniLM fine-tuning; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/second-path/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_qwen_zero_v1",
+      "name": "Full article · Qwen news rubric",
+      "group": "current",
+      "use": "Full article · Qwen news rubric; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/second-path/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_qwen_lora_v1",
+      "name": "Full article · own Qwen LoRA",
+      "group": "current",
+      "use": "Full article · own Qwen LoRA; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/second-path/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
     }
-  ]
+  ],
+  "next_stage": {
+    "reviewed_on": "2026-11-11",
+    "status": "27 development evaluations complete; four full-Train fits; frozen 691-article Test.",
+    "protocol": "docs/next-stage.md",
+    "annotation_provenance": "AI-labelled · Codex-reviewed; two self-review passes, not independent verification",
+    "japanese_source_status": "Native revision and third-party passage review complete: 91 Train / 300 Test; no human validation.",
+    "source_text_and_annotations": "Separate CC-BY contribution terms and project CC0 metadata scope; raw texts and weights excluded from Git.",
+    "historical_entries": "Preserved; no blanket commercial release"
+  }
 }

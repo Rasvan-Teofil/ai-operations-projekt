@@ -1,0 +1,167 @@
+{
+  "version": "article-next-stage-development-1",
+  "created_on": "2026-11-10",
+  "status": "Both source pilots reviewed; 240 development Train inputs and recipes frozen. 24 evaluations complete; optional seed stability in progress. Fresh final Test absent.",
+  "label_status": "AI-labelled · Codex-reviewed",
+  "human_gold": false,
+  "research_question": "Which local adaptation gives the best DE/EN full-article outcome classification under the declared quality/latency/size rule? Japanese is a conditional extension.",
+  "primary_metric": {
+    "name": "mean_de_en_macro_f1",
+    "languages": [
+      "de",
+      "en"
+    ],
+    "labels": [
+      "negative",
+      "neutral",
+      "positive"
+    ],
+    "formula": "(macro_f1_de + macro_f1_en) / 2",
+    "development": "Concatenate each candidate's out-of-fold predictions, calculate 3-class macro-F1 separately per language, then average DE and EN. Report fold SD separately.",
+    "tie_margin_absolute": 0.005,
+    "tie_breakers": [
+      "lower warm batch-one inference_ms_per_text",
+      "lower full_model_size_bytes"
+    ],
+    "japanese": "Separate per-language result; equal three-language mean is secondary and never replaces the DE/EN primary metric after observing results."
+  },
+  "rubric_version": "outcome-rubric-v1",
+  "extraction_version": "full-article-v5",
+  "pilot": {
+    "languages": [
+      "de",
+      "en",
+      "ja"
+    ],
+    "first_checkpoint_per_language": 30,
+    "target_per_language": 100,
+    "role": "development only, never a fresh final test",
+    "annotation": "Assistant reads exact full input; two documented self-review passes without candidate predictions. Same annotator, not independent verification.",
+    "gates": [
+      "revision-specific source rights and third-party passage review",
+      "stable target/outcome rubric",
+      "native text and adequate class/topic/length coverage",
+      "protected historical groups",
+      "measured annotation time and tokenizer lengths"
+    ],
+    "japanese_failure": "Document missing rights, supply or coverage; continue mandatory DE/EN without silently switching to translated test text.",
+    "first_checkpoint_result": "checkpoint-90.json: 90 two-pass AI labels, 35 rights-eligible; no eligible English positive inputs; 1 unresolved reference label. Preserve exact reviewed v3 inputs.",
+    "second_checkpoint_frame": {
+      "extraction_version": "full-article-v4",
+      "per_language": 100,
+      "excludes": "All 90 development-exposed v3 pages, prior collected historical pages, observed protected keys, explicit translations, pre-2005-09-26 pages, long direct quotations >=80 chars DE/EN or >=40 JA. Manual rights review still mandatory.",
+      "scope": "Frozen recent-1500 published-category frame/language; quote-length condition is class-blind but changes population. No sentiment predictions or labels for eligibility."
+    },
+    "second_checkpoint_result": "300 v4 inputs read twice; 25 unresolved rights, 1 unresolved reference. V5 exact-hash transfer plus five changed texts re-read twice. After conservative observed source/translation/event protection, 240 Train inputs remain."
+  },
+  "data": {
+    "train_ceiling": 3000,
+    "expansion_6000": "Deferred; requires a new justified protocol decision based on development evidence and annotation cost.",
+    "final_test_target_per_language": 300,
+    "final_test_sampling": "Native articles; group-disjoint, representative declared source/time/topic population. No score-based removals or seed changes to improve class balance. Report scarce classes and uncertainty.",
+    "split": "Reviewed article/event/translation/source groups, then language:label stratification where feasible. Grouped 3-fold CV inside Train only. Original Val and historical tests/related groups remain protected.",
+    "legacy_leads": "Full articles require new annotations. No automatic inheritance of old lead labels; no initialization from restricted legacy fine-tunes.",
+    "rights": "Source text, annotation metadata, code and model licences are separate. No academically restricted legacy corpora in the publication-oriented pool.",
+    "difficulty": "Keep difficult valid inputs. Neutral is not uncertainty. Log unreadable/rights exclusions and unresolvable labels separately, including coverage.",
+    "selected_train_rows": 240,
+    "selected_train_scope": "78 DE, 71 EN, 91 JA. Complete suitable second-pilot pool; not evidence of an optimal or sufficient quantity. The measured nested MiniLM learning curve has not saturated."
+  },
+  "experiments": {
+    "core": {
+      "conditions": [
+        "frozen MiniLM plus fitted head",
+        "own MiniLM fine-tuning",
+        "local Qwen news-rubric zero-shot",
+        "own Qwen LoRA"
+      ],
+      "folds": 3,
+      "scored_evaluations": 12
+    },
+    "quantity": {
+      "model_families": 1,
+      "additional_nested_sizes": 2,
+      "folds": 3,
+      "additional_scored_evaluations": 6,
+      "control": "Same dev inputs; freeze source/class allocation; log tokens and optimizer steps, not just rows."
+    },
+    "one_additional_question": {
+      "maximum_conditions": 2,
+      "folds": 3,
+      "maximum_scored_evaluations": 6,
+      "choose_before_execution": "Context/aggregation OR fixed-count selection OR another evidence-backed question; do not mix them into an uninterpretable bundle.",
+      "chosen": "MiniLM chunk windows 256 and 512 against the 128-token core control, all with identical mean chunk-feature article pooling and article-level loss; six additional evaluations."
+    },
+    "stability_if_needed": {
+      "finalists": 2,
+      "additional_seeds": 1,
+      "folds": 3,
+      "maximum_scored_evaluations": 6,
+      "execution": "Triggered by a .01105 top-two OOF gap. One additional LoRA seed across three folds; reuse deterministic zero-shot outputs without a meaningless changed-training-seed repeat."
+    },
+    "development_limit": "24 to 30 scored evaluations; training fits, engineering checks and final-test evaluations counted separately.",
+    "final_candidates": "4, at most 5; fixed before final inference; full-Train fits for all trainable candidates; final test once per candidate.",
+    "transfer": "Separate deferred study, initially one family. Source-only tuning; no target labels for examples, stopping or hyperparameters. Prior target-pilot exposure disclosed. Equal training count/class controls for leave-one-language-out and three-language reference.",
+    "deferred": [
+      "6000 Train",
+      "additional LLMs",
+      "large transfer matrix",
+      "ensemble",
+      "self-training",
+      "synthetic translations",
+      "domain-adaptive pretraining",
+      "external ChatGPT API"
+    ]
+  },
+  "freeze_before_final_test": [
+    "all exact input and label hashes",
+    "sampling population, exclusions and group membership",
+    "protocol and annotation rule",
+    "artifact/base dependency hashes",
+    "prompts and fit-only examples",
+    "training recipes and seeds",
+    "context/chunk/aggregation policies",
+    "primary metric and cost measurement",
+    "candidate list and no-retuning rule"
+  ],
+  "metrics": [
+    "accuracy",
+    "pooled macro_f1",
+    "per-class F1",
+    "per-language macro_f1",
+    "negative precision and recall",
+    "positive recall",
+    "confusion matrices",
+    "warm inference_ms_per_text",
+    "p50/p95 latency",
+    "full_model_size_bytes including LLM base",
+    "training time",
+    "peak GPU memory",
+    "retained token fraction",
+    "coverage and exclusion rates"
+  ],
+  "latency": "Same tower, isolated worker, warmups separate, batch one, synchronized CUDA. Tokenization/transfers/context included; loading and URL fetch excluded and reported separately. No repeated Test inference for timing.",
+  "tracking": {
+    "experiment": "article-sentiment-second-path",
+    "new_phase": "article-next-stage",
+    "helper": "src.next_stage_protocol.RunIdentity",
+    "historical_runs": "Never overwrite"
+  },
+  "technical": [
+    "second-path only; no merge from or changes on main",
+    "Python 3.12 and CUDA PyTorch; never requirements-transformer.txt",
+    "nvidia-smi immediately before GPU work; no GPU means no training",
+    "coordinate occupied GPU before a capacity probe; do not silently stop services",
+    "raw texts and weights ignored; local-only serving artifacts",
+    "exactly text or URL; label/scores/model_version and 422/403/502/503 preserved",
+    "offline tests separate from live URL/GPU checks"
+  ],
+  "no_claims": [
+    "no 95-percent guarantee",
+    "no known LLM winner",
+    "no full-article quality established yet",
+    "self-review is not independent verification",
+    "public pretraining overlap remains unknown",
+    "no continuous numeric curve across different historical tests"
+  ],
+  "development_freeze": "development-protocol-v1.json; original preserved, pre-score engineering correction in engineering-amendment-v1.json"
+}

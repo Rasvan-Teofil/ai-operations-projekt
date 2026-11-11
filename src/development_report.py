@@ -8,10 +8,12 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from src.config import REPORTS
+from src.reporting import report_destination
 
 
 def main():
     folder=Path(os.getenv('SENTIMENT_DEV_REPORTS',str(REPORTS/'development'))).resolve()
+    report_destination(folder)
     decision=json.loads((folder/'decision.json').read_text())
     rows=decision['results']
     df=pd.DataFrame(rows)
@@ -53,7 +55,7 @@ def main():
            '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |']
     for r in rows:
         lines.append(f"| {r['stage']} | {r['mean_macro_f1']:.4f} ± {r['sd_macro_f1']:.4f} | {r['mean_macro_f1_de']:.4f} | {r['mean_macro_f1_en']:.4f} | {r['mean_negative_recall']:.4f} | {r['median_latency_ms']:.3f} | {r['model_size_bytes']/2**20:.1f} | {r['html_fixture_exact_match']:.0%} |")
-    lines+=['','![Gemessene Entwicklung](development_curve.png)','',f"**Vor dem Kollegenvergleich ausgewählt: `{decision['selected']}`.** Regel: höchstes mittleres Quellen-CV-macro-F1; innerhalb 0,005 gewinnen Latenz, dann Größe.",'',
+    lines+=['','![Gemessene Entwicklung](development_curve.png)','',f"**Vor dem gemeinsamen Methodenvergleich ausgewählt: `{decision['selected']}`.** Regel: höchstes mittleres Quellen-CV-macro-F1; innerhalb 0,005 gewinnen Latenz, dann Größe.",'',
        'B0 ist je Fold neu gefittet; R0 ist der ursprüngliche Fine-Tune-Ansatz, ebenfalls ausschließlich auf dem jeweiligen Fit-Fold neu trainiert. Das ursprüngliche Volltrain-Modell wurde nicht auf Trainings-Folds bewertet. R1 ändert nur die Gewichtung von Klassen zu Sprache×Klasse; R2 nutzt R0-Gewichte mit tokengewichteter Chunk-Aggregation und verbesserter HTML-Extraktion; R3 speichert und rechnet R0 in BF16. R4 kombiniert R1, R2 und R3.','']
     by={r['stage']:r for r in rows}
     for stage,parent in [('R0_reference','B0_frozen'),('R1_quality','R0_reference'),('R2_article','R0_reference'),('R3_deploy','R0_reference'),('R4_combined','R0_reference')]:
@@ -83,11 +85,12 @@ def main():
     print('Measured chart and development.md written')
 
 def branch_report(folder):
+    report_destination(folder)
     result=json.loads((folder/'branch_comparison.json').read_text())
     rows=result['results']
     by={r['model']:r for r in rows}
     order=['colleague_main_default','second_path_v1','second_path_v2']
-    labels=['Colleague main\nreconstructed default','Our v1\noriginal release','Our v2\nselected release']
+    labels=['TF-IDF + LinearSVC\nreconstructed reference','MiniLM\noriginal release','MiniLM\nselected BF16 release']
     fig,axes=plt.subplots(1,2,figsize=(11,5))
     x=np.arange(3)
     ax=axes[0]
@@ -100,7 +103,7 @@ def branch_report(folder):
     ax.set(xticks=x,xticklabels=labels,ylabel='macro-F1',ylim=(0,.9),title='Same final external headlines')
     ax.legend(fontsize=8,loc='upper left')
     ax=axes[1]
-    for key,label,color in zip(order,['Colleague main','Our v1','Our v2'],['#8894a2','#2166ac','#00876c']):
+    for key,label,color in zip(order,['TF-IDF + LinearSVC','MiniLM original','MiniLM BF16'],['#8894a2','#2166ac','#00876c']):
         r=by[key]
         ax.scatter(r['inference_ms_per_text'],r['model_size_bytes']/2**20,s=100,color=color)
         ax.annotate(label,(r['inference_ms_per_text'],r['model_size_bytes']/2**20),xytext=(7,5),textcoords='offset points')
@@ -127,16 +130,16 @@ def branch_report(folder):
         r=by[key]
         lines.append(f"| {key} | {r['macro_f1_en']:.4f} | {r['macro_f1_de']:.4f} | {r['macro_f1']:.4f} | {r['inference_ms_per_text']:.3f} | {r['model_size_bytes']/2**20:.2f} |")
     lines+=['','![Gemeinsamer externer Vergleich](branch_comparison.png)','',
-        f"Auf den 600 nativen englischen Headlines liegt v2 um {result['native_en_delta_v2_minus_peer']:+.4f} macro-F1 vor dem rekonstruierten Kollegen-Standard. Ein gepaarter Bootstrap über diese 600 bereits vorhergesagten Headlines (1000 Ziehungen, Seed 20261019) ergibt ein 95-%-Perzentilintervall der Differenz [{ci[0]:.4f}, {ci[1]:.4f}]. Keine zusätzlichen Modellvorhersagen oder Modellwahl durch Bootstrap.",'',
+        f"Auf den 600 nativen englischen Headlines liegt v2 um {result['native_en_delta_v2_minus_peer']:+.4f} macro-F1 vor dem rekonstruierten TF-IDF-/LinearSVC-Standard. Ein gepaarter Bootstrap über diese 600 bereits vorhergesagten Headlines (1000 Ziehungen, Seed 20261019) ergibt ein 95-%-Perzentilintervall der Differenz [{ci[0]:.4f}, {ci[1]:.4f}]. Keine zusätzlichen Modellvorhersagen oder Modellwahl durch Bootstrap.",'',
         f"**Kein pauschaler Genauigkeitsgewinn von v2 gegenüber v1 behauptet:** Englisch bewegt sich von {by['second_path_v1']['macro_f1_en']:.4f} auf {by['second_path_v2']['macro_f1_en']:.4f}; übersetztes Deutsch von {by['second_path_v1']['macro_f1_de']:.4f} auf {by['second_path_v2']['macro_f1_de']:.4f}. Die Artefaktgröße bewegt sich von {by['second_path_v1']['model_size_bytes']/2**20:.1f} auf {by['second_path_v2']['model_size_bytes']/2**20:.1f} MiB. Der Unterschied Englisch v1/v2 wird hier nicht als signifikant bezeichnet.",'',
-        'Der Kollegen-Standard ist erheblich kleiner und schneller auf CPU. Unser Encoder nutzt CUDA und ist trotz BF16 größer und langsamer. Für das vorgegebene Qualitätsziel spricht dieser externe Benchmark für den Encoder; für enge CPU-/Speicherbudgets bleibt LinearSVC ein klarer Trade-off. Das ist keine allgemeine Rangliste für andere Nachrichtendomänen.','',
+        'Der TF-IDF-/LinearSVC-Standard ist erheblich kleiner und schneller auf CPU. Unser Encoder nutzt CUDA und ist trotz BF16 größer und langsamer. Für das vorgegebene Qualitätsziel spricht dieser externe Benchmark für den Encoder; für enge CPU-/Speicherbudgets bleibt LinearSVC ein klarer Trade-off. Das ist keine allgemeine Rangliste für andere Nachrichtendomänen.','',
         '## Herkunft, Filter, Grenzen','',
         '[SEntFiN](https://github.com/pyRis/SEntFiN), Revision `eba43610fe3cb57a3e5773cd6c037da1f8992ad5`, ursprüngliches Repo unter [MIT](https://github.com/pyRis/SEntFiN/blob/eba43610fe3cb57a3e5773cd6c037da1f8992ad5/LICENSE); Sinha, Kedas, Kumar, Malo. Von 10.753 englischen Headlines bleiben 9.512 mit einem einheitlichen Sentiment für sämtliche genannten Entitäten und gültiger Länge. Nach normalisierten Duplikaten und Prüfung gegen beide Trainingskorpora bleiben 9.453; kein exakter normalisierter Trainingsüberlapp wurde gefunden. Je 200 negative, neutrale und positive Headlines werden ohne Modellvorhersagen mit Seed 20261019 gezogen.','',
         'Die englischen Labels stammen aus der menschlichen Entitätsannotation. Das Übertragen auf den ganzen Titel erfolgt nur bei einstimmigen Entitätslabels; das bleibt eine Operationalisierung, keine neue Annotation. Die 600 deutschen Texte werden aus genau diesen Titeln mit [Helsinki-NLP/opus-mt-en-de](https://huggingface.co/Helsinki-NLP/opus-mt-en-de), CC-BY-4.0, Revision `6183067f769a302e3861815543b9f312c71b0ca4` übersetzt (Beam 4, kein Sampling, Kontext 256, max. 128 neue Token). Kein englischer Quelltext wurde durch den Kontext gekürzt. Deutsche Labels sind übernommen: Übersetzungsfehler und eine veränderte Tonalität wurden nicht unabhängig geprüft. **DE ist deshalb ein MT-Transfercheck, kein nativer deutscher Goldtest.**','',
         'Der Benchmark ist klassenbalanciert, besteht aus Headlines und hat 600 unterschiedliche Titelpaare. Er repräsentiert weder natürliche Nachrichtenhäufigkeiten noch vollständig gelabelte Artikel. Semantischer Ereignisüberlapp und Vortrainingskontamination sind unbekannt. Die alte Testzahl 0,720 und die alte eigene Zahl 0,7187 werden nicht zur Rangbildung benutzt.','',
         '## Unveränderte Referenz, kein nachgetragener Lauf auf main','',
         'Der Referenzcode liegt ausschließlich in einem separaten detached Checkout auf `a840bb7bc8f1656f1700ccabaa89837ce347ca2b`. Der Adapter importiert `new_linearsvc` und die originale `prepare()`-Funktion. Er kopiert keine Modellimplementierung in second-path und ruft niemals `src.train` oder das ursprüngliche MLflow-Experiment auf. Referenz-Trainingsdaten: 5.923 Zeilen aus Phrasebank EN und Kenpache DE; pandas 3.0.6, scikit-learn 1.9.1 und joblib 1.6.0 wie in deren Requirements. Unsere Modelle trainieren auf 8.335 Kenpache-DE/EN-Zeilen. Der Vergleich trennt daher nicht den Effekt der Architektur von der Trainingsdatenwahl.','',
-        'Die ursprünglichen trainierten Gewichte des Kollegen waren nicht verfügbar. Das Ergebnis ist eine Rekonstruktion des gelieferten Standardverfahrens mit unverändertem Code und erneut hergestelltem Trainingssplit; es wird weder Bitgleichheit zum damaligen Artefakt noch zum damaligen Testsplit behauptet. Code-, Daten- und Artefakthashes stehen in `peer_provenance.json`, die Referenz-Abhängigkeiten in `reference_requirements.txt`.','',
+        'Die ursprünglichen trainierten Gewichte der ursprünglichen Referenz waren nicht verfügbar. Das Ergebnis ist eine Rekonstruktion des gelieferten Standardverfahrens mit unverändertem Code und erneut hergestelltem Trainingssplit; es wird weder Bitgleichheit zum damaligen Artefakt noch zum damaligen Testsplit behauptet. Code-, Daten- und Artefakthashes stehen in `peer_provenance.json`, die Referenz-Abhängigkeiten in `reference_requirements.txt`.','',
         'Alle drei neuen gemeinsamen Auswertungen liegen ausschließlich im Experiment `article-sentiment-second-path`, Tag `phase=final-branch-comparison`. Die Hauptbranch-Referenz und ihr MLflow-Verzeichnis bleiben unverändert.','',
         '## Entscheidungen nach Themen','',
         '| Thema | Beobachtung / Entscheidung |',
@@ -146,12 +149,12 @@ def branch_report(folder):
         '| Artikelverarbeitung | R2/R4 bestehen sechs statt zwei HTML-Fixtures; technische Verbesserung, kein menschlich gelabelter Artikelnachweis. Nicht Bestandteil des nach Zeit-Tie-Regel gewählten R3-Standards. |',
         '| Betrieb | R3/BF16 liefert ca. 241 statt 465 MiB; begrenztes Warten und Prüfung endlicher Scores verhindern zwei konkrete Betriebsfehler. Geringe Latenzunterschiede sind keine Signifikanzbehauptung. |',
         f"| Kombination / Auswahl | Höchster CV-Punktwert: {best['stage']} mit {best['mean_macro_f1']:.4f}. Gewählt nach der vorab erklärten Nähe-/Latenzregel: {chosen['stage']} mit {chosen['mean_macro_f1']:.4f} und {chosen['median_latency_ms']:.3f} ms. Kein nachträgliches Umdefinieren, um alles kombiniert auszuliefern. |",
-        '| Kollege vs. second-path | Auf diesem gemeinsamen nativen EN-Benchmark bessere Encoder-Qualität gegen deutlich kleineren/schnelleren CPU-Standard. Andere Daten, Kosten und Sprachdomänen können die Entscheidung ändern. |']
+        '| TF-IDF/LinearSVC vs. MiniLM | Auf diesem gemeinsamen nativen EN-Benchmark bessere Encoder-Qualität gegen deutlich kleineren/schnelleren CPU-Standard. Andere Daten, Kosten und Sprachdomänen können die Entscheidung ändern. |']
     lines+=['','## Frisch reproduzieren (erst nach v2-Auswahl)','',
         'In einem frischen Clone nach den v2-Befehlen im README. Der v1-Trainingsaufruf erzeugt nur den Vergleichsstand, keine alte Testbewertung. Auf dem aktuellen Tower sind die Artefakte bereits vorhanden und werden nicht überschrieben. Neue Berichte bleiben von den historischen getrennt.','',
         '```bash',
         'export SENTIMENT_DEV_REPORTS=reports/reproduction',
-        'python -m pip install -r requirements-evaluation.txt',
+        'python -m pip install -r requirements/requirements-evaluation.txt',
         'python -m src.train finetuned',
         'git clone --no-checkout https://github.com/Rasvan-Teofil/ai-operations-projekt.git ../colleague-reference',
         'git -C ../colleague-reference checkout --detach a840bb7bc8f1656f1700ccabaa89837ce347ca2b',

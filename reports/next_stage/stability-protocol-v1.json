@@ -1,0 +1,13 @@
+{
+  "seed": 20261111,
+  "finalists": [
+    "qwen-lora",
+    "qwen-zero"
+  ],
+  "same_three_folds": true,
+  "recipe_change": "Only the training/random-initialization seed changes; no input, label, prompt, epoch, optimiser or context search.",
+  "trigger_gap": 0.011047238253147462,
+  "development_sha256": "60b76f72186abc34b084233a40e5fa51507d37c7b03bc78d50ac0bebda22a71a",
+  "zero_shot": "Reuse deterministic unadapted model predictions; no meaningless re-inference for a changed training seed.",
+  "interpretation": "Diagnostic seed sensitivity. Original-seed OOF primary metric and tie rule remain the deployment selection rule; no final Test available."
+}

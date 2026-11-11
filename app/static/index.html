@@ -3,26 +3,30 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Article sentiment · Local model lab</title>
-  <link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script>
+  <link rel="stylesheet" href="/static/style.css?v=full-article-v1"><script src="/static/app.js?v=full-article-v1" defer></script>
 </head>
 <body>
   <main>
     <header><div><p class="eyebrow">MEDIA MONITORING / LOCAL MODEL LAB</p><h1>Article sentiment</h1>
-      <p>Classify German or English news. Inspect the evidence behind the model choice.</p></div>
+      <p>Classify German, English or Japanese news. Inspect the evidence behind the model choice.</p></div>
       <span id="health" role="status">Checking local model…</span></header>
-    <div class="workspace">
+    <nav class="project-nav" aria-label="Project sections">
+      <a href="#analyse">Analyse</a><a href="#compare">Compare</a><a href="#development">Development</a><a href="/licenses">Data &amp; licences</a><a href="#reproduce">Reproduce</a>
+    </nav>
+    <div class="workspace" id="analyse">
       <section class="panel" aria-labelledby="input-title">
         <h2 id="input-title">Try an article</h2>
         <form id="predict-form">
           <label for="model-choice">Model</label>
-          <select id="model-choice"><option value="">Benchmark default</option></select>
-          <p class="hint model-note">Choose a model for this request. The first use may take longer while its local weights load.</p>
+          <select id="model-choice"><option value="">API default · full-article Qwen LoRA</option></select>
+          <p class="hint model-note">The selector groups the four full-article methods first. The default was selected on Train-only development. First use may take longer while local weights load.</p>
+          <p id="context-policy" class="hint">Full-article study: native DE/EN/JA archive texts with AI reference labels.</p>
           <p class="licence-banner">Research demo: AI news classifiers and matched-task Qwen profiles are experimental; older classifiers use restricted training data. <a href="/licenses">Data &amp; licences</a> lists the sources and terms.</p>
           <fieldset><legend>Input source</legend>
             <label><input type="radio" name="source" value="text" checked> Text</label>
             <label><input type="radio" name="source" value="url"> Article URL</label></fieldset>
-          <div id="text-input"><label for="text">Article text <span>DE or EN · up to 20,000 characters</span></label>
-            <textarea id="text" rows="9" maxlength="20000" required placeholder="Paste the headline or article text here…"></textarea>
+          <div id="text-input"><label for="text">Article text <span>DE / EN / JA · up to 20,000 characters</span></label>
+            <textarea id="text" rows="9" maxlength="20000" required placeholder="Paste the complete article text here…"></textarea>
             <div class="examples"><span>Controls:</span><button type="button" data-example="negative">Negative · DE</button>
               <button type="button" data-example="neutral">Neutral · EN</button><button type="button" data-example="positive">Positive · EN</button></div>
           </div>
@@ -32,6 +36,7 @@
           <button class="primary" id="submit" type="submit">Classify article</button>
           <button class="secondary" id="highlight" type="button">Highlight sentence sentiment</button>
           <p id="error" role="alert" hidden></p>
+          <button id="paste-instead" type="button" class="secondary" hidden>Paste article text instead</button>
         </form>
       </section>
       <section class="panel result" aria-labelledby="result-title" aria-live="polite">
@@ -53,20 +58,47 @@
       <div id="highlighted-text" class="highlighted-text"></div>
       <p id="sentence-scores" class="hint" aria-live="polite">Select a coloured sentence to inspect its scores.</p>
     </section>
-    <section class="panel evidence" aria-labelledby="llm-title">
-      <p class="eyebrow">MATCHED TASK / PROMPT, EXAMPLES AND OWN LLM FINE-TUNING</p><h2 id="llm-title">Does adapting the LLM change the comparison?</h2>
+    <section class="panel evidence" id="compare" aria-labelledby="final-title">
+      <p class="eyebrow">FULL ARTICLES / ONE FROZEN FINAL TEST</p><h2 id="final-title">Four methods on the same complete articles</h2>
+      <p>All learned candidates use the same 240 Train articles. Model recipes and the Qwen LoRA choice were fixed using Train-only development before collecting this Test. German and English macro-F1 receive equal weight; Japanese is reported separately.</p>
+      <p id="final-status" role="status">Loading the full-article final comparison…</p>
+      <p><a href="/?model=article_qwen_lora_v1#analyse">Try the development-selected Qwen LoRA ↗</a> · <a href="/?model=article_minilm_v1#analyse">Try faster MiniLM ↗</a></p>
+      <div class="table-scroll"><table><caption id="final-caption">AI-labelled · Codex-reviewed · two readings by the same AI, no independent human gold</caption><thead><tr><th scope="col">Method</th><th scope="col">DE/EN F1</th><th scope="col">95% interval</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">JA F1</th><th scope="col">Warm ms/article</th><th scope="col">Full MiB</th></tr></thead><tbody id="final-rows"></tbody></table></div>
+      <img id="final-chart" src="/comparison/full-article.svg" alt="Four frozen full-article candidates: equal-weight German/English macro-F1 with paired event-group bootstrap intervals and measured warm latency." loading="lazy">
+      <p id="final-interpretation" class="licence-banner"></p>
+      <p class="hint">Real source supply: 273 DE, 118 EN, 300 JA. No synthetic padding. Source, rights, ambiguous-label and related-event exclusions are preserved. One saved prediction per candidate and article. Intervals describe sampling uncertainty conditional on these AI references; they do not measure label correctness or unknown pretraining overlap. This is a restricted archive, not a guarantee for all publishers or sentence highlights.</p>
+      <p><a href="/comparison/full-article">Complete results JSON</a> · <a href="/project/final-report">Measured report</a> · <a href="/project/model-cards">Model cards</a> · <a href="/licenses">Licences</a></p>
+    </section>
+    <section class="panel evidence" id="development" aria-labelledby="development-title">
+      <p class="eyebrow">FULL ARTICLES / DEVELOPMENT ONLY</p>
+      <h2 id="development-title">Development inside Train</h2>
+      <p>300 native DE/EN/JA articles were reviewed twice. After rights and overlap checks, 240 full articles entered three fixed training folds. The 24 core, quantity and context evaluations are complete, followed by three additional seed checks. Reference labels remain <strong>AI-labelled · Codex-reviewed</strong>.</p>
+      <p id="full-article-development-status" role="status">Loading full-article development results…</p>
+      <img id="full-article-development-chart" src="/comparison/full-article-development.svg" alt="Full-article training-only comparison: four core methods, nested MiniLM training quantities and chunk windows. Equal DE/EN macro-F1 from out-of-fold predictions; no final Test." loading="lazy">
+      <p class="hint">DE/EN is the primary metric; Japanese is separate. The small quantity curve has not saturated. These results do not establish an optimal data quantity or independent label accuracy. The frozen final Test is shown above; it did not change the selected recipe.</p>
+      <p><a href="/comparison/full-article-development">Saved development results</a> · <a href="/project/next-stage">Protocol and source review</a> · <a href="/project/progress">Current progress</a></p>
+      <details class="archive-group"><summary>Historical v5 development · short title/lead texts</summary>
+      <p>Four fixed Qwen conditions on the same three source-group folds: 12 CV runs in the historical short-news study. Few-shot examples came only from each fold's fit rows. These data and scores belong to that comparison group.</p>
+      <img id="llm-development-chart" src="/comparison/news-v5-development.svg" alt="Historical short-news Train-only development: financial prompt, matched news rubric, six examples and own LoRA, with three-fold SD." loading="lazy">
+      <p id="llm-cost" class="hint"></p>
+      </details>
+    </section>
+    <section id="archive" aria-labelledby="archive-title">
+      <h2 id="archive-title">Project archive · separate comparison groups</h2>
+      <p>Data versions belong to one project. Each table uses its own common test; scores across these groups do not form a progress curve.</p>
+    <details class="archive-group"><summary>v5 · matched task · 692 Train / 227 short-text Test</summary>
+    <section class="panel evidence" id="historical-v5" aria-labelledby="llm-title">
+      <p class="eyebrow">MATCHED TASK / PROMPT, EXAMPLES AND OWN LLM FINE-TUNING</p><h2 id="llm-title">Compare methods on one shared test</h2>
       <p>The previous LLM used a financial-news prompt while MiniLM learned our general-news labels. This follow-up compares the same Qwen weights with that original prompt, a matching news rubric, six Train-only examples and an own LoRA adapter. Supervised models use the same 692 training texts.</p>
       <p id="llm-status" role="status">Loading the matched-task comparison…</p>
       <p><a id="llm-try" href="/">Try the reported experimental choice ↗</a></p>
-      <div class="table-scroll"><table><caption>Different fresh Test · 227 DE/EN texts · SHA-256 starts 723673ee · AI-labelled · Codex-reviewed</caption><thead><tr><th scope="col">Model / adaptation</th><th scope="col">Mean F1</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">Positive recall</th><th scope="col">ms/text</th><th scope="col">Full MiB</th></tr></thead><tbody id="llm-rows"></tbody></table></div>
+      <div class="table-scroll"><table><caption>v5 data: same 692 Train · one 227-text DE/EN Test · SHA-256 starts 723673ee · AI-labelled · Codex-reviewed</caption><thead><tr><th scope="col">Model / adaptation</th><th scope="col">Mean F1</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">Positive recall</th><th scope="col">ms/text</th><th scope="col">Full MiB</th></tr></thead><tbody id="llm-rows"></tbody></table></div>
       <img id="llm-chart" src="/comparison/news-v5.svg" alt="Matched-task comparison on one new 227-item test: frozen MiniLM, fine-tuned MiniLM, LinearSVC and four Qwen adaptation conditions, with measured agreement latency and standalone size." loading="lazy">
       <p id="llm-interpretation" class="licence-banner"></p>
-      <h3>Development inside Train</h3>
-      <p>Four fixed Qwen conditions on the same three source-group folds: 12 new CV runs. Few-shot examples come only from each fold's fit rows. LoRA sees every fit row for three fixed epochs. Error bars show fold SD; the small-model FP32 references reuse the earlier identical folds. No prompt sweep or Val/Test model choice.</p>
-      <img id="llm-development-chart" src="/comparison/news-v5-development.svg" alt="Train-only development: financial prompt, matched news rubric, six examples and own LoRA, with three-fold SD and original small-model reference lines." loading="lazy">
-      <p id="llm-cost" class="hint"></p>
-      <p class="hint">This is a new Test, despite also having 227 texts. Do not compare its numbers directly with the earlier section's Test. One AI reference annotator, short archive news and unknown pretraining overlap limit conclusions; compute and context policies differ. The historical Qwen benchmark default is retained; new profiles are experimental selectable options. <a href="/comparison/news-v5">Results JSON</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/comparison.md">Measured report &amp; MLflow runs</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/docs/llm-adaptation-v5.md">Why repeat this comparison?</a> · <a href="/licenses">Licences</a>.</p>
+      <p class="hint">This is a new Test, despite also having 227 texts. Do not compare its numbers directly with the archived v4 Test. One AI reference annotator, short archive news and unknown pretraining overlap limit conclusions; compute and context policies differ. Historical profiles remain selectable; the current full-article default is documented above. <a href="/comparison/news-v5">Results JSON</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/llm_adaptation_v5/comparison.md">Measured report &amp; MLflow runs</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/docs/llm-adaptation-v5.md">Why repeat this comparison?</a> · <a href="/licenses">Licences</a>.</p>
     </section>
+    </details>
+    <details class="archive-group"><summary>v4 · data expansion · 692 Train / 227 Test</summary>
     <section class="panel evidence" aria-labelledby="expanded-title">
       <p class="eyebrow">DATA EXPANSION / 26 NEW MEASURED RUNS</p><h2 id="expanded-title">Does more training data help?</h2>
       <p>692 training texts instead of 244, including 206 positive examples instead of 45. Original and expanded models see the same fresh 227 native German/English test texts. Reference labels: <strong>AI-labelled · Codex-reviewed</strong>.</p>
@@ -80,17 +112,21 @@
       <img id="learning-chart" src="/comparison/news-v4-learning.svg" alt="Train-only three-fold learning curve with nested data sizes: mean F1 and positive recall for frozen and fine-tuned models, with fold standard-deviation bars." loading="lazy">
       <p class="hint">Data quantity and class/topic coverage both changed. This is one AI reference annotator, historical title+lead news and a small test; long articles and sentence-highlight accuracy are unmeasured. Old tests are preserved and their numbers are not joined to this curve. <a href="/comparison/news-v4">Results JSON</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/comparison.md">Protocol, labels, source credits and MLflow run IDs</a> · <a href="/licenses">Licences</a>.</p>
     </section>
+    </details>
+    <details class="archive-group"><summary>v3 · initial AI-labelled pilot · 244 Train / 49 Test</summary>
     <section class="panel evidence" aria-labelledby="news-title">
       <p class="eyebrow">EARLIER 244-TRAIN PILOT / SEPARATE OLD TEST</p><h2 id="news-title">AI-labelled · Codex-reviewed</h2>
       <p>New native German and English Wikinews headlines with short leads: 244 training items, 49 held-out test items. One AI annotator created and reviewed the reference labels without candidate predictions. Val was unused.</p>
       <p id="news-status" role="status">Loading the new recorded comparison…</p>
       <div class="table-scroll"><table><caption>Agreement with AI reference labels · mean DE/EN macro-F1 · not human-gold accuracy</caption><thead><tr><th scope="col">Model</th><th scope="col">Mean F1</th><th scope="col">DE F1</th><th scope="col">EN F1</th><th scope="col">ms/text</th><th scope="col">MiB</th></tr></thead><tbody id="news-rows"></tbody></table></div>
       <img id="news-chart" src="/comparison/news-v3.svg" alt="New AI-labelled Wikinews pilot: measured agreement, latency and size for four newly fitted or derived classifier artifacts and unchanged zero-shot Qwen." loading="lazy">
-      <p class="licence-banner">The fine-tune did not beat the frozen baseline in this pilot. All four trained classifiers missed the positive class on this small test. Qwen remains the default. Experimental models can be selected above; this pilot does not establish an improvement over the older versions.</p>
+      <p class="licence-banner">The fine-tune did not beat the frozen baseline in this pilot. All four trained classifiers missed the positive class on this small test. At that historical stage Qwen remained the default. Models can still be selected above; this pilot does not establish an improvement over the older versions.</p>
       <p class="hint">Only 4 DE and 6 EN positive test items. The FP32 and BF16 variants share the same new fine-tuning; BF16 is a storage/serving derivation. AI annotation errors, archive bias and pretraining overlap remain possible. <a href="/comparison/news-v3">Results JSON</a> · <a href="https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/comparison.md">Protocol, labels and MLflow run IDs</a>.</p>
     </section>
+    </details>
+    <details class="archive-group"><summary>Historical SEntFiN comparison · native EN and translated DE</summary>
     <section class="panel evidence" aria-labelledby="evidence-title">
-      <div class="evidence-header"><div><p class="eyebrow">EARLIER SENTFIN BENCHMARK</p><h2 id="evidence-title">Why the current default?</h2></div>
+      <div class="evidence-header"><div><p class="eyebrow">EARLIER SENTFIN BENCHMARK</p><h2 id="evidence-title">Historical default selection</h2></div>
         <a href="/docs">API documentation ↗</a></div>
       <p>All three models see the same fresh 600 English headlines and their German translations. Native English macro-F1 selects the model; within 0.005, latency and size decide.</p>
       <p id="selected-model" role="status">Loading recorded results…</p>
@@ -98,7 +134,15 @@
       <img id="comparison-chart" src="/comparison.svg" alt="Measured macro-F1, warm inference time and artifact size for MiniLM v2, LinearSVC v2 and local Qwen3 4B." loading="lazy">
       <p class="hint">German is a translation transfer check, not native German gold. These are 600 independent headline pairs. General-news articles and public-corpus pretraining overlap remain unverified. Historical test scores use different data.</p>
     </section>
-    <footer>Inference runs on this machine using local weights. Article URLs still need internet access. <a href="/licenses">Data &amp; licences</a> · Health: <a href="/health">/health</a> · Results: <a href="/comparison">JSON</a></footer>
+    </details>
+    </section>
+    <section class="panel evidence" id="reproduce" aria-labelledby="reproduce-title">
+      <h2 id="reproduce-title">Reproduce and inspect</h2>
+      <p>The API reads local artifacts. Historical data, labels and model versions have separate identifiers. The full-article training series uses fixed input hashes, reviewed event groups and three folds inside Train. The fresh final Test follows frozen candidate selection, with saved predictions and group-level uncertainty.</p>
+      <p><a href="/docs">API documentation</a> · <a href="/project/readme">Current README</a> · <a href="/project/archive">Historical commands and results</a> · <a href="/project/reproduction">Full-article reproduction</a> · <a href="/project/structure">Repository layout</a></p>
+      <p class="hint">Up to 20,000 characters. The full-article Qwen profiles reject inputs above 4,096 article tokens. MiniLM combines all chunks. Historical Qwen profiles can omit the middle. Sentence colours are separate predictions; their accuracy was not measured by the article Test. Local service reachability does not establish public availability.</p>
+    </section>
+    <footer>Inference runs on this machine using local weights. Article URLs still need internet access. <a href="/licenses">Data &amp; licences</a> · Health: <a href="/health">/health</a> · Results: <a href="/comparison/full-article">JSON</a></footer>
   </main>
 </body>
 </html>

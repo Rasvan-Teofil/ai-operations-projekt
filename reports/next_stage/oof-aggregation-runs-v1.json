@@ -1,0 +1,42 @@
+[
+  {
+    "model": "frozen128",
+    "run_id": "7350a525f50a4c009d85198e9610f8fa",
+    "scored_evaluation": false
+  },
+  {
+    "model": "minilm128",
+    "run_id": "7de33a59785c4de4a78b4fe505f142a7",
+    "scored_evaluation": false
+  },
+  {
+    "model": "qwen-zero",
+    "run_id": "9bdc41e31b854f19849a392a3e964bea",
+    "scored_evaluation": false
+  },
+  {
+    "model": "qwen-lora",
+    "run_id": "1d151160f0424f1c81fc032937698b9d",
+    "scored_evaluation": false
+  },
+  {
+    "model": "minilm-third",
+    "run_id": "04e7ca5f4de34078835089a0d7175e85",
+    "scored_evaluation": false
+  },
+  {
+    "model": "minilm-two-thirds",
+    "run_id": "5a5b5c16b1db4322bf80f2d77fb37834",
+    "scored_evaluation": false
+  },
+  {
+    "model": "minilm256",
+    "run_id": "0757cf10d40449b0abd56929cdbb1f22",
+    "scored_evaluation": false
+  },
+  {
+    "model": "minilm512",
+    "run_id": "1fe9ff2ee70840ebad7e52f0ce1d354a",
+    "scored_evaluation": false
+  }
+]

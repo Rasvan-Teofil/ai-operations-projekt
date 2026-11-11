@@ -1,5 +1,7 @@
 # Data and model licences
 
+**Full-article study, 11 November 2026:** Four candidates share 240 rights-reviewed native DE/EN/JA Train articles and one frozen 691-article Test. New models start from clean pinned bases. Source contributions, third-party passages, annotation metadata and model weights have separate rights records. Prior studies and their restrictions remain visible. See [model cards](../reports/next_stage/model-cards-v1.md), [source provenance](../reports/next_stage/final-test-v1/provenance.jsonl) and [inventory](inventory.json).
+
 Reviewed **7 November 2026**. The website's [Data & licences page](http://127.0.0.1:8000/licenses) reads [inventory.json](inventory.json) through `/licenses/inventory`. This is the shared record for currently used sources and proposed replacements; it is not a blanket commercial release statement.
 
 The current Qwen zero-shot weights have an Apache-2.0 licence. Historical MiniLM and reconstructed LinearSVC use training data with non-commercial or unresolved permissions. We retain them as research artifacts pending clarification. A model's base licence does not resolve a separate training-data question. This is our conservative release policy, not a claim that every dataset condition automatically transfers to weights.

@@ -17,3 +17,10 @@ data/local_llm/
 data/common_data_v3/
 data/expanded_news_v4/
 data/llm_adaptation_v5/
+data/next_stage/
+
+# Machine-local runtime logs; never commit article-bearing process output.
+runtime/
+
+# Keep model placement guidance, never the local weights.
+!models/README.md

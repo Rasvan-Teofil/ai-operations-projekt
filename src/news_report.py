@@ -5,15 +5,15 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import mlflow
 
+from src.reporting import report_destination
 from src.config import LABELS
 from src.news_data import LOCAL, OUT, SEED
 from src.news_experiment import scores, verified, read_json, write_json
-from src.tracking import tracking
 
 
 def report():
+    report_destination(OUT)
     verified()
     comparison = read_json(OUT / 'comparison.json')
     test = pd.read_csv(LOCAL / 'test.csv')
@@ -39,13 +39,9 @@ def report():
                 part = ix[languages[ix] == lang]
                 values.append(scores(y[part], predictions[r['model']][part])['macro_f1'])
             boot[r['model']].append(np.mean(values))
-    tracking()
     for r in records:
         low, high = np.percentile(boot[r['model']], [2.5, 97.5])
         r.update(balanced_language_macro_f1_ci_low=float(low), balanced_language_macro_f1_ci_high=float(high))
-        with mlflow.start_run(run_id=r['run_id']):
-            mlflow.log_metrics({'balanced_language_macro_f1_ci_low': float(low), 'balanced_language_macro_f1_ci_high': float(high)})
-            mlflow.set_tag('uncertainty', 'Exploratory paired group bootstrap of saved predictions, 1000 samples; does not include annotation error')
     comparison['uncertainty'] = 'Exploratory paired group bootstrap, 1000 resamples, seed20261107, 95% percentile intervals; no model rerun. AI annotation error is not covered.'
     comparison['paired_intervals'] = {}
     for name in ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3']:
@@ -90,10 +86,6 @@ def report():
         '[Frozen protocol](protocol.json) · [AI labels and short rationales](annotations.csv) · [split and source hashes](split_manifest.json) · [source credits](source_manifest.json) · [CSV](comparison.csv) · [run IDs and confusion matrices](comparison.json)', '',
         '![Measured pilot](comparison.png)', '']
     (OUT / 'comparison.md').write_text('\n'.join(lines))
-    for r in records:
-        with mlflow.start_run(run_id=r['run_id']):
-            mlflow.log_artifact(str(OUT / 'comparison.svg'), 'comparison')
-            mlflow.log_artifact(str(OUT / 'comparison.md'), 'comparison')
     print('Rendered saved results and exploratory intervals; no model inference repeated.', flush=True)
 
 

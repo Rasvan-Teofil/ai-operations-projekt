@@ -1,0 +1,6 @@
+{
+  "status": "complete",
+  "candidate_declaration_sha256": "7ca89a57ad4e17288f93974764a69ea77e05dd3dd45d49a33a8dd9f28d33c766",
+  "test_sha256": "219bd9daf3c5dbc84696abe811074230859886129b9371bbc35458fe646b578f",
+  "test_manifest_sha256": "d7f51d3ada45efe55a3b77ece51b80f71e3110f25a79ae536d8c3ade148c86ff"
+}

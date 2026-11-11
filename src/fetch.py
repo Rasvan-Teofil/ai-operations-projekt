@@ -6,6 +6,7 @@ import ssl
 from urllib.parse import urlsplit, urlunsplit, quote
 from urllib.robotparser import RobotFileParser
 from bs4 import BeautifulSoup
+from src.article import ARTICLE_POLICY, ArticleError, extract_full_article
 
 AGENT = 'AIOpsSecondPathBot/1.0'
 TIMEOUT = 15
@@ -13,8 +14,8 @@ LIMIT = 2_000_000
 
 
 class FetchError(Exception):
-    def __init__(self, status, detail):
-        self.status, self.detail = status, detail
+    def __init__(self, status, detail, code='fetch_failed'):
+        self.status, self.detail, self.code = status, detail, code
         super().__init__(detail)
 
 
@@ -36,7 +37,7 @@ def public_target(url):
     except (ValueError, UnicodeError) as e:
         raise FetchError(422, 'Invalid URL') from e
     except OSError as e:
-        raise FetchError(502, 'Host cannot be resolved') from e
+        raise FetchError(502, 'Host cannot be resolved', 'dns_failed') from e
 
 
 class PinnedHTTPS(http.client.HTTPSConnection):
@@ -65,10 +66,10 @@ def request(u, host, port, address, path):
                                          'Accept': 'text/html,text/plain', 'Accept-Encoding': 'identity'})
         res = conn.getresponse()
         if 300 <= res.status < 400:
-            raise FetchError(502, 'Redirects are not followed')
+            raise FetchError(502, 'Redirects are not followed', 'redirect_blocked')
         body = res.read(LIMIT+1)
         if len(body) > LIMIT:
-            raise FetchError(502, 'Upstream response is too large')
+            raise FetchError(502, 'Upstream response is too large', 'response_too_large')
         charset = res.headers.get_content_charset() or 'utf-8'
         try:
             text = body.decode(charset, errors='replace')
@@ -77,29 +78,39 @@ def request(u, host, port, address, path):
         return res.status, res.headers.get_content_type(), text
     except FetchError:
         raise
+    except TimeoutError as e:
+        raise FetchError(502, 'Upstream request timed out', 'upstream_timeout') from e
     except (OSError, http.client.HTTPException) as e:
-        raise FetchError(502, 'Upstream request failed or timed out') from e
+        raise FetchError(502, 'Upstream request failed', 'transport_failed') from e
     finally:
         conn.close()
 
 
-def article_text(url, improved=False):
+def article_text(url, improved=False, *, policy=None):
+    if policy not in (None, ARTICLE_POLICY):
+        raise ValueError('Unknown article extraction policy')
     u, host, port, ip = public_target(url)
     status, _, robots = request(u, host, port, ip, '/robots.txt')
     if status == 200:
         parser = RobotFileParser()
         parser.parse(robots.splitlines())
         if not parser.can_fetch(AGENT, url):
-            raise FetchError(403, 'robots.txt forbids this article')
+            raise FetchError(403, 'robots.txt forbids this article', 'robots_denied')
     elif status != 404:
-        raise FetchError(502, 'robots.txt cannot be read')
+        raise FetchError(502, 'robots.txt cannot be read', 'robots_unavailable')
     path = urlunsplit(('', '', quote(u.path or '/', safe="/%:@!$&'()*+,;=-._~"),
                          quote(u.query, safe="/?%:@!$&'()*+,;=+-._~"), ''))
     status, content_type, html = request(u, host, port, ip, path)
     if status != 200:
-        raise FetchError(502, f'Article returned HTTP {status}')
+        code = 'upstream_forbidden' if status in (401, 403) else 'upstream_http'
+        raise FetchError(502, f'Article returned HTTP {status}', code)
     if content_type not in ('text/html', 'application/xhtml+xml'):
-        raise FetchError(422, 'No readable HTML article')
+        raise FetchError(422, 'No readable HTML article', 'unsupported_content')
+    if policy == ARTICLE_POLICY:
+        try:
+            return extract_full_article(html)
+        except ArticleError as e:
+            raise FetchError(422, str(e), e.code) from e
     return extract_article(html, improved=improved)
 
 
