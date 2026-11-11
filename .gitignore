@@ -67,3 +67,4 @@ data/*
 # Trained weights and joblib artefacts (`python -m src.train`, fine-tuning).
 models/*
 !models/.gitkeep
+logs/

@@ -1,1 +1,1 @@
-"""Lokaler Inferenzdienst (FastAPI)."""
+"""Local inference service (FastAPI)."""

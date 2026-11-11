@@ -19,6 +19,7 @@ If the artefact is missing, the process stays up: ``/health`` reports it,
 """
 
 import logging
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -26,6 +27,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from app.monitoring import log_prediction
 from app.schemas import HealthResponse, PredictRequest, PredictResponse
 from src.config import selected_model_name
 from src.excerpt import article_excerpt
@@ -80,7 +82,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Artikel-Sentiment",
+    title="Article Sentiment",
     summary="Sentiment of a news text or a single article URL.",
     lifespan=lifespan,
 )
@@ -130,12 +132,25 @@ def predict(payload: PredictRequest, request: Request) -> PredictResponse:
     text, excerpt = _text_from_request(payload)
     if not text.strip():
         raise HTTPException(status_code=422, detail="No text to classify.")
+    started = time.perf_counter()
     try:
         scores = model.predict_proba([text])[0]
         label = label_from_scores(scores)
     except Exception as exc:
         logger.exception("Prediction failed")
         raise HTTPException(status_code=500, detail="Prediction failed.") from exc
+    try:
+        log_prediction(
+            model_name=request.app.state.model_name,
+            model_version=model.model_version,
+            source="url" if payload.url is not None else "text",
+            text_chars=len(text),
+            label=label,
+            scores=scores,
+            latency_ms=(time.perf_counter() - started) * 1000,
+        )
+    except OSError:
+        logger.exception("Prediction log could not be written")
     return PredictResponse(
         label=label,
         scores=scores,

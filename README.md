@@ -419,7 +419,7 @@ MLflow comparison experiment: `article-sentiment-comparison`, tags `iteration=1-
 ## Open points
 
 - Error costs (false alarm vs. missed negative text): draft with assumptions in [`docs/error-costs.md`](docs/error-costs.md); cost ratio not yet confirmed.
-- Container: minimal `Dockerfile` for the first-iteration API exists; monitoring is not built yet.
+- Container: minimal `Dockerfile` for the first-iteration API exists. Monitoring is a first prototype only: set `PREDICTION_LOG_PATH=logs/predictions.jsonl` to log label, scores, model version, text length and latency per `/predict` call (no raw text, no URL); `python -m app.monitoring logs/predictions.jsonl` prints the label share per model version. No drift check against the test split yet.
 - Judgemental or loaded language remains a later goal, without labels or a model.
 - The GPU run from the Colab notebook (DistilBERT, three epochs, full train split) is described but not measured in this state.
 - The second iteration is measured and lives in `src/second_path/` (API: `app/second_path.py`). Its training needs CUDA. Without a GPU, load the already recorded runs into MLflow with `python -m src.import_recorded`.
