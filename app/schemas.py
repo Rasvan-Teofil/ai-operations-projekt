@@ -1,67 +1,56 @@
-"""Input and output contract of the inference API.
-
-Exactly one of ``text`` or ``url``. The response is always the
-three-class sentiment plus the distribution and the model version.
-A URL request also returns a short ``scraped_excerpt`` of the fetched
-article. A raw-text request leaves that field null.
-"""
-
-from pydantic import AnyHttpUrl, BaseModel, ConfigDict, Field, model_validator
+"""HTTP input and output contracts; no inference or training imports."""
+from typing import Literal
+from pydantic import BaseModel, ConfigDict, StrictStr, model_validator
 
 
 class PredictRequest(BaseModel):
-    """One article as raw text or as a single URL."""
+    model_config = ConfigDict(extra='forbid')
+    text: StrictStr | None = None
+    url: StrictStr | None = None
 
-    model_config = ConfigDict(
-        extra="forbid",
-        json_schema_extra={
-            "examples": [
-                {"text": "The clinic reported fewer infections after the new treatment."},
-                {"url": "https://example.com/news/library"},
-            ]
-        },
-    )
-
-    text: str | None = Field(
-        default=None,
-        max_length=20_000,
-        description="Article text. Exactly one of text or url.",
-    )
-    url: AnyHttpUrl | None = Field(
-        default=None,
-        description="URL of exactly one article. Exactly one of text or url.",
-    )
-
-    @model_validator(mode="after")
-    def exactly_one_source(self):
-        has_text = self.text is not None
-        has_url = self.url is not None
-        if has_text == has_url:
-            raise ValueError("Provide exactly one of text or url.")
-        if has_text and not self.text.strip():
-            raise ValueError("text must not be empty.")
+    @model_validator(mode='after')
+    def exactly_one(self):
+        if len(self.model_fields_set) != 1:
+            raise ValueError('Provide exactly one of text or url; omit the other field')
+        value = self.text if self.text is not None else self.url
+        if not value or not value.strip() or len(value) > 20000:
+            raise ValueError('Input must contain 1–20000 non-blank characters')
+        if self.url is not None:
+            from urllib.parse import urlsplit
+            try:
+                u = urlsplit(self.url)
+                if (u.scheme not in ('http','https') or not u.hostname or u.username or u.password
+                    or any(c.isspace() for c in self.url) or u.port not in (None,80,443)):
+                    raise ValueError('Exactly one http(s) URL is required')
+            except (ValueError, UnicodeError) as e:
+                raise ValueError('Exactly one http(s) URL is required') from e
         return self
 
 
-class PredictResponse(BaseModel):
-    """Prediction in the shared three-class space."""
-
-    label: str = Field(..., description="negative, neutral or positive.")
-    scores: dict[str, float] = Field(..., description="Distribution over the three classes.")
-    model_version: str = Field(..., description="Version or checkpoint of the loaded model.")
-    scraped_excerpt: str | None = Field(
-        default=None,
-        description=(
-            "Opening of a scraped article, a few sentences and at most 400 characters. "
-            "Null when the request sent raw text."
-        ),
-    )
+class Scores(BaseModel):
+    negative: float
+    neutral: float
+    positive: float
 
 
-class HealthResponse(BaseModel):
-    """Process state. model_loaded is false while the artefact is missing."""
+class Prediction(BaseModel):
+    label: Literal['negative','neutral','positive']
+    scores: Scores
+    model_version: str
+    scraped_excerpt: str | None = None
+    input_policy: str | None = None
 
-    status: str
-    model_loaded: bool
-    model_name: str | None = None
-    model_version: str | None = None
+
+class Highlight(BaseModel):
+    start: int
+    end: int
+    text: str
+    label: Literal['negative', 'neutral', 'positive']
+    scores: Scores
+
+
+class Analysis(Prediction):
+    text: str
+    sentences: list[Highlight]
+    total_sentences: int
+    highlighting_limited: bool

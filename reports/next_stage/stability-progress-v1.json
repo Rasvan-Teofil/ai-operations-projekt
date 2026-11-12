@@ -1,0 +1,179 @@
+[
+  {
+    "model": "qwen-lora",
+    "fold": 0,
+    "seed": 20261111,
+    "run_id": "d18d0d1a9fab48928683f9d166a6e919",
+    "artifact_sha256": "09034ea9e2674df06981cc86da77b5290d233ec924b0fbda86e61d9157c5c48d",
+    "full_model_size_bytes": 8072741784,
+    "accuracy": 0.8148148148148148,
+    "macro_f1": 0.7580823717046629,
+    "primary_score": 0.7634199134199136,
+    "mean_three_language_macro_f1": 0.7594960594960596,
+    "macro_f1_de": 0.7222222222222223,
+    "macro_f1_en": 0.8046176046176047,
+    "macro_f1_ja": 0.7516483516483516,
+    "negative_precision": 0.9347826086956522,
+    "negative_recall": 0.8775510204081632,
+    "positive_recall": 0.8235294117647058,
+    "confusion_matrix": [
+      [
+        43,
+        6,
+        0
+      ],
+      [
+        3,
+        9,
+        3
+      ],
+      [
+        0,
+        3,
+        14
+      ]
+    ],
+    "per_class": {
+      "negative": {
+        "precision": 0.9347826086956522,
+        "recall": 0.8775510204081632,
+        "f1": 0.9052631578947369,
+        "support": 49
+      },
+      "neutral": {
+        "precision": 0.5,
+        "recall": 0.6,
+        "f1": 0.5454545454545454,
+        "support": 15
+      },
+      "positive": {
+        "precision": 0.8235294117647058,
+        "recall": 0.8235294117647058,
+        "f1": 0.8235294117647058,
+        "support": 17
+      }
+    },
+    "inference_ms_per_text": 176.23527776622385,
+    "latency_p50_ms": 164.6724829915911,
+    "latency_p95_ms": 258.56143212877214,
+    "peak_inference_allocated_bytes": 8228427264
+  },
+  {
+    "model": "qwen-lora",
+    "fold": 1,
+    "seed": 20261111,
+    "run_id": "dcbb1090cbf24422b0b09afad5493754",
+    "artifact_sha256": "1d762e742ba398a0426b99696d32574d1d6e90447120c640bbc56a3735f6f4ab",
+    "full_model_size_bytes": 8072741784,
+    "accuracy": 0.8375,
+    "macro_f1": 0.7784141529845998,
+    "primary_score": 0.75,
+    "mean_three_language_macro_f1": 0.7824670824670825,
+    "macro_f1_de": 0.6666666666666666,
+    "macro_f1_en": 0.8333333333333334,
+    "macro_f1_ja": 0.8474012474012476,
+    "negative_precision": 0.9375,
+    "negative_recall": 0.9183673469387755,
+    "positive_recall": 0.5882352941176471,
+    "confusion_matrix": [
+      [
+        45,
+        4,
+        0
+      ],
+      [
+        2,
+        12,
+        0
+      ],
+      [
+        1,
+        6,
+        10
+      ]
+    ],
+    "per_class": {
+      "negative": {
+        "precision": 0.9375,
+        "recall": 0.9183673469387755,
+        "f1": 0.9278350515463918,
+        "support": 49
+      },
+      "neutral": {
+        "precision": 0.5454545454545454,
+        "recall": 0.8571428571428571,
+        "f1": 0.6666666666666666,
+        "support": 14
+      },
+      "positive": {
+        "precision": 1.0,
+        "recall": 0.5882352941176471,
+        "f1": 0.7407407407407407,
+        "support": 17
+      }
+    },
+    "inference_ms_per_text": 173.25757684302516,
+    "latency_p50_ms": 161.80818201974034,
+    "latency_p95_ms": 291.597440384794,
+    "peak_inference_allocated_bytes": 8242439680
+  },
+  {
+    "model": "qwen-lora",
+    "fold": 2,
+    "seed": 20261111,
+    "run_id": "6d6bf73c25904ac9b000f38bcb6b8cc0",
+    "artifact_sha256": "117b6a39589ef8fccc19fa975057b4b123f1fddb85af4ca60dd47a3113ad26c4",
+    "full_model_size_bytes": 8072741784,
+    "accuracy": 0.8227848101265823,
+    "macro_f1": 0.7404990499049905,
+    "primary_score": 0.7172260236776365,
+    "mean_three_language_macro_f1": 0.7396979439990193,
+    "macro_f1_de": 0.7610513739545998,
+    "macro_f1_en": 0.6734006734006733,
+    "macro_f1_ja": 0.7846417846417847,
+    "negative_precision": 0.9019607843137255,
+    "negative_recall": 0.92,
+    "positive_recall": 0.8,
+    "confusion_matrix": [
+      [
+        46,
+        2,
+        2
+      ],
+      [
+        3,
+        7,
+        4
+      ],
+      [
+        2,
+        1,
+        12
+      ]
+    ],
+    "per_class": {
+      "negative": {
+        "precision": 0.9019607843137255,
+        "recall": 0.92,
+        "f1": 0.9108910891089109,
+        "support": 50
+      },
+      "neutral": {
+        "precision": 0.7,
+        "recall": 0.5,
+        "f1": 0.5833333333333334,
+        "support": 14
+      },
+      "positive": {
+        "precision": 0.6666666666666666,
+        "recall": 0.8,
+        "f1": 0.7272727272727273,
+        "support": 15
+      }
+    },
+    "inference_ms_per_text": 176.2803505245549,
+    "latency_p50_ms": 165.67574185319245,
+    "latency_p95_ms": 263.3102526422588,
+    "peak_inference_allocated_bytes": 8254151680
+  }
+]

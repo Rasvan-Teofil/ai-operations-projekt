@@ -1,0 +1,77 @@
+{
+  "status": "complete",
+  "performed": true,
+  "seed": 20261111,
+  "finalists": [
+    "qwen-lora",
+    "qwen-zero"
+  ],
+  "primary_gap": 0.011047238253147462,
+  "additional_scored_evaluations": 3,
+  "total_scored_development_evaluations": 27,
+  "summaries": [
+    {
+      "model": "qwen-lora",
+      "original_primary_score": 0.7431772209133528,
+      "additional_seed_primary_score": 0.7483233303589254,
+      "additional_seed_metrics": {
+        "accuracy": 0.825,
+        "macro_f1": 0.7609279174536693,
+        "primary_score": 0.7483233303589254,
+        "mean_three_language_macro_f1": 0.7630546495493276,
+        "macro_f1_de": 0.7209170140204623,
+        "macro_f1_en": 0.7757296466973886,
+        "macro_f1_ja": 0.792517287930132,
+        "negative_precision": 0.9241379310344827,
+        "negative_recall": 0.9054054054054054,
+        "positive_recall": 0.7346938775510204,
+        "confusion_matrix": [
+          [
+            134,
+            12,
+            2
+          ],
+          [
+            8,
+            28,
+            7
+          ],
+          [
+            3,
+            10,
+            36
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9241379310344827,
+            "recall": 0.9054054054054054,
+            "f1": 0.9146757679180887,
+            "support": 148
+          },
+          "neutral": {
+            "precision": 0.56,
+            "recall": 0.6511627906976745,
+            "f1": 0.6021505376344086,
+            "support": 43
+          },
+          "positive": {
+            "precision": 0.8,
+            "recall": 0.7346938775510204,
+            "f1": 0.7659574468085106,
+            "support": 49
+          }
+        }
+      },
+      "reused_deterministic_predictions": false
+    },
+    {
+      "model": "qwen-zero",
+      "original_primary_score": 0.7321299826602053,
+      "additional_seed_primary_score": 0.7321299826602053,
+      "reused_deterministic_predictions": true
+    }
+  ],
+  "selection_rule_unchanged": true,
+  "limits": "Two seeds and three folds describe limited sensitivity, not an independent uncertainty estimate or a hyperparameter search."
+}

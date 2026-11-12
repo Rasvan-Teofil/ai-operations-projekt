@@ -1,0 +1,64 @@
+{
+  "protocol_sha256": "0137642b9199df4b1a68d8803e5644392d2c130490fd00d7ceccc35e992559c7",
+  "models": [
+    {
+      "model": "frozen_news_v4",
+      "name": "Expanded frozen GPU baseline",
+      "path": "models/expanded_news_v4/final/frozen_news_v4",
+      "run_id": "83487ac1aced41b8822528e41dc8a5e1",
+      "artifact_sha256": "468f76f70291644f159c3baf785ab9d9deab24e8429bcfb8cc5fe7ed0ca0d83a"
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "name": "Expanded own fine-tune · FP32",
+      "path": "models/expanded_news_v4/final/minilm_fp32_news_v4",
+      "run_id": "16bd980816574ff785734af1e3c76ecd",
+      "artifact_sha256": "e5887a55d5f3b17c4cce12a08f4c8b59a7ad719320fb764ed10eb1aad00db350"
+    },
+    {
+      "model": "minilm_bf16_news_v4",
+      "name": "Same expanded fine-tune · BF16",
+      "path": "models/expanded_news_v4/final/minilm_bf16_news_v4",
+      "run_id": "65bcf43545054dc09c0df4e05a98e0d6",
+      "artifact_sha256": "dd2e8e80d220ce6630cdae0533b53b4e0e131268277b75413db6e3b1abbe1874"
+    },
+    {
+      "model": "linearsvc_news_v4",
+      "name": "Expanded LinearSVC",
+      "path": "models/expanded_news_v4/final/linearsvc_news_v4",
+      "run_id": "1cc7ff15880c4c23852680d7708a4a87",
+      "artifact_sha256": "0d4f00c57bc9f99daaebf02334eda0e7f8afa89725cd4ce1eef9d45fe80bec32"
+    },
+    {
+      "model": "frozen_news_v3",
+      "name": "Original 244 · frozen baseline",
+      "path": "models/common_data_v3/frozen_news_v3",
+      "run_id": null,
+      "artifact_sha256": "1570ae382e61237d138ac702cc1d4fda5cb8019615cdc9fcbe3749911e7325ad",
+      "original_run_id": "7c4839810edc4d42884bb1bee7a36e4e"
+    },
+    {
+      "model": "minilm_fp32_news_v3",
+      "name": "Original 244 · own fine-tune FP32",
+      "path": "models/common_data_v3/minilm_fp32_news_v3",
+      "run_id": null,
+      "artifact_sha256": "0eac414b787d5aaa61735fb954221b28d32a26236640cd76a3b41b2013b98fd9",
+      "original_run_id": "43e28f08b2f64edcb3fe1df4ec50231f"
+    },
+    {
+      "model": "linearsvc_news_v3",
+      "name": "Original 244 · LinearSVC",
+      "path": "models/common_data_v3/linearsvc_news_v3",
+      "run_id": null,
+      "artifact_sha256": "bfc872d5b8e89f53f29dcdffdf5ea8209847e2c283fe0bbe195160bb6f2e9030",
+      "original_run_id": "92f6bc44fc02459190f274eb88878722"
+    },
+    {
+      "model": "qwen3_4b",
+      "name": "Unchanged Qwen3 4B · zero-shot",
+      "path": "models/local_llm",
+      "run_id": null,
+      "artifact_sha256": "4a28bff16fc5b5b5cf24c0caf43442921f6ae5fb0d61055150d8613e606c5496"
+    }
+  ]
+}

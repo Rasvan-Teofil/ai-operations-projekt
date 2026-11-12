@@ -1,0 +1,239 @@
+{
+  "checked_at_utc": "2026-11-06T20:09:20.023497+00:00",
+  "api": "http://127.0.0.1:8000",
+  "cases": [
+    {
+      "case": "health",
+      "status": 200,
+      "response": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_available": true,
+        "model_id": "qwen3_4b",
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "model_kind": "local_llm",
+        "score_method": "softmax of next-token logits restricted to A/B/C; uncalibrated"
+      }
+    },
+    {
+      "case": "text_de",
+      "request": {
+        "text": "Die Firma meldet einen Gewinneinbruch und muss Beschäftigte entlassen."
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "negative",
+        "scores": {
+          "negative": 1.0,
+          "neutral": 1.71390848833098e-15,
+          "positive": 1.4637784257268138e-12
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1"
+      }
+    },
+    {
+      "case": "text_en",
+      "request": {
+        "text": "The company reported record earnings and raised its outlook."
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "positive",
+        "scores": {
+          "negative": 3.9008374438584403e-14,
+          "neutral": 1.0603575851565739e-13,
+          "positive": 1.0
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1"
+      }
+    },
+    {
+      "case": "text_neutral",
+      "request": {
+        "text": "Die Hauptversammlung findet am Dienstag in Berlin statt."
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "neutral",
+        "scores": {
+          "negative": 9.545034901359273e-12,
+          "neutral": 1.0,
+          "positive": 4.2777878461741636e-11
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1"
+      }
+    },
+    {
+      "case": "valid_url",
+      "request": {
+        "url": "https://www.bbc.com/news/articles/c687z8127302o"
+      },
+      "status": 200,
+      "expected": 200,
+      "response": {
+        "label": "positive",
+        "scores": {
+          "negative": 4.508755348242577e-12,
+          "neutral": 5.1090889331695255e-12,
+          "positive": 1.0
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt_characters": 400
+      }
+    },
+    {
+      "case": "missing_fields",
+      "request": {},
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body"
+            ],
+            "msg": "Value error, Provide exactly one of text or url; omit the other field",
+            "input": {},
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "both_fields",
+      "request": {
+        "text": "hi",
+        "url": "https://example.com"
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body"
+            ],
+            "msg": "Value error, Provide exactly one of text or url; omit the other field",
+            "input": {
+              "text": "hi",
+              "url": "https://example.com"
+            },
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "empty_text",
+      "request": {
+        "text": "  "
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body"
+            ],
+            "msg": "Value error, Input must contain 1–20000 non-blank characters",
+            "input": {
+              "text": "  "
+            },
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "case": "wrong_type",
+      "request": {
+        "text": 42
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "string_type",
+            "loc": [
+              "body",
+              "text"
+            ],
+            "msg": "Input should be a valid string",
+            "input": 42
+          }
+        ]
+      }
+    },
+    {
+      "case": "private_url",
+      "request": {
+        "url": "http://127.0.0.1/"
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": "Non-public address is not allowed"
+      }
+    },
+    {
+      "case": "no_article",
+      "request": {
+        "url": "https://www.bbc.com/robots.txt"
+      },
+      "status": 422,
+      "expected": 422,
+      "response": {
+        "detail": "No readable HTML article"
+      }
+    },
+    {
+      "case": "robots_denied",
+      "request": {
+        "url": "https://www.google.com/search?q=sentiment"
+      },
+      "status": 403,
+      "expected": 403,
+      "response": {
+        "detail": "robots.txt forbids this article"
+      }
+    },
+    {
+      "case": "dns_failure",
+      "request": {
+        "url": "https://second-path-no-such-host.invalid/news"
+      },
+      "status": 502,
+      "expected": 502,
+      "response": {
+        "detail": "Host cannot be resolved"
+      }
+    },
+    {
+      "case": "missing_model",
+      "status": 503,
+      "expected": 503,
+      "response": {
+        "detail": "Local model artifact unavailable; run the documented training pipeline"
+      }
+    }
+  ],
+  "serving_offline_flags": {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "harness_note": "Initial smoke reached prediction/error cases before its missing-model server was ready. Re-run after readiness passed. No benchmark predictions repeated."
+}

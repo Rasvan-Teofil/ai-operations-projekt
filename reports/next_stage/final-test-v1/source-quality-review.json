@@ -1,0 +1,76 @@
+{
+  "version": "manual-source-quality-v1",
+  "status": "reviewed-before-candidate-test-inference",
+  "candidate_predictions_seen": false,
+  "policy": "Preserve every pinned raw text and its annotations. Exclude non-article contamination or standalone correction notices without rewriting input or resampling by class. Review is independent of sentiment class and candidate scores.",
+  "decisions": [
+    {
+      "id": "wikinews:de:85117",
+      "text_sha256": "ba93e558e6e6ff80d0811987df68067d4764ecf530cb607d7393ffcf918970f6",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Unclear boundary between report and long appended editorial/commentary section; preserve bytes, exclude this input from clean full-article Test."
+    },
+    {
+      "id": "wikinews:de:86867",
+      "text_sha256": "7b39f86d11d4fa74d5d8648a59313368ce9224e1a45324f007eb38901b134cc4",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Unrelated English political sentence inside railway accident report suggests source-revision vandalism; preserve pinned source but exclude contaminated input."
+    },
+    {
+      "id": "wikinews:ja:34913",
+      "text_sha256": "cb73895e0e1807980eb8adf661859801454c221f7931c645f7b5f8328f6395da",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Six later-dated related typhoon links embedded after main body; exclude this extraction from clean full-article Test."
+    },
+    {
+      "id": "wikinews:ja:25572",
+      "text_sha256": "81b8d812a602abdce185f50b913011708edeecbb073ee34b4076214672b956f6",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Standalone editorial apology/headline correction rather than full news report; retain in source ledger, exclude from main article Test."
+    },
+    {
+      "id": "wikinews:ja:34850",
+      "text_sha256": "0be074fbaf35bdb1f0068d4e5e351e90894d2e2442a0f2e7f70aa4c39fac9bb4",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Later-dated related typhoon list appended to focal hurricane report; exclude this extraction."
+    },
+    {
+      "id": "wikinews:ja:41902",
+      "text_sha256": "d2657e9f7164857bcbe9a5157ed82accdfbe766ee3565b8b5403a7eb7729577c",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Standalone editorial correction of prior earthquake report; retain but exclude from main full-news-article Test."
+    },
+    {
+      "id": "wikinews:ja:34883",
+      "text_sha256": "01a16eab167bb33753c13d773dab57a9351bda7d8a69104e9001565dcaaa892d",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Later-dated related typhoon list appended to focal weather report; exclude this extraction."
+    },
+    {
+      "id": "wikinews:ja:38889",
+      "text_sha256": "52f6b8a94d76a0c65097ade8068b716cd500f7474a96c8f3c5053f13ccf31885",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Later-dated weather-news list appended to focal report; preserve original extraction and exclude contaminated input."
+    },
+    {
+      "id": "wikinews:ja:44497",
+      "text_sha256": "93eecf21ebe9eecfa420e8a722c0b78de929433020666263e6197c5b7dd516c2",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Medal-count tracking page explicitly describes itself as a tally, rather than a narrative full-news report; preserve and exclude from full-article Test."
+    },
+    {
+      "id": "wikinews:ja:42916",
+      "text_sha256": "b947f94a88c6726543567a32cd5836ac81e5588f890c408a5cd4cde91d0ab559",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Later-dated weather-news list includes 2025/2026 headlines after a 2024 report; preserve bytes and exclude contaminated input."
+    },
+    {
+      "id": "wikinews:ja:45050",
+      "text_sha256": "8c689110240718bbc47e162a3069989f65389f8a1b710cb33e4784cc18caea70",
+      "decision": "exclude_from_clean_full_article_test",
+      "note": "Standalone election-seat tally explicitly describes itself as an enumeration, without a narrative report. Same source-form rule as medal tally; retain raw bytes and both reviews."
+    }
+  ],
+  "completed_at": "2026-11-11T22:12:59.090549+00:00",
+  "coverage": "All 856 exact inputs fully read in both passes; 11 explicit source-form exclusions, no sentiment or model-score selection."
+}

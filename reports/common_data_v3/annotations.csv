@@ -1,0 +1,361 @@
+id,text_sha256,label,reason,annotation_source,review_status
+wikinews-de-82411-841914,c06b925f41a79bc1d3998281f734cf0fb392a1b5b6f2e6f79cb4d9cef18b5a74,negative,Repeated violence and deaths create safety risk,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74878-859907,14b0b317ac9e5238b67e21b385869b1e4744d0dbef59391595f9b7302aca1e7f,neutral,Summit attendance and dates without directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74325-858099,08e87fb4907d44401add84984fb8f74fe63179577ede6cf533cbb91bd8c31355,neutral,Historical software anniversary with no current outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79030-857736,61fbca9b3565eae8b4ccbb77c6a7fe44d66df71e8e04d02693dbfa10a856de68,neutral,Event preparations described without success or harm,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85243-850703,e7f8cfa503ec40d57298823d544f3576210b810b17b5240b26aca71bcadf0af4,neutral,Legislative vote without established directional effect,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82137-857428,11f8eab5908093e56b9dbba7961a0d85f9125c83f9966ff81431c3b3da311384,negative,Alleged sexual harassment and reputational harm,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76210-857533,806debb6a53af393d9c14a4e186d223dd92a0e17d055c189add0adadb9c51328,negative,Winter exposure and documented deaths threaten homeless people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82559-810682,9468b8a1ec35465cd2913232c7735c038cb1dc490e603dbd4aee696cbbaeb1bc,neutral,Regulatory anniversary and history,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83067-847937,bbe04461383b832934d440019ea0ac31416f55d845761cca00d7f697c178fe30,negative,Crane collapse causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86288-850245,164ba9ea1a4b87144eaa74a2018c4eca9c0d5aae7a5cf9fab6793a0cb6fd10cc,exclude,Extract repeats headline and subtitle instead of substantive lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83341-842703,77afc3b156003a7829b520bb5b45ba3b8929da525fe5688f63c9f0246b216165,exclude,Headline withdrawal conflicts with unrelated winning-rider lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84090-830606,f4dbbdba79073ace913000e8038999687ccd115a9183f427bbfa662fa59820f7,positive,Employee awarded substantial compensation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84634-835633,6093f203ebb4feb638e3c98915c17479ea0442dd16816cba46acab3dc3b97e5b,neutral,Advocacy proposal without implemented outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75819-861506,afce8efc24dae19efd9d7c1d3bc52f17920fd8a47fe6721b162f56a7b4f7e942,neutral,Protest participation counts without evidenced harm or benefit,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76978-729907,958c9672faca9bcf4ef42d8c5e92a9d1d0b9543f41984023c0fd25533bcee174,negative,Corruption arrests and investigations,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77570-695783,a97a3846b66b833d76bb69e715f7e4caf882819e70a6a7cf8f285c79847f5283,negative,Import-ban threat and fisheries-rule failures,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82615-815409,8d17e3694bea09ec9845e124f2c7f8cf2b8440cba78af5e1000365e23ce65196,negative,Rising environmental exposure and public concern,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74674-862135,bae7616bc4c684fcee0b1956d7fa43c198ffd062e158748355c35a715f0b6e9f,negative,Military conflict and counteroffensive,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79451-858230,54e10fc1969fce32e420cf4752dc4d014cc216646675644bfc5dc3cf01dc7f67,negative,Expensive hospital unusable without infrastructure,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80027-859862,30a0ab2fcb2743cd571fad6bd25ebd97d02cfae0538d11700667163704979249,negative,Exploding batteries and burn injury,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77968-703606,05422cf402f4da90d54a2c6ab7d6dca016bf566676ed0a4ab97064635ef866f9,positive,Deficit reduction exceeds expectations,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82375-825400,131f66ddadb02608492e7b2680c696a461736b36047277e20424b47a1e8579d1,negative,Fatal assault,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79316-861444,9d976eb562fd6e587ee6829a75b82682abd97eec799abae6cde4ec31779a1545,neutral,Unusual theory reported without evidenced directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82475-820582,5bf753a5e297786c7d301aae60cb9b97d12ee3d84bbfafe3b6f8a9cda10f1896,negative,Severe flooding and emergency damage,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83174-823046,29f3eaa20a970cd1fa5be93c40ec27e480d7212e63f5523e066bc51cb48c441d,positive,Planned military strike stopped before execution,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77549-858379,fa765c284da7f9a223bcd204edd263d02c742527233481a99e20fe52afa3b8f5,negative,Violent street clashes,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80411-859251,343abd8808d6638c43811c08410bfd1c29dbc0c32cce99fd4ba3c2e030efc813,neutral,Arrest operation with allegations and outcome unresolved,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83272-848176,df6d468311053531121162b6a298267ebb10f970668e67717d96b48dc0396022,negative,Restructuring involves substantial job losses,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79131-861072,1e9764e8eb69f52d3fbda5565bdad61fc765e87b9c1cf3bcdc07ef5edf42ff0e,neutral,Contested appointment without evidenced material outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75593-857690,762dea1848cd0b2a506e4a98e6a7f6f81f21a76d314f9bf6a8c0425634621bd7,negative,Closure ends local court institution,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84359-832822,50a8c4dc2d9dd981799ff29fa7bc111222047d8b874fc4b1e3cf6840d43a58f3,negative,Death of mathematician,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84484-847791,face1c282211e8ad53bd6f3e6a22259d83dd23280684dbc9577ae7c619b6e69e,neutral,Aggregate election results without one primary beneficiary,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79176-717125,04e0c0f21a515287360fc0446d937d25124a94b005b262ab35e2edc577be4daa,positive,Named candidate wins reelection,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84759-851028,c72aa5554d5e4c002678abd86a66bb26a1dc09a32d3883fd19b820968a30e8e2,negative,Lockdown creates shortages and escalating hardship,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75113-800165,60e6659898250c032163b47664020c133a3e9fc4bbdc62853d5f933964b8821f,negative,Fraud and accounting-manipulation investigation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82024-803575,9031c9d09fcfc75a16947251a800c96a11464ae1e34b6c007be285df17182ad5,negative,Criminal allegations against mayor,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82580-852549,8eeb84a483edf0847b21a7a828e857ea30e90d0fd7fd0a6ab9c954d952c906a4,negative,Death after illness,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-73759-858734,96914a0ad45f09efacfae148bad74e09253378bac9b12adf9476ea695a559332,negative,Camp clearance displaces families,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82524-859976,48521a5481ed263e911232047d6bb71054718ae1efd549f3271162a2f896e591,negative,Escalating reputational controversy,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82654-814770,16cde3c4419bb6b78725ebe12791095539a0f7647bde4f31b033047cb7bb2f7f,negative,Fatal crash and prosecution,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83164-823967,e28ec7b7b326e26326ad808e257edaa81f191944c3fb9f743631697198ef9944,negative,Named acting minister withdraws nomination,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85318-852383,618737004c89de5d1566032341ee2c7f3899b7f202721d84231b850150c20506,positive,Named candidate decisively wins primary,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84933-837393,87127e9447aec2ba4795a5c9c5ffb1ee98fd9caec55fed20c83b2606c0473f98,negative,Cancelled fishing season threatens livelihoods,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79462-858300,adbf0fdd753e433784d2b0408b7c4860ec988713434cec56c07c21bceacc2488,negative,Criminal complaints over alleged police failures,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74809-864742,37c7802789cef23a6f86aa64d10fc0aadd6e316a9926044da5ebcc261c03a54d,neutral,Diplomatic visit without directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-78103-858885,fcabbfe8e3ebec50d8dcdb6f782f2f92843b0e64eab529070bab4a5a5a3a734a,negative,War displacement and worsening refugee crisis,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81423-860227,24e57f521221e9508295ae36259d9a780da81aac6844bbe08223c9ebca29de9a,neutral,Memorial inauguration commemorates historical deaths,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76485-858118,dcbf451c2a3df0d0bb95573df98eaa5da5991be7c9c3c61906919329e129fff0,negative,Dangerous restrictions on press reporting,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80786-859222,24dcb6f4db4560b90e04f8b750a6de871e584714415375c4c87f95f873ac845f,neutral,New policy concept without demonstrated outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84977-850458,b315ead54f6b07fa70ed7bd02bb94e8e74b73360be4543269320baff24d6f663,neutral,Population count milestone,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77143-857758,e132a153bf1ebe655f324ff0fd68391f2f82826af08f5d9f5b893aad91b4b530,negative,Arms-export restriction and international conflict,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74598-856469,3cbe6e636d11f2ec63381c8dc77a00ab8427925f5f2bde3a9337d901682c15aa,positive,Named athlete wins second competition,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81835-800821,13ec9358f48f78652db7bd861f691037a1130c428836da937e267ccff3419bb6,negative,Fatal police shooting,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77356-862166,53a29dca75f7a3268be3505eb4187418564985c24696a6d851f7e891c5c7c50f,neutral,Tournament schedule and event description,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81062-857770,d15709f1be61ab2e5cbc945b4c94247b336e5d12bf1fb735d51bae663ca52185,negative,Alleged extremist assassination plot,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80440-765574,1a8eea5a80bf9fc17faa0bbdbff8a7a2d5038d54a8d464a8688163d9442f3af8,negative,Fatal assault after prolonged coma,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79567-858395,2aa958a5bc47c8f981af39df99ad508393d314e4ec803f05e62462c154b108f5,negative,Attempted arson against refugee housing,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81975-856922,5f334a1ffbd29b77a003c54dbea1f4d9668d55d3f30ac2db44f6f9417c070842,positive,Sustained sales growth exceeds expectations,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86543-853025,05198f680e7120dd9b31de46a4eb5c9ae96cd9803dc10827a7c5df604c2d10b8,exclude,Extract contains headline and subtitle instead of article lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83424-848740,71e3edba3d545b1cda316472b143039faa4e522a509a563d72b318e183fafd14,neutral,Demonstration attendance without concrete directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77805-858484,fe01b65c29532161fe6d79166378c426f057780b2b76d0e58c2ec4fd48692a5e,negative,Abuse-material investigation and alleged confidential leak,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77224-861117,5f340bbabe6bb337bfbef49444f85b37a3dfdd260a8e4ec0275e671f6e697571,negative,Diplomatic meeting cancelled amid dispute,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76382-861583,a2278f093074e1cac482d2b433d08b43609e38d0e0c4d245d4e6f8a14ceb957a,negative,Leadership disagreement leads to resignation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75177-861682,66801b348296b2410bca21325de67a46ab4e9b0fcfc0c4d55efb5706a7893c2b,positive,Mathematician receives major award,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81867-859525,78d9faec962ee14bfd510a876425772cf72038f3763c9d0dd93b9c390119793c,neutral,Public preference survey about a proposed rebuild,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86858-864749,c901802553cdcba4c70e2c79003b26911adebb48151242c649188548f762e6c7,neutral,Construction stages and architectural history,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81415-856551,746d894d2bccaed95c9c824ff7a21a011169ff70701de964116a2b6412dce8f3,negative,Rioting and attacks on police,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81574-848773,09a28b149214841e2643a3ba3024efce9eea456973dbc9c98a7783f409842eb7,negative,Serious injuries after accident,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77848-700526,216583c6a424a7d875851897b390aedef5a8d45b0b7fb87afce5b61c82b974bc,neutral,Currency adoption without demonstrated directional effect,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79668-856687,96748eca10da34eb87e78ee9a36d8bb2005faf4e17585aae557961f084b29029,negative,Death after failed surgery; compensation only sought in lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76569-861024,e271bd8ce74eaaa0e7952d55b5c4ec767cb585f73268dc2e9a68994219246bae,negative,Counterfeit currency reported in headline,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-78970-858643,705283cdcbf51c7390e4ed0578b5a18694199d2951f4507062675cce89a5417f,negative,Market manipulation and arrest,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83753-834842,c586c9b1dc8971fdf4a1693d6f4e538863b92a3e7a551910656237fbd272590c,positive,German team wins opening match,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81040-862251,6af6029c54598f18050802cf50a3d4bb4c5819d73d59f17bca6e1fc50f731b8b,negative,Fatal shooting and murder investigation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74739-857900,13e587bb41393b60d98746871c056a9eb1850ea68700aeba038f9c432f45350c,positive,Named candidate wins presidential election,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81074-850459,b14953212b9426404c08685ca8af2befc5dd631f16981d71960ae63cd4899de7,exclude,Accusatory headline lacks supporting employment conditions in lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83619-825980,12c70874853f798e36fedcdb88d0093e3fce3ded7b1db033e0bb3253c2ec7ffb,negative,Deliberate vehicle collision injures people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79547-861714,ca4d4eabff464931fd2253c57c036f810ce1da86e30861c35381ae6585292dca,negative,Candidacy associated with bankruptcy and mass job losses,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79232-858003,2540a3cc394698487b0c087654829d9891ce46d288338fabf8e0099ad6cc3ffa,negative,Increasing antibiotic resistance threatens treatment,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75199-859804,f936b8dd0e2fa816b609c1325fe7df3a2ba690287c1d0b05105ba18849e17b79,positive,Bailout agreement secures funding and protects small deposits,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83430-824559,56da41dd4474f56d17e80f0c330785e00a81d785050c4dff5467793a437d5f5f,negative,Floods cause deaths and displacement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74182-860798,9657feed519549ca896b80ae24e7a629f478d15194138378120c470e66162a7b,neutral,Festival opening and historical description,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74455-861191,9880f82ad55b5fe722ea9b5dc4c9845c493758aebf2a3a56ef296825452f0c33,negative,Lower deposit interest reduces saver returns,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80055-789983,7e269124f68292d2ab1c52db9b8507df4d98542c1fbcc3df4bc4c8cca77721de,neutral,Proposed emissions policy without implemented outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82799-861903,5a059a4bfe9ad49de93a3290d191bab4ca8a66133166b59776bf243dc267af11,negative,Court rules ordering system unlawful,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79158-857411,50d2bff30f9f4a952e28d0b659e32f2f56a76208c153863c02e960d760e183f1,positive,Team wins trophy and both teams gain promotion,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76128-861790,0c1fb52b5c1eb65f36fb27722e202d28467c5d73252aecf9b28b79b74c280f80,negative,Documented allegations of animal cruelty,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79031-749415,6940408429ebcab36d7ba134912db9cb671432ea70bee841e598a91069b964cf,positive,Named singer wins competition,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83739-852024,a5ea2fcb73225c545deaa3344eb068785b53be23d5c0732c6425374b97d783ef,negative,Military killing,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76346-859768,e8b7063a87a5913ab999394352f31b79df49ccfdf1905b240a2278280d48d7c4,positive,Enacted tax deduction and greater pension-product flexibility,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83256-823514,c27c45911fc8b8f3132cd2c02a37836f04cd36967fe0a8f93a7e33323a28d618,positive,Named teams qualify for final through wins,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83225-823468,190fceac369c2b8f98acb772b0f38278ff2ef591b503a21c0b11fb79db023a03,negative,Extreme record heat creates material risk,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86861-862744,1100634065dfd6be6cecc6648f9a5a1cec246ab7e4eb24c9367778a952d49183,positive,New rules improve protection against account closure,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85006-838393,f6ed7e052e89f8907e82bd8cd1aa1b7dd23f2da29713a0e5d1f2939ccc4390fc,negative,Death of writer,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75073-862282,fd8c099fe8d81392686f58dce83a22d3dd5da6414a1fd5ab8e462d3b09a39761,negative,Fatal balloon accident and severe burns,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83325-824391,b290a8bf02f5d7db411c4f4f10c39237886f9638dfb470b3727b89afd4cdf733,negative,Flights suspended over safety concerns,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83760-834840,e3b4545948ed24062038eda2a7461f11ed889bdce07ce80a417219fe8266fa41,negative,German team loses and misses early qualification,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84668-835273,89a4a89749e682c3e1ddba62d077c7a30d1c8d202798297c88ed875727f60f92,neutral,Mask-upgrade request without implemented outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83490-825309,5816fe139a31da77ed843c3a9c58f62726d87225c0beaa19053407dc940d5746,neutral,Capital relocation decision without demonstrated net benefit or harm,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79346-858642,b8c10f7af60e7327cbadc772cc0dd9559ceba0988a15b2f05f13751c3dc240d9,neutral,Disputed statistical proposal without established directional effect,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85891-854270,88b64a852ddfba7a7381807b62c78c28244d7ec58d178fd24214ab545f8df421,exclude,Extract contains repeated headline and subtitle rather than lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77368-692074,8ba5e1c3a7ce84e55350cb14705aa87621a2065ae0576c72ac9a99ed8657f1af,negative,Disputed election leaves political deadlock,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77730-860560,12372cb117d275d45a4e7965102c8409b88264f9919eac78f7b0708cbe9e5ead,negative,Security incident disrupts public transport,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83100-822724,371f42d6ec47f180559861a1e4f5249a81685db2fb0983ae4f538d6ca2ac46d4,positive,German team wins unexpectedly,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80952-856442,638bb4b58a2970ebd1cfa6e60953b52ce53f94fb8e859c4625b9df00162d2844,negative,Dangerous pursuit involves collisions and gunfire,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81748-858866,0d8e24d42bcdedea6e58f5802fc2644c52d4c32c979db9052f57b498cf5b117c,negative,Murder of three people in arson attack,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74746-857397,6d15660ae0c7a53f34721da07e47cb8ed78f2351d27bd9cc21169d591969d107,negative,Violent unrest kills many people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81052-861830,b34ef4e13301a98ffc2e7345eba00cd0c8e273bd9fa9ad878cb04c59d0fb0566,neutral,Festival attendance and schedule without comparative outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81653-852098,22fbfc14aee6e6624f8da322826e8115ec619dc7cf146862de27b33cdab1b925,negative,Vehicle sales decline sharply despite market growth,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80804-773705,fa932945447dd2eb47558e5bd15597381ddb1759f8383fd8058774c4ac5cdc50,neutral,Birthday and corrected birth-year information,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83371-864763,8be37db7e4a47bf53c9286b66b1c7c836fc7b1cf32b316388793a93c3b4e2e4d,neutral,Monetary-policy change without demonstrated directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86053-847419,b44e0aece5de736c26839987843661a3857d33ebc53118715639e2c4f14e1945,negative,Deadly unrest and forced political flight,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74256-842811,5c984a7fded5fa35f4eedeea3d7d0ff19e75c76f084176785d3f905aeecab709,exclude,Historical acquittal and new unresolved lawsuit mix distinct outcomes,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84811-844202,e02ad2301304076185c91ff46687b34d0eeec1c5785073a4f653b3148ad202e9,neutral,Binding waste-collection vote without explicit directional benefit,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85944-845944,f6ec8280c8e6c9a144bf6a9842507832bf69d9e09b3a447868d1dea051a36d6c,negative,Murder and ensuing criminal investigation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85654-852752,ce453cebba669876cd4fbe27a584df249c5a4cfa8a0b2311fc059f38a387d3f9,exclude,Conflicting attack and damage reports leave outcome unclear,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81922-860078,296b19448691d1e01bb0ef3b0d76a7643c76a83359143742894d147bcb20b031,positive,Archaeologists successfully discover historical archive,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79494-864788,ba7f9030948a10640aa94594be6ba30e9949163eb8cb2a24b86d25703d9b74e0,neutral,Speculative planet report without confirmed outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80301-858582,14c617e39dbeb088879cdd0e0a4e0e417746c91e7942522d318e52fa91814f3d,negative,Fire causes injury and major property damage,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-78867-832894,2528a6396f3a5dfd15c26921cdf0d378e3d8aa5cc3d5ae0b58bc337cfbb9b6c6,neutral,Campaign-advertising method without established harm or benefit,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85869-846521,85077075686970f7d1198d6607db72e91f7a75c1b70e028e8ab0c035762d4ea8,negative,Violent clashes during protests,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84877-844170,b5b2535206ba26889cd2735dc0c4b18f21ce4bfb0c212830ef7b3e427dcd9484,positive,Scientific medals conferred and congress held,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80683-860222,0e6c4755e749c524e9b035cdb341c3c86bb3610b55b2f5c40e101d857aa53e30,negative,Severe weather delays planned diplomatic meeting,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82031-856881,4782f4c814ab4903c2e1d3f27091268644339dca6d3804ef1b0352caa4f629c8,positive,Firefighters rescue trapped child,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80337-860202,82693681f5cd695f79f16c47cfb906d76dbc905ff2981990c9681c852abafc73,negative,Avian influenza outbreak and culling,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-73950-861814,4210b5de87308ff296606d2d7b52c46f747f218c0382a2a7a4489fb136859bc3,negative,Attacks kill embassy personnel,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75792-860871,361550b2b97f0000e87f81fa4fc2d297a7357539caa5f62b6c742048ee7228c7,negative,Unrest causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76862-858814,88dfd6435b4b9b9e327cfe0ed729fea37a2bf94e2942e0565201ddfbb2338e4a,negative,Rights activists imprisoned,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-78207-859987,30967e82670e09e1b8b5e462447de331890ca9d16e5cd410feb6927db574ac68,negative,Cyberattack and health-data privacy weaknesses,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77732-861551,63dccaa71d4bf1fa84de4ff63358b100b56695cb86ddff7ef3438ec239de5032,negative,Freezing weather disrupts power and forces evacuations,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86901-864807,f878559038c0242888a4c983412107b98a939fe7c8c12c00738996c6dfb06f41,neutral,Company name change without directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80032-860135,9f76a5fc34cc10e8b8525e0aeb9f56b6a9072a24bbe1e6e63232754c61247216,negative,Gas reserves approach depletion,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83552-833205,2fa680a36a1324180a4b3c9ee67de3178aefddfe539b794122043dc8042c13c9,negative,False hurricane warnings confuse public,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80669-859010,17a6dca901ea7eb7b3ad2e24b49159a78647ae8d9166f1425899b9767cb01fb8,negative,Knife violence causes serious injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76234-660957,bfd84137c897803ee915e586d4ba7145ea6b7228c160fd19472e35488464a6f2,negative,Security vulnerability exposes users despite rapid mitigation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81473-858847,8f8294e5ed3387aa1054a3a3935e3bbb3414471a6f20d3eacbb194c9d74528ed,negative,Child abandonment causes death,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76836-860916,885863efe6cdf601b318621359429ca2c10422c041475921e3ef500ef2c9215e,negative,Long-running show cancelled,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75701-861762,afa8fa7c2733f6cb5a10c6e86aab5077e4926c4b764aabaff30597c1fe7a3415,negative,Fatal bus crash and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75057-860748,52b23f5a19a23d70c2d3f681749d26ba379326824e062d756ed4195943102af2,neutral,Trade-fair activity without demonstrated success or failure,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82410-855098,576738f60fca22c96fddea56475e775a092fe892776a545b74f78cc373b03211,negative,Club suffers historic relegation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79357-861965,039f53b944c9f1c87dfffb859cfbb229c146ea435c499f931643407e7097b5ce,neutral,Administrative transport expense without established wrongdoing,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74932-859403,0eb338f693372876ec473ded3c072aed8d49d803abfb635f949fc71be0114a45,negative,Insolvency and inability to pay,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76702-861633,c90248eac759e982997af38626c0bf5c89305d1628add05e9236401f4280fd89,positive,Athlete wins Olympic gold,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80432-857766,1dd792fc7141cbee57d7f2ff4e262357c44731bc0b4743a1e2cc19d0aa791a37,negative,Suspected planned terror attack,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82543-815402,932ae1d507cb7a67ff17441183f00cbb77f269cbed57aaa642070c0483b36282,negative,Toxic fuel dumped over populated region,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77439-859546,138f33e9afb5efb0e4aed86a6af4975322aef8a35df23281367aee2a4ed95650,negative,Military bombardment,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76542-860475,ba72c65e5f6fc56d094d8c31344b7b354eaf3ce3b16010082b5f4d1cc9f188b9,negative,Serious brain injury after accident,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79224-807751,f5242b6c36da75bfbca5d01fdd4d6cf4fe7b51b53986d1b11f55c755239dba39,positive,Economic growth exceeds forecasts,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79526-859690,3278f78e194d68e87cd7d825e3e444c23917f76c3042b90a12326ad117b54bd2,neutral,Demographic registration statistics,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76972-857868,3e77d2c2742084018cf2d7891bd938e957aff564b351c2183dd46d0bad7222c2,positive,Named candidate elected to leadership role,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-76225-861195,15bee1153ac7539ecf3802d22acb16a12b560b764fc877098be6ae77156f229f,neutral,Diplomatic meeting description,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-78997-714693,0e81b7f4b3e14c0d5de0c99b950fb985acc4164cc93c4e29435cb2fc3184a9a5,neutral,Commemoration of historical death,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74535-859064,29de06420c73bd5bb96fdb2fdf0e66c7a783e47ce429ae8b611570934503eab2,negative,Victim dies from assault injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86144-848232,6738d36fc263fcaca84da2c760795f4b8df2bfbc49b8e0bbe4f10d7f3d1d2917,exclude,Repeated headline and subtitle instead of substantive lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74884-859543,acad25f3aca5ee660dadfdd58cfe813397e093d0545d7bf22a00a58b8fd690e5,positive,Wind-farm construction begins and financing secured,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75087-860027,0202125ab9872ed7855a48a024e26192b7c9c6fa88e92a802fef1b0f75df4179,negative,Pollution limits breached and cities warned,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74768-644641,55e0391ca59c4f1d49cbb62cd6022315ec1e782e4a792835873bab44b41bba39,negative,Death of athlete,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82507-846441,0b56c177354fd0d4aaa5cdac266d3cda140e49fd7122194ddaf9d62d5c4b70d0,negative,Escalating fighting threatens humanitarian catastrophe,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80794-861373,0b96cf6c0347c7954aeb265b832ff7b83e2cf729316e99440ee58d5a5b001048,neutral,Competing climate explanations without new directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82334-857188,273f186a7d3d1f56bc9515b40143ecb7b09d84b49c64bd60ffb673a5711f5b36,exclude,Institutional power redistribution lacks unambiguous target perspective,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81109-854230,e4864bdeb91edf0254b719e14f4dae1d99b72a45b43fac7bf14eea7d8522cb1d,positive,Named clubs gain promotion,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82088-859254,73cbb3870997434244791e7626e6be331828e60c5b039fed802184687d9c8ec6,positive,Researcher receives funded major award,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75804-861033,e31259717f617fdb74e94fabd94a9a28292ffcf7ed452f881d822cdb29fd4bfc,exclude,Conflicting unconfirmed reports mix repression and new freedom,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86075-853806,647f48724755b7936e1d24d66f5e277e4d2b07817fbc7d451ba04f76dd951c8d,neutral,Legal limit introduced without demonstrated directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79684-861001,6d73d76db54e827f1363bf3883d18c6d5ccae6acbd82311fb93c336880de4951,negative,Death of former public figure,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-75436-856535,611e394991fa7c01db2c7b17145d4dc3c3c93aeeaf23dab9e8d88e5a5d295e56,positive,Paid student participation in open-source projects offered,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-81193-858464,6b64ba3b7f16de640be48abdce77b6f2754a867b5463d875ff58473db069c959,negative,Building fire kills many people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-77168-861783,cb0dd4221f2980c6a1055422b9958f5da7456c6aea6ee846258a2ed36754bb71,negative,Protests bring road blocks and communications shutdown,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-80732-859708,111c66d95a01e6998eb473734a77cf7d4fc139f405d8bc375636ee50c899d853,negative,Terror attack causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82404-807256,424eec9704b3d64c4facc51cd1de0ef090154ef3bd02794f4ee96d9c9de60d34,neutral,Draft selection and player background,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85088-864702,0b70462daca5b4cb054b2dfe953505303acb3fa42f872fbc29dafba12a913486,negative,Attack kills and injures residents,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-74872-862058,343713bf3b3bb650bb3812b3c8407b9055a6d5630119986c83915e6af7b00ede,negative,Food mislabelling scandal and product withdrawals,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-85419-846701,8b0f1fa39675b222860e8cabdf7042872fac26014ade2329a693f26b1ca2c200,negative,Airstrikes cause deaths,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82392-851995,579190d652fb434bcd203e3505e5563aaf8f6d68cdf8b753aca09927aa32d28f,neutral,Political proposal without implemented outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-84328-834776,2a465c1fa3b689beda23fa321194181da180bcb99a371d66469acd74d42b3bbd,negative,Vaccine access denied to controlled population,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79956-858001,696e747eece43ac0fdcd3c358f9d79f9bdb0c01995d4dd5d2856b39d02efb71b,negative,Proposed religious bans threaten affected community rights,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-86298-852878,95559612631c52d48420149e67118f35085f26dc3be808049a4b544f20089676,exclude,Extract repeats headline and subtitle instead of article lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-82874-820805,80376bbe6b9b1aa8e3f7eedb51bac6555c4338b76ac4cd612e721ce53c761635,negative,Fire kills many people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-83268-823566,53f68c64b8de76d249176e8b46e4af51f531f542a0a83652fc56d31ee05d538d,positive,Team wins world championship,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-de-79562-732746,25caf3415739b7e2d1a2f1da1c3134c9beba3192e347cc3a5fc280e4edb2ef42,exclude,Headline gives opposing outcomes for multiple political targets,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2958130-4829308,74444bc1201f1eca993a6afc9596c7f5f7f584389064d3af441cab4feba19160,negative,Annexation condemned by overwhelming UN vote,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2944564-4818046,a4814d01190c58fc1e5fb741341fe43968c5c5454dbc6c6e640ab10fbe52d7d2,positive,Flight recorder recovered for crash investigation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2993847-4832368,1a71e259402064a053e624adc2d87328db37194b808bf4a69f602cbaf9f3d68b,negative,Body found with signs of violent killing,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2931883-4813851,43ed37a20c352afb55491afd3289405edc423b67ac2af6ceba8b52010b70eeb1,positive,Team wins premiership,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2928802-4812942,2c84e451ba90a277a753f6917652c7156c1815046ec114c7eef91e5ebc5dff4b,negative,Armed takeover and president forced to flee,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2858134-5024821,4c1eda7ba1349a62cb341096c1023e5612b12bf1ceb9f031b29234fe65ee287d,neutral,Diplomatic recognition decision without established directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2833007-4830613,a4c76cbc3b810ad0dfe4261b0d1472cbafd64bde099fbe93af488515f20a2742,negative,Fatal helicopter crash,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2887933-4818363,fab168dd5611ae2ac2f1152dfd4837d1478bc23910354e2e3acc61233c0961a4,negative,Fatal helicopter crash,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2874229-4819209,03e21ecaf2f5954be6b1582755be6f428b96bd63d8a678d70015468b4a5c7df6,negative,Mass shooting causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2891006-5007995,d2f278cc3ac03217e93982dee0addbb6794e616d8490139a661fdc00e35bead4,positive,Inclusive workforce initiative successfully operates train,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2845635-4817611,116fe94e842d6192edf76a0d78c80afbde3eb08ae180bc06fd97e2e8d1339536,positive,Named teams secure World Cup wins,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3013638-4879682,c7ac832e7ec1a8f961dd041cba2974a37c1acbc71dd40e9c3eb78ca9c8f057ee,neutral,Auto-show schedule and anniversary,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3007927-5003141,d867135c7f434cbcdd896a26f0ed67bb1d898a39bf78dc65c90cab1ed48c3e80,positive,Completed bridge opens public connection,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2940389-4826089,ec512a7f2999890a8608c30c77995bfcde1fdce2652b23f5f717ffc77ace3cce,exclude,De-escalation claim not established by meeting-only lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3054619-4990179,94a74a3eb5d73563bdbc604f51de1adfbe67146844212dbb413b899ac1a57eb9,positive,Named football team wins match,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2945898-4824585,907e6a4f1b199c1bcc16e4c80c6ab491132a5247626f1053cced180c5d14220b,negative,Leader admits serious criminal offences,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2952349-4819809,cd13007c8309874ce35de8a36b4b2511bb788c3896bb1f59ccda94b6e135ecec,neutral,Conference adopts future conservation commitments,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2843814-4820970,f2db36db38db76fc0b28b5e4e10c375198c1803e4254c9383d2a55c5aa69e05c,neutral,Diplomatic meeting without agreed outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3013904-4880807,88432cdabe6feaa3eb8ab5cf94abd9fb358c20aa55e744a9ec62dfa41437874b,neutral,Social-media post described without evidenced directional consequence,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2814538-4816643,250658fd3ef3db481e1fc7f39c0787a13c60de3d5b848b5a44d914778a5730eb,neutral,Protocol migration replaces FTP access with HTTP,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3013435-4878753,bfc0a3d2711a7d7bdcd9324b69bc6d7341c6cf59f47724d920752a46d865f901,neutral,Further negotiations scheduled,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2812502-4818697,1128832cd2bf3403634ce3074a34b1208a6f0f54eba4028e93853e3d8bffda76,exclude,Platform change and investment withdrawal give incomplete mixed-target context,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2955706-4813130,fa3ca3b06cbcdd830701db19bab658dade6bc4758e5b783974d4db16fdf68583,negative,Police computer systems suffer cyberattack,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2839679-4827406,60b1620d626c26bd261e85c50caf6ba04e24cc89567f0aff56ebe0b51579b3f5,positive,Child successfully rescued,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2969617-4824453,7fdfcc87406e41e2339b055e2714ee0af4b0d4d35f5b5776bf56f775b2c1df0e,negative,Military drills reported to destabilize region,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3002457-4832389,bc779449b3b6efbf2df908f208365022797c490025ed5a96cbb32c09ae6685dc,neutral,Court clarifies lack of involvement in publication,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2817172-4824760,eeaaa4d59132573de47eb5d13514ee06ce42109952ce46d99040bd8fa0db42c7,positive,Club successfully defends championship,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2845578-4817600,fdd6a9f103a24a18dca2d3f6ad44e33aeb6fb4c27643bc116582680b01453daf,positive,Named teams secure late wins,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2854298-4820755,ada10ff09e433a696ae4e5031652ac17194e93a6b89f586a38c66c1c8da77650,exclude,Lease nonrenewal has opposing national beneficiaries without clear common target,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2947131-4815058,50840ce9325f4539aeaaab962155460ae48998e460fd38c5b47cac3371be3bcd,positive,Team achieves first win,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2970345-4825095,7e616498de9bb692329b67bea8fc2c62116e6c8b8348a06ad8baae008674b80c,negative,Financial-disclosure redaction raises transparency concerns,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2817997-4813206,eaa5bda145873ae87ba472fda93ee7506bea2052a597605ffca2f4daea0626df,neutral,Acquisition terms without evidenced premium or benefit,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2945870-4819204,647d99ba71bc93c13d6fe321d2230d370d492c6f1ec5fcf067d4307e12826f45,negative,Shooting kills and injures people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2892597-4825531,e97df757e07f042d13f8205c14eeb02207c3335730cbc8e93878841beab64938,negative,Pandemic infections and deaths rise,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2820531-4814946,4a68dc7924da44e8ba32c9d5003753fb6c999f63d3d87de3dffc9249edc263d4,negative,Fatal road accident,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3008919-4853164,85429d58c7be3f0f54c55161e2c8316da6bdd03c4db8378517c2d042085635be,neutral,Awards ceremony held without specific winning outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2932956-4820033,151330517bbb651c5ce597df0a6c390b5d8a1eb8c1413158dd488dcb92805c6a,positive,Cross-border communication restored,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2921324-5007938,7c6b286a8ba41fe3c58e7e09947ae7efbb15e396b8d8ed7c9b30a54bf122ed74,negative,New law reduces affected patients access to abortion,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2886281-4819114,fad10fff63163c1f912702404d91f3d36bff5dcba25e67fc0e4822b77a5147ef,neutral,Project participation invitation without realized outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2810296-4820673,4a81b19fc6b51ff48aacfff276ddfcf05df9d3e4fc81ba9fa573ecaae20f54e3,neutral,Executive resignation without stated adverse cause or consequence,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2992274-4832375,14dcdd8f9d700841e3b9b4b91267094ba6b92199537c200a76c5867026fb777a,negative,Energy and manufacturing constraints threaten development,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3011114-4880301,fe6b71f0931fb9485a7e3962c73dd8e5a33f2fa1783a5a03c926c3b3eb29c498,negative,Military escalation amid regional tensions,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2995026-4832393,5f23c31c3641197b16f89ac8054bf0d4dcc0c4b92d290780658c8b1263631230,negative,Shooting causes death and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2917287-4815662,267220f0d534e083ebd0219af131d1dbfaca81e441739b8d7b73815857bbf9e8,negative,Pandemic causes major job losses and economic contraction,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2873205-4818474,58c4484f3ea5704a4d20c41650480867b05f84539b1a7134babe121e9b2843da,negative,Teenagers injured in shooting,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2895271-4824088,497ed7fa01956acd777aeb1ea0ccdcede801185c267cf20a2e0c0862ec2f04b3,negative,Government forces broadcaster off air,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3003233-5024269,67f0dc687858c25dc051d3367d241618a7684b39af5248444f84f891033e34be,positive,Named candidate wins party leadership,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2814034-4812611,b3b872b0a7abeea4b36b86fea033930b0ebc8723ab7109ec9384477d68689734,negative,Attack injures team members and prompts charges,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2974932-4817360,60743c15ad1df978950723ac7460b4f83e271c6eb69c232b1971cc5dda0c0b75,positive,Scientific telescope successfully launched,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2828842-4830605,9660631cd1d73209a70f7d717a38923c1f87ed0f5cabb9578fc726371a6e7deb,negative,President loses office amid coup and impeachment threat,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3011642-4987753,99cc4c373f0bdaac7249031c5f970be0d3f382f4fe5463b2d4154179e5472c3d,positive,Senator achieves record-length speech,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2926548-4815263,a92be3275569d704b5536ada3c080cee97e42d61c3b563dc76865a819bd538f7,positive,Enacted stimulus provides financial support,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2943542-4825686,24e44e054151f4a93f5799c6b68450e28c955376991ad2539c923ed45183bb55,positive,New disease treatment developed,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2985797-4821718,9a9960c5317a73e17fbea07bf4761cbd15ebbc09629868225aa9ec6d384d2c8f,neutral,Planned voluntary succession,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2926240-4813844,0909735a8d0ffa37876a9dcb07c657f58d64f14e79a2b7eb505874b0f928ee03,neutral,Election interview and scheduled by-election,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2928341-4823583,403b608eddc8380ef83cf98cc1ba095c56ca3a9a6bf358ad3bb51ba7382f6713,negative,Shooting causes death and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2839303-4823280,83f086b8678e844368105d849edd33ff3cfeab4c306f971d1b2475985c24ba8a,neutral,Summit scheduled without substantive agreement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2942848-4828415,5947901b6209ba939399cd9cd59b7d9056b05beddbc760c4694bd43274ea3c6f,negative,Appeal route rejected,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2837973-4829364,428dfdabdf6467ded659b6995863f4c460372065666210b8080566ba120ce819,negative,Hostages and perpetrator killed,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2868568-4827635,c8b2d1ab05f3b84633a7065666281f6a8f9de18461b00ffea7202de2db1d807e,neutral,Convention attendance and activities described,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2825493-4823838,d771aa69a5f64d6a0d8aaca633117e201db3ddb134b0056a91dd5eb717997b83,negative,Suicide attack causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2907033-4830130,16c55ce315f538764a06824888500be262c83e365db68a28d79f4b68c822328d,neutral,Campaign interview without directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2809243-4828448,37e25099a7b5c06a5d63107f816d90b505c74b609337367001cf8de172898049,negative,Tax increase raises costs and creates broken-promise criticism,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2817442-5008694,f46ed3fc4759181e74a7bed196411562bfb1bfae7ed128f539eee21b6066237c,negative,Party loses parliamentary majority and governing certainty,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2885202-4828767,c65983fc82387a6c3f8bba25ec876fb6be1fa4347406f3b3a6dcdb7cb064f0bc,negative,President impeached over alleged abuse of power,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2863031-4823116,29cb7fe3f94274b75278710f85e0fc75c93ed328763fa6419c53c1bd5accd6ad,negative,Serious abuse offences result in prison sentences,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3013758-4880723,0574d46e812a5f4ba16a18608c402e305878036e0f14be25de47bf5f4c907ea9,negative,Fatal shooting,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2930461-4813860,9b08316d26529f3b97f18b2e5c7e29b4c1382bfaa543724efedb645b0f69b2e9,neutral,Scheduled by-election and candidate interview,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2926620-4814122,f14fa65b48bb692cbdcc2fd383cc3bbec5b04ed0ee140f597f8a3b086ebb3a6e,negative,Outbreak leads to lockdown restrictions,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2822684-4818536,84b2d0e27318b451e0a6a94dbe9249366746ba6bdcbc3be0bcd311bd87067bf9,positive,Wartime bomb successfully defused,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2834080-4818126,d7a93d6ca8273954b4b6b926f84e73c82ffc5cf590100b4c3a8db03efa124ceb,neutral,Football transfer terms without demonstrated performance benefit,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2940187-4829190,52ac46a6006f8de1784a961642615fc89ccf6ba18682314c0500cc756070931c,negative,Imminent invasion warning,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2837166-4813204,c8b7d8aa8c94269209f7e136543f86fe3b0d4e62679cc289289339b28ee3bc8a,neutral,Acquisition announcement without evidenced directional benefit,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2918156-4820931,b0d11d8240950f0712eb4ab8cf14e6b3a170d9683dc6bf23c50306d134f34159,negative,Threatening response to military drills,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2919534-4813505,12e249822fd7b8fc36152b5ff8a992dc3b5d740e142ff10b13478e1c31f534c2,negative,Law restricts affected young patients access to treatment,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2927251-4813149,126ce4a2ec03f6123293e0df76474a626736e14ef7fa2d1478a2e16c669d46ff,negative,Athlete suspended from Olympics,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2969393-4820644,48f1ed2417614555582e852f845e533a4f1e0c98fbc559029ac529db5026a286,negative,Helicopter crash with missing people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2916638-4813013,2178c6a0fea7ea254c68c7372f1e48d97728a7977b3ccd32e4afee8122e3ad48,neutral,Stadium inauguration and renaming without demonstrated improvement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2856306-4830054,fa82347ca197f87637847cc27e7e343797055a92253ae70b79adcb94d987a2f0,neutral,Convention attendance and interviews,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2845310-4826505,76ddc6f049a1d239c74d48931f6f0cb6a73757d500883362fec97887f9ad5c2d,negative,Coach dismissed before major tournament,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2875932-4830458,caba70f1ca4ec4e2ced7c22f84188a64a4f87e21dadb78f1c780fe723d445f31,negative,Wildfires destroy rainforest and prompt crisis response,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2975290-4828556,3070301542ac9127e2b99993a480c07e4a1585911e84d9186bdee91340f7ca04,negative,Government borrowing incurs unusually high yield cost,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2819056-4818832,464d968ddb862de93d2b807dc02dccb7ddbfad65e64a66c3985d4dee7b20e14b,positive,Legislation expands marriage rights,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2884297-4825578,29230c8b279084beade1fae66b4cd364097f89ac5b502267825bf19077c6b308,negative,Deadly outbreak disrupts nationwide services,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2880628-4819991,abfe235f714b99bb92b9c932db203eaf4f63ed34eb4e9fb8f7d5c593b5cb94e8,negative,Minister injured in stabbing attack,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2968334-4826696,a600c6f190ea4f5decbaef42027f54167c9e0230060bdd9083b1c8c427f3948f,negative,Tornado causes injury and building damage,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2907331-5024827,31ee9c697e09978811da683f91c78ffe5066066473202f138a2003038ce791d9,neutral,Candidate interview announcement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3083587-5013891,faf263e28e91198050dd1059289d50228a710a32040d7247371c657e49a6f443,negative,Military deployment responds to regional attacks,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3002071-4832362,126757dd85e9f8fad5bdc7e88fa2b1704ba9b1beb875cf747e7718213c4ba772,negative,Extreme river levels create flood risk,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2828243-4816506,391fc254dc48eeaaac204c20212a9397dace77f764ec75d700c0f0dbb3c207f2,negative,Train crash kills people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2850144-4818399,d43d82f8eb734e6d69ab83b2a5d62a70a06c7fa0cb6adaf976d225986956e0b2,positive,First confirmed discovery advances knowledge of human ancestry,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2858576-4819969,db8c6ec5d80207876136e0ce865973953e58c4b9797da3383e27cef94cfe936a,negative,Tsunami strikes coastal communities,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2969425-4825445,5e89c5be5c5bfdb6a9c2718049f4494fc35aa0527e5b466b8fdbbbd0cc02a758,negative,Reporter faces espionage charges,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2861857-4827318,c18ae05f7e247f02ac6e0643877e26d2faa4ce0d2bc24653872b67a6884c1bea,negative,Political nomination withdrawn after opposition,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2816470-4821715,4b7bb698c5c4f30c2d2195b4ef705670c6feb02649e47fe90736f2c0ac48f3ca,neutral,Coaching contract announcement without demonstrated benefit,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2819618-4813630,f579bdba87a203fcecb885036bbc48df95cf6bf065eca420d823e91659fc5806,positive,Astronomers confirm new stellar discovery,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2955696-4824396,1d12f24d1c78f3400303bb7371f9ec2e8f4d445878b287628e2c3a5960b4638a,negative,Earthquake causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3029103-4972496,abfa0d904ce301e9216e9b1a3aa9a1c791611cf195313a7928271a771a0345de,exclude,Headline mentions incident absent from event-only lead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2907434-4812101,06682674ca60ae1c4607fb2ea614de1a5181cf93072da62ad0616491b368d9b5,positive,Study demonstrates new biological finding,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2853623-4821691,6e7a223a92ffa0b3e68bcd8c439583ef54c0b54369a4929794cb60adf43b202d,negative,Rocket failure forces mission abort despite crew rescue,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2825212-4819799,df31130931696be20a69d8c4a92572183d06c9b2bd3fd5679f0eb355be3fdebe,negative,Killing by nerve agent and criminal proceedings,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3004483-5024281,b482dbdc5d7a4f97a0350ac66c4e0cac77f78fa81f6d66fa41dd069a9bd113e7,exclude,Meeting-only headline and unresolved tariff threat leave primary outcome ambiguous,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2940201-4820955,84f19792c39c90b59571f5689cd87799c8d75d03e6faf79a8a7b57da78711303,negative,Species becomes endangered,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2975999-4825501,6169402208f2878fc5e5ed066720af3006bc673fb055ba4395477479e4ba6fad,neutral,Book presentation and travel description,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2832698-4815025,2d6adabd18777efa335424398d6eb3819066ffc8cb6b1c0d73ccde4b68ddcafc,negative,Resistant bacteria exposure elevated among surfers,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2819714-4826842,c0012983aeb2c7ccb40acf83908b9031613d20236c98b6469748a27e575166f3,positive,Research resolves scientific uncertainty about stellar cycles,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2880972-4820890,b66a1b65a26d7c2c0036699c09e31a06146c4e689c5e1936518526127951f6bc,positive,Athlete wins and sets world record,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2933986-4817410,3565e07754ec0f901eac1b9a3ef32d7460f2a4ec2f5987fc2670e3b2d26292b6,positive,Debt payment averts default,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2880124-4830449,d15e7ee28496109be6dd27c84cb35c9dde88134879514aee8fc01daf5cd90e93,negative,Plane crash causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3026639-4972080,b45455256a07dfc66492da966d1a979b732f7c639a667b0d30b5cd7310bbe8a9,neutral,Exhibition schedule and performance description,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2826338-4829350,fe247de4677243333ba808f24dc7c3ea6dd5b1d1fc5628c72974dcd140fab2c2,positive,Court blocks restriction on affected travellers access,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2922321-4830251,c85865f8f627dd5387945831d516b60595aa8ab846af654c7127c592c8809948,neutral,Candidate interview without directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2929469-4829321,08e804d27bbc56f76b33e6b4f5cc391fdfc20293ddcd91425eb2046866d80c9a,neutral,Diplomatic military meeting announcement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2840087-4816603,e6a3adb534b9c28964fb71a9417cc212ff313e1540be5aabd315117fd872bb77,negative,Fatal building fire and firefighter injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2965658-4814317,8c53c79b40e85aa0c5493d09a9d56d43e69c7e45991d3e710818afcfb7d7f745,neutral,Presidential handover meeting,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2973597-4829681,bc5092094eca66b06120b83989729ef893f3681ddecee8e822ecca991da87f38,positive,Candidate left unopposed for leadership,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3065582-5004376,b938df235af92544afb63df6302389ad3065377172740fe22d56799059192902,negative,Woman dies after officer shooting,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2819582-4816803,b2f262963ce55a88dd3107a752ec3a77410bd06788bb431044aaf7e8fd5a2eb8,negative,Injury forces tournament withdrawal,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2810289-4812297,c363ded2d4fcfb5cf74ab663b44721b3f2deb369708d14c1fc63c2b5dd1c1658,negative,Falling tree causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2848593-4817978,40053ff7f79790994ddb7b078a910d479f64016074c8b952c37d521cf2a17174,neutral,Community event attendance without demonstrated comparative outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2827153-4820874,19c5eb583ed5433474c6af20084827fff130699ea8a2d283fb8b561188b77d32,neutral,Writing-system change without established directional outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3022229-4969025,b4f05533c6578bffa81f1814d44cf4e1012c1e5b709ca9791449514c8974638c,negative,Former president sentenced to prison,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3011313-4970441,8253a8661be25f7b32dc95e2aa6de51124a196f5f1475c01bd9682cb8adcde57,positive,Shield law protects physician from out-of-state penalty,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3004941-5024278,2db5a3e83ebc2d66936c1b3c74a7891760d3bd8d3b6ce1f195f5bac89b390c4e,positive,Cathedral reopens after restoration,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2819202-4829625,0e2dea4d5ed907d4a55e4c55787fd0d26c65732fbed2be1a6b7b8c6a558744ab,neutral,Product strategy announcement without demonstrated outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2865759-4826705,ae27f3951ab8251438151a093ca1d465efa0f4b44adf0f4e3a0fa4e8916f20ec,neutral,Competition attendance without reported winner,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3022913-4970749,9ad76164de1ef39112448390aa40240d101349932635fd6bbc76b23f2f0b63d7,negative,Religious leader arrested on bribery allegations,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2969170-4814929,53d0a95fd5dea11258c1f05f3eb60e8249be706619507f2494ba4482bac18ffb,negative,Athlete receives doping ban,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2838645-4829227,e8cd8e5a6a552d4807b8cdc6c7b643107f2fa3055e9fbb24e2b5b1cd38d35111,negative,Fatal collision forces program suspension,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2836384-4820210,481aca0ee3280e4fc62b5e7a42fb24e907149e975e2c7ff4a5604daa97cedc27,negative,Plane crash with all occupants presumed dead,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2942332-4828450,82292ee35a47a9ef2d63b00e9ea237f79efcc27670b379058fa30d2947e3e412,neutral,Government clarifies policy response without demonstrated outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2926813-4814365,3d605bb089f145b4d964021e22ac7ffab05e8f7ad9e5c7877b83d1ee018f3c52,negative,Shooting injuries disrupt sporting event,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2906942-4830193,be16f5d87adf7e09bb5a4fd70b65577a6958097a7d4a1d5884e57ff1b8da911b,neutral,Campaign interview announcement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2880569-4825655,000a34539e5dfc062ac571fb318b8c94ce8a3a52335e0ae4aed237bca3f15e4f,negative,Planned blackouts interrupt electricity for many customers,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2939622-4817723,8e82f055c8ab233d08531c82f0e7aec749c2189420711342154b1f16b6feb722,negative,Guilty plea rejected in fatal hate-crime case,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2831520-4821228,77b42c19607bd11f58b1d40e13c1f091fb0e71f6bd6c7c5da60d2d952527a1fe,positive,Named candidate wins presidential election,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2911490-4824486,eb88d79917120025968860a03520e95e1dc1d4d78979b9e935495484bd091066,negative,Prime minister contracts infection,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3054779-4992761,ca870ec8aee8ea2224b7921d1d834a855408672efa8bd1e9291d69173901141a,negative,Former lawmaker sought through international notice,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2914287-4818113,f82dd55106abf2eb598d5c596dfa6d98ca57a6f159191af13387062b7b8f21d1,negative,Manager dismissed amid poor performance,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2966445-4829131,bc8e763b7f7722296c55426c8ab37c29796d2840555c4d7983e81bf17942146a,negative,Company loses control of self-governing district,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2975381-4819357,839915b771dd1c140e3409e05f9db8c433bc53278a788a7befd6a6b09dc651d6,negative,Record heat indicates intensifying heatwave risk,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2995563-4832373,b6db6389154f792e90f84522b514cd89492b35d6c459099dec74f274dcee3f4e,positive,Hostages successfully rescued,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2815817-4826097,7114515e8e4e0934f3b2c9562a7faa3d6862de3025e59b57fba9aa57695e51d9,positive,Successful simulations provide new evidence about planetary habitability,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2880165-4829628,d2724cc74239e43869c88483416962077c6070b8096434a0e62d24f74d13a97d,exclude,Warming-related harm and conditional mitigation mix opposing outcomes,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3078720-5004397,3d8d332a319e2668a7390fdaf2ce58ae2f9cb4d17f3225e85275809d3a5315a1,positive,Club wins and advances,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3001552-5024321,8d3ae61a68cba766761ee6b47949b160579d7808d3050e83f52fedb83552ace4,positive,Prime minister survives confidence challenge,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3054516-4990173,318ec0cd60aad85602f54872233831525b95905adb2291e59c01b6962eca5985,negative,Multiple withdrawals damage contest participation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2927271-4819367,6a88801fdc0b0d66f47d12bafdb58fb4ad865f061a8d4338aad7a8031b6ff572,negative,Floods kill and displace people,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2872726-4828766,436ac295e8d70a55663791d3532330358987957804d97a6a41945136024ac114,negative,Officials held in criminal contempt,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2954922-4824001,e089115a4d48fd015600c13f65e603a39670c9618037c77449ba30e32e995e05,positive,Named candidate wins election,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2833898-4818134,b38837a3662ac7e234d807445b667b9ec69696698096a4770f5c14cbf824ca08,neutral,Routine contract extension without demonstrated performance outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2985140-4821106,6b1be943f711580050f54b353f25417e4ca584c6117f1dea48368b20e22bf1c0,neutral,Travel-book event description,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2883606-4825134,c67600765f9fb4c53a4cfdbc775223f4d43b70877a6dfd3ca03eff00e194bc05,negative,Pollution linked to premature deaths,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2928457-4812574,d889ce3243e78979e1824fea43564bc94e6b2b18a87762b69f99f5e21b021530,neutral,Sporting schedule announcement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2930271-4821107,41174198b49ff1011366d5e48805cb6020147e698cf8d6d76c0b49838ae966c0,negative,New disease case after prolonged absence,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2843114-4818102,07fbfbb2ab672339cc2c2457d71bc22375b81525c30be26781bff6cf3de783a1,positive,Named club wins championship,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2859576-4815627,bf170443d9d46d5cbe9312c676cf803622d4d36eaa4e836f5d24827ffd2f2f64,negative,Building fire causes deaths and injuries,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2911067-4824803,3c2952a08ec7bcf82a1b78dc81332f5a0a65208bb6cf9c5beac378da525b9e10,neutral,Software focus change without stated adverse consequence,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2942367-4821363,d03a3b8f742dfe0153d13cbcf1f93c249686c949f477554adf11fc723a11b0f9,positive,Historic wreck successfully rediscovered,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2946128-4821779,581fcd2fb22f8a6466cd03890b2a47befa107b0aaf6033c4ec2c37157ef19d6c,negative,Mass shooting on public transport,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2880351-4820001,b36d8fe32dae4ed35dcda3b2e9335f8f3278d695f9db0f52d5b2302c4b57455b,negative,Death of musician,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2823709-4818148,e52049a8b52a962aded71011abbcc52f970e3c5aa87e40b60303c93620232e08,neutral,Routine coaching appointment,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2969298-4821766,2d7c41db80b8c11c0c690ced2e70af27e897b3a0c9a1e76641fb46b8c500582c,negative,Allegations of extensive child abuse,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2840141-4818150,9b59e20593af106f349f627b90ba98e89c8c5b3d46d46dcd2b4fd72a2f14a017,neutral,Contract expiry and planned departure without adverse cause,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2893166-4814462,efd8dc1ac92da9681190a05bebca69b2bc48e9897a6c49aa94cb549f33ee6bf2,negative,Candidate abandons presidential bid,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2859097-4825758,28e7c139fc2e06ec9f9c6c3cfa244037a9bd3972219f07b76266d56c46b2a6c1,negative,Road accident kills and injures passengers,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2860613-4818886,f5c9962d529bfd29b16ebe97ce8b3fc30cc05fe49652e3e98a56deb541f38000,negative,Airline loses permission to operate in country,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2868115-4819056,dedb8364108abbbf17948399ea5c687c895bcee80309f1db8ba17db5ec30d92b,negative,Law removes affected patients access to abortion,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2879722-4817769,dc69d7cd26d8a25e5795448aa45e1f50dea9d3f284669b873c675217978b268d,negative,Murder and unresolved demand for justice,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2966169-4824895,cad2a40454450bb8f50dae429093e761be27a85ea739c54dc7fcf7c00ba31616,neutral,Asylum procedure change without demonstrated directional effect,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2968660-4825482,9473e40332e8b045ce27e10b56cc38990e469abeea7728a91d9e4fe990039178,neutral,Art-book presentation,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3079816-5010345,f50f1a52e14eaffdba70f17157bf0d51d883744235718fea20ce389106b76bb0,neutral,Routine sporting contract announcement,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-3012409-4970445,f41a2185f42b76da46dfd54f9f5d1bb2d2866ed201429f26083dd614395d8912,negative,Helicopter crash causes extensive damage,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2970420-4829072,383250058b117bc35d0ac2a10da922a9af05de86d2c4ae2caab91c2ce8a6ed1a,neutral,Partnership separation without stated adverse cause or consequence,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2848757-4812653,090cc7cb8a8831f27405dfe08ca2b8cb42876a02b03fffdc15851aa2d0999e85,neutral,Pride attendance and anniversary description,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2965821-4827226,45803327cc2e64e1d0a7a9e1e6bcd4745b7453a44991e56bfdef79a564413b39,negative,Fatal abuse allegations and criminal proceedings,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2815442-4824450,f71dd19095dbdd12265e72c314f4bc525701d9ea0baf0af89a21eeb5aa6282b8,negative,Director dismissed amid investigation controversy,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2886393-4820282,69ea43c38fb9663b201024f8d825a1444717071a71c5b279784eadc168f6972b,neutral,Legislative resolution without implemented expulsion outcome,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2922936-4812157,718d550a6a0f7797985567adc3679d6732128e53713f16d9cbf30d281b82b50f,positive,Named country wins competition,AI: Codex assistant in this chat,Codex-reviewed
+wikinews-en-2917331-4827483,07f34840b0b5426d5ada247191a41384f49f39ece722b5b52cb34d56b6c58c62,negative,Earthquakes prompt public safety warnings,AI: Codex assistant in this chat,Codex-reviewed

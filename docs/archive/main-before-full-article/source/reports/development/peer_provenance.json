@@ -1,0 +1,117 @@
+{
+  "reference_commit": "a840bb7bc8f1656f1700ccabaa89837ce347ca2b",
+  "method": "Unmodified src.sklearn_models.new_linearsvc().fit on unmodified prepare() training split",
+  "original_weights_available": false,
+  "published_0_720_not_reproduced_or_used": true,
+  "training_rows": 5923,
+  "train_sha256": "e224bc21816d87bf5353b7c6e59656ce6ef2e5e4a93366e6201325d555ca15fc",
+  "artifact_sha256": "fc71af8d9bde20e694bf0d9efba2c084f6d3b0df10b708caa6edf2da287e3ee1",
+  "model_size_bytes": 4280946,
+  "tracking_params": {
+    "vectorizer": "tfidf",
+    "ngram_range": "1-2",
+    "min_df": 1,
+    "classifier": "LinearSVC",
+    "probability_method": "softmax_decision_function"
+  },
+  "pandas": "3.0.6",
+  "sklearn": "1.9.1",
+  "python": "3.12.3",
+  "source_files": {
+    "src/__init__.py": "f0d09998ad66427b0985c84b3aad14512883bb0ae7691c986b3b2bbdf3b92fa0",
+    "src/compare.py": "1c23ef943550bc2a162852da656e60aea33f610ae3b1d6969eb0851fb5fa0081",
+    "src/config.py": "1749bb3db200910bee948e8f6e20cf2fadb5d6652468b9f31df0268df9808f32",
+    "src/data.py": "287ce3ef0dcd5dc3ea01ae77940247ff56de667a614a4232aea24f86f93df02e",
+    "src/evaluate.py": "41721a4f2dea7764a245e099169c07af4fe0d86939b47d344cb5bc568f1b1f99",
+    "src/finetune.py": "b54aab6e19cac88b23807fbf1173fb42e609fd98e964dbda380cf7a6cd47dfba",
+    "src/hf_models.py": "94bf0e5a5b8010fa88507bbd5b014255836edb8b0cb2462a6b6a9acf51831001",
+    "src/interface.py": "271de171d2b6ad6d4df49e6d11bf83625b2a5256e25b2c9349f9c9d72a623bc9",
+    "src/labels.py": "a5b73e396ba3f89d55b9b8396e8386e3f79f84d618fb509c0005545b19305a24",
+    "src/prepare_data.py": "288c070e3d2e52b08a7b3ddbfe3ff9319aaaed34f4b6431b678c7fce53bf8731",
+    "src/registry.py": "f2fd2635aded91ceeed8845bfcb025fbe39c2bf71cf0499a10add6008334762f",
+    "src/scraping.py": "44d0f4e7e1544fde05a438ecab34cce770f8c8c6c71403c964c536485e72bf5c",
+    "src/sklearn_models.py": "acb462b235340e97252104cc9a813b6870c0307a4754bd7612868dfe800583ce",
+    "src/tracking.py": "e782f78ccbdb5d8fead2270049035ebcdc6372e8db333173c4656116956cc9c3",
+    "src/train.py": "ea907b456d2ca09bc3008f0f6781496a74f475de85301ffc40686805d6500bbd"
+  },
+  "data_metadata": {
+    "seed": 42,
+    "test_size": 0.15,
+    "val_size": 0.15,
+    "train_size": 0.7,
+    "stratify": "label|language",
+    "min_chars": 20,
+    "split_steps": [
+      "Zuerst Test als 15 % stratifiziert nach label|language, Seed 42.",
+      "Aus dem Rest Val mit Anteil 0.15/0.85, ebenfalls stratifiziert, Seed 42.",
+      "Train ist der Rest, etwa 70 %."
+    ],
+    "cross_source_duplicates_dropped": 0,
+    "sources": [
+      {
+        "id": "takala/financial_phrasebank",
+        "config": "sentences_75agree",
+        "language": "en",
+        "license": "CC BY-NC-SA 3.0",
+        "url": "https://huggingface.co/datasets/takala/financial_phrasebank",
+        "snapshot": "8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964",
+        "rows_parsed": 3453,
+        "rows_in": 3453,
+        "rows_after_filter": 3445,
+        "dropped_short_or_invalid": 8,
+        "dropped_duplicate_text": 5,
+        "rows_kept": 3440
+      },
+      {
+        "id": "Kenpache/multilingual-financial-sentiment",
+        "config": "language=de",
+        "language": "de",
+        "license": "academic-non-commercial (card also says Apache-2.0; stricter reading applies)",
+        "url": "https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment",
+        "snapshot": "9d43950d151602f623f28bba62f30554b5d40dd2",
+        "rows_parsed": 5023,
+        "rows_in": 5023,
+        "rows_after_filter": 5023,
+        "dropped_short_or_invalid": 0,
+        "dropped_duplicate_text": 0,
+        "rows_kept": 5023
+      }
+    ],
+    "rows_combined": 8463,
+    "splits": {
+      "train": {
+        "rows": 5923,
+        "by_language_label": {
+          "de|negative": 974,
+          "de|neutral": 1697,
+          "de|positive": 844,
+          "en|negative": 294,
+          "en|neutral": 1493,
+          "en|positive": 621
+        }
+      },
+      "val": {
+        "rows": 1270,
+        "by_language_label": {
+          "de|negative": 209,
+          "de|neutral": 364,
+          "de|positive": 181,
+          "en|negative": 63,
+          "en|neutral": 320,
+          "en|positive": 133
+        }
+      },
+      "test": {
+        "rows": 1270,
+        "by_language_label": {
+          "de|negative": 209,
+          "de|neutral": 364,
+          "de|positive": 181,
+          "en|negative": 63,
+          "en|neutral": 320,
+          "en|positive": 133
+        }
+      }
+    }
+  }
+}

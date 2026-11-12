@@ -1,0 +1,173 @@
+{
+  "seed": 20261110,
+  "extraction_version": "full-article-v3",
+  "status": "unlabelled pilot; rights/event review pending",
+  "sampling": "Seeded first eligible pages from a frozen recent-1500 published-category membership pool/language. No sentiment hints or predictions. Explicit translations and historical pages excluded.",
+  "exclusions": [
+    {
+      "id": "wikinews:de:86865",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79346",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:81827",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79113",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:83854",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82405",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:80867",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:82522",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:78921",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85173",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85692",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79131",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:79912",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:de:85188",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2935205",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2834431",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2927091",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2886393",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2833007",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2848441",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3012307",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2893166",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2833898",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2814034",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2823755",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:3017543",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2995321",
+      "reason": "previously collected page; not a new pilot input"
+    },
+    {
+      "id": "wikinews:en:2843814",
+      "reason": "previously collected page; not a new pilot input"
+    }
+  ],
+  "sites": {
+    "de": {
+      "rightsinfo": {
+        "url": "https://creativecommons.org/licenses/by/2.5/",
+        "text": "Creative Commons Attribution 2.5"
+      },
+      "readonly_observed": false,
+      "policy_revision_url": "https://de.wikinews.org/w/index.php?oldid=849219"
+    },
+    "en": {
+      "rightsinfo": {
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "text": "Creative Commons Attribution 4.0"
+      },
+      "readonly_observed": false,
+      "policy_revision_url": "https://en.wikinews.org/w/index.php?oldid=4991371"
+    },
+    "ja": {
+      "rightsinfo": {
+        "url": "https://creativecommons.org/licenses/by/4.0/",
+        "text": "Creative Commons Attribution 4.0"
+      },
+      "readonly_observed": false,
+      "policy_revision_url": "https://ja.wikinews.org/w/index.php?oldid=184633"
+    }
+  },
+  "pool_hashes": {
+    "de": "a0b28a1a04e55a442ac5cd62789144ea7838646feae789febb5d07696deef281",
+    "en": "6de6a3fe707547a994b09f2cd0b8dcee7f15e50864f35b02c49900d2fb2b982b",
+    "ja": "ee717a5eebf692a4c5ec4fbf931bb5d078ba224791b4b8428f4ec748d4965e4a"
+  },
+  "protected_file_hashes": {
+    "data/processed/val.csv": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+    "data/processed/test.csv": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+    "data/benchmark/shared.csv": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+    "data/local_llm/shared.csv": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+    "data/common_data_v3/val.csv": "ce96b1cea8446df6ea029189fffc15c00551902120d3cd9199ca96dd8f7cb43a",
+    "data/common_data_v3/test.csv": "e885f65d5b430627e62b7c6980ad796b3829cc7ca5d7f39c0e5f1000b16fd970",
+    "data/expanded_news_v4/test.csv": "6f02c3a6b06cbb6bf11a387ed5785919bedf0a805b158043c02a6685da29610a",
+    "data/llm_adaptation_v5/test.csv": "723673ee3c08fb7c2896aed0e14396623de25d9959f5c68382a4eb7971f48b93"
+  },
+  "limits": "Category membership time is not publication time. Single archive, source declarations and native/translation flags require manual review. Pretraining overlap unknown.",
+  "language_counts": {
+    "de": 30,
+    "en": 30,
+    "ja": 30
+  },
+  "raw_file_sha256": "cef0d0c433603f791035727be042ab43a20d2de1228e4335cfd1d170e14acf63",
+  "migrated_from": {
+    "file": "data/next_stage/pilot/articles.jsonl",
+    "sha256": "7473548a5c083637f3d3f2465888f276bcf5c036c66293d04180b4935ae08067",
+    "reason": "Before annotation: remove observed Wikinews publication/comment/gallery boilerplate; same pages and revisions, no class filtering"
+  }
+}

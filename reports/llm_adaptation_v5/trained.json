@@ -1,0 +1,98 @@
+{
+  "protocol_sha256": "5acc4faae69003a1ef24cc8f9bda9cdf70ab8e32bcac52d404e63daac5693111",
+  "models": [
+    {
+      "model": "qwen_news_v5",
+      "name": "Qwen · news rubric zero-shot",
+      "path": "models/llm_adaptation_v5/final/qwen_news_v5",
+      "run_id": null,
+      "artifact_sha256": "26d7678f5fc077adce1e9a8f1f54afe71d1bf54ffd7b0f5859d2888804726ddf",
+      "example_provenance": []
+    },
+    {
+      "model": "qwen_fewshot_v5",
+      "name": "Qwen · news rubric + six examples",
+      "path": "models/llm_adaptation_v5/final/qwen_fewshot_v5",
+      "run_id": null,
+      "artifact_sha256": "30ec8a66f4a7adad7d0b77d8786ec6c03342b190ea37957d7d764641e3134c52",
+      "example_provenance": [
+        {
+          "id": "wikinews-de-80989-857580",
+          "language": "de",
+          "label": "positive",
+          "text_sha256": "09d386ac003bfa07f59be4281dddb9031717b947b0c62c9a970cfb08f10bd0db"
+        },
+        {
+          "id": "wikinews-en-2970489-4812141",
+          "language": "en",
+          "label": "neutral",
+          "text_sha256": "4d68c3d723738d23da3390c970735876a1824bfc08e4f0e7ab6eae54f94a1615"
+        },
+        {
+          "id": "wikinews-en-3084787-5024638",
+          "language": "en",
+          "label": "positive",
+          "text_sha256": "397b5482f7a8d6ce224d7abc33c05b4f7c666248d2edae94e23543cfde2c19d6"
+        },
+        {
+          "id": "wikinews-de-82507-846441",
+          "language": "de",
+          "label": "negative",
+          "text_sha256": "0b56c177354fd0d4aaa5cdac266d3cda140e49fd7122194ddaf9d62d5c4b70d0"
+        },
+        {
+          "id": "wikinews-de-77848-700526",
+          "language": "de",
+          "label": "neutral",
+          "text_sha256": "216583c6a424a7d875851897b390aedef5a8d45b0b7fb87afce5b61c82b974bc"
+        },
+        {
+          "id": "wikinews-en-2969617-4824453",
+          "language": "en",
+          "label": "negative",
+          "text_sha256": "7fdfcc87406e41e2339b055e2714ee0af4b0d4d35f5b5776bf56f775b2c1df0e"
+        }
+      ]
+    },
+    {
+      "model": "qwen_lora_v5",
+      "name": "Qwen · own LoRA on same Train",
+      "path": "models/llm_adaptation_v5/final/qwen_lora_v5",
+      "run_id": "4941680554f34b18bb30d66a3a1df5af",
+      "artifact_sha256": "6d5a39ee5c0e49985f406de94552ae0237219c9f741cba4c68101f65f4567e7f"
+    },
+    {
+      "model": "qwen3_4b",
+      "name": "Qwen · original financial prompt",
+      "path": "models/local_llm",
+      "run_id": null,
+      "artifact_sha256": "482c1e05ac307856d75647a6cd26714bc0163341b276cbf6449ad604c1437024"
+    },
+    {
+      "model": "frozen_news_v4",
+      "name": "Frozen MiniLM · 692 Train",
+      "path": "models/expanded_news_v4/final/frozen_news_v4",
+      "run_id": null,
+      "artifact_sha256": "81579c8a94fd41f99cd36bae56740d1c49925f7ada4f6ea0cb2eca23bb1f4573",
+      "original_run_id": "83487ac1aced41b8822528e41dc8a5e1"
+    },
+    {
+      "model": "minilm_bf16_news_v4",
+      "name": "MiniLM BF16 · 692 Train",
+      "path": "models/expanded_news_v4/final/minilm_bf16_news_v4",
+      "run_id": null,
+      "artifact_sha256": "00b38d4a42ef3722826f7803944e5363ff0289d8c5d95b8ba9118367a7524a30",
+      "original_run_id": "65bcf43545054dc09c0df4e05a98e0d6"
+    },
+    {
+      "model": "linearsvc_news_v4",
+      "name": "LinearSVC · 692 Train",
+      "path": "models/expanded_news_v4/final/linearsvc_news_v4",
+      "run_id": null,
+      "artifact_sha256": "a5d18790e7eddf32c9a061dd5eda5bd0511ae0f1829bb95d271eff710d34b314",
+      "original_run_id": "1cc7ff15880c4c23852680d7708a4a87"
+    }
+  ],
+  "test_unpredicted": true,
+  "full_train_rows": 692
+}

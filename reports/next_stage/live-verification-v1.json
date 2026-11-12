@@ -1,0 +1,129 @@
+{
+  "scope": "Synthetic controls and nonarticle example.com only. No Test reruns. First verification attempt expected the wrong SSRF status (403); confirmed existing 422 contract, corrected verification expectation, no service relaxation.",
+  "checks": [
+    {
+      "check": "default",
+      "response": {
+        "status": "ok",
+        "model_loaded": true,
+        "model_available": true,
+        "model_id": "article_qwen_lora_v1",
+        "model_version": "article-qwen-lora-v1",
+        "model_kind": "local_llm",
+        "score_method": "softmax of next-token logits restricted to A/B/C; uncalibrated"
+      }
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_frozen_v1",
+      "language": "de",
+      "label": "positive",
+      "version": "article-minilm-128-frozen-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_frozen_v1",
+      "language": "en",
+      "label": "neutral",
+      "version": "article-minilm-128-frozen-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_frozen_v1",
+      "language": "ja",
+      "label": "negative",
+      "version": "article-minilm-128-frozen-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_minilm_v1",
+      "language": "de",
+      "label": "neutral",
+      "version": "article-minilm-128-ft-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_minilm_v1",
+      "language": "en",
+      "label": "neutral",
+      "version": "article-minilm-128-ft-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_minilm_v1",
+      "language": "ja",
+      "label": "negative",
+      "version": "article-minilm-128-ft-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_qwen_zero_v1",
+      "language": "de",
+      "label": "positive",
+      "version": "article-qwen-zero-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_qwen_zero_v1",
+      "language": "en",
+      "label": "neutral",
+      "version": "article-qwen-zero-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_qwen_zero_v1",
+      "language": "ja",
+      "label": "negative",
+      "version": "article-qwen-zero-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_qwen_lora_v1",
+      "language": "de",
+      "label": "positive",
+      "version": "article-qwen-lora-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_qwen_lora_v1",
+      "language": "en",
+      "label": "neutral",
+      "version": "article-qwen-lora-v1"
+    },
+    {
+      "check": "synthetic-predict",
+      "model": "article_qwen_lora_v1",
+      "language": "ja",
+      "label": "negative",
+      "version": "article-qwen-lora-v1"
+    },
+    {
+      "check": "Japanese-analysis-offsets",
+      "status": 200,
+      "sentences": 3
+    },
+    {
+      "check": "exactly-one-input",
+      "status": 422
+    },
+    {
+      "check": "private-address-blocked",
+      "status": 422
+    },
+    {
+      "check": "character-limit",
+      "status": 422
+    },
+    {
+      "check": "overflow-rejected-no-truncation",
+      "status": 422,
+      "code": "article_context_exceeded"
+    },
+    {
+      "check": "live-nonarticle-url",
+      "status": 200,
+      "code": null,
+      "result": "neutral"
+    }
+  ]
+}

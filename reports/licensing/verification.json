@@ -1,0 +1,65 @@
+{
+  "verified_on": "2026-11-06",
+  "change": "Licensing website, source inventory and proposed next data version; no training/evaluation rerun",
+  "offline_pytest": {
+    "passed": 77,
+    "network": false,
+    "large_model": false
+  },
+  "live_checks": [
+    {
+      "path": "/health",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/licenses",
+      "status": 200
+    },
+    {
+      "path": "/licenses/inventory",
+      "status": 200
+    },
+    {
+      "path": "/licenses/notices/qwen-Apache-2.0.txt",
+      "status": 200
+    },
+    {
+      "path": "/comparison",
+      "status": 200
+    },
+    {
+      "path": "/predict",
+      "status": 200,
+      "result": {
+        "label": "positive",
+        "scores": {
+          "negative": 3.9008374438584403e-14,
+          "neutral": 1.0603575851565739e-13,
+          "positive": 1.0
+        },
+        "model_version": "qwen3-4b-2507-bf16-prompt1",
+        "scraped_excerpt": null
+      }
+    }
+  ],
+  "browser": {
+    "homepage_link_followed": true,
+    "current_source_cards": 8,
+    "proposed_source_cards": 3,
+    "inventory_rendered": true
+  },
+  "mlflow": {
+    "experiment": "article-sentiment-second-path",
+    "existing_run_statuses": {
+      "6c07d33fa4804e9591305999917e34a6": "FINISHED",
+      "e2ab0f5273b54fd9b7c2f81a751f4b6c": "FINISHED",
+      "a3859fbfd0b041e5aedf7e28d0f85532": "FINISHED"
+    },
+    "new_runs_created": 0
+  },
+  "new_training_data_committed": false
+}

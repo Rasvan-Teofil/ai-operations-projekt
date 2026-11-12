@@ -1,1 +1,0 @@
-"""Lokaler Inferenzdienst (FastAPI)."""

@@ -1,0 +1,406 @@
+[
+  {
+    "model": "linearsvc_news_v3",
+    "name": "LinearSVC · new AI news data",
+    "path": "models/common_data_v3/linearsvc_news_v3",
+    "run_id": "92f6bc44fc02459190f274eb88878722",
+    "artifact_sha256": "bfc872d5b8e89f53f29dcdffdf5ea8209847e2c283fe0bbe195160bb6f2e9030",
+    "model_version": "wikinews-ai-v3-linearsvc",
+    "accuracy": 0.5306122448979592,
+    "macro_f1": 0.3592563498297984,
+    "f1_negative": 0.6567164179104478,
+    "f1_neutral": 0.42105263157894735,
+    "f1_positive": 0.0,
+    "accuracy_de": 0.5416666666666666,
+    "macro_f1_de": 0.23423423423423426,
+    "f1_negative_de": 0.7027027027027027,
+    "f1_neutral_de": 0.0,
+    "f1_positive_de": 0.0,
+    "accuracy_en": 0.52,
+    "macro_f1_en": 0.4051282051282052,
+    "f1_negative_en": 0.6,
+    "f1_neutral_en": 0.6153846153846154,
+    "f1_positive_en": 0.0,
+    "balanced_language_macro_f1": 0.3196812196812197,
+    "inference_ms_per_text": 0.3096844231215667,
+    "latency_p50_ms": 0.28033205308020115,
+    "latency_p95_ms": 0.3558228723704814,
+    "model_size_bytes": 916412,
+    "confusion_matrix": {
+      "all": [
+        [
+          22,
+          2,
+          2
+        ],
+        [
+          9,
+          4,
+          0
+        ],
+        [
+          10,
+          0,
+          0
+        ]
+      ],
+      "de": [
+        [
+          13,
+          0,
+          1
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0
+        ]
+      ],
+      "en": [
+        [
+          9,
+          2,
+          1
+        ],
+        [
+          3,
+          4,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "model": "frozen_news_v3",
+    "name": "Frozen MiniLM · AI news pilot",
+    "path": "models/common_data_v3/frozen_news_v3",
+    "run_id": "7c4839810edc4d42884bb1bee7a36e4e",
+    "artifact_sha256": "1570ae382e61237d138ac702cc1d4fda5cb8019615cdc9fcbe3749911e7325ad",
+    "model_version": "wikinews-ai-v3-frozen",
+    "accuracy": 0.5510204081632653,
+    "macro_f1": 0.4047619047619048,
+    "f1_negative": 0.7142857142857143,
+    "f1_neutral": 0.5,
+    "f1_positive": 0.0,
+    "accuracy_de": 0.5833333333333334,
+    "macro_f1_de": 0.4246913580246914,
+    "f1_negative_de": 0.7407407407407407,
+    "f1_neutral_de": 0.5333333333333333,
+    "f1_positive_de": 0.0,
+    "accuracy_en": 0.52,
+    "macro_f1_en": 0.3837312113174183,
+    "f1_negative_en": 0.6896551724137931,
+    "f1_neutral_en": 0.46153846153846156,
+    "f1_positive_en": 0.0,
+    "balanced_language_macro_f1": 0.4042112846710548,
+    "inference_ms_per_text": 3.214723302279504,
+    "latency_p50_ms": 2.9072919860482216,
+    "latency_p95_ms": 4.176794784143567,
+    "model_size_bytes": 487730066,
+    "confusion_matrix": {
+      "all": [
+        [
+          20,
+          4,
+          2
+        ],
+        [
+          4,
+          7,
+          2
+        ],
+        [
+          6,
+          4,
+          0
+        ]
+      ],
+      "de": [
+        [
+          10,
+          3,
+          1
+        ],
+        [
+          1,
+          4,
+          1
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "en": [
+        [
+          10,
+          1,
+          1
+        ],
+        [
+          3,
+          3,
+          1
+        ],
+        [
+          4,
+          2,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "model": "minilm_fp32_news_v3",
+    "name": "MiniLM FP32 · v1 recipe / new AI data",
+    "path": "models/common_data_v3/minilm_fp32_news_v3",
+    "run_id": "43e28f08b2f64edcb3fe1df4ec50231f",
+    "artifact_sha256": "0eac414b787d5aaa61735fb954221b28d32a26236640cd76a3b41b2013b98fd9",
+    "model_version": "wikinews-ai-v3-minilm-fp32",
+    "accuracy": 0.5714285714285714,
+    "macro_f1": 0.39673571876961705,
+    "f1_negative": 0.7457627118644068,
+    "f1_neutral": 0.4444444444444444,
+    "f1_positive": 0.0,
+    "accuracy_de": 0.5833333333333334,
+    "macro_f1_de": 0.3957307060755337,
+    "f1_negative_de": 0.7586206896551724,
+    "f1_neutral_de": 0.42857142857142855,
+    "f1_positive_de": 0.0,
+    "accuracy_en": 0.56,
+    "macro_f1_en": 0.39829059829059826,
+    "f1_negative_en": 0.7333333333333333,
+    "f1_neutral_en": 0.46153846153846156,
+    "f1_positive_en": 0.0,
+    "balanced_language_macro_f1": 0.39701065218306597,
+    "inference_ms_per_text": 3.2026840620959294,
+    "latency_p50_ms": 2.895931014791131,
+    "latency_p95_ms": 4.456958267837763,
+    "model_size_bytes": 487730074,
+    "confusion_matrix": {
+      "all": [
+        [
+          22,
+          4,
+          0
+        ],
+        [
+          5,
+          6,
+          2
+        ],
+        [
+          6,
+          4,
+          0
+        ]
+      ],
+      "de": [
+        [
+          11,
+          3,
+          0
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "en": [
+        [
+          11,
+          1,
+          0
+        ],
+        [
+          3,
+          3,
+          1
+        ],
+        [
+          4,
+          2,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "model": "minilm_bf16_news_v3",
+    "name": "MiniLM BF16 · v2 deployment / new AI data",
+    "path": "models/common_data_v3/minilm_bf16_news_v3",
+    "run_id": "171e009888bf49e996c57e06b83a6bed",
+    "artifact_sha256": "414f21ddd80255456d82d742379f65a7e7c1ddd1be158ecf047d0d7e74f29561",
+    "model_version": "wikinews-ai-v3-minilm-bf16",
+    "accuracy": 0.5714285714285714,
+    "macro_f1": 0.39673571876961705,
+    "f1_negative": 0.7457627118644068,
+    "f1_neutral": 0.4444444444444444,
+    "f1_positive": 0.0,
+    "accuracy_de": 0.5833333333333334,
+    "macro_f1_de": 0.3957307060755337,
+    "f1_negative_de": 0.7586206896551724,
+    "f1_neutral_de": 0.42857142857142855,
+    "f1_positive_de": 0.0,
+    "accuracy_en": 0.56,
+    "macro_f1_en": 0.39829059829059826,
+    "f1_negative_en": 0.7333333333333333,
+    "f1_neutral_en": 0.46153846153846156,
+    "f1_positive_en": 0.0,
+    "balanced_language_macro_f1": 0.39701065218306597,
+    "inference_ms_per_text": 3.5812989143388614,
+    "latency_p50_ms": 2.959860023111105,
+    "latency_p95_ms": 4.432236449792981,
+    "model_size_bytes": 252420509,
+    "confusion_matrix": {
+      "all": [
+        [
+          22,
+          4,
+          0
+        ],
+        [
+          5,
+          6,
+          2
+        ],
+        [
+          6,
+          4,
+          0
+        ]
+      ],
+      "de": [
+        [
+          11,
+          3,
+          0
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          2,
+          2,
+          0
+        ]
+      ],
+      "en": [
+        [
+          11,
+          1,
+          0
+        ],
+        [
+          3,
+          3,
+          1
+        ],
+        [
+          4,
+          2,
+          0
+        ]
+      ]
+    }
+  },
+  {
+    "model": "qwen3_4b",
+    "name": "Qwen3 4B · unchanged zero-shot",
+    "path": "models/local_llm",
+    "run_id": "2e43a3ab04e74f759ef8717ffa23c976",
+    "model_version": "qwen3-4b-2507-bf16-prompt1",
+    "accuracy": 0.7142857142857143,
+    "macro_f1": 0.5636974789915966,
+    "f1_negative": 0.96,
+    "f1_neutral": 0.5882352941176471,
+    "f1_positive": 0.14285714285714285,
+    "accuracy_de": 0.75,
+    "macro_f1_de": 0.6271367521367521,
+    "f1_negative_de": 0.9230769230769231,
+    "f1_neutral_de": 0.625,
+    "f1_positive_de": 0.3333333333333333,
+    "accuracy_en": 0.68,
+    "macro_f1_en": 0.5185185185185185,
+    "f1_negative_en": 1.0,
+    "f1_neutral_en": 0.5555555555555556,
+    "f1_positive_en": 0.0,
+    "balanced_language_macro_f1": 0.5728276353276354,
+    "inference_ms_per_text": 77.67047069738715,
+    "latency_p50_ms": 64.79169591329992,
+    "latency_p95_ms": 99.30954147130251,
+    "model_size_bytes": 8060917225,
+    "confusion_matrix": {
+      "all": [
+        [
+          24,
+          2,
+          0
+        ],
+        [
+          0,
+          10,
+          3
+        ],
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      "de": [
+        [
+          12,
+          2,
+          0
+        ],
+        [
+          0,
+          5,
+          1
+        ],
+        [
+          0,
+          3,
+          1
+        ]
+      ],
+      "en": [
+        [
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          2
+        ],
+        [
+          0,
+          6,
+          0
+        ]
+      ]
+    }
+  }
+]

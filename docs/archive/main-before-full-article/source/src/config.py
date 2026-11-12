@@ -1,0 +1,74 @@
+"""Paths, seeds and the shared three-class contract.
+
+Training, comparison and API read the same values. ``data/sample`` stays
+the dummy sample for tests and CI. The default run reads the prepared
+splits in ``data/processed`` (not in Git).
+"""
+
+import os
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATA_DIR = PROJECT_ROOT / "data"
+SAMPLE_DATA_PATH = DATA_DIR / "sample" / "sentiment_sample.csv"
+# Hand-written opinion and financial-cue sentences. Appended to the train
+# split only (see src.data.load_work_splits). Not part of the financial val/test.
+OPINION_SUPPLEMENT_PATH = DATA_DIR / "sample" / "opinion_supplement.csv"
+PREPARED_DIR = DATA_DIR / "processed"
+PREPARED_TRAIN_PATH = PREPARED_DIR / "train.csv"
+PREPARED_VAL_PATH = PREPARED_DIR / "val.csv"
+PREPARED_TEST_PATH = PREPARED_DIR / "test.csv"
+PREPARED_META_PATH = PREPARED_DIR / "metadata.json"
+MODELS_DIR = PROJECT_ROOT / "models"
+REPORTS_DIR = PROJECT_ROOT / "reports"
+NOTEBOOKS_DIR = PROJECT_ROOT / "notebooks"
+FINETUNED_DIR = MODELS_DIR / "finetuned"
+FINETUNED_SMOKE_DIR = MODELS_DIR / "finetuned-smoke"
+
+RANDOM_SEED = 42
+TEST_SIZE = 0.2
+# Real splits: 70 % train, 15 % val, 15 % test, stratified by label and language.
+PREPARE_TEST_SIZE = 0.15
+PREPARE_VAL_SIZE = 0.15
+MIN_TEXT_CHARS = 20
+
+DATASET_ID_EN = "takala/financial_phrasebank"
+DATASET_CONFIG_EN = "sentences_75agree"
+DATASET_ID_DE = "Kenpache/multilingual-financial-sentiment"
+
+TEXT_COLUMN = "text"
+LABEL_COLUMN = "label"
+LANGUAGE_COLUMN = "language"
+ORIGIN_COLUMN = "origin"
+
+LABELS_3 = ("negative", "neutral", "positive")
+ALLOWED_LANGUAGES = frozenset({"de", "en"})
+
+MLFLOW_TRACKING_DIR = PROJECT_ROOT / "mlruns"
+MLFLOW_EXPERIMENT_NAME = "article-sentiment"
+# Same store as the second iteration. The tag separates the runs in the UI.
+MLFLOW_ITERATION = "1-first-path"
+MLFLOW_COMPARISON_EXPERIMENT = "article-sentiment-comparison"
+
+# Practical choice after the comparison on the real test split: highest macro-F1,
+# and small and fast. CI sets SENTIMENT_MODEL=tfidf_logreg and stays lightweight.
+DEFAULT_MODEL_NAME = "tfidf_linearsvc"
+
+HF_MAX_TOKENS = 512
+TABULARISAI_MODEL_ID = "tabularisai/multilingual-sentiment-analysis"
+CARDIFFNLP_MODEL_ID = "cardiffnlp/twitter-xlm-roberta-base-sentiment"
+DEFAULT_FINETUNE_BASE = "distilbert-base-multilingual-cased"
+
+REQUEST_TIMEOUT_SECONDS = 15.0
+USER_AGENT = "AIOpsSentimentBot/0.1 (HHN AI Operations coursework; single-article fetch)"
+
+TFIDF_NGRAM_RANGE = (1, 2)
+TFIDF_MIN_DF = 1
+LOGREG_MAX_ITER = 1000
+LINEARSVC_MAX_ITER = 2000
+
+
+def selected_model_name() -> str:
+    """Reads the model the API should load. Default: TF-IDF + LinearSVC."""
+    raw = os.environ.get("SENTIMENT_MODEL", DEFAULT_MODEL_NAME).strip().lower()
+    return raw or DEFAULT_MODEL_NAME

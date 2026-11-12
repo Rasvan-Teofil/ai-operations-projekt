@@ -1,0 +1,308 @@
+{
+  "schema_version": "pilot-audit-v1",
+  "article_rows": 90,
+  "language_counts": {
+    "de": 30,
+    "en": 30,
+    "ja": 30
+  },
+  "language_label_counts": {
+    "de:negative": 19,
+    "de:positive": 9,
+    "de:neutral": 2,
+    "en:negative": 16,
+    "en:positive": 7,
+    "en:neutral": 6,
+    "en:unresolved": 1,
+    "ja:negative": 11,
+    "ja:positive": 13,
+    "ja:neutral": 6
+  },
+  "observed_groups": 90,
+  "blockers": [
+    {
+      "id": "wikinews:de:80634",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:79506",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:86741",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:83286",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:80053",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:79969",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:80197",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:83473",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:79881",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:77568",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:83296",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:86649",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:de:86734",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2871942",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2918278",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2819841",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:3014780",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2972263",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2912426",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2824029",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2815642",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2926945",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2879804",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2846378",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2825648",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2825775",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:3011413",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2867805",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2847653",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2915751",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2943372",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2949438",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2859514",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2964266",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2933301",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2994412",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2893471",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2978031",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:18744",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:18209",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:43824",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:17395",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:18731",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:21323",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:17056",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:22140",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:18775",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:18599",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:26053",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:21327",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:29209",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:20944",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:17396",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:22108",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:ja:20112",
+      "code": "rights_review_pending"
+    },
+    {
+      "id": "wikinews:en:2825648",
+      "code": "unresolved_annotation"
+    }
+  ],
+  "ready_for_development_intake": false,
+  "final_test_frozen": false,
+  "label_status": "AI-labelled · Codex-reviewed",
+  "limits": "Exact/provenance/event-key audit only. Semantic near-duplicates, translation history and residual events require review before splitting. Two passes are one AI annotator, not independent verification.",
+  "protected_file_hashes": {
+    "data/processed/val.csv": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+    "data/processed/test.csv": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+    "data/benchmark/shared.csv": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+    "data/local_llm/shared.csv": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+    "data/common_data_v3/val.csv": "ce96b1cea8446df6ea029189fffc15c00551902120d3cd9199ca96dd8f7cb43a",
+    "data/common_data_v3/test.csv": "e885f65d5b430627e62b7c6980ad796b3829cc7ca5d7f39c0e5f1000b16fd970",
+    "data/expanded_news_v4/test.csv": "6f02c3a6b06cbb6bf11a387ed5785919bedf0a805b158043c02a6685da29610a",
+    "data/llm_adaptation_v5/test.csv": "723673ee3c08fb7c2896aed0e14396623de25d9959f5c68382a4eb7971f48b93"
+  },
+  "input_file_sha256": "cef0d0c433603f791035727be042ab43a20d2de1228e4335cfd1d170e14acf63",
+  "annotation_file_sha256": "dbbbd84b9fc51b7e8127c191c06e9eb4e59214213da49a737962344b562f133f",
+  "reviewed_article_file_sha256": "8ce800b142838940040a9ca2cc3b0063121693c106fbebc8a9b12028eed48d29",
+  "same_annotator_label_agreement": {
+    "matches": 88,
+    "total": 90,
+    "independent_validation": false,
+    "interpretation": "Self-consistency only; neither annotation accuracy nor human agreement."
+  },
+  "rights_by_language": {
+    "de": {
+      "reviewed_compatible": 17,
+      "unresolved": 13
+    },
+    "en": {
+      "reviewed_compatible": 5,
+      "unresolved": 25
+    },
+    "ja": {
+      "unresolved": 17,
+      "reviewed_compatible": 13
+    }
+  },
+  "rights_eligible_class_counts": {
+    "de:negative": 10,
+    "de:positive": 6,
+    "de:neutral": 1,
+    "en:negative": 4,
+    "en:neutral": 1,
+    "ja:positive": 7,
+    "ja:negative": 3,
+    "ja:neutral": 3
+  },
+  "annotation_timing": {
+    "first_saved_review": "2026-11-10T18:36:27.411585+00:00",
+    "last_saved_review": "2026-11-10T18:54:48.887506+00:00",
+    "elapsed_saved_review_window_seconds": 1101.475921,
+    "limits": "Elapsed wall-clock window between saved reviews includes other work; not measured active annotation labor or a scalable per-item estimate."
+  },
+  "scope": "90 first-checkpoint pilot inputs, 30/language; all are development-exposed. No fresh final test, development score or new training run.",
+  "extraction_findings": [
+    "Some Japanese topic-navigation tables precede body text.",
+    "Some English related/sister-link sections and hidden original-language quotation tooltips remain.",
+    "Some German comment links remain."
+  ],
+  "next_decision": "Repair extraction in a new version and preserve this exact reviewed checkpoint. Expand the rights-reviewed source frame before freezing any train/test sample; current eligible English inputs have no positive class."
+}

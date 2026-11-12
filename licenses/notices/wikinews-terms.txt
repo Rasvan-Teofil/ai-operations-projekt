@@ -1,0 +1,18 @@
+Wikinews — source policy references
+
+This project summary does not replace the linked licence terms.
+English policy (pinned):
+https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371
+German policy (pinned):
+https://de.wikinews.org/w/index.php?title=Wikinews:Lizenzbestimmungen&oldid=849219
+
+English text after 16 December 2024: CC BY 4.0. Earlier English material
+after 25 September 2005: CC BY 2.5. German text policy specifies CC BY 2.5.
+Do not apply the English transition date to German pages. Older material
+has special public-domain provisions; inspect each selected revision.
+Images and other files have separate terms. Exclude them from our corpus.
+Keep original page and author/history links and indicate transformations.
+No article text has been selected for the proposed corpus yet.
+
+Licence texts: CC-BY-2.5.txt and CC-BY-4.0.txt (standard CC text).
+Reviewed: 2026-11-06

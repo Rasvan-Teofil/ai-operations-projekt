@@ -1,0 +1,75 @@
+SENTiVENT dataset and content license notice
+
+Copyright notices
+-----------------
+
+SENTiVENT dataset arrangement, annotation schemas, release metadata,
+documentation, dataset and metric cards, images, and guidelines other than the
+original annotation guidelines: Copyright (c) Gilles Jacobs.
+
+SENTiVENT annotations and original annotation guidelines: Copyright (c) Gilles
+Jacobs and Ghent University.
+
+Licensed material
+-----------------
+
+Except for the software and Third-Party Source Material described below, the
+original SENTiVENT dataset and content materials identified in the copyright
+notices above are licensed under the Creative Commons Attribution 4.0
+International license (CC BY 4.0).
+
+To the extent that a named rights holder holds sui generis database rights in
+the Licensed Material, that rights holder licenses those rights under the same
+license.
+
+You may share and adapt the Licensed Material for any purpose, including
+commercially, provided that appropriate credit is given, a link to the license
+is provided, and changes are indicated.
+
+License URL: https://creativecommons.org/licenses/by/4.0/
+SPDX license identifier: CC-BY-4.0
+
+Software exclusion
+------------------
+
+SENTiVENT software, build, test, and publish tooling, metric modules, and
+executable integration adapters and configurations are not licensed by this
+file. They are licensed under the Apache License 2.0. See
+LICENSES/LICENSE-APACHE-2.0.txt and LICENSES/NOTICE.md for the complete scope
+map.
+
+Requested attribution and scholarly citation
+---------------------------------------------
+
+For scholarly use, please cite the dataset as the primary research output:
+
+  Jacobs, Gilles. SENTiVENT Bench: Economic Events and Implicit Sentiment in
+  Financial News.
+  Version 1.1. OSF, 2020. https://doi.org/10.17605/OSF.IO/8JEC2
+
+For event extraction or annotation methodology, please also cite the 2022
+SENTiVENT paper: https://doi.org/10.1007/s10579-021-09562-4
+
+When using the sentiment annotations or configurations, please also cite the
+2021 sentiment paper: https://doi.org/10.3390/electronics10202554
+
+These scholarly citation requests are not additional license conditions. Where
+a formal citation is not reasonably practicable, use the applicable credit:
+
+  Solely owned dataset and content material: "SENTiVENT dataset and content —
+  Gilles Jacobs, licensed under CC BY 4.0."
+
+  Annotations and original annotation guidelines: "SENTiVENT annotations and
+  original annotation guidelines — Gilles Jacobs and Ghent University,
+  licensed under CC BY 4.0."
+
+Preserve the applicable copyright notice, link to CC BY 4.0, and indicate
+changes as required by the license.
+
+Third-Party Source Material
+---------------------------
+
+Except where otherwise indicated, source news articles and other third-party
+source material are not covered by CC BY 4.0 or Apache-2.0. Rights in that
+material remain with their respective rights holders. Nothing in this notice
+limits any use permitted by applicable law.

@@ -1,0 +1,19 @@
+{
+  "version": "source-quality-clarification-v1",
+  "recorded_at": "2026-11-11T17:46:40.412845+00:00",
+  "phase": "before-final-test-freeze-and-candidate-test-inference",
+  "candidate_predictions_seen": false,
+  "candidate_declaration_sha256": "7ca89a57ad4e17288f93974764a69ea77e05dd3dd45d49a33a8dd9f28d33c766",
+  "reason": "Explicit full-text reading found non-article editorial notices, unrelated appended navigation and source-revision contamination that the frozen extractor did not remove.",
+  "rule": "Retain the exact pinned raw texts and both explicit annotations. Manually list source-form exclusions by input ID and exact text SHA. Exclude whole connected components containing such inputs before class-blind source-order quotas. Do not repair text, add replacement source frames, balance labels or inspect candidate predictions.",
+  "implementation": "src/next_stage_test_prepare.py validates completion, pre-prediction status, unique known IDs, exact hashes, explicit notes and the allowed source-quality decision; embeds the review hash and exclusion reasons in the frozen Test manifest.",
+  "unchanged": [
+    "four frozen candidates",
+    "training data and final fits",
+    "model recipes and development selection",
+    "inference code and collector",
+    "language weighting and metric selection",
+    "single saved Test prediction pass per candidate"
+  ],
+  "review_status": "in-progress; not permission to freeze before both source reviews and residual grouping are complete"
+}

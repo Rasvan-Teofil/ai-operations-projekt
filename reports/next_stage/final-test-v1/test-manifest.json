@@ -1,0 +1,1225 @@
+{
+  "schema_version": "pilot-audit-v1",
+  "article_rows": 691,
+  "language_counts": {
+    "de": 273,
+    "en": 118,
+    "ja": 300
+  },
+  "language_label_counts": {
+    "de:neutral": 63,
+    "de:negative": 160,
+    "de:positive": 50,
+    "en:positive": 19,
+    "en:negative": 85,
+    "en:neutral": 14,
+    "ja:negative": 167,
+    "ja:positive": 68,
+    "ja:neutral": 65
+  },
+  "observed_groups": 658,
+  "blockers": [],
+  "ready_for_development_intake": true,
+  "final_test_frozen": true,
+  "label_status": "AI-labelled · Codex-reviewed",
+  "limits": "Exact/provenance/event-key audit only. Semantic near-duplicates, translation history and residual events require review before splitting. Two passes are one AI annotator, not independent verification.",
+  "version": "fresh-full-article-test-v1",
+  "candidate_declaration_sha256": "7ca89a57ad4e17288f93974764a69ea77e05dd3dd45d49a33a8dd9f28d33c766",
+  "source_sha256": "9bdbfe50c00f03d7e8d390f187e2b77788dbe825fe5ba39ea22fb8d9d16648ce",
+  "test_sha256": "219bd9daf3c5dbc84696abe811074230859886129b9371bbc35458fe646b578f",
+  "annotation_sha256": "b80f5446774f69563c51172a2a6550d15f67519e40ac82c619edd246b831b14e",
+  "all_source_annotation_sha256": "2596990fab37f35031ffdaa7c43c6c8b4a77c32bc179fd2ec2c117f1b03bac03",
+  "group_review_sha256": "a9714a0f64876f07dd04c0da8d092941eb9e0dc22e8a0340676817719e79a189",
+  "source_quality_review_sha256": "7fcc3378eab60382427f362c752352a6b644016a90ec95fa3432506212619f66",
+  "source_quality_exclusions": {
+    "wikinews:de:85117": "Unclear boundary between report and long appended editorial/commentary section; preserve bytes, exclude this input from clean full-article Test.",
+    "wikinews:de:86867": "Unrelated English political sentence inside railway accident report suggests source-revision vandalism; preserve pinned source but exclude contaminated input.",
+    "wikinews:ja:34913": "Six later-dated related typhoon links embedded after main body; exclude this extraction from clean full-article Test.",
+    "wikinews:ja:25572": "Standalone editorial apology/headline correction rather than full news report; retain in source ledger, exclude from main article Test.",
+    "wikinews:ja:34850": "Later-dated related typhoon list appended to focal hurricane report; exclude this extraction.",
+    "wikinews:ja:41902": "Standalone editorial correction of prior earthquake report; retain but exclude from main full-news-article Test.",
+    "wikinews:ja:34883": "Later-dated related typhoon list appended to focal weather report; exclude this extraction.",
+    "wikinews:ja:38889": "Later-dated weather-news list appended to focal report; preserve original extraction and exclude contaminated input.",
+    "wikinews:ja:44497": "Medal-count tracking page explicitly describes itself as a tally, rather than a narrative full-news report; preserve and exclude from full-article Test.",
+    "wikinews:ja:42916": "Later-dated weather-news list includes 2025/2026 headlines after a 2024 report; preserve bytes and exclude contaminated input.",
+    "wikinews:ja:45050": "Standalone election-seat tally explicitly describes itself as an enumeration, without a narrative report. Same source-form rule as medal tally; retain raw bytes and both reviews."
+  },
+  "protected_file_hashes": {
+    "data/processed/val.csv": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+    "data/processed/test.csv": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+    "data/benchmark/shared.csv": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+    "data/local_llm/shared.csv": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+    "data/common_data_v3/val.csv": "ce96b1cea8446df6ea029189fffc15c00551902120d3cd9199ca96dd8f7cb43a",
+    "data/common_data_v3/test.csv": "e885f65d5b430627e62b7c6980ad796b3829cc7ca5d7f39c0e5f1000b16fd970",
+    "data/expanded_news_v4/test.csv": "6f02c3a6b06cbb6bf11a387ed5785919bedf0a805b158043c02a6685da29610a",
+    "data/llm_adaptation_v5/test.csv": "723673ee3c08fb7c2896aed0e14396623de25d9959f5c68382a4eb7971f48b93",
+    "data/common_data_v3/articles.jsonl": "825bd7ad08c50667bc902ccf79644dbc7748d132bda5893ad6a42732fecc9f4c",
+    "data/expanded_news_v4/articles.jsonl": "10ead880737970bfab79b4049ab16324f5bc909ef35fcd8a9ae273a9030eb145",
+    "data/llm_adaptation_v5/articles.jsonl": "90514073365312879f0e53e377b9a491ce2880a7fd62fc0a5142086e6f82166d",
+    "data/next_stage/pilot/reviewed-articles-v1-input-v3.jsonl": "8ce800b142838940040a9ca2cc3b0063121693c106fbebc8a9b12028eed48d29",
+    "data/next_stage/pilot/reviewed-articles-v1-input-v4.jsonl": "b54be2fb3ff6e3f76c4e1b8fd37c24eb1065b795ed78130d7a868b61dc83744d",
+    "data/next_stage/pilot/articles-full-article-v5.jsonl": "08d5197115da698ef58418d239443cd3de24fd2586799cec59388240f240d7b7",
+    "data/next_stage/pilot/development-v2/articles.jsonl": "66592161ba1ddd3bca0053ef975f467dd8641a15e78f0f2fa6a6ca8c4a4f87ed",
+    "reports/next_stage/pilot/group-addendum-v1.json": "9f8fdf032040df02d3a6ebfa0eaa04f3416723bc1b48d9f7fed7ded9792638e5"
+  },
+  "source_rows": 856,
+  "eligible_before_quotas": 699,
+  "exclusions": [
+    {
+      "id": "wikinews:de:81776",
+      "group": "wikinews-de-81827-801067",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77044",
+      "group": "wikinews-de-77069-859281",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82022",
+      "group": "wikinews-de-82246-856563",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77543",
+      "group": "wikinews-de-77547-856776",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77331",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77531",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82309",
+      "group": "wikinews-de-81827-801067",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:80843",
+      "group": "wikinews-de-80762-861105",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77503",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77340",
+      "group": "wikinews-de-77316-856933",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77496",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77466",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82721",
+      "group": "wikinews-de-82594-860002",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82272",
+      "group": "wikinews:de:82272",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:79115",
+      "group": "wikinews-de-79113-847976",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82546",
+      "group": "wikinews-de-82024-803575",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77167",
+      "group": "wikinews:de:77150",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:81716",
+      "group": "wikinews-de-77435-841869",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77859",
+      "group": "wikinews:de:77844",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:80308",
+      "group": "wikinews:de:80308",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:79738",
+      "group": "wikinews-de-79652-856834",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77529",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82621",
+      "group": "wikinews-de-81574-848773",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82686",
+      "group": "wikinews-de-82834-847974",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82119",
+      "group": "wikinews-de-77435-841869",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77975",
+      "group": "wikinews:de:77975",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:80438",
+      "group": "wikinews-de-80388-862078",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:86530",
+      "group": "wikinews-de-75795-856619",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:85680",
+      "group": "wikinews:de:85680",
+      "codes": [
+        "unresolved_annotation"
+      ]
+    },
+    {
+      "id": "wikinews:de:85117",
+      "group": "wikinews-de-82834-847974",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending",
+        "unresolved_annotation",
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:de:77218",
+      "group": "wikinews-de-77168-861783",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:78123",
+      "group": "wikinews:de:78123",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:83178",
+      "group": "wikinews-de-83194-823465",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:78980",
+      "group": "wikinews-de-78867-832894",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77423",
+      "group": "wikinews-de-77294-824065",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82550",
+      "group": "wikinews-de-81827-801067",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:78186",
+      "group": "wikinews:de:77975",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77310",
+      "group": "wikinews-de-77168-861783",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:81851",
+      "group": "wikinews-en-2812502-4818697",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77565",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:79173",
+      "group": "wikinews-de-78926-858311",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:85340",
+      "group": "wikinews-de-83753-834842",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:79496",
+      "group": "wikinews:de:77975",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77094",
+      "group": "wikinews-de-77099-692135",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:86598",
+      "group": "wikinews:de:86598",
+      "codes": [
+        "unresolved_annotation"
+      ]
+    },
+    {
+      "id": "wikinews:de:78871",
+      "group": "wikinews-de-78866-861833",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77197",
+      "group": "wikinews-de-77168-861783",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:81592",
+      "group": "wikinews:de:81592",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77215",
+      "group": "wikinews-de-77032-858063",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:83819",
+      "group": "wikinews-en-2892597-4825531",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77213",
+      "group": "wikinews-de-77267-859229",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:79310",
+      "group": "wikinews-de-75795-856619",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:85846",
+      "group": "wikinews-de-85971-848839",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:83186",
+      "group": "wikinews-de-83194-823465",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:77478",
+      "group": "wikinews-de-78867-832894",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82374",
+      "group": "wikinews-de-81827-801067",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82542",
+      "group": "wikinews-de-81827-801067",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:81645",
+      "group": "wikinews-de-82410-855098",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:84784",
+      "group": "wikinews:de:84784",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:79647",
+      "group": "wikinews-de-79462-858300",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:86867",
+      "group": "wikinews:de:86867",
+      "codes": [
+        "rights_review_pending",
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:de:80416",
+      "group": "wikinews-de-80388-862078",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82327",
+      "group": "wikinews:de:82327",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82511",
+      "group": "wikinews-de-82522-862336",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:83782",
+      "group": "wikinews-de-83753-834842",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:85660",
+      "group": "wikinews:de:85660",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:81400",
+      "group": "wikinews:de:81241",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:83770",
+      "group": "wikinews-de-83753-834842",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:83795",
+      "group": "wikinews-de-83753-834842",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:78978",
+      "group": "wikinews-de-78867-832894",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:81247",
+      "group": "wikinews:de:81241",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:82241",
+      "group": "wikinews-de-81975-856922",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:81764",
+      "group": "wikinews-de-81867-859525",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:83281",
+      "group": "wikinews:de:83281",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:86249",
+      "group": "wikinews:de:86249",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:83089",
+      "group": "wikinews-de-83120-853363",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:de:83233",
+      "group": "wikinews-de-83194-823465",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2870410",
+      "group": "wikinews-en-2877717-4819506",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3013361",
+      "group": "wikinews-en-3004879-4853234",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2966525",
+      "group": "wikinews-en-2940389-4826089",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2991701",
+      "group": "wikinews-en-2965169-5025852",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2961794",
+      "group": "wikinews-en-2965169-5025852",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2990220",
+      "group": "wikinews-en-2940389-4826089",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3082598",
+      "group": "wikinews:en:3012338",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2889045",
+      "group": "wikinews-en-2892597-4825531",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2938619",
+      "group": "wikinews:en:2938619",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2966054",
+      "group": "wikinews-en-2872001-4814450",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2995222",
+      "group": "wikinews-en-2965169-5025852",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2977907",
+      "group": "wikinews-en-2965169-5025852",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2924985",
+      "group": "wikinews-en-2971578-4823021",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3014880",
+      "group": "wikinews-en-2940389-4826089",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2894645",
+      "group": "wikinews-en-2892597-4825531",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3004911",
+      "group": "wikinews-en-3011832-4853271",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2917824",
+      "group": "da52c26777f4728c0a3ca01ddf11c1620ae6ac5e0e17b6286d82d1f15b050eb8",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3004129",
+      "group": "wikinews-en-2995321-4832380",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2966644",
+      "group": "wikinews:en:2966644",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:3013365",
+      "group": "wikinews-en-2940389-4826089",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2834235",
+      "group": "wikinews-en-2833718-4820972",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3001179",
+      "group": "wikinews-en-2995321-4832380",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2917360",
+      "group": "wikinews-en-2877717-4819506",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2932171",
+      "group": "wikinews:en:2929534",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2846899",
+      "group": "wikinews-en-2845578-4817600",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2946612",
+      "group": "wikinews-en-2940389-4826089",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3057460",
+      "group": "wikinews:en:3057460",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:3084932",
+      "group": "wikinews:en:3084932",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2988635",
+      "group": "wikinews-en-2965169-5025852",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2946564",
+      "group": "wikinews-en-2892597-4825531",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2932165",
+      "group": "wikinews:en:2929534",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2939861",
+      "group": "wikinews:en:2939861",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2914864",
+      "group": "wikinews:en:2914864",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2885849",
+      "group": "wikinews-en-2884297-4825578",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:3014302",
+      "group": "wikinews-en-3013008-4853321",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2944246",
+      "group": "wikinews-en-2944564-4818046",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:en:2995413",
+      "group": "wikinews:en:2995413",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2981457",
+      "group": "wikinews:en:2981457",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:34913",
+      "group": "wikinews:ja:34913",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:22534",
+      "group": "wikinews:ja:22534",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:18672",
+      "group": "wikinews:ja:18672",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:5732",
+      "group": "wikinews:ja:5732",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:25038",
+      "group": "wikinews:ja:25038",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:25572",
+      "group": "wikinews:ja:25572",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:18804",
+      "group": "wikinews:ja:18804",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:34850",
+      "group": "wikinews:ja:34850",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:45154",
+      "group": "wikinews:en:3012338",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:24222",
+      "group": "wikinews:ja:24222",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:41902",
+      "group": "wikinews:ja:41902",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:29231",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:16922",
+      "group": "wikinews:ja:16922",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:27967",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:26149",
+      "group": "wikinews:ja:26149",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:16915",
+      "group": "wikinews:ja:16915",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:21241",
+      "group": "wikinews:ja:21241",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:41691",
+      "group": "wikinews:ja:41272",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:45050",
+      "group": "wikinews:ja:44963",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:41692",
+      "group": "wikinews:ja:41272",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:27956",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:28470",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:27948",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:34883",
+      "group": "wikinews:ja:34883",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:40195",
+      "group": "wikinews:ja:40195",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:38889",
+      "group": "wikinews:ja:38889",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:18032",
+      "group": "wikinews:ja:18032",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:17019",
+      "group": "wikinews:ja:17019",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:27639",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:39793",
+      "group": "wikinews:ja:39793",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:44497",
+      "group": "wikinews:ja:44497",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:28412",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:45159",
+      "group": "wikinews:en:3012338",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:26949",
+      "group": "wikinews:ja:26948",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:27184",
+      "group": "wikinews-de-78866-861833",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:28382",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:27645",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:28404",
+      "group": "wikinews:ja:28404",
+      "codes": [
+        "unresolved_annotation"
+      ]
+    },
+    {
+      "id": "wikinews:ja:27944",
+      "group": "wikinews:ja:27639",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:18726",
+      "group": "wikinews:ja:17056",
+      "codes": [
+        "related_protected_component"
+      ]
+    },
+    {
+      "id": "wikinews:ja:42916",
+      "group": "wikinews:ja:42916",
+      "codes": [
+        "source_quality_exclusion"
+      ]
+    },
+    {
+      "id": "wikinews:ja:42883",
+      "group": "wikinews:ja:41272",
+      "codes": [
+        "related_protected_component",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:20600",
+      "code": "whole_group_source_order_quota",
+      "group": "wikinews:ja:20600"
+    },
+    {
+      "id": "wikinews:ja:27606",
+      "code": "whole_group_source_order_quota",
+      "group": "wikinews:ja:27606"
+    },
+    {
+      "id": "wikinews:ja:44963",
+      "code": "related_blocked_source_group"
+    },
+    {
+      "id": "wikinews:ja:44992",
+      "code": "related_blocked_source_group"
+    },
+    {
+      "id": "wikinews:ja:45000",
+      "code": "related_blocked_source_group"
+    },
+    {
+      "id": "wikinews:ja:45053",
+      "code": "related_blocked_source_group"
+    },
+    {
+      "id": "wikinews:ja:45054",
+      "code": "related_blocked_source_group"
+    },
+    {
+      "id": "wikinews:ja:45075",
+      "code": "related_blocked_source_group"
+    }
+  ],
+  "final_test_predicted": false,
+  "same_annotator_label_agreement": {
+    "matches": 815,
+    "total": 856,
+    "independent_validation": false
+  },
+  "selection": "First whole rights-compatible, resolvable, protected-disjoint groups in frozen source order; no class balancing or candidate scores.",
+  "annotation_limits": "Same AI annotator with prior development exposure; no predictions on these inputs seen during annotation. Self-review is not independent human validation.",
+  "all_source_inputs_permanently_test_reserved": true
+}

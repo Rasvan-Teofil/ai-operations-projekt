@@ -1,0 +1,17 @@
+name: offline-api-tests
+on: [push, pull_request]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python scripts/check_layout.py
+      - run: python scripts/check_main_integration.py
+      - run: pip install -r requirements.txt
+      # GitHub's CPU runner only. The tower keeps its separate CUDA wheel install.
+      - run: pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pytest -q

@@ -1,0 +1,20 @@
+{
+  "client_date": "2026-11-11",
+  "offline_tests": {
+    "passed": 166,
+    "warnings": 1,
+    "warning": "Existing Starlette/httpx TestClient deprecation",
+    "network_or_gpu_tests": false
+  },
+  "live_api": {
+    "temporary_mode": "Original MiniLM, CPU-only process via CUDA_VISIBLE_DEVICES=-1; persistent selected.json/serving_selected.json not changed",
+    "health_status": 200,
+    "prediction_status": 200
+  },
+  "branch": "second-path",
+  "head": "5b6fb3aef01cc25840825b89c5202024db9ef3fb",
+  "raw_texts_and_weights_ignored": true,
+  "historical_report_directories_not_overwritten": true,
+  "engineering": "Train-only full-article forward/backward capacity passed; first discarded Qwen OOM and constructor-mode correction recorded separately.",
+  "limits": "Verification snapshot before fresh-Test collection. Development scoring is separate from software tests."
+}

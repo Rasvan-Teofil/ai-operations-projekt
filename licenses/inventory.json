@@ -1,0 +1,617 @@
+{
+  "version": "2026-11-11.1",
+  "reviewed_on": "2026-11-11",
+  "scope": "Full-article research demo and preserved historical source records; no blanket commercial clearance or project-code licence.",
+  "entries": [
+    {
+      "id": "qwen3_4b",
+      "name": "Qwen3-4B-Instruct-2507",
+      "group": "current",
+      "use": "Historical zero-shot profile and pinned base of new full-article Qwen profiles.",
+      "license": "Apache-2.0",
+      "status": "Apache-2.0 base with retained notices; article and adaptation rights separate.",
+      "scope": "Commercial reuse and redistribution of the licensed model are permitted subject to Apache-2.0 conditions, including retained notices. This does not license submitted articles or certify the pretraining corpus.",
+      "attribution": "Qwen Team / Alibaba Cloud; retain upstream notices.",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "license_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/blob/cdbee75f17c01a7cc42f958dc650907174af0554/LICENSE",
+      "notices": [
+        "qwen-Apache-2.0.txt"
+      ]
+    },
+    {
+      "id": "minilm_v2",
+      "name": "MiniLM base and project fine-tunes v1/v2",
+      "group": "current",
+      "use": "Selectable MiniLM v2; original base encoder for historical classifiers.",
+      "license": "Apache-2.0 for the base model",
+      "status": "Legacy training data restricted; research comparison.",
+      "scope": "The base model card declares Apache-2.0. Kenpache training permissions are a separate issue. We retain the trained artifacts as research-only pending clarification; a future publication-oriented model must start again from the clean base, not the legacy fine-tune.",
+      "attribution": "Sentence Transformers / UKPLab contributors; project training documented separately.",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "source_url": "https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "license_url": "https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/blob/e8f8c211226b894fcb81acc59f3b34ba3efd5f42/README.md",
+      "notices": [
+        "Apache-2.0.txt"
+      ]
+    },
+    {
+      "id": "linearsvc_v2",
+      "name": "Reconstructed LinearSVC v2",
+      "group": "current",
+      "use": "Selectable reconstruction of the colleague recipe, not their original weights.",
+      "license": "No separate project artifact licence assigned",
+      "status": "Legacy training data restricted; research comparison.",
+      "scope": "Trained on Financial PhraseBank, German Kenpache and a 46-row original supplement. Do not treat public code or the sklearn implementation licence as permission to redistribute those data or as commercial clearance for this artifact. We keep it for research comparison.",
+      "attribution": "Colleague recipe from Rasvan-Teofil/ai-operations-projekt; reconstruction on second-path.",
+      "revision": "8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/local_llm/reference_provenance.json",
+      "notices": []
+    },
+    {
+      "id": "kenpache",
+      "name": "Kenpache multilingual financial sentiment",
+      "group": "current",
+      "use": "Historical MiniLM v1/v2 training; German training data for LinearSVC reconstruction.",
+      "license": "Conflicting card: Apache-2.0 badge; academic / non-commercial research usage section",
+      "status": "Restricted / unresolved; excluded from the proposed publication-oriented pool.",
+      "scope": "We follow the more restrictive usage statement. Original publisher rights are retained; commercial permission must be obtained from original sources. Neither a new licence page nor new benchmark results remove this issue.",
+      "attribution": "Kenpache dataset creator; respective publishers in the source field.",
+      "revision": "9d43950d151602f623f28bba62f30554b5d40dd2",
+      "source_url": "https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment",
+      "license_url": "https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment/blob/9d43950d151602f623f28bba62f30554b5d40dd2/README.md",
+      "notices": [
+        "kenpache-usage.txt"
+      ]
+    },
+    {
+      "id": "phrasebank",
+      "name": "Financial PhraseBank",
+      "group": "current",
+      "use": "English training data for reconstructed LinearSVC.",
+      "license": "CC-BY-NC-SA-3.0",
+      "status": "Non-commercial; excluded from the proposed pool without separate permission.",
+      "scope": "Research publication of aggregate results is distinct from commercial use or redistribution of corpus text. Retain attribution and share-alike where applicable. The source card directs commercial users to the authors for a separate licence.",
+      "attribution": "Malo, Sinha, Korhonen, Wallenius and Takala; Good debt or bad debt (2014).",
+      "revision": "8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964",
+      "source_url": "https://huggingface.co/datasets/takala/financial_phrasebank",
+      "license_url": "https://huggingface.co/datasets/takala/financial_phrasebank/blob/8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964/README.md",
+      "notices": [
+        "CC-BY-NC-SA-3.0.txt"
+      ]
+    },
+    {
+      "id": "sentfin",
+      "name": "SEntFiN 1.0",
+      "group": "current",
+      "use": "Fresh shared headline evaluation only; not project LLM training.",
+      "license": "MIT in repository",
+      "status": "Repository licence verified; publisher headline rights not independently established.",
+      "scope": "The MIT file grants rights in software and associated documentation. We have not established a separate grant from the underlying news publishers. We publish aggregate metrics and split hashes, not headline texts. Do not silently promote this benchmark to commercially cleared training data.",
+      "attribution": "Ankur Sinha, Satishwar Kedas, Rishu Kumar and Pekka Malo (2021 licence notice).",
+      "revision": "eba43610fe3cb57a3e5773cd6c037da1f8992ad5",
+      "source_url": "https://github.com/pyRis/SEntFiN",
+      "license_url": "https://github.com/pyRis/SEntFiN/blob/eba43610fe3cb57a3e5773cd6c037da1f8992ad5/LICENSE",
+      "notices": [
+        "sentfin-MIT.txt"
+      ]
+    },
+    {
+      "id": "opus",
+      "name": "OPUS-MT English → German",
+      "group": "current",
+      "use": "Creates the German translated benchmark diagnostic; not a sentiment model.",
+      "license": "CC-BY-4.0",
+      "status": "Permissive translation-model licence.",
+      "scope": "Credit the translator and mark output as machine-translated. Translation does not clear source headline rights or create independent native-German gold labels.",
+      "attribution": "Helsinki-NLP Research Group; OPUS-MT contributors.",
+      "revision": "6183067f769a302e3861815543b9f312c71b0ca4",
+      "source_url": "https://huggingface.co/Helsinki-NLP/opus-mt-en-de",
+      "license_url": "https://huggingface.co/Helsinki-NLP/opus-mt-en-de/blob/6183067f769a302e3861815543b9f312c71b0ca4/README.md",
+      "notices": [
+        "CC-BY-4.0.txt"
+      ]
+    },
+    {
+      "id": "supplement",
+      "name": "46 original training supplement rows",
+      "group": "current",
+      "use": "Training-only supplement in reconstructed colleague v2.",
+      "license": "No standalone data licence found at inspected source commit",
+      "status": "Unresolved for external reuse.",
+      "scope": "Original hand-written examples are not publisher-sourced news. Public GitHub availability alone is not a licence grant. Not included in the proposed new shared training set until its authors choose an explicit licence.",
+      "attribution": "Original project contributors.",
+      "revision": "8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/8668255ed7b94c24e16d52bec1d992f9ad507e87",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/local_llm/reference_provenance.json",
+      "notices": []
+    },
+    {
+      "id": "wikinews",
+      "name": "Wikinews · German and English",
+      "group": "current",
+      "use": "New AI-labelled news pilot: 360 native DE/EN title+lead inputs collected; 342 labelled, 244 Train /49 Val /49 Test.",
+      "license": "DE text: CC-BY-2.5; EN text after 2024-12-16: CC-BY-4.0; older EN usually CC-BY-2.5",
+      "status": "Open-text AI-labelled pilot; single-assistant reference labels.",
+      "scope": "Attribution licences permit commercial sharing/adaptation of covered text. Per-page source/revision/history links, hashes and transformations are retained. German text CC BY2.5; English article-era policy CC BY2.5/4.0, with both terms preserved for later contributions to older articles. Images/quoted leads excluded. This is a small single-source short-news pilot; the same AI created and reviewed the labels, not a human annotation panel.",
+      "attribution": "Wikinews / de.wikinews.org and article contributors, with original page/history links.",
+      "revision": "Per-page revisions frozen in reports/common_data_v3/source_manifest.json; protocol commit cbf0d86.",
+      "source_url": "https://en.wikinews.org/wiki/Main_Page",
+      "license_url": "https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371",
+      "notices": [
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "wikinews-terms.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "gerntsa",
+      "name": "GerNTSA · German news topic sentiment",
+      "group": "candidate",
+      "use": "Possible German labelled auxiliary source; not yet approved for training.",
+      "license": "CC-BY-4.0 declared for dataset",
+      "status": "Conditional: verify source-text rights and target-to-global label mapping.",
+      "scope": "Local inspection: 3,792 target-labelled rows, 3,632 distinct snippets; negative 573, neutral 2,255, positive 964. Publisher permissions were not independently established. Topic/target labels do not automatically equal article sentiment. Mixed targets must not be relabelled neutral; article grouping cannot be claimed from the supplied fields alone.",
+      "attribution": "GerNTSA contributors / cgoer; credit dataset URL and indicate filtering.",
+      "revision": "a28ca5245fd35ce0e16baa516515c913eba3c834",
+      "source_url": "https://github.com/cgoer/GerNTSA",
+      "license_url": "https://github.com/cgoer/GerNTSA/blob/a28ca5245fd35ce0e16baa516515c913eba3c834/LICENSE",
+      "notices": [
+        "CC-BY-4.0.txt"
+      ]
+    },
+    {
+      "id": "sentivent",
+      "name": "SENTiVENT · English financial events",
+      "group": "candidate",
+      "use": "Potential annotation/guideline reference; not a cleared replacement text corpus.",
+      "license": "CC-BY-4.0 annotations/content; Apache-2.0 software; source news explicitly excluded",
+      "status": "Conditional: obtain article permissions before including source text.",
+      "scope": "The licence expressly excludes third-party news articles. Structured target/event annotations need an audited mapping to our three global classes. Do not label every unannotated sentence neutral. Useful for investor-relevant factual sentiment and a later span task, not a drop-in publishable bilingual corpus.",
+      "attribution": "Gilles Jacobs; annotations and original guidelines: Gilles Jacobs and Ghent University. Dataset DOI 10.17605/OSF.IO/8JEC2.",
+      "revision": "6a9e8f9fc11ba7db3d8dffe3e5df9e7b062e6441",
+      "source_url": "https://huggingface.co/datasets/GillesJacobs/sentivent",
+      "license_url": "https://huggingface.co/datasets/GillesJacobs/sentivent/blob/6a9e8f9fc11ba7db3d8dffe3e5df9e7b062e6441/LICENSE",
+      "notices": [
+        "sentivent-scope.txt",
+        "sentivent-NOTICE.md",
+        "CC-BY-4.0.txt"
+      ]
+    },
+    {
+      "id": "frozen_news_v3",
+      "name": "Frozen MiniLM · AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_fp32_news_v3",
+      "name": "MiniLM v1 recipe · new AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_bf16_news_v3",
+      "name": "MiniLM v2 BF16 deployment · new AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "linearsvc_news_v3",
+      "name": "LinearSVC · new AI news pilot",
+      "group": "current",
+      "use": "Selectable experimental artifact fitted on the new Train split; BF16 variant derives from the same new fine-tuning.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean training inputs replace restricted legacy corpora for this artifact only. No Kenpache/PhraseBank/supplement rows or legacy fine-tune initialization. All applicable source/model notices retained. Small AI-labelled test does not support a human-gold accuracy claim; old artifacts retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM base where used; new AI annotations from this Codex chat.",
+      "revision": "Training cbf0d86; artifacts frozen before evaluation at92996f4; hashes in reports/common_data_v3/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/common_data_v3/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v3-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "codex_annotations",
+      "name": "New Wikinews reference annotations",
+      "group": "current",
+      "use": "342 three-class AI reference labels and18 recorded exclusions; created before model predictions.",
+      "license": "CC0-1.0 for new annotation metadata, to the extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed; single AI annotator.",
+      "scope": "The same assistant created and reviewed each label from the exact source input. No human annotator panel or consensus; exact serving-model revision is unavailable. Short rationales, text hashes and split membership are retained. CC0 does not cover original article text.",
+      "attribution": "Codex assistant in this project chat; annotations generated at user request.",
+      "revision": "Frozen in cbf0d86 before fitting and test inference.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/common_data_v3/annotations.csv",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notices": [
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "frozen_news_v4",
+      "name": "Frozen MiniLM · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_fp32_news_v4",
+      "name": "MiniLM FP32 · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "minilm_bf16_news_v4",
+      "name": "MiniLM BF16 · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "linearsvc_news_v4",
+      "name": "LinearSVC · expanded AI news",
+      "group": "current",
+      "use": "Experimental artifact fitted on 692 title+lead training inputs; original 244 plus 448 new. BF16 derives from the same new fine-tune.",
+      "license": "MiniLM base Apache-2.0 where used; Wikinews text CC-BY-2.5/4.0; new annotation metadata CC0-1.0.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Clean original pretrained initialization; no restricted legacy fine-tunes or supplement. One AI reference annotator, not human-gold labels. Fresh 227-item Test shared with unchanged controls. Historical models retain their original restrictions.",
+      "attribution": "Wikinews contributors; Sentence Transformers / UKPLab for MiniLM where used; AI annotations from this Codex chat.",
+      "revision": "Labels/protocol frozen at d1063df; final artifacts pinned at 3ecda09 before Test. Full hashes in reports/expanded_news_v4/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/expanded_news_v4/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-ai-v4-ATTRIBUTION.txt",
+      "notices": [
+        "Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "wikinews_expanded",
+      "name": "Wikinews · additional data coverage",
+      "group": "current",
+      "use": "720 new revision-pinned DE/EN short news inputs: 448 new Train and 227 fresh Test accepted; 45 exclusions. Original 244 Train carried separately.",
+      "license": "CC-BY-2.5 / CC-BY-4.0, according to language and article era; retain both terms for later EN contributions.",
+      "status": "Used in completed data-expansion study; AI-labelled · Codex-reviewed.",
+      "scope": "Only Wikinews title and first substantive paragraph;650-character complete-sentence lead cap. No images, quoted leads or linked publisher articles. Source declarations do not warrant every contribution. Bibliographic title/credit metadata is in Git; raw inputs and weights remain local.",
+      "attribution": "German and English Wikinews contributors; every page revision and author-history link in the source manifest.",
+      "revision": "720 revisions and exact text hashes frozen at d1063df; sampling seed 20261108; no project-generated translations.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/expanded_news_v4/source_manifest.json",
+      "license_url": "https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371",
+      "notices": [
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "wikinews-terms.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "codex_annotations_expanded",
+      "name": "Expanded Wikinews AI reference annotations",
+      "group": "current",
+      "use": "675 new three-class AI reference labels and 45 exclusion rationales; created before candidate predictions.",
+      "license": "CC0-1.0 for new annotation metadata, to the extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed; single AI annotator.",
+      "scope": "Same assistant read the exact title+lead text and reviewed consistency; no candidate predictions or title hints assigned labels. No human consensus or verified-ground-truth claim. Sampling role and hint hidden from annotation batches. CC0 does not cover underlying text.",
+      "attribution": "Codex assistant in this project chat, at user request; exact serving revision unavailable.",
+      "revision": "New ledger frozen at d1063df before fitting; original 244 labels reused unchanged from v3.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/expanded_news_v4/annotations.csv",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notices": [
+        "CC0-1.0.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "qwen_news_v5",
+      "name": "Qwen · matched news rubric",
+      "group": "current",
+      "use": "Same pretrained weights; general-news outcome rubric replacing financial-only context.",
+      "license": "Qwen base Apache-2.0; Wikinews inputs CC-BY-2.5/4.0 where used; AI annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Local artifact/profile with shared pinned Qwen dependency. Few-shot examples and LoRA use only the same 692 Train as the small classifiers, without restricted legacy corpora. AI-reference agreement does not constitute human-gold accuracy. Original data/model notices retained; this does not assign a blanket licence to project code.",
+      "attribution": "Qwen / Alibaba Cloud; Wikinews contributors with per-page revision/history credits; AI annotations from this Codex chat.",
+      "revision": "Qwen cdbee75f17c01a7cc42f958dc650907174af0554; exact prompt/protocol frozen at 8a81b9e; profile/base/adapter hashes in reports/llm_adaptation_v5/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/llm_adaptation_v5/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-llm-v5-ATTRIBUTION.txt",
+      "notices": [
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "qwen_fewshot_v5",
+      "name": "Qwen · six Train examples",
+      "group": "current",
+      "use": "Same pretrained weights/news rubric; six seeded 692-Train demonstrations, one per language/class.",
+      "license": "Qwen base Apache-2.0; Wikinews inputs CC-BY-2.5/4.0 where used; AI annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Local artifact/profile with shared pinned Qwen dependency. Few-shot examples and LoRA use only the same 692 Train as the small classifiers, without restricted legacy corpora. AI-reference agreement does not constitute human-gold accuracy. Original data/model notices retained; this does not assign a blanket licence to project code.",
+      "attribution": "Qwen / Alibaba Cloud; Wikinews contributors with per-page revision/history credits; AI annotations from this Codex chat.",
+      "revision": "Qwen cdbee75f17c01a7cc42f958dc650907174af0554; exact prompt/protocol frozen at 8a81b9e; profile/base/adapter hashes in reports/llm_adaptation_v5/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/llm_adaptation_v5/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-llm-v5-ATTRIBUTION.txt",
+      "notices": [
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "qwen_lora_v5",
+      "name": "Qwen · own LoRA fine-tuning",
+      "group": "current",
+      "use": "Own rank 8 LoRA, 2,949,120 trainable parameters, full 692 Train for three epochs; frozen BF16 Qwen base and FP32 adapters.",
+      "license": "Qwen base Apache-2.0; Wikinews inputs CC-BY-2.5/4.0 where used; AI annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "Experimental / AI-labelled · Codex-reviewed.",
+      "scope": "Local artifact/profile with shared pinned Qwen dependency. Few-shot examples and LoRA use only the same 692 Train as the small classifiers, without restricted legacy corpora. AI-reference agreement does not constitute human-gold accuracy. Original data/model notices retained; this does not assign a blanket licence to project code.",
+      "attribution": "Qwen / Alibaba Cloud; Wikinews contributors with per-page revision/history credits; AI annotations from this Codex chat.",
+      "revision": "Qwen cdbee75f17c01a7cc42f958dc650907174af0554; exact prompt/protocol frozen at 8a81b9e; profile/base/adapter hashes in reports/llm_adaptation_v5/trained.json.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/llm_adaptation_v5/comparison.md",
+      "license_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/licenses/notices/wikinews-llm-v5-ATTRIBUTION.txt",
+      "notices": [
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-ai-v3-ATTRIBUTION.txt",
+        "wikinews-ai-v4-ATTRIBUTION.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "wikinews_llm_v5",
+      "name": "Wikinews · fresh matched-task LLM Test",
+      "group": "current",
+      "use": "239 random new title+lead inputs, 227 retained after 12 annotation exclusions; no class balancing/enrichment and no new Train rows.",
+      "license": "CC-BY-2.5 / CC-BY-4.0 by language/article era; both retained for later EN contributions.",
+      "status": "Used for matched-task LLM comparison / AI-labelled · Codex-reviewed.",
+      "scope": "Excludes all 1080 historical Wikinews inputs and conservative linked/source/near-duplicate groups. Same extraction, detected quote/media filtering and source declaration limits. No externally linked publisher articles fetched, no project-generated translations; source translation history not audited.",
+      "attribution": "German/English Wikinews contributors; per-page revision, history and transformation in source manifest.",
+      "revision": "Seed 20261109; 239 revisions/text hashes frozen at 8a81b9e. Existing 692 Train unchanged from v4.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/llm_adaptation_v5/source_manifest.json",
+      "license_url": "https://en.wikinews.org/w/index.php?title=Wikinews:Copyright&oldid=4991371",
+      "notices": [
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "wikinews-terms.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "codex_annotations_llm_v5",
+      "name": "Fresh LLM-comparison AI reference annotations",
+      "group": "current",
+      "use": "227 new reference labels and 12 exclusion rationales, written before candidate results.",
+      "license": "CC0-1.0 for new annotation metadata, to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed; single AI annotator.",
+      "scope": "Same assistant read exact title+lead inputs and reviewed consistency, without candidate Test predictions. No human consensus or verified-ground-truth claim; exact serving revision unavailable. Original texts retain their terms.",
+      "attribution": "Codex assistant in this project chat, at user request.",
+      "revision": "Frozen ledger/text hashes at 8a81b9e before CV and full-Train fitting.",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/main/reports/llm_adaptation_v5/annotations.csv",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notices": [
+        "CC0-1.0.txt",
+        "wikinews-llm-v5-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "full_article_v1",
+      "name": "Full-article DE/EN/JA study and models",
+      "group": "current",
+      "use": "240 Train, one 691-article Test (DE273/EN118/JA300); four frozen candidates, Qwen LoRA selected before Test.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/main/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_frozen_v1",
+      "name": "Full article · frozen MiniLM + head",
+      "group": "current",
+      "use": "Full article · frozen MiniLM + head; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/main/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_minilm_v1",
+      "name": "Full article · own MiniLM fine-tuning",
+      "group": "current",
+      "use": "Full article · own MiniLM fine-tuning; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/main/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_qwen_zero_v1",
+      "name": "Full article · Qwen news rubric",
+      "group": "current",
+      "use": "Full article · Qwen news rubric; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/main/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    },
+    {
+      "id": "article_qwen_lora_v1",
+      "name": "Full article · own Qwen LoRA",
+      "group": "current",
+      "use": "Full article · own Qwen LoRA; same 240 Train and 691 Test articles; exact hashes and costs in model cards.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "scope": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Sentence Transformers / UKPLab; Codex annotation metadata.",
+      "revision": "reports/next_stage/final-artifacts-v1.json and final-test-v1/provenance.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/main/reports/next_stage",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ]
+    }
+  ],
+  "next_stage": {
+    "reviewed_on": "2026-11-11",
+    "status": "27 development evaluations complete; four full-Train fits; frozen 691-article Test.",
+    "protocol": "docs/next-stage.md",
+    "annotation_provenance": "AI-labelled · Codex-reviewed; two self-review passes, not independent verification",
+    "japanese_source_status": "Native revision and third-party passage review complete: 91 Train / 300 Test; no human validation.",
+    "source_text_and_annotations": "Separate CC-BY contribution terms and project CC0 metadata scope; raw texts and weights excluded from Git.",
+    "historical_entries": "Preserved; no blanket commercial release"
+  }
+}

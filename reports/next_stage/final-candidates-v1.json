@@ -1,0 +1,113 @@
+{
+  "version": "full-article-final-candidates-v1",
+  "status": "frozen-before-fresh-test",
+  "final_test_predicted": false,
+  "selected_on_development": "qwen-lora",
+  "minilm_window_selected_on_development": 128,
+  "models": [
+    "frozen128",
+    "minilm128",
+    "qwen-zero",
+    "qwen-lora"
+  ],
+  "selection_rule": "OOF primary DE/EN F1; within .005 use warm latency then full standalone bytes. Final Test will not change the selected model or recipes.",
+  "development_sha256": "60b76f72186abc34b084233a40e5fa51507d37c7b03bc78d50ac0bebda22a71a",
+  "development_protocol_sha256": "b4c1c2dbb17cd077abac32aab4a3d3bfb844241f7248dd62c92cd325a01280ec",
+  "train_sha256": "059e0929a0e87478a6aef5f102590c37443bc0089c946a73837dbb1675736dc1",
+  "annotation_sha256": "edc7e007418feedb51ee99b34c11b4a16fa732e008f8462e7c808e3826a165ce",
+  "working_tree_code_sha256": "c9484dc0508352252497334f13f6bf3745865f6353da08bed15cb8204cad0111",
+  "engineering_amendment_sha256": "660b413e79da2bc5a663515cce4e68a49d96b9a070d07fc22150d8bcbef07a24",
+  "final_runner_sha256": "c5de2f09600ed2d4ab85440272a3dd7348a1259ebe19cbe00847f4a5a55ea00e",
+  "source_collector_sha256": "c72062d307c56e4ef0e75526593b1734528911597a0873e5ee5afd0f2d7b7e57",
+  "inference_capacity_sha256": "5a2c0f783edda007bdd31170734e164b1405fa2e24e4a396b2618dd4e5cecb9e",
+  "seed": 20261110,
+  "full_train_rows": 240,
+  "stability": {
+    "status": "complete",
+    "performed": true,
+    "seed": 20261111,
+    "finalists": [
+      "qwen-lora",
+      "qwen-zero"
+    ],
+    "primary_gap": 0.011047238253147462,
+    "additional_scored_evaluations": 3,
+    "total_scored_development_evaluations": 27,
+    "summaries": [
+      {
+        "model": "qwen-lora",
+        "original_primary_score": 0.7431772209133528,
+        "additional_seed_primary_score": 0.7483233303589254,
+        "additional_seed_metrics": {
+          "accuracy": 0.825,
+          "macro_f1": 0.7609279174536693,
+          "primary_score": 0.7483233303589254,
+          "mean_three_language_macro_f1": 0.7630546495493276,
+          "macro_f1_de": 0.7209170140204623,
+          "macro_f1_en": 0.7757296466973886,
+          "macro_f1_ja": 0.792517287930132,
+          "negative_precision": 0.9241379310344827,
+          "negative_recall": 0.9054054054054054,
+          "positive_recall": 0.7346938775510204,
+          "confusion_matrix": [
+            [
+              134,
+              12,
+              2
+            ],
+            [
+              8,
+              28,
+              7
+            ],
+            [
+              3,
+              10,
+              36
+            ]
+          ],
+          "per_class": {
+            "negative": {
+              "precision": 0.9241379310344827,
+              "recall": 0.9054054054054054,
+              "f1": 0.9146757679180887,
+              "support": 148
+            },
+            "neutral": {
+              "precision": 0.56,
+              "recall": 0.6511627906976745,
+              "f1": 0.6021505376344086,
+              "support": 43
+            },
+            "positive": {
+              "precision": 0.8,
+              "recall": 0.7346938775510204,
+              "f1": 0.7659574468085106,
+              "support": 49
+            }
+          }
+        },
+        "reused_deterministic_predictions": false
+      },
+      {
+        "model": "qwen-zero",
+        "original_primary_score": 0.7321299826602053,
+        "additional_seed_primary_score": 0.7321299826602053,
+        "reused_deterministic_predictions": true
+      }
+    ],
+    "selection_rule_unchanged": true,
+    "limits": "Two seeds and three folds describe limited sensitivity, not an independent uncertainty estimate or a hyperparameter search."
+  },
+  "test_source_frame": {
+    "source_target_per_language": 350,
+    "final_target_per_language": 300,
+    "source_order": "Same frozen shuffled recent-1500 published-category frame, skip all previously exposed pages and observed related source/translation groups",
+    "source_eligibility": "Native DE/EN/JA; quote-restricted v5, <=20000 characters and <=4096 Qwen article tokens; compatible rights and resolvable article-level target after two explicit AI reviews.",
+    "selection": "First up to 300 eligible articles/language in frozen source order, whole event groups; no class balancing, score-based removal or seed changes. Disclose supply/rights/grouping shortages.",
+    "final_test_access": "No candidate predictions or candidate-error examples in annotation. Same AI annotator already exposed to development findings; this is not independent blind human evaluation."
+  },
+  "no_post_test_tuning": true,
+  "human_gold": false,
+  "label_status": "AI-labelled · Codex-reviewed"
+}
