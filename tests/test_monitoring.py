@@ -62,3 +62,31 @@ def test_api_logs_prediction(monkeypatch, tmp_path):
     assert record["latency_ms"] >= 0
     assert record["label"] == response.json()["label"]
     assert os.environ[LOG_PATH_ENV] == str(path)
+
+
+def test_drift_report_flags_shifted_share(monkeypatch, tmp_path):
+    from app.monitoring import drift_report, total_variation
+
+    path = tmp_path / "predictions.jsonl"
+    monkeypatch.setenv(LOG_PATH_ENV, str(path))
+    for _ in range(30):
+        _log("negative")
+    for _ in range(10):
+        _log("positive")
+    reference = {"negative": 0.3333, "neutral": 0.3334, "positive": 0.3333}
+    assert total_variation(reference, reference) == 0.0
+    report = drift_report(path, reference=reference)
+    entry = report["versions"]["v1"]
+    assert entry["n"] == 40
+    assert entry["tv_distance"] == 0.4167
+    assert entry["drift"] is True
+    small = drift_report(path, reference=reference, min_n=100)
+    assert small["versions"]["v1"]["drift"] is None
+
+
+def test_reference_share_from_test_split():
+    from app.monitoring import reference_label_share
+
+    shares = reference_label_share()
+    assert set(shares) <= {"negative", "neutral", "positive"}
+    assert abs(sum(shares.values()) - 1.0) < 0.01

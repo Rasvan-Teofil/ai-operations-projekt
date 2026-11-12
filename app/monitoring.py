@@ -8,6 +8,9 @@ The raw text and the URL are never written.
 
 Read it back with ``summarize`` to see the label distribution, which is
 the first drift signal we track before the mock deployment.
+``drift_report`` compares that distribution with a reference (by default
+the label share of the test split) and flags a version when the total
+variation distance passes a threshold.
 """
 
 import json
@@ -73,10 +76,54 @@ def summarize(path: Path) -> dict:
     return summary
 
 
+DRIFT_THRESHOLD = 0.15
+
+
+def reference_label_share() -> dict[str, float]:
+    """Label share of the test split the models were evaluated on."""
+    from src.data import load_work_splits
+
+    _, _, test = load_work_splits()
+    shares = test["label"].value_counts(normalize=True)
+    return {k: round(float(v), 4) for k, v in sorted(shares.items())}
+
+
+def total_variation(a: dict[str, float], b: dict[str, float]) -> float:
+    """Half the summed absolute share difference (0 = same, 1 = disjoint)."""
+    labels = set(a) | set(b)
+    return round(0.5 * sum(abs(a.get(k, 0.0) - b.get(k, 0.0)) for k in labels), 4)
+
+
+def drift_report(
+    path: Path,
+    reference: dict[str, float] | None = None,
+    threshold: float = DRIFT_THRESHOLD,
+    min_n: int = 30,
+) -> dict:
+    """Per model version: n, label share, distance to reference, flag.
+
+    Versions with fewer than ``min_n`` predictions get ``drift=None``
+    because the share is too noisy to judge.
+    """
+    reference = reference if reference is not None else reference_label_share()
+    report = {"reference": reference, "threshold": threshold, "versions": {}}
+    for version, entry in summarize(path).items():
+        distance = total_variation(entry["label_share"], reference)
+        enough = entry["n"] >= min_n
+        report["versions"][version] = {
+            **entry,
+            "tv_distance": distance,
+            "drift": (distance > threshold) if enough else None,
+        }
+    return report
+
+
 if __name__ == "__main__":
     import sys
 
-    target = Path(sys.argv[1]) if len(sys.argv) > 1 else log_path()
+    args = [a for a in sys.argv[1:] if a != "--drift"]
+    target = Path(args[0]) if args else log_path()
     if target is None:
         raise SystemExit(f"Pass a log file or set {LOG_PATH_ENV}.")
-    print(json.dumps(summarize(target), indent=2))
+    result = drift_report(target) if "--drift" in sys.argv else summarize(target)
+    print(json.dumps(result, indent=2))
