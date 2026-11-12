@@ -1,0 +1,9 @@
+# Matplotlib retains insignificant trailing spaces inside SVG path data.
+reports/next_stage/*.svg whitespace=-blank-at-eol
+# Python's CSV writer uses CRLF; preserve measured export bytes.
+reports/**/*.csv whitespace=cr-at-eol
+# Preserve the exact pre-Test runtime hash, including its final blank line.
+src/article.py whitespace=-blank-at-eof
+
+# Exact historical snapshot: keep bytes and omit it from language statistics.
+docs/archive/main-before-full-article/source/** whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol linguist-vendored=true

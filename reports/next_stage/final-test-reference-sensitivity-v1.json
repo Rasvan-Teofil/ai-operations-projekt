@@ -1,0 +1,34 @@
+{
+  "frozen128": {
+    "all_reference_cases": 691,
+    "ambiguous_reference_cases": 71,
+    "clear_reference_cases": 620,
+    "clear_de_en_primary_score": 0.5360253997590062,
+    "ambiguity_rule": "Either review explicitly ambiguous or first/second class differs, even after resolution.",
+    "interpretation": "Descriptive reference-ambiguity sensitivity from the same saved predictions; no relabel, rerun or selection change."
+  },
+  "minilm128": {
+    "all_reference_cases": 691,
+    "ambiguous_reference_cases": 71,
+    "clear_reference_cases": 620,
+    "clear_de_en_primary_score": 0.5994590600412485,
+    "ambiguity_rule": "Either review explicitly ambiguous or first/second class differs, even after resolution.",
+    "interpretation": "Descriptive reference-ambiguity sensitivity from the same saved predictions; no relabel, rerun or selection change."
+  },
+  "qwen-zero": {
+    "all_reference_cases": 691,
+    "ambiguous_reference_cases": 71,
+    "clear_reference_cases": 620,
+    "clear_de_en_primary_score": 0.8102718842462293,
+    "ambiguity_rule": "Either review explicitly ambiguous or first/second class differs, even after resolution.",
+    "interpretation": "Descriptive reference-ambiguity sensitivity from the same saved predictions; no relabel, rerun or selection change."
+  },
+  "qwen-lora": {
+    "all_reference_cases": 691,
+    "ambiguous_reference_cases": 71,
+    "clear_reference_cases": 620,
+    "clear_de_en_primary_score": 0.8496068961586203,
+    "ambiguity_rule": "Either review explicitly ambiguous or first/second class differs, even after resolution.",
+    "interpretation": "Descriptive reference-ambiguity sensitivity from the same saved predictions; no relabel, rerun or selection change."
+  }
+}

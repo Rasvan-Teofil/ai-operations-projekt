@@ -1,435 +1,109 @@
 # Article Sentiment
 
-**Course:** AI Operations  
-**University:** HHN Hochschule Heilbronn (Heilbronn University of Applied Sciences)  
-**Programme:** M.Sc. Business Informatics (Wirtschaftsinformatik)  
-**Semester:** Winter 2026/27
+**AI Operations · Hochschule Heilbronn · M.Sc. Wirtschaftsinformatik · Wintersemester 2026/27**
 
-The tool reads a news text or exactly one article URL and estimates its sentiment: negative, neutral or positive. German and English.
+Medienbeobachtung für native deutsche, englische und japanische Nachrichten: vollständigen Text oder genau eine HTTP(S)-URL als `negative`, `neutral` oder `positive` klassifizieren. **Der aktuelle Projektstand liegt vollständig auf `main`.** Frühere Studien bleiben im Archiv erhalten.
 
-## Summary
+## Stand · 12. November 2026
 
-Built for newsrooms, PR & communications teams and analysts. Later, not yet labelled or modelled here: a score for judgemental or loaded language.
+Die Vollartikelstudie ist abgeschlossen: 27 Train-interne Entwicklungsauswertungen, vier Fits auf denselben 240 Train-Artikeln und ein gemeinsamer frischer Test mit **691 Artikeln: DE273, EN118, JA300**. Qwen LoRA wurde vor Erhebung des Tests gewählt und ist jetzt der lokale API-Standard.
 
-## Two iterations
+**AI-labelled · Codex-reviewed**: zwei vollständige Lesedurchgänge desselben AI-Annotators, keine unabhängige menschliche Ground Truth. Der Hauptwert gewichtet DE- und EN-macro-F1 je zur Hälfte; JA bleibt separat. Keine künstliche Auffüllung des englischen Tests.
 
-Both paths live in this state of the repo. Neither replaces the other.
+| Methode | DE/EN-macro-F1 | DE | EN | JA | warme ms/Artikel | vollständige MiB |
+|---|---:|---:|---:|---:|---:|---:|
+| frozen128 | 0.5150 | 0.5281 | 0.5019 | 0.6257 | 3.72 | 240.73 |
+| minilm128 | 0.5928 | 0.4734 | 0.7122 | 0.5655 | 3.66 | 240.73 |
+| qwen-zero | 0.7796 | 0.7508 | 0.8085 | 0.8143 | 172.33 | 7687.49 |
+| qwen-lora | 0.8218 | 0.7612 | 0.8825 | 0.8132 | 184.26 | 7698.77 |
 
-| | First iteration (modules in `src/` and `app/main.py`) | Second iteration (MiniLM in `src/second_path/`, API `app/second_path.py`) |
-| --- | --- | --- |
-| Models | TF-IDF + LogReg, TF-IDF + LinearSVC, two HF zero-shot models, DistilBERT fine-tuning | MiniLM `paraphrase-multilingual-MiniLM-L12-v2`: frozen, fine-tuned, centroid, majority; then ablations B0 and R0–R4 |
-| Own test | Financial sentences, n = 1,270. Best macro-F1: **LinearSVC 0.7202** | Kenpache DE/EN, n = 1,787. Fine-tuned **0.7187** vs. frozen 0.6656 |
-| Serving | API default `tfidf_linearsvc` | v2 selects **R3_deploy** (BF16, source-CV macro-F1 0.6729, about 241 MiB) |
-| Training | CPU for TF-IDF. Transformers optional | CUDA, BF16. A CPU fallback is refused |
-| API | `uvicorn app.main:app` | `uvicorn app.second_path:app` |
-| MLflow experiment | `article-sentiment`, tag `iteration=1-first-path` | `article-sentiment-second-path`, tag `iteration=2-second-path` |
+- [Ergebnisse mit Unsicherheit, Kosten und Laufkennungen](reports/next_stage/comparison-v1.md) · [vollständiges JSON](reports/next_stage/comparison-v1.json)
+- [Modellkarten und Grenzen](reports/next_stage/model-cards-v1.md) · [unveränderte Referenzen und Fehlerfälle](reports/next_stage/error-analysis-v1.json)
+- [Reproduzieren](docs/reproduce-full-article.md) · [Projektstruktur und Dateiplatzierung](docs/repository-structure.md)
+- [Quellen und Lizenzen](licenses/README.md) · [Inventar](licenses/inventory.json)
+- [Historische Studien und Befehle](docs/archive/project-history-through-v5.md) · [Phasenprotokoll](docs/next-stage.md)
 
-The fair comparison of both approaches on the **same** 600 SEntFiN headlines is in [`reports/development/branch_comparison.md`](reports/development/branch_comparison.md): reconstructed LinearSVC macro-F1 EN 0.4524, second-path v1 0.7360, v2 0.7293. The earlier test scores 0.7202 and 0.7187 come from different splits and are not ranked against each other. The executive pitch is in [`docs/executive-pitch/`](docs/executive-pitch/).
+## Sprachen: Deutsch, Englisch und Japanisch
 
-Second-iteration artefacts: data under `data/second_path/processed/`, weights under `models/second_path/`. The first iteration stays in `data/processed/` and `models/`.
+| Sprache | Native Train-Artikel | Native Testartikel | Qwen-LoRA-Macro-F1 |
+|---|---:|---:|---:|
+| Deutsch / German | 78 | 273 | 0.7612 |
+| Englisch / English | 71 | 118 | 0.8825 |
+| **Japanisch / Japanese / 日本語** | **91** | **300** | **0.8132** |
 
-## Problem & stakeholders
+Japanisch ist implementiert und wurde separat ausgewertet. Es handelt sich um
+native japanische Vollartikel, keine übersetzten DE/EN-Testtexte.
+[Japanisch: Daten, Ergebnisse, Bedienung und Grenzen](docs/languages/japanese.md).
+DE/EN bleiben die vorab festgelegte Hauptkennzahl; JA wird nicht nachträglich
+zur Hauptkennzahl hinzugenommen.
 
-| | |
-| --- | --- |
-| Business problem | Sort incoming articles by sentiment without reading every text by hand |
-| Decision | What is urgently negative, what is a neutral report, what is demonstrably positive |
-| Stakeholders | Newsrooms, PR & Communications, Analysts |
-| Languages | German and English |
-| Errors | A false alarm and a missed negative text cost different amounts. The costs are still open, so the selection metric is macro-F1 |
+## Projekt direkt von main erklären
 
-The idea was agreed with the lecturer. He expects a comparison of several models and our own fine-tuning.
+1. [Problem, Zielgruppe und Aufbau](docs/project-overview.md).
+2. [Aktuelle Ergebnisse einschließlich Japanisch](reports/next_stage/comparison-v1.md).
+3. [Projektstruktur nach Vorlesungsvorlage](docs/repository-structure.md).
+4. [Vorführungsleitfaden](docs/presentation-guide.md) und [Reproduktion](docs/reproduce-full-article.md).
+5. [Quellen und Lizenzen](licenses/README.md), [Prüfnachweise](reports/next_stage/verification-final-v1.json)
+   und [ursprünglicher main-Stand](docs/archive/main-before-full-article/README.md).
 
-## Prediction target
+Alle verlinkten Dateien, die aktuelle Anwendung und ihre Tests liegen auf diesem
+Hauptzweig. `second-path` bleibt nur als historische Entwicklungskennung in
+Messprotokollen und MLflow erhalten. Für die Präsentation ist kein Branchwechsel nötig.
 
-| | |
-| --- | --- |
-| Target | Sentiment of a text |
-| Classes | `negative`, `neutral`, `positive` |
-| Five levels in zero-shot | Very Negative and Negative → `negative`, Neutral → `neutral`, Positive and Very Positive → `positive` |
-| Selection | Highest macro-F1 on the shared test split; if close, inference time and model size |
+**Öffentliche Demo:** noch nicht bereitgestellt. Die laufende Anwendung und MLflow
+sind bisher lokal. Kostenloses Hosting ohne Tower ist eine separate, noch offene
+Bereitstellungsaufgabe; eine GitHub-Seite allein führt das Modell nicht aus.
+[Hostingstand und kostenfreie Optionen](docs/public-hosting.md).
 
-The mapping uses the label names (`src/labels.py`).
+## Was daraus folgt
 
-## Dataset
+Qwen LoRA erzielt die höchste Übereinstimmung im gleichgewichteten DE/EN-Hauptwert. Die gepaarte 95%-Bootstrapspanne der Differenz zu Qwen Zero liegt bei [0,0070; 0,0826], bedingt auf diesen Quellenbestand und die festen KI-Referenzen. Das ist kein Nachweis von 95% Genauigkeit. Auf Japanisch liegt LoRA geringfügig unter Zero-Shot; MiniLMs Verbesserung gilt ebenfalls nicht für jede Sprache.
 
-One row is one sentence from a financial news item. The collection is usable for academic purposes and stays local: `python -m src.prepare_data` downloads it, `.gitignore` keeps the texts out of Git. The dummy file `data/sample/sentiment_sample.csv` (18 hand-written sentences, `origin=dummy`) is only for tests and CI (`SENTIMENT_DATA=dummy`).
+Das angepasste MiniLM benötigt hier etwa 3,66 statt 184,26 warme ms/Artikel und rund 241 statt 7699 MiB. Diese Größen enthalten eigenständig benötigte Basisgewichte und Adapter. Zeiten enthalten Tokenisierung, Transfer, gesamten Kontext und Aggregation; Modellladen und URL-Abruf sind ausgenommen. GPU: RTX 5060 Ti, Batch 1.
 
-| Language | Source | Subset | Licence | Rows after filtering |
-| --- | --- | --- | --- | --- |
-| English | [takala/financial_phrasebank](https://huggingface.co/datasets/takala/financial_phrasebank) | `Sentences_75Agree.txt` (≥ 75 % annotator agreement) | [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) | 3,440 |
-| German | [Kenpache/multilingual-financial-sentiment](https://huggingface.co/datasets/Kenpache/multilingual-financial-sentiment) | `language=de` only | academic / non-commercial; the card also lists Apache-2.0, we apply the stricter reading | 5,023 |
+Die Trainingsmenge 240 ist kein belegtes Optimum: die kleine Mengenkurve war nicht gesättigt. 3000 war eine Obergrenze, 6000 bleibt spätere Forschung. Ein einzelnes Archiv, begrenzte direkte Zitate, maximal 20000 Zeichen/4096 Qwen-Artikeltokens, unvollständige Erkennung semantischer Verbindungen und mögliche Vortrainingsüberschneidungen begrenzen die Übertragbarkeit. Ein unabhängiges menschliches Referenzset bleibt nötig, um Referenzfehler zu messen.
 
-Phrasebank labels take an investor's view: would the sentence rather raise, lower or not move the share price. Kenpache contains shorter sentences from German-language financial media; its labels are usable but coarser (glossary rows, occasionally merged reports). Both sources already provide the three class names. 8,463 sentences in total.
+## Daten und Testsperre
 
-**Split** (only in `src/prepare_data.py`, seed 42, strata `label|language`): first 15 % test, from the rest validation as 15 % of the total (`0.15/0.85`), train is the remainder.
+Train: DE78/EN71/JA91 nach zwei Lesedurchgängen, Rechte- und Ereignisprüfung. Im frischen Test-Quellenrahmen wurden 856 Artikel erhoben und jeweils zweimal vollständig gelesen. 41 Klassenabweichungen wurden vor Modellvorhersagen begründet; beide Originalprüfungen bleiben erhalten. Vier weiterhin unauflösbare Annotationen sowie offene Rechte, Quellformprobleme und geschützte Ereignisverbindungen sind dokumentiert ausgeschlossen. Ausschlussgründe können sich überlappen. Ganze Gruppen werden gemeinsam behandelt.
 
-| Split | Rows |
-| --- | --- |
-| Train | 5,923 |
-| Val | 1,270 |
-| Test | 1,270 |
+691 Fälle in 658 beobachteten Gruppen bleiben nach vorab festgelegter Quellenreihenfolge und Sprachobergrenze. Die englische 1500-Seiten-Stichprobenquelle war erschöpft; dies bedeutet nicht, dass es weltweit zu wenige englische Nachrichten gibt. Quellenverluste und Sprach-/Klassenhäufigkeiten stehen im [Test-Manifest](reports/next_stage/final-test-v1/test-manifest.json). Keine Klassenbalance, Textumstellungen, Duplikate oder synthetischen Testfälle. Alle 856 Rohfälle bleiben dauerhaft Test-reserviert.
 
-Validation stays untouched. All five models see the same test split. There is no article ID, so sentences from the same report can end up in both train and test. Provenance, label mapping and limits are in `data/README.md`.
+Vier Kandidaten × 691 erfolgreiche gespeicherte Testvorhersagen, kein erneuter Testdurchlauf zur Zeitmessung und keine nachträgliche Optimierung. Warmups nutzen nur Train. Unsicherheit und Fehleranalyse verwenden dieselben gespeicherten Vorhersagen. Die historischen acht Schutzdateien, alten Berichte und MLflow-Läufe bleiben erhalten; v1–v5 und Vollartikelwerte werden nicht zu einer Fortschrittskurve verbunden.
 
-## Quick start
+## Lokal starten und verwenden
 
-Python 3.12, project root.
+Python 3.12 mit bestehender CUDA-PyTorch-Umgebung; Rohdaten, Gewichte und MLflow-Datenbank liegen ignoriert außerhalb Git. Ein frischer Clone enthält zunächst Nachweise und Code. API-Start trainiert nichts und lädt keine Gewichte aus dem Netz.
 
 ```bash
-python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+nvidia-smi
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
 ```
 
-Windows (PowerShell): `.venv\Scripts\Activate.ps1`, then the same pip call.
-
-Zero-shot and fine-tuning additionally need PyTorch (CPU wheel) and Transformers. CI does not install this file:
+Bestehenden Listener identifizieren und keinen zweiten Dienst starten. [Lokale Anwendung](http://127.0.0.1:8000/) · [API-Dokumentation](http://127.0.0.1:8000/docs) · [MLflow](http://127.0.0.1:5000/). `127.0.0.1` ist lokal erreichbar; kein öffentliches Deployment behauptet.
 
 ```bash
-python -m pip install -r requirements-transformer.txt
+curl -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' -d '{"text":"Das Unternehmen meldet einen Gewinneinbruch."}'
 ```
 
-Fetch and split the data (downloads the two Hugging Face files, writes `data/processed/`, does not commit it):
+Genau eines von `text` oder `url`. Optionale Query-Aliasse: `article_frozen_v1`, `article_minilm_v1`, `article_qwen_zero_v1`, `article_qwen_lora_v1`. Historische Modelle bleiben auswählbar. `/predict` liefert `label`, drei normalisierte `scores`, tatsächliche `model_version`, `input_policy` und bei URL einen Auszug. Scores sind nicht kalibriert. `/analyze` ergänzt Satzlabels mit Originaltext-Offsets, maximal 80 Sätze; Farben sind zusätzliche Vorhersagen, keine kausalen Worterklärungen.
+
+Vollartikel-Qwen weist über 4096 Artikeltokens zurück und kürzt nichts aus der Mitte. MiniLM verarbeitet alle 128-Token-Chunks als gleich gemittelte Features vor dem Artikelkopf. Historisches Qwen behält seine 3072-Token-Anfang/Ende-Regel, historische MiniLM-Profile ihre jeweilige Aggregation.
+
+Modellunabhängiger URL-Abruf mit `full-article-v5`, ohne stille Zeichenkürzung. Private Adressen, Redirects, robots-Verbote und erkannte Login-/Sperrseiten bleiben blockiert. 422/403/502/503 und optionale `X-Article-Error`-Diagnosen bleiben erhalten. Fehlerhafte/veränderte Verlagslayouts können weiterhin scheitern; Textpaste bleibt möglich.
+
+## Verifikation und Reproduktion
+
+**181 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [aktuellen Prüfnachweis](reports/next_stage/verification-final-v1.json).
 
 ```bash
-python -m src.prepare_data
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m pytest -q -p no:cacheprovider
+python -m src.next_stage_reproduce --name review-only
 ```
 
-Train both TF-IDF models and log them to MLflow:
-
-```bash
-python -m src.train
-```
-
-Our own fine-tuning. Without a GPU, the recorded run in this repo is the CPU subset: one epoch, 2,000 stratified training sentences, context 128. Evaluation uses the full test split. On a small CPU this takes a few minutes once `distilbert-base-multilingual-cased` is cached.
-
-```bash
-python -m src.finetune --epochs 1 --lr 2e-5 --batch-size 8 --max-length 128 --max-samples 2000
-```
-
-Full run on a GPU (Google Colab, Runtime → GPU): `notebooks/02_finetune_colab.ipynb`. Three epochs there, the whole train split, context 256, CUDA PyTorch instead of the CPU wheel. Afterwards put the `models/finetuned` folder in the same place locally.
-
-All five models on the same test split, one table under `reports/`:
-
-```bash
-python -m src.train --all
-```
-
-`python -m src.compare` does the same. If `models/finetuned` is missing, the comparison runs without the fine-tuned model and says so in the table.
-
-### MLflow: both iterations in one store
-
-Windows, Git Bash, project root. One store, `./mlruns`. The UI is `mlflow ui --backend-store-uri ./mlruns`.
-
-```bash
-python -m venv .venv
-source .venv/Scripts/activate
-python -m pip install -r requirements.txt
-```
-
-Iteration 1 live on CPU (TF-IDF, dummy or, after `python -m src.prepare_data`, the real splits). Every run gets the tag `iteration=1-first-path`:
-
-```bash
-python -m src.train
-```
-
-The published metrics of **both** iterations, without a GPU and without retraining, from the committed reports. This is the CPU route for the second iteration, whose training requires CUDA and refuses a CPU fallback:
-
-```bash
-python -m src.import_recorded
-```
-
-UI:
-
-```bash
-export MLFLOW_ALLOW_FILE_STORE=true
-mlflow ui --backend-store-uri ./mlruns --host 127.0.0.1 --port 5000
-```
-
-Linux and macOS: `source .venv/bin/activate`, same `python` calls.
-
-Open <http://127.0.0.1:5000> in the browser.
-
-Screenshots of this view (all runs, SEntFiN chart, run comparison): [`docs/mlflow/`](docs/mlflow/README.md).
-
-| Experiment | Contents | Tag |
-| --- | --- | --- |
-| `article-sentiment` | Live TF-IDF and the imported table from `reports/model_comparison.md` | `iteration=1-first-path` |
-| `article-sentiment-second-path` | Imported v1 tests, source CV R0–R4 and the external audit | `iteration=2-second-path` (the reconstructed LinearSVC in the audit: `iteration=1-first-path`) |
-| `article-sentiment-comparison` | The same imported rows side by side | both iteration tags |
-
-To compare in the UI, open the experiment `article-sentiment-comparison` and filter by `comparable_group`. `sentfin-external` is the only block where the first and second iteration are scored on the same texts. `first-path-own-test`, `second-path-own-test` and `second-path-source-group-cv` are separate measurements. Column `f1_macro` is set in all imported runs.
-
-A fresh live run of the second iteration (NVIDIA GPU only, CUDA 12.8, lots of disk) writes to the same `./mlruns` and the same experiment `article-sentiment-second-path`, tag `iteration=2-second-path`:
-
-```bash
-python -m pip install -r requirements-second-path.txt -r requirements-cuda.txt
-python -m src.second_path.prepare
-python -m src.second_path.train frozen
-python -m src.second_path.train finetuned
-python -m src.second_path.train centroid
-python -m src.second_path.train majority
-python -m src.second_path.evaluate
-```
-
-Ablations and release, also CUDA and BF16: `python -m src.second_path.development run`, then `summarize`, `release`, `activate`. Historical logs stay under `reports/development/`. For fresh repetitions run `export SENTIMENT_DEV_REPORTS=reports/reproduction` first so the committed reports are not overwritten. Second-iteration API: `uvicorn app.second_path:app --host 127.0.0.1 --port 8000`. The first iteration stays `uvicorn app.main:app`.
-
-A live run in the experiment `article-sentiment` contains accuracy, macro-F1, per-class F1, `inference_ms_per_text` and the artefact `confusion_matrix.csv`.
-
-API, default model `tfidf_linearsvc`:
-
-```bash
-uvicorn app.main:app --reload
-```
-
-- Demo: <http://127.0.0.1:8000/> (same page as <http://127.0.0.1:8000/demo>)
-- Health: <http://127.0.0.1:8000/health>
-- Docs: <http://127.0.0.1:8000/docs>
-
-The demo is one page under `app/static/`. Paste a URL or the article text, not both. It sends `{"text": "..."}` or `{"url": "..."}` to `POST /predict` and shows the label, the three scores and the model version. The loaded model name comes from `GET /health`. `docker compose up --build` serves the same page, because the UI is part of `app.main`.
-
-Other model: `SENTIMENT_MODEL=tfidf_logreg`, `tabularisai`, `cardiffnlp` or `finetuned`. Transformers and the fine-tuned model need `requirements-transformer.txt` and the weights on disk.
-
-### Container (Docker)
-
-The image builds the first-iteration API and trains the default TF-IDF models while it builds, so a clean clone does not need a host-side `python -m src.train` or a bind-mount of `models/`. The build downloads the same two public sentence files as `python -m src.prepare_data` (not Transformer weights), fits `tfidf_linearsvc` and `tfidf_logreg`, and keeps only those joblib files. The running container installs `requirements-api.txt` and does not call Hugging Face.
-
-From the project root, with Docker Desktop:
-
-```bash
-docker compose up --build
-```
-
-Equivalent without Compose:
-
-```bash
-docker build -t article-sentiment-api .
-docker run --rm -p 8000:8000 article-sentiment-api
-```
-
-Health (expect `model_loaded` true and `model_name` `tfidf_linearsvc`):
-
-```bash
-curl -s http://127.0.0.1:8000/health
-```
-
-German sentence:
-
-```bash
-curl -s -X POST http://127.0.0.1:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Die Aktie verlor nach der Gewinnwarnung deutlich an Wert."}'
-```
-
-English sentence:
-
-```bash
-curl -s -X POST http://127.0.0.1:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Samsung expects a nine-fold surge in quarterly profits, driven by demand for AI memory chips."}'
-```
-
-Stop with Ctrl-C, then `docker compose down`. The demo is <http://127.0.0.1:8000/> and the docs stay at <http://127.0.0.1:8000/docs>. Another baked model: `SENTIMENT_MODEL=tfidf_logreg docker compose up`.
-
-An offline image that trains only on the committed 18-sentence sample (no dataset download) is not the pitch model:
-
-```bash
-SENTIMENT_DATA=dummy docker compose up --build
-```
-
-### Example calls
-
-Health after `python -m src.train`:
-
-```json
-{"status":"ok","model_loaded":true,"model_name":"tfidf_linearsvc","model_version":"tfidf-linearsvc-v2"}
-```
-
-German, raw text ("The share lost significant value after the profit warning."):
-
-```bash
-curl -s -X POST http://127.0.0.1:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Die Aktie verlor nach der Gewinnwarnung deutlich an Wert."}'
-```
-
-```json
-{"label":"negative","scores":{"negative":0.7280397983023794,"neutral":0.13295243844218282,"positive":0.13900776325543784},"model_version":"tfidf-linearsvc-v2","scraped_excerpt":null}
-```
-
-English, raw text:
-
-```bash
-curl -s -X POST http://127.0.0.1:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Samsung expects a nine-fold surge in quarterly profits, driven by demand for AI memory chips."}'
-```
-
-```json
-{"label":"positive","scores":{"negative":0.31662651807444525,"neutral":0.2437844152192505,"positive":0.43958906670630427},"model_version":"tfidf-linearsvc-v2","scraped_excerpt":null}
-```
-
-Article URL (exactly one, fetched on 8 October 2026). BBC: "AI chip boom pushes Samsung profits to record $80bn", <https://www.bbc.com/news/articles/c687z8127302o>.
-
-```bash
-curl -s -X POST http://127.0.0.1:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://www.bbc.com/news/articles/c687z8127302o"}'
-```
-
-A URL response keeps `label`, `scores` and `model_version`, and adds `scraped_excerpt`: the first three sentences of the fetched article, capped at 400 characters. Raw text leaves `scraped_excerpt` null. The demo shows that preview above the score bars.
-
-The LinearSVC scores are a softmax of the decision function, not a calibrated probability. Text and URL together, or neither, returns HTTP 422.
-
-| Situation | HTTP |
-| --- | --- |
-| Text or URL missing, both set, empty text, wrong type | 422 |
-| Page without readable article text | 422 |
-| `robots.txt` forbids fetching | 403 |
-| Timeout, HTTP error, redirect, host cannot be resolved | 502 |
-| Model file missing | 503 |
-
-`src/scraping.py` fetches exactly one http(s) URL. It follows no links and no redirects. Timeout 15 seconds. User agent `AIOpsSentimentBot/0.1`. If `robots.txt` is missing (404), the single fetch is allowed; a read error aborts. Local and non-public addresses are not fetched. Still read the site's terms of use.
-
-## Model comparison
-
-The measured table, the trade-off discussion and the recommendation are in [`reports/model_comparison.md`](reports/model_comparison.md). In short, CPU, shared test set of 1,270 sentences:
-
-| Model | macro-F1 | ms per text | Size |
-| --- | --- | --- | --- |
-| TF-IDF + LinearSVC | 0.720 | 0.02 | 4 MB |
-| TF-IDF + LogisticRegression | 0.656 | 0.03 | 4 MB |
-| Fine-tuning, CPU subset (2,000 sentences, 1 epoch, context 128) | 0.614 | 8.3 | 516 MB |
-| cardiffnlp/twitter-xlm-roberta-base-sentiment | 0.486 | 19.0 | 1,061 MB |
-| tabularisai/multilingual-sentiment-analysis (5→3) | 0.364 | 8.8 | 516 MB |
-
-**Recommendation and API default: `tfidf_linearsvc`.** Highest macro-F1 in that recorded comparison, small, fast, runs with `requirements.txt`. The full GPU run (3 epochs, all 5,923 training sentences, context 256) is prepared but not measured here. CI sets `SENTIMENT_MODEL=tfidf_logreg` and `SENTIMENT_DATA=dummy`, installs only `requirements.txt` and makes no network calls.
-
-### Why clear negatives were labelled neutral
-
-The table above is `tfidf-linearsvc-v1`, trained only on the financial sentences with default class weights (macro-F1 0.7202). The demo still called obvious negatives neutral. Two gaps, checked on the trained model rather than guessed:
-
-- **The neutral intercept.** Neutral is the majority class (3,190 of 5,923 financial training rows). LinearSVC puts that prior in the intercept. For `The company reported a sharp drop in quarterly revenue and warned of further losses.` the features `drop` and `losses` already pushed toward negative, and the neutral class features pushed away from neutral, but the intercept was larger. Softmax was about 0.275 / 0.449 / 0.276, so the label was neutral. Temperature scaling cannot fix that: it does not change which class has the highest decision score.
-- **Colloquial wording is outside the training domain.** PhraseBank labels price impact, not whether a sentence sounds unhappy. `I don't like that` and `Das ist absolut schlecht` share almost no tokens with those financial sentences, so the same intercept wins.
-
-The API and the Docker bake now serve **`tfidf-linearsvc-v2`**:
-
-- LinearSVC uses `class_weight="balanced"`, so the majority class does not own the intercept.
-- `data/sample/opinion_supplement.csv` (46 original sentences written for this project, not a redistributed corpus) is appended to the **train** split only, in `load_work_splits`. That file holds short negative and positive opinions in English and German, plus a few paraphrases of a revenue-drop warning. The demo strings themselves are not in the file. Validation and test stay the financial 1,270 + 1,270 sentences.
-
-On that same financial test split, v2 measures accuracy 0.7638, macro-F1 **0.7330**, F1 negative 0.6903 (v1: 0.7575 / 0.7202 / 0.6758). Validation macro-F1 is 0.7251, next to the v1 validation figure 0.7265. MLflow keeps the experiment `article-sentiment` and the tag `iteration=1-first-path`. A new run stores `class_weight=balanced` and `model_version=tfidf-linearsvc-v2`. Logistic regression stays the unweighted baseline the CI job trains (`tfidf-logreg-v1`). A fresh `python -m src.train` also fits that baseline on the financial rows plus the 46 extra train sentences, so its macro-F1 moves slightly (0.653 here, 0.656 in the recorded table). The five-model table is the recorded v1 comparison and is not rewritten here.
-
-Every model has `predict_proba(texts)` (`src/interface.py`). TF-IDF sees the whole text. Transformers split it into chunks of at most 512 tokens and average the distributions. Fine-tuning truncates to `--max-length` during training and chunks with that length at inference.
-
-## Tests
-
-```bash
-SENTIMENT_DATA=dummy SENTIMENT_MODEL=tfidf_logreg python -m src.train
-pytest
-```
-
-CI does exactly this in the `test` job. The `second-path` job installs `requirements-second-path.txt` (without CUDA torch) and runs `pytest tests/secondpath`. The tokenizer test is skipped in the light job as long as `transformers` is missing.
-
-Exploration of the real splits, with saved output: `notebooks/01_exploration.ipynb`.
-
-## Repository structure
-
-The lecture keynote requires this layout. Both iterations live inside it. There is no second top-level code package.
-
-```text
-projekt/
-├── README.md
-├── requirements.txt
-├── data/               # raw data (large files not in git)
-├── notebooks/          # exploration
-├── src/
-│   ├── data.py         # loading and preprocessing
-│   ├── features.py     # feature engineering (TF-IDF pipeline)
-│   ├── train.py        # training and MLflow logging
-│   └── evaluate.py     # metrics, comparison with the baseline
-├── models/             # saved artefacts
-├── app/
-│   ├── main.py         # FastAPI app with /predict
-│   └── schemas.py      # input/output contract (Pydantic)
-└── tests/
-```
-
-Iteration 1 (TF-IDF, zero-shot, DistilBERT) is the modules directly under `src/` plus `app/main.py` and `app/schemas.py`. The browser demo is static files in `app/static/`, served by that same app at `/` and `/demo`. Processed splits are `data/processed/`. Weights are `models/*.joblib` and `models/finetuned/`.
-
-Iteration 2 (MiniLM, ablations R0–R4) is the package `src/second_path/` (prepare, train, evaluate, tracking). Its API entry point is `app/second_path.py` (`uvicorn app.second_path:app`), still under `app/` rather than a sibling package. Processed data is `data/second_path/processed/`. Weights are `models/second_path/`. Its extra dependencies are `requirements-second-path.txt`.
-
-Beside the keynote tree, and not instead of it: `docs/` (pitch), `reports/`, `scripts/`, `Dockerfile` and `docker-compose.yml` (first-iteration image only), `.github/workflows/ci.yml`, and the extra `requirements-*.txt` files.
-
-### Commands
-
-Iteration 1, CPU, default API is TF-IDF + LinearSVC. The demo is on this API.
-
-```bash
-python -m pip install -r requirements.txt
-python -m src.prepare_data
-python -m src.train
-uvicorn app.main:app --reload
-```
-
-Open <http://127.0.0.1:8000/>. The same service from the baked image: `docker compose up --build`, then the same URL.
-
-Iteration 2 needs an NVIDIA GPU (CUDA 12.8). Training refuses a CPU fallback. Recorded metrics without a GPU: `python -m src.import_recorded`.
-
-```bash
-python -m pip install -r requirements-second-path.txt -r requirements-cuda.txt
-python -m src.second_path.prepare
-python -m src.second_path.train frozen
-python -m src.second_path.train finetuned
-python -m src.second_path.train centroid
-python -m src.second_path.train majority
-python -m src.second_path.evaluate
-uvicorn app.second_path:app --host 127.0.0.1 --port 8000
-```
-
-Ablations: `python -m src.second_path.development run`, then `summarize`, `release`, `activate`.
-
-MLflow comparison experiment: `article-sentiment-comparison`, tags `iteration=1-first-path` and `iteration=2-second-path`.
-
-## Milestones
-
-### M1 – Problem, data, baseline
-
-- [x] Business idea agreed (article sentiment, DE/EN)
-- [x] Prediction target: negative / neutral / positive
-- [x] Labelled news sentences chosen, provenance and licence recorded
-- [x] Split rule recorded (70/15/15, label and language, seed 42; no article ID)
-- [x] TF-IDF baseline on the real train split
-
-### M2 – Comparison and selection
-
-- [x] Five models, same metrics, one MLflow experiment
-- [x] Comparison on the real test split, including CPU fine-tuning
-- [x] Selection: `tfidf_linearsvc` (macro-F1, latency, size)
-- [x] Trade-off in `reports/model_comparison.md`
-
-### M3 – Artefact, contract, local deployment
-
-- [x] Training and inference separated, shared `predict_proba`
-- [x] Contract: exactly text or URL, response with label, scores, model version
-- [x] FastAPI locally, valid and invalid cases
-- [x] README reflects the measured state
-- [x] Executive pitch under `docs/executive-pitch/`
-
-## Open points
-
-- Error costs (false alarm vs. missed negative text): draft with assumptions in [`docs/error-costs.md`](docs/error-costs.md); cost ratio not yet confirmed.
-- Container: minimal `Dockerfile` for the first-iteration API exists; monitoring is not built yet.
-- Judgemental or loaded language remains a later goal, without labels or a model.
-- The GPU run from the Colab notebook (DistilBERT, three epochs, full train split) is described but not measured in this state.
-- The second iteration is measured and lives in `src/second_path/` (API: `app/second_path.py`). Its training needs CUDA. Without a GPU, load the already recorded runs into MLflow with `python -m src.import_recorded`.
-- R2/R4 improve the HTML fixtures but are not the default chosen by the time rule (R3).
-- The training domain is still mostly financial sentences. v2 adds a small handwritten train-only slice so short opinions and a clear revenue-drop warning are not labelled neutral. A long general-news article can still be off.
-- 0.7202 and 0.7187 come from different tests. The shared comparison is `reports/development/branch_comparison.md`.
+Der zweite Befehl prüft standardmäßig nur. Ein ausdrücklich gestarteter Reproduktionslauf verwendet einen eigenen Namensraum und neue MLflow-Kennungen. [Anleitung](docs/reproduce-full-article.md) beschreibt Gewichte, exakte Datenwiederherstellung, Fehler bei abweichendem Rendering und die Testsperre. Die Quellenattribution und alten Lizenzbeschränkungen bleiben erhalten.
 
 ## Team
 
-| Name | Contact | Role |
-| --- | --- | --- |
-| Teofil Wetzel | twetzel@stud.hs-heilbronn.de | AI Operations, HHN |
-| Nick Fronius | nfronius@stud.hs-heilbronn.de | AI Operations, HHN |
+Teofil Wetzel und Nick Fronius · AI Operations, Hochschule Heilbronn.

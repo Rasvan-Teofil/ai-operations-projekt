@@ -1,0 +1,9 @@
+{
+  "stage": "B0_frozen",
+  "fold": 0,
+  "failure": "Legacy extraction correctly rejected a short related-story fixture; harness failed to count rejection as a failed extraction check",
+  "correction": "Count FetchError as false in exact-match fixture metric; no changes to model, dataset, folds or candidate definitions",
+  "original_test_or_val_accessed": false,
+  "metrics_from_failed_run_used_for_selection": false,
+  "resume": "Explicit resume retains failed MLflow run and aborted artifact; reruns only incomplete stage"
+}

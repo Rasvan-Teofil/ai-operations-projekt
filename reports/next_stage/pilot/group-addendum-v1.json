@@ -1,0 +1,26 @@
+{
+  "status": "Verified without changing any frozen text, label, fit/dev membership or recipe",
+  "components": [
+    {
+      "event_id": "fifa-governance-election-transition-2015-2016",
+      "ids": [
+        "wikinews:ja:27981",
+        "wikinews:ja:28471",
+        "wikinews:ja:29234"
+      ],
+      "reason": "Conservative common governance/election transition: Platini appeal/support, scheduled succession election and Infantino remuneration follow-up.",
+      "existing_dev_fold": 2
+    },
+    {
+      "event_id": "noto-earthquake-response-sequence-2024",
+      "ids": [
+        "wikinews:ja:41272",
+        "wikinews:ja:42925"
+      ],
+      "reason": "Conservative same regional earthquake/response sequence: Haneda coastguard earthquake-relief mission and later Noto earthquake follow-up.",
+      "existing_dev_fold": 2
+    }
+  ],
+  "finding": "Additional conservative event aliases were identified during continued provenance review. Every member was already held in the same existing fold, so there is no fit/dev bridge and no affected OOF prediction needs removal or repeat inference. Apply aliases to fresh-Test protection and future grouping.",
+  "limits": "This strengthens the observed-group audit; it is not a proof of exhaustive semantic deduplication."
+}

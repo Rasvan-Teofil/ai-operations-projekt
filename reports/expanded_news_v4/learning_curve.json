@@ -1,0 +1,66 @@
+{
+  "train_only": true,
+  "interpretation": "Three fixed group folds inside Train; nested data sizes, same development rows per fold. Error bars are sample SD across folds, not confidence intervals. Fixed final recipe not selected using these scores.",
+  "points": [
+    {
+      "model": "frozen_news_v4",
+      "size": 1,
+      "folds": 3,
+      "mean_train_rows": 153.66666666666666,
+      "balanced_language_macro_f1_mean": 0.6840693796361542,
+      "balanced_language_macro_f1_sd": 0.0037007719875184644,
+      "recall_positive_mean": 0.6690110826939472,
+      "recall_positive_sd": 0.16317687292297256
+    },
+    {
+      "model": "frozen_news_v4",
+      "size": 2,
+      "folds": 3,
+      "mean_train_rows": 307.6666666666667,
+      "balanced_language_macro_f1_mean": 0.6880279876712829,
+      "balanced_language_macro_f1_sd": 0.04164300581683578,
+      "recall_positive_mean": 0.708226768968457,
+      "recall_positive_sd": 0.10433973767748009
+    },
+    {
+      "model": "frozen_news_v4",
+      "size": 3,
+      "folds": 3,
+      "mean_train_rows": 461.3333333333333,
+      "balanced_language_macro_f1_mean": 0.7127723360950625,
+      "balanced_language_macro_f1_sd": 0.08542790072514342,
+      "recall_positive_mean": 0.7861608411480535,
+      "recall_positive_sd": 0.0974782249672348
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "size": 1,
+      "folds": 3,
+      "mean_train_rows": 153.66666666666666,
+      "balanced_language_macro_f1_mean": 0.7036211657894262,
+      "balanced_language_macro_f1_sd": 0.013171890301519912,
+      "recall_positive_mean": 0.707871554418869,
+      "recall_positive_sd": 0.1572452925801988
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "size": 2,
+      "folds": 3,
+      "mean_train_rows": 307.6666666666667,
+      "balanced_language_macro_f1_mean": 0.7026924474995981,
+      "balanced_language_macro_f1_sd": 0.03595766110249972,
+      "recall_positive_mean": 0.7323813583404376,
+      "recall_positive_sd": 0.13348059110385968
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "size": 3,
+      "folds": 3,
+      "mean_train_rows": 461.3333333333333,
+      "balanced_language_macro_f1_mean": 0.7461358350580257,
+      "balanced_language_macro_f1_sd": 0.038893817002840086,
+      "recall_positive_mean": 0.7762148337595908,
+      "recall_positive_sd": 0.10403040136290657
+    }
+  ]
+}

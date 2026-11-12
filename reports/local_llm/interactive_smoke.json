@@ -1,0 +1,36 @@
+{
+  "text_origin": "Synthetic technical control, not accuracy evidence",
+  "cases": [
+    {
+      "requested_model": "qwen3_4b",
+      "model_version": "qwen3-4b-2507-bf16-prompt1",
+      "overall_label": "positive",
+      "sentence_labels": [
+        "positive",
+        "negative",
+        "neutral"
+      ]
+    },
+    {
+      "requested_model": "minilm_v2",
+      "model_version": "dev2-R3_deploy-foldrelease-20261019",
+      "overall_label": "negative",
+      "sentence_labels": [
+        "positive",
+        "negative",
+        "neutral"
+      ]
+    },
+    {
+      "requested_model": "linearsvc_v2",
+      "model_version": "tfidf-linearsvc-v2",
+      "overall_label": "neutral",
+      "sentence_labels": [
+        "neutral",
+        "neutral",
+        "neutral"
+      ]
+    }
+  ],
+  "unknown_model_status": 422
+}

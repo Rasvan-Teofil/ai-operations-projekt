@@ -1,0 +1,35 @@
+{
+  "checked_at_utc": "2026-11-06T20:10:09.939627+00:00",
+  "offline_pytest_passed": 70,
+  "benchmark_csv_sha256": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+  "independent_restore_csv_sha256": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+  "frozen_inference_sources_verified_unchanged": true,
+  "live_api": {
+    "url": "http://127.0.0.1:8000",
+    "docs": "http://127.0.0.1:8000/docs",
+    "three_models_predict_and_analyze": true,
+    "error_statuses_verified": [
+      422,
+      403,
+      502,
+      503
+    ]
+  },
+  "browser_verified": [
+    "Qwen default and real article URL",
+    "visible HTTP 422 and successful recovery",
+    "MiniLM selected with matching response version",
+    "LinearSVC selected with matching response version",
+    "Qwen selected with matching response version",
+    "red/grey/green sentence spans preserve original text",
+    "click sentence exposes its scores",
+    "comparison table/chart",
+    "MLflow shows three measured runs, params and macro_f1_en comparison"
+  ],
+  "sentence_level_accuracy_measured": false,
+  "synthetic_controls_are_not_gold_accuracy": true,
+  "original_model_comparison_not_repeated": true,
+  "historical_models_selected_json_preserved": true,
+  "mlflow_startup_note": "Keep venv/bin on PATH for huey_consumer.py. Restarted with correct PATH; local UI and job workers verified.",
+  "scope": "second-path only; no commits or merges to main"
+}

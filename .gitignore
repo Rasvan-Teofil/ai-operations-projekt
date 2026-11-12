@@ -1,69 +1,26 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.egg-info/
-.eggs/
-dist/
-build/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-
-# Virtual environments
 .venv/
-venv/
-env/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Local experiments (MLflow). Reports with the measured numbers stay in the repo.
-mlruns/
-mlartifacts/
-mlflow.db*
-reports/*
-!reports/model_comparison.md
-!reports/second_path_model_comparison.md
-!reports/comparison.csv
-!reports/comparison.json
-!reports/data_manifest.json
-!reports/protocol.json
-!reports/preflight_incident.json
-!reports/smoke.json
-!reports/training_evidence.json
-!reports/centroid_confusion_matrix.csv
-!reports/finetuned_confusion_matrix.csv
-!reports/frozen_confusion_matrix.csv
-!reports/majority_confusion_matrix.csv
-!reports/development/
-!reports/development/**
-!reports/daily/
-!reports/daily/**
-reports/reproduction/
-reports/evaluation.lock
-reports/development/partial_runs.json
-
-# LaTeX build files. The finished PDF sits next to them and stays versioned.
-docs/**/build/
-
-# Secrets and local configuration
-.env
-.env.*
-!.env.example
-
-# Operating system
-.DS_Store
-
-# Large raw data stays local. Dummy sample and description stay in the repo.
-data/*
-!data/.gitkeep
-!data/README.md
-!data/sample/
-!data/sample/**
-
-# Trained weights and joblib artefacts (`python -m src.train`, fine-tuning).
+__pycache__/
+.pytest_cache/
+data/raw/
+data/processed/
 models/*
-!models/.gitkeep
+mlruns/
+mlflow.db*
+*.log
+.env
+reports/evaluation.lock
+data/development/
+data/benchmark/
+reports/reproduction/
+reports/development/partial_runs.json
+data/local_llm/
+data/common_data_v3/
+data/expanded_news_v4/
+data/llm_adaptation_v5/
+data/next_stage/
+
+# Machine-local runtime logs; never commit article-bearing process output.
+runtime/
+
+# Keep model placement guidance, never the local weights.
+!models/README.md

@@ -1,0 +1,177 @@
+{
+  "schema_version": "pilot-audit-v1",
+  "article_rows": 240,
+  "language_counts": {
+    "de": 78,
+    "en": 71,
+    "ja": 91
+  },
+  "language_label_counts": {
+    "de:positive": 16,
+    "de:negative": 45,
+    "de:neutral": 17,
+    "en:negative": 47,
+    "en:neutral": 10,
+    "en:positive": 14,
+    "ja:negative": 56,
+    "ja:positive": 19,
+    "ja:neutral": 16
+  },
+  "observed_groups": 235,
+  "blockers": [],
+  "ready_for_development_intake": true,
+  "final_test_frozen": false,
+  "label_status": "AI-labelled · Codex-reviewed",
+  "limits": "Exact/provenance/event-key audit only. Semantic near-duplicates, translation history and residual events require review before splitting. Two passes are one AI annotator, not independent verification.",
+  "exclusions": [
+    {
+      "id": "wikinews:de:77903",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-78064-856825"
+    },
+    {
+      "id": "wikinews:de:81036",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-80055-789983"
+    },
+    {
+      "id": "wikinews:de:77026",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-76299-692260"
+    },
+    {
+      "id": "wikinews:de:82849",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-81574-848773"
+    },
+    {
+      "id": "wikinews:de:80382",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-80388-862078"
+    },
+    {
+      "id": "wikinews:de:77052",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-77069-859281"
+    },
+    {
+      "id": "wikinews:de:77519",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-77224-861117"
+    },
+    {
+      "id": "wikinews:de:81810",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-81867-859525"
+    },
+    {
+      "id": "wikinews:de:77227",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-77239-859152"
+    },
+    {
+      "id": "wikinews:de:77885",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-77224-861117"
+    },
+    {
+      "id": "wikinews:de:78990",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-78064-856825"
+    },
+    {
+      "id": "wikinews:de:79201",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-78064-856825"
+    },
+    {
+      "id": "wikinews:de:77344",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-77239-859152"
+    },
+    {
+      "id": "wikinews:de:81068",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-81058-861382"
+    },
+    {
+      "id": "wikinews:de:77468",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-de-77032-858063"
+    },
+    {
+      "id": "wikinews:en:2925313",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2920166-4829201"
+    },
+    {
+      "id": "wikinews:en:3017370",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-3033849-4980943"
+    },
+    {
+      "id": "wikinews:en:2892887",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2886676-4812573"
+    },
+    {
+      "id": "wikinews:en:2989510",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-3003615-5024289"
+    },
+    {
+      "id": "wikinews:en:2822169",
+      "code": "reviewed_related_historical_component",
+      "group": "46797dd0179e7d54313fca8209beab04efa99efa34e91f78936796f1a812809f"
+    },
+    {
+      "id": "wikinews:en:2945275",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2952149-4824727"
+    },
+    {
+      "id": "wikinews:en:2887993",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2892597-4825531"
+    },
+    {
+      "id": "wikinews:en:2896884",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2892597-4825531"
+    },
+    {
+      "id": "wikinews:en:2911830",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2892597-4825531"
+    },
+    {
+      "id": "wikinews:en:2891328",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2892597-4825531"
+    },
+    {
+      "id": "wikinews:en:3012338",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-3013122-5024258"
+    },
+    {
+      "id": "wikinews:en:2973566",
+      "code": "reviewed_related_historical_component",
+      "group": "wikinews-en-2968806-4821681"
+    },
+    {
+      "id": "wikinews:en:2807420",
+      "code": "reviewed_related_historical_component",
+      "group": "6dacc3d4812317467288c65c50077e1842d19de1ecf1f5d2239bef0e7d163dd8"
+    }
+  ],
+  "train_csv_sha256": "059e0929a0e87478a6aef5f102590c37443bc0089c946a73837dbb1675736dc1",
+  "article_sha256": "66592161ba1ddd3bca0053ef975f467dd8641a15e78f0f2fa6a6ca8c4a4f87ed",
+  "annotation_sha256": "edc7e007418feedb51ee99b34c11b4a16fa732e008f8462e7c808e3826a165ce",
+  "group_review_sha256": "a52aedf4780846b09a4cb14e25288d2bd9a57b9286fa65dfd38f69a898f9bfa8",
+  "cv_membership_sha256": "844bfa6ef54d28274e52be2234611d710268a028b32236a0e767530773e35bfa",
+  "seed": 20261110,
+  "folded_inside_train_only": true,
+  "quantity_decision": "Use all eligible second-pilot inputs for the bounded first full-article experiment, not an assumed 3000-row optimum. Scarce positive/neutral cells and source-frame restriction limit precision. Nested learning curves determine whether a later independently frozen expansion is warranted.",
+  "final_test": "No final sample collected, annotated or predicted yet; all current articles are development-exposed."
+}

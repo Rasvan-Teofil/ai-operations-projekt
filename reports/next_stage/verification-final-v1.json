@@ -1,0 +1,112 @@
+{
+  "checked_at": "2026-11-11T22:38:29.567213+00:00",
+  "branch": "second-path",
+  "base_commit": "5b6fb3aef01cc25840825b89c5202024db9ef3fb",
+  "offline_tests": {
+    "passed": 181,
+    "warning": "Existing Starlette/httpx TestClient deprecation",
+    "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/python -m pytest -q -p no:cacheprovider",
+    "after_schema_extraction": true
+  },
+  "layout": {
+    "check": "scripts/check_layout.py",
+    "ci_enforced": true,
+    "template_commit": "6d1356aa114e370eda3fb3971325608325ba9ead",
+    "moves_preserved": 54,
+    "notebook_syntax_and_saved_report_verified": true
+  },
+  "integrity": {
+    "frozen_runtime_verified": true,
+    "candidate_declaration_sha256": "7ca89a57ad4e17288f93974764a69ea77e05dd3dd45d49a33a8dd9f28d33c766",
+    "test_manifest_sha256": "d7f51d3ada45efe55a3b77ece51b80f71e3110f25a79ae536d8c3ade148c86ff",
+    "source_and_annotation_hashes_verified": true,
+    "protected_files_unchanged": 16,
+    "historical_tracked_reports_unchanged": 150,
+    "artifacts": [
+      {
+        "model": "frozen128",
+        "artifact_sha256": "20f82616bda02d9010f355d5ca8af0975b769aa19a4ddf88e30c476e895074ee",
+        "full_model_size_bytes": 252421041
+      },
+      {
+        "model": "minilm128",
+        "artifact_sha256": "67010650b8773720b62bc74ec9f2225c2a9e34febf1bc6a1895c5d948d26f433",
+        "full_model_size_bytes": 252421036
+      },
+      {
+        "model": "qwen-zero",
+        "artifact_sha256": "697775af176554c97921fbea900f21075fecca93a22d41c1fe5099e7e8c368c1",
+        "full_model_size_bytes": 8060919707
+      },
+      {
+        "model": "qwen-lora",
+        "artifact_sha256": "fd17ae277f926b5fd5828ba103a7d27e69546a7375ba7f8a2240450a64fb3ee9",
+        "full_model_size_bytes": 8072741766
+      }
+    ],
+    "test_predictions": [
+      {
+        "model": "frozen128",
+        "saved_predictions": 691,
+        "sha256": "40a180d389a6932a974b1fb8b5cfbf0955deca9a845ef6b46fd659476e37aaba"
+      },
+      {
+        "model": "minilm128",
+        "saved_predictions": 691,
+        "sha256": "f301cd899536f3f8d2061f0f85deff5117da97a6d0e8dac6797a8ad2835039d6"
+      },
+      {
+        "model": "qwen-zero",
+        "saved_predictions": 691,
+        "sha256": "40980bcee3119aeed6751ff37d527d1933f2dcc7d61f08184e163b011cb114a7"
+      },
+      {
+        "model": "qwen-lora",
+        "saved_predictions": 691,
+        "sha256": "953190becb9be32f3185a624c0ef6c54fc4ab38ee264ab450ff23c07faac988b"
+      }
+    ],
+    "test_evaluation_lock": "complete",
+    "test_inference_repeated": false
+  },
+  "mlflow": {
+    "active_runs": 131,
+    "historical_runs": 88,
+    "next_stage_runs": 43,
+    "http_health": 200,
+    "background_job_execution": false,
+    "service_note": "MLflow background Huey consumer tried a None entry path; only unused server job execution disabled. Tracking, saved runs and experiments unchanged."
+  },
+  "live_application": {
+    "health": {
+      "status": "ok",
+      "model_loaded": true,
+      "model_available": true,
+      "model_id": "article_qwen_lora_v1",
+      "model_version": "article-qwen-lora-v1",
+      "model_kind": "local_llm",
+      "score_method": "softmax of next-token logits restricted to A/B/C; uncalibrated"
+    },
+    "all_four_aliases_available_and_experimental": true,
+    "six_document_and_comparison_routes": 200,
+    "browser_synthetic_control": "German negative control returns negative with article-qwen-lora-v1 after final restart",
+    "browser_compare": "691 rows and all four scores visible; responsive chart; screenshot saved in chat outputs",
+    "earlier_live_checks": "live-verification-v1.json"
+  },
+  "reproduction_validation": {
+    "name": "final-review",
+    "execute": false,
+    "inputs_verified": true,
+    "test_read_by_reproduction_driver": false
+  },
+  "publication": {
+    "raw_texts_weights_logs_database_excluded_from_git": true,
+    "main_unchanged": true,
+    "target_branch": "second-path"
+  },
+  "limitations": [
+    "AI-labelled · Codex-reviewed, one annotator, not independent human gold",
+    "DE273/EN118/JA300; no synthetic Test padding",
+    "No public deployment; services listen on localhost"
+  ]
+}

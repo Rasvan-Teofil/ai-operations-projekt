@@ -1,0 +1,13 @@
+{
+  "matched_ids": [],
+  "scanned_files": [
+    "data/processed/test.csv",
+    "data/processed/train.csv",
+    "data/processed/val.csv",
+    "data/benchmark/shared.csv",
+    "data/local_llm/shared.csv"
+  ],
+  "protected_historical_inputs": 1080,
+  "linked_source_near_duplicate_groups_disjoint": true,
+  "limits": "Conservative observed input/event groups; residual semantic event and public pretraining overlap unknown"
+}

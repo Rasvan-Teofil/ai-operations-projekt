@@ -1,0 +1,1593 @@
+{
+  "train_only": true,
+  "protocol_sha256": "5acc4faae69003a1ef24cc8f9bda9cdf70ab8e32bcac52d404e63daac5693111",
+  "runs": [
+    {
+      "model": "qwen3_4b",
+      "name": "Qwen · original financial prompt",
+      "fold": 1,
+      "run_id": "495f917be97e403d8212dc52cc0029b9",
+      "path": "models/local_llm",
+      "artifact_sha256": "482c1e05ac307856d75647a6cd26714bc0163341b276cbf6449ad604c1437024",
+      "accuracy": 0.6753246753246753,
+      "macro_f1": 0.6498729227761486,
+      "f1_negative": 0.8387096774193549,
+      "f1_neutral": 0.5909090909090909,
+      "f1_positive": 0.52,
+      "recall_negative": 0.7572815533980582,
+      "recall_neutral": 0.8813559322033898,
+      "recall_positive": 0.37681159420289856,
+      "accuracy_de": 0.6814159292035398,
+      "macro_f1_de": 0.6199544791777801,
+      "f1_negative_de": 0.8543689320388349,
+      "f1_neutral_de": 0.5952380952380952,
+      "f1_positive_de": 0.41025641025641024,
+      "accuracy_en": 0.6694915254237288,
+      "macro_f1_en": 0.6654658548663649,
+      "f1_negative_en": 0.8192771084337349,
+      "f1_neutral_en": 0.5869565217391305,
+      "f1_positive_en": 0.5901639344262295,
+      "balanced_language_macro_f1": 0.6427101670220725,
+      "inference_ms_per_text": 79.6219471688846,
+      "latency_p50_ms": 91.32720390334725,
+      "latency_p95_ms": 98.31841848790646,
+      "model_size_bytes": 8060917225,
+      "model_incremental_storage_bytes": 8060917225,
+      "confusion_matrix": {
+        "all": [
+          [
+            78,
+            24,
+            1
+          ],
+          [
+            3,
+            52,
+            4
+          ],
+          [
+            2,
+            41,
+            26
+          ]
+        ],
+        "de": [
+          [
+            44,
+            10,
+            0
+          ],
+          [
+            3,
+            25,
+            0
+          ],
+          [
+            2,
+            21,
+            8
+          ]
+        ],
+        "en": [
+          [
+            34,
+            14,
+            1
+          ],
+          [
+            0,
+            27,
+            4
+          ],
+          [
+            0,
+            20,
+            18
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-2507-bf16-prompt1"
+    },
+    {
+      "model": "qwen_news_v5",
+      "name": "Qwen · news rubric zero-shot",
+      "fold": 1,
+      "run_id": "78dac01469bd473ea8678abbb8a89a2c",
+      "path": "models/llm_adaptation_v5/cv/fold1/qwen_news_v5",
+      "artifact_sha256": "26d7678f5fc077adce1e9a8f1f54afe71d1bf54ffd7b0f5859d2888804726ddf",
+      "accuracy": 0.8311688311688312,
+      "macro_f1": 0.8180165682776742,
+      "f1_negative": 0.9035532994923858,
+      "f1_neutral": 0.7244094488188977,
+      "f1_positive": 0.8260869565217391,
+      "recall_negative": 0.8640776699029126,
+      "recall_neutral": 0.7796610169491526,
+      "recall_positive": 0.8260869565217391,
+      "accuracy_de": 0.8141592920353983,
+      "macro_f1_de": 0.7980976013234078,
+      "f1_negative_de": 0.8846153846153846,
+      "f1_neutral_de": 0.7096774193548387,
+      "f1_positive_de": 0.8,
+      "accuracy_en": 0.847457627118644,
+      "macro_f1_en": 0.8364488558036945,
+      "f1_negative_en": 0.9247311827956989,
+      "f1_neutral_en": 0.7384615384615385,
+      "f1_positive_en": 0.8461538461538461,
+      "balanced_language_macro_f1": 0.8172732285635511,
+      "inference_ms_per_text": 104.3026573014611,
+      "latency_p50_ms": 105.0365378614515,
+      "latency_p95_ms": 114.92385854944587,
+      "model_size_bytes": 8060919423,
+      "model_incremental_storage_bytes": 2198,
+      "confusion_matrix": {
+        "all": [
+          [
+            89,
+            12,
+            2
+          ],
+          [
+            3,
+            46,
+            10
+          ],
+          [
+            2,
+            10,
+            57
+          ]
+        ],
+        "de": [
+          [
+            46,
+            7,
+            1
+          ],
+          [
+            2,
+            22,
+            4
+          ],
+          [
+            2,
+            5,
+            24
+          ]
+        ],
+        "en": [
+          [
+            43,
+            5,
+            1
+          ],
+          [
+            1,
+            24,
+            6
+          ],
+          [
+            0,
+            5,
+            33
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-news-bf16"
+    },
+    {
+      "model": "qwen_fewshot_v5",
+      "name": "Qwen · news rubric + six examples",
+      "fold": 1,
+      "run_id": "57b35ea93e0948dead1d53f39ecaaaa8",
+      "path": "models/llm_adaptation_v5/cv/fold1/qwen_fewshot_v5",
+      "artifact_sha256": "865c2dd3fc7da72eac38c04ba4222ab3c8832de0f0a7919204c35c988d4dc0f9",
+      "accuracy": 0.8398268398268398,
+      "macro_f1": 0.8262949362003997,
+      "f1_negative": 0.9082125603864735,
+      "f1_neutral": 0.7480916030534351,
+      "f1_positive": 0.8225806451612904,
+      "recall_negative": 0.912621359223301,
+      "recall_neutral": 0.8305084745762712,
+      "recall_positive": 0.7391304347826086,
+      "accuracy_de": 0.7964601769911505,
+      "macro_f1_de": 0.7715154858012001,
+      "f1_negative_de": 0.8828828828828829,
+      "f1_neutral_de": 0.696969696969697,
+      "f1_positive_de": 0.7346938775510204,
+      "accuracy_en": 0.8813559322033898,
+      "macro_f1_en": 0.8725,
+      "f1_negative_en": 0.9375,
+      "f1_neutral_en": 0.8,
+      "f1_positive_en": 0.88,
+      "balanced_language_macro_f1": 0.8220077429006001,
+      "inference_ms_per_text": 261.9370266037199,
+      "latency_p50_ms": 266.75348402932286,
+      "latency_p95_ms": 279.6845369739458,
+      "model_size_bytes": 8060924304,
+      "model_incremental_storage_bytes": 7079,
+      "confusion_matrix": {
+        "all": [
+          [
+            94,
+            8,
+            1
+          ],
+          [
+            7,
+            49,
+            3
+          ],
+          [
+            3,
+            15,
+            51
+          ]
+        ],
+        "de": [
+          [
+            49,
+            5,
+            0
+          ],
+          [
+            5,
+            23,
+            0
+          ],
+          [
+            3,
+            10,
+            18
+          ]
+        ],
+        "en": [
+          [
+            45,
+            3,
+            1
+          ],
+          [
+            2,
+            26,
+            3
+          ],
+          [
+            0,
+            5,
+            33
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-fewshot-bf16"
+    },
+    {
+      "model": "qwen_lora_v5",
+      "name": "Qwen · own LoRA on same Train",
+      "fold": 1,
+      "run_id": "a2a3a21eac744c17aa36ab4ab08d41ad",
+      "path": "models/llm_adaptation_v5/cv/fold1/qwen_lora_v5",
+      "artifact_sha256": "8576f1b27289199ce88a4bef894d3dd5b7ad11c022279ece91a6b10291829a44",
+      "accuracy": 0.8658008658008658,
+      "macro_f1": 0.854841260032213,
+      "f1_negative": 0.916256157635468,
+      "f1_neutral": 0.7741935483870968,
+      "f1_positive": 0.8740740740740741,
+      "recall_negative": 0.9029126213592233,
+      "recall_neutral": 0.8135593220338984,
+      "recall_positive": 0.855072463768116,
+      "accuracy_de": 0.8584070796460177,
+      "macro_f1_de": 0.8408981168517625,
+      "f1_negative_de": 0.9174311926605505,
+      "f1_neutral_de": 0.7719298245614035,
+      "f1_positive_de": 0.8333333333333334,
+      "accuracy_en": 0.8728813559322034,
+      "macro_f1_en": 0.865893228891006,
+      "f1_negative_en": 0.9148936170212766,
+      "f1_neutral_en": 0.7761194029850746,
+      "f1_positive_en": 0.9066666666666666,
+      "balanced_language_macro_f1": 0.8533956728713843,
+      "inference_ms_per_text": 111.24707136436233,
+      "latency_p50_ms": 111.91040300764143,
+      "latency_p95_ms": 123.22120147291571,
+      "model_size_bytes": 8072741487,
+      "model_incremental_storage_bytes": 11824262,
+      "confusion_matrix": {
+        "all": [
+          [
+            93,
+            9,
+            1
+          ],
+          [
+            5,
+            48,
+            6
+          ],
+          [
+            2,
+            8,
+            59
+          ]
+        ],
+        "de": [
+          [
+            50,
+            3,
+            1
+          ],
+          [
+            3,
+            22,
+            3
+          ],
+          [
+            2,
+            4,
+            25
+          ]
+        ],
+        "en": [
+          [
+            43,
+            6,
+            0
+          ],
+          [
+            2,
+            26,
+            3
+          ],
+          [
+            0,
+            4,
+            34
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-lora-bf16"
+    },
+    {
+      "model": "qwen3_4b",
+      "name": "Qwen · original financial prompt",
+      "fold": 2,
+      "run_id": "cb0e45f0ef36491a91f4f86b1a546eb1",
+      "path": "models/local_llm",
+      "artifact_sha256": "482c1e05ac307856d75647a6cd26714bc0163341b276cbf6449ad604c1437024",
+      "accuracy": 0.6608695652173913,
+      "macro_f1": 0.6266170476696792,
+      "f1_negative": 0.8421052631578947,
+      "f1_neutral": 0.5730994152046783,
+      "f1_positive": 0.46464646464646464,
+      "recall_negative": 0.7766990291262136,
+      "recall_neutral": 0.8448275862068966,
+      "recall_positive": 0.3333333333333333,
+      "accuracy_de": 0.6486486486486487,
+      "macro_f1_de": 0.5761904761904761,
+      "f1_negative_de": 0.8571428571428571,
+      "f1_neutral_de": 0.5714285714285714,
+      "f1_positive_de": 0.3,
+      "accuracy_en": 0.6722689075630253,
+      "macro_f1_en": 0.6590235955468594,
+      "f1_negative_en": 0.8260869565217391,
+      "f1_neutral_en": 0.5747126436781609,
+      "f1_positive_en": 0.576271186440678,
+      "balanced_language_macro_f1": 0.6176070358686678,
+      "inference_ms_per_text": 78.55948201866578,
+      "latency_p50_ms": 66.20766199193895,
+      "latency_p95_ms": 98.4716419246979,
+      "model_size_bytes": 8060917225,
+      "model_incremental_storage_bytes": 8060917225,
+      "confusion_matrix": {
+        "all": [
+          [
+            80,
+            21,
+            2
+          ],
+          [
+            4,
+            49,
+            5
+          ],
+          [
+            3,
+            43,
+            23
+          ]
+        ],
+        "de": [
+          [
+            42,
+            11,
+            1
+          ],
+          [
+            0,
+            24,
+            3
+          ],
+          [
+            2,
+            22,
+            6
+          ]
+        ],
+        "en": [
+          [
+            38,
+            10,
+            1
+          ],
+          [
+            4,
+            25,
+            2
+          ],
+          [
+            1,
+            21,
+            17
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-2507-bf16-prompt1"
+    },
+    {
+      "model": "qwen_news_v5",
+      "name": "Qwen · news rubric zero-shot",
+      "fold": 2,
+      "run_id": "a119d7a25d91431d934b629901dd702f",
+      "path": "models/llm_adaptation_v5/cv/fold2/qwen_news_v5",
+      "artifact_sha256": "26d7678f5fc077adce1e9a8f1f54afe71d1bf54ffd7b0f5859d2888804726ddf",
+      "accuracy": 0.8304347826086956,
+      "macro_f1": 0.8151698487390807,
+      "f1_negative": 0.9137055837563451,
+      "f1_neutral": 0.7142857142857143,
+      "f1_positive": 0.8175182481751825,
+      "recall_negative": 0.8737864077669902,
+      "recall_neutral": 0.7758620689655172,
+      "recall_positive": 0.8115942028985508,
+      "accuracy_de": 0.8198198198198198,
+      "macro_f1_de": 0.8006000600060007,
+      "f1_negative_de": 0.9108910891089109,
+      "f1_neutral_de": 0.7272727272727273,
+      "f1_positive_de": 0.7636363636363637,
+      "accuracy_en": 0.8403361344537815,
+      "macro_f1_en": 0.8234417344173441,
+      "f1_negative_en": 0.9166666666666666,
+      "f1_neutral_en": 0.7,
+      "f1_positive_en": 0.8536585365853658,
+      "balanced_language_macro_f1": 0.8120208972116725,
+      "inference_ms_per_text": 104.00889888911954,
+      "latency_p50_ms": 104.66896439902484,
+      "latency_p95_ms": 114.75979811511934,
+      "model_size_bytes": 8060919423,
+      "model_incremental_storage_bytes": 2198,
+      "confusion_matrix": {
+        "all": [
+          [
+            90,
+            11,
+            2
+          ],
+          [
+            3,
+            45,
+            10
+          ],
+          [
+            1,
+            12,
+            56
+          ]
+        ],
+        "de": [
+          [
+            46,
+            7,
+            1
+          ],
+          [
+            0,
+            24,
+            3
+          ],
+          [
+            1,
+            8,
+            21
+          ]
+        ],
+        "en": [
+          [
+            44,
+            4,
+            1
+          ],
+          [
+            3,
+            21,
+            7
+          ],
+          [
+            0,
+            4,
+            35
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-news-bf16"
+    },
+    {
+      "model": "qwen_fewshot_v5",
+      "name": "Qwen · news rubric + six examples",
+      "fold": 2,
+      "run_id": "10859ec4c9bb40698d525934f6a5937f",
+      "path": "models/llm_adaptation_v5/cv/fold2/qwen_fewshot_v5",
+      "artifact_sha256": "e30b5eb8e1074292e0a44d1ae907ee86f5e706e5dcf4d015c9d24eae7fed299b",
+      "accuracy": 0.7869565217391304,
+      "macro_f1": 0.7799123445686468,
+      "f1_negative": 0.8287292817679558,
+      "f1_neutral": 0.6976744186046512,
+      "f1_positive": 0.8133333333333334,
+      "recall_negative": 0.7281553398058253,
+      "recall_neutral": 0.7758620689655172,
+      "recall_positive": 0.8840579710144928,
+      "accuracy_de": 0.7567567567567568,
+      "macro_f1_de": 0.7509399173902743,
+      "f1_negative_de": 0.8043478260869565,
+      "f1_neutral_de": 0.6865671641791045,
+      "f1_positive_de": 0.7619047619047619,
+      "accuracy_en": 0.8151260504201681,
+      "macro_f1_en": 0.80472823875606,
+      "f1_negative_en": 0.8539325842696629,
+      "f1_neutral_en": 0.7096774193548387,
+      "f1_positive_en": 0.8505747126436781,
+      "balanced_language_macro_f1": 0.7778340780731672,
+      "inference_ms_per_text": 254.15817193848932,
+      "latency_p50_ms": 247.3351110238582,
+      "latency_p95_ms": 279.3673084466718,
+      "model_size_bytes": 8060924049,
+      "model_incremental_storage_bytes": 6824,
+      "confusion_matrix": {
+        "all": [
+          [
+            75,
+            19,
+            9
+          ],
+          [
+            2,
+            45,
+            11
+          ],
+          [
+            1,
+            7,
+            61
+          ]
+        ],
+        "de": [
+          [
+            37,
+            12,
+            5
+          ],
+          [
+            0,
+            23,
+            4
+          ],
+          [
+            1,
+            5,
+            24
+          ]
+        ],
+        "en": [
+          [
+            38,
+            7,
+            4
+          ],
+          [
+            2,
+            22,
+            7
+          ],
+          [
+            0,
+            2,
+            37
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-fewshot-bf16"
+    },
+    {
+      "model": "qwen_lora_v5",
+      "name": "Qwen · own LoRA on same Train",
+      "fold": 2,
+      "run_id": "32a67ea9f845499c9387768168d960cc",
+      "path": "models/llm_adaptation_v5/cv/fold2/qwen_lora_v5",
+      "artifact_sha256": "3321c8b54356109be3c33d3c6c36d48789ddfe39109802b8fa3decb8aa088807",
+      "accuracy": 0.8652173913043478,
+      "macro_f1": 0.8474066795855054,
+      "f1_negative": 0.9371980676328503,
+      "f1_neutral": 0.7457627118644068,
+      "f1_positive": 0.8592592592592593,
+      "recall_negative": 0.941747572815534,
+      "recall_neutral": 0.7586206896551724,
+      "recall_positive": 0.8405797101449275,
+      "accuracy_de": 0.8558558558558559,
+      "macro_f1_de": 0.8330025838040154,
+      "f1_negative_de": 0.9345794392523364,
+      "f1_neutral_de": 0.7368421052631579,
+      "f1_positive_de": 0.8275862068965517,
+      "accuracy_en": 0.8739495798319328,
+      "macro_f1_en": 0.8590717479242068,
+      "f1_negative_en": 0.94,
+      "f1_neutral_en": 0.7540983606557377,
+      "f1_positive_en": 0.8831168831168831,
+      "balanced_language_macro_f1": 0.846037165864111,
+      "inference_ms_per_text": 111.39492649058609,
+      "latency_p50_ms": 111.76780250389129,
+      "latency_p95_ms": 124.06154059572145,
+      "model_size_bytes": 8072741487,
+      "model_incremental_storage_bytes": 11824262,
+      "confusion_matrix": {
+        "all": [
+          [
+            97,
+            6,
+            0
+          ],
+          [
+            6,
+            44,
+            8
+          ],
+          [
+            1,
+            10,
+            58
+          ]
+        ],
+        "de": [
+          [
+            50,
+            4,
+            0
+          ],
+          [
+            2,
+            21,
+            4
+          ],
+          [
+            1,
+            5,
+            24
+          ]
+        ],
+        "en": [
+          [
+            47,
+            2,
+            0
+          ],
+          [
+            4,
+            23,
+            4
+          ],
+          [
+            0,
+            5,
+            34
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-lora-bf16"
+    },
+    {
+      "model": "qwen3_4b",
+      "name": "Qwen · original financial prompt",
+      "fold": 3,
+      "run_id": "814bcf60b34c4a4d8156387779d90cd0",
+      "path": "models/local_llm",
+      "artifact_sha256": "482c1e05ac307856d75647a6cd26714bc0163341b276cbf6449ad604c1437024",
+      "accuracy": 0.670995670995671,
+      "macro_f1": 0.6426242987608227,
+      "f1_negative": 0.837696335078534,
+      "f1_neutral": 0.5747126436781609,
+      "f1_positive": 0.5154639175257731,
+      "recall_negative": 0.7692307692307693,
+      "recall_neutral": 0.847457627118644,
+      "recall_positive": 0.36764705882352944,
+      "accuracy_de": 0.6607142857142857,
+      "macro_f1_de": 0.6181813887855654,
+      "f1_negative_de": 0.8235294117647058,
+      "f1_neutral_de": 0.5432098765432098,
+      "f1_positive_de": 0.4878048780487805,
+      "accuracy_en": 0.680672268907563,
+      "macro_f1_en": 0.6639324692061191,
+      "f1_negative_en": 0.8539325842696629,
+      "f1_neutral_en": 0.6021505376344086,
+      "f1_positive_en": 0.5357142857142857,
+      "balanced_language_macro_f1": 0.6410569289958423,
+      "inference_ms_per_text": 79.41418254618972,
+      "latency_p50_ms": 67.79915210790932,
+      "latency_p95_ms": 100.87175806984305,
+      "model_size_bytes": 8060917225,
+      "model_incremental_storage_bytes": 8060917225,
+      "confusion_matrix": {
+        "all": [
+          [
+            80,
+            24,
+            0
+          ],
+          [
+            5,
+            50,
+            4
+          ],
+          [
+            2,
+            41,
+            25
+          ]
+        ],
+        "de": [
+          [
+            42,
+            12,
+            0
+          ],
+          [
+            5,
+            22,
+            1
+          ],
+          [
+            1,
+            19,
+            10
+          ]
+        ],
+        "en": [
+          [
+            38,
+            12,
+            0
+          ],
+          [
+            0,
+            28,
+            3
+          ],
+          [
+            1,
+            22,
+            15
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-2507-bf16-prompt1"
+    },
+    {
+      "model": "qwen_news_v5",
+      "name": "Qwen · news rubric zero-shot",
+      "fold": 3,
+      "run_id": "3990e6a4a69d41a38dc5b6781834d69f",
+      "path": "models/llm_adaptation_v5/cv/fold3/qwen_news_v5",
+      "artifact_sha256": "26d7678f5fc077adce1e9a8f1f54afe71d1bf54ffd7b0f5859d2888804726ddf",
+      "accuracy": 0.8398268398268398,
+      "macro_f1": 0.8266097831315222,
+      "f1_negative": 0.9090909090909091,
+      "f1_neutral": 0.7301587301587301,
+      "f1_positive": 0.8405797101449275,
+      "recall_negative": 0.8653846153846154,
+      "recall_neutral": 0.7796610169491526,
+      "recall_positive": 0.8529411764705882,
+      "accuracy_de": 0.8392857142857143,
+      "macro_f1_de": 0.8251975129060781,
+      "f1_negative_de": 0.9038461538461539,
+      "f1_neutral_de": 0.7096774193548387,
+      "f1_positive_de": 0.8620689655172413,
+      "accuracy_en": 0.8403361344537815,
+      "macro_f1_en": 0.8299645390070921,
+      "f1_negative_en": 0.9148936170212766,
+      "f1_neutral_en": 0.75,
+      "f1_positive_en": 0.825,
+      "balanced_language_macro_f1": 0.8275810259565851,
+      "inference_ms_per_text": 104.53926925990908,
+      "latency_p50_ms": 104.78038084693253,
+      "latency_p95_ms": 115.23622390814126,
+      "model_size_bytes": 8060919423,
+      "model_incremental_storage_bytes": 2198,
+      "confusion_matrix": {
+        "all": [
+          [
+            90,
+            12,
+            2
+          ],
+          [
+            3,
+            46,
+            10
+          ],
+          [
+            1,
+            9,
+            58
+          ]
+        ],
+        "de": [
+          [
+            47,
+            7,
+            0
+          ],
+          [
+            3,
+            22,
+            3
+          ],
+          [
+            0,
+            5,
+            25
+          ]
+        ],
+        "en": [
+          [
+            43,
+            5,
+            2
+          ],
+          [
+            0,
+            24,
+            7
+          ],
+          [
+            1,
+            4,
+            33
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-news-bf16"
+    },
+    {
+      "model": "qwen_fewshot_v5",
+      "name": "Qwen · news rubric + six examples",
+      "fold": 3,
+      "run_id": "3c149e3a7d9c4f7db89acbb6cdb455e4",
+      "path": "models/llm_adaptation_v5/cv/fold3/qwen_fewshot_v5",
+      "artifact_sha256": "6a23f531c9affb69cbb29426b016e6b1823881c957d8a5c2b9c94825c28cbc78",
+      "accuracy": 0.8225108225108225,
+      "macro_f1": 0.815203480689383,
+      "f1_negative": 0.8783068783068783,
+      "f1_neutral": 0.7205882352941176,
+      "f1_positive": 0.8467153284671532,
+      "recall_negative": 0.7980769230769231,
+      "recall_neutral": 0.8305084745762712,
+      "recall_positive": 0.8529411764705882,
+      "accuracy_de": 0.7946428571428571,
+      "macro_f1_de": 0.7952367165953037,
+      "f1_negative_de": 0.8387096774193549,
+      "f1_neutral_de": 0.684931506849315,
+      "f1_positive_de": 0.8620689655172413,
+      "accuracy_en": 0.8487394957983193,
+      "macro_f1_en": 0.8380048221820373,
+      "f1_negative_en": 0.9166666666666666,
+      "f1_neutral_en": 0.7619047619047619,
+      "f1_positive_en": 0.8354430379746836,
+      "balanced_language_macro_f1": 0.8166207693886705,
+      "inference_ms_per_text": 265.422402409377,
+      "latency_p50_ms": 268.645775038749,
+      "latency_p95_ms": 285.10604810435325,
+      "model_size_bytes": 8060924193,
+      "model_incremental_storage_bytes": 6968,
+      "confusion_matrix": {
+        "all": [
+          [
+            83,
+            20,
+            1
+          ],
+          [
+            0,
+            49,
+            10
+          ],
+          [
+            2,
+            8,
+            58
+          ]
+        ],
+        "de": [
+          [
+            39,
+            15,
+            0
+          ],
+          [
+            0,
+            25,
+            3
+          ],
+          [
+            0,
+            5,
+            25
+          ]
+        ],
+        "en": [
+          [
+            44,
+            5,
+            1
+          ],
+          [
+            0,
+            24,
+            7
+          ],
+          [
+            2,
+            3,
+            33
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-fewshot-bf16"
+    },
+    {
+      "model": "qwen_lora_v5",
+      "name": "Qwen · own LoRA on same Train",
+      "fold": 3,
+      "run_id": "16db82a2d0814078a53bdf037ec18eb0",
+      "path": "models/llm_adaptation_v5/cv/fold3/qwen_lora_v5",
+      "artifact_sha256": "8b060a8b64c3502bcc2e0e11baac12273543836dc27fa0f99663acdaaca5c9a0",
+      "accuracy": 0.8311688311688312,
+      "macro_f1": 0.8159891888047229,
+      "f1_negative": 0.9029126213592233,
+      "f1_neutral": 0.7142857142857143,
+      "f1_positive": 0.8307692307692308,
+      "recall_negative": 0.8942307692307693,
+      "recall_neutral": 0.7627118644067796,
+      "recall_positive": 0.7941176470588235,
+      "accuracy_de": 0.8392857142857143,
+      "macro_f1_de": 0.8209686400964976,
+      "f1_negative_de": 0.8990825688073395,
+      "f1_neutral_de": 0.7017543859649122,
+      "f1_positive_de": 0.8620689655172413,
+      "accuracy_en": 0.8235294117647058,
+      "macro_f1_en": 0.8124699105201122,
+      "f1_negative_en": 0.9072164948453608,
+      "f1_neutral_en": 0.7246376811594203,
+      "f1_positive_en": 0.8055555555555556,
+      "balanced_language_macro_f1": 0.8167192753083049,
+      "inference_ms_per_text": 111.01387676609544,
+      "latency_p50_ms": 111.39098089188337,
+      "latency_p95_ms": 122.8411445626989,
+      "model_size_bytes": 8072741487,
+      "model_incremental_storage_bytes": 11824262,
+      "confusion_matrix": {
+        "all": [
+          [
+            93,
+            10,
+            1
+          ],
+          [
+            7,
+            45,
+            7
+          ],
+          [
+            2,
+            12,
+            54
+          ]
+        ],
+        "de": [
+          [
+            49,
+            4,
+            1
+          ],
+          [
+            6,
+            20,
+            2
+          ],
+          [
+            0,
+            5,
+            25
+          ]
+        ],
+        "en": [
+          [
+            44,
+            6,
+            0
+          ],
+          [
+            1,
+            25,
+            5
+          ],
+          [
+            2,
+            7,
+            29
+          ]
+        ]
+      },
+      "model_version": "qwen3-4b-news-v5-lora-bf16"
+    }
+  ],
+  "llm_mean_language_f1": {
+    "qwen3_4b": 0.6337913772955276,
+    "qwen_news_v5": 0.8189583839106028,
+    "qwen_fewshot_v5": 0.8054875301208125,
+    "qwen_lora_v5": 0.8387173713479333
+  },
+  "reused_small_model_runs": [
+    {
+      "model": "frozen_news_v4",
+      "name": "Expanded frozen GPU baseline",
+      "path": "models/expanded_news_v4/cv/fold1-size3/frozen_news_v4",
+      "run_id": "b21d79ca62424b939efb657894075ecc",
+      "artifact_sha256": "003527ac9e2caeaa7defe4e144dfd8144d3211e50bfccb384ac38e6dba29410e",
+      "fold": 1,
+      "size": 3,
+      "fraction": 1.0,
+      "fit_rows": 461,
+      "dev_rows": 231,
+      "fit_ids_sha256": "9d60cf18de249cc72422922c9a244d5b33e7a1b51443efe7414d672e6b3d2413",
+      "dev_ids_sha256": "7cbf0ecbebce127a3ea5a96d49a2bb194c95fd220355751970a7e0f4f21edf09",
+      "accuracy": 0.7575757575757576,
+      "macro_f1": 0.731710018954746,
+      "f1_negative": 0.8177339901477833,
+      "f1_neutral": 0.5825242718446602,
+      "f1_positive": 0.7948717948717948,
+      "recall_negative": 0.8058252427184466,
+      "recall_neutral": 0.5084745762711864,
+      "recall_positive": 0.8985507246376812,
+      "accuracy_de": 0.7610619469026548,
+      "macro_f1_de": 0.7363400860620644,
+      "f1_negative_de": 0.8148148148148148,
+      "f1_neutral_de": 0.5882352941176471,
+      "f1_positive_de": 0.8059701492537313,
+      "accuracy_en": 0.7542372881355932,
+      "macro_f1_en": 0.7281641874782029,
+      "f1_negative_en": 0.8210526315789474,
+      "f1_neutral_en": 0.5769230769230769,
+      "f1_positive_en": 0.7865168539325843,
+      "balanced_language_macro_f1": 0.7322521367701336,
+      "inference_ms_per_text": 3.291286995787641,
+      "latency_p50_ms": 2.9741949401795864,
+      "latency_p95_ms": 4.53637249302119,
+      "model_size_bytes": 487730080,
+      "confusion_matrix": {
+        "all": [
+          [
+            83,
+            10,
+            10
+          ],
+          [
+            14,
+            30,
+            15
+          ],
+          [
+            3,
+            4,
+            62
+          ]
+        ],
+        "de": [
+          [
+            44,
+            6,
+            4
+          ],
+          [
+            8,
+            15,
+            5
+          ],
+          [
+            2,
+            2,
+            27
+          ]
+        ],
+        "en": [
+          [
+            39,
+            4,
+            6
+          ],
+          [
+            6,
+            15,
+            10
+          ],
+          [
+            1,
+            2,
+            35
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-frozen-fp32-cv1-3"
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "name": "Expanded own fine-tune · FP32",
+      "path": "models/expanded_news_v4/cv/fold1-size3/minilm_fp32_news_v4",
+      "run_id": "a7de6625fbec4b648f2922d1239a25ab",
+      "artifact_sha256": "097b5ad3aa3192933fefa948d5f039c6df18f9b1a6d2d9798128f2525200bee5",
+      "fold": 1,
+      "size": 3,
+      "fraction": 1.0,
+      "fit_rows": 461,
+      "dev_rows": 231,
+      "fit_ids_sha256": "9d60cf18de249cc72422922c9a244d5b33e7a1b51443efe7414d672e6b3d2413",
+      "dev_ids_sha256": "7cbf0ecbebce127a3ea5a96d49a2bb194c95fd220355751970a7e0f4f21edf09",
+      "accuracy": 0.7878787878787878,
+      "macro_f1": 0.7671773636991029,
+      "f1_negative": 0.8405797101449275,
+      "f1_neutral": 0.6476190476190476,
+      "f1_positive": 0.8133333333333334,
+      "recall_negative": 0.8446601941747572,
+      "recall_neutral": 0.576271186440678,
+      "recall_positive": 0.8840579710144928,
+      "accuracy_de": 0.8141592920353983,
+      "macro_f1_de": 0.8008458854472246,
+      "f1_negative_de": 0.8468468468468469,
+      "f1_neutral_de": 0.7169811320754716,
+      "f1_positive_de": 0.8387096774193549,
+      "accuracy_en": 0.7627118644067796,
+      "macro_f1_en": 0.7352369852369852,
+      "f1_negative_en": 0.8333333333333334,
+      "f1_neutral_en": 0.5769230769230769,
+      "f1_positive_en": 0.7954545454545454,
+      "balanced_language_macro_f1": 0.7680414353421049,
+      "inference_ms_per_text": 3.2719241705162703,
+      "latency_p50_ms": 2.955219941213727,
+      "latency_p95_ms": 4.288611002266407,
+      "model_size_bytes": 487730086,
+      "confusion_matrix": {
+        "all": [
+          [
+            87,
+            8,
+            8
+          ],
+          [
+            13,
+            34,
+            12
+          ],
+          [
+            4,
+            4,
+            61
+          ]
+        ],
+        "de": [
+          [
+            47,
+            4,
+            3
+          ],
+          [
+            7,
+            19,
+            2
+          ],
+          [
+            3,
+            2,
+            26
+          ]
+        ],
+        "en": [
+          [
+            40,
+            4,
+            5
+          ],
+          [
+            6,
+            15,
+            10
+          ],
+          [
+            1,
+            2,
+            35
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-finetuned-fp32-cv1-3"
+    },
+    {
+      "model": "frozen_news_v4",
+      "name": "Expanded frozen GPU baseline",
+      "path": "models/expanded_news_v4/cv/fold2-size3/frozen_news_v4",
+      "run_id": "71beda1ead8244e4a30650b409cc7518",
+      "artifact_sha256": "7a80571c5c55caf4e5102f6172e6069d34814b22846033b18acf699c55f916f3",
+      "fold": 2,
+      "size": 3,
+      "fraction": 1.0,
+      "fit_rows": 462,
+      "dev_rows": 230,
+      "fit_ids_sha256": "309a19ada9ee747266540b4785170c1e12bfee5999fc38da7c1157cd6584b605",
+      "dev_ids_sha256": "6b26302b9769172e2802f58adac8d898f6f523bd803dc9f70afe900941e1a321",
+      "accuracy": 0.6391304347826087,
+      "macro_f1": 0.6206481690352658,
+      "f1_negative": 0.7076923076923077,
+      "f1_neutral": 0.509090909090909,
+      "f1_positive": 0.6451612903225806,
+      "recall_negative": 0.6699029126213593,
+      "recall_neutral": 0.4827586206896552,
+      "recall_positive": 0.7246376811594203,
+      "accuracy_de": 0.5675675675675675,
+      "macro_f1_de": 0.5488653699466056,
+      "f1_negative_de": 0.6458333333333334,
+      "f1_neutral_de": 0.42105263157894735,
+      "f1_positive_de": 0.5797101449275363,
+      "accuracy_en": 0.7058823529411765,
+      "macro_f1_en": 0.6897082570623597,
+      "f1_negative_en": 0.7676767676767676,
+      "f1_neutral_en": 0.6037735849056604,
+      "f1_positive_en": 0.6976744186046512,
+      "balanced_language_macro_f1": 0.6192868135044827,
+      "inference_ms_per_text": 3.24973872680541,
+      "latency_p50_ms": 2.9171545756980777,
+      "latency_p95_ms": 4.444066004361956,
+      "model_size_bytes": 487730080,
+      "confusion_matrix": {
+        "all": [
+          [
+            69,
+            14,
+            20
+          ],
+          [
+            14,
+            28,
+            16
+          ],
+          [
+            9,
+            10,
+            50
+          ]
+        ],
+        "de": [
+          [
+            31,
+            12,
+            11
+          ],
+          [
+            7,
+            12,
+            8
+          ],
+          [
+            4,
+            6,
+            20
+          ]
+        ],
+        "en": [
+          [
+            38,
+            2,
+            9
+          ],
+          [
+            7,
+            16,
+            8
+          ],
+          [
+            5,
+            4,
+            30
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-frozen-fp32-cv2-3"
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "name": "Expanded own fine-tune · FP32",
+      "path": "models/expanded_news_v4/cv/fold2-size3/minilm_fp32_news_v4",
+      "run_id": "b170b8dcf0204435b340f24bf1dda24b",
+      "artifact_sha256": "ae55e1398e267f565725dd431077cb6ff5080816226d0625595d7e732b788ebf",
+      "fold": 2,
+      "size": 3,
+      "fraction": 1.0,
+      "fit_rows": 462,
+      "dev_rows": 230,
+      "fit_ids_sha256": "309a19ada9ee747266540b4785170c1e12bfee5999fc38da7c1157cd6584b605",
+      "dev_ids_sha256": "6b26302b9769172e2802f58adac8d898f6f523bd803dc9f70afe900941e1a321",
+      "accuracy": 0.7217391304347827,
+      "macro_f1": 0.7026704925754234,
+      "f1_negative": 0.7788461538461539,
+      "f1_neutral": 0.5981308411214953,
+      "f1_positive": 0.7310344827586207,
+      "recall_negative": 0.7864077669902912,
+      "recall_neutral": 0.5517241379310345,
+      "recall_positive": 0.7681159420289855,
+      "accuracy_de": 0.6936936936936937,
+      "macro_f1_de": 0.6667664969551762,
+      "f1_negative_de": 0.7735849056603774,
+      "f1_neutral_de": 0.5283018867924528,
+      "f1_positive_de": 0.6984126984126984,
+      "accuracy_en": 0.7478991596638656,
+      "macro_f1_en": 0.7356926510441575,
+      "f1_negative_en": 0.7843137254901961,
+      "f1_neutral_en": 0.6666666666666666,
+      "f1_positive_en": 0.7560975609756098,
+      "balanced_language_macro_f1": 0.7012295739996668,
+      "inference_ms_per_text": 3.2265672085644757,
+      "latency_p50_ms": 2.8833559481427073,
+      "latency_p95_ms": 4.385014227591455,
+      "model_size_bytes": 487730086,
+      "confusion_matrix": {
+        "all": [
+          [
+            81,
+            10,
+            12
+          ],
+          [
+            15,
+            32,
+            11
+          ],
+          [
+            9,
+            7,
+            53
+          ]
+        ],
+        "de": [
+          [
+            41,
+            8,
+            5
+          ],
+          [
+            7,
+            14,
+            6
+          ],
+          [
+            4,
+            4,
+            22
+          ]
+        ],
+        "en": [
+          [
+            40,
+            2,
+            7
+          ],
+          [
+            8,
+            18,
+            5
+          ],
+          [
+            5,
+            3,
+            31
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-finetuned-fp32-cv2-3"
+    },
+    {
+      "model": "frozen_news_v4",
+      "name": "Expanded frozen GPU baseline",
+      "path": "models/expanded_news_v4/cv/fold3-size3/frozen_news_v4",
+      "run_id": "0e42a48fe0fd41cb96a7d9d6dad9613a",
+      "artifact_sha256": "fb95c15b38279ee1eb7dc97f85095cef00ef29b08c0a25595f9b5907d285d332",
+      "fold": 3,
+      "size": 3,
+      "fraction": 1.0,
+      "fit_rows": 461,
+      "dev_rows": 231,
+      "fit_ids_sha256": "f693148e703a475f5a453e29095d6d9d93f654e62fe15a414d3772a53f2e5d46",
+      "dev_ids_sha256": "d1078eafb4857d35ebb1c43f38c9b3c1cd62a39124683c464cd3529b1b80a586",
+      "accuracy": 0.7965367965367965,
+      "macro_f1": 0.7872684182087619,
+      "f1_negative": 0.8405797101449275,
+      "f1_neutral": 0.746031746031746,
+      "f1_positive": 0.7751937984496124,
+      "recall_negative": 0.8365384615384616,
+      "recall_neutral": 0.7966101694915254,
+      "recall_positive": 0.7352941176470589,
+      "accuracy_de": 0.8035714285714286,
+      "macro_f1_de": 0.7877724614566719,
+      "f1_negative_de": 0.8545454545454545,
+      "f1_neutral_de": 0.7017543859649122,
+      "f1_positive_de": 0.8070175438596491,
+      "accuracy_en": 0.7899159663865546,
+      "macro_f1_en": 0.7857836545644704,
+      "f1_negative_en": 0.8247422680412371,
+      "f1_neutral_en": 0.782608695652174,
+      "f1_positive_en": 0.75,
+      "balanced_language_macro_f1": 0.7867780580105712,
+      "inference_ms_per_text": 3.4264961189038052,
+      "latency_p50_ms": 3.0379740055650473,
+      "latency_p95_ms": 4.769160528667271,
+      "model_size_bytes": 487730080,
+      "confusion_matrix": {
+        "all": [
+          [
+            87,
+            12,
+            5
+          ],
+          [
+            6,
+            47,
+            6
+          ],
+          [
+            10,
+            8,
+            50
+          ]
+        ],
+        "de": [
+          [
+            47,
+            6,
+            1
+          ],
+          [
+            5,
+            20,
+            3
+          ],
+          [
+            4,
+            3,
+            23
+          ]
+        ],
+        "en": [
+          [
+            40,
+            6,
+            4
+          ],
+          [
+            1,
+            27,
+            3
+          ],
+          [
+            6,
+            5,
+            27
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-frozen-fp32-cv3-3"
+    },
+    {
+      "model": "minilm_fp32_news_v4",
+      "name": "Expanded own fine-tune · FP32",
+      "path": "models/expanded_news_v4/cv/fold3-size3/minilm_fp32_news_v4",
+      "run_id": "b1bdee5621cb4739b7c97f93f8b45c3b",
+      "artifact_sha256": "77e86025dc179ab45c7040df95073b1f7187c697b86becf01c51a1d888e07f59",
+      "fold": 3,
+      "size": 3,
+      "fraction": 1.0,
+      "fit_rows": 461,
+      "dev_rows": 231,
+      "fit_ids_sha256": "f693148e703a475f5a453e29095d6d9d93f654e62fe15a414d3772a53f2e5d46",
+      "dev_ids_sha256": "d1078eafb4857d35ebb1c43f38c9b3c1cd62a39124683c464cd3529b1b80a586",
+      "accuracy": 0.7792207792207793,
+      "macro_f1": 0.768799128738951,
+      "f1_negative": 0.822429906542056,
+      "f1_neutral": 0.736,
+      "f1_positive": 0.7479674796747967,
+      "recall_negative": 0.8461538461538461,
+      "recall_neutral": 0.7796610169491526,
+      "recall_positive": 0.6764705882352942,
+      "accuracy_de": 0.7946428571428571,
+      "macro_f1_de": 0.7788296771347619,
+      "f1_negative_de": 0.8468468468468469,
+      "f1_neutral_de": 0.711864406779661,
+      "f1_positive_de": 0.7777777777777778,
+      "accuracy_en": 0.7647058823529411,
+      "macro_f1_en": 0.7594433145298489,
+      "f1_negative_en": 0.7961165048543689,
+      "f1_neutral_en": 0.7575757575757576,
+      "f1_positive_en": 0.7246376811594203,
+      "balanced_language_macro_f1": 0.7691364958323055,
+      "inference_ms_per_text": 3.2977519417786367,
+      "latency_p50_ms": 2.879850100725889,
+      "latency_p95_ms": 4.411119618453085,
+      "model_size_bytes": 487730086,
+      "confusion_matrix": {
+        "all": [
+          [
+            88,
+            12,
+            4
+          ],
+          [
+            8,
+            46,
+            5
+          ],
+          [
+            14,
+            8,
+            46
+          ]
+        ],
+        "de": [
+          [
+            47,
+            6,
+            1
+          ],
+          [
+            5,
+            21,
+            2
+          ],
+          [
+            5,
+            4,
+            21
+          ]
+        ],
+        "en": [
+          [
+            41,
+            6,
+            3
+          ],
+          [
+            3,
+            25,
+            3
+          ],
+          [
+            9,
+            4,
+            25
+          ]
+        ]
+      },
+      "model_version": "wikinews-ai-v4-finetuned-fp32-cv3-3"
+    }
+  ],
+  "selection": "Diagnostic fixed conditions; no parameter/epoch/prompt search. All seven final conditions retained."
+}

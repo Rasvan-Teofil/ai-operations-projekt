@@ -1,0 +1,25 @@
+{
+  "cv_fold_runs_finished": 18,
+  "oof_each_training_row_once_per_stage": true,
+  "original_artifact_hashes_unchanged": true,
+  "original_reports_unchanged": true,
+  "reference_tracked_source_unchanged": true,
+  "no_reference_mlflow_directory_created": true,
+  "active_health": {
+    "status": "ok",
+    "model_loaded": true,
+    "model_version": "dev2-R3_deploy-foldrelease-20261019"
+  },
+  "active_example": {
+    "label": "positive",
+    "scores": {
+      "negative": 0.0005161766312085092,
+      "neutral": 0.0060238405130803585,
+      "positive": 0.993459939956665
+    },
+    "model_version": "dev2-R3_deploy-foldrelease-20261019"
+  },
+  "pytest_passed": 51,
+  "final_audit_selection_preserved": true,
+  "all_original_git_report_files_bitwise_unchanged": true
+}

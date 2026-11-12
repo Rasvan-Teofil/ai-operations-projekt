@@ -1,0 +1,4 @@
+# Install after the existing CUDA and project requirements. No torch override.
+peft==0.18.1
+accelerate==1.12.0
+psutil==7.0.0

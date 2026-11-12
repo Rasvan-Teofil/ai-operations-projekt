@@ -1,0 +1,63 @@
+{
+  "benchmark_sha256": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+  "our_selection_unchanged": true,
+  "primary_comparison": "native English macro-F1; German MT reported separately",
+  "native_en_delta_v2_minus_peer": 0.27695135700357987,
+  "native_en_paired_bootstrap_95_percentile_interval": [
+    0.22573482221865712,
+    0.3249383348383114
+  ],
+  "results": [
+    {
+      "model": "second_path_v1",
+      "run_id": "13d5506660ba4c87aa7ca4fc7822b571",
+      "accuracy": 0.69,
+      "macro_f1": 0.6908589698505665,
+      "negative_precision": 0.745945945945946,
+      "negative_recall": 0.69,
+      "f1_negative": 0.7168831168831169,
+      "f1_neutral": 0.671201814058957,
+      "f1_positive": 0.6844919786096256,
+      "macro_f1_en": 0.7360354350753585,
+      "macro_f1_de": 0.6457910588303512,
+      "inference_ms_per_text": 2.335432788335462,
+      "latency_p50_ms": 2.375811499859992,
+      "latency_p95_ms": 2.5608085001067593,
+      "model_size_bytes": 487729898
+    },
+    {
+      "model": "second_path_v2",
+      "run_id": "afaa236788144953b9e05ee8b5a4ed5b",
+      "accuracy": 0.6916666666666667,
+      "macro_f1": 0.6925327856920855,
+      "negative_precision": 0.7446236559139785,
+      "negative_recall": 0.6925,
+      "f1_negative": 0.7176165803108808,
+      "f1_neutral": 0.6719817767653758,
+      "f1_positive": 0.688,
+      "macro_f1_en": 0.7293498260817141,
+      "macro_f1_de": 0.6556935941043084,
+      "inference_ms_per_text": 2.326122074164232,
+      "latency_p50_ms": 2.291053499902773,
+      "latency_p95_ms": 2.446247600278184,
+      "model_size_bytes": 252420405
+    },
+    {
+      "model": "colleague_main_default",
+      "run_id": "e023d9d1a50b4a6fb4ea4218e974a70f",
+      "accuracy": 0.4716666666666667,
+      "macro_f1": 0.4410405628570957,
+      "negative_precision": 0.6973684210526315,
+      "negative_recall": 0.265,
+      "f1_negative": 0.38405797101449274,
+      "f1_neutral": 0.551004016064257,
+      "f1_positive": 0.3880597014925373,
+      "macro_f1_en": 0.4523984690781342,
+      "macro_f1_de": 0.42927956340292805,
+      "inference_ms_per_text": 0.2504308758386742,
+      "latency_p50_ms": 0.24704599991309806,
+      "latency_p95_ms": 0.26791499983573885,
+      "model_size_bytes": 4280946
+    }
+  ]
+}

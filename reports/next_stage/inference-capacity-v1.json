@@ -1,0 +1,16 @@
+{
+  "engineering_only": true,
+  "scored_evaluation": false,
+  "source": "Repeated and bounded longest Train article; not a natural new data item and never added to Train/Test",
+  "source_train_id": "wikinews:de:77900",
+  "source_train_text_sha256": "c857c7d6fb0db170102dd8cd75cbcd06d2442f6ae2472b8c0b00e3a839c16b45",
+  "artificial_input_sha256": "ee0c367573f60a73bba7f3f296b58a0b7bfb4532de76e23aa4489ea4dece3b43",
+  "article_tokens": 4096,
+  "full_sequence_tokens": 4415,
+  "seconds": 1.461739151040092,
+  "peak_allocated_bytes": 8475080704,
+  "peak_reserved_bytes": 8713666560,
+  "profile": "CV fold0 Qwen LoRA, same full-window inference implementation and dependencies as final candidates",
+  "truncation": false,
+  "limits": "Single artificial full-window inference check; training capacity was measured only on the actual longest fixed Train input."
+}

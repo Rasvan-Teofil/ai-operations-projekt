@@ -1,0 +1,30 @@
+Expanded Wikinews AI study v4 — attribution and scope
+
+German and English Wikinews contributors supplied 720 additional revision-pinned
+headline/lead inputs. 675 new labels retained, 45 ambiguous/broken inputs excluded.
+448 new Train inputs join 244 original v3 Train inputs; 227 new inputs form fresh
+Test. Original Val/Test are protected and do not enter fitting.
+
+Per-page source revisions, author-history credits, transformations and terms:
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/source_manifest.json
+Carried original training text credits:
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/common_data_v3/source_manifest.json
+
+German text: CC BY 2.5. English article-era terms: CC BY 2.5 for older material,
+CC BY 4.0 after 16 December 2024. Retain both for later contributions to older EN
+articles. Source declarations do not warrant every individual contribution.
+No images, quoted leads or linked publisher articles included. Title plus first
+substantive paragraph, 650-character complete-sentence lead cap, metadata removed.
+No project-generated translations; source-page translation history not audited.
+Original text stays outside Git. Bibliographic titles, URLs and hashes retained.
+
+AI-labelled / Codex-reviewed: same assistant created and reviewed each new label
+from exact inputs, before candidate predictions, with split role/sampling hint
+hidden in annotation batches. One AI annotator; exact serving revision unavailable.
+New annotation metadata is offered under CC0-1.0 to the extent project rights apply.
+This does not relicense article text or claim human authorship/annotator consensus.
+https://github.com/Rasvan-Teofil/ai-operations-projekt/blob/second-path/reports/expanded_news_v4/annotations.csv
+
+MiniLM pretrained base: Apache-2.0. Own new fit starts from pinned clean original
+weights, not legacy restricted fine-tunes. FP32 and BF16 share one expanded fit.
+Qwen unchanged zero-shot comparison: Apache-2.0. Artifacts remain local models/.

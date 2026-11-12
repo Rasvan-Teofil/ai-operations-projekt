@@ -1,0 +1,49 @@
+{
+  "dataset": "Kenpache/multilingual-financial-sentiment",
+  "revision": "9d43950d151602f623f28bba62f30554b5d40dd2",
+  "seed": 20261018,
+  "source_sha256": "be719558d710871e06515a4c2924ab4f12686804fe786acf7a265bf9f0ee5b95",
+  "raw_rows": 39829,
+  "de_en_before_filter": 11910,
+  "conflicting_rows_removed": 0,
+  "duplicates_removed": 0,
+  "filtered_rows": 11909,
+  "splits": {
+    "train": {
+      "rows": 8335,
+      "sha256": "86c27c18cd94b914ffbc9afe5876fa4fb0fc1784af8b6c408508748a258b18c4",
+      "counts": {
+        "de:negative": 974,
+        "de:neutral": 1697,
+        "de:positive": 844,
+        "en:negative": 1193,
+        "en:neutral": 2336,
+        "en:positive": 1291
+      }
+    },
+    "val": {
+      "rows": 1787,
+      "sha256": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+      "counts": {
+        "de:negative": 209,
+        "de:neutral": 364,
+        "de:positive": 181,
+        "en:negative": 256,
+        "en:neutral": 501,
+        "en:positive": 276
+      }
+    },
+    "test": {
+      "rows": 1787,
+      "sha256": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+      "counts": {
+        "de:negative": 209,
+        "de:neutral": 364,
+        "de:positive": 181,
+        "en:negative": 255,
+        "en:neutral": 501,
+        "en:positive": 277
+      }
+    }
+  }
+}

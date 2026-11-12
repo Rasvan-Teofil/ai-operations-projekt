@@ -1,0 +1,261 @@
+{
+  "selected_on_development": "qwen-lora",
+  "no_post_test_tuning": true,
+  "test_manifest_sha256": "d7f51d3ada45efe55a3b77ece51b80f71e3110f25a79ae536d8c3ade148c86ff",
+  "label_status": "AI-labelled · Codex-reviewed",
+  "human_gold": false,
+  "models": [
+    {
+      "model": "frozen128",
+      "path": "models/next_stage/final/frozen128",
+      "run_id": "b808b43f56ee40df9cfe43fcba550388",
+      "artifact_sha256": "20f82616bda02d9010f355d5ca8af0975b769aa19a4ddf88e30c476e895074ee",
+      "full_model_size_bytes": 252421041,
+      "full_train_rows": 240,
+      "test_run_id": "ccc1b462bac044b681014c3d319cb35e",
+      "accuracy": 0.6743849493487699,
+      "macro_f1": 0.5762055266154501,
+      "primary_score": 0.5149987058051271,
+      "mean_three_language_macro_f1": 0.5519020248164129,
+      "macro_f1_de": 0.5281384697771437,
+      "macro_f1_en": 0.5018589418331104,
+      "macro_f1_ja": 0.6257086628389845,
+      "negative_precision": 0.7718120805369127,
+      "negative_recall": 0.837378640776699,
+      "positive_recall": 0.4306569343065693,
+      "confusion_matrix": [
+        [
+          345,
+          40,
+          27
+        ],
+        [
+          47,
+          62,
+          33
+        ],
+        [
+          55,
+          23,
+          59
+        ]
+      ],
+      "per_class": {
+        "negative": {
+          "precision": 0.7718120805369127,
+          "recall": 0.837378640776699,
+          "f1": 0.8032596041909197,
+          "support": 412
+        },
+        "neutral": {
+          "precision": 0.496,
+          "recall": 0.43661971830985913,
+          "f1": 0.46441947565543074,
+          "support": 142
+        },
+        "positive": {
+          "precision": 0.4957983193277311,
+          "recall": 0.4306569343065693,
+          "f1": 0.4609375,
+          "support": 137
+        }
+      },
+      "inference_ms_per_text": 3.720736943452192,
+      "latency_p50_ms": 3.538428107276559,
+      "latency_p95_ms": 4.91752102971077,
+      "peak_inference_allocated_bytes": 258321920,
+      "test_inference_calls": 691,
+      "warmup_fit_calls": 20,
+      "model_version": "article-minilm-128-frozen-v1"
+    },
+    {
+      "model": "minilm128",
+      "path": "models/next_stage/final/minilm128",
+      "run_id": "e2cc1ff6526f4068b010dc483a84c192",
+      "artifact_sha256": "67010650b8773720b62bc74ec9f2225c2a9e34febf1bc6a1895c5d948d26f433",
+      "full_model_size_bytes": 252421036,
+      "full_train_rows": 240,
+      "test_run_id": "ee0576a3c33a4305b9a7af8fb7e6dca6",
+      "accuracy": 0.662807525325615,
+      "macro_f1": 0.5598691025520294,
+      "primary_score": 0.5928224136813094,
+      "mean_three_language_macro_f1": 0.5837032617642764,
+      "macro_f1_de": 0.47342741514520653,
+      "macro_f1_en": 0.7122174122174122,
+      "macro_f1_ja": 0.5654649579302107,
+      "negative_precision": 0.794392523364486,
+      "negative_recall": 0.8252427184466019,
+      "positive_recall": 0.38686131386861317,
+      "confusion_matrix": [
+        [
+          340,
+          49,
+          23
+        ],
+        [
+          44,
+          65,
+          33
+        ],
+        [
+          44,
+          40,
+          53
+        ]
+      ],
+      "per_class": {
+        "negative": {
+          "precision": 0.794392523364486,
+          "recall": 0.8252427184466019,
+          "f1": 0.8095238095238095,
+          "support": 412
+        },
+        "neutral": {
+          "precision": 0.42207792207792205,
+          "recall": 0.45774647887323944,
+          "f1": 0.4391891891891892,
+          "support": 142
+        },
+        "positive": {
+          "precision": 0.48623853211009177,
+          "recall": 0.38686131386861317,
+          "f1": 0.43089430894308944,
+          "support": 137
+        }
+      },
+      "inference_ms_per_text": 3.65882544466948,
+      "latency_p50_ms": 3.553918097168207,
+      "latency_p95_ms": 4.698829026892781,
+      "peak_inference_allocated_bytes": 258321920,
+      "test_inference_calls": 691,
+      "warmup_fit_calls": 20,
+      "model_version": "article-minilm-128-ft-v1"
+    },
+    {
+      "model": "qwen-zero",
+      "path": "models/next_stage/final/qwen-zero",
+      "run_id": "3ffc1ff5bf794cf197ffe7e25ad1bf31",
+      "artifact_sha256": "697775af176554c97921fbea900f21075fecca93a22d41c1fe5099e7e8c368c1",
+      "full_model_size_bytes": 8060919707,
+      "full_train_rows": 240,
+      "test_run_id": "5c7368b3a93040a2a93786208787a908",
+      "accuracy": 0.8422575976845152,
+      "macro_f1": 0.7936565182074165,
+      "primary_score": 0.7796418945476519,
+      "mean_three_language_macro_f1": 0.7912001062423535,
+      "macro_f1_de": 0.7507926818090157,
+      "macro_f1_en": 0.808491107286288,
+      "macro_f1_ja": 0.8143165296317566,
+      "negative_precision": 0.9328358208955224,
+      "negative_recall": 0.9101941747572816,
+      "positive_recall": 0.6277372262773723,
+      "confusion_matrix": [
+        [
+          375,
+          36,
+          1
+        ],
+        [
+          11,
+          121,
+          10
+        ],
+        [
+          16,
+          35,
+          86
+        ]
+      ],
+      "per_class": {
+        "negative": {
+          "precision": 0.9328358208955224,
+          "recall": 0.9101941747572816,
+          "f1": 0.9213759213759214,
+          "support": 412
+        },
+        "neutral": {
+          "precision": 0.6302083333333334,
+          "recall": 0.852112676056338,
+          "f1": 0.7245508982035929,
+          "support": 142
+        },
+        "positive": {
+          "precision": 0.8865979381443299,
+          "recall": 0.6277372262773723,
+          "f1": 0.7350427350427351,
+          "support": 137
+        }
+      },
+      "inference_ms_per_text": 172.3297915860132,
+      "latency_p50_ms": 161.02196089923382,
+      "latency_p95_ms": 271.6174015076831,
+      "peak_inference_allocated_bytes": 8236392960,
+      "test_inference_calls": 691,
+      "warmup_fit_calls": 20,
+      "model_version": "article-qwen-zero-v1"
+    },
+    {
+      "model": "qwen-lora",
+      "path": "models/next_stage/final/qwen-lora",
+      "run_id": "f8f41ca7c45c4c6fa31de94eed722792",
+      "artifact_sha256": "fd17ae277f926b5fd5828ba103a7d27e69546a7375ba7f8a2240450a64fb3ee9",
+      "full_model_size_bytes": 8072741766,
+      "full_train_rows": 240,
+      "test_run_id": "c071020e208142c1a45fca0a49f7f971",
+      "accuracy": 0.85383502170767,
+      "macro_f1": 0.8029593118759406,
+      "primary_score": 0.8218154895172254,
+      "mean_three_language_macro_f1": 0.8189451440726664,
+      "macro_f1_de": 0.7611560639996554,
+      "macro_f1_en": 0.8824749150347952,
+      "macro_f1_ja": 0.8132044531835483,
+      "negative_precision": 0.9455445544554455,
+      "negative_recall": 0.9271844660194175,
+      "positive_recall": 0.7445255474452555,
+      "confusion_matrix": [
+        [
+          382,
+          25,
+          5
+        ],
+        [
+          12,
+          106,
+          24
+        ],
+        [
+          10,
+          25,
+          102
+        ]
+      ],
+      "per_class": {
+        "negative": {
+          "precision": 0.9455445544554455,
+          "recall": 0.9271844660194175,
+          "f1": 0.9362745098039216,
+          "support": 412
+        },
+        "neutral": {
+          "precision": 0.6794871794871795,
+          "recall": 0.7464788732394366,
+          "f1": 0.7114093959731543,
+          "support": 142
+        },
+        "positive": {
+          "precision": 0.7786259541984732,
+          "recall": 0.7445255474452555,
+          "f1": 0.7611940298507462,
+          "support": 137
+        }
+      },
+      "inference_ms_per_text": 184.25769850277436,
+      "latency_p50_ms": 171.2512169033289,
+      "latency_p95_ms": 292.9140488849953,
+      "peak_inference_allocated_bytes": 8248189440,
+      "test_inference_calls": 691,
+      "warmup_fit_calls": 20,
+      "model_version": "article-qwen-lora-v1"
+    }
+  ]
+}

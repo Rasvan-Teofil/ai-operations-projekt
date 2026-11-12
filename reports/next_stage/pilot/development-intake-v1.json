@@ -1,0 +1,247 @@
+{
+  "schema_version": "pilot-audit-v1",
+  "article_rows": 268,
+  "language_counts": {
+    "de": 93,
+    "en": 84,
+    "ja": 91
+  },
+  "language_label_counts": {
+    "de:neutral": 24,
+    "de:positive": 17,
+    "de:negative": 52,
+    "en:negative": 57,
+    "en:positive": 16,
+    "en:neutral": 11,
+    "ja:negative": 56,
+    "ja:positive": 19,
+    "ja:neutral": 16
+  },
+  "observed_groups": 262,
+  "blockers": [],
+  "ready_for_development_intake": true,
+  "final_test_frozen": false,
+  "label_status": "AI-labelled · Codex-reviewed",
+  "limits": "Exact/provenance/event-key audit only. Semantic near-duplicates, translation history and residual events require review before splitting. Two passes are one AI annotator, not independent verification.",
+  "input_version": "full-article-v5",
+  "train_only": true,
+  "exclusions": [
+    {
+      "id": "wikinews:de:80550",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:79621",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:82270",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:83518",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:84715",
+      "codes": [
+        "historical_overlap"
+      ]
+    },
+    {
+      "id": "wikinews:de:77788",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:de:86373",
+      "codes": [
+        "historical_overlap"
+      ]
+    },
+    {
+      "id": "wikinews:en:2873317",
+      "codes": [
+        "historical_overlap"
+      ]
+    },
+    {
+      "id": "wikinews:en:2995465",
+      "codes": [
+        "historical_overlap"
+      ]
+    },
+    {
+      "id": "wikinews:en:2956738",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2816528",
+      "codes": [
+        "changed_text_review_pending",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2907845",
+      "codes": [
+        "changed_text_review_pending",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2926951",
+      "codes": [
+        "historical_overlap"
+      ]
+    },
+    {
+      "id": "wikinews:en:2930934",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2839675",
+      "codes": [
+        "changed_text_review_pending",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2891495",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2929534",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:3029315",
+      "codes": [
+        "changed_text_review_pending",
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2973664",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2927070",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2963615",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:3004591",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:en:2808740",
+      "codes": [
+        "unresolved_annotation"
+      ]
+    },
+    {
+      "id": "wikinews:ja:43384",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:40147",
+      "codes": [
+        "historical_overlap"
+      ]
+    },
+    {
+      "id": "wikinews:ja:23379",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:19216",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:44977",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:25695",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:45026",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:28476",
+      "codes": [
+        "rights_review_pending"
+      ]
+    },
+    {
+      "id": "wikinews:ja:16389",
+      "codes": [
+        "rights_review_pending"
+      ]
+    }
+  ],
+  "original_rows": 300,
+  "migrated_annotation_rows": 296,
+  "original_input_sha256": "d977aec48dcf5637fbf64a38af86ad13d412fcd02ee13ee6f860f0c398c810d7",
+  "new_input_sha256": "08d5197115da698ef58418d239443cd3de24fd2586799cec59388240f240d7b7",
+  "protection_hashes": {
+    "data/processed/val.csv": "7b00f52bc643c6abd92b964b5f4ee9fc68e7781fff36b3e11645ac068ab3b4e6",
+    "data/processed/test.csv": "7337d5e4423d90bbf54fbd6ec26938adf6b197d4dc92a72e31c8b570879391bd",
+    "data/benchmark/shared.csv": "97a2f9980dcd5d845cfed3720141162cdfcf7c3d0b4b69794a1ca52063aeb099",
+    "data/local_llm/shared.csv": "51869e71902b908cad7c00d74a786a92304e5a4c82e9186a8bb283b70d2ab3d3",
+    "data/common_data_v3/val.csv": "ce96b1cea8446df6ea029189fffc15c00551902120d3cd9199ca96dd8f7cb43a",
+    "data/common_data_v3/test.csv": "e885f65d5b430627e62b7c6980ad796b3829cc7ca5d7f39c0e5f1000b16fd970",
+    "data/expanded_news_v4/test.csv": "6f02c3a6b06cbb6bf11a387ed5785919bedf0a805b158043c02a6685da29610a",
+    "data/llm_adaptation_v5/test.csv": "723673ee3c08fb7c2896aed0e14396623de25d9959f5c68382a4eb7971f48b93",
+    "data/common_data_v3/articles.jsonl": "825bd7ad08c50667bc902ccf79644dbc7748d132bda5893ad6a42732fecc9f4c",
+    "data/expanded_news_v4/articles.jsonl": "10ead880737970bfab79b4049ab16324f5bc909ef35fcd8a9ae273a9030eb145",
+    "data/llm_adaptation_v5/articles.jsonl": "90514073365312879f0e53e377b9a491ce2880a7fd62fc0a5142086e6f82166d"
+  },
+  "migration": "Exact-hash transfer only; five changed compatible texts re-read twice. Four changed rights-blocked inputs remain unreviewed in v5.",
+  "protected_scope": "Original held-outs plus all 1319 old news collection pages and their observed source/translation components.",
+  "population": "Second seeded quote-restricted pilot; all development-exposed; no final test.",
+  "publication_metadata": "Visible dateline replaces mistaken page-creation value in development records; old raw bytes preserved. Do not infer verified chronology."
+}

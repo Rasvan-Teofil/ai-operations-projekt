@@ -1,0 +1,55 @@
+{
+  "python": "Python 3.12.3",
+  "torch": "2.11.0+cu128",
+  "cuda_runtime": "12.8",
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 5060 Ti",
+  "gpu_driver": "NVIDIA GeForce RTX 5060 Ti, 595.71.05, 16311 MiB",
+  "fine_tune_first_and_last_layer_max_absolute_weight_changes": {
+    "encoder.layer.0.attention.self.query.weight": 0.002049120143055916,
+    "encoder.layer.11.output.dense.weight": 0.0010982034727931023
+  },
+  "runs": {
+    "frozen": {
+      "run_id": "6f942a83f7c949b2a3a70d9036b2d12d",
+      "artifact_sha256": "906ba788b12aa9658be2a36094658aacd8717f74661908ea47195c4cfa0307cb",
+      "training_seconds": 11.307758821999983
+    },
+    "finetuned": {
+      "run_id": "5b1864e1e45e49cc99a74c33a39b5660",
+      "artifact_sha256": "32a0639a9c349968249742afa1b5011fdd1b06a26389c57eafc361c841af7b11",
+      "training_seconds": 40.33568189599998,
+      "epoch_rows_seen": [
+        {
+          "epoch": 1,
+          "rows": 8335.0
+        },
+        {
+          "epoch": 2,
+          "rows": 8335.0
+        },
+        {
+          "epoch": 3,
+          "rows": 8335.0
+        }
+      ]
+    },
+    "centroid": {
+      "run_id": "d130c7f51fe749a5a17326f5503f4d78",
+      "artifact_sha256": "7736572effbe273af44df9d10bbff4032ca1aece36a16450fb8b9a1ab37f86d5",
+      "training_seconds": 5.056312939999998
+    },
+    "majority": {
+      "run_id": "8a7d115af9d54edc83a2d029e034df35",
+      "artifact_sha256": "20b6838c0bb7404a0049614eb0e9ced60aee87435b861fb6945afcfdfbee0c0e",
+      "training_seconds": null
+    }
+  },
+  "main_ref_readonly": "a840bb7bc8f1656f1700ccabaa89837ce347ca2b",
+  "normalized_text_ids_disjoint_across_all_splits": true,
+  "full_train_examples_per_epoch": 8335,
+  "fine_tune_total_examples": 25005,
+  "validation_used_for_selection": false,
+  "complete_test_evaluations_per_model": 1,
+  "preflight_failure_test_predictions": 0
+}

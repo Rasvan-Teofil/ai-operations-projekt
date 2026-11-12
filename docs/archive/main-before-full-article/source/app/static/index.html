@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Article sentiment</title>
+  <link rel="stylesheet" href="/static/demo.css">
+</head>
+<body>
+  <header class="mast">
+    <p class="kicker">AI Operations · HHN</p>
+    <h1>Article sentiment</h1>
+    <p class="lede">Paste a news URL or the article text. Send exactly one of the two. The page posts that JSON to <code>POST /predict</code>.</p>
+    <p id="model-status" class="model-status">Checking the loaded model…</p>
+  </header>
+
+  <main>
+    <form id="predict-form" class="panel">
+      <label for="article-url">Article URL</label>
+      <input id="article-url" name="url" type="url" inputmode="url" autocomplete="off" placeholder="https://example.com/news/article" spellcheck="false">
+
+      <label for="article-text">Article text</label>
+      <textarea id="article-text" name="text" rows="7" placeholder="Die Aktie verlor nach der Gewinnwarnung deutlich an Wert."></textarea>
+
+      <button type="submit">Classify</button>
+      <p id="form-status" class="status" role="alert"></p>
+    </form>
+
+    <section id="result" class="panel result" hidden>
+      <p class="result-kicker">Prediction</p>
+      <p id="label" class="label"></p>
+      <p class="model-line">Model version <span id="result-model"></span></p>
+      <div id="excerpt-block" class="excerpt-block" hidden>
+        <p class="result-kicker">Scraped text</p>
+        <p id="scraped-excerpt" class="excerpt"></p>
+      </div>
+      <div id="scores" class="scores"></div>
+      <pre id="raw-json" class="raw"></pre>
+    </section>
+  </main>
+  <script src="/static/demo.js"></script>
+</body>
+</html>

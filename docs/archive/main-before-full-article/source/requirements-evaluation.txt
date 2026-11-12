@@ -1,0 +1,3 @@
+# Only for the final independent EN -> DE transfer benchmark; never installs torch.
+sentencepiece==0.2.1
+sacremoses==0.1.1

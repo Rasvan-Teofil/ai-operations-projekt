@@ -1,0 +1,663 @@
+{
+  "extraction_version": "full-article-v3",
+  "chunk_length": 128,
+  "article_limit": 3072,
+  "items": [
+    {
+      "id": "wikinews:de:81577",
+      "text_sha256": "d0328a240548bc02d46f1610de876d7e064191b24b6337e1c40fbba07aa49913",
+      "tokens": 577,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:80634",
+      "text_sha256": "3b2d12c639cdfbdd9e27b9fb4b145476d682d54a3d28c12d8aa81d15992dae73",
+      "tokens": 528,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:85997",
+      "text_sha256": "2630e38df08983edc9766e3dc493c10953e898da063982bc12469e89b7af4cf6",
+      "tokens": 628,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:79506",
+      "text_sha256": "178a74f5396ab29b352560509693ecf3232cf7c95afcd6a17057c6df5ae98d96",
+      "tokens": 381,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:79487",
+      "text_sha256": "4a52987785cf9d2a125df72cb1c9bc6f78aea1854a930354e63dff216b3ae994",
+      "tokens": 673,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:86741",
+      "text_sha256": "194b3d3f0efd21dadb8bc3db7e247c84e1664c918b4c250e3941d9c667707620",
+      "tokens": 757,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:83286",
+      "text_sha256": "c38ad5034719049a3a839df445bb8582603e64f0888f4414517b866f367f7de4",
+      "tokens": 1228,
+      "chunks": 10,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:77945",
+      "text_sha256": "d3111f6092f2031f8f81a80ae019f78523c53ae6b4399126d9dfe783e19a2bde",
+      "tokens": 762,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:82452",
+      "text_sha256": "abb0fedd697206719dda98d7ed6ae6d843c90969ea89a70217cbbfd3173439a4",
+      "tokens": 531,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:81652",
+      "text_sha256": "6c5e4afda19e6c115c040b7b31cb29822a1ddac5944a6af06d88aa9f2d8e623c",
+      "tokens": 588,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:77421",
+      "text_sha256": "36338e1035fc3754ee88d934d9ccd106a63080e574891f2a44550c6019cd80da",
+      "tokens": 176,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:79929",
+      "text_sha256": "337349c6d024617504f8c3ac2a614c34662c4599b3d379cb8b16af76ba15cbc9",
+      "tokens": 210,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:84747",
+      "text_sha256": "5bec36a5996f37b0c469e712f39f52c6b71a3c317a5e228c8d1981476fcaf1f8",
+      "tokens": 656,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:80053",
+      "text_sha256": "9763c670540c2d899a9891f628918fb03ea6d6d55fe74788742a7d52ed04df5d",
+      "tokens": 222,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:80559",
+      "text_sha256": "da6d484e3b1af4700163556510581bdf586cfd673e728891bc5e196146bf1293",
+      "tokens": 178,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:79969",
+      "text_sha256": "f2a955e8efa5c7ec0e97638821ed4bb5892030731cf99d5d2f175fa70df602da",
+      "tokens": 308,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:82787",
+      "text_sha256": "7fc49e0a69694840c70d4123f25bc6e14cc414ec99f13b6785b663fda94b6759",
+      "tokens": 346,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:85505",
+      "text_sha256": "4b4bdcd8c6fb1d457a5200ae9847e30783c0661fd9cf6480a23e53f212c9d12f",
+      "tokens": 804,
+      "chunks": 7,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:80197",
+      "text_sha256": "536dddde63a50ef51bc18650555a337530967106478f51819434d7ca54beba5d",
+      "tokens": 1033,
+      "chunks": 9,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:83473",
+      "text_sha256": "09b7d8131a1e359b21da9f665c1b6754f0cc2626d4ebd8eeccbe69294339537d",
+      "tokens": 684,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:79881",
+      "text_sha256": "f50fc91cd9ef0f7dcf0be410001841d4d2c7efb3b4d8a17c3cc96ea06bd6870f",
+      "tokens": 641,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:81692",
+      "text_sha256": "a49d443a141a0dc128b26445768a48bd0ec99eb474af9420e88026684baf97d2",
+      "tokens": 296,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:80692",
+      "text_sha256": "cd092d0b3be5661583d3f7e39a7b280dd8499fcffe8ae059550cd81d8b5307e5",
+      "tokens": 368,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:80348",
+      "text_sha256": "4b1a6ecf35b08b618168531be3c7998d486b62fcff2eb829ab60f6c01965a734",
+      "tokens": 458,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:79297",
+      "text_sha256": "8ed1ec894f6c595cde0c6b8fed478d8f2f220c14ac33ec17edb0b8a6808f53b4",
+      "tokens": 381,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:77064",
+      "text_sha256": "d44796cb46cc43f5eb5a86c5dec55940515a20cfd9c928dd7347bbf35ba822ff",
+      "tokens": 264,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:77568",
+      "text_sha256": "bc278e08ca8a8fb71cf456e0eb43b08190c3ea4c0d65007629aaa516b9f3db44",
+      "tokens": 633,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:83296",
+      "text_sha256": "03419564ab3e87da6a80728cb010980da1f46cfd00f2db22c34bebba2ce918c0",
+      "tokens": 2426,
+      "chunks": 19,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:86649",
+      "text_sha256": "0dc13faa232c3ca05b45aebeb328d281abfd1db47f6e0f1545d19abedbe9a9f5",
+      "tokens": 2897,
+      "chunks": 23,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:de:86734",
+      "text_sha256": "72aca823670a87dceba36755c752fd83b426fb14859e9149403de1a82a5e0bfe",
+      "tokens": 831,
+      "chunks": 7,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:3014824",
+      "text_sha256": "f97653762692d11a366a3d1087ad2d31ad63ea2db813225839a00bfcf312b121",
+      "tokens": 576,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2871942",
+      "text_sha256": "b464c2ab0435e54818d039254fcc66177495a915af48a877c0a521703169a63a",
+      "tokens": 490,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2918278",
+      "text_sha256": "e45ca78acfc6fcfdad2c1beea3b7a6ce8eaa7102c2a6c5607230f373f33dcc80",
+      "tokens": 629,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2819841",
+      "text_sha256": "ee723dfbb59d7a1dca6ed5bd316663ce25a0d0f75ee7095c104c967c0e915863",
+      "tokens": 1021,
+      "chunks": 8,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:3014780",
+      "text_sha256": "12bb3d7e9eb173e263add45676358cb144d75c5313cbbcf33365c0efdbb1d436",
+      "tokens": 471,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2972263",
+      "text_sha256": "7761d0cbc07a991fbe66ba7fc2270d626832e1224d9c03da835a7ea2cc6c7a3d",
+      "tokens": 1268,
+      "chunks": 10,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2912426",
+      "text_sha256": "1c3601903476022135ae249682218f482707f0de584904a68f93c8d33e3e4370",
+      "tokens": 819,
+      "chunks": 7,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2824029",
+      "text_sha256": "a6d947de0be2e1b227d01cc599390c29b99a916fa752f31f2e15142ad1513738",
+      "tokens": 483,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2815642",
+      "text_sha256": "a5ac536203abca2951f239eaaee68f0d11fbe2840c08d37197ff543dd997dd1e",
+      "tokens": 566,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2866259",
+      "text_sha256": "615dc17a1b2bc18bb398486968afbead84111bb0820e283356a03ba5eedb911d",
+      "tokens": 259,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2926945",
+      "text_sha256": "75572ea98afd83526dd0dfab45627777268f0804cb39b51918c3f9fd1b5197ec",
+      "tokens": 312,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2879804",
+      "text_sha256": "f28096276f08116c17125884c6042f5a1fa5e68426894e9dd9e150b6c9b609f5",
+      "tokens": 658,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2846378",
+      "text_sha256": "8cfd8fc3949b3688bdc1bc7edb8ff48931079ab3c1507a79ccfa1e5ac1718e42",
+      "tokens": 256,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2825648",
+      "text_sha256": "08320c712b0169560de328f85ba3cbd1f2e057480a1529568f8a96865c2eab17",
+      "tokens": 592,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2825775",
+      "text_sha256": "48f202c02a34c74dc7d08c90b1621ff9c2e92c7f6d496f33735a66597979675d",
+      "tokens": 354,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2985731",
+      "text_sha256": "56751bedb68b7a506d4121ac98705cca28cbbc5d00f3adff19079d795361d5b5",
+      "tokens": 285,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:3011413",
+      "text_sha256": "1eab60b2906a4fa521773fde913288acf47700c7b766570af3ae92d20862c2ed",
+      "tokens": 305,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2867805",
+      "text_sha256": "caf3fbd47273d38efde7a49395e7b6e088441862aec5f44169ce1ffad4adda43",
+      "tokens": 747,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2847653",
+      "text_sha256": "dc720147dc7a4597bb0ea189ed2505e48df856bf8e1474ab924d9718a2d8b94e",
+      "tokens": 392,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2915751",
+      "text_sha256": "f5703e120bb10cbfb7eed05082acd931c0cef272c02f92807cfe731da1678e84",
+      "tokens": 408,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2943372",
+      "text_sha256": "9fe3b0ec5d42a06838ed479adbc11d9ddf54b037ddb875e29756f1563df02546",
+      "tokens": 372,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2949438",
+      "text_sha256": "4dee9c2f08db46918fd3fd55e5073b68e7b802d29f5dafc8f3c0acaaf3ab24ab",
+      "tokens": 481,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2859514",
+      "text_sha256": "83741f4d9df5b5a6eab8c207fb0b8891a6abb1126a117d2fabce62427369dfb3",
+      "tokens": 571,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2964266",
+      "text_sha256": "9ffec51f851e646b0b59a884ae08dedcc8bbdab3f56d2e884721e7629ce1be1a",
+      "tokens": 884,
+      "chunks": 7,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2933301",
+      "text_sha256": "0c709065aedee6b99a49bbb9dcf7a092b5c917a343b663eb20f4d02ea1f395b5",
+      "tokens": 742,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2994412",
+      "text_sha256": "f50190b6569e9319691f05242c1307646bc8d4f9fd35d673a55042ea80eb3dd3",
+      "tokens": 433,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2994614",
+      "text_sha256": "c399ffc9bc1eefcedf357c1de2af9fa12cd56808bc5ca7eec73e31d0621cb055",
+      "tokens": 324,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2944997",
+      "text_sha256": "39e94eea9d4af3adeb4f87545517b4e9cd568ecc12ffa3b7122243d46cbf4c8c",
+      "tokens": 362,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2893471",
+      "text_sha256": "2484bf82fceea7b745fceedf04c3e01f55e3d1fb06b04c9abbefd7db22a021c3",
+      "tokens": 327,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:en:2978031",
+      "text_sha256": "517177a25393773b086cb8dde3464716bffbbde1bbb87455f7996f8098843f67",
+      "tokens": 1680,
+      "chunks": 14,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:18744",
+      "text_sha256": "b7f781844bee46bc7064fa5ef90e3e0ec63dfc2cbbe15854e1ac8ad64412c109",
+      "tokens": 734,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:18209",
+      "text_sha256": "27666fa87c2ab509cfba18873ef28b6d0a426989327ba6cd2770643e4cd1dbca",
+      "tokens": 340,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:43824",
+      "text_sha256": "d1a5454378aacf6c5eba6d61d7704c985c3fb7172bbd53ab5a9adbff97cb0775",
+      "tokens": 686,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:17395",
+      "text_sha256": "565cfbdb08a5b6c638edffb376b9b4173cbdcb6c7caf24867b244d8d54408e5c",
+      "tokens": 583,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:23294",
+      "text_sha256": "8d989aee96ccaaa77a2ab74d27a17dd69d23f1407d2c6c424c90f41dcc330d65",
+      "tokens": 357,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:18731",
+      "text_sha256": "70576ab783879df75d59abc3d295dabffe445e06dee3e0292a833ec7eaa4a45c",
+      "tokens": 607,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:21323",
+      "text_sha256": "8817a2313f340750297776c4a862b6f8bfccd4b9338a3ae751cd5e80d1f8a211",
+      "tokens": 455,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:36682",
+      "text_sha256": "7e89626bb07091839bd95257353167a51911c5320e2387e760a09a76435568bb",
+      "tokens": 385,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:26950",
+      "text_sha256": "f279f150dfd88c31fce44a3bb345eeb44976ff772cf1d9ad5d4e48ccee251ef8",
+      "tokens": 982,
+      "chunks": 8,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:18041",
+      "text_sha256": "19f07211c5e8ec806bfce0acba2792e80623a04f02b573ee2e62852bf4964749",
+      "tokens": 520,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:17056",
+      "text_sha256": "7e238687d072487fdcbad56cd6289f4581555349b3edd9c6509cdb53a84ea8a6",
+      "tokens": 705,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:42480",
+      "text_sha256": "1a26f11ec1029d7e16e9d0b22e9c65472e186826e2fd365fd2dfaad67ffb75cd",
+      "tokens": 427,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:22140",
+      "text_sha256": "47dcf975ea3c1eab370bde1c5ce9008e7c57edde83a3c1449a2f3abe95032211",
+      "tokens": 552,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:18775",
+      "text_sha256": "0a31f4930916d58a521a19536067ae11b426536c3a59b1ef4b94b23805214696",
+      "tokens": 440,
+      "chunks": 4,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:45147",
+      "text_sha256": "f4c3e7a9bc964978d71fccdbe40bdc0f7b83e43bcbcab724d1cbd121e9c8a33e",
+      "tokens": 304,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:45212",
+      "text_sha256": "9768c743c64c80cb3b6dfcca2f9ffa87277d406cc2c42f0c18183af245e3508f",
+      "tokens": 255,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:40201",
+      "text_sha256": "958c6941f0a43eb6d2c962ea26051578494a54ca8db0474544ecfd51c05c3644",
+      "tokens": 171,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:18599",
+      "text_sha256": "e20ced1942c9671721b51bf4072cad20c1f205629c90459d939dcbf705bd08d4",
+      "tokens": 989,
+      "chunks": 8,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:26053",
+      "text_sha256": "91651ca64f97418def002e545b9fafabe10326c22f84d7f786586fccb17bc4c5",
+      "tokens": 196,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:19645",
+      "text_sha256": "13bbc171df4625ee8d8e4d21a08428c5244ee43bc35cda488f22fdb4af89eaec",
+      "tokens": 530,
+      "chunks": 5,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:45224",
+      "text_sha256": "2d2db25a4fb3048b6c15a9a5d6b2bdac68fc07fd199139c12e125f366b7cc8dd",
+      "tokens": 707,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:21327",
+      "text_sha256": "bc86af357e016974f9636eafb45b0e31540730288b4d0c80d37e5939010fa5ed",
+      "tokens": 689,
+      "chunks": 6,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:18789",
+      "text_sha256": "1c6189ddc14b861468c2f992d06a503dce615d44752fa0f4a1e38f6c64176390",
+      "tokens": 904,
+      "chunks": 8,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:29209",
+      "text_sha256": "ef4167ec9082b96e94ec9da7048167120d0569e2696b9f2a2b2d7a6322542180",
+      "tokens": 1060,
+      "chunks": 9,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:20944",
+      "text_sha256": "9816eb7379df6a7614f8cb4a793ccde3dfe0a3e6e9bf82bea0b665c855271c9b",
+      "tokens": 1316,
+      "chunks": 11,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:22900",
+      "text_sha256": "ea563007c7ae95a9c77ef12b618efb0ec5d350b956f8ce2fb2fa2d5089dbb225",
+      "tokens": 277,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:17396",
+      "text_sha256": "037ca52329ad1d3146b8119d0f41bc5d77fe766a5958097ea7d160b4cf7006c6",
+      "tokens": 281,
+      "chunks": 3,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:22108",
+      "text_sha256": "d0bb19074af19339b1da3efc052d2bb17f70af6670c4e13bc602e0512663070c",
+      "tokens": 244,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:43814",
+      "text_sha256": "7cb06dd42752c1181dfe026738607de69d40488d744c23b5ba254a870b5c6a65",
+      "tokens": 195,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    },
+    {
+      "id": "wikinews:ja:20112",
+      "text_sha256": "c3e43afa14dc225cd418433d06747291a190d65bf4a7bbcf9a31ae18cb650d8f",
+      "tokens": 244,
+      "chunks": 2,
+      "retained_fraction_at_article_limit": 1.0
+    }
+  ],
+  "languages": {
+    "de": {
+      "rows": 30,
+      "min": 176,
+      "median": 582.5,
+      "max": 2897,
+      "over_article_limit": 0
+    },
+    "en": {
+      "rows": 30,
+      "min": 256,
+      "median": 482.0,
+      "max": 1680,
+      "over_article_limit": 0
+    },
+    "ja": {
+      "rows": 30,
+      "min": 171,
+      "median": 487.5,
+      "max": 1316,
+      "over_article_limit": 0
+    }
+  },
+  "limits": "Article tokens only; prompt, demonstrations and special-token overhead need a separate capacity check. No model inference or GPU allocation.",
+  "input_file_sha256": "cef0d0c433603f791035727be042ab43a20d2de1228e4335cfd1d170e14acf63",
+  "purpose": "Unlabelled pilot length diagnostics, not a quality evaluation"
+}

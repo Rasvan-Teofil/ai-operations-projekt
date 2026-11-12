@@ -1,189 +1,289 @@
-"""Valid and invalid requests. No transformer, no network."""
-
-import os
-
+import socket
+import numpy as np
 import pytest
 from fastapi.testclient import TestClient
-
-from src.config import LABELS_3
-from src.scraping import EmptyArticleError, FetchError
-
-
-@pytest.fixture(scope="module")
-def client():
-    previous = os.environ.get("SENTIMENT_MODEL")
-    os.environ["SENTIMENT_MODEL"] = "tfidf_logreg"
-    from src.config import MODELS_DIR
-
-    if not (MODELS_DIR / "tfidf_logreg.joblib").exists():
-        from src.train import train
-
-        train()
-
-    from app.main import app
-
-    with TestClient(app) as test_client:
-        yield test_client
-    if previous is None:
-        os.environ.pop("SENTIMENT_MODEL", None)
-    else:
-        os.environ["SENTIMENT_MODEL"] = previous
+import app.main as api
+from src.fetch import FetchError
 
 
-def test_health_reports_the_baseline(client):
-    response = client.get("/health")
-    assert response.status_code == 200
-    body = response.json()
-    assert body["model_loaded"] is True
-    assert body["model_name"] == "tfidf_logreg"
-    assert body["model_version"] == "tfidf-logreg-v1"
+class Stub:
+    version = 'test-local-v1'
+    def predict_proba(self, texts):
+        return np.array([[.1,.2,.7] for _ in texts])
 
 
-def test_predict_valid_text(client):
-    response = client.post(
-        "/predict",
-        json={"text": "The clinic reported fewer infections after the new treatment."},
-    )
-    assert response.status_code == 200
-    body = response.json()
-    assert body["label"] in LABELS_3
-    assert set(body["scores"]) == set(LABELS_3)
-    assert abs(sum(body["scores"].values()) - 1) < 1e-4
-    assert body["model_version"] == "tfidf-logreg-v1"
+@pytest.fixture(autouse=True)
+def offline(monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Network access in unit test')
+    monkeypatch.setattr(socket, 'create_connection', forbidden)
+    monkeypatch.setattr(socket, 'getaddrinfo', forbidden)
 
 
-def test_predict_rejects_text_and_url_together(client):
-    response = client.post(
-        "/predict",
-        json={"text": "Hallo", "url": "https://example.com/a"},
-    )
+@pytest.fixture
+def client(monkeypatch):
+    monkeypatch.setattr(api, 'load_predictor', lambda: Stub())
+    with TestClient(api.create_app()) as c:
+        yield c
+
+
+@pytest.mark.parametrize('text', ['Das Unternehmen meldet Rekordumsatz.', 'Profits increased strongly.'])
+def test_text_and_health(client, text):
+    assert client.get('/health').json()['model_loaded']
+    r = client.post('/predict', json={'text': text})
+    assert r.status_code == 200
+    d = r.json()
+    assert d['label'] == 'positive'
+    assert set(d['scores']) == {'negative','neutral','positive'}
+    assert sum(d['scores'].values()) == pytest.approx(1)
+    assert d['model_version'] == 'test-local-v1'
+
+
+@pytest.mark.parametrize('payload', [{}, {'text':'x','url':'https://example.com'},
+    {'text':'x','url':None}, {'text':None}, {'text':''}, {'text':'  '}, {'text':12},
+    {'url':[]}, {'text':'x','other':1}, {'url':'ftp://example.com'},
+    {'url':'https://example.com https://other.com'}, {'url':'https://user:pass@example.com'},
+    {'url':'http://example.com:9000'}, {'text':'x'*20001}])
+def test_invalid(client, payload):
+    assert client.post('/predict', json=payload).status_code == 422
+
+
+def test_url(client, monkeypatch):
+    monkeypatch.setattr(api, 'article_text', lambda url, **kwargs: 'Die Umsätze steigen deutlich und übertreffen die Erwartungen.')
+    assert client.post('/predict', json={'url':'https://example.com/article'}).status_code == 200
+
+
+@pytest.mark.parametrize('status', [422,403,502])
+def test_fetch_errors(client, monkeypatch, status):
+    def fail(url, **kwargs):
+        raise FetchError(status, 'controlled failure')
+    monkeypatch.setattr(api, 'article_text', fail)
+    assert client.post('/predict', json={'url':'https://example.com/article'}).status_code == status
+
+
+def test_missing_model(monkeypatch):
+    def missing():
+        raise FileNotFoundError('model')
+    monkeypatch.setattr(api, 'load_predictor', missing)
+    with TestClient(api.create_app()) as c:
+        assert not c.get('/health').json()['model_loaded']
+        assert c.post('/predict', json={'text':'hello'}).status_code == 503
+
+
+def test_inference_unavailable(client, monkeypatch):
+    def broken(self, texts):
+        raise RuntimeError('device unavailable')
+    monkeypatch.setattr(Stub, 'predict_proba', broken)
+    assert client.post('/predict', json={'text':'hello'}).status_code == 503
+
+
+@pytest.mark.parametrize('values', [[float('nan'),.5,.5],[-.1,.5,.6],[.2,.2,.2],[.5,.5]])
+def test_invalid_model_distributions_are_503(client,monkeypatch,values):
+    monkeypatch.setattr(Stub,'predict_proba',lambda self,texts: np.array([values]))
+    assert client.post('/predict',json={'text':'Valid text'}).status_code==503
+
+
+def test_queue_timeout_is_bounded_and_recovers(monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    import threading
+    entered=threading.Event()
+    release=threading.Event()
+    class Slow(Stub):
+        def predict_proba(self,texts):
+            entered.set()
+            assert release.wait(5), 'Test did not release held inference'
+            return super().predict_proba(texts)
+    monkeypatch.setattr(api,'load_predictor',lambda: Slow())
+    with TestClient(api.create_app(queue_timeout=.01)) as c:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            first=pool.submit(c.post,'/predict',json={'text':'First request'})
+            assert entered.wait(2)
+            try:
+                second=c.post('/predict',json={'text':'Second request'})
+                assert second.status_code==503
+                assert second.headers['retry-after']=='1'
+            finally:
+                release.set()
+            assert first.result().status_code==200
+        assert c.post('/predict',json={'text':'Recovered'}).status_code==200
+
+
+def test_url_extraction_policy_is_shared_by_model_profiles(client,monkeypatch):
+    monkeypatch.setattr(Stub,'meta',{'improved_article':True},raising=False)
+    calls=[]
+    def fetch(url, **kwargs):
+        calls.append(kwargs)
+        return 'The company reports record profits and raises its forecast.'
+    monkeypatch.setattr(api,'article_text',fetch)
+    assert client.post('/predict',json={'url':'https://example.com/news'}).status_code==200
+    assert calls == [{'policy': 'full-article-v5'}]
+
+
+def test_same_url_input_and_policy_reach_different_models(client, monkeypatch):
+    received = []
+    class Recording(Stub):
+        meta = {'improved_article': False}
+        def predict_proba(self, texts):
+            received.append(texts)
+            return super().predict_proba(texts)
+    other = Recording()
+    monkeypatch.setattr(api, 'load_named_predictor', lambda name: other)
+    monkeypatch.setattr(Stub, 'predict_proba', lambda self, texts: received.append(texts) or np.array([[.1, .2, .7]]))
+    calls = []
+    def fetch(url, **kwargs):
+        calls.append(kwargs)
+        return 'Headline\n\nThe complete article has an important middle paragraph.'
+    monkeypatch.setattr(api, 'article_text', fetch)
+    for endpoint in ['/predict', '/predict?model=minilm_v2']:
+        response = client.post(endpoint, json={'url': 'https://example.com/news'})
+        assert response.status_code == 200
+        assert response.json()['input_policy'] == 'full-article-v5'
+    assert calls == [{'policy': 'full-article-v5'}] * 2
+    assert received[0] == received[1]
+
+
+def test_access_page_returns_diagnostic_without_model_inference(client, monkeypatch):
+    import src.fetch as fetch
+    monkeypatch.setattr(fetch, 'public_target', lambda url: (fetch.urlsplit(url), 'example.com', 443, '1.1.1.1'))
+    monkeypatch.setattr(fetch, 'request', lambda *args: (404, 'text/plain', '') if args[-1] == '/robots.txt'
+                        else (200, 'text/html', '<title>Access denied</title><main><p>' + 'A publisher access challenge. ' * 8 + '</p></main>'))
+    def forbidden(*args):
+        raise AssertionError('An access page must never be classified')
+    monkeypatch.setattr(Stub, 'predict_proba', forbidden)
+    response = client.post('/predict', json={'url': 'https://example.com/news'})
     assert response.status_code == 422
+    assert response.headers['X-Article-Error'] == 'access_page'
 
 
-def test_predict_rejects_empty_body(client):
-    response = client.post("/predict", json={})
-    assert response.status_code == 422
-
-
-def test_predict_url_uses_the_fetcher(client, monkeypatch):
-    monkeypatch.setattr(
-        "app.main.fetch_article_text",
-        lambda url: "Freiwillige haben genug Geld gesammelt um die Bibliothek wieder zu öffnen.",
-    )
-    response = client.post("/predict", json={"url": "https://example.com/news/bibliothek"})
-    assert response.status_code == 200
-    assert response.json()["label"] in LABELS_3
-
-
-def test_predict_fetch_failure(client, monkeypatch):
-    def boom(url):
-        raise FetchError("Fetching the URL failed.")
-
-    monkeypatch.setattr("app.main.fetch_article_text", boom)
-    response = client.post("/predict", json={"url": "https://example.com/missing"})
+def test_upstream_403_stays_502_but_is_distinguishable(client, monkeypatch):
+    import src.fetch as fetch
+    monkeypatch.setattr(fetch, 'public_target', lambda url: (fetch.urlsplit(url), 'example.com', 443, '1.1.1.1'))
+    monkeypatch.setattr(fetch, 'request', lambda *args: (404, 'text/plain', '') if args[-1] == '/robots.txt' else (403, 'text/html', ''))
+    response = client.post('/predict', json={'url': 'https://example.com/news'})
     assert response.status_code == 502
+    assert response.json()['detail'] == 'Article returned HTTP 403'
+    assert response.headers['X-Article-Error'] == 'upstream_forbidden'
 
 
-def test_demo_page_returns_html(client):
-    for path in ("/", "/demo"):
+def test_demo_and_static_assets_are_available_without_network(client):
+    for path in ['/', '/demo']:
         response = client.get(path)
         assert response.status_code == 200
-        assert "text/html" in response.headers["content-type"]
-        assert "Article sentiment" in response.text
-        assert 'id="predict-form"' in response.text
-        assert 'id="scraped-excerpt"' in response.text
-        assert "/static/demo.js" in response.text
-    script = client.get("/static/demo.js")
-    assert script.status_code == 200
-    assert 'fetch("/predict"' in script.text
-    assert "scraped_excerpt" in script.text
-    style = client.get("/static/demo.css")
-    assert style.status_code == 200
-    assert "text/css" in style.headers["content-type"]
+        assert 'Article sentiment' in response.text
+    assert client.get('/static/app.js').status_code == 200
+    assert client.get('/static/style.css').status_code == 200
 
 
-# Strings the demo got wrong on tfidf-linearsvc-v1. They are not copied
-# verbatim into data/sample/opinion_supplement.csv.
-OBVIOUS_NEGATIVES = (
-    "I dont like that",
-    "I don't like that",
-    "This is terrible",
-    "Das ist absolut schlecht",
-    "The company reported a sharp drop in quarterly revenue and warned of further losses.",
-    "Das Unternehmen meldete einen starken Umsatzrückgang und warnte vor weiteren Verlusten.",
-)
+def test_current_local_project_documents_are_reviewable_without_github_or_inference(client, monkeypatch):
+    def forbidden(*args):
+        raise AssertionError('Project documents must not predict')
+    monkeypatch.setattr(Stub, 'predict_proba', forbidden)
+    for document in ['readme', 'next-stage', 'archive', 'protocol']:
+        assert client.get('/project/' + document).status_code == 200
+    assert client.get('/project/protocol').json()['primary_metric']['languages'] == ['de', 'en']
+    assert client.get('/project/unknown').status_code == 404
+    assert client.get('/project/%2e%2e%2f.env').status_code == 404
 
 
-def _ensure_linearsvc_v2() -> None:
-    """CI trains before pytest. Retrain if this checkout has no v2 artefact yet."""
-    import joblib
-
-    from src.config import MODELS_DIR
-
-    path = MODELS_DIR / "tfidf_linearsvc.joblib"
-    if path.exists() and joblib.load(path).get("model_version") == "tfidf-linearsvc-v2":
-        return
-    from src.train import train
-
-    train()
-
-
-def test_predict_obvious_negatives_on_the_demo_model(client):
-    """The browser demo posts to /predict and serves tfidf_linearsvc, not the CI logreg."""
-    _ensure_linearsvc_v2()
-    from src.registry import load_model
-
-    previous = (
-        client.app.state.model,
-        client.app.state.model_name,
-        client.app.state.model_version,
-    )
-    model = load_model("tfidf_linearsvc")
-    client.app.state.model = model
-    client.app.state.model_name = model.name
-    client.app.state.model_version = model.model_version
-    try:
-        for text in OBVIOUS_NEGATIVES:
-            response = client.post("/predict", json={"text": text})
-            assert response.status_code == 200, text
-            body = response.json()
-            assert body["model_version"] == "tfidf-linearsvc-v2"
-            assert body["label"] == "negative", (text, body)
-            assert body["scores"]["negative"] > body["scores"]["neutral"]
-            assert body["scores"]["negative"] > body["scores"]["positive"]
-            assert body["scraped_excerpt"] is None
-    finally:
-        (
-            client.app.state.model,
-            client.app.state.model_name,
-            client.app.state.model_version,
-        ) = previous
-
-
-def test_predict_url_returns_a_short_excerpt(client, monkeypatch):
-    article = (
-        "The company reported a sharp drop in quarterly revenue and warned of further losses. "
-        "Analysts said the warning covers the next two quarters. "
-        "The board meets on Thursday to discuss the outlook. "
-        "This closing sentence must stay out of the preview."
-    )
-    monkeypatch.setattr("app.main.fetch_article_text", lambda url: article)
-    response = client.post("/predict", json={"url": "https://example.com/news/losses"})
+def test_url_excerpt_and_text_null(client, monkeypatch):
+    monkeypatch.setattr(api, 'article_text', lambda url, **kwargs: 'Article body. ' * 100)
+    response = client.post('/predict', json={'url':'https://example.com/article'})
     assert response.status_code == 200
-    body = response.json()
-    excerpt = body["scraped_excerpt"]
-    assert isinstance(excerpt, str)
-    assert excerpt.startswith("The company reported a sharp drop")
-    assert "next two quarters" in excerpt
-    assert "closing sentence" not in excerpt
-    assert len(excerpt) <= 400
-    assert set(body["scores"]) == set(LABELS_3)
+    assert len(response.json()['scraped_excerpt']) == 400
+    assert client.post('/predict', json={'text':'Some text'}).json()['scraped_excerpt'] is None
 
 
-def test_predict_empty_article(client, monkeypatch):
-    def empty(url):
-        raise EmptyArticleError("No article text could be read from the page.")
+def test_comparison_missing_is_explicit(client, monkeypatch, tmp_path):
+    import src.config
+    monkeypatch.setattr(src.config, 'REPORTS', tmp_path)
+    assert client.get('/comparison').status_code == 503
+    assert client.get('/comparison.svg').status_code == 503
+    assert client.get('/comparison/news-v3').status_code == 503
+    assert client.get('/comparison/news-v3.svg').status_code == 503
+    assert client.get('/comparison/news-v4').status_code == 503
+    assert client.get('/comparison/news-v4.svg').status_code == 503
+    assert client.get('/comparison/news-v4-learning.svg').status_code == 503
+    assert client.get('/comparison/news-v5').status_code == 503
+    assert client.get('/comparison/news-v5.svg').status_code == 503
+    assert client.get('/comparison/news-v5-development.svg').status_code == 503
+    assert client.get('/comparison/full-article').status_code == 503
+    assert client.get('/comparison/full-article.svg').status_code == 503
 
-    monkeypatch.setattr("app.main.fetch_article_text", empty)
-    response = client.post("/predict", json={"url": "https://example.com/empty"})
-    assert response.status_code == 422
+
+def test_full_article_evidence_routes_do_not_predict(client, monkeypatch, tmp_path):
+    import json
+    import src.config
+    target = tmp_path / 'next_stage'; target.mkdir()
+    (target / 'comparison-v1.json').write_text(json.dumps({'test_rows': 691, 'selected_on_development': 'qwen-lora'}))
+    (target / 'comparison-v1.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg"></svg>')
+    monkeypatch.setattr(src.config, 'REPORTS', tmp_path)
+    monkeypatch.setattr(Stub, 'predict_proba', lambda *args: pytest.fail('Evidence must not invoke inference'))
+    assert client.get('/comparison/full-article').json()['selected_on_development'] == 'qwen-lora'
+    assert client.get('/comparison/full-article.svg').headers['content-type'].startswith('image/svg+xml')
+
+
+def test_full_article_model_discovery_has_accurate_context_and_scope(client, monkeypatch, tmp_path):
+    import json
+    monkeypatch.setattr(api, 'MODELS', tmp_path)
+    path=tmp_path/'next_stage/final/qwen-lora';path.mkdir(parents=True)
+    (path/'artifact.json').write_text(json.dumps({'kind':'local_llm','model_version':'article-qwen-lora-v1',
+        'max_article_tokens':4096,'article_overflow':'reject'}))
+    records=client.get('/models').json()
+    model=next(x for x in records['models'] if x['id']=='article_qwen_lora_v1')
+    assert model['available'] and model['comparison_group']=='full-article-v1'
+    assert 'overflow rejected' in model['context_policy'] and 'middle omitted' not in model['context_policy']
+    assert 'DE/EN/JA' in model['evaluated_scope']
+    assert records['article_research_choice']=='article_qwen_lora_v1'
+    assert client.post('/predict?model=not-a-model',json={'text':'Test'}).status_code==422
+
+
+@pytest.mark.parametrize('folder,route,curve', [('expanded_news_v4', 'news-v4', 'learning'),
+                                              ('llm_adaptation_v5', 'news-v5', 'development')])
+def test_expansion_comparison_routes_serve_saved_evidence_without_inference(client, monkeypatch, tmp_path, folder, route, curve):
+    import json
+    import src.config
+    report = tmp_path / folder; report.mkdir()
+    (report / 'comparison.json').write_text(json.dumps({'test_rows': 227, 'results': []}))
+    for name in ['comparison.svg', 'learning_curve.svg' if curve == 'learning' else 'development.svg']:
+        (report / name).write_text('<svg xmlns="http://www.w3.org/2000/svg"></svg>')
+    monkeypatch.setattr(src.config, 'REPORTS', tmp_path)
+    def forbidden(*args):
+        raise AssertionError('Saved comparison route must not predict')
+    monkeypatch.setattr(Stub, 'predict_proba', forbidden)
+    assert client.get('/comparison/' + route).json()['test_rows'] == 227
+    for path in ['/comparison/' + route + '.svg', '/comparison/' + route + '-' + curve + '.svg']:
+        response = client.get(path)
+        assert response.status_code == 200
+        assert response.headers['content-type'].startswith('image/svg+xml')
+
+
+def test_serving_selection_loads_same_artifact_and_version(monkeypatch, tmp_path):
+    import json
+    import src.serving
+    calls = []
+    monkeypatch.setattr(api, 'MODELS', tmp_path)
+    monkeypatch.delenv('SENTIMENT_ARTIFACT', raising=False)
+    (tmp_path / 'selected.json').write_text(json.dumps({'model':'development/release', 'model_version':'historical'}))
+    (tmp_path / 'serving_selected.json').write_text(json.dumps({'model':'local_llm', 'model_version':Stub.version}))
+    def loader(path):
+        calls.append(path)
+        return Stub()
+    monkeypatch.setattr(src.serving, 'load_artifact', loader)
+    assert api.load_predictor().version == Stub.version
+    assert calls == [tmp_path / 'local_llm']
+    (tmp_path / 'serving_selected.json').write_text(json.dumps({'model':'local_llm', 'model_version':'wrong'}))
+    with pytest.raises(ValueError, match='version'):
+        api.load_predictor()
+
+
+def test_model_context_overflow_returns_422_and_recovers(client, monkeypatch):
+    from src.article import ArticleError
+    original = Stub.predict_proba
+    def too_long(self, texts):
+        raise ArticleError('article_context_exceeded', 'Full-text token limit exceeded; no text was truncated')
+    monkeypatch.setattr(Stub, 'predict_proba', too_long)
+    response=client.post('/predict',json={'text':'A synthetically overlong model input.'})
+    assert response.status_code==422
+    assert response.headers['x-article-error']=='article_context_exceeded'
+    monkeypatch.setattr(Stub,'predict_proba',original)
+    assert client.post('/predict',json={'text':'A valid shorter input.'}).status_code==200

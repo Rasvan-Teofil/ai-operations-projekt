@@ -1,0 +1,12 @@
+{
+  "version": "engineering-amendment-1",
+  "stage": "Before all candidate development predictions and fits",
+  "original_code_sha256": "c9484dc0508352252497334f13f6bf3745865f6353da08bed15cb8204cad0111",
+  "corrected_code_sha256": "d3492d61f1809a5df267b195ee1b9a07907b7055bbad536c3ed0f14566cf8496",
+  "protocol_sha256": "b4c1c2dbb17cd077abac32aab4a3d3bfb844241f7248dd62c92cd325a01280ec",
+  "failed_probe": "Qwen forward OOM near 14.26 GiB PyTorch allocation; no retained fit or accuracy result. MiniLM probes had completed but no capacity report was finalized.",
+  "cause": "AutoModelForCausalLM starts in eval mode. The probe did not switch to training, so checkpointing was inactive.",
+  "correction": "Enable input gradients and set net.train() in the LoRA constructor, matching the frozen non-reentrant checkpointing recipe. Re-run discarded Train-only capacity probe. No input, label, prompt, hyperparameter or membership change.",
+  "original_protocol_preserved": true,
+  "candidate_predictions_seen": false
+}

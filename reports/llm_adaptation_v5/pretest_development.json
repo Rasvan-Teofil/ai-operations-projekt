@@ -1,0 +1,52 @@
+{
+  "fresh_test_unpredicted": true,
+  "recipe_changed": false,
+  "conditions_retained": 7,
+  "summary": [
+    {
+      "model": "qwen3_4b",
+      "name": "Qwen · original financial prompt",
+      "folds": 3,
+      "balanced_language_macro_f1_mean": 0.6337913772955276,
+      "balanced_language_macro_f1_sd": 0.01404040524909161,
+      "recall_positive_mean": 0.35926399545325377,
+      "recall_positive_sd": 0.022919350027063055,
+      "inference_ms_per_text_mean": 79.19853724458004,
+      "inference_ms_per_text_sd": 0.5631032062927086
+    },
+    {
+      "model": "qwen_news_v5",
+      "name": "Qwen · news rubric zero-shot",
+      "folds": 3,
+      "balanced_language_macro_f1_mean": 0.8189583839106028,
+      "balanced_language_macro_f1_sd": 0.007915757263037887,
+      "recall_positive_mean": 0.8302074452969594,
+      "recall_positive_sd": 0.02097920105012885,
+      "inference_ms_per_text_mean": 104.28360848349656,
+      "inference_ms_per_text_sd": 0.26569780889620265
+    },
+    {
+      "model": "qwen_fewshot_v5",
+      "name": "Qwen · news rubric + six examples",
+      "folds": 3,
+      "balanced_language_macro_f1_mean": 0.8054875301208125,
+      "balanced_language_macro_f1_sd": 0.024099583575616514,
+      "recall_positive_mean": 0.8253765274225633,
+      "recall_positive_sd": 0.07629452862044965,
+      "inference_ms_per_text_mean": 260.50586698386206,
+      "inference_ms_per_text_sd": 5.766878307928166
+    },
+    {
+      "model": "qwen_lora_v5",
+      "name": "Qwen · own LoRA on same Train",
+      "folds": 3,
+      "balanced_language_macro_f1_mean": 0.8387173713479333,
+      "balanced_language_macro_f1_sd": 0.019402939941425425,
+      "recall_positive_mean": 0.8299232736572889,
+      "recall_positive_sd": 0.03184402846652989,
+      "inference_ms_per_text_mean": 111.21862487368128,
+      "inference_ms_per_text_sd": 0.19211097120583814
+    }
+  ],
+  "decision": "All four prespecified Qwen conditions and all three unchanged small controls retained. News prompt improves every fold; few-shot is lower than news in two folds; LoRA is lower than news in fold3. No parameter, prompt or epoch selected from CV. One full-692 LoRA fit follows, with the fixed final epoch3."
+}

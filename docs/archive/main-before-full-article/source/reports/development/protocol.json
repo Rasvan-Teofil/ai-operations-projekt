@@ -1,0 +1,25 @@
+{
+  "version": "development-v2",
+  "parent_commit": "974518f145a7fe108832bb0be56b310dd8868e72",
+  "authorized_extension": "Separate improvement runs, combined run, development curve, then colleague comparison at the end",
+  "seed": 20261019,
+  "data": "Only original train.csv (8335 rows); original Val and Test not opened or re-evaluated",
+  "evaluation": "3-fold StratifiedGroupKFold; group=source, stratum=language:label; every row out-of-fold once per candidate; same folds for all",
+  "initialization": "Original frozen encoder only, never full-train classification heads; fit balanced C=1 logistic head separately inside each fold",
+  "training": "Three fixed full-fold epochs, batch32, encoder_lr2e-5/head_lr2e-4, AdamW .01, warmup10%, bf16 training, final epoch only; same seed/order per paired fold",
+  "candidates": {
+    "B0_frozen": "Fold-fitted logistic head; frozen encoder; uniform chunks; fp32",
+    "R0_reference": "Original three-epoch fine-tuning recipe refitted within each fold; inverse class-frequency CE; uniform chunks; fp32",
+    "R1_quality": "R0 except per-example inverse frequency of language:label; equal weight per language/class cell",
+    "R2_article": "R0 weights, token-count-weighted chunk probabilities plus title/hidden-content/duplicate-aware HTML extraction",
+    "R3_deploy": "R0 weights stored and inferred in bf16 on CUDA; bounded API inference queue and finite-score validation",
+    "R4_combined": "R1 training + R2 article handling + R3 deployment"
+  },
+  "selection": "Highest mean source-group CV macro-F1; candidates within 0.005 absolute prefer lower median per-text CUDA latency, then artifact bytes; no deployment change based on final branch benchmark",
+  "article_checks": "Fixed synthetic DE/EN financial texts and HTML extraction fixtures; measured separately; not independent human-labelled real-article accuracy; no tuning after results",
+  "release": "Fit selected training recipe once on all original training rows; independent artifact, preserve v1; do not use old Val or Test",
+  "comparison_at_end": "Freeze our selection first. Then run colleague original default method unmodified in isolated checkout and ours on a new shared external benchmark. Prefer SEntFiN unanimous-entity headlines, 200/class by seed, native English and separately identified machine-translated German. Remove normalized overlap with both training corpora. Never compare the old 0.720 and 0.719 as paired scores.",
+  "external_limit": "No trusted real-article labels supplied; machine-translated German is a transfer check, not native German gold; no real-world article accuracy claim",
+  "latency": "Warm CUDA, batch1, tokenizer/transfers included; 20 independent warmups, paired same-order fold sample up to180 rows; report p50/p95 and median across folds",
+  "evidence": "MLflow experiment article-sentiment-second-path, stage/fold tags, parameters, accuracy, macro_f1, per-class F1, language scores, negative recall/precision, confusion matrices, latency, bytes; immutable original reports"
+}
