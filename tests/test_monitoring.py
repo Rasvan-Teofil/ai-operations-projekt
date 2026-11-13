@@ -90,3 +90,29 @@ def test_reference_share_from_test_split():
     shares = reference_label_share()
     assert set(shares) <= {"negative", "neutral", "positive"}
     assert abs(sum(shares.values()) - 1.0) < 0.01
+
+
+def test_daily_summary_groups_by_day_and_version(tmp_path):
+    from app.monitoring import daily_summary
+
+    path = tmp_path / "predictions.jsonl"
+    rows = [
+        ("2026-11-12T08:00:00+00:00", "v1", "positive", 10.0),
+        ("2026-11-12T09:00:00+00:00", "v1", "negative", 30.0),
+        ("2026-11-12T10:00:00+00:00", "v1", "positive", 20.0),
+        ("2026-11-13T08:00:00+00:00", "v1", "neutral", None),
+        ("2026-11-13T08:30:00+00:00", "v2", "positive", 5.0),
+    ]
+    with path.open("w") as handle:
+        for ts, version, label, latency in rows:
+            handle.write(json.dumps({
+                "ts": ts, "model_version": version, "label": label, "latency_ms": latency,
+            }) + "\n")
+    summary = daily_summary(path)
+    assert list(summary) == ["2026-11-12", "2026-11-13"]
+    day1 = summary["2026-11-12"]["v1"]
+    assert day1["n"] == 3
+    assert day1["label_share"] == {"negative": 0.3333, "positive": 0.6667}
+    assert day1["median_latency_ms"] == 20.0
+    assert summary["2026-11-13"]["v1"]["median_latency_ms"] is None
+    assert summary["2026-11-13"]["v2"]["n"] == 1

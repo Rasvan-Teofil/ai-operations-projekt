@@ -11,11 +11,14 @@ the first drift signal we track before the mock deployment.
 ``drift_report`` compares that distribution with a reference (by default
 the label share of the test split) and flags a version when the total
 variation distance passes a threshold.
+``daily_summary`` groups the log by UTC day and model version with count,
+label share and median latency.
 """
 
 import json
 import os
 from collections import Counter
+from statistics import median
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -76,6 +79,35 @@ def summarize(path: Path) -> dict:
     return summary
 
 
+def daily_summary(path: Path) -> dict:
+    """Per UTC day and model version: n, label share, median latency (ms)."""
+    labels: dict[str, dict[str, Counter]] = {}
+    latencies: dict[str, dict[str, list[float]]] = {}
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            day = record["ts"][:10]
+            version = record["model_version"]
+            labels.setdefault(day, {}).setdefault(version, Counter())[record["label"]] += 1
+            bucket = latencies.setdefault(day, {}).setdefault(version, [])
+            if record.get("latency_ms") is not None:
+                bucket.append(float(record["latency_ms"]))
+    summary: dict[str, dict] = {}
+    for day in sorted(labels):
+        summary[day] = {}
+        for version, counter in sorted(labels[day].items()):
+            total = sum(counter.values())
+            values = latencies[day][version]
+            summary[day][version] = {
+                "n": total,
+                "label_share": {k: round(v / total, 4) for k, v in sorted(counter.items())},
+                "median_latency_ms": round(median(values), 1) if values else None,
+            }
+    return summary
+
+
 DRIFT_THRESHOLD = 0.15
 
 
@@ -121,9 +153,15 @@ def drift_report(
 if __name__ == "__main__":
     import sys
 
-    args = [a for a in sys.argv[1:] if a != "--drift"]
+    flags = {"--drift", "--daily"}
+    args = [a for a in sys.argv[1:] if a not in flags]
     target = Path(args[0]) if args else log_path()
     if target is None:
         raise SystemExit(f"Pass a log file or set {LOG_PATH_ENV}.")
-    result = drift_report(target) if "--drift" in sys.argv else summarize(target)
+    if "--drift" in sys.argv:
+        result = drift_report(target)
+    elif "--daily" in sys.argv:
+        result = daily_summary(target)
+    else:
+        result = summarize(target)
     print(json.dumps(result, indent=2))
