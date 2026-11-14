@@ -98,10 +98,12 @@ Aggregationsregeln. Maximal 20000 Zeichen; URL-Abruf prüft weiterhin SSRF,
 robots und Zugangssperren. Satzfarben sind zusätzliche Vorhersagen, keine
 kausalen Erklärungen und kein Bestandteil der gemessenen Artikelgenauigkeit.
 
-Die Kennzahlen messen Übereinstimmung mit **AI-labelled · Codex-reviewed**
-Referenzen. Zwei Lesedurchgänge desselben AI-Annotators ersetzen keine
-unabhängige menschliche Validierung. Das Archiv, die Längenbegrenzung und offene
-Vortrainingsüberschneidungen begrenzen die Übertragbarkeit.
+Die Kennzahlen wurden gegen die ursprünglich KI-unterstützt erstellten Referenzen
+gemessen. Der Projektverantwortliche hat die Daten anschließend geprüft und am
+14. November 2026 bestätigt. [Prüfstatus](data/project-review.md) und
+[Originalquellen](data/README.md) sind separat dokumentiert; Labels, Messungen
+und eingefrorene Herkunftsnachweise bleiben unverändert. Archivpopulation,
+Längenbegrenzung und mögliche Vortrainingsüberschneidung begrenzen die Übertragbarkeit.
 
 ## Lokales MLflow anzeigen
 

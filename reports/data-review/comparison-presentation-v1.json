@@ -1,0 +1,14 @@
+{
+  "version": "reviewed-comparison-presentation-v1",
+  "model_calls": 0,
+  "source_results": "reports/next_stage/comparison-v1.json",
+  "source_sha256": "bb1a105ec497b127940b6bad858526c723ae61acb68b7205b87918e1b82c126b",
+  "review_record": "reports/data-review/project-review-v1.json",
+  "review_record_sha256": "b894a0bb129eff5b4a871b408ebe978b2224d28a3f618f0713c0829b86545ace",
+  "reviewed_on": "2026-11-14",
+  "scope": "Presentation caption updated after project-owner review. Same saved metrics and intervals; original figure and result files unchanged.",
+  "output_files": {
+    "reports/data-review/comparison-reviewed-v1.png": "613d22fc1e68d7a6b51a37ed014217bcfb4a702c38603347752d08c6bdbbfb76",
+    "reports/data-review/comparison-reviewed-v1.svg": "bdbb765764b23588befbf127c8f17e1dbb0c2392988aa510b868844d08abe242"
+  }
+}

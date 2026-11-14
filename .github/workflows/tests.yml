@@ -11,6 +11,7 @@ jobs:
           cache: pip
       - run: python scripts/check_layout.py
       - run: python scripts/check_main_integration.py
+      - run: python scripts/build_source_catalog.py --check
       - run: pip install -r requirements.txt
       # GitHub's CPU runner only. The tower keeps its separate CUDA wheel install.
       - run: pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu

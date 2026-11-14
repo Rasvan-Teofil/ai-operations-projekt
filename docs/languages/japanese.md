@@ -15,8 +15,8 @@ Die japanischen Testtexte sind keine Übersetzungen deutscher oder englischer Ar
 - Japanischer Test: 167 negative, 65 neutrale, 68 positive Referenzen.
 - Quelle: japanisches Wikinews, feste Seitenrevisionen, Text-Hashes und
   beitragsbezogene Rechte-/Attributionsnachweise.
-- Referenzen: **AI-labelled · Codex-reviewed**. Zwei Lesungen desselben
-  AI-Annotators, keine unabhängig menschlich validierte Ground Truth.
+- Referenzen: **Projektseitig geprüft**, bestätigt am 14. November 2026.
+  [Prüfstatus und ursprüngliche KI-unterstützte Annotation](../data/project-review.md).
 
 ## Gemessene Ergebnisse
 
@@ -54,8 +54,14 @@ synthetischen Eingaben geprüft. Die gemessene Artikelqualität ist kein Nachwei
 für die Genauigkeit jeder einzelnen Satzmarkierung.
 
 Das Testarchiv ist eingeschränkt; Rechteausschlüsse, Längengrenzen, mögliche
-Vortrainingsüberschneidungen und die AI-Referenzen begrenzen die Übertragbarkeit.
+Vortrainingsüberschneidungen und mögliche Referenzfehler begrenzen die Übertragbarkeit.
 Öffentliches Hosting ohne Tower ist noch nicht eingerichtet.
+
+## Daten direkt öffnen
+
+[91 japanische Train-Artikel](../data/train-ja.md) ·
+[300 japanische Testartikel](../data/test-ja.md) ·
+[Alle Quellen und Versionen](../data/README.md)
 
 ## Nachweise auf main
 

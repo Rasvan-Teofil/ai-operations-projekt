@@ -142,7 +142,7 @@ def create_app(queue_timeout=None):
             records.append({'id': name, 'name': MODEL_NAMES[name], 'model_version': version,
                             'available': available, 'loaded': name in app.state.predictors,
                             'input_policy': ARTICLE_POLICY, 'context_policy': context,
-                            'evaluated_scope': ('Native DE/EN/JA full Wikinews articles; AI-labelled · Codex-reviewed, one annotator; uncalibrated scores.'
+                            'evaluated_scope': ('Native DE/EN/JA full Wikinews articles; project-reviewed reference labels, confirmed 14 November 2026; original annotation provenance retained; uncalibrated scores.'
                                                 if name in ARTICLE_MODELS else 'Historical short texts/headlines/leads; full-article and Japanese quality not established.'),
                             'comparison_group': 'full-article-v1' if name in ARTICLE_MODELS else 'historical',
                             'is_default': name == app.state.default_id,
@@ -178,13 +178,15 @@ def create_app(queue_timeout=None):
                      'reproduction': 'docs/reproduce-full-article.md',
                      'structure': 'docs/repository-structure.md',
                      'japanese': 'docs/languages/japanese.md',
-                     'overview': 'docs/project-overview.md'}
+                     'overview': 'docs/project-overview.md',
+                     'data-sources': 'docs/data/README.md',
+                     'data-review': 'reports/data-review/project-review-v1.json'}
         if document not in documents:
             raise HTTPException(404, 'Unknown project document')
         path = root / documents[document]
         if not path.is_file():
             raise HTTPException(503, 'Project document unavailable')
-        return FileResponse(path, media_type='application/json' if document in ('protocol', 'progress') else 'text/plain; charset=utf-8')
+        return FileResponse(path, media_type='application/json' if document in ('protocol', 'progress', 'data-review') else 'text/plain; charset=utf-8')
 
     @app.get('/comparison/full-article-development', include_in_schema=False)
     def full_article_development():
@@ -211,7 +213,7 @@ def create_app(queue_timeout=None):
     @app.get('/comparison/full-article.svg', include_in_schema=False)
     def full_article_comparison_chart():
         from src.config import REPORTS
-        path = REPORTS / 'next_stage/comparison-v1.svg'
+        path = REPORTS / 'data-review/comparison-reviewed-v1.svg'
         if not path.exists():
             raise HTTPException(503, 'Full-article final comparison chart unavailable')
         return FileResponse(path, media_type='image/svg+xml')
@@ -237,7 +239,7 @@ def create_app(queue_timeout=None):
         from src.config import REPORTS
         path = REPORTS / 'common_data_v3/comparison.json'
         if not path.exists():
-            raise HTTPException(503, 'AI-labelled news pilot has not been completed')
+            raise HTTPException(503, 'News pilot results unavailable')
         return json.loads(path.read_text())
 
     @app.get('/comparison/news-v3.svg', include_in_schema=False)
@@ -245,7 +247,7 @@ def create_app(queue_timeout=None):
         from src.config import REPORTS
         path = REPORTS / 'common_data_v3/comparison.svg'
         if not path.exists():
-            raise HTTPException(503, 'AI-labelled news pilot has not been completed')
+            raise HTTPException(503, 'News pilot results unavailable')
         return FileResponse(path, media_type='image/svg+xml')
 
     @app.get('/comparison/news-v4', include_in_schema=False)

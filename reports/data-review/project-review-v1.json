@@ -1,0 +1,47 @@
+{
+  "version": "project-review-v1",
+  "reviewed_on": "2026-11-14",
+  "reviewer_role": "project_owner",
+  "review_evidence": "Direct statement by the project owner in the project chat on 2026-11-14.",
+  "statement_original": "Die Daten die du erstellt hast oder klassifiziert hast habe ich geprüft die passen so.",
+  "scope": "Project-generated/classified reference data in the published project, as confirmed by the project owner; artifact list identifies the preserved published annotation versions. This is a project-level review statement, not an invented per-row review log.",
+  "display_label_de": "Projektseitig geprüft",
+  "display_label_en": "Project-reviewed references",
+  "initial_annotation_origin": "KI-unterstützte Erstellung und Klassifikation; original AI-labelled / Codex-reviewed provenance retained in frozen artifacts.",
+  "review_timing": "After the recorded development and final-Test evaluation.",
+  "annotation_artifacts": [
+    {
+      "path": "reports/next_stage/train-annotations-v1.jsonl",
+      "sha256": "edc7e007418feedb51ee99b34c11b4a16fa732e008f8462e7c808e3826a165ce",
+      "rows": 240
+    },
+    {
+      "path": "reports/next_stage/final-test-v1/annotations.jsonl",
+      "sha256": "2596990fab37f35031ffdaa7c43c6c8b4a77c32bc179fd2ec2c117f1b03bac03",
+      "rows": 856
+    },
+    {
+      "path": "reports/common_data_v3/annotations.csv",
+      "sha256": "772faba87d963693bdf09ca934c148d0005a75c21d9f6155c31b4d02cf629482",
+      "rows": 360
+    },
+    {
+      "path": "reports/expanded_news_v4/annotations.csv",
+      "sha256": "46cc6822dcb685140a935429aa11bbf859e3c75d421c05d024c7db154eac2b2d",
+      "rows": 720
+    },
+    {
+      "path": "reports/llm_adaptation_v5/annotations.csv",
+      "sha256": "42dc48e6120c2eee0265409ae2f45b6e33b117a54564fabff5d41408beb177ef",
+      "rows": 239
+    }
+  ],
+  "row_level_review_log_provided": false,
+  "independent_blind_annotation_claimed": false,
+  "human_consensus_claimed": false,
+  "reference_labels_changed": false,
+  "metrics_recomputed": false,
+  "final_test_rerun": false,
+  "excluded_or_unresolved_cases_reinstated": false,
+  "rights_decisions_changed": false
+}

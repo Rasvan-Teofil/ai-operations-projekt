@@ -169,7 +169,7 @@ async function newsComparison() {
     const response = await fetch('/comparison/news-v3', {cache:'no-store'});
     if (!response.ok) throw new Error('AI news pilot results unavailable.');
     const data = await response.json();
-    $('news-status').textContent = `${data.test_rows} historical shared test texts · AI-labelled · Codex-reviewed.`;
+    $('news-status').textContent = `${data.test_rows} historical shared test texts · Project-reviewed references.`;
     $('news-rows').replaceChildren();
     for (const record of data.results) {
       const row = document.createElement('tr');
@@ -204,7 +204,7 @@ async function llmComparison() {
     if (!response.ok) throw new Error('Matched-task LLM results unavailable.');
     const data = await response.json();
     const chosen = data.results.find((row) => row.model === data.descriptive_leader);
-    $('llm-status').textContent = `${data.test_rows} new shared test texts · AI-labelled · Codex-reviewed · descriptive choice: ${chosen?.name || data.descriptive_leader}.`;
+    $('llm-status').textContent = `${data.test_rows} new shared test texts · Project-reviewed references · descriptive choice: ${chosen?.name || data.descriptive_leader}.`;
     $('llm-try').href = '/?model=' + encodeURIComponent(data.descriptive_leader);
     $('llm-rows').replaceChildren();
     for (const record of data.results) {
@@ -251,7 +251,7 @@ async function fullArticleComparison() {
       $('final-rows').append(row);
     }
     const selected = data.models.find((row) => row.model === data.selected_on_development);
-    $('final-interpretation').textContent = `The preselected LoRA scores ${selected.primary_score.toFixed(4)} equal-weight DE/EN macro-F1 against the AI references. This is neither independent human accuracy nor evidence of 95% quality. Warm latency includes tokenization and complete-article inference, with model loading and URL fetching excluded. Model size includes Qwen base weights and adapter.`;
+    $('final-interpretation').textContent = `The preselected LoRA scores ${selected.primary_score.toFixed(4)} equal-weight DE/EN macro-F1 against the fixed references, subsequently checked by the project owner. The review does not change the recorded scores or establish 95% accuracy. Warm latency includes tokenization and complete-article inference, with model loading and URL fetching excluded. Model size includes Qwen base weights and adapter.`;
   } catch (error) { $('final-status').textContent = error.message; $('final-chart').hidden = true; }
 }
 checkHealth(); loadModels(); fullArticleComparison(); comparison(); newsComparison(); expandedComparison(); llmComparison(); fullArticleDevelopment();

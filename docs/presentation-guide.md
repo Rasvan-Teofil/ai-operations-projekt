@@ -16,9 +16,11 @@ Japanisch ist in [der Sprachübersicht](languages/japanese.md) ausdrücklich dok
    Qwen LoRA rund 184,26 ms und 7699 MiB einschließlich Basis.
 6. Development: 27 Auswertungen innerhalb Train, keine Sättigung der kleinen
    Mengenkurve. 240 ist kein Datenoptimum; keine künstliche Testvergrößerung.
-7. Grenzen offen zeigen: ein AI-Annotator mit zwei Lesungen, keine unabhängig
-   menschlich geprüfte Ground Truth, eingeschränktes Archiv und mögliche
-   Vortrainingsüberschneidung. 95%-Intervalle bedeuten nicht 95% Genauigkeit.
+7. [Originalquellen und Labels](data/README.md) sowie den
+   [projektseitigen Review](data/project-review.md) zeigen. Die ursprüngliche
+   KI-unterstützte Erstellung ist als Herkunft dokumentiert. Eingeschränktes
+   Archiv und mögliche Vortrainingsüberschneidung bleiben Grenzen.
+   95%-Intervalle bedeuten nicht 95% Genauigkeit.
 8. Reproduce und Data & licences: feste Hashes, neue MLflow-Läufe, genaue
    Quellenattribution; Rohtexte und Gewichte fehlen bewusst im Git-Repository.
 

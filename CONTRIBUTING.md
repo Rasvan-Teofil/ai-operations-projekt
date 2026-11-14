@@ -45,3 +45,10 @@ Arbeitsmittel. Historische Branch-Namen in eingefrorenen Nachweisen nicht umschr
 Vor Merge zusätzlich `python scripts/check_main_integration.py` ausführen; der
 frühere Hauptzweig bleibt unter `docs/archive/main-before-full-article/source/`
 bytegetreu erhalten und wird nicht als aktive zweite Anwendung eingebunden.
+
+Lesbare Quellenlisten aus den öffentlichen Metadaten erzeugen:
+`python scripts/build_source_catalog.py`; CI prüft sie mit `--check`.
+Originale Referenzlabels, Quellrevisionen und Text-Hashes dabei nicht verändern.
+Spätere menschliche Datenprüfungen mit Datum, Rolle, tatsächlichem Umfang und
+Herkunftsnachweis als eigenen Schritt dokumentieren. Keine nachträgliche
+Umdeutung der ursprünglichen Annotation oder des damaligen Messablaufs.
