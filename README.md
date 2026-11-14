@@ -46,6 +46,8 @@ zur Hauptkennzahl hinzugenommen.
 4. [Vorführungsleitfaden](docs/presentation-guide.md) und [Reproduktion](docs/reproduce-full-article.md).
 5. [Quellen und Lizenzen](licenses/README.md), [Prüfnachweise](reports/next_stage/verification-final-v1.json)
    und [ursprünglicher main-Stand](docs/archive/main-before-full-article/README.md).
+6. [Englischer Code-Walkthrough für Qwen und das beste Modell](docs/qwen-code-walkthrough.md)
+   sowie [Abschlussaudit der Kursanforderungen](docs/course-completion-audit.md).
 
 Alle verlinkten Dateien, die aktuelle Anwendung und ihre Tests liegen auf diesem
 Hauptzweig. `second-path` bleibt nur als historische Entwicklungskennung in

@@ -5,6 +5,8 @@ Aktueller Projektstand auf `main`; alle folgenden Links bleiben in diesem Branch
 - [Daten, Originalquellen und Labels](data/README.md)
 - [Projektseitige Prüfbestätigung](data/project-review.md)
 - [Projektübersicht: Problem, Umsetzung und Historie](project-overview.md)
+- [Course completion audit and remaining prerequisites](course-completion-audit.md)
+- [English Qwen and best-model code walkthrough](qwen-code-walkthrough.md)
 - [Japanisch / 日本語: Unterstützung und Ergebnisse](languages/japanese.md)
 - [Öffentliches Hosting: aktueller Stand und kostenfreie Optionen](public-hosting.md)
 

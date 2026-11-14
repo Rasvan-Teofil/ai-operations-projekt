@@ -27,3 +27,10 @@ Japanisch ist in [der Sprachübersicht](languages/japanese.md) ausdrücklich dok
 Die früheren Studien bleiben im ausklappbaren Archiv. Ihre unterschiedlichen
 Testbestände nicht als Fortschrittskurve mit dem Vollartikeltest vergleichen.
 Der Dienst ist lokal auf `127.0.0.1:8000`, kein öffentliches Deployment.
+
+## Nächster Wochenblock: Qwen-Code auf Englisch
+
+Für die Erklärung des besten Modells und der Qwen-Varianten dem
+[englischen Code-Walkthrough](qwen-code-walkthrough.md) folgen. Er trennt
+Trainingspfad, Kandidatenauswahl, Inferenz und FastAPI-Anbindung und nennt die
+Funktionen, die tatsächlich gezeigt werden sollten.
