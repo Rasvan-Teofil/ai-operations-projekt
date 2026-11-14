@@ -215,7 +215,8 @@ def test_full_article_evidence_routes_do_not_predict(client, monkeypatch, tmp_pa
     import src.config
     target = tmp_path / 'next_stage'; target.mkdir()
     (target / 'comparison-v1.json').write_text(json.dumps({'test_rows': 691, 'selected_on_development': 'qwen-lora'}))
-    (target / 'comparison-v1.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg"></svg>')
+    presentation = tmp_path / 'data-review'; presentation.mkdir()
+    (presentation / 'comparison-reviewed-v1.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg"></svg>')
     monkeypatch.setattr(src.config, 'REPORTS', tmp_path)
     monkeypatch.setattr(Stub, 'predict_proba', lambda *args: pytest.fail('Evidence must not invoke inference'))
     assert client.get('/comparison/full-article').json()['selected_on_development'] == 'qwen-lora'

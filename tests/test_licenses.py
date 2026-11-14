@@ -59,8 +59,20 @@ def test_restricted_data_is_not_presented_as_permissive(client):
     assert entries['phrasebank']['license'] == 'CC-BY-NC-SA-3.0'
     assert 'source news explicitly excluded' in entries['sentivent']['license']
     assert 'publisher' in entries['sentfin']['status']
-    assert 'AI-labelled' in entries['wikinews']['status']
+    assert 'Project-reviewed references' in entries['wikinews']['status']
+    assert 'AI-labelled' in entries['wikinews']['original_annotation_status']
     assert entries['codex_annotations']['group'] == 'current'
+
+
+def test_project_review_is_accessible_without_weights_and_preserves_timing(client):
+    review = client.get('/project/data-review').json()
+    assert review['reviewed_on'] == '2026-11-14'
+    assert review['reviewer_role'] == 'project_owner'
+    assert review['review_timing'].startswith('After')
+    assert review['reference_labels_changed'] is False
+    assert review['final_test_rerun'] is False
+    assert review['independent_blind_annotation_claimed'] is False
+    assert 'Daten und Originalquellen' in client.get('/project/data-sources').text
 
 
 def test_all_notices_serve_exact_verified_bytes(client):

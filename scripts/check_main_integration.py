@@ -10,6 +10,7 @@ ENTRY_DOCS = (
     'docs/languages/japanese.md', 'docs/presentation-guide.md',
     'docs/reproduce-full-article.md', 'docs/repository-structure.md',
     'docs/public-hosting.md', 'reports/README.md',
+    'data/README.md', 'docs/data/README.md', 'docs/data/project-review.md',
     'docs/archive/main-before-full-article/README.md',
 )
 

@@ -1,0 +1,56 @@
+{
+  "checked_on": "2026-11-14",
+  "source_commit": "0ac12b94c53154d9b848ab6d45363e9558addb6e",
+  "scope": "Readable source catalog, project-owner review record and updated presentation. No data/model evaluation rerun.",
+  "offline_tests_passed": 189,
+  "catalog": {
+    "selected_train": 240,
+    "selected_test": 691,
+    "excluded_test_sources": 165,
+    "historical_collected_sources": {
+      "v3": 360,
+      "v4": 720,
+      "v5": 239
+    },
+    "generated_files": 15,
+    "original_article_revision_history_license_urls_validated": true,
+    "reference_hash_membership_and_class_counts_verified": true,
+    "raw_article_texts_published": false,
+    "generator": "scripts/build_source_catalog.py --check"
+  },
+  "project_review": {
+    "record": "reports/data-review/project-review-v1.json",
+    "confirmed_by": "project_owner",
+    "date": "2026-11-14",
+    "initial_provenance_preserved": true,
+    "labels_or_metrics_changed": false,
+    "blind_review_or_human_consensus_claimed": false
+  },
+  "integrity": {
+    "archived_main_files_preserved": 168,
+    "existing_source_report_files_unchanged": 236,
+    "frozen_runtime_verified": true,
+    "original_chart_and_results_unchanged": true,
+    "derived_figure_manifest": "reports/data-review/comparison-presentation-v1.json",
+    "test_inference_repeated": false
+  },
+  "presentation_routes_without_weights": 200,
+  "representative_external_revision_link_checks": [
+    {
+      "language": "de",
+      "url": "https://de.wikinews.org/w/index.php?oldid=857949",
+      "status": 200
+    },
+    {
+      "language": "en",
+      "url": "https://en.wikinews.org/w/index.php?oldid=5004383",
+      "status": 200
+    },
+    {
+      "language": "ja",
+      "url": "https://ja.wikinews.org/w/index.php?oldid=200209",
+      "status": 200
+    }
+  ],
+  "limits": "HEAD checks are representative, not continuous availability monitoring of all external pages. User review is a project-level statement; no per-row review log was supplied."
+}

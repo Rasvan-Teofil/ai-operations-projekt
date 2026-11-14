@@ -1,0 +1,39 @@
+{
+  "version": "readable-source-catalog-v1",
+  "contains_raw_text": false,
+  "selected_rows": {
+    "train": 240,
+    "test": 691,
+    "excluded": 165
+  },
+  "source_files": {
+    "reports/next_stage/train-provenance-v1.jsonl": "9cab183329752148764ffec04a13577d3fe40e6a84795146c523c67b38837d3f",
+    "reports/next_stage/train-annotations-v1.jsonl": "edc7e007418feedb51ee99b34c11b4a16fa732e008f8462e7c808e3826a165ce",
+    "reports/next_stage/final-test-v1/provenance.jsonl": "70e7611b643ad4365623bd16a9dee7b6a00931462520b107765bc50c21d2d6ac",
+    "reports/next_stage/final-test-v1/annotations.jsonl": "2596990fab37f35031ffdaa7c43c6c8b4a77c32bc179fd2ec2c117f1b03bac03",
+    "reports/next_stage/final-test-v1/test-manifest.json": "d7f51d3ada45efe55a3b77ece51b80f71e3110f25a79ae536d8c3ade148c86ff",
+    "reports/data-review/project-review-v1.json": "b894a0bb129eff5b4a871b408ebe978b2224d28a3f618f0713c0829b86545ace",
+    "reports/common_data_v3/source_manifest.json": "82288f3b4699ea0d40e971fca0f9289dd08c57368cfd8e0c37a8ad13e270d134",
+    "reports/common_data_v3/annotations.csv": "772faba87d963693bdf09ca934c148d0005a75c21d9f6155c31b4d02cf629482",
+    "reports/expanded_news_v4/source_manifest.json": "6c460056930f2d96836463cec208ce9104376ef37aeda8f11d133fbcb9f4f447",
+    "reports/expanded_news_v4/annotations.csv": "46cc6822dcb685140a935429aa11bbf859e3c75d421c05d024c7db154eac2b2d",
+    "reports/llm_adaptation_v5/source_manifest.json": "a930b440d63efbb020d65a832c58e75eb5db422cacae76dea1d63ef6a9b77729",
+    "reports/llm_adaptation_v5/annotations.csv": "42dc48e6120c2eee0265409ae2f45b6e33b117a54564fabff5d41408beb177ef"
+  },
+  "generated_files": {
+    "docs/data/v3-de.md": "7d533706757ee99b38989f7610f1a3d56ede8de8dd719ef7f5c86ed511c7b9b9",
+    "docs/data/v3-en.md": "84190e972379fca2dd4a66cb8d68acad3a3da8545695f283d8ad6350605d20d4",
+    "docs/data/v4-de.md": "b0ddead1fa2d52c4701e02e4852bdc6dded5c6cac2cebabd2d37f8dbe4db74d6",
+    "docs/data/v4-en.md": "d5045e4feacfe71a10ad451c13d87ac5c928f2530d0d6c24d5ffc30aefeb6ed0",
+    "docs/data/v5-de.md": "3d77cc2a05ec6be4b4a874b6941c2345ed9b3ca85c3876a45b356eb809f090a4",
+    "docs/data/v5-en.md": "8becf95440a536b452fcba5942cce270f25b6ff19c32582ca9c8613c593e00f5",
+    "docs/data/train-de.md": "d472ba9388d4bbec760a08989dc57632628b92d27e135849bc98ea657e703dea",
+    "docs/data/test-de.md": "ba21766f584e730488514a10df6cf0953bc5b626816c1300e83d2324898509d4",
+    "docs/data/train-en.md": "16c6fe29cde62a31cb1176020ae4f29392a046423ea3036aaca5861a26957e3b",
+    "docs/data/test-en.md": "72c037ba62d8ffcdc7c2acf7e3d3c99ca35538699f5787f324c01830821e99ec",
+    "docs/data/train-ja.md": "6e359b95be76538ab81848b8694208475d710b6863558aa52d1414c36ca61594",
+    "docs/data/test-ja.md": "4b9c7d92d439388d5aebb4bdf4185c7ff51e3085fb15fa75976105d72744c73a",
+    "docs/data/README.md": "207d1bd162ed82d9dde6325e0ea31e231421c1077e5eca40f9dc7e76cd47c27a",
+    "docs/data/excluded-test.md": "566dbe93b8e0738906d5a69267fe64d68ff2fca94ef35a4915d59836e7ce9752"
+  }
+}

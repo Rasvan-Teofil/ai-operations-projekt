@@ -22,7 +22,8 @@ Entscheidung über Personen.
 
 ## Vorstellungsweg ohne Branchwechsel
 
-1. [README](../README.md): Problem, Stand und Sprachübersicht.
+1. [README](../README.md): Problem, Stand und Sprachübersicht;
+   [Daten und Originalquellen](data/README.md) direkt nachvollziehen.
 2. [Japanisch / 日本語](languages/japanese.md): 91 Train, 300 Test und separat
    gemessene Ergebnisse; keine übersetzten Testtexte.
 3. [Ergebnisse](../reports/next_stage/comparison-v1.md): Hauptwert, Unsicherheit,
@@ -47,7 +48,7 @@ Kennung. Die aktuelle Anwendung und ihre Nachweise stehen nun auf `main`.
 ## Was noch offen ist
 
 Die öffentliche, kostenlose Bereitstellung ohne privaten Tower ist noch nicht
-erfolgt. [Hostingstand](public-hosting.md). Die AI-Eigenprüfung ersetzt keine
-unabhängige menschliche Validierung; 240 Train-Artikel sind kein belegtes Optimum.
+erfolgt. [Hostingstand](public-hosting.md). Die Daten sind inzwischen [projektseitig geprüft](data/project-review.md);
+240 Train-Artikel sind weiterhin kein belegtes Optimum.
 Ein frei zugänglicher Dienst benötigt außerdem passende Betriebsgrenzen und
 Quellen-/Lizenzhinweise. Die Datenumstellung ist keine pauschale rechtliche Garantie.
