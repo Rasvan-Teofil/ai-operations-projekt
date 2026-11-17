@@ -83,8 +83,7 @@ def _evaluate_default(train_frame: pd.DataFrame, test_texts: list[str], test_lab
     """One model after another, so not all transformers sit in memory at once."""
     import gc
 
-    from src.hf_models import finetuned_is_ready, load_finetuned, load_pretrained
-    from src.hf_models import PRETRAINED_SPECS
+    from src.hf_models import PRETRAINED_SPECS, finetuned_is_ready, load_finetuned, load_pretrained
     from src.sklearn_models import train_sklearn_models
 
     rows = []

@@ -1,10 +1,12 @@
 """Live API verification with real local model. External URL behavior is date dependent."""
 import argparse
 import json
-from pathlib import Path
 from datetime import datetime, timezone
+from pathlib import Path
+
 import httpx
-from src.second_path.config import REPORTS, LABELS
+
+from src.second_path.config import LABELS, REPORTS
 
 
 def main(base, missing_base, report=None):

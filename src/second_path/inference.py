@@ -1,11 +1,13 @@
 """Local artifacts only. No training or Hub downloads in serving."""
 import json
+
 import numpy as np
 import torch
 from transformers import AutoModel, AutoTokenizer
+
+from src.second_path.aggregation import aggregate
 from src.second_path.config import LABELS, MAX_LENGTH
 from src.second_path.tokenization import token_chunks
-from src.second_path.aggregation import aggregate
 
 
 class SentimentNet(torch.nn.Module):

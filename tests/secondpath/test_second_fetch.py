@@ -1,5 +1,7 @@
 import socket
+
 import pytest
+
 import src.second_path.fetch as fetch
 
 
@@ -72,7 +74,8 @@ def test_transport_failures(monkeypatch, mode):
     class Conn:
         def __init__(self,*a,**k): pass
         def request(self,*a,**k):
-            if mode == 'timeout': raise TimeoutError()
+            if mode == 'timeout':
+                raise TimeoutError()
         def getresponse(self): return Response()
         def close(self): pass
     monkeypatch.setattr(fetch.http.client, 'HTTPConnection', Conn)
@@ -87,7 +90,8 @@ def test_unicode_path_is_encoded(monkeypatch):
     paths = []
     def response(u,host,port,ip,path):
         paths.append(path)
-        if path == '/robots.txt': return 404,'text/plain',''
+        if path == '/robots.txt':
+            return 404,'text/plain',''
         return 200,'text/html','<article><p>Eine lesbare Wirtschaftsmeldung mit ausreichend vielen Zeichen.</p></article>'
     monkeypatch.setattr(fetch,'request',response)
     fetch.article_text('https://example.com/börse?q=höher')

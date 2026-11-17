@@ -256,7 +256,11 @@ def import_recorded(store: Path | None = None) -> dict[str, int]:
                     "rank_against": "only other runs with comparable_group=second-path-source-group-cv",
                 },
                 metrics,
-                {"comparable_group": "second-path-source-group-cv", "phase": "development-v2-summary", "stage": row["stage"]},
+                {
+                    "comparable_group": "second-path-source-group-cv",
+                    "phase": "development-v2-summary",
+                    "stage": row["stage"],
+                },
             )
             for status in outcome.values():
                 counts[status] += 1

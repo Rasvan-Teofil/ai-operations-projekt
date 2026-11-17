@@ -1,0 +1,17 @@
+# Lint config for the whole repo (Milestone 2 code-style item).
+# Run: ruff check app src tests scripts
+line-length = 120
+target-version = "py311"
+extend-exclude = ["notebooks", "mlruns", "models", "data"]
+
+[lint]
+select = ["E", "F", "W", "I", "B"]
+
+[lint.per-file-ignores]
+# Second-iteration evidence scripts and their tests keep long provenance strings,
+# manifests and fixture HTML on one line so recorded values stay greppable.
+"src/second_path/*.py" = ["E501"]
+"tests/secondpath/*.py" = ["E501"]
+# Second-iteration scripts share constants via `from config import *` on purpose.
+"src/second_path/evaluate.py" = ["E501", "F403", "F405"]
+"src/second_path/train.py" = ["E501", "F403", "F405"]

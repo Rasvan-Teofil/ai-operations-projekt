@@ -329,7 +329,9 @@ SENTIMENT_DATA=dummy SENTIMENT_MODEL=tfidf_logreg python -m src.train
 pytest
 ```
 
-CI does exactly this in the `test` job. The `second-path` job installs `requirements-second-path.txt` (without CUDA torch) and runs `pytest tests/secondpath`. The tokenizer test is skipped in the light job as long as `transformers` is missing.
+Lint: `pip install ruff==0.17.5 && ruff check app src tests scripts` (rules in `ruff.toml`: pycodestyle, pyflakes, import order, bugbear, 120 characters; second-iteration evidence scripts may keep long lines).
+
+CI does exactly this in the `test` job, lint included. The `second-path` job installs `requirements-second-path.txt` (without CUDA torch) and runs `pytest tests/secondpath`. The tokenizer test is skipped in the light job as long as `transformers` is missing.
 
 Exploration of the real splits, with saved output: `notebooks/01_exploration.ipynb`.
 

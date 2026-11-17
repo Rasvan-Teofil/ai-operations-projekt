@@ -18,9 +18,9 @@ label share and median latency.
 import json
 import os
 from collections import Counter
-from statistics import median
 from datetime import datetime, timezone
 from pathlib import Path
+from statistics import median
 
 LOG_PATH_ENV = "PREDICTION_LOG_PATH"
 

@@ -2,11 +2,14 @@
 import json
 import os
 from pathlib import Path
+
+import matplotlib
 import numpy as np
 import pandas as pd
-import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 from src.second_path.config import REPORTS
 
 
@@ -100,7 +103,7 @@ def branch_report(folder):
     ax.set(xticks=x,xticklabels=labels,ylabel='macro-F1',ylim=(0,.9),title='Same final external headlines')
     ax.legend(fontsize=8,loc='upper left')
     ax=axes[1]
-    for key,label,color in zip(order,['Iteration 1','Iteration 2 v1','Iteration 2 v2'],['#8894a2','#2166ac','#00876c']):
+    for key,label,color in zip(order,['Iteration 1','Iteration 2 v1','Iteration 2 v2'],['#8894a2','#2166ac','#00876c'],strict=False):
         r=by[key]
         ax.scatter(r['inference_ms_per_text'],r['model_size_bytes']/2**20,s=100,color=color)
         ax.annotate(label,(r['inference_ms_per_text'],r['model_size_bytes']/2**20),xytext=(7,5),textcoords='offset points')
@@ -166,4 +169,5 @@ def branch_report(folder):
     (folder/'branch_comparison.md').write_text('\n'.join(lines)+'\n')
 
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    main()

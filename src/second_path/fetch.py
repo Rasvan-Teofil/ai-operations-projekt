@@ -3,8 +3,9 @@ import http.client
 import ipaddress
 import socket
 import ssl
-from urllib.parse import urlsplit, urlunsplit, quote
+from urllib.parse import quote, urlsplit, urlunsplit
 from urllib.robotparser import RobotFileParser
+
 from bs4 import BeautifulSoup
 
 AGENT = 'AIOpsSecondPathBot/1.0'

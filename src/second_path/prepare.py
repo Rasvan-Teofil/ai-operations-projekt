@@ -1,12 +1,14 @@
 """Download one pinned dataset; split unique normalized sentences, never raw row order."""
 import hashlib
 import json
-import unicodedata
 import re
+import unicodedata
+
 import pandas as pd
 from huggingface_hub import hf_hub_download
 from sklearn.model_selection import train_test_split
-from src.second_path.config import DATA, DATASET, DATA_REVISION, REPORTS, SEED, LABELS
+
+from src.second_path.config import DATA, DATA_REVISION, DATASET, LABELS, REPORTS, SEED
 
 
 def normalized(text):

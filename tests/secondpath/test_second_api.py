@@ -1,7 +1,9 @@
 import socket
+
 import numpy as np
 import pytest
 from fastapi.testclient import TestClient
+
 import app.second_path as api
 from src.second_path.fetch import FetchError
 
@@ -84,8 +86,8 @@ def test_invalid_model_distributions_are_503(client,monkeypatch,values):
 
 
 def test_queue_timeout_is_bounded_and_recovers(monkeypatch):
-    from concurrent.futures import ThreadPoolExecutor
     import threading
+    from concurrent.futures import ThreadPoolExecutor
     entered=threading.Event()
     release=threading.Event()
     class Slow(Stub):

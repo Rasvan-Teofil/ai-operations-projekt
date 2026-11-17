@@ -14,8 +14,10 @@ import threading
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict, StrictStr, model_validator
+
 from src.second_path.config import LABELS, MODELS
 from src.second_path.fetch import FetchError, article_text
 
@@ -116,7 +118,7 @@ def create_app(queue_timeout=None):
                     or not math.isclose(sum(values), 1., abs_tol=1e-4)):
                 raise ValueError('Invalid model score distribution')
             return {'label': LABELS[max(range(3), key=lambda i: values[i])],
-                    'scores': dict(zip(LABELS, values)), 'model_version': p.version}
+                    'scores': dict(zip(LABELS, values, strict=False)), 'model_version': p.version}
         except HTTPException:
             raise
         except Exception as e:

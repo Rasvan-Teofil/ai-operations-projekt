@@ -1,7 +1,7 @@
 """The comparison uses one test split without loading transformers."""
 
-from src.config import TEXT_COLUMN
 from src.compare import SELECTION_NOTE, run_comparison
+from src.config import TEXT_COLUMN
 from src.data import load_dataset, split_dataset
 from src.interface import SentimentModel
 

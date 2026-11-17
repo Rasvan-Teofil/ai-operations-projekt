@@ -1,17 +1,18 @@
 """Local real-model serving checks; workload/queue effects are not classifier accuracy."""
-from concurrent.futures import ThreadPoolExecutor
 import json
 import os
-from pathlib import Path
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
+
 import httpx
 import mlflow
 import numpy as np
-from src.second_path.config import ROOT, MODELS, REPORTS
-from src.second_path.tracking import tracking, iteration_run
+
+from src.second_path.config import MODELS, ROOT
 from src.second_path.development import DEV
+from src.second_path.tracking import iteration_run, tracking
 
 
 def measure(name,path,port,queue_timeout):
@@ -23,15 +24,18 @@ def measure(name,path,port,queue_timeout):
     try:
         ready=False
         for _ in range(160):
-            if process.poll() is not None: raise RuntimeError(f'{name} process stopped; inspect service log')
+            if process.poll() is not None:
+                raise RuntimeError(f'{name} process stopped; inspect service log')
             try:
                 res=httpx.get(base+'/health',timeout=1,trust_env=False)
                 if res.status_code==200 and res.json()['model_loaded']:
                     ready=True
                     break
-            except httpx.HTTPError: pass
+            except httpx.HTTPError:
+                pass
             time.sleep(.25)
-        if not ready: raise RuntimeError(f'{name} API not ready')
+        if not ready:
+            raise RuntimeError(f'{name} API not ready')
         short='The company reported record profits and raised its revenue forecast.'
         with httpx.Client(timeout=60,trust_env=False) as client:
             for _ in range(20):
@@ -66,7 +70,8 @@ def measure(name,path,port,queue_timeout):
                 'burst_elapsed_seconds':elapsed,'recovered':True}
     finally:
         process.terminate()
-        try: process.wait(timeout=5)
+        try:
+            process.wait(timeout=5)
         except subprocess.TimeoutExpired:
             process.kill()
             process.wait(timeout=5)
@@ -76,7 +81,8 @@ def measure(name,path,port,queue_timeout):
 def main():
     tracking()
     target=DEV/'service.json'
-    if target.exists(): raise SystemExit('Service benchmark already recorded')
+    if target.exists():
+        raise SystemExit('Service benchmark already recorded')
     results=[]
     for name,stage,port,timeout in [('reference','R0_reference',8010,60.),('bounded_bf16','R3_deploy',8011,.01)]:
         with iteration_run(run_name=f'dev2-service-{name}',tags={'phase':'development-v2-service'}) as run:
@@ -90,4 +96,5 @@ def main():
             print(result,flush=True)
     target.write_text(json.dumps({'note':'Deliberately low 10ms bounded queue exposes backpressure; production default is 2s. Synthetic local workload; no URL/network latency or real traffic claim.', 'results':results},indent=2))
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    main()

@@ -130,7 +130,9 @@ class HuggingFaceSentimentModel(SentimentModel):
             raise RuntimeError("Not every text has a prediction.")
         return [row for row in scores if row is not None]
 
-    def _scores_for_short_batch(self, texts: list[str], max_length: int, batch_size: int = 16) -> list[dict[str, float]]:
+    def _scores_for_short_batch(
+        self, texts: list[str], max_length: int, batch_size: int = 16
+    ) -> list[dict[str, float]]:
         """One window per text. Same softmax as the single path, just batched."""
         import torch
 

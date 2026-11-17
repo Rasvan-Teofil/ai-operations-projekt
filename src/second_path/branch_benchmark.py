@@ -6,21 +6,22 @@ import hashlib
 import io
 import json
 import subprocess
-import sys
 import time
 import urllib.request
 from pathlib import Path
+
 import mlflow
 import numpy as np
 import pandas as pd
 import torch
 from sklearn.metrics import confusion_matrix
-from transformers import AutoModelForSeq2SeqLM,AutoTokenizer
-from src.second_path.config import ROOT,DATA,MODELS,REPORTS,LABELS
-from src.second_path.development import metrics, DEV
-from src.second_path.prepare import normalized
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+from src.second_path.config import DATA, LABELS, MODELS, ROOT
+from src.second_path.development import DEV, metrics
 from src.second_path.inference import Predictor
-from src.second_path.tracking import tracking,fingerprint,iteration_run
+from src.second_path.prepare import normalized
+from src.second_path.tracking import fingerprint, iteration_run, tracking
 
 OUT=DEV
 LOCAL=DATA.parent/'benchmark'
@@ -32,20 +33,26 @@ SEED=20261019
 
 
 def prepare(reference):
-    if (OUT/'benchmark_manifest.json').exists(): raise SystemExit('External benchmark already frozen')
+    if (OUT/'benchmark_manifest.json').exists():
+        raise SystemExit('External benchmark already frozen')
     assert (OUT/'release.json').exists(), 'Freeze our release before constructing final benchmark'
     LOCAL.mkdir(parents=True,exist_ok=True)
     raw=urllib.request.urlopen(URL,timeout=30).read()
     source=pd.read_csv(io.BytesIO(raw))
     rows=[]
     for _,r in source.iterrows():
-        try: values=ast.literal_eval(r['Decisions'])
-        except (ValueError,SyntaxError): continue
-        if not isinstance(values,dict) or not values: continue
+        try:
+            values=ast.literal_eval(r['Decisions'])
+        except (ValueError,SyntaxError):
+            continue
+        if not isinstance(values,dict) or not values:
+            continue
         labels={str(v).strip().lower() for v in values.values()}
-        if len(labels)!=1 or not labels.issubset(LABELS): continue
+        if len(labels)!=1 or not labels.issubset(LABELS):
+            continue
         text=str(r['Title']).strip()
-        if not 20<=len(text)<=20000: continue
+        if not 20<=len(text)<=20000:
+            continue
         rows.append({'paired_id':'sentfin-'+str(r['S No.']),'text':text,'label':next(iter(labels))})
     frame=pd.DataFrame(rows)
     unanimous=len(frame)
@@ -114,7 +121,8 @@ def audit(reference):
     assert hashlib.sha256(csv.read_bytes()).hexdigest()==manifest['sha256']
     assert hashlib.sha256((OUT/'decision.json').read_bytes()).hexdigest()==manifest['our_selection_sha256']
     assert fingerprint(MODELS/'development'/'release')==manifest['our_release_sha256']
-    with (LOCAL/'audit.lock').open('x') as f: json.dump({'status':'started','benchmark_sha256':manifest['sha256']},f)
+    with (LOCAL/'audit.lock').open('x') as f:
+        json.dump({'status':'started','benchmark_sha256':manifest['sha256']},f)
     # Reference source executes only now, with its own pinned lightweight environment.
     subprocess.run([str(reference/'.venv'/'bin'/'python'),str(ROOT/'src'/'second_path'/'peer_reference.py'),'predict',
                     '--checkout',str(reference),'--benchmark',str(csv),'--report',str(LOCAL/'peer_predictions.json')],check=True,cwd=reference)
@@ -126,7 +134,8 @@ def audit(reference):
     for name,path in candidates:
         if path:
             predictor=Predictor(path,device='cuda')
-            for _ in range(20): predictor.predict_proba(['The firm reports quarterly results.'])
+            for _ in range(20):
+                predictor.predict_proba(['The firm reports quarterly results.'])
             prob=[]
             duration=[]
             for text in df.text:
@@ -168,7 +177,8 @@ def audit(reference):
             mlflow.log_artifact(str(cm_path))
             mlflow.log_artifact(str(OUT/'benchmark_manifest.json'))
             mlflow.log_artifact(str(OUT/'decision.json'))
-            if path is None: mlflow.log_artifact(str(OUT/'peer_provenance.json'))
+            if path is None:
+                mlflow.log_artifact(str(OUT/'peer_provenance.json'))
             record={'model':name,'run_id':run.info.run_id,**values}
             records.append(record)
             print(record,flush=True)
@@ -196,7 +206,8 @@ def audit(reference):
     client=mlflow.MlflowClient()
     client.set_tag(release['run_id'],'final_audit_run_id',record['run_id'])
     for key,value in record.items():
-        if isinstance(value,(int,float)): client.log_metric(release['run_id'],'external_'+key,float(value))
+        if isinstance(value,(int,float)):
+            client.log_metric(release['run_id'],'external_'+key,float(value))
     print('Final shared audit complete; deployment selection unchanged')
 
 if __name__=='__main__':

@@ -11,9 +11,11 @@ Usage (needs models/second_path/finetuned and data/second_path/processed):
     python -m src.second_path.threshold_curve            # validation split
 """
 import argparse
+
 import numpy as np
 import pandas as pd
-from src.second_path.config import DATA, MODELS, REPORTS, LABELS
+
+from src.second_path.config import DATA, LABELS, MODELS, REPORTS
 
 NEG = LABELS.index('negative')
 MARGINS = [0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40]

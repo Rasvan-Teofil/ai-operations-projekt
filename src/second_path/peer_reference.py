@@ -20,15 +20,18 @@ def main():
     args=parser.parse_args()
     checkout=args.checkout.resolve()
     sys.path.insert(0,str(checkout))
+    import numpy as np
     import pandas as pd
     import sklearn
-    import numpy as np
-    from src.sklearn_models import new_linearsvc,load_sklearn_model
+
+    from src.sklearn_models import load_sklearn_model, new_linearsvc
     if args.action=='prepare':
-        from src.prepare_data import prepare
-        from src.config import PREPARED_TRAIN_PATH,TEXT_COLUMN,LABEL_COLUMN
         from unittest.mock import patch
+
         from huggingface_hub import hf_hub_download
+
+        from src.config import LABEL_COLUMN, PREPARED_TRAIN_PATH, TEXT_COLUMN
+        from src.prepare_data import prepare
         revisions={'takala/financial_phrasebank': '8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964', 'Kenpache/multilingual-financial-sentiment': '9d43950d151602f623f28bba62f30554b5d40dd2'}
         def pinned_download(repo_id,filename,**kwargs):
             return hf_hub_download(repo_id,filename,revision=revisions[repo_id],**kwargs)
@@ -50,7 +53,8 @@ def main():
     else:
         frame=pd.read_csv(args.benchmark)
         model=load_sklearn_model('tfidf_linearsvc')
-        for _ in range(20): model.predict_proba(['The firm reports quarterly results.'])
+        for _ in range(20):
+            model.predict_proba(['The firm reports quarterly results.'])
         probabilities=[]
         durations=[]
         for text in frame.text:
@@ -66,4 +70,5 @@ def main():
     args.report.write_text(json.dumps(result,indent=2))
     print(args.action,'complete',flush=True)
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    main()

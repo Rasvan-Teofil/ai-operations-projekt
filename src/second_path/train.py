@@ -3,15 +3,17 @@ import argparse
 import json
 import random
 import time
+
+import mlflow
 import numpy as np
 import pandas as pd
 import torch
-import mlflow
 from sklearn.linear_model import LogisticRegression
 from transformers import AutoModel, AutoTokenizer, get_linear_schedule_with_warmup
+
 from src.second_path.config import *
 from src.second_path.inference import SentimentNet, save_model
-from src.second_path.tracking import tracking, verify_data, fingerprint, iteration_run
+from src.second_path.tracking import fingerprint, iteration_run, tracking, verify_data
 
 
 def seed():

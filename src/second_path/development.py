@@ -8,18 +8,20 @@ import random
 import shutil
 import time
 from pathlib import Path
+
 import mlflow
 import numpy as np
 import pandas as pd
 import torch
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, precision_score, recall_score
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
 from sklearn.model_selection import StratifiedGroupKFold
 from transformers import AutoModel, AutoTokenizer, get_linear_schedule_with_warmup
-from src.second_path.config import ROOT, DATA, MODELS, REPORTS, LABELS
+
+from src.second_path.config import DATA, LABELS, MODELS, REPORTS
+from src.second_path.fetch import FetchError, extract_article
 from src.second_path.inference import Predictor, SentimentNet, save_model
-from src.second_path.tracking import tracking, fingerprint, iteration_run
-from src.second_path.fetch import extract_article, FetchError
+from src.second_path.tracking import fingerprint, iteration_run, tracking
 
 DEV = Path(os.getenv('SENTIMENT_DEV_REPORTS',str(REPORTS/'development'))).resolve()
 LOCAL = DATA.parent/'development'
@@ -153,7 +155,7 @@ def controlled_cases():
              ('en','positive','The company reported record profits and raised its revenue forecast.')]
     texts,labels=[],[]
     for lang,label,anchor in anchors:
-        other=next(a for l,v,a in anchors if l==lang and v!=label)
+        other=next(a for lng,v,a in anchors if lng==lang and v!=label)
         for text in [anchor,(anchor+' ')*20,(anchor+' ')*20+other]:
             texts.append(text)
             labels.append(LABELS.index(label))
@@ -180,7 +182,8 @@ def evaluate(path,df):
     for lang in ['de','en']:
         ix=df.language.to_numpy()==lang
         out['macro_f1_'+lang]=metrics(y[ix],probs[ix])['macro_f1']
-    for _ in range(20): p.predict_proba(['Die Firma meldet ihre Quartalszahlen.'])
+    for _ in range(20):
+        p.predict_proba(['Die Firma meldet ihre Quartalszahlen.'])
     duration=[]
     for text in df.text.iloc[:180]:
         torch.cuda.synchronize()
@@ -208,7 +211,7 @@ def evaluate(path,df):
 
 
 def run(resume=False):
-    protocol=setup()
+    setup()
     df=train_data()
     if (DEV/'runs.json').exists():
         raise SystemExit('v2 execution complete; preserve completed evidence')
@@ -317,13 +320,16 @@ def release():
     setup()
     selected=json.loads((DEV/'decision.json').read_text())['selected']
     dest=ART/'release'
-    if dest.exists(): raise SystemExit('Release already exists')
+    if dest.exists():
+        raise SystemExit('Release already exists')
     df=train_data()
     with iteration_run(run_name=f'dev2-release-{selected}',tags={'phase':'development-v2-release','stage':selected}) as run:
         net,tokenizer=fit_frozen(df,SEED)
-        if selected!='B0_frozen': tune(net,tokenizer,df,selected in ['R1_quality','R4_combined'],SEED)
+        if selected!='B0_frozen':
+            tune(net,tokenizer,df,selected in ['R1_quality','R4_combined'],SEED)
         metadata=meta(selected,'release',run.info.run_id)
-        if metadata['precision']=='bf16': net.to(dtype=torch.bfloat16)
+        if metadata['precision']=='bf16':
+            net.to(dtype=torch.bfloat16)
         save_model(dest,net,tokenizer,metadata)
         mlflow.log_params({'stage':selected,'seed':SEED,'train_rows':len(df),'epochs':0 if selected=='B0_frozen' else 3,
                            'test_evaluated':False,'original_val_used':False,'selection_source':'source-group training CV'})
@@ -351,5 +357,7 @@ if __name__=='__main__':
     parser.add_argument('action',choices=['run','summarize','release','activate'])
     parser.add_argument('--resume',action='store_true')
     args=parser.parse_args()
-    if args.action=='run': run(resume=args.resume)
-    else: {'summarize':summarize,'release':release,'activate':activate}[args.action]()
+    if args.action=='run':
+        run(resume=args.resume)
+    else:
+        {'summarize':summarize,'release':release,'activate':activate}[args.action]()

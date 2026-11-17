@@ -1,5 +1,5 @@
-import numpy as np
 import pytest
+
 from src.second_path.aggregation import aggregate
 from src.second_path.fetch import extract_article
 
