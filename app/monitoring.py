@@ -150,18 +150,39 @@ def drift_report(
     return report
 
 
-if __name__ == "__main__":
+def flagged_versions(report: dict) -> list[str]:
+    """Model versions whose drift flag is on (``None`` does not count)."""
+    return sorted(v for v, entry in report["versions"].items() if entry["drift"] is True)
+
+
+def main(argv: list[str] | None = None) -> int:
+    """CLI entry point. Returns the process exit code.
+
+    With ``--drift --fail-on-drift`` the exit code is 1 when at least one
+    model version is flagged, so a cron job or CI step can act on it.
+    """
     import sys
 
-    flags = {"--drift", "--daily"}
-    args = [a for a in sys.argv[1:] if a not in flags]
+    argv = sys.argv[1:] if argv is None else argv
+    flags = {"--drift", "--daily", "--fail-on-drift"}
+    args = [a for a in argv if a not in flags]
     target = Path(args[0]) if args else log_path()
     if target is None:
         raise SystemExit(f"Pass a log file or set {LOG_PATH_ENV}.")
-    if "--drift" in sys.argv:
+    if "--fail-on-drift" in argv and "--drift" not in argv:
+        raise SystemExit("--fail-on-drift needs --drift.")
+    if "--drift" in argv:
         result = drift_report(target)
-    elif "--daily" in sys.argv:
+    elif "--daily" in argv:
         result = daily_summary(target)
     else:
         result = summarize(target)
     print(json.dumps(result, indent=2))
+    if "--fail-on-drift" in argv and flagged_versions(result):
+        print("Drift flagged for: " + ", ".join(flagged_versions(result)), file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

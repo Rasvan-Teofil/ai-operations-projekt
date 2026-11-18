@@ -116,3 +116,23 @@ def test_daily_summary_groups_by_day_and_version(tmp_path):
     assert day1["median_latency_ms"] == 20.0
     assert summary["2026-11-13"]["v1"]["median_latency_ms"] is None
     assert summary["2026-11-13"]["v2"]["n"] == 1
+
+
+def test_fail_on_drift_exit_code(monkeypatch, tmp_path, capsys):
+    import pytest
+
+    from app import monitoring
+
+    path = tmp_path / "predictions.jsonl"
+    monkeypatch.setenv(LOG_PATH_ENV, str(path))
+    for _ in range(30):
+        _log("negative")
+    balanced = {"negative": 0.3333, "neutral": 0.3334, "positive": 0.3333}
+    monkeypatch.setattr(monitoring, "reference_label_share", lambda: balanced)
+    assert monitoring.main([str(path), "--drift"]) == 0
+    assert monitoring.main([str(path), "--drift", "--fail-on-drift"]) == 1
+    assert "v1" in capsys.readouterr().err
+    monkeypatch.setattr(monitoring, "reference_label_share", lambda: {"negative": 1.0})
+    assert monitoring.main([str(path), "--drift", "--fail-on-drift"]) == 0
+    with pytest.raises(SystemExit):
+        monitoring.main([str(path), "--fail-on-drift"])
