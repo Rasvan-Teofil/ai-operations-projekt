@@ -32,6 +32,8 @@ python -m app.monitoring logs/predictions.jsonl           # label share per mode
 python -m app.monitoring logs/predictions.jsonl --daily   # per UTC day and version: n, label share, median latency
 python -m app.monitoring logs/predictions.jsonl --drift   # label share vs. test split, drift flag
 python -m app.monitoring logs/predictions.jsonl --drift --fail-on-drift   # same, exit code 1 if any version is flagged
+python -m app.monitoring logs/predictions.jsonl --drift --daily   # drift flag per UTC day and version, plus streaks
+python -m app.monitoring logs/predictions.jsonl --drift --daily --fail-on-drift   # exit code 1 after 3 flagged days in a row
 ```
 
 How to read `--daily`:
@@ -50,7 +52,7 @@ How to read `--daily`:
 
 ## Retraining trigger (first step built)
 
-`--drift --fail-on-drift` exits with code 1 when a version is flagged, so a daily cron job or CI step can stop and alert. Steps 1 to 4 below are still manual.
+`--drift --fail-on-drift` exits with code 1 when a version is flagged, so a daily cron job or CI step can stop and alert. With `--daily` added, the flag is computed per UTC day and the exit code is 1 only when a version is flagged on 3 consecutive calendar days up to the latest day in the log (`streaks` in the output). A day with fewer than 30 predictions or no data ends the streak. This checks step 1 automatically; steps 2 to 4 stay manual.
 
 
 1. Drift flag on for one version on 3 consecutive days with at least 30 predictions per day.
@@ -61,5 +63,6 @@ How to read `--daily`:
 ## Limits
 
 - No dashboard. Alerting is only the exit code of `--fail-on-drift`; nothing runs it on a schedule yet.
+- The streak counts calendar days, so a weekend with low traffic breaks it. Fine for a prototype, may need business days with real traffic.
 - Topic drift without label drift goes unnoticed. A cheap next signal would be the `text_chars` distribution.
 - The 0.15 threshold and the 30-prediction minimum are first guesses, not tuned on real traffic.

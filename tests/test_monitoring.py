@@ -136,3 +136,37 @@ def test_fail_on_drift_exit_code(monkeypatch, tmp_path, capsys):
     assert monitoring.main([str(path), "--drift", "--fail-on-drift"]) == 0
     with pytest.raises(SystemExit):
         monitoring.main([str(path), "--fail-on-drift"])
+
+
+def test_daily_drift_streak_and_fail(monkeypatch, tmp_path):
+    from app import monitoring
+
+    path = tmp_path / "predictions.jsonl"
+    balanced = {"negative": 0.3333, "neutral": 0.3334, "positive": 0.3333}
+    with path.open("w") as handle:
+        # 11-10 balanced, 11-11 small (null), 11-12..11-14 shifted
+        for day, label, n in [
+            ("2026-11-10", None, 30), ("2026-11-11", "negative", 5),
+            ("2026-11-12", "negative", 30), ("2026-11-13", "negative", 30),
+            ("2026-11-14", "negative", 30),
+        ]:
+            for i in range(n):
+                lab = label or ["negative", "neutral", "positive"][i % 3]
+                handle.write(json.dumps({
+                    "ts": f"{day}T08:00:00+00:00", "model_version": "v1",
+                    "label": lab, "latency_ms": 1.0,
+                }) + "\n")
+    report = monitoring.daily_drift_report(path, reference=balanced)
+    assert report["days"]["2026-11-10"]["v1"]["drift"] is False
+    assert report["days"]["2026-11-11"]["v1"]["drift"] is None
+    assert report["days"]["2026-11-14"]["v1"]["drift"] is True
+    assert report["streaks"] == {"v1": 3}
+    assert monitoring.flagged_versions(report) == ["v1"]
+    monkeypatch.setattr(monitoring, "reference_label_share", lambda: balanced)
+    assert monitoring.main([str(path), "--drift", "--daily", "--fail-on-drift"]) == 1
+    # Only two flagged days at the end: no alert yet.
+    lines = [ln for ln in path.read_text().splitlines() if not ln.startswith('{"ts": "2026-11-12')]
+    path.write_text("\n".join(lines) + "\n")
+    short = monitoring.daily_drift_report(path, reference=balanced)
+    assert short["streaks"] == {"v1": 2}
+    assert monitoring.main([str(path), "--drift", "--daily", "--fail-on-drift"]) == 0

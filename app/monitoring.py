@@ -13,12 +13,15 @@ the label share of the test split) and flags a version when the total
 variation distance passes a threshold.
 ``daily_summary`` groups the log by UTC day and model version with count,
 label share and median latency.
+``daily_drift_report`` applies the drift flag per UTC day, and
+``drift_streaks`` counts how many consecutive days each version has been
+flagged up to the latest day in the log (the 3-days retraining rule).
 """
 
 import json
 import os
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from statistics import median
 
@@ -150,8 +153,60 @@ def drift_report(
     return report
 
 
+DRIFT_DAYS = 3
+
+
+def daily_drift_report(
+    path: Path,
+    reference: dict[str, float] | None = None,
+    threshold: float = DRIFT_THRESHOLD,
+    min_n: int = 30,
+) -> dict:
+    """Drift flag per UTC day and model version (same rule as ``drift_report``)."""
+    reference = reference if reference is not None else reference_label_share()
+    days: dict[str, dict] = {}
+    for day, versions in daily_summary(path).items():
+        days[day] = {}
+        for version, entry in versions.items():
+            distance = total_variation(entry["label_share"], reference)
+            days[day][version] = {
+                "n": entry["n"],
+                "label_share": entry["label_share"],
+                "tv_distance": distance,
+                "drift": (distance > threshold) if entry["n"] >= min_n else None,
+            }
+    report = {"reference": reference, "threshold": threshold, "min_n": min_n, "days": days}
+    report["streaks"] = drift_streaks(report)
+    return report
+
+
+def drift_streaks(report: dict) -> dict[str, int]:
+    """Consecutive flagged calendar days per version, ending at the latest log day.
+
+    A day without data or with ``drift`` not ``True`` ends the streak.
+    """
+    days = report["days"]
+    if not days:
+        return {}
+    last = date.fromisoformat(max(days))
+    versions = sorted({v for entries in days.values() for v in entries})
+    streaks = {}
+    for version in versions:
+        count, current = 0, last
+        while days.get(current.isoformat(), {}).get(version, {}).get("drift") is True:
+            count += 1
+            current -= timedelta(days=1)
+        streaks[version] = count
+    return streaks
+
+
 def flagged_versions(report: dict) -> list[str]:
-    """Model versions whose drift flag is on (``None`` does not count)."""
+    """Model versions whose drift flag is on (``None`` does not count).
+
+    For a daily report a version counts once its streak reaches ``DRIFT_DAYS``.
+    """
+    if "streaks" in report:
+        return sorted(v for v, n in report["streaks"].items() if n >= DRIFT_DAYS)
     return sorted(v for v, entry in report["versions"].items() if entry["drift"] is True)
 
 
@@ -160,6 +215,8 @@ def main(argv: list[str] | None = None) -> int:
 
     With ``--drift --fail-on-drift`` the exit code is 1 when at least one
     model version is flagged, so a cron job or CI step can act on it.
+    With ``--drift --daily`` the flag is computed per day, and
+    ``--fail-on-drift`` only fires after ``DRIFT_DAYS`` flagged days in a row.
     """
     import sys
 
@@ -171,7 +228,9 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"Pass a log file or set {LOG_PATH_ENV}.")
     if "--fail-on-drift" in argv and "--drift" not in argv:
         raise SystemExit("--fail-on-drift needs --drift.")
-    if "--drift" in argv:
+    if "--drift" in argv and "--daily" in argv:
+        result = daily_drift_report(target)
+    elif "--drift" in argv:
         result = drift_report(target)
     elif "--daily" in argv:
         result = daily_summary(target)
