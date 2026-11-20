@@ -60,9 +60,39 @@ How to read `--daily`:
 3. If macro-F1 on that sample drops clearly below the test result, retrain with the new sample added and compare in MLflow against the current version, the same way run 1 and run 2 were compared.
 4. Promote the new version only if it wins on the test split and on the new sample.
 
+## Scheduling example (documented, not enabled)
+
+Nothing runs this automatically yet. Two ways to run the 3-day check once a day:
+
+Cron on the API host (06:00 every day, alert mail via cron's MAILTO on a non-zero exit):
+
+```cron
+0 6 * * * cd /srv/article-sentiment && python -m app.monitoring logs/predictions.jsonl --drift --daily --fail-on-drift >> logs/drift.log 2>&1
+```
+
+GitHub Actions `schedule` (only useful if the log is copied somewhere the runner can read, e.g. an artifact or bucket):
+
+```yaml
+on:
+  schedule:
+    - cron: "0 5 * * *"   # 05:00 UTC
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python -m app.monitoring logs/predictions.jsonl --drift --daily --fail-on-drift
+```
+
+A failed job is the alert. Neither variant is active: the log lives only on the serving machine and there is no live traffic yet.
+
 ## Limits
 
-- No dashboard. Alerting is only the exit code of `--fail-on-drift`; nothing runs it on a schedule yet.
+- No dashboard. Alerting is only the exit code of `--fail-on-drift`; the scheduling examples above are not enabled.
 - The streak counts calendar days, so a weekend with low traffic breaks it. Fine for a prototype, may need business days with real traffic.
 - Topic drift without label drift goes unnoticed. A cheap next signal would be the `text_chars` distribution.
 - The 0.15 threshold and the 30-prediction minimum are first guesses, not tuned on real traffic.
