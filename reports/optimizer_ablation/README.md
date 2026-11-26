@@ -1,5 +1,12 @@
 # Optimizer-Ablation: 32 zusätzliche Entwicklungsfits
 
+**Nachfolgende Validierung:** Die [27 gepaarten Auswertungen über drei Folds und
+drei Seeds](../optimizer_validation/README.md) zeigen keinen belegten Vorteil
+des ausgewählten neuen Rezepts oder des isolierten Clippings in diesem Rezept.
+Der hier berichtete +1,75-Punkte-Haupteffekt gilt für den ursprünglichen Fold 0
+und den gemittelten Parameterbereich; er ist kein allgemeiner Qualitätsnachweis.
+Das bisherige API-Standardmodell bleibt ausgewählt.
+
 [Versuchsplan und Bedienung](../../src/studies/optimizer_ablation/README.md).
 Vollständiges 2⁴-Design mit zwei Seeds: Clipping, Lernrate, AdamW Weight Decay,
 Warmup. Qwen-LoRA, 159 Fit-/81 Entwicklungsartikel aus bestehendem Train-Fold 0.

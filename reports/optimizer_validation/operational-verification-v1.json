@@ -1,0 +1,66 @@
+{
+  "default_unchanged": true,
+  "baseline_predictions_equal": true,
+  "synthetic_only": true,
+  "results": [
+    {
+      "language": "de",
+      "response": {
+        "label": "positive",
+        "scores": {
+          "negative": 4.05865202557365e-10,
+          "neutral": 7.194133289090132e-09,
+          "positive": 1.0
+        },
+        "model_version": "article-qwen-lora-optimizer-v1",
+        "scraped_excerpt": null,
+        "input_policy": "text-verbatim-v1"
+      }
+    },
+    {
+      "language": "en",
+      "response": {
+        "label": "neutral",
+        "scores": {
+          "negative": 4.8473686869998645e-11,
+          "neutral": 1.0,
+          "positive": 2.789468100949932e-10
+        },
+        "model_version": "article-qwen-lora-optimizer-v1",
+        "scraped_excerpt": null,
+        "input_policy": "text-verbatim-v1"
+      }
+    },
+    {
+      "language": "ja",
+      "response": {
+        "label": "negative",
+        "scores": {
+          "negative": 1.0,
+          "neutral": 7.99195987166712e-11,
+          "positive": 3.224186784223093e-08
+        },
+        "model_version": "article-qwen-lora-optimizer-v1",
+        "scraped_excerpt": null,
+        "input_policy": "text-verbatim-v1"
+      }
+    }
+  ],
+  "model_version": "article-qwen-lora-optimizer-v1",
+  "check_scope": "Synthetic operational checks only; not a quality benchmark",
+  "candidate_adapter_unchanged": true,
+  "candidate_profile_unchanged": true,
+  "default_selection_unchanged": true,
+  "public_mlflow_same_original_payloads": true,
+  "public_mlflow_experiment_run_counts": {
+    "4": 22,
+    "3": 1,
+    "2": 33,
+    "1": 131,
+    "0": 0
+  },
+  "public_write_endpoints_blocked": true,
+  "recipe_validation_artifacts_accessible_on_original_candidate_run": true,
+  "candidate_training_metrics_unchanged_after_attaching_recipe_report": true,
+  "final_test_inference_performed": false
+}
