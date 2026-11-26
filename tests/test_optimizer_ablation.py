@@ -77,3 +77,12 @@ def test_evidence_is_immutable_and_nonfinite_metrics_cannot_be_written(tmp_path)
     with pytest.raises(ValueError):
         write(tmp_path / 'bad.json', {'metric': float('nan')}, immutable=True)
     assert not (tmp_path / 'bad.json').exists()
+
+
+def test_audited_reboot_retry_needs_new_boot_unchanged_protocol_and_armed_state():
+    from scripts.resume_optimizer_ablation import may_resume
+    state = dict(state='armed', failed_boot_id='old', protocol_sha256='frozen')
+    assert not may_resume(state, 'old', 'frozen')
+    assert not may_resume(state, 'new', 'changed')
+    assert may_resume(state, 'new', 'frozen')
+    assert not may_resume(dict(state, state='consumed'), 'new', 'frozen')

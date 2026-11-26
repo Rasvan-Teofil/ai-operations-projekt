@@ -1,0 +1,15 @@
+{
+  "verified_on": "2026-11-26",
+  "offline_tests_passed": 194,
+  "new_study_guard_tests": 5,
+  "layout_check": "passed",
+  "main_integration_check": "168 archive files and 236 frozen source/report files unchanged",
+  "source_catalog_check": "passed",
+  "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+  "study_source_change_after_protocol": false,
+  "completed_fits": 0,
+  "execution": "First attempt failed at GPU Xid 79 before development predictions; no completed run metrics",
+  "recovery": "User systemd unit verified, enabled and inactive; same-boot execution correctly refused; one audited retry gated on new boot and CUDA probe",
+  "final_test_inference_performed": false,
+  "serving_model_changed": false
+}

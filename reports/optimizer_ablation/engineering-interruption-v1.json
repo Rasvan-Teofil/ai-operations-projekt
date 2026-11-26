@@ -1,0 +1,133 @@
+{
+  "version": "optimizer-ablation-engineering-interruption-v1",
+  "recorded_at": "2026-11-26T09:23:58.779127+00:00",
+  "planned_run": "run-01",
+  "attempt": 1,
+  "mlflow_run_id": "e4e627e3bbd143ef90753478feeeaa75",
+  "mlflow_status": "FAILED",
+  "completed_fits": 0,
+  "last_completed_step": 10,
+  "planned_optimizer_steps": 30,
+  "development_predictions_made": false,
+  "final_test_used": false,
+  "serving_model_changed": false,
+  "driver": "595.99.02 open kernel module",
+  "observed_failure": "CUDA CUBLAS_STATUS_INTERNAL_ERROR during backward; kernel Xid 79 at 2026-11-26T09:21:44Z: GPU has fallen off the bus",
+  "underlying_cause": "Not established; a device/driver/PCIe failure is observed, not evidence about the hyperparameter quality.",
+  "recovery": "nvidia-smi no longer enumerates a usable GPU; reset unavailable without administrator access and GPU drives the desktop. User reboot required; no reboot or driver change executed by agent.",
+  "retry": "Empty partial adapter directory archived locally; failed MLflow run retained. Same planned condition can start with a new run ID only after a new boot and GPU probe. One audited retry; no automatic retry loop.",
+  "original_log_sha256": "ba6802904d7bc020ced898f99ec5e20d473d3fe4d50108c78adec66d44164781",
+  "partial_training_telemetry": [
+    {
+      "run_id": "run-01",
+      "step": 1,
+      "epoch": 1,
+      "train_loss": 4.2909797990883956,
+      "gradient_norm": 56.96340560913086,
+      "clipped": 1,
+      "learning_rate": 0.0,
+      "adapter_update_l2": 0.0,
+      "step_seconds": 8.539490212999908
+    },
+    {
+      "run_id": "run-01",
+      "step": 2,
+      "epoch": 1,
+      "train_loss": 1.3639920038233413,
+      "gradient_norm": 23.5288143157959,
+      "clipped": 1,
+      "learning_rate": 3.3333333333333335e-05,
+      "adapter_update_l2": 0.028711307793855667,
+      "step_seconds": 7.342615517000013
+    },
+    {
+      "run_id": "run-01",
+      "step": 3,
+      "epoch": 1,
+      "train_loss": 0.003355782769853821,
+      "gradient_norm": 0.9010137319564819,
+      "clipped": 0,
+      "learning_rate": 6.666666666666667e-05,
+      "adapter_update_l2": 0.06678025424480438,
+      "step_seconds": 9.102798790999941
+    },
+    {
+      "run_id": "run-01",
+      "step": 4,
+      "epoch": 1,
+      "train_loss": 4.233538507134654,
+      "gradient_norm": 25.46587371826172,
+      "clipped": 1,
+      "learning_rate": 0.0001,
+      "adapter_update_l2": 0.09778782725334167,
+      "step_seconds": 8.285095850000062
+    },
+    {
+      "run_id": "run-01",
+      "step": 5,
+      "epoch": 1,
+      "train_loss": 1.499868839983172,
+      "gradient_norm": 37.60506057739258,
+      "clipped": 1,
+      "learning_rate": 9.62962962962963e-05,
+      "adapter_update_l2": 0.09852749109268188,
+      "step_seconds": 8.506378232000088
+    },
+    {
+      "run_id": "run-01",
+      "step": 6,
+      "epoch": 1,
+      "train_loss": 4.666435176649351,
+      "gradient_norm": 53.85804748535156,
+      "clipped": 1,
+      "learning_rate": 9.25925925925926e-05,
+      "adapter_update_l2": 0.09296666085720062,
+      "step_seconds": 8.612281152999913
+    },
+    {
+      "run_id": "run-01",
+      "step": 7,
+      "epoch": 1,
+      "train_loss": 3.5286900423697025,
+      "gradient_norm": 10.86633586883545,
+      "clipped": 1,
+      "learning_rate": 8.888888888888889e-05,
+      "adapter_update_l2": 0.07037578523159027,
+      "step_seconds": 8.849073791000137
+    },
+    {
+      "run_id": "run-01",
+      "step": 8,
+      "epoch": 1,
+      "train_loss": 1.359684076537134,
+      "gradient_norm": 31.26525115966797,
+      "clipped": 1,
+      "learning_rate": 8.518518518518518e-05,
+      "adapter_update_l2": 0.07282308489084244,
+      "step_seconds": 8.32738945799997
+    },
+    {
+      "run_id": "run-01",
+      "step": 9,
+      "epoch": 1,
+      "train_loss": 1.0333039383130398,
+      "gradient_norm": 18.69013214111328,
+      "clipped": 1,
+      "learning_rate": 8.148148148148148e-05,
+      "adapter_update_l2": 0.0611533522605896,
+      "step_seconds": 7.388555474999976
+    },
+    {
+      "run_id": "run-01",
+      "step": 10,
+      "epoch": 1,
+      "train_loss": 2.0066625964155564,
+      "gradient_norm": 47.21709442138672,
+      "clipped": 1,
+      "learning_rate": 7.777777777777778e-05,
+      "adapter_update_l2": 0.05547945946455002,
+      "step_seconds": 7.991506005999781
+    }
+  ],
+  "nvidia_reference": "https://docs.nvidia.com/deploy/xid-errors/archive/index.html#xid-79-gpu-has-fallen-off-the-bus"
+}
