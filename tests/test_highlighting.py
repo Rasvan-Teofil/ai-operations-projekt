@@ -111,18 +111,18 @@ def test_model_choice_is_cached_versioned_and_does_not_change_default(client, mo
         'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
         'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
         'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
-        'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1'}
+        'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1', 'article_qwen_lora_optimizer_v1'}
     assert {row['id'] for row in models if row['experimental']} == {
         'frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
         'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
         'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
-        'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1'}
+        'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1', 'article_qwen_lora_optimizer_v1'}
 
 
 @pytest.mark.parametrize('model', ['frozen_news_v3', 'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
                                  'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
                                  'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
-                                 'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1'])
+                                 'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1', 'article_qwen_lora_optimizer_v1'])
 def test_experimental_model_choice_preserves_prediction_contract(client, monkeypatch, model):
     def load(name):
         predictor = SentenceStub()

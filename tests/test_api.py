@@ -288,3 +288,35 @@ def test_model_context_overflow_returns_422_and_recovers(client, monkeypatch):
     assert response.headers['x-article-error']=='article_context_exceeded'
     monkeypatch.setattr(Stub,'predict_proba',original)
     assert client.post('/predict',json={'text':'A valid shorter input.'}).status_code==200
+
+
+def test_optimizer_candidate_discovery_does_not_inherit_final_test_claims(client, monkeypatch, tmp_path):
+    import json
+    monkeypatch.setattr(api, 'MODELS', tmp_path)
+    path = tmp_path/'optimizer_candidate/v1/profile'; path.mkdir(parents=True)
+    (path/'artifact.json').write_text(json.dumps({'kind':'local_llm',
+        'model_version':'article-qwen-lora-optimizer-v1', 'max_article_tokens':4096, 'article_overflow':'reject'}))
+    monkeypatch.setattr(api, 'load_named_predictor', lambda *args: pytest.fail('Discovery must not load weights'))
+    data = client.get('/models').json()
+    record = next(r for r in data['models'] if r['id']=='article_qwen_lora_optimizer_v1')
+    assert record['available'] and record['experimental'] and not record['is_default']
+    assert record['comparison_group']=='optimizer-candidate-v1'
+    assert 'no independent quality score' in record['evaluated_scope']
+    assert data['article_research_choice']=='article_qwen_lora_v1'
+
+
+def test_optimizer_candidate_can_be_requested_without_replacing_default(client, monkeypatch):
+    class Candidate(Stub):
+        version = 'article-qwen-lora-optimizer-v1'
+    requested = []
+    def loader(name):
+        requested.append(name)
+        assert name=='article_qwen_lora_optimizer_v1'
+        return Candidate()
+    monkeypatch.setattr(api, 'load_named_predictor', loader)
+    response = client.post('/predict?model=article_qwen_lora_optimizer_v1',json={'text':'Synthetic API routing example.'})
+    assert response.status_code==200
+    assert response.json()['model_version']==Candidate.version
+    assert requested==['article_qwen_lora_optimizer_v1']
+    assert client.get('/health').json()['model_version']==Stub.version
+    assert client.post('/predict',json={'text':'The original default remains selected.'}).json()['model_version']==Stub.version

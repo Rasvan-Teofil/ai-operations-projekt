@@ -1,0 +1,32 @@
+{
+  "version": "article-qwen-lora-optimizer-v1",
+  "completed_at": "2026-11-26T13:50:12.757682+00:00",
+  "mlflow_run_id": "5230309ca351479980869ef61fc239f0",
+  "mlflow_experiment": "article-optimizer-candidate-v1",
+  "protocol_sha256": "9e12f03270392f8d76ee6dfa4fb1fbb304dcefe5d37f8ba68739099640ca0ca1",
+  "recipe": {
+    "gradient_clip": 1.0,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.0,
+    "warmup_fraction": 0.0
+  },
+  "seed": 20261110,
+  "metrics": {
+    "training_seconds": 376.7338806479984,
+    "optimizer_steps": 45,
+    "train_rows": 240,
+    "peak_training_allocated_bytes": 8780084736,
+    "clip_fraction": 0.9777777777777777,
+    "final_train_loss": 0.8553685918644219
+  },
+  "model_path": "models/optimizer_candidate/v1/profile",
+  "adapter_path": "models/optimizer_candidate/v1/adapter",
+  "adapter_sha256": "570abee30e4bcf8b2d04a7c2baff90be77a57956bce724f06b935f64dde4b717",
+  "profile_sha256": "2b295f9a320a85b4a66f09d894025e1fade5ac9b5c2e79faf317c1e6742d8719",
+  "telemetry_sha256": "903823497447cd92d3ff466d1265e5c1ab41bc85ec499c147b7000d97674a37e",
+  "base_artifact_sha256": "4a28bff16fc5b5b5cf24c0caf43442921f6ae5fb0d61055150d8613e606c5496",
+  "independently_evaluated": false,
+  "quality_score": null,
+  "final_test_used": false,
+  "serving_selection_changed": false
+}

@@ -669,6 +669,30 @@
       "original_annotation_status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
       "review_note": "Project-owner review after the recorded evaluations; no labels, measurements or rights decisions changed. See docs/data/project-review.md.",
       "scope_at_measurement": "New MiniLM starts from clean pinned encoder, Qwen from pinned base. Per-revision source, history, attribution, transformation and third-party rights reviewed; unresolved inputs excluded. No raw articles or weights in Git, no synthetic Test padding. This is not blanket permission for later publisher inputs or a separate weight-redistribution grant."
+    },
+    {
+      "id": "article_qwen_lora_optimizer_v1",
+      "name": "Full article · exploratory optimizer candidate",
+      "group": "current",
+      "use": "Fresh LoRA fit from the pinned Qwen base on the existing 240 Train articles only, using the optimizer-ablation recipe. Optional API candidate; not the default.",
+      "license": "Apache-2.0 upstream bases; DE source CC-BY-2.5, EN/JA CC-BY-2.5/4.0 by contribution; new annotation metadata CC0-1.0 to extent project rights apply.",
+      "status": "Exploratory full-Train candidate; no independent quality evaluation or new final-Test use. Same project-reviewed Train references.",
+      "scope": "Same pinned Qwen base and the existing 240 full-article Train inputs only. Existing source, history, annotation and attribution records remain applicable. Former development cases are now fitted; old development or Test scores do not measure this new artifact. No raw articles, base weights or adapter weights in Git. No new weight-redistribution grant is claimed.",
+      "attribution": "Wikinews contributors per page/history; Qwen Team / Alibaba Cloud; Codex annotation metadata.",
+      "revision": "reports/optimizer_candidate/protocol-v1.json; Train source revisions in reports/next_stage/train-provenance-v1.jsonl",
+      "source_url": "https://github.com/Rasvan-Teofil/ai-operations-projekt/tree/main/reports/optimizer_candidate",
+      "license_url": "https://ja.wikinews.org/w/index.php?oldid=184633",
+      "notices": [
+        "Apache-2.0.txt",
+        "qwen-Apache-2.0.txt",
+        "CC-BY-2.5.txt",
+        "CC-BY-4.0.txt",
+        "CC0-1.0.txt",
+        "wikinews-full-article-v1-ATTRIBUTION.txt"
+      ],
+      "original_annotation_status": "AI-labelled · Codex-reviewed, two readings by one AI; no independent human gold.",
+      "review_note": "Project-owner review after the recorded evaluations; no labels, measurements or rights decisions changed. See docs/data/project-review.md.",
+      "added_on": "2026-11-26"
     }
   ],
   "next_stage": {

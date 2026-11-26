@@ -18,9 +18,10 @@ ModelID = Literal['qwen3_4b', 'minilm_v2', 'linearsvc_v2', 'frozen_news_v3',
                   'minilm_fp32_news_v3', 'minilm_bf16_news_v3', 'linearsvc_news_v3',
                   'frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4',
                   'qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5',
-                  'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1']
+                  'article_frozen_v1', 'article_minilm_v1', 'article_qwen_zero_v1', 'article_qwen_lora_v1', 'article_qwen_lora_optimizer_v1']
 ARTICLE_MODELS = {'article_frozen_v1': 'frozen128', 'article_minilm_v1': 'minilm128',
                   'article_qwen_zero_v1': 'qwen-zero', 'article_qwen_lora_v1': 'qwen-lora'}
+EXPLORATORY_MODELS = {'article_qwen_lora_optimizer_v1': 'optimizer_candidate/v1/profile'}
 MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · financial rubric · historical zero-shot',
                'minilm_v2': 'MiniLM · fine-tuned BF16 · legacy financial data',
                'linearsvc_v2': 'TF-IDF + LinearSVC · legacy financial data',
@@ -38,7 +39,8 @@ MODEL_NAMES = {'qwen3_4b': 'Qwen3 4B · financial rubric · historical zero-shot
                'article_frozen_v1': 'Full article · frozen MiniLM + trained head',
                'article_minilm_v1': 'Full article · own MiniLM fine-tuning',
                'article_qwen_zero_v1': 'Full article · Qwen news rubric',
-               'article_qwen_lora_v1': 'Full article · own Qwen LoRA'}
+               'article_qwen_lora_v1': 'Full article · own Qwen LoRA',
+               'article_qwen_lora_optimizer_v1': 'Full article · optimizer candidate · quality not independently evaluated'}
 
 
 def candidate_paths():
@@ -50,7 +52,8 @@ def candidate_paths():
                ['frozen_news_v4', 'minilm_fp32_news_v4', 'minilm_bf16_news_v4', 'linearsvc_news_v4']},
             **{name: MODELS / 'llm_adaptation_v5/final' / name for name in
                ['qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5']},
-            **{name: MODELS / 'next_stage/final' / folder for name, folder in ARTICLE_MODELS.items()}}
+            **{name: MODELS / 'next_stage/final' / folder for name, folder in ARTICLE_MODELS.items()},
+            **{name: MODELS / folder for name, folder in EXPLORATORY_MODELS.items()}}
 
 
 def load_named_predictor(name):
@@ -142,11 +145,12 @@ def create_app(queue_timeout=None):
             records.append({'id': name, 'name': MODEL_NAMES[name], 'model_version': version,
                             'available': available, 'loaded': name in app.state.predictors,
                             'input_policy': ARTICLE_POLICY, 'context_policy': context,
-                            'evaluated_scope': ('Native DE/EN/JA full Wikinews articles; project-reviewed reference labels, confirmed 14 November 2026; original annotation provenance retained; uncalibrated scores.'
+                            'evaluated_scope': ('Exploratory candidate trained on all 240 Train articles after optimizer ablation. Synthetic DE/EN/JA smoke checks only; no independent quality score or new final-Test evaluation.'
+                                                if name in EXPLORATORY_MODELS else 'Native DE/EN/JA full Wikinews articles; project-reviewed reference labels, confirmed 14 November 2026; original annotation provenance retained; uncalibrated scores.'
                                                 if name in ARTICLE_MODELS else 'Historical short texts/headlines/leads; full-article and Japanese quality not established.'),
-                            'comparison_group': 'full-article-v1' if name in ARTICLE_MODELS else 'historical',
+                            'comparison_group': 'optimizer-candidate-v1' if name in EXPLORATORY_MODELS else 'full-article-v1' if name in ARTICLE_MODELS else 'historical',
                             'is_default': name == app.state.default_id,
-                            'experimental': name in ARTICLE_MODELS or name.endswith(('_news_v3', '_news_v4')) or name in
+                            'experimental': name in EXPLORATORY_MODELS or name in ARTICLE_MODELS or name.endswith(('_news_v3', '_news_v4')) or name in
                                 ('qwen_news_v5', 'qwen_fewshot_v5', 'qwen_lora_v5')})
         return {'default': app.state.default_id, 'models': records,
                 'article_research_choice': 'article_qwen_lora_v1', 'article_fast_alternative': 'article_minilm_v1',
