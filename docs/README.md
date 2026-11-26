@@ -12,6 +12,7 @@ Aktueller Projektstand auf `main`; alle folgenden Links bleiben in diesem Branch
 
 - [Repositorystruktur und Vorlage](repository-structure.md)
 - [Vorführungsweg für die Besprechung](presentation-guide.md)
+- [Optimizer-Ablation: 32 Entwicklungsfits](../src/studies/optimizer_ablation/README.md)
 - [Vollartikel reproduzieren](reproduce-full-article.md)
 - [Vollartikel-Phasenprotokoll](next-stage.md)
 - [Quellenauswahl und Rechte](data-sources-next-stage.md)
