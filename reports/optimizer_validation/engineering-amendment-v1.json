@@ -1,0 +1,14 @@
+{
+  "created_at": "2026-11-26T14:39:18.340451+00:00",
+  "stage": "Before any successful validation fit, gradient update or development inference",
+  "original_protocol_sha256": "d5ea2105e4543c37bb9f61ea87b137f584d79bd0c5fca92bfd2177887f31f59a",
+  "original_source_sha256": "bbfc8738a111958bc6dca51d4686f2069232572eba6baa235511e74d6c162792",
+  "corrected_source_sha256": "9dabf99a1f7f2066a8f451a2c734ea24224bb0ecd108167fa57529620b1926a8",
+  "corrected_source_commit": "fdabb9110eb0123d8653fdf83a0b7e989ab42ae4",
+  "reason": "Fix pre-fit MLflow tag setup: read Train SHA-256 from the existing files_sha256 map instead of a nonexistent train_sha256 field.",
+  "design_unchanged": true,
+  "recipes_unchanged": true,
+  "metrics_seen": false,
+  "training_steps_in_failed_attempt": 0,
+  "failed_setup_mlflow_run_id": "8c059c09abea4d66aa078380ade96172"
+}
