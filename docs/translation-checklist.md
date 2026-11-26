@@ -10,8 +10,8 @@ Method: files ranked by count of common German function words (heuristic, `git s
 ## A. Prose docs (translate by hand)
 
 Priority 1, examiner reads these first:
-- [ ] `README.md` (43)
-- [ ] `docs/project-overview.md` (31)
+- [ ] `README.md` (43) — draft ready: `docs/drafts/README.en-draft.md`
+- [ ] `docs/project-overview.md` (31) — draft ready: `docs/drafts/project-overview.en-draft.md`
 - [ ] `docs/presentation-guide.md` (25)
 - [ ] `docs/reproduce-full-article.md` (55)
 - [ ] `docs/next-stage.md` (171)
