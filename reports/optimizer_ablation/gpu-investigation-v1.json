@@ -1,0 +1,122 @@
+{
+  "version": "gpu-investigation-v1",
+  "recorded_at": "2026-11-26T09:56:50.727678+00:00",
+  "scope": "System investigation, not a model-performance experiment",
+  "kernel_events_scanned": 78800,
+  "retained_boots": 35,
+  "xid_counts": {
+    "79": 6,
+    "154": 4,
+    "31": 1
+  },
+  "distinct_xid79_incidents": 4,
+  "incidents": [
+    {
+      "time_berlin": "2026-04-20T22:46:21.895642+02:00",
+      "kernel": null,
+      "driver": null,
+      "xid79_messages": 1,
+      "same_physical_gpu_uuid_confirmed": true
+    },
+    {
+      "time_berlin": "2026-04-21T09:54:04.289356+02:00",
+      "kernel": "6.17.0-20-generic",
+      "driver": "580.126.09",
+      "xid79_messages": 1,
+      "same_physical_gpu_uuid_confirmed": true
+    },
+    {
+      "time_berlin": "2026-11-17T20:48:57.861849+01:00",
+      "kernel": "7.0.0-38-generic",
+      "driver": "595.99.02",
+      "xid79_messages": 3,
+      "same_physical_gpu_uuid_confirmed": true
+    },
+    {
+      "time_berlin": "2026-11-26T10:21:44.494495+01:00",
+      "kernel": "7.0.0-38-generic",
+      "driver": "595.99.02",
+      "xid79_messages": 1,
+      "same_physical_gpu_uuid_confirmed": true
+    }
+  ],
+  "identity": "Same actual GPU UUID verified per boot and PCI address; identifiers omitted publicly",
+  "privileged_capture": {
+    "success": true,
+    "nvidia_bug_report_safe_mode_exit": 0,
+    "raw_upload_performed": false
+  },
+  "hardware": {
+    "gpu": "Gigabyte RTX 5060 Ti 16 GiB; exact commercial SKU not reported",
+    "board": "ASUS ProArt B650-CREATOR",
+    "cpu": "AMD Ryzen 5 7600",
+    "bios": "2904 / 2025-03-04",
+    "vbios": "98.06.39.80.63",
+    "gsp": "595.99.02",
+    "gpu_power_limit_w": 180,
+    "gpu_clock_offsets": {
+      "graphics": 0,
+      "memory": 0
+    },
+    "gpu_slot_firmware_mapping": "PCIEX16_1 / CPU root 0000:00:01.1",
+    "active_link": "16 GT/s x4",
+    "root_max_capability": "16 GT/s x16; no assertion about physical GPU PCB lane count",
+    "root_aer_capability_advertised": false,
+    "gpu_aer_capability_advertised": true,
+    "aspm": "L1 enabled at both ends; not changed",
+    "psu_smbios_type39": "No record returned",
+    "psu_usb_hwmon_interface": "Not detected",
+    "passive_riser": "Cannot be excluded from topology"
+  },
+  "findings": [
+    "Recurrent across two kernel/driver generations and months before this study",
+    "No loaded NVIDIA driver/userspace/GSP mismatch found",
+    "No evidence of broken package transaction or immediate driver update at failure",
+    "Device-level loss proven; component-level cause unproven",
+    "Zero endpoint AER counters do not exonerate root link because root AER is not exposed"
+  ],
+  "monitor": {
+    "unit": "article-gpu-health-capture.service",
+    "interval_seconds": 5,
+    "maximum_seconds": 10800,
+    "started_during_fit": "run-04",
+    "changes_gpu_settings": false,
+    "private_path": "runtime/gpu-investigation-2026-11-26/health-samples.jsonl"
+  },
+  "evidence_files": {
+    "gpu-baseline.xml": {
+      "sha256": "b78e082f0c75cb93e97ff7c61edcd89d6d00338c867bcdec697cfc6837da2f1f",
+      "bytes": 122850
+    },
+    "privileged/gpu-pcie.txt": {
+      "sha256": "6eb11ad44e6155444a07796a11cd3a55b9497057c2ab50d2c75892f7e2ef05ae",
+      "bytes": 5374
+    },
+    "privileged/root-port-pcie.txt": {
+      "sha256": "f9cba464b59a1b756b3a9f1c8a5f285eca0c639a3919e55cd98336cce8384f75",
+      "bytes": 4444
+    },
+    "privileged/power-supply-smbios.txt": {
+      "sha256": "ccd85718ecdccab64b243b5fcec377fb9b261afaf7353d43b6dc9c3b5f77faa2",
+      "bytes": 177
+    },
+    "privileged/slots-smbios.txt": {
+      "sha256": "fb4e10c305651b656cbca9da4936db1b91e56c86294935069d3e1e8da40142fe",
+      "bytes": 2172
+    },
+    "privileged/nvidia-bug-report.log.gz": {
+      "sha256": "5fa08ab442e14f26d20b6b73a9ac14d8878d56acb2c1753bbbc551df58359b62",
+      "bytes": 158601
+    },
+    "journal-analysis-final-v2.json": {
+      "sha256": "d2f028ade1ff5d0551be878e7a1717f5f123080038f12ae5a642e90c698fd003",
+      "bytes": 8146
+    }
+  },
+  "tests": {
+    "offline_passed": 197,
+    "hardware_cause_proven": false
+  },
+  "system_mutations": "None to driver, kernel, BIOS, ASPM, clocks, power limit; transient read-only monitor only",
+  "next_discriminating_test": "Power-off physical connection inspection then GPU/PSU substitution one factor at a time; software changes after frozen fit queue only"
+}
