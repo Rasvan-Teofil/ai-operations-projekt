@@ -1,0 +1,36 @@
+{
+  "updated_at": "2026-11-26T09:23:58.797733+00:00",
+  "state": "blocked-gpu-xid-79-awaiting-reboot",
+  "expected_runs": 32,
+  "completed_runs": 0,
+  "mlflow_experiment": "article-optimizer-ablation-v1",
+  "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+  "effects": {
+    "primary_score": {
+      "status": "pending",
+      "completed_runs": 0,
+      "expected_runs": 32
+    },
+    "macro_f1_de": {
+      "status": "pending",
+      "completed_runs": 0,
+      "expected_runs": 32
+    },
+    "macro_f1_en": {
+      "status": "pending",
+      "completed_runs": 0,
+      "expected_runs": 32
+    },
+    "macro_f1_ja": {
+      "status": "pending",
+      "completed_runs": 0,
+      "expected_runs": 32
+    },
+    "development_nll": {
+      "status": "pending",
+      "completed_runs": 0,
+      "expected_runs": 32
+    }
+  },
+  "runs": []
+}
