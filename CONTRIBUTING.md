@@ -52,3 +52,9 @@ Originale Referenzlabels, Quellrevisionen und Text-Hashes dabei nicht verändern
 Spätere menschliche Datenprüfungen mit Datum, Rolle, tatsächlichem Umfang und
 Herkunftsnachweis als eigenen Schritt dokumentieren. Keine nachträgliche
 Umdeutung der ursprünglichen Annotation oder des damaligen Messablaufs.
+
+Persönliche Rechnerdiagnosen, Hardwareinventare und private Systemwartungsnotizen
+bleiben ausschließlich lokal unter dem ignorierten `runtime/`. Sie gehören weder
+in Studienberichte noch in PR-Titel oder PR-Beschreibungen. Öffentliche Nachweise
+beschränken sich auf die für die Experimente nötigen Methoden, Metriken und
+Reproduktionsangaben.

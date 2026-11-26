@@ -53,7 +53,7 @@ Alle verlinkten Dateien, die aktuelle Anwendung und ihre Tests liegen auf diesem
 Hauptzweig. `second-path` bleibt nur als historische Entwicklungskennung in
 Messprotokollen und MLflow erhalten. Für die Präsentation ist kein Branchwechsel nötig.
 
-**Zusätzliche Entwicklungsstudie:** [32 Qwen-LoRA-Läufe zu Clipping, AdamW-Weight-Decay, Lernrate und Warmup](reports/optimizer_ablation/README.md). Eigener Versuchsplan; unveränderte Testauswertung und Serving-Auswahl. Nach GPU-Fehler Xid 79 und Rechnerneustart fortgesetzt: erster Fit abgeschlossen, Warteschlange läuft; [Prüfnachweis](reports/optimizer_ablation/post-reboot-check-v1.json).
+**Zusätzliche Entwicklungsstudie:** [32 Qwen-LoRA-Läufe zu Clipping, AdamW-Weight-Decay, Lernrate und Warmup](reports/optimizer_ablation/README.md). Die Warteschlange läuft mit eingefrorenem Versuchsplan. Ergebnisse auf GitHub sind geprüfte Momentaufnahmen; den aktuellen Fortschritt zeigen CLI und MLflow. Testauswertung und Serving-Auswahl bleiben unverändert.
 
 **Öffentliche Demo:** noch nicht bereitgestellt. Die laufende Anwendung und MLflow
 sind bisher lokal. Kostenloses Hosting ohne Tower ist eine separate, noch offene
@@ -100,7 +100,7 @@ Modellunabhängiger URL-Abruf mit `full-article-v5`, ohne stille Zeichenkürzung
 
 ## Verifikation und Reproduktion
 
-**197 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
+**193 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
 
 ```bash
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m pytest -q -p no:cacheprovider
