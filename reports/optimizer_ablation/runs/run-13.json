@@ -1,0 +1,76 @@
+{
+  "config": {
+    "gradient_clip": null,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.0,
+    "warmup_fraction": 0.1,
+    "seed": 20261110,
+    "block": "factorial",
+    "id": "run-13"
+  },
+  "completed_at": "2026-11-26T10:29:32.914742+00:00",
+  "mlflow_run_id": "8c82b1c03c044d2ea83b447f7ec9c523",
+  "metrics": {
+    "accuracy": 0.8271604938271605,
+    "macro_f1": 0.7537227949599083,
+    "primary_score": 0.7634199134199136,
+    "mean_three_language_macro_f1": 0.757025857025857,
+    "macro_f1_de": 0.7222222222222223,
+    "macro_f1_en": 0.8046176046176047,
+    "macro_f1_ja": 0.7442377442377442,
+    "negative_precision": 0.9375,
+    "negative_recall": 0.9183673469387755,
+    "positive_recall": 0.8235294117647058,
+    "confusion_matrix": [
+      [
+        45,
+        4,
+        0
+      ],
+      [
+        3,
+        8,
+        4
+      ],
+      [
+        0,
+        3,
+        14
+      ]
+    ],
+    "per_class": {
+      "negative": {
+        "precision": 0.9375,
+        "recall": 0.9183673469387755,
+        "f1": 0.9278350515463918,
+        "support": 49
+      },
+      "neutral": {
+        "precision": 0.5333333333333333,
+        "recall": 0.5333333333333333,
+        "f1": 0.5333333333333333,
+        "support": 15
+      },
+      "positive": {
+        "precision": 0.7777777777777778,
+        "recall": 0.8235294117647058,
+        "f1": 0.8,
+        "support": 17
+      }
+    },
+    "development_nll": 1.168861483259771,
+    "training_seconds": 237.1498144100001,
+    "loading_seconds": 1.9641781709997304,
+    "peak_training_allocated_bytes": 8792003584,
+    "mean_gradient_norm": 24.96829855454465,
+    "max_gradient_norm": 56.89848709106445,
+    "clip_fraction": 0.0,
+    "mean_adapter_update_l2": 0.021247456828132272,
+    "final_train_loss": 1.3453815191207703
+  },
+  "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+  "adapter_sha256": "fa0299574a3f270df0734245d9e7f1f81f60b7d9833172a1f8d62d7f872ffdd0",
+  "predictions_sha256": "a35209ed1170d29ce7c9d654978e3c69500b66f0d6a565d439751192bc14d864",
+  "telemetry_sha256": "2d163025cfa89d6e21ee69111b47a4578ae7d521506600703587c78182487193",
+  "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 453 MiB"
+}

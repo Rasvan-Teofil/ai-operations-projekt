@@ -1,35 +1,1365 @@
 {
-  "updated_at": "2026-11-26T10:07:41.499606+00:00",
-  "state": "running",
+  "updated_at": "2026-11-26T11:52:22.233686+00:00",
+  "state": "complete",
   "expected_runs": 32,
-  "completed_runs": 8,
+  "completed_runs": 32,
   "mlflow_experiment": "article-optimizer-ablation-v1",
   "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
   "effects": {
     "primary_score": {
-      "status": "pending",
-      "completed_runs": 8,
-      "expected_runs": 32
+      "status": "complete",
+      "metric": "primary_score",
+      "main_effects": {
+        "gradient_clip": {
+          "high_minus_low": 0.017512652808815213,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.052308802308802305,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.021607782898105388,
+            0.052308802308802305,
+            0.05707070707070705,
+            0.052308802308802305,
+            0.01292366637194231,
+            -0.01031746031746028,
+            0.01292366637194231,
+            0.029067675619399713
+          ],
+          "low": null,
+          "high": 1.0,
+          "pairs": 16
+        },
+        "learning_rate": {
+          "high_minus_low": 0.00492055528206807,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.052308802308802305,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.01292366637194231,
+            0.06262626262626259,
+            0.02253925780065935,
+            0.01031746031746028,
+            -0.021607782898105388,
+            0.0,
+            -0.021607782898105388,
+            -0.01292366637194231
+          ],
+          "low": 5e-05,
+          "high": 0.0001,
+          "pairs": 16
+        },
+        "weight_decay": {
+          "high_minus_low": -0.009562762197634286,
+          "paired_differences": [
+            0.0,
+            -0.052308802308802305,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.03546292417260166,
+            0.0,
+            0.0,
+            -0.052308802308802305,
+            0.0,
+            0.0,
+            0.0,
+            -0.01292366637194231
+          ],
+          "low": 0.0,
+          "high": 0.01,
+          "pairs": 16
+        },
+        "warmup_fraction": {
+          "high_minus_low": -0.011464328990747216,
+          "paired_differences": [
+            0.0,
+            -0.052308802308802305,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.052308802308802305,
+            -0.016845878136200643,
+            0.02324112668940259,
+            -0.029067675619399713,
+            -0.021607782898105388,
+            -0.021607782898105388,
+            0.0,
+            -0.01292366637194231
+          ],
+          "low": 0.0,
+          "high": 0.1,
+          "pairs": 16
+        }
+      },
+      "per_seed": {
+        "20261110": {
+          "status": "complete",
+          "metric": "primary_score",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.006538600288600288,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.052308802308802305,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": 0.006538600288600288,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.052308802308802305,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.006538600288600288,
+              "paired_differences": [
+                0.0,
+                -0.052308802308802305,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": -0.006538600288600288,
+              "paired_differences": [
+                0.0,
+                -0.052308802308802305,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": -0.013077200577200576,
+            "gradient_clip × weight_decay": 0.013077200577200576,
+            "gradient_clip × warmup_fraction": 0.013077200577200576,
+            "learning_rate × weight_decay": 0.013077200577200576,
+            "learning_rate × warmup_fraction": 0.013077200577200576,
+            "weight_decay × warmup_fraction": -0.013077200577200576
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        },
+        "20261111": {
+          "status": "complete",
+          "metric": "primary_score",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.028486705329030138,
+              "paired_differences": [
+                0.021607782898105388,
+                0.052308802308802305,
+                0.05707070707070705,
+                0.052308802308802305,
+                0.01292366637194231,
+                -0.01031746031746028,
+                0.01292366637194231,
+                0.029067675619399713
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": 0.0033025102755358526,
+              "paired_differences": [
+                -0.01292366637194231,
+                0.06262626262626259,
+                0.02253925780065935,
+                0.01031746031746028,
+                -0.021607782898105388,
+                0.0,
+                -0.021607782898105388,
+                -0.01292366637194231
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.012586924106668285,
+              "paired_differences": [
+                -0.03546292417260166,
+                0.0,
+                0.0,
+                -0.052308802308802305,
+                0.0,
+                0.0,
+                0.0,
+                -0.01292366637194231
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": -0.016390057692894144,
+              "paired_differences": [
+                -0.052308802308802305,
+                -0.016845878136200643,
+                0.02324112668940259,
+                -0.029067675619399713,
+                -0.021607782898105388,
+                -0.021607782898105388,
+                0.0,
+                -0.01292366637194231
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": -0.03467463663514825,
+            "gradient_clip × weight_decay": 0.018712015027365414,
+            "gradient_clip × warmup_fraction": 0.004710499301711746,
+            "learning_rate × weight_decay": -0.007442386127035738,
+            "learning_rate × warmup_fraction": 0.023405007734818573,
+            "weight_decay × warmup_fraction": -0.007442386127035738
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        }
+      },
+      "two_way_difference_of_differences": {
+        "gradient_clip × learning_rate": -0.023875918606174412,
+        "gradient_clip × weight_decay": 0.015894607802282995,
+        "gradient_clip × warmup_fraction": 0.008893849939456161,
+        "learning_rate × weight_decay": 0.002817407225082419,
+        "learning_rate × warmup_fraction": 0.018241104156009574,
+        "weight_decay × warmup_fraction": -0.010259793352118157
+      },
+      "interpretation": "Descriptive fixed-split effects with two seeds; pairs share data. No p-values or causal mechanism proof."
     },
     "macro_f1_de": {
-      "status": "pending",
-      "completed_runs": 8,
-      "expected_runs": 32
+      "status": "complete",
+      "metric": "macro_f1_de",
+      "main_effects": {
+        "gradient_clip": {
+          "high_minus_low": -0.0009639067828722814,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.02584733274388462,
+            -0.02063492063492056,
+            0.02584733274388462,
+            -0.04648225337880518
+          ],
+          "low": null,
+          "high": 1.0,
+          "pairs": 16
+        },
+        "learning_rate": {
+          "high_minus_low": -0.0022670098101132963,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.02584733274388462,
+            0.02063492063492056,
+            -0.02584733274388462,
+            0.02063492063492056,
+            0.0,
+            0.0,
+            0.0,
+            -0.02584733274388462
+          ],
+          "low": 5e-05,
+          "high": 0.0001,
+          "pairs": 16
+        },
+        "weight_decay": {
+          "high_minus_low": -0.0016154582964927888,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.02584733274388462
+          ],
+          "low": 0.0,
+          "high": 0.01,
+          "pairs": 16
+        },
+        "warmup_fraction": {
+          "high_minus_low": 0.004194823375857859,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.04648225337880518,
+            0.04648225337880518,
+            0.0,
+            0.0,
+            0.0,
+            -0.02584733274388462
+          ],
+          "low": 0.0,
+          "high": 0.1,
+          "pairs": 16
+        }
+      },
+      "per_seed": {
+        "20261110": {
+          "status": "complete",
+          "metric": "macro_f1_de",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.0,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": 0.0,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": 0.0,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": 0.0,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": 0.0,
+            "gradient_clip × weight_decay": 0.0,
+            "gradient_clip × warmup_fraction": 0.0,
+            "learning_rate × weight_decay": 0.0,
+            "learning_rate × warmup_fraction": 0.0,
+            "weight_decay × warmup_fraction": 0.0
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        },
+        "20261111": {
+          "status": "complete",
+          "metric": "macro_f1_de",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": -0.0019278135657445628,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.02584733274388462,
+                -0.02063492063492056,
+                0.02584733274388462,
+                -0.04648225337880518
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": -0.0045340196202265926,
+              "paired_differences": [
+                -0.02584733274388462,
+                0.02063492063492056,
+                -0.02584733274388462,
+                0.02063492063492056,
+                0.0,
+                0.0,
+                0.0,
+                -0.02584733274388462
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.0032309165929855777,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                -0.02584733274388462
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": 0.008389646751715718,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.04648225337880518,
+                0.04648225337880518,
+                0.0,
+                0.0,
+                0.0,
+                -0.02584733274388462
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": -0.0038556271314891255,
+            "gradient_clip × weight_decay": -0.006461833185971155,
+            "gradient_clip × warmup_fraction": -0.029702959875373747,
+            "learning_rate × weight_decay": -0.006461833185971155,
+            "learning_rate × warmup_fraction": 0.016779293503431436,
+            "weight_decay × warmup_fraction": -0.006461833185971155
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        }
+      },
+      "two_way_difference_of_differences": {
+        "gradient_clip × learning_rate": -0.0019278135657445628,
+        "gradient_clip × weight_decay": -0.0032309165929855777,
+        "gradient_clip × warmup_fraction": -0.014851479937686873,
+        "learning_rate × weight_decay": -0.0032309165929855777,
+        "learning_rate × warmup_fraction": 0.008389646751715718,
+        "weight_decay × warmup_fraction": -0.0032309165929855777
+      },
+      "interpretation": "Descriptive fixed-split effects with two seeds; pairs share data. No p-values or causal mechanism proof."
     },
     "macro_f1_en": {
-      "status": "pending",
-      "completed_runs": 8,
-      "expected_runs": 32
+      "status": "complete",
+      "metric": "macro_f1_en",
+      "main_effects": {
+        "gradient_clip": {
+          "high_minus_low": 0.035989212400502714,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.10461760461760461,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.043215565796210886,
+            0.10461760461760461,
+            0.1141414141414141,
+            0.10461760461760461,
+            0.0,
+            0.0,
+            0.0,
+            0.10461760461760461
+          ],
+          "low": null,
+          "high": 1.0,
+          "pairs": 16
+        },
+        "learning_rate": {
+          "high_minus_low": 0.012108120374249416,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.10461760461760461,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.10461760461760461,
+            0.07092584834520321,
+            0.0,
+            -0.043215565796210886,
+            0.0,
+            -0.043215565796210886,
+            0.0
+          ],
+          "low": 5e-05,
+          "high": 0.0001,
+          "pairs": 16
+        },
+        "weight_decay": {
+          "high_minus_low": -0.017510066098775777,
+          "paired_differences": [
+            0.0,
+            -0.10461760461760461,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.07092584834520321,
+            0.0,
+            0.0,
+            -0.10461760461760461,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "low": 0.0,
+          "high": 0.01,
+          "pairs": 16
+        },
+        "warmup_fraction": {
+          "high_minus_low": -0.027123481357352312,
+          "paired_differences": [
+            0.0,
+            -0.10461760461760461,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.10461760461760461,
+            -0.033691756272401396,
+            0.0,
+            -0.10461760461760461,
+            -0.043215565796210886,
+            -0.043215565796210886,
+            0.0,
+            0.0
+          ],
+          "low": 0.0,
+          "high": 0.1,
+          "pairs": 16
+        }
+      },
+      "per_seed": {
+        "20261110": {
+          "status": "complete",
+          "metric": "macro_f1_en",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.013077200577200576,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.10461760461760461,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": 0.013077200577200576,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.10461760461760461,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.013077200577200576,
+              "paired_differences": [
+                0.0,
+                -0.10461760461760461,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": -0.013077200577200576,
+              "paired_differences": [
+                0.0,
+                -0.10461760461760461,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": -0.026154401154401152,
+            "gradient_clip × weight_decay": 0.026154401154401152,
+            "gradient_clip × warmup_fraction": 0.026154401154401152,
+            "learning_rate × weight_decay": 0.026154401154401152,
+            "learning_rate × warmup_fraction": 0.026154401154401152,
+            "weight_decay × warmup_fraction": -0.026154401154401152
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        },
+        "20261111": {
+          "status": "complete",
+          "metric": "macro_f1_en",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.05890122422380485,
+              "paired_differences": [
+                0.043215565796210886,
+                0.10461760461760461,
+                0.1141414141414141,
+                0.10461760461760461,
+                0.0,
+                0.0,
+                0.0,
+                0.10461760461760461
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": 0.011139040171298256,
+              "paired_differences": [
+                0.0,
+                0.10461760461760461,
+                0.07092584834520321,
+                0.0,
+                -0.043215565796210886,
+                0.0,
+                -0.043215565796210886,
+                0.0
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.021942931620350978,
+              "paired_differences": [
+                -0.07092584834520321,
+                0.0,
+                0.0,
+                -0.10461760461760461,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": -0.04116976213750405,
+              "paired_differences": [
+                -0.10461760461760461,
+                -0.033691756272401396,
+                0.0,
+                -0.10461760461760461,
+                -0.043215565796210886,
+                -0.043215565796210886,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": -0.0654936461388074,
+            "gradient_clip × weight_decay": 0.043885863240701956,
+            "gradient_clip × warmup_fraction": 0.03912395847879721,
+            "learning_rate × weight_decay": -0.008422939068100349,
+            "learning_rate × warmup_fraction": 0.030030721966205792,
+            "weight_decay × warmup_fraction": -0.008422939068100349
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        }
+      },
+      "two_way_difference_of_differences": {
+        "gradient_clip × learning_rate": -0.045824023646604276,
+        "gradient_clip × weight_decay": 0.035020132197551554,
+        "gradient_clip × warmup_fraction": 0.03263917981659918,
+        "learning_rate × weight_decay": 0.008865731043150402,
+        "learning_rate × warmup_fraction": 0.028092561560303472,
+        "weight_decay × warmup_fraction": -0.01728867011125075
+      },
+      "interpretation": "Descriptive fixed-split effects with two seeds; pairs share data. No p-values or causal mechanism proof."
     },
     "macro_f1_ja": {
-      "status": "pending",
-      "completed_runs": 8,
-      "expected_runs": 32
+      "status": "complete",
+      "metric": "macro_f1_ja",
+      "main_effects": {
+        "gradient_clip": {
+          "high_minus_low": 0.03762377438848028,
+          "paired_differences": [
+            0.05871905871905869,
+            0.05871905871905869,
+            0.02466102466102471,
+            0.0833800833800834,
+            0.0513084513084513,
+            0.0513084513084513,
+            0.10625350625350616,
+            0.0513084513084513,
+            0.0,
+            0.02466102466102471,
+            0.0,
+            0.0,
+            -0.0316023845435609,
+            0.02334267040149396,
+            0.02334267040149396,
+            0.07657832363714723
+          ],
+          "low": null,
+          "high": 1.0,
+          "pairs": 16
+        },
+        "learning_rate": {
+          "high_minus_low": -0.002179188943894829,
+          "paired_differences": [
+            0.007410607410607395,
+            0.007410607410607395,
+            -0.022873422873422755,
+            0.032071632071632106,
+            0.0,
+            0.0,
+            0.05871905871905869,
+            0.0,
+            -0.015932062990886564,
+            0.008728961670138147,
+            -0.015932062990886564,
+            -0.06916771622653983,
+            -0.047534447534447466,
+            0.007410607410607395,
+            0.007410607410607395,
+            0.007410607410607395
+          ],
+          "low": 5e-05,
+          "high": 0.0001,
+          "pairs": 16
+        },
+        "weight_decay": {
+          "high_minus_low": -0.008538483538483542,
+          "paired_differences": [
+            -0.02466102466102471,
+            -0.02466102466102471,
+            -0.05494505494505486,
+            0.0,
+            -0.05871905871905869,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.02466102466102471,
+            0.0,
+            -0.05323565323565327,
+            0.0,
+            0.0,
+            0.05494505494505486,
+            0.0
+          ],
+          "low": 0.0,
+          "high": 0.01,
+          "pairs": 16
+        },
+        "warmup_fraction": {
+          "high_minus_low": 0.005669530669530652,
+          "paired_differences": [
+            0.0,
+            0.0,
+            0.0,
+            0.05494505494505486,
+            0.0,
+            0.05871905871905869,
+            0.0,
+            0.0,
+            -0.02466102466102471,
+            0.0,
+            0.0,
+            -0.05323565323565327,
+            0.0,
+            0.0,
+            0.05494505494505486,
+            0.0
+          ],
+          "low": 0.0,
+          "high": 0.1,
+          "pairs": 16
+        }
+      },
+      "per_seed": {
+        "20261110": {
+          "status": "complete",
+          "metric": "macro_f1_ja",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.06070726070726069,
+              "paired_differences": [
+                0.05871905871905869,
+                0.05871905871905869,
+                0.02466102466102471,
+                0.0833800833800834,
+                0.0513084513084513,
+                0.0513084513084513,
+                0.10625350625350616,
+                0.0513084513084513
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": 0.010342310342310354,
+              "paired_differences": [
+                0.007410607410607395,
+                0.007410607410607395,
+                -0.022873422873422755,
+                0.032071632071632106,
+                0.0,
+                0.0,
+                0.05871905871905869,
+                0.0
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.020373270373270372,
+              "paired_differences": [
+                -0.02466102466102471,
+                -0.02466102466102471,
+                -0.05494505494505486,
+                0.0,
+                -0.05871905871905869,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": 0.014208014208014194,
+              "paired_differences": [
+                0.0,
+                0.0,
+                0.0,
+                0.05494505494505486,
+                0.0,
+                0.05871905871905869,
+                0.0,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": 0.008674908674908638,
+            "gradient_clip × weight_decay": 0.011387011387011398,
+            "gradient_clip × warmup_fraction": 0.0009435009435009578,
+            "learning_rate × weight_decay": 0.013274013274013313,
+            "learning_rate × warmup_fraction": -0.0009435009435009578,
+            "weight_decay × warmup_fraction": 0.028416028416028388
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        },
+        "20261111": {
+          "status": "complete",
+          "metric": "macro_f1_ja",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.01454028806969987,
+              "paired_differences": [
+                0.0,
+                0.02466102466102471,
+                0.0,
+                0.0,
+                -0.0316023845435609,
+                0.02334267040149396,
+                0.02334267040149396,
+                0.07657832363714723
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": -0.014700688230100012,
+              "paired_differences": [
+                -0.015932062990886564,
+                0.008728961670138147,
+                -0.015932062990886564,
+                -0.06916771622653983,
+                -0.047534447534447466,
+                0.007410607410607395,
+                0.007410607410607395,
+                0.007410607410607395
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": 0.003296303296303288,
+              "paired_differences": [
+                0.0,
+                0.02466102466102471,
+                0.0,
+                -0.05323565323565327,
+                0.0,
+                0.0,
+                0.05494505494505486,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": -0.00286895286895289,
+              "paired_differences": [
+                -0.02466102466102471,
+                0.0,
+                0.0,
+                -0.05323565323565327,
+                0.0,
+                0.0,
+                0.05494505494505486,
+                0.0
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": 0.016750063808887383,
+            "gradient_clip × weight_decay": 0.020879920879920855,
+            "gradient_clip × warmup_fraction": 0.03321043321043321,
+            "learning_rate × weight_decay": -0.00573790573790578,
+            "learning_rate × warmup_fraction": 0.006592606592606576,
+            "weight_decay × warmup_fraction": -0.020879920879920855
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        }
+      },
+      "two_way_difference_of_differences": {
+        "gradient_clip × learning_rate": 0.01271248624189801,
+        "gradient_clip × weight_decay": 0.016133466133466126,
+        "gradient_clip × warmup_fraction": 0.017076967076967084,
+        "learning_rate × weight_decay": 0.003768053768053767,
+        "learning_rate × warmup_fraction": 0.002824552824552809,
+        "weight_decay × warmup_fraction": 0.003768053768053767
+      },
+      "interpretation": "Descriptive fixed-split effects with two seeds; pairs share data. No p-values or causal mechanism proof."
     },
     "development_nll": {
-      "status": "pending",
-      "completed_runs": 8,
-      "expected_runs": 32
+      "status": "complete",
+      "metric": "development_nll",
+      "main_effects": {
+        "gradient_clip": {
+          "high_minus_low": -0.06422333082940176,
+          "paired_differences": [
+            -0.13581777102686532,
+            -0.1360933802466875,
+            -0.1103924536193821,
+            -0.117440142771152,
+            -0.1484766948609193,
+            -0.1471741754428577,
+            -0.1712052186853127,
+            -0.13335630951787958,
+            0.043732786997862316,
+            0.0179049097049635,
+            0.023925860042805835,
+            -0.008927367369753636,
+            0.00042385379920151234,
+            -0.012761689974524204,
+            -0.030889666025174844,
+            0.03897416572524759
+          ],
+          "low": null,
+          "high": 1.0,
+          "pairs": 16
+        },
+        "learning_rate": {
+          "high_minus_low": -0.46150845019309095,
+          "paired_differences": [
+            -0.48124620179496513,
+            -0.48210382004754604,
+            -0.4448434121165731,
+            -0.5335769401225443,
+            -0.4939051256290191,
+            -0.49318461524371626,
+            -0.5056561771825037,
+            -0.5494931068692719,
+            -0.3804947866896443,
+            -0.40776260424682054,
+            -0.42946914494139365,
+            -0.4418916032382354,
+            -0.4238037198883051,
+            -0.43842920392630824,
+            -0.48428467100937433,
+            -0.3939900701432342
+          ],
+          "low": 5e-05,
+          "high": 0.0001,
+          "pairs": 16
+        },
+        "weight_decay": {
+          "high_minus_low": -0.006653521249727977,
+          "paired_differences": [
+            -0.029510674348068866,
+            0.02511230929320485,
+            0.00689211533032319,
+            -0.02636081078179342,
+            -0.004085356940585649,
+            0.04376554676874034,
+            -0.015836408494070198,
+            -0.012542944856815286,
+            0.02464320516970897,
+            -9.838501177972248e-06,
+            -0.02433115308204037,
+            -0.03413883749259283,
+            0.00483627821465249,
+            -0.02684211557589511,
+            -0.055644672906416726,
+            0.01759701820717896
+          ],
+          "low": 0.0,
+          "high": 0.01,
+          "pairs": 16
+        },
+        "warmup_fraction": {
+          "high_minus_low": 0.01154510270670512,
+          "paired_differences": [
+            -0.03718067813808612,
+            0.017442305503187594,
+            -0.038038296390667026,
+            -0.07129122250278364,
+            -0.03745628735790829,
+            0.010394616351417696,
+            -0.03673577697260544,
+            -0.033442313335350526,
+            0.07387810490880287,
+            0.049225061237915924,
+            0.046610287351626645,
+            0.03680260294107418,
+            0.04805022761590405,
+            0.016371833825356452,
+            0.03342474357790093,
+            0.10666643469149661
+          ],
+          "low": 0.0,
+          "high": 0.1,
+          "pairs": 16
+        }
+      },
+      "per_seed": {
+        "20261110": {
+          "status": "complete",
+          "metric": "development_nll",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": -0.13749451827138204,
+              "paired_differences": [
+                -0.13581777102686532,
+                -0.1360933802466875,
+                -0.1103924536193821,
+                -0.117440142771152,
+                -0.1484766948609193,
+                -0.1471741754428577,
+                -0.1712052186853127,
+                -0.13335630951787958
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": -0.49800117487576745,
+              "paired_differences": [
+                -0.48124620179496513,
+                -0.48210382004754604,
+                -0.4448434121165731,
+                -0.5335769401225443,
+                -0.4939051256290191,
+                -0.49318461524371626,
+                -0.5056561771825037,
+                -0.5494931068692719
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.0015707780036331304,
+              "paired_differences": [
+                -0.029510674348068866,
+                0.02511230929320485,
+                0.00689211533032319,
+                -0.02636081078179342,
+                -0.004085356940585649,
+                0.04376554676874034,
+                -0.015836408494070198,
+                -0.012542944856815286
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": -0.02828845660534947,
+              "paired_differences": [
+                -0.03718067813808612,
+                0.017442305503187594,
+                -0.038038296390667026,
+                -0.07129122250278364,
+                -0.03745628735790829,
+                0.010394616351417696,
+                -0.03673577697260544,
+                -0.033442313335350526
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": -0.025117162710720564,
+            "gradient_clip × weight_decay": 0.008791974245900863,
+            "gradient_clip × warmup_fraction": 0.007957032553475657,
+            "learning_rate × weight_decay": -0.020782468393911624,
+            "learning_rate × warmup_fraction": -0.03317689139000435,
+            "weight_decay × warmup_fraction": 0.0181286062189345
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        },
+        "20261111": {
+          "status": "complete",
+          "metric": "development_nll",
+          "main_effects": {
+            "gradient_clip": {
+              "high_minus_low": 0.009047856612578509,
+              "paired_differences": [
+                0.043732786997862316,
+                0.0179049097049635,
+                0.023925860042805835,
+                -0.008927367369753636,
+                0.00042385379920151234,
+                -0.012761689974524204,
+                -0.030889666025174844,
+                0.03897416572524759
+              ],
+              "low": null,
+              "high": 1.0,
+              "pairs": 8
+            },
+            "learning_rate": {
+              "high_minus_low": -0.42501572551041444,
+              "paired_differences": [
+                -0.3804947866896443,
+                -0.40776260424682054,
+                -0.42946914494139365,
+                -0.4418916032382354,
+                -0.4238037198883051,
+                -0.43842920392630824,
+                -0.48428467100937433,
+                -0.3939900701432342
+              ],
+              "low": 5e-05,
+              "high": 0.0001,
+              "pairs": 8
+            },
+            "weight_decay": {
+              "high_minus_low": -0.011736264495822823,
+              "paired_differences": [
+                0.02464320516970897,
+                -9.838501177972248e-06,
+                -0.02433115308204037,
+                -0.03413883749259283,
+                0.00483627821465249,
+                -0.02684211557589511,
+                -0.055644672906416726,
+                0.01759701820717896
+              ],
+              "low": 0.0,
+              "high": 0.01,
+              "pairs": 8
+            },
+            "warmup_fraction": {
+              "high_minus_low": 0.05137866201875971,
+              "paired_differences": [
+                0.07387810490880287,
+                0.049225061237915924,
+                0.046610287351626645,
+                0.03680260294107418,
+                0.04805022761590405,
+                0.016371833825356452,
+                0.03342474357790093,
+                0.10666643469149661
+              ],
+              "low": 0.0,
+              "high": 0.1,
+              "pairs": 8
+            }
+          },
+          "two_way_difference_of_differences": {
+            "gradient_clip × learning_rate": -0.02022238146278199,
+            "gradient_clip × weight_decay": -0.006554217038594545,
+            "gradient_clip × warmup_fraction": -0.0005007041821903924,
+            "learning_rate × weight_decay": -0.024786293645289836,
+            "learning_rate × warmup_fraction": 0.008994710243529797,
+            "weight_decay × warmup_fraction": 0.0017756423104021701
+          },
+          "interpretation": "Descriptive fixed-split effects, not independent samples or causal mechanism proof."
+        }
+      },
+      "two_way_difference_of_differences": {
+        "gradient_clip × learning_rate": -0.022669772086751278,
+        "gradient_clip × weight_decay": 0.001118878603653159,
+        "gradient_clip × warmup_fraction": 0.0037281641856426323,
+        "learning_rate × weight_decay": -0.02278438101960073,
+        "learning_rate × warmup_fraction": -0.012091090573237276,
+        "weight_decay × warmup_fraction": 0.009952124264668336
+      },
+      "interpretation": "Descriptive fixed-split effects with two seeds; pairs share data. No p-values or causal mechanism proof."
     }
   },
   "runs": [
@@ -640,6 +1970,1830 @@
       "predictions_sha256": "a527036acc1a1bccabf17e371190bd8630e94d771607a2a686bfde0967305048",
       "telemetry_sha256": "421dbe66fd79811a4387e129f10a8163e782b749ee93521e5475705323bd3f94",
       "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 569 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-09"
+      },
+      "completed_at": "2026-11-26T10:12:08.754217+00:00",
+      "mlflow_run_id": "731a1ef01e9b416a9ad81594780486bb",
+      "metrics": {
+        "accuracy": 0.8271604938271605,
+        "macro_f1": 0.7537227949599083,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.757025857025857,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5333333333333333,
+            "recall": 0.5333333333333333,
+            "f1": 0.5333333333333333,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.2060421613978571,
+        "training_seconds": 244.69090485100014,
+        "loading_seconds": 1.990526859000056,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 24.330964776252706,
+        "max_gradient_norm": 56.962764739990234,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.022661961382254958,
+        "final_train_loss": 1.3529401751446732
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "95da337af8d3d5c00cc59556c3fdf04fe9da1261b055c67f4979164aa361b751",
+      "predictions_sha256": "c4c7c2640c92d5752294173826035c087f895169fc737e5a523557a896b4e9e6",
+      "telemetry_sha256": "817e11ede323603115f86058f13ed325635eb94502f31113c77cafba318a4f46",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 576 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-10"
+      },
+      "completed_at": "2026-11-26T10:16:29.616945+00:00",
+      "mlflow_run_id": "12c8ab5768a547a5b0dd9ac56d1aac7e",
+      "metrics": {
+        "accuracy": 0.8395061728395061,
+        "macro_f1": 0.7773365415338068,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7765988765988766,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5625,
+            "recall": 0.6,
+            "f1": 0.5806451612903226,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 1.0327681030130835,
+        "training_seconds": 237.4459743309999,
+        "loading_seconds": 1.9480197200000475,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 24.017185812691846,
+        "max_gradient_norm": 56.94347381591797,
+        "clip_fraction": 0.9333333333333333,
+        "mean_adapter_update_l2": 0.021672901041650525,
+        "final_train_loss": 1.2566685493564431
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "29bc27f09d60d27070d939ffa49f7f8a77f649c3bd07170c8dd11d9425ad1404",
+      "predictions_sha256": "5c596b48dcd58d746b84be892e270c7c15c4e8dd8cee4463b09028fe7d8533b9",
+      "telemetry_sha256": "ec276d80cae22626fdb8e974da4e3a2aef07ebf88b217d5f38cbd4b91e8235ac",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 496 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-11"
+      },
+      "completed_at": "2026-11-26T10:20:51.134693+00:00",
+      "mlflow_run_id": "cc735f6770914f0ab8e53a6661c4884a",
+      "metrics": {
+        "accuracy": 0.8395061728395061,
+        "macro_f1": 0.7773365415338068,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7765988765988766,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5625,
+            "recall": 0.6,
+            "f1": 0.5806451612903226,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 1.0765336497818239,
+        "training_seconds": 238.04796361699982,
+        "loading_seconds": 1.955095498999981,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 24.316445499658585,
+        "max_gradient_norm": 56.899017333984375,
+        "clip_fraction": 0.9333333333333333,
+        "mean_adapter_update_l2": 0.02142068328879153,
+        "final_train_loss": 1.2908820697872296
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "71ce81d3144fd5822007db8b49402b4f3334304b4458b756687d5d50d1df3c35",
+      "predictions_sha256": "bd908ae2ac2a89e3ffde21f38172170a9696b80efcaabdc4ccc8be925ffc934f",
+      "telemetry_sha256": "de0e8865e18c2a29af852d4cc1e9f07556400880903f554e22f28f82b34bd850",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 453 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-12"
+      },
+      "completed_at": "2026-11-26T10:25:11.890066+00:00",
+      "mlflow_run_id": "7b2bcba0cb914df2b7a735e7ae7bab19",
+      "metrics": {
+        "accuracy": 0.8148148148148148,
+        "macro_f1": 0.7580823717046629,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7594960594960596,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516,
+        "negative_precision": 0.9347826086956522,
+        "negative_recall": 0.8775510204081632,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            43,
+            6,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9347826086956522,
+            "recall": 0.8775510204081632,
+            "f1": 0.9052631578947369,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5,
+            "recall": 0.6,
+            "f1": 0.5454545454545454,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.686757663212225,
+        "training_seconds": 237.3253385529997,
+        "loading_seconds": 1.9577595609998752,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 20.15101771155993,
+        "max_gradient_norm": 56.899383544921875,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.03933706183452159,
+        "final_train_loss": 0.6432317518555614
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "9e4cb5ce3516be34f685f6c826bd0a16b8eee2ce8bc05a1df6babee5d7bbda92",
+      "predictions_sha256": "762d741f61151cebde9d74d5837441f8d81279e5df60aabaf1ae78b3522b8d86",
+      "telemetry_sha256": "5b3bb5223d791a5d858e15baee44481a9279ee2ecbb1a856515e33a40c8f689c",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 453 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-13"
+      },
+      "completed_at": "2026-11-26T10:29:32.914742+00:00",
+      "mlflow_run_id": "8c82b1c03c044d2ea83b447f7ec9c523",
+      "metrics": {
+        "accuracy": 0.8271604938271605,
+        "macro_f1": 0.7537227949599083,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.757025857025857,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5333333333333333,
+            "recall": 0.5333333333333333,
+            "f1": 0.5333333333333333,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.168861483259771,
+        "training_seconds": 237.1498144100001,
+        "loading_seconds": 1.9641781709997304,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 24.96829855454465,
+        "max_gradient_norm": 56.89848709106445,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.021247456828132272,
+        "final_train_loss": 1.3453815191207703
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "fa0299574a3f270df0734245d9e7f1f81f60b7d9833172a1f8d62d7f872ffdd0",
+      "predictions_sha256": "a35209ed1170d29ce7c9d654978e3c69500b66f0d6a565d439751192bc14d864",
+      "telemetry_sha256": "2d163025cfa89d6e21ee69111b47a4578ae7d521506600703587c78182487193",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 453 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-14"
+      },
+      "completed_at": "2026-11-26T10:33:54.124527+00:00",
+      "mlflow_run_id": "bdfa0d6e0f7945f39826893ad37052de",
+      "metrics": {
+        "accuracy": 0.8024691358024691,
+        "macro_f1": 0.7350877192982456,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7411810411810412,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.6967032967032968,
+        "negative_precision": 0.9347826086956522,
+        "negative_recall": 0.8775510204081632,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            43,
+            6,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9347826086956522,
+            "recall": 0.8775510204081632,
+            "f1": 0.9052631578947369,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.47058823529411764,
+            "recall": 0.5333333333333333,
+            "f1": 0.5,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 0.7316880749332152,
+        "training_seconds": 237.81249982300005,
+        "loading_seconds": 1.9489906110002266,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 17.62788098330299,
+        "max_gradient_norm": 56.90873336791992,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.04169205447736506,
+        "final_train_loss": 0.7009234194538241
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "dd198c3b89e4e98e093d3962078576da19f4aab4c4b37e382b7f0ef9b666fb0b",
+      "predictions_sha256": "e2a371c82f0ed41a600fc13d2f785f317dd4c9e83dead4c8f0d1d8bd64fbec67",
+      "telemetry_sha256": "7eee1212750212ad2433207d4d2f920eb0de85612cef167d7853d19f75570301",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 453 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-15"
+      },
+      "completed_at": "2026-11-26T10:38:15.516707+00:00",
+      "mlflow_run_id": "13faa0c6224c4cfbaf676dda12847136",
+      "metrics": {
+        "accuracy": 0.8271604938271605,
+        "macro_f1": 0.7537227949599083,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.757025857025857,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5333333333333333,
+            "recall": 0.5333333333333333,
+            "f1": 0.5333333333333333,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.0661390334304062,
+        "training_seconds": 238.01008514700015,
+        "loading_seconds": 1.950257830999817,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 23.903881670286257,
+        "max_gradient_norm": 56.979732513427734,
+        "clip_fraction": 0.9666666666666667,
+        "mean_adapter_update_l2": 0.023207491228822617,
+        "final_train_loss": 1.264974122457066
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "4032738b3e849706d70f26084e654cae46a22648e66a3bcc45fb56b225500d71",
+      "predictions_sha256": "649bb0bdadc4f31c560de53ee0458b3046eff256c068ff9c53b80b701da045a6",
+      "telemetry_sha256": "62bd5c192b7a3d74731672e1efd86ba23728ec9d50e57d606fa552d11a077bd4",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 453 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-16"
+      },
+      "completed_at": "2026-11-26T10:42:36.292571+00:00",
+      "mlflow_run_id": "c9ea7d331033464e88de978de495d213",
+      "metrics": {
+        "accuracy": 0.8148148148148148,
+        "macro_f1": 0.7442652329749103,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7488055154721822,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7195767195767195,
+        "negative_precision": 0.9361702127659575,
+        "negative_recall": 0.8979591836734694,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            44,
+            5,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9361702127659575,
+            "recall": 0.8979591836734694,
+            "f1": 0.9166666666666666,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5,
+            "recall": 0.5333333333333333,
+            "f1": 0.5161290322580645,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.1765314870497883,
+        "training_seconds": 237.25510983499998,
+        "loading_seconds": 1.9711897739998676,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 24.01933960703512,
+        "max_gradient_norm": 56.97774887084961,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.022502051654737443,
+        "final_train_loss": 1.3380006482677564
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "935297ce6aac796d1a3332206b8323b9b76f8a6bf3399ce4ca92ff477d17a9d4",
+      "predictions_sha256": "3e668d8aacc3c9e9e08db5f51bb5c6cfccf7b2c8dd0edc8860ec29acd9ed8e83",
+      "telemetry_sha256": "74565d2925d3dd22a5ac4b518047bde77f78193d166d0fb9e915d82dd0530895",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 464 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-17"
+      },
+      "completed_at": "2026-11-26T10:46:56.965721+00:00",
+      "mlflow_run_id": "d4216b28b6854fd6a4fa192f9d28cbd2",
+      "metrics": {
+        "accuracy": 0.8024691358024691,
+        "macro_f1": 0.7488527325823947,
+        "primary_score": 0.7504962470479712,
+        "mean_three_language_macro_f1": 0.7508802819147647,
+        "macro_f1_de": 0.6963748894783377,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516,
+        "negative_precision": 0.9333333333333333,
+        "negative_recall": 0.8571428571428571,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            42,
+            7,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9333333333333333,
+            "recall": 0.8571428571428571,
+            "f1": 0.8936170212765957,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.47368421052631576,
+            "recall": 0.6,
+            "f1": 0.5294117647058824,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.7054387713328869,
+        "training_seconds": 237.27733786299996,
+        "loading_seconds": 1.9621198509994429,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 18.16931141043703,
+        "max_gradient_norm": 45.58124923706055,
+        "clip_fraction": 0.9666666666666667,
+        "mean_adapter_update_l2": 0.041380058803285165,
+        "final_train_loss": 0.6915007901015137
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "340b3f54592478a5ed29352e01275fc9a551bbf211dce5eb6e2379788a50c796",
+      "predictions_sha256": "c7bb4377734c867c092e3af15fbae92ac3eed1060482070fadfefa47473246b1",
+      "telemetry_sha256": "e02e8223c664135fc04bf4f66214ed2623181a3211a53649c43f7cd38a943d66",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 463 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-18"
+      },
+      "completed_at": "2026-11-26T10:51:20.218857+00:00",
+      "mlflow_run_id": "914aded59cd74baeb2e589e5c9a3d5f4",
+      "metrics": {
+        "accuracy": 0.8148148148148148,
+        "macro_f1": 0.7580823717046629,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7594960594960596,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516,
+        "negative_precision": 0.9347826086956522,
+        "negative_recall": 0.8775510204081632,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            43,
+            6,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9347826086956522,
+            "recall": 0.8775510204081632,
+            "f1": 0.9052631578947369,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5,
+            "recall": 0.6,
+            "f1": 0.5454545454545454,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.5987723366413903,
+        "training_seconds": 238.6011987740003,
+        "loading_seconds": 1.9556648499992662,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 14.52256196141243,
+        "max_gradient_norm": 37.51089859008789,
+        "clip_fraction": 0.9333333333333333,
+        "mean_adapter_update_l2": 0.043934897853372,
+        "final_train_loss": 0.5615209660799293
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "87f82e9806bca197ffcfdf6cda860cf923387875928788c44e97d91c8437b793",
+      "predictions_sha256": "06f52005e783fdcfcb786e9acbec6606dc9d5707818d364e67152702703d91e2",
+      "telemetry_sha256": "265056d976e952b5da1f8bf033ad25db4df14de551cbe062f7bb63094f7a4d1d",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 463 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-19"
+      },
+      "completed_at": "2026-11-26T10:55:41.621501+00:00",
+      "mlflow_run_id": "84567cbcb0be4da08aa3c154aca1d941",
+      "metrics": {
+        "accuracy": 0.8395061728395061,
+        "macro_f1": 0.7634998827117053,
+        "primary_score": 0.7850276963180189,
+        "mean_three_language_macro_f1": 0.7714310456245941,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8478331704138156,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9387755102040817,
+        "negative_recall": 0.9387755102040817,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            46,
+            3,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9387755102040817,
+            "recall": 0.9387755102040817,
+            "f1": 0.9387755102040817,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5714285714285714,
+            "recall": 0.5333333333333333,
+            "f1": 0.5517241379310345,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.0830570076507646,
+        "training_seconds": 237.67948256700038,
+        "loading_seconds": 2.000879017000443,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 21.913951290771365,
+        "max_gradient_norm": 56.81752395629883,
+        "clip_fraction": 0.9333333333333333,
+        "mean_adapter_update_l2": 0.023760578812410435,
+        "final_train_loss": 1.263402996619486
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "2aa643c5437287b523119fd50f68c998410de6698ef2b961d3cd92b810b2614b",
+      "predictions_sha256": "416d210cd70c628d0e259d2b8832fa404aa284b1cb9daec6affcb63dc8b8bca6",
+      "telemetry_sha256": "dca7f7e9f041f5e6200e1f28965c77b6c731cb351fbe16a7ec4dde65a52aa497",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 585 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-20"
+      },
+      "completed_at": "2026-11-26T11:00:02.896094+00:00",
+      "mlflow_run_id": "6690346a0962480f8b426d99df04450c",
+      "metrics": {
+        "accuracy": 0.7901234567901234,
+        "macro_f1": 0.7398451853859823,
+        "primary_score": 0.7504962470479712,
+        "mean_three_language_macro_f1": 0.7430993917809333,
+        "macro_f1_de": 0.6963748894783377,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7283056812468577,
+        "negative_precision": 0.9318181818181818,
+        "negative_recall": 0.8367346938775511,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            41,
+            8,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9318181818181818,
+            "recall": 0.8367346938775511,
+            "f1": 0.8817204301075269,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.45,
+            "recall": 0.6,
+            "f1": 0.5142857142857142,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.6539931557486055,
+        "training_seconds": 237.71172112600016,
+        "loading_seconds": 1.9554986690000078,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 13.906907212734222,
+        "max_gradient_norm": 34.983394622802734,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.04389936748581628,
+        "final_train_loss": 0.5557814417343404
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "7cb081dd251ead4f5e6534a348032531bb186df713865f4719fa946c5647f42a",
+      "predictions_sha256": "4d39d7fe123c90daf1597473e43558a7413914518487f8954b462ed54e17016c",
+      "telemetry_sha256": "bdce6be7669c5a2fb36b3a67b4c3f23551ea54dde6bee78d7165cd248cc365e1",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 533 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-21"
+      },
+      "completed_at": "2026-11-26T11:04:24.282909+00:00",
+      "mlflow_run_id": "c40cd7234d874c80bf55a5a35a60e90f",
+      "metrics": {
+        "accuracy": 0.8024691358024691,
+        "macro_f1": 0.7350877192982456,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7411810411810412,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.6967032967032968,
+        "negative_precision": 0.9347826086956522,
+        "negative_recall": 0.8775510204081632,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            43,
+            6,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9347826086956522,
+            "recall": 0.8775510204081632,
+            "f1": 0.9052631578947369,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.47058823529411764,
+            "recall": 0.5333333333333333,
+            "f1": 0.5,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 0.654417009547807,
+        "training_seconds": 237.79618934300015,
+        "loading_seconds": 1.966970279000634,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 14.780711816747983,
+        "max_gradient_norm": 37.40128707885742,
+        "clip_fraction": 0.9333333333333333,
+        "mean_adapter_update_l2": 0.043509080346363284,
+        "final_train_loss": 0.5863896794737604
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "732bf5238ebd623ec0922a9130a09f3564801178f8161dc394af326bc3e734ec",
+      "predictions_sha256": "6c12ea73cc89b9007e1c0c92065be86ee62d18d005f232d47bb9b553f175cd5a",
+      "telemetry_sha256": "c9a163df03a9de8909800524d6e394796603858e1d4fc57f79bfa350110ac3fc",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 513 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-22"
+      },
+      "completed_at": "2026-11-26T11:08:46.012510+00:00",
+      "mlflow_run_id": "f8ee879333e84635a39046318182cc45",
+      "metrics": {
+        "accuracy": 0.8024691358024691,
+        "macro_f1": 0.7203703703703703,
+        "primary_score": 0.7111111111111112,
+        "mean_three_language_macro_f1": 0.7139329805996474,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.7000000000000001,
+        "macro_f1_ja": 0.7195767195767195,
+        "negative_precision": 0.9361702127659575,
+        "negative_recall": 0.8979591836734694,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            44,
+            5,
+            0
+          ],
+          [
+            3,
+            7,
+            5
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9361702127659575,
+            "recall": 0.8979591836734694,
+            "f1": 0.9166666666666666,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.4666666666666667,
+            "recall": 0.4666666666666667,
+            "f1": 0.4666666666666667,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7368421052631579,
+            "recall": 0.8235294117647058,
+            "f1": 0.7777777777777778,
+            "support": 17
+          }
+        },
+        "development_nll": 1.1083660473470527,
+        "training_seconds": 238.25803291899956,
+        "loading_seconds": 1.9474763459993483,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 22.623883843732376,
+        "max_gradient_norm": 56.648189544677734,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.023119972134009004,
+        "final_train_loss": 1.2419895550392053
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "e4014672c9e59f9339805b9ccd8d3e244d7a48e292e35e244183907d99fbc67a",
+      "predictions_sha256": "26f69c9e119c6a2958a999c6cf22c2d0831c7f2715fccfb5676f75333a91467f",
+      "telemetry_sha256": "0329ae182f5d1c9fc24f73a6c242dde03060ce5c6ee0f8f2a8b926bc08b7322a",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 514 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-23"
+      },
+      "completed_at": "2026-11-26T11:13:07.953183+00:00",
+      "mlflow_run_id": "f60a68bbd70b4b30bd191d16f6270387",
+      "metrics": {
+        "accuracy": 0.8148148148148148,
+        "macro_f1": 0.7294571500046083,
+        "primary_score": 0.7111111111111112,
+        "mean_three_language_macro_f1": 0.7221533221533223,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.7000000000000001,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            7,
+            5
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5,
+            "recall": 0.4666666666666667,
+            "f1": 0.4827586206896552,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7368421052631579,
+            "recall": 0.8235294117647058,
+            "f1": 0.7777777777777778,
+            "support": 17
+          }
+        },
+        "development_nll": 1.1083562088458747,
+        "training_seconds": 238.40669529500065,
+        "loading_seconds": 1.9553314169997975,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 22.4097951627026,
+        "max_gradient_norm": 50.956336975097656,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.02299973991466686,
+        "final_train_loss": 1.2917103851149931
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "2387c30cba896b939ad99e09280ce6e015dd7421dd92faed5eb255b1f27d6747",
+      "predictions_sha256": "736eb9db126df26470448859fbd122a90f97344e895fcf276b913770647e883f",
+      "telemetry_sha256": "47829610b7180b36b8d11296fbb6c015457e55780f8dc17b853c3c02dade967e",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 513 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-24"
+      },
+      "completed_at": "2026-11-26T11:17:29.276494+00:00",
+      "mlflow_run_id": "627f51514f0b4cf687e5669947a7692b",
+      "metrics": {
+        "accuracy": 0.8148148148148148,
+        "macro_f1": 0.7580823717046629,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7594960594960596,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516,
+        "negative_precision": 0.9347826086956522,
+        "negative_recall": 0.8775510204081632,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            43,
+            6,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9347826086956522,
+            "recall": 0.8775510204081632,
+            "f1": 0.9052631578947369,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5,
+            "recall": 0.6,
+            "f1": 0.5454545454545454,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.6878417531257079,
+        "training_seconds": 237.853089317,
+        "loading_seconds": 1.9586718539994763,
+        "peak_training_allocated_bytes": 8778008064,
+        "mean_gradient_norm": 17.59258951321244,
+        "max_gradient_norm": 43.695648193359375,
+        "clip_fraction": 0.9666666666666667,
+        "mean_adapter_update_l2": 0.040871807676739993,
+        "final_train_loss": 0.6744458151666765
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "00b707d1bd2a86de02d6fa83c92b02291ae14c73900e071f7ebce77bfe7caa35",
+      "predictions_sha256": "81d10ab9ec0230e92115aba41eda20fcab276e2edf60dfd28935657351527531",
+      "telemetry_sha256": "46ad808f46a7fbdc701a673c3f733917c1c33dbea98b803ed39fe2c1ff3234a3",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 533 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-25"
+      },
+      "completed_at": "2026-11-26T11:21:50.931591+00:00",
+      "mlflow_run_id": "20565d3bd8864f15a18af0ef597f8f4c",
+      "metrics": {
+        "accuracy": 0.8271604938271605,
+        "macro_f1": 0.7537227949599083,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.757025857025857,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5333333333333333,
+            "recall": 0.5333333333333333,
+            "f1": 0.5333333333333333,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.1262709570520162,
+        "training_seconds": 238.0706688299997,
+        "loading_seconds": 1.960444653000195,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 23.190734946976104,
+        "max_gradient_norm": 58.23814010620117,
+        "clip_fraction": 0.9666666666666667,
+        "mean_adapter_update_l2": 0.02276657261730482,
+        "final_train_loss": 1.32491351060557
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "412fd20a4072dcf3f9f9013415a4efa084593e4f9a99305059931b2a7157c849",
+      "predictions_sha256": "f94803e29927ca86c23329f5ac95ce749089f2209344bdfe39a63e057df82340",
+      "telemetry_sha256": "0ea709a7dba3e123359228f0812396973d35800e8067a06c322124c016fb5b75",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 532 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-26"
+      },
+      "completed_at": "2026-11-26T11:26:12.215049+00:00",
+      "mlflow_run_id": "0703fbb93ce8436cb0d5775d99cbac3d",
+      "metrics": {
+        "accuracy": 0.8395061728395061,
+        "macro_f1": 0.7634998827117053,
+        "primary_score": 0.7850276963180189,
+        "mean_three_language_macro_f1": 0.7714310456245941,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8478331704138156,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9387755102040817,
+        "negative_recall": 0.9387755102040817,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            46,
+            3,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9387755102040817,
+            "recall": 0.9387755102040817,
+            "f1": 0.9387755102040817,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5714285714285714,
+            "recall": 0.5333333333333333,
+            "f1": 0.5517241379310345,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.0782207294361121,
+        "training_seconds": 237.82672044100036,
+        "loading_seconds": 1.9537112439993507,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 22.615770049579442,
+        "max_gradient_norm": 59.090030670166016,
+        "clip_fraction": 0.9666666666666667,
+        "mean_adapter_update_l2": 0.023764429125003518,
+        "final_train_loss": 1.2625149920922716
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "35a8dc0f4dfb310f9ef50fb4b01ba64a10b296b246192f88cf23399e8c3e3f2f",
+      "predictions_sha256": "56d0918af690dd95af4c0b36415e696cb67bdc7e72fe70def661d77d49dab613",
+      "telemetry_sha256": "fbe1c8baf863c987b8752d39bb73a12a22469ca3e6f0eb0bc4f2d17745e9044b",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 526 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-27"
+      },
+      "completed_at": "2026-11-26T11:30:33.886297+00:00",
+      "mlflow_run_id": "730f04065f5f40919edc3744589a07e6",
+      "metrics": {
+        "accuracy": 0.8271604938271605,
+        "macro_f1": 0.7537227949599083,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.757025857025857,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5333333333333333,
+            "recall": 0.5333333333333333,
+            "f1": 0.5333333333333333,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.0344879424382498,
+        "training_seconds": 237.99145175800004,
+        "loading_seconds": 1.9596593579999535,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 21.470686700319252,
+        "max_gradient_norm": 52.052490234375,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.024476733473905672,
+        "final_train_loss": 1.1872160001948326
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "78b484b44b68f794d675620252671a318eb3dbf7ab9f3e76029f10fc78893415",
+      "predictions_sha256": "54dfb9a308033d202b061e84c651e673fead1532d339a19f6ebbc20a64b8480a",
+      "telemetry_sha256": "14e25ba41808407703193f31b9b58b48d76234f18d4029358795f1f93e08bba9",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 526 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-28"
+      },
+      "completed_at": "2026-11-26T11:34:55.810923+00:00",
+      "mlflow_run_id": "e5d16abd9e1341ec8021ba1806f01571",
+      "metrics": {
+        "accuracy": 0.7777777777777778,
+        "macro_f1": 0.7132234536326608,
+        "primary_score": 0.7214285714285715,
+        "mean_three_language_macro_f1": 0.7059757236227825,
+        "macro_f1_de": 0.7428571428571429,
+        "macro_f1_en": 0.7000000000000001,
+        "macro_f1_ja": 0.6750700280112044,
+        "negative_precision": 0.9534883720930233,
+        "negative_recall": 0.8367346938775511,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            41,
+            8,
+            0
+          ],
+          [
+            2,
+            8,
+            5
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9534883720930233,
+            "recall": 0.8367346938775511,
+            "f1": 0.8913043478260869,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.42105263157894735,
+            "recall": 0.5333333333333333,
+            "f1": 0.47058823529411764,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7368421052631579,
+            "recall": 0.8235294117647058,
+            "f1": 0.7777777777777778,
+            "support": 17
+          }
+        },
+        "development_nll": 0.6664646056076393,
+        "training_seconds": 237.94886944800055,
+        "loading_seconds": 1.9644627970001238,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 17.145683982471624,
+        "max_gradient_norm": 39.35005569458008,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.04182177988113835,
+        "final_train_loss": 0.6290486961892114
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "efdfdd384e4696dc7f37fb1fa559e8ab41df233f66696a02ba2e9158c82513dd",
+      "predictions_sha256": "82f10bbe6d547e8f4424c409efea7ab3c247897dcd6091f9c5854ace8c7dd817",
+      "telemetry_sha256": "bf2e4511040d2a482457569e3437d6b35c7e01c7243bf0ea1579aa4507d6475d",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 526 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-29"
+      },
+      "completed_at": "2026-11-26T11:39:17.171320+00:00",
+      "mlflow_run_id": "b7a540637baf4379a8777d17611b6ce8",
+      "metrics": {
+        "accuracy": 0.7901234567901234,
+        "macro_f1": 0.7398451853859823,
+        "primary_score": 0.7504962470479712,
+        "mean_three_language_macro_f1": 0.7430993917809333,
+        "macro_f1_de": 0.6963748894783377,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7283056812468577,
+        "negative_precision": 0.9318181818181818,
+        "negative_recall": 0.8367346938775511,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            41,
+            8,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9318181818181818,
+            "recall": 0.8367346938775511,
+            "f1": 0.8817204301075269,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.45,
+            "recall": 0.6,
+            "f1": 0.5142857142857142,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.6296620026665651,
+        "training_seconds": 237.82565098299983,
+        "loading_seconds": 2.010660117999578,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 14.58593055307865,
+        "max_gradient_norm": 35.28329086303711,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.04387814759975299,
+        "final_train_loss": 0.5730904609135585
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "fee8be999f9c10ab01ce443beb3b95aebb22f338bb48939dd804d8a19dfc5223",
+      "predictions_sha256": "3c9b9ac4fcdf9458ad34a89907c5bb21e752469f8244fba1c0bea5c6ebabe57c",
+      "telemetry_sha256": "3a0adb9493f01ed731ae964a50117be786adc2c8d3123c787dd8fbc3694032c1",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 526 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-30"
+      },
+      "completed_at": "2026-11-26T11:43:38.524660+00:00",
+      "mlflow_run_id": "25e03b1cce80449b982238f8a2acc278",
+      "metrics": {
+        "accuracy": 0.8271604938271605,
+        "macro_f1": 0.7537227949599083,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.757025857025857,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            8,
+            4
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5333333333333333,
+            "recall": 0.5333333333333333,
+            "f1": 0.5333333333333333,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7777777777777778,
+            "recall": 0.8235294117647058,
+            "f1": 0.8,
+            "support": 17
+          }
+        },
+        "development_nll": 1.099428841476121,
+        "training_seconds": 237.7543528690003,
+        "loading_seconds": 1.9574283400006607,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 22.641951887992523,
+        "max_gradient_norm": 52.661380767822266,
+        "clip_fraction": 0.9666666666666667,
+        "mean_adapter_update_l2": 0.0227199053314204,
+        "final_train_loss": 1.3203577049300235
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "b3f08e14dd5f4f42a473f99ee156edcdcdf571b66fc38854b4f4277ae56f1379",
+      "predictions_sha256": "da99e4ba8837f6412f1141eb269444e2092fccec0e4aade2b30865802f119bac",
+      "telemetry_sha256": "c4678db7a5f0855ff203f6a4ba147e020cc95e6943384f5e6e73a6a0bd331492",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 526 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-31"
+      },
+      "completed_at": "2026-11-26T11:47:59.653037+00:00",
+      "mlflow_run_id": "fb28c20a3b774803b18d4a3aa2176a4b",
+      "metrics": {
+        "accuracy": 0.8271604938271605,
+        "macro_f1": 0.7388510959939532,
+        "primary_score": 0.7279569892473119,
+        "mean_three_language_macro_f1": 0.7333839075774561,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.7336917562724015,
+        "macro_f1_ja": 0.7442377442377442,
+        "negative_precision": 0.9387755102040817,
+        "negative_recall": 0.9387755102040817,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            46,
+            3,
+            0
+          ],
+          [
+            3,
+            7,
+            5
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9387755102040817,
+            "recall": 0.9387755102040817,
+            "f1": 0.9387755102040817,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5384615384615384,
+            "recall": 0.4666666666666667,
+            "f1": 0.5,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.7368421052631579,
+            "recall": 0.8235294117647058,
+            "f1": 0.7777777777777778,
+            "support": 17
+          }
+        },
+        "development_nll": 1.0591311476079588,
+        "training_seconds": 237.67532049199963,
+        "loading_seconds": 1.9564467039999727,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 21.404927907511592,
+        "max_gradient_norm": 51.904293060302734,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.024578959421099476,
+        "final_train_loss": 1.210271863135259
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "ee7695f7d53fd15baa9d6660c6ccf035b5c8659cac941d2431ecbe3a73d251a6",
+      "predictions_sha256": "2339e588afe8a450407d4eb0c7c759142e8f430134bb64461b4ba7f64ca541d8",
+      "telemetry_sha256": "ae9661bb0c4dee74989ee305082520d8af95afed718f72bb7ce9ce0f02595d8e",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 526 MiB"
+    },
+    {
+      "config": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "block": "factorial",
+        "id": "run-32"
+      },
+      "completed_at": "2026-11-26T11:52:21.204942+00:00",
+      "mlflow_run_id": "237e8053565045a6a0754a0727d4960c",
+      "metrics": {
+        "accuracy": 0.8024691358024691,
+        "macro_f1": 0.7567964383821161,
+        "primary_score": 0.7737373737373738,
+        "mean_three_language_macro_f1": 0.758593476240535,
+        "macro_f1_de": 0.7428571428571429,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7283056812468577,
+        "negative_precision": 0.9534883720930233,
+        "negative_recall": 0.8367346938775511,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            41,
+            8,
+            0
+          ],
+          [
+            2,
+            10,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9534883720930233,
+            "recall": 0.8367346938775511,
+            "f1": 0.8913043478260869,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.47619047619047616,
+            "recall": 0.6666666666666666,
+            "f1": 0.5555555555555556,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.7006034431002321,
+        "training_seconds": 238.03488871399895,
+        "loading_seconds": 1.9674149319998833,
+        "peak_training_allocated_bytes": 8778560000,
+        "mean_gradient_norm": 16.96130246942242,
+        "max_gradient_norm": 38.06940460205078,
+        "clip_fraction": 0.0,
+        "mean_adapter_update_l2": 0.04161187030064563,
+        "final_train_loss": 0.6433018829975927
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "b4c2eea2c72ded52b48268b09f6c5c2514e4618d863377eacca56fdf9d9f9a55",
+      "predictions_sha256": "bdc36a249d03182145a53b08011e226fd8e1342e673e208bbb1a92dfb4b2b6e6",
+      "telemetry_sha256": "cdc60ce16806f3e98a4a70d93c765ed2c66a8fe0cff4ae15cf8e89dfdf5752c2",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 526 MiB"
     }
   ]
 }

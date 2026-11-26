@@ -53,7 +53,7 @@ Alle verlinkten Dateien, die aktuelle Anwendung und ihre Tests liegen auf diesem
 Hauptzweig. `second-path` bleibt nur als historische Entwicklungskennung in
 Messprotokollen und MLflow erhalten. Für die Präsentation ist kein Branchwechsel nötig.
 
-**Zusätzliche Entwicklungsstudie:** [32 Qwen-LoRA-Läufe zu Clipping, AdamW-Weight-Decay, Lernrate und Warmup](reports/optimizer_ablation/README.md). Die Warteschlange läuft mit eingefrorenem Versuchsplan. Ergebnisse auf GitHub sind geprüfte Momentaufnahmen; den aktuellen Fortschritt zeigen CLI und MLflow. Testauswertung und Serving-Auswahl bleiben unverändert.
+**Zusätzliche Entwicklungsstudie abgeschlossen:** [32 Qwen-LoRA-Fits zu Clipping, AdamW-Weight-Decay, Lernrate und Warmup](reports/optimizer_ablation/README.md). Clipping verbessert den DE/EN-Entwicklungswert im Mittel um 1,75 F1-Prozentpunkte; Sprach-, Seed- und Wechselwirkungseffekte stehen in der [Abschlussauswertung](reports/optimizer_ablation/interpretation-v1.md). Alle 32 Fits und MLflow-Nachweise sind geprüft. Die endgültige Testauswertung und Serving-Auswahl bleiben unverändert.
 
 **Öffentliche Demo:** noch nicht bereitgestellt. Die laufende Anwendung und MLflow
 sind bisher lokal. Kostenloses Hosting ohne Tower ist eine separate, noch offene
