@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "checked_records": 27,
+  "expected_records": 27,
+  "distinct_mlflow_run_ids": 27,
+  "new_fits": 21,
+  "reused_fits": 6,
+  "hashes_membership_predictions_metrics_telemetry_artifacts_and_mlflow_verified": true,
+  "final_test_inference_performed": false,
+  "source_protocol_sha256": "d5ea2105e4543c37bb9f61ea87b137f584d79bd0c5fca92bfd2177887f31f59a",
+  "pooled_oof_scores_and_paired_contrasts_independently_reproduced": true,
+  "bootstrap_2000_paired_group_draws_independently_reproduced_with_sklearn_weights": true
+}

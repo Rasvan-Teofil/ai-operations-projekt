@@ -13,14 +13,18 @@ identisch. Neue lokale Ergebnisse werden über denselben Zugang sichtbar.
 | article-sentiment-second-path | [Experiment 1](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/1) |
 | article-optimizer-ablation-v1 | [Experiment 2](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/2) |
 | article-optimizer-candidate-v1 | [Experiment 3](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3) |
+| article-optimizer-validation-v1 | [Experiment 4](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/4) |
 | Neuer Volltrain-Kandidat | [Originalmodelllauf](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3/runs/5230309ca351479980869ef61fc239f0) |
 
-Beim Abgleich am 26.11.2026 waren alle vier Experimente einschließlich des
-leeren Default-Experiments und alle 165 gespeicherten Läufe öffentlich und lokal
-identisch: 131 in Experiment 1, 33 in Experiment 2, einer in Experiment 3.
-Die 33 Ablationseinträge sind die gespeicherte Historie; die abgeschlossene
-Studie umfasst weiterhin 32 Fits. Es wurden keine zusätzlichen Versuche erzeugt.
-Auch der Ergebnisdownload des neuen Modelllaufs wurde bytegenau verglichen.
+Beim abschließenden Abgleich am 26.11.2026 enthält die Originalinstanz fünf
+Experimente einschließlich des leeren Default-Experiments und 187 gespeicherte
+Läufe: 131 in Experiment 1, 33 in Experiment 2, einer in Experiment 3 und 22 in
+Experiment 4. Die neue Validierung umfasst 21 neue Fits und sechs exakt
+übernommene ältere Fits; die sechs behalten ihre alten Kennungen aus Experiment 2.
+Ein zusätzlicher Setup-Fehlschlag in Experiment 4 hat null Trainingsschritte
+und keine Vorhersagen. Er bleibt als Ausführungshistorie erhalten.
+Die abgeschlossene Faktorstudie umfasst weiterhin 32 Fits.
+[Abschluss und Modellentscheidung](../reports/optimizer_validation/README.md).
 
 Die Oberfläche ist dieselbe MLflow-Version. Browserabhängige Einstellungen wie
 Tabellenspalten, Filter und Sprache können auf anderen Geräten abweichen.

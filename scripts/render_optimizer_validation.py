@@ -21,12 +21,14 @@ def main():
     means={recipe:{m:float(np.mean([a['per_seed'][s]['oof'][recipe][m] for s in seeds])) for m in metrics} for recipe in recipes}
     gain=a['mean_contrasts'];intervals=a['conditional_group_bootstrap_95_intervals']
     supported=a['clipping_supported_in_this_exploratory_cv'];gate=all(a['practical_recipe_gate'].values())
-    clip_statement=('Der vorab festgelegte deskriptive Clipping-Nachweis ist in dieser explorativen CV erfüllt.' if supported else
-                    'Der vorab festgelegte deskriptive Clipping-Nachweis ist in dieser explorativen CV nicht erfüllt.')
+    clip_statement=('Die vorab festgelegte Prüfung unterstützt einen positiven Clipping-Effekt in dieser explorativen CV.' if supported else
+                    'Ein positiver Clipping-Effekt ist in dieser erweiterten Prüfung nicht belegt.')
     recipe_statement=('Das neue Gesamtrezept erfüllt die vorab festgelegte praktische Konsistenzregel.' if gate else
-                      'Das neue Gesamtrezept erfüllt die vorab festgelegte praktische Konsistenzregel nicht; der bisherige API-Standard bleibt die Empfehlung.')
+                      'Das neue Gesamtrezept zeigt keinen belegten Vorteil; der bisherige API-Standard bleibt die Empfehlung.')
     lines=['# Optimizer-Validierung: Ergebnis und Modellentscheidung','',clip_statement,recipe_statement,'',
         '**27/27 Auswertungen abgeschlossen: 21 neue Fits und sechs exakt übernommene bestehende Fits.** Drei gruppierte Folds, drei feste Seeds, 240 Train-Artikel in 235 semantischen Gruppen. Kein erneuter Abschlusstest, kein automatischer Modellwechsel.','',
+        f'Der mittlere DE/EN-OOF-Wert beträgt {means["baseline"]["primary_score"]:.4f} für das bisherige Rezept und {means["candidate"]["primary_score"]:.4f} für den neuen Kandidaten: Unterschied {gain["recipe"]["primary_score"]*100:+.2f} F1-Prozentpunkte. Clipping allein im neuen Rezept ergibt {gain["clipping"]["primary_score"]*100:+.2f} Punkte gegenüber ohne Clipping. Die Unsicherheitsintervalle und einzelnen Seeds stehen unten.','',
+        'Der frühere mittlere Clipping-Vorteil von +1,75 Punkten stammt aus einem einzigen Fold und mittelt über mehrere andere Parametereinstellungen. Die jetzige Kontrolle untersucht Clipping bei der konkret ausgewählten neuen Rezeptur über weitere Folds und einen zusätzlichen Seed. Die Befunde betreffen unterschiedliche Vergleichsbereiche; ein allgemeiner Clipping-Vorteil lässt sich daraus nicht ableiten.','',
         '**Was verglichen wurde:** Bisheriges Rezept und neuer Kandidat verwenden beide Clipping 1,0. Ihr Unterschied betrifft Lernrate, Weight Decay und Warmup. Der Vergleich des neuen Rezepts mit und ohne Clipping isoliert den Clipping-Schalter.','',
         '![Gepaarte Optimizer-Validierung](optimizer-validation-v1.svg)','',
         '## Gepoolte Out-of-fold-Güte','',
@@ -66,6 +68,7 @@ def main():
     lines+=['','## Nachweise und Grenzen','',
         '- [Festes Protokoll](protocol-v1.json), [Korrektur vor erstem Trainingsschritt](engineering-amendment-v1.json), [vollständige Ergebnisse](summary-v1.json), [separate Verifikation](verification-v1.json).',
         '- [Öffentliches Original-MLflow · Validierung](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/4), [Volltrain-Modelllauf](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3/runs/5230309ca351479980869ef61fc239f0).',
+        '- [Alle Fold-Werte als CSV](fold-results-v1.csv), [HTTP-/Betriebsprüfung](operational-verification-v1.json), [Prüfskript](../../scripts/check_optimizer_validation.py), [Berichtsgenerator](../../scripts/render_optimizer_validation.py).',
         '- Unter `runs/`, `predictions/` und `telemetry/` stehen alle 27 Auswertungen; sechs verweisen auf ihre ursprünglichen Fits. Keine Rohartikel oder Modellgewichte in Git.',
         '- Ein zusätzlicher fehlgeschlagener MLflow-Setup-Eintrag enthält null Trainingsschritte und keine Vorhersagen. Er ist kein weiterer Fit und bleibt als Ausführungshistorie erhalten.',
         '- Kleine, wiederverwendete Stichprobe; bereits bekannte Projektergebnisse; Auswahl des Rezepts auf Fold 0; drei feste Seeds und überlappende Trainingsmengen. Keine unabhängigen Fold-/Seed-Stichproben, keine p-Werte, keine kausale Mechanismusaussage.',

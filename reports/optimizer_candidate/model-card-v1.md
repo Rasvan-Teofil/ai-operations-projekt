@@ -44,3 +44,30 @@ Gewichte bleiben lokal und teilen sich dieselben Basisgewichte; keine zusätzlic
 Basismodellkopie. Veröffentlichte Berichte enthalten Methoden, Hashes, Telemetrie,
 synthetische Beispiele und Laufkennungen, keine Artikelrohtexte. Quellen- und
 Datenrechte bleiben im [Quellenkatalog](../../docs/data/README.md) nachvollziehbar.
+
+## Erweiterte Rezeptvalidierung · 26. November 2026
+
+Die [gepaarte 27-Auswertungs-Validierung](../optimizer_validation/README.md) ist
+abgeschlossen: drei gruppierte Train-Folds, drei feste Seeds, drei Rezepte;
+21 neue Fits und sechs exakt übernommene Fits. Alle 240 Artikel werden pro Seed
+jeweils außerhalb des Fits vorhergesagt. Die Ergebnisse und 2000 gepaarten
+Gruppen-Bootstrap-Ziehungen wurden unabhängig nachgerechnet.
+
+| Rezeptvergleich | DE/EN-OOF-Unterschied | Bedingtes 95%-Intervall |
+|---|---:|---:|
+| Neuer Kandidat minus bisheriges Rezept | −1,73 F1-Prozentpunkte | [−5,59; +1,03] |
+| Neues Rezept mit minus ohne Clipping | −0,61 F1-Prozentpunkte | [−3,43; +1,75] |
+
+Das bisherige Rezept erzielt im Seed-Mittel 0,7483, das neue 0,7310 im
+DE/EN-OOF-Wert. Beide Unterschiede sind in allen drei Seeds negativ; die
+Intervalle umfassen null. Ein positiver Vorteil ist damit nicht belegt; eine
+allgemeingültige Verschlechterung ist daraus ebenfalls nicht bewiesen.
+Die vorab festgelegten praktischen Vergleichskriterien sind nicht erfüllt.
+Der bisherige API-Standard bleibt ausgewählt, dieser Adapter bleibt ein
+explorativer Kandidat. Seine Gewichte und sein Inferenzprofil sind unverändert.
+
+Diese Werte bewerten die Rezeptur auf wiederverwendeten Train-Daten und sind
+kein unabhängiger Qualitätswert dieses auf allen 240 Artikeln trainierten
+Artefakts. Der frühere Abschlusstest wurde nicht erneut ausgeführt. Die technische
+HTTP-Nachprüfung in DE/EN/JA funktioniert weiterhin; die Standardvorhersage
+bleibt nach Adapterwechsel unverändert.

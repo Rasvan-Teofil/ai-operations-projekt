@@ -4,6 +4,8 @@
 199 Offline-Tests bestanden. Direkte DE/EN/JA-Inferenz, echte FastAPI-Anfragen
 und Browserauswahl geprüft.
 
+**Nachfolgende Rezeptvalidierung abgeschlossen:** [27 gepaarte Fold-/Seed-Auswertungen](../optimizer_validation/README.md) zeigen keinen belegten Vorteil des neuen Rezepts. DE/EN-OOF: 0,7310 statt 0,7483 für das bisherige Rezept. Der Kandidat bleibt technisch ausführbar, wird aber nicht zum API-Standard. Dies ist Rezept-CV, keine unabhängige Testgüte des 240-Artikel-Adapters.
+
 **[Diesen Modelllauf öffentlich in MLflow öffnen](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3/runs/5230309ca351479980869ef61fc239f0)**
 · [Öffentlicher Zugang und Verfügbarkeit](../../docs/mlflow-presentation.md).
 
@@ -24,6 +26,8 @@ und die ursprüngliche Teststudie bleiben erhalten.
 - [Telemetrie aller 45 Optimierungsschritte](telemetry-v1.json).
 - [Technische Inferenzprüfung mit synthetischen Beispielen](smoke-v1.json).
 - [Abschlussprüfung](verification-v1.json).
+- [Erweiterte Rezept-CV und Modellentscheidung](../optimizer_validation/README.md).
+- [Erneute technische HTTP-/Betriebsprüfung nach der Validierung](../optimizer_validation/operational-verification-v1.json).
 - [Quellcode, Bedienung und Reproduktion](../../src/studies/optimizer_candidate/README.md).
 - [Zugrunde liegende 32-Fit-Ablation](../optimizer_ablation/interpretation-v1.md).
 
