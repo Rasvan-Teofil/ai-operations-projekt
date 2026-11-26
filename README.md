@@ -4,6 +4,8 @@
 
 Medienbeobachtung für native deutsche, englische und japanische Nachrichten: vollständigen Text oder genau eine HTTP(S)-URL als `negative`, `neutral` oder `positive` klassifizieren. **Der aktuelle Projektstand liegt vollständig auf `main`.** Frühere Studien bleiben im Archiv erhalten.
 
+**[MLflow öffentlich öffnen](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments)** · [Zugänge und Einordnung](docs/mlflow-presentation.md). Der Tower muss für diesen vorübergehenden Zugang weiterlaufen.
+
 **Schnellzugriff:** [Anwendung](http://127.0.0.1:8000/) · [FastAPI-Dokumentation](http://127.0.0.1:8000/docs) · **[MLflow und Modellhistorie](#mlflow-öffnen)**
 
 ## Stand · 14. November 2026
@@ -59,8 +61,7 @@ Messprotokollen und MLflow erhalten. Für die Präsentation ist kein Branchwechs
 
 **Neue Kandidatenversion:** [Qwen LoRA aus der Optimizer-Ablation](reports/optimizer_candidate/README.md), frischer Fit auf allen 240 Train-Artikeln mit Clipping 1,0, Lernrate 0,00005, ohne Warmup und Weight Decay. Optionaler API-Alias `article_qwen_lora_optimizer_v1`; eigene Modellkennung und MLflow-Historie. Ein unabhängiger Qualitätsvergleich steht aus. Das bisherige API-Standardmodell bleibt ausgewählt.
 
-**Öffentliche Demo:** noch nicht bereitgestellt. Die laufende Anwendung und MLflow
-sind bisher lokal. Kostenloses Hosting ohne Tower ist eine separate, noch offene
+**Öffentliche Anwendung:** noch nicht bereitgestellt. [MLflow ist öffentlich erreichbar](docs/mlflow-presentation.md) und zeigt direkt die lokale Originalinstanz. Kostenloses Hosting ohne Tower ist eine separate, noch offene
 Bereitstellungsaufgabe; eine GitHub-Seite allein führt das Modell nicht aus.
 [Hostingstand und kostenfreie Optionen](docs/public-hosting.md).
 
@@ -90,7 +91,7 @@ nvidia-smi
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
 ```
 
-Bestehenden Listener identifizieren und keinen zweiten Dienst starten. [Lokale Anwendung](http://127.0.0.1:8000/) · [API-Dokumentation](http://127.0.0.1:8000/docs) · [MLflow](http://127.0.0.1:5000/). `127.0.0.1` ist lokal erreichbar; kein öffentliches Deployment behauptet.
+Bestehenden Listener identifizieren und keinen zweiten Dienst starten. [Lokale Anwendung](http://127.0.0.1:8000/) · [API-Dokumentation](http://127.0.0.1:8000/docs) · [MLflow](http://127.0.0.1:5000/). Die `127.0.0.1`-Links sind lokal; der öffentliche MLflow-Zugang steht im folgenden Abschnitt.
 
 ```bash
 curl -s http://127.0.0.1:8000/predict -H 'Content-Type: application/json' -d '{"text":"Das Unternehmen meldet einen Gewinneinbruch."}'
@@ -104,6 +105,10 @@ Modellunabhängiger URL-Abruf mit `full-article-v5`, ohne stille Zeichenkürzung
 
 ## MLflow öffnen
 
+**[Öffentliche Originalansicht · ohne lokale Installation](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments)** · [Neuer Modelllauf](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3/runs/5230309ca351479980869ef61fc239f0) · [Umfang und Verfügbarkeit](docs/mlflow-presentation.md).
+
+Die folgenden Links öffnen zusätzlich die lokale Originalinstanz:
+
 - **[MLflow-Startseite](http://127.0.0.1:5000/)**.
 - [32-Fit-Optimizer-Studie · Experiment 2](http://127.0.0.1:5000/#/experiments/2).
 - **[Neuer Modelllauf · Optimizer-Kandidat](http://127.0.0.1:5000/#/experiments/3/runs/5230309ca351479980869ef61fc239f0)** · [alle Kandidatenläufe · Experiment 3](http://127.0.0.1:5000/#/experiments/3).
@@ -111,7 +116,7 @@ Modellunabhängiger URL-Abruf mit `full-article-v5`, ohne stille Zeichenkürzung
 Diese Links öffnen die lokale MLflow-Instanz. `127.0.0.1` bezeichnet immer den
 Rechner, auf dem der Browser läuft. GitHub hostet weder MLflow noch dessen lokale
 Datenbank; auf einem anderen Gerät entsteht dadurch kein Zugriff auf den Tower.
-Die Instanz ist derzeit nicht öffentlich bereitgestellt.
+Der oben verlinkte öffentliche Zugang leitet lesende Anfragen direkt an diese Originalinstanz weiter: gleiche Experimente, Laufkennungen, Zeiten, Parameter, Metriken und Artefakte. Es gibt keine separate Ergebnisdatenbank.
 
 Ohne laufendes MLflow sind die [32-Fit-Nachweise](reports/optimizer_ablation/README.md)
 und die [Modellkarte mit Trainingsnachweisen](reports/optimizer_candidate/README.md)
@@ -120,7 +125,7 @@ MLflow-Laufkennungen, keine öffentliche Live-Datenbank.
 
 ## Verifikation und Reproduktion
 
-**199 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
+**202 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
 
 ```bash
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m pytest -q -p no:cacheprovider

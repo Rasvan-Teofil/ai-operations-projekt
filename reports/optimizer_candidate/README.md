@@ -4,7 +4,10 @@
 199 Offline-Tests bestanden. Direkte DE/EN/JA-Inferenz, echte FastAPI-Anfragen
 und Browserauswahl geprüft.
 
-**[Diesen Modelllauf in MLflow öffnen](http://127.0.0.1:5000/#/experiments/3/runs/5230309ca351479980869ef61fc239f0)**
+**[Diesen Modelllauf öffentlich in MLflow öffnen](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3/runs/5230309ca351479980869ef61fc239f0)**
+· [Öffentlicher Zugang und Verfügbarkeit](../../docs/mlflow-presentation.md).
+
+Lokale Originalansicht: [Modelllauf](http://127.0.0.1:5000/#/experiments/3/runs/5230309ca351479980869ef61fc239f0)
 · [Experiment 3](http://127.0.0.1:5000/#/experiments/3)
 · [MLflow-Startseite](http://127.0.0.1:5000/).
 Diese Links funktionieren bei laufender lokaler Instanz auf dem Tower.
