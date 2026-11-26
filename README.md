@@ -63,6 +63,8 @@ Messprotokollen und MLflow erhalten. Für die Präsentation ist kein Branchwechs
 
 **Erweiterte Validierung abgeschlossen:** [27 gepaarte Auswertungen über drei Folds und drei Seeds](reports/optimizer_validation/README.md). Das neue Rezept liegt im mittleren DE/EN-OOF-Wert bei **0,7310 gegenüber 0,7483** für das bisherige Rezept (−1,73 F1-Prozentpunkte). Clipping allein im neuen Rezept ergibt −0,61 Punkte; das bedingte 95%-Intervall umfasst null. **Kein belegter Vorteil; der bisherige API-Standard bleibt ausgewählt.** Alle 27 Nachweise und die 2000 Gruppen-Bootstrap-Ziehungen wurden separat nachgerechnet. Keine erneute Abschlusstest-Auswertung.
 
+**Clipping gezielt isolieren:** [Vollständige Gegenläufe mit und ohne Gradient Clipping](reports/clipping_control/README.md). Ergänzt sieben fehlende Ohne-Clipping-Fits des bisherigen Rezepts; 53 exakt passende Fits liegen bereits vor. Danach 30 verschiedene Paare / 60 Fits, mit gleichen übrigen Einstellungen innerhalb jedes Paars. [Neue Läufe öffentlich verfolgen · MLflow Experiment 5](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/5). Der Bericht kennzeichnet laufende Fits als offen; noch kein neues Gesamtergebnis und kein automatischer Modellwechsel.
+
 **Öffentliche Anwendung:** noch nicht bereitgestellt. [MLflow ist öffentlich erreichbar](docs/mlflow-presentation.md) und zeigt direkt die lokale Originalinstanz. Kostenloses Hosting ohne Tower ist eine separate, noch offene
 Bereitstellungsaufgabe; eine GitHub-Seite allein führt das Modell nicht aus.
 [Hostingstand und kostenfreie Optionen](docs/public-hosting.md).
@@ -127,7 +129,7 @@ MLflow-Laufkennungen, keine öffentliche Live-Datenbank.
 
 ## Verifikation und Reproduktion
 
-**206 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
+**212 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
 
 ```bash
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m pytest -q -p no:cacheprovider

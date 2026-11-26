@@ -14,9 +14,10 @@ identisch. Neue lokale Ergebnisse werden über denselben Zugang sichtbar.
 | article-optimizer-ablation-v1 | [Experiment 2](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/2) |
 | article-optimizer-candidate-v1 | [Experiment 3](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3) |
 | article-optimizer-validation-v1 | [Experiment 4](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/4) |
+| article-gradient-clipping-controls-v1 | [Experiment 5 · neue Gegenläufe ohne Clipping](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/5) |
 | Neuer Volltrain-Kandidat | [Originalmodelllauf](https://aquarium-markers-messaging-specialists.trycloudflare.com/#/experiments/3/runs/5230309ca351479980869ef61fc239f0) |
 
-Beim abschließenden Abgleich am 26.11.2026 enthält die Originalinstanz fünf
+Beim Abgleich vor Beginn der zusätzlichen Clipping-Kontrollen am 26.11.2026 enthielt die Originalinstanz fünf
 Experimente einschließlich des leeren Default-Experiments und 187 gespeicherte
 Läufe: 131 in Experiment 1, 33 in Experiment 2, einer in Experiment 3 und 22 in
 Experiment 4. Die neue Validierung umfasst 21 neue Fits und sechs exakt
@@ -25,6 +26,15 @@ Ein zusätzlicher Setup-Fehlschlag in Experiment 4 hat null Trainingsschritte
 und keine Vorhersagen. Er bleibt als Ausführungshistorie erhalten.
 Die abgeschlossene Faktorstudie umfasst weiterhin 32 Fits.
 [Abschluss und Modellentscheidung](../reports/optimizer_validation/README.md).
+
+Die nachfolgend beauftragten [Clipping-Gegenläufe](../reports/clipping_control/README.md)
+stehen in Experiment 5: sieben neue Fits ohne Clipping, jeweils mit Link zum
+ursprünglichen Clipping-Partner und eigenen Vergleichsmetriken. Zusammen mit
+53 vorhandenen Fits ergeben sich nach Abschluss 30 verschiedene Paare / 60 Fits.
+Die laufende Zahl neuer Runs erhöht den obigen historischen Stand; es werden
+keine vorhandenen Fits als neue Trainingsläufe importiert. Die vollständige
+Paarliste wird nach Abschluss und Prüfung als Artefakt an die sieben neuen Runs
+angehängt. Offene Fits sind kein fertiges Gesamtergebnis.
 
 Die Oberfläche ist dieselbe MLflow-Version. Browserabhängige Einstellungen wie
 Tabellenspalten, Filter und Sprache können auf anderen Geräten abweichen.

@@ -1,0 +1,1258 @@
+{
+  "version": "gradient-clipping-controls-v1",
+  "updated_at": "2026-11-26T19:21:40.085792+00:00",
+  "state": "running",
+  "completed_new_fits": 0,
+  "expected_new_fits": 7,
+  "completed_pairs": 23,
+  "expected_pairs": 30,
+  "distinct_successful_mlflow_run_ids": 53,
+  "missing": [
+    "reports/clipping_control/runs/f1-s20261110-baseline_no_clip.json",
+    "reports/clipping_control/runs/f1-s20261112-baseline_no_clip.json",
+    "reports/clipping_control/runs/f0-s20261112-baseline_no_clip.json",
+    "reports/clipping_control/runs/f2-s20261110-baseline_no_clip.json",
+    "reports/clipping_control/runs/f1-s20261111-baseline_no_clip.json",
+    "reports/clipping_control/runs/f2-s20261112-baseline_no_clip.json",
+    "reports/clipping_control/runs/f2-s20261111-baseline_no_clip.json"
+  ],
+  "protocol_sha256": "d280aac7a39cfc264f284d525e751c4d646fdc629e66f6420231d176921870d2",
+  "pairs": [
+    {
+      "id": "f0-s20261110-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-01.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-01.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-01.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-08.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-08.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-08.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "9311802fd2ec4480a81e1c97d7f6c646",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "f68baf7212454e59a96f2b891d4be0b8",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.0513084513084513
+      }
+    },
+    {
+      "id": "f0-s20261110-learning_rate=0.0001-weight_decay=0-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-03.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-03.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-03.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-12.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-12.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-12.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "19bf602f77824f4abb4305e0cc666ec9",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "7b2bcba0cb914df2b7a735e7ae7bab19",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.0513084513084513
+      }
+    },
+    {
+      "id": "f0-s20261110-learning_rate=0.0001-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-04.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-04.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-04.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-05.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-05.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-05.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "fa203567b5824501b3ea7cba2e770a5a",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "2cf0a47c051941328658502dc0318bfa",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.0513084513084513
+      }
+    },
+    {
+      "id": "f0-s20261110-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-06.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-06.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-06.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-09.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-09.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-09.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "cbad49ab4d9a430c91bbba29743f716d",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "731a1ef01e9b416a9ad81594780486bb",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.05871905871905869
+      }
+    },
+    {
+      "id": "f0-s20261110-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-07.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-07.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-07.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-14.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-14.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-14.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "ece6348334fb4a4290daf5bd5dfe541a",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "bdfa0d6e0f7945f39826893ad37052de",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.6967032967032968
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.10625350625350616
+      }
+    },
+    {
+      "id": "f0-s20261110-learning_rate=5e-05-weight_decay=0-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-10.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-10.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-10.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-13.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-13.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-13.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "12c8ab5768a547a5b0dd9ac56d1aac7e",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "8c82b1c03c044d2ea83b447f7ec9c523",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.05871905871905869
+      }
+    },
+    {
+      "id": "f0-s20261110-learning_rate=5e-05-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-11.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-11.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-11.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-02.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-02.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-02.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "cc735f6770914f0ab8e53a6661c4884a",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "25709e1958a94b619d2ed4b597a8a1f5",
+      "without_metrics": {
+        "primary_score": 0.7111111111111112,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.7000000000000001,
+        "macro_f1_ja": 0.7195767195767195
+      },
+      "with_minus_without": {
+        "primary_score": 0.052308802308802305,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.10461760461760461,
+        "macro_f1_ja": 0.0833800833800834
+      }
+    },
+    {
+      "id": "f0-s20261110-learning_rate=5e-05-weight_decay=0.01-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261110,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-15.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-15.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-15.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-16.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-16.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-16.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "13faa0c6224c4cfbaf676dda12847136",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "without_mlflow_run_id": "c9ea7d331033464e88de978de495d213",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7195767195767195
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.02466102466102471
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-17.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-17.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-17.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-28.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-28.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-28.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "d4216b28b6854fd6a4fa192f9d28cbd2",
+      "with_metrics": {
+        "primary_score": 0.7504962470479712,
+        "macro_f1_de": 0.6963748894783377,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516
+      },
+      "without_mlflow_run_id": "e5d16abd9e1341ec8021ba1806f01571",
+      "without_metrics": {
+        "primary_score": 0.7214285714285715,
+        "macro_f1_de": 0.7428571428571429,
+        "macro_f1_en": 0.7000000000000001,
+        "macro_f1_ja": 0.6750700280112044
+      },
+      "with_minus_without": {
+        "primary_score": 0.029067675619399713,
+        "macro_f1_de": -0.04648225337880518,
+        "macro_f1_en": 0.10461760461760461,
+        "macro_f1_ja": 0.07657832363714723
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-18.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-18.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-18.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-29.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-29.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-29.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "914aded59cd74baeb2e589e5c9a3d5f4",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516
+      },
+      "without_mlflow_run_id": "b7a540637baf4379a8777d17611b6ce8",
+      "without_metrics": {
+        "primary_score": 0.7504962470479712,
+        "macro_f1_de": 0.6963748894783377,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7283056812468577
+      },
+      "with_minus_without": {
+        "primary_score": 0.01292366637194231,
+        "macro_f1_de": 0.02584733274388462,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.02334267040149396
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=5e-05-weight_decay=0.01-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-19.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-19.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-19.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-31.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-31.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-31.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "84567cbcb0be4da08aa3c154aca1d941",
+      "with_metrics": {
+        "primary_score": 0.7850276963180189,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8478331704138156,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "without_mlflow_run_id": "fb28c20a3b774803b18d4a3aa2176a4b",
+      "without_metrics": {
+        "primary_score": 0.7279569892473119,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.7336917562724015,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "with_minus_without": {
+        "primary_score": 0.05707070707070705,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.1141414141414141,
+        "macro_f1_ja": 0.0
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=0.0001-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-21.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-21.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-21.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-20.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-20.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-20.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "c40cd7234d874c80bf55a5a35a60e90f",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.6967032967032968
+      },
+      "without_mlflow_run_id": "6690346a0962480f8b426d99df04450c",
+      "without_metrics": {
+        "primary_score": 0.7504962470479712,
+        "macro_f1_de": 0.6963748894783377,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7283056812468577
+      },
+      "with_minus_without": {
+        "primary_score": 0.01292366637194231,
+        "macro_f1_de": 0.02584733274388462,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": -0.0316023845435609
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=0.0001-weight_decay=0-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-24.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-24.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-24.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-32.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-32.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-32.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "627f51514f0b4cf687e5669947a7692b",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7516483516483516
+      },
+      "without_mlflow_run_id": "237e8053565045a6a0754a0727d4960c",
+      "without_metrics": {
+        "primary_score": 0.7737373737373738,
+        "macro_f1_de": 0.7428571428571429,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7283056812468577
+      },
+      "with_minus_without": {
+        "primary_score": -0.01031746031746028,
+        "macro_f1_de": -0.02063492063492056,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.02334267040149396
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=5e-05-weight_decay=0-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-25.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-25.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-25.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-22.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-22.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-22.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "20565d3bd8864f15a18af0ef597f8f4c",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "without_mlflow_run_id": "f8ee879333e84635a39046318182cc45",
+      "without_metrics": {
+        "primary_score": 0.7111111111111112,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.7000000000000001,
+        "macro_f1_ja": 0.7195767195767195
+      },
+      "with_minus_without": {
+        "primary_score": 0.052308802308802305,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.10461760461760461,
+        "macro_f1_ja": 0.02466102466102471
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-26.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-26.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-26.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-27.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-27.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-27.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "0703fbb93ce8436cb0d5775d99cbac3d",
+      "with_metrics": {
+        "primary_score": 0.7850276963180189,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8478331704138156,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "without_mlflow_run_id": "730f04065f5f40919edc3744589a07e6",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "with_minus_without": {
+        "primary_score": 0.021607782898105388,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.043215565796210886,
+        "macro_f1_ja": 0.0
+      }
+    },
+    {
+      "id": "f0-s20261111-learning_rate=5e-05-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261111,
+        "gradient_clip": 1.0,
+        "fold": 0
+      },
+      "factorial": true,
+      "cv_recipe": null,
+      "with_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-30.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-30.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-30.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_ablation/runs/run-23.json",
+        "predictions": "reports/optimizer_ablation/predictions/run-23.json",
+        "telemetry": "reports/optimizer_ablation/telemetry/run-23.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "25e03b1cce80449b982238f8a2acc278",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "without_mlflow_run_id": "f60a68bbd70b4b30bd191d16f6270387",
+      "without_metrics": {
+        "primary_score": 0.7111111111111112,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.7000000000000001,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "with_minus_without": {
+        "primary_score": 0.052308802308802305,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.10461760461760461,
+        "macro_f1_ja": 0.0
+      }
+    },
+    {
+      "id": "f1-s20261110-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "fold": 1,
+        "seed": 20261110,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261110-baseline.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261110-baseline.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261110-baseline.json"
+      },
+      "without_clipping": {
+        "runs": "reports/clipping_control/runs/f1-s20261110-baseline_no_clip.json",
+        "predictions": "reports/clipping_control/predictions/f1-s20261110-baseline_no_clip.json",
+        "telemetry": "reports/clipping_control/telemetry/f1-s20261110-baseline_no_clip.json"
+      },
+      "status": "pending",
+      "with_mlflow_run_id": "9561f1a98b014d04ac4fd918cfc87ce8",
+      "with_metrics": {
+        "primary_score": 0.7520481310803891,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.8602339181286549
+      }
+    },
+    {
+      "id": "f1-s20261110-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "fold": 1,
+        "seed": 20261110,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261110-candidate.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261110-candidate.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261110-candidate.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261110-candidate_no_clip.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261110-candidate_no_clip.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261110-candidate_no_clip.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "84720eea950a493380a56404759410c6",
+      "with_metrics": {
+        "primary_score": 0.7083973374295955,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.746031746031746,
+        "macro_f1_ja": 0.8006379585326954
+      },
+      "without_mlflow_run_id": "99423a9c323149e596742af091be1800",
+      "without_metrics": {
+        "primary_score": 0.7520481310803891,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.8474012474012476
+      },
+      "with_minus_without": {
+        "primary_score": -0.04365079365079361,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": -0.08730158730158732,
+        "macro_f1_ja": -0.04676328886855219
+      }
+    },
+    {
+      "id": "f1-s20261112-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "fold": 1,
+        "seed": 20261112,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261112-candidate.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261112-candidate.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261112-candidate.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261112-candidate_no_clip.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261112-candidate_no_clip.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261112-candidate_no_clip.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "c4516452484a462f8162fe297c674380",
+      "with_metrics": {
+        "primary_score": 0.6576036866359447,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.6444444444444444,
+        "macro_f1_ja": 0.8006379585326954
+      },
+      "without_mlflow_run_id": "f75b566c5de64c82a655592642d18fac",
+      "without_metrics": {
+        "primary_score": 0.7083973374295955,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.746031746031746,
+        "macro_f1_ja": 0.8474012474012476
+      },
+      "with_minus_without": {
+        "primary_score": -0.050793650793650835,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": -0.10158730158730167,
+        "macro_f1_ja": -0.04676328886855219
+      }
+    },
+    {
+      "id": "f1-s20261112-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "fold": 1,
+        "seed": 20261112,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261112-baseline.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261112-baseline.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261112-baseline.json"
+      },
+      "without_clipping": {
+        "runs": "reports/clipping_control/runs/f1-s20261112-baseline_no_clip.json",
+        "predictions": "reports/clipping_control/predictions/f1-s20261112-baseline_no_clip.json",
+        "telemetry": "reports/clipping_control/telemetry/f1-s20261112-baseline_no_clip.json"
+      },
+      "status": "pending",
+      "with_mlflow_run_id": "b4ce4ca422f04f009194773d5d6cdbb2",
+      "with_metrics": {
+        "primary_score": 0.8013509479026721,
+        "macro_f1_de": 0.7693685624720108,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.8474012474012476
+      }
+    },
+    {
+      "id": "f0-s20261112-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "fold": 0,
+        "seed": 20261112,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f0-s20261112-candidate.json",
+        "predictions": "reports/optimizer_validation/predictions/f0-s20261112-candidate.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f0-s20261112-candidate.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_validation/runs/f0-s20261112-candidate_no_clip.json",
+        "predictions": "reports/optimizer_validation/predictions/f0-s20261112-candidate_no_clip.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f0-s20261112-candidate_no_clip.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "bd6ff7823a87427ab5724a4a75ec9e28",
+      "with_metrics": {
+        "primary_score": 0.7850276963180189,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8478331704138156,
+        "macro_f1_ja": 0.7442377442377442
+      },
+      "without_mlflow_run_id": "c4b9676e8201495e99e4b3fe684ae926",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7195767195767195
+      },
+      "with_minus_without": {
+        "primary_score": 0.021607782898105388,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.043215565796210886,
+        "macro_f1_ja": 0.02466102466102471
+      }
+    },
+    {
+      "id": "f0-s20261112-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "fold": 0,
+        "seed": 20261112,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f0-s20261112-baseline.json",
+        "predictions": "reports/optimizer_validation/predictions/f0-s20261112-baseline.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f0-s20261112-baseline.json"
+      },
+      "without_clipping": {
+        "runs": "reports/clipping_control/runs/f0-s20261112-baseline_no_clip.json",
+        "predictions": "reports/clipping_control/predictions/f0-s20261112-baseline_no_clip.json",
+        "telemetry": "reports/clipping_control/telemetry/f0-s20261112-baseline_no_clip.json"
+      },
+      "status": "pending",
+      "with_mlflow_run_id": "eaea4062785a476187ad5e34e916710f",
+      "with_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029
+      }
+    },
+    {
+      "id": "f2-s20261110-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "fold": 2,
+        "seed": 20261110,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261110-candidate.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261110-candidate.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261110-candidate.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261110-candidate_no_clip.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261110-candidate_no_clip.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261110-candidate_no_clip.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "bf1c609b08b84b4ca85b3b38c367ed81",
+      "with_metrics": {
+        "primary_score": 0.6956711896228025,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6302910052910052,
+        "macro_f1_ja": 0.7132132132132133
+      },
+      "without_mlflow_run_id": "2bca70f0982a409592b1ee34d11754c3",
+      "without_metrics": {
+        "primary_score": 0.6956711896228025,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6302910052910052,
+        "macro_f1_ja": 0.7132132132132133
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.0
+      }
+    },
+    {
+      "id": "f2-s20261110-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "fold": 2,
+        "seed": 20261110,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261110-baseline.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261110-baseline.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261110-baseline.json"
+      },
+      "without_clipping": {
+        "runs": "reports/clipping_control/runs/f2-s20261110-baseline_no_clip.json",
+        "predictions": "reports/clipping_control/predictions/f2-s20261110-baseline_no_clip.json",
+        "telemetry": "reports/clipping_control/telemetry/f2-s20261110-baseline_no_clip.json"
+      },
+      "status": "pending",
+      "with_mlflow_run_id": "947b885b41b74f0fad57a839fa9ef04c",
+      "with_metrics": {
+        "primary_score": 0.704136798088411,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6472222222222221,
+        "macro_f1_ja": 0.7132132132132133
+      }
+    },
+    {
+      "id": "f1-s20261111-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "fold": 1,
+        "seed": 20261111,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261111-baseline.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261111-baseline.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261111-baseline.json"
+      },
+      "without_clipping": {
+        "runs": "reports/clipping_control/runs/f1-s20261111-baseline_no_clip.json",
+        "predictions": "reports/clipping_control/predictions/f1-s20261111-baseline_no_clip.json",
+        "telemetry": "reports/clipping_control/telemetry/f1-s20261111-baseline_no_clip.json"
+      },
+      "status": "pending",
+      "with_mlflow_run_id": "8c886c944fee4f3ab668d89dc123c0f9",
+      "with_metrics": {
+        "primary_score": 0.75,
+        "macro_f1_de": 0.6666666666666666,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.8195767195767196
+      }
+    },
+    {
+      "id": "f1-s20261111-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "fold": 1,
+        "seed": 20261111,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261111-candidate.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261111-candidate.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261111-candidate.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_validation/runs/f1-s20261111-candidate_no_clip.json",
+        "predictions": "reports/optimizer_validation/predictions/f1-s20261111-candidate_no_clip.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f1-s20261111-candidate_no_clip.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "5a5b61b27a694481a45b62063172b79a",
+      "with_metrics": {
+        "primary_score": 0.7083973374295955,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.746031746031746,
+        "macro_f1_ja": 0.7889707889707891
+      },
+      "without_mlflow_run_id": "8f4e5e21b17240db93a3959cb07e1dab",
+      "without_metrics": {
+        "primary_score": 0.7520481310803891,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.8474012474012476
+      },
+      "with_minus_without": {
+        "primary_score": -0.04365079365079361,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": -0.08730158730158732,
+        "macro_f1_ja": -0.058430458430458465
+      }
+    },
+    {
+      "id": "f2-s20261112-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "fold": 2,
+        "seed": 20261112,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261112-baseline.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261112-baseline.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261112-baseline.json"
+      },
+      "without_clipping": {
+        "runs": "reports/clipping_control/runs/f2-s20261112-baseline_no_clip.json",
+        "predictions": "reports/clipping_control/predictions/f2-s20261112-baseline_no_clip.json",
+        "telemetry": "reports/clipping_control/telemetry/f2-s20261112-baseline_no_clip.json"
+      },
+      "status": "pending",
+      "with_mlflow_run_id": "6ecff09f334842b89ae91727140f4f18",
+      "with_metrics": {
+        "primary_score": 0.6956711896228025,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6302910052910052,
+        "macro_f1_ja": 0.7132132132132133
+      }
+    },
+    {
+      "id": "f2-s20261112-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "fold": 2,
+        "seed": 20261112,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261112-candidate.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261112-candidate.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261112-candidate.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261112-candidate_no_clip.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261112-candidate_no_clip.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261112-candidate_no_clip.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "b4661edaf6ca4363a9f1ce2b1432a0f2",
+      "with_metrics": {
+        "primary_score": 0.7172260236776365,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6734006734006733,
+        "macro_f1_ja": 0.7132132132132133
+      },
+      "without_mlflow_run_id": "6e9b17e11f3e49999fa3b4c222c92063",
+      "without_metrics": {
+        "primary_score": 0.6930256869772999,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.625,
+        "macro_f1_ja": 0.8445263445263446
+      },
+      "with_minus_without": {
+        "primary_score": 0.02420033670033661,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.04840067340067333,
+        "macro_f1_ja": -0.13131313131313127
+      }
+    },
+    {
+      "id": "f2-s20261111-learning_rate=0.0001-weight_decay=0.01-warmup_fraction=0.1",
+      "config": {
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "fold": 2,
+        "seed": 20261111,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "baseline",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261111-baseline.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261111-baseline.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261111-baseline.json"
+      },
+      "without_clipping": {
+        "runs": "reports/clipping_control/runs/f2-s20261111-baseline_no_clip.json",
+        "predictions": "reports/clipping_control/predictions/f2-s20261111-baseline_no_clip.json",
+        "telemetry": "reports/clipping_control/telemetry/f2-s20261111-baseline_no_clip.json"
+      },
+      "status": "pending",
+      "with_mlflow_run_id": "892eeffa39a848dda5f6237cd883bf66",
+      "with_metrics": {
+        "primary_score": 0.7172260236776365,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6734006734006733,
+        "macro_f1_ja": 0.7132132132132133
+      }
+    },
+    {
+      "id": "f2-s20261111-learning_rate=5e-05-weight_decay=0-warmup_fraction=0",
+      "config": {
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0,
+        "fold": 2,
+        "seed": 20261111,
+        "gradient_clip": 1.0
+      },
+      "factorial": false,
+      "cv_recipe": "candidate",
+      "with_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261111-candidate.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261111-candidate.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261111-candidate.json"
+      },
+      "without_clipping": {
+        "runs": "reports/optimizer_validation/runs/f2-s20261111-candidate_no_clip.json",
+        "predictions": "reports/optimizer_validation/predictions/f2-s20261111-candidate_no_clip.json",
+        "telemetry": "reports/optimizer_validation/telemetry/f2-s20261111-candidate_no_clip.json"
+      },
+      "status": "complete",
+      "with_mlflow_run_id": "db4aa3ea238041088b76ff18d91df866",
+      "with_metrics": {
+        "primary_score": 0.7172260236776365,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6734006734006733,
+        "macro_f1_ja": 0.7380952380952381
+      },
+      "without_mlflow_run_id": "2c783418854d4156b4dcff3d951a180f",
+      "without_metrics": {
+        "primary_score": 0.6930256869772999,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.625,
+        "macro_f1_ja": 0.7132132132132133
+      },
+      "with_minus_without": {
+        "primary_score": 0.02420033670033661,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.04840067340067333,
+        "macro_f1_ja": 0.024882024882024845
+      }
+    }
+  ],
+  "cv_analysis": {
+    "status": "pending",
+    "available_cv_arms": 29,
+    "expected_cv_arms": 36
+  },
+  "final_test_used": false,
+  "serving_selection_changed": false
+}
