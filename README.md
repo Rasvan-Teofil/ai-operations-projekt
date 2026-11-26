@@ -4,6 +4,8 @@
 
 Medienbeobachtung für native deutsche, englische und japanische Nachrichten: vollständigen Text oder genau eine HTTP(S)-URL als `negative`, `neutral` oder `positive` klassifizieren. **Der aktuelle Projektstand liegt vollständig auf `main`.** Frühere Studien bleiben im Archiv erhalten.
 
+**Schnellzugriff:** [Anwendung](http://127.0.0.1:8000/) · [FastAPI-Dokumentation](http://127.0.0.1:8000/docs) · **[MLflow und Modellhistorie](#mlflow-öffnen)**
+
 ## Stand · 14. November 2026
 
 Die Vollartikelstudie ist abgeschlossen: 27 Train-interne Entwicklungsauswertungen, vier Fits auf denselben 240 Train-Artikeln und ein gemeinsamer frischer Test mit **691 Artikeln: DE273, EN118, JA300**. Qwen LoRA wurde vor Erhebung des Tests gewählt und ist jetzt der lokale API-Standard.
@@ -99,6 +101,22 @@ Genau eines von `text` oder `url`. Optionale Query-Aliasse: `article_frozen_v1`,
 Vollartikel-Qwen weist über 4096 Artikeltokens zurück und kürzt nichts aus der Mitte. MiniLM verarbeitet alle 128-Token-Chunks als gleich gemittelte Features vor dem Artikelkopf. Historisches Qwen behält seine 3072-Token-Anfang/Ende-Regel, historische MiniLM-Profile ihre jeweilige Aggregation.
 
 Modellunabhängiger URL-Abruf mit `full-article-v5`, ohne stille Zeichenkürzung. Private Adressen, Redirects, robots-Verbote und erkannte Login-/Sperrseiten bleiben blockiert. 422/403/502/503 und optionale `X-Article-Error`-Diagnosen bleiben erhalten. Fehlerhafte/veränderte Verlagslayouts können weiterhin scheitern; Textpaste bleibt möglich.
+
+## MLflow öffnen
+
+- **[MLflow-Startseite](http://127.0.0.1:5000/)**.
+- [32-Fit-Optimizer-Studie · Experiment 2](http://127.0.0.1:5000/#/experiments/2).
+- **[Neuer Modelllauf · Optimizer-Kandidat](http://127.0.0.1:5000/#/experiments/3/runs/5230309ca351479980869ef61fc239f0)** · [alle Kandidatenläufe · Experiment 3](http://127.0.0.1:5000/#/experiments/3).
+
+Diese Links öffnen die lokale MLflow-Instanz. `127.0.0.1` bezeichnet immer den
+Rechner, auf dem der Browser läuft. GitHub hostet weder MLflow noch dessen lokale
+Datenbank; auf einem anderen Gerät entsteht dadurch kein Zugriff auf den Tower.
+Die Instanz ist derzeit nicht öffentlich bereitgestellt.
+
+Ohne laufendes MLflow sind die [32-Fit-Nachweise](reports/optimizer_ablation/README.md)
+und die [Modellkarte mit Trainingsnachweisen](reports/optimizer_candidate/README.md)
+direkt auf GitHub lesbar. Sie enthalten Konfigurationen, Metriken, Hashes und
+MLflow-Laufkennungen, keine öffentliche Live-Datenbank.
 
 ## Verifikation und Reproduktion
 
