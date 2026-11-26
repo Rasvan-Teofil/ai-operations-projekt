@@ -53,7 +53,7 @@ Alle verlinkten Dateien, die aktuelle Anwendung und ihre Tests liegen auf diesem
 Hauptzweig. `second-path` bleibt nur als historische Entwicklungskennung in
 Messprotokollen und MLflow erhalten. Für die Präsentation ist kein Branchwechsel nötig.
 
-**Zusätzliche Entwicklungsstudie:** [32 Qwen-LoRA-Läufe zu Clipping, AdamW-Weight-Decay, Lernrate und Warmup](reports/optimizer_ablation/README.md). Eigener Versuchsplan; unveränderte Testauswertung und Serving-Auswahl. Aktuell nach GPU-Fehler Xid 79 angehalten (0/32 fertig); einmalige Fortsetzung nach Rechnerneustart vorbereitet.
+**Zusätzliche Entwicklungsstudie:** [32 Qwen-LoRA-Läufe zu Clipping, AdamW-Weight-Decay, Lernrate und Warmup](reports/optimizer_ablation/README.md). Eigener Versuchsplan; unveränderte Testauswertung und Serving-Auswahl. Nach GPU-Fehler Xid 79 und Rechnerneustart fortgesetzt: erster Fit abgeschlossen, Warteschlange läuft; [Prüfnachweis](reports/optimizer_ablation/post-reboot-check-v1.json).
 
 **Öffentliche Demo:** noch nicht bereitgestellt. Die laufende Anwendung und MLflow
 sind bisher lokal. Kostenloses Hosting ohne Tower ist eine separate, noch offene
