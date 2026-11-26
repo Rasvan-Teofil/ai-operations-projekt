@@ -1,0 +1,72 @@
+{
+  "version": "optimizer-ablation-validation-v1",
+  "checked_at": "2026-11-26T10:08:11.093234+00:00",
+  "completed_runs_checked": 8,
+  "expected_runs": 32,
+  "offline_tests_passed": 193,
+  "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+  "study_source_sha256": "908d0c6fed78fab617846bab5ca2223891f56969e9972a1744165b587db3ba2b",
+  "checks": [
+    "Frozen protocol, training source, dependencies and Train membership unchanged",
+    "Completed configurations match preregistered factorial design",
+    "Prediction, telemetry and local adapter hashes match every result",
+    "Exactly 81 unique development predictions per completed fit; no raw texts",
+    "Reported classification metrics recomputed from stored predictions",
+    "30 optimizer steps and recorded clipping fraction verified per fit",
+    "MLflow FINISHED status, protocol/source tags and classification metrics match",
+    "Layout, source catalog and original main integration checks pass"
+  ],
+  "final_test_inference_performed": false,
+  "serving_selection_changed": false,
+  "factor_effects": "Pending all 32 fits; no interim factor-effect claim",
+  "runs": [
+    {
+      "id": "run-01",
+      "result_sha256": "213f22685ae82da0fdd82e32a506a921bc61469fcc79209b569bd086718c636b",
+      "mlflow_run_id": "9311802fd2ec4480a81e1c97d7f6c646",
+      "status": "FINISHED"
+    },
+    {
+      "id": "run-02",
+      "result_sha256": "c190c0e47df2d995d83e8c7452239ea519468550d970c35fb3719c743ee1f524",
+      "mlflow_run_id": "25709e1958a94b619d2ed4b597a8a1f5",
+      "status": "FINISHED"
+    },
+    {
+      "id": "run-03",
+      "result_sha256": "0c8cf6045ba3cef92fd8c83825562bb3da8ad31e6b3cde105abbf531ebde6b89",
+      "mlflow_run_id": "19bf602f77824f4abb4305e0cc666ec9",
+      "status": "FINISHED"
+    },
+    {
+      "id": "run-04",
+      "result_sha256": "8a233bb999a67ce66c3d8a3fdfd2361c9ac687d1f54d0159e2e169537e3fedfa",
+      "mlflow_run_id": "fa203567b5824501b3ea7cba2e770a5a",
+      "status": "FINISHED"
+    },
+    {
+      "id": "run-05",
+      "result_sha256": "82cbc6f3c245ae0b54918bcb600eb42c34f757fb9d5a928051992795c683640c",
+      "mlflow_run_id": "2cf0a47c051941328658502dc0318bfa",
+      "status": "FINISHED"
+    },
+    {
+      "id": "run-06",
+      "result_sha256": "b0ebad2fb88541172dac0560da966f7d24ebbc5bdfef21a56d126199ab7b03be",
+      "mlflow_run_id": "cbad49ab4d9a430c91bbba29743f716d",
+      "status": "FINISHED"
+    },
+    {
+      "id": "run-07",
+      "result_sha256": "cfb443d0a9b82607aa3b81c6440c3e9b627646d8185721775d1ee507ae311e8a",
+      "mlflow_run_id": "ece6348334fb4a4290daf5bd5dfe541a",
+      "status": "FINISHED"
+    },
+    {
+      "id": "run-08",
+      "result_sha256": "d6a04adb479e656d51722c721f3310f9f8734711fc34a675172fd6afffc0aebf",
+      "mlflow_run_id": "f68baf7212454e59a96f2b891d4be0b8",
+      "status": "FINISHED"
+    }
+  ]
+}
