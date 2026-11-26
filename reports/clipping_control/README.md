@@ -1,6 +1,8 @@
 # Gradient Clipping: vollständige Gegenläufe
 
-**0/7 neue Fits, 23/30 vollständige Paare.**
+**7/7 neue Fits, 30/30 vollständige Paare.**
+
+[Einordnung und Formulierung für den Prof](interpretation-v1.md) · [Unabhängige Verifikation](verification-v1.json).
 
 Jeder Lauf mit Clipping erhält einen ansonsten identischen Gegenlauf ohne Clipping. Lernrate, AdamW Weight Decay, Warmup, Seed, Datenaufteilung, LoRA und Trainingsdauer bleiben gleich. Vorhandene exakt passende Fits werden wiederverwendet, keine Messung wird erfunden oder überschrieben.
 
@@ -17,7 +19,35 @@ Die erste 32-Fit-Serie enthält bereits 16 Paare. Die spätere CV umfasst zwei R
 
 Drei gruppierte Train-Folds und drei feste Seeds (20261110/11/12). Pro Seed werden die drei zurückgehaltenen Folds auf allen 240 Artikeln gepoolt, dann Macro-F1 berechnet. Hauptwert ist das gleichgewichtete DE/EN-Mittel; Japanisch wird separat ausgewiesen. Kein Mittel über die beiden Rezepte als vermeintlich allgemeiner Clipping-Effekt.
 
-**Die vollständige CV-Auswertung steht noch aus. Es gibt noch kein neues Gesamtergebnis.**
+## Vollständige gepaarte CV-Ergebnisse
+
+| Rezept | DE/EN mit | DE/EN ohne | Δ DE/EN [95%-Intervall] (pp) | Δ DE | Δ EN | Δ JA |
+|---|---:|---:|---:|---:|---:|---:|
+| baseline | 0.7483 | 0.7451 | +0.32 [-2.13; +2.61] | -0.72 | +1.36 | +0.99 |
+| candidate | 0.7310 | 0.7371 | -0.61 [-3.43; +1.75] | +0.00 | -1.22 | -1.86 |
+
+| Rezept | Seed | Δ DE/EN (pp) |
+|---|---:|---:|
+| baseline | 20261110 | +0.00 |
+| baseline | 20261111 | -0.23 |
+| baseline | 20261112 | +1.19 |
+| candidate | 20261110 | -1.49 |
+| candidate | 20261111 | -0.09 |
+| candidate | 20261112 | -0.25 |
+
+### Ohne den früheren Auswahlfold 0
+
+| Rezept | Δ DE/EN (pp) | Δ DE | Δ EN | Δ JA |
+|---|---:|---:|---:|---:|
+| baseline | +0.30 | -0.29 | +0.90 | -1.31 |
+| candidate | -1.49 | +0.00 | -2.98 | -4.29 |
+
+Die feste Regel für einen positiven Clipping-Nachweis verlangt einen positiven mittleren Hauptwert, positive Hauptwertunterschiede in allen drei Seeds und eine positive untere bedingte Bootstrap-Grenze.
+
+- baseline: Regel nicht erfüllt.
+- candidate: Regel nicht erfüllt.
+
+Ein nicht erfüllter positiver Nachweis beweist keine Wirkungslosigkeit oder allgemeine Schädlichkeit. Der API-Standard wird durch diese explorative Studie nicht automatisch geändert.
 
 ## Alle ursprünglichen Faktor-Paare
 

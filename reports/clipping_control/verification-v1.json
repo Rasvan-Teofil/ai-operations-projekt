@@ -1,0 +1,12 @@
+{
+  "status": "complete",
+  "checked_unique_fits": 60,
+  "complete_pairs": 30,
+  "expected_pairs": 30,
+  "expected_unique_fits": 60,
+  "protocol_sha256": "d280aac7a39cfc264f284d525e751c4d646fdc629e66f6420231d176921870d2",
+  "hashes_group_membership_scores_predictions_telemetry_adapters_and_mlflow_verified": true,
+  "final_test_inference_performed": false,
+  "serving_selection_changed": false,
+  "pooled_oof_and_2000_bootstrap_draws_per_recipe_independently_reproduced_with_sklearn_weights": true
+}
