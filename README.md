@@ -55,6 +55,8 @@ Messprotokollen und MLflow erhalten. Für die Präsentation ist kein Branchwechs
 
 **Zusätzliche Entwicklungsstudie abgeschlossen:** [32 Qwen-LoRA-Fits zu Clipping, AdamW-Weight-Decay, Lernrate und Warmup](reports/optimizer_ablation/README.md). Clipping verbessert den DE/EN-Entwicklungswert im Mittel um 1,75 F1-Prozentpunkte; Sprach-, Seed- und Wechselwirkungseffekte stehen in der [Abschlussauswertung](reports/optimizer_ablation/interpretation-v1.md). Alle 32 Fits und MLflow-Nachweise sind geprüft. Die endgültige Testauswertung und Serving-Auswahl bleiben unverändert.
 
+**Neue Kandidatenversion:** [Qwen LoRA aus der Optimizer-Ablation](reports/optimizer_candidate/README.md), frischer Fit auf allen 240 Train-Artikeln mit Clipping 1,0, Lernrate 0,00005, ohne Warmup und Weight Decay. Optionaler API-Alias `article_qwen_lora_optimizer_v1`; eigene Modellkennung und MLflow-Historie. Ein unabhängiger Qualitätsvergleich steht aus. Das bisherige API-Standardmodell bleibt ausgewählt.
+
 **Öffentliche Demo:** noch nicht bereitgestellt. Die laufende Anwendung und MLflow
 sind bisher lokal. Kostenloses Hosting ohne Tower ist eine separate, noch offene
 Bereitstellungsaufgabe; eine GitHub-Seite allein führt das Modell nicht aus.
@@ -100,7 +102,7 @@ Modellunabhängiger URL-Abruf mit `full-article-v5`, ohne stille Zeichenkürzung
 
 ## Verifikation und Reproduktion
 
-**193 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
+**199 Offline-Tests bestanden**; synthetische GPU-/HTTP-Prüfungen aller vier Modelle in DE/EN/JA, japanische Satzoffsets, Kontextgrenzen und Browserprüfung sind separat dokumentiert. Keine Testtexte wurden dafür erneut klassifiziert. Siehe [Prüfnachweis für Quellenkatalog und Reviewdarstellung](reports/data-review/verification-v1.json) und den [ursprünglichen Studien-Prüfnachweis](reports/next_stage/verification-final-v1.json).
 
 ```bash
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 python -m pytest -q -p no:cacheprovider

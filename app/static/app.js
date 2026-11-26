@@ -144,6 +144,7 @@ async function loadModels() {
     const qualityChoice = data.article_research_choice || 'article_qwen_lora_v1';
     const fastChoice = data.article_fast_alternative || 'article_minilm_v1';
     const suggested = document.createElement('optgroup'); suggested.label = 'Full-article study · DE / EN / JA';
+    const candidates = document.createElement('optgroup'); candidates.label = 'Experimental candidate · quality not independently evaluated';
     const archive = document.createElement('optgroup'); archive.label = 'More methods and historical data versions';
     for (const model of data.models.slice().sort((a, b) => {
       const order = [qualityChoice, fastChoice];
@@ -154,9 +155,9 @@ async function loadModels() {
       const role = model.id === qualityChoice ? ' · selected before Test' : model.id === fastChoice ? ' · fast alternative' : '';
       option.textContent = model.name + role + (model.is_default ? ' · API default' : '') + (!model.available ? ' · unavailable' : '');
       option.disabled = !model.available;
-      (model.comparison_group === 'full-article-v1' ? suggested : archive).append(option);
+      (model.comparison_group === 'full-article-v1' ? suggested : model.comparison_group === 'optimizer-candidate-v1' ? candidates : archive).append(option);
     }
-    $('model-choice').append(suggested, archive);
+    $('model-choice').append(suggested, candidates, archive);
     const requested = new URLSearchParams(window.location.search).get('model');
     if (requested && data.models.some((model) => model.id === requested && model.available)) {
       $('model-choice').value = requested; await checkHealth();

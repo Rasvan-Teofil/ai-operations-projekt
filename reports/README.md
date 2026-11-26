@@ -2,6 +2,7 @@
 
 | Vergleichsgruppe | Einstieg | Datenart |
 |---|---|---|
+| Neuer Optimizer-Kandidat | [optimizer_candidate/README.md](optimizer_candidate/README.md) | Frischer Fit auf 240 Train-Artikeln; keine unabhängige Qualitätsauswertung |
 | Optimizer-Ablation (explorativ) | [optimizer_ablation/README.md](optimizer_ablation/README.md) | 32 Fits, bestehender Train-Fold 0; kein Test |
 | Aktuell: Vollartikel DE/EN/JA | [next_stage/comparison-v1.md](next_stage/comparison-v1.md) | 240 Train, 691 frischer Test |
 | v5: passende LLM-Aufgabe/LoRA | [llm_adaptation_v5/comparison.md](llm_adaptation_v5/comparison.md) | 692 Train, 227 Titel/Leads |

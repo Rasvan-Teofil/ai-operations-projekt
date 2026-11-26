@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-11-26T13:50:30.568137+00:00",
+  "model_version": "article-qwen-lora-optimizer-v1",
+  "engineering_only": true,
+  "independent_quality_evaluation": false,
+  "synthetic_examples": true,
+  "results": [
+    {
+      "language": "de",
+      "text": "Die Rettungskräfte haben alle Vermissten lebend gefunden. Die Geretteten sind wieder bei ihren Familien.",
+      "label": "positive",
+      "scores": [
+        5.905304023556823e-10,
+        1.1861120086109622e-08,
+        1.0
+      ]
+    },
+    {
+      "language": "en",
+      "text": "The council published the date and location of its next routine meeting. The agenda will follow next week.",
+      "label": "neutral",
+      "scores": [
+        7.99195987166712e-11,
+        1.0,
+        4.5990555808117506e-10
+      ]
+    },
+    {
+      "language": "ja",
+      "text": "工場で火災が発生し、複数の作業員が負傷した。生産は停止している。",
+      "label": "negative",
+      "scores": [
+        1.0,
+        1.0261879540562902e-10,
+        4.139937814784389e-08
+      ]
+    }
+  ]
+}

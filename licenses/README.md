@@ -41,3 +41,9 @@ Attribution names, exact model/data revisions, restrictions and intended uses ar
 This directory covers dataset/model sources, not a complete dependency SBOM. Installed dependencies keep their own licences. No licence is assigned here to this repository's own code or the colleague's original supplement. Public GitHub access alone does not provide such a grant.
 
 When replacing data or a serving artifact, update the inventory, notices/evidence, README and corresponding MLflow provenance together. Keep earlier version records in Git. Only update the website's measured comparison and default after the new protocol's final evaluation. Re-run `python -m pytest -q`; the licence tests require no network, data download or model training.
+
+The optional [optimizer-derived candidate](../reports/optimizer_candidate/README.md)
+uses the same pinned Qwen base and existing 240 Train articles. Its separate
+inventory entry retains the applicable notices and source credits. It does not
+inherit the earlier model's Test score, change the API default or introduce a new
+weight-distribution grant. No new Test articles are used in its fitting.
