@@ -23,6 +23,13 @@ Japanisch ist in [der Sprachübersicht](languages/japanese.md) ausdrücklich dok
    95%-Intervalle bedeuten nicht 95% Genauigkeit.
 8. Reproduce und Data & licences: feste Hashes, neue MLflow-Läufe, genaue
    Quellenattribution; Rohtexte und Gewichte fehlen bewusst im Git-Repository.
+9. [Gradient-Clipping-Ablation](../reports/clipping_control/interpretation-v1.md):
+   gleicher Seed, gleicher Split, gleiches Rezept, nur Clipping 1,0 oder aus.
+   30 verschiedene Paare; innerhalb der CV drei Folds und drei Seeds je Rezept.
+   Mit minus ohne Clipping im DE/EN-Hauptwert: bisheriges Rezept +0,32 Punkte
+   [−2,13; +2,61], neues Rezept −0,61 [−3,43; +1,75]. Beide bedingten Intervalle
+   umfassen null. Kein robuster Gütevorteil nachgewiesen, kein Modellwechsel.
+   Die Werte sind explorative Train-interne CV, keine Wiederholung des 691er Tests.
 
 Die früheren Studien bleiben im ausklappbaren Archiv. Ihre unterschiedlichen
 Testbestände nicht als Fortschrittskurve mit dem Vollartikeltest vergleichen.

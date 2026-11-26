@@ -1,6 +1,6 @@
 # Optimizer-Validierung: Ergebnis und Modellentscheidung
 
-**Nachfolgender Auftrag:** Die [Clipping-Gegenläufe](../clipping_control/README.md) ergänzen die sieben noch fehlenden Ohne-Clipping-Fits des bisherigen Rezepts. Damit werden anschließend beide Rezepte jeweils über alle drei Folds und drei Seeds isoliert mit/ohne Clipping verglichen. Die folgenden ursprünglichen 27 Ergebnisse bleiben erhalten.
+**Nachfolgende Clipping-Kontrolle abgeschlossen:** Die [vollständigen Gegenläufe](../clipping_control/README.md) ergänzen die sieben früher fehlenden Ohne-Clipping-Fits des bisherigen Rezepts. Beide Rezepte sind jetzt jeweils über drei Folds und drei Seeds isoliert mit/ohne Clipping verglichen: bisheriges Rezept +0,32 F1-Prozentpunkte [−2,13; +2,61], neues Rezept −0,61 [−3,43; +1,75] im mittleren DE/EN-Hauptwert, jeweils mit minus ohne Clipping. Kein robuster positiver Nachweis. Die folgenden ursprünglichen 27 Ergebnisse bleiben erhalten und beschreiben den damaligen Vergleichsumfang.
 
 Ein positiver Clipping-Effekt ist in dieser erweiterten Prüfung nicht belegt.
 Das neue Gesamtrezept zeigt keinen belegten Vorteil; der bisherige API-Standard bleibt die Empfehlung.

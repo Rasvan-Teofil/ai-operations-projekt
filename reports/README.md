@@ -2,7 +2,7 @@
 
 | Vergleichsgruppe | Einstieg | Datenart |
 |---|---|---|
-| Clipping-Gegenläufe | [clipping_control/README.md](clipping_control/README.md) | Sieben fehlende Kontrollen; am Ende 30 verschiedene Paare / 60 Fits, kein Test |
+| Clipping-Gegenläufe abgeschlossen | [clipping_control/README.md](clipping_control/README.md) | 30 vollständige Paare / 60 verschiedene Fits; kein robuster Clipping-Vorteil, kein Test |
 | Erweiterte Optimizer-Validierung | [optimizer_validation/README.md](optimizer_validation/README.md) | 27 Auswertungen, drei Folds / drei Seeds, kein Test |
 | Neuer Optimizer-Kandidat | [optimizer_candidate/README.md](optimizer_candidate/README.md) | Frischer Fit auf 240 Train-Artikeln; keine unabhängige Qualitätsauswertung |
 | Optimizer-Ablation (explorativ) | [optimizer_ablation/README.md](optimizer_ablation/README.md) | 32 Fits, bestehender Train-Fold 0; kein Test |

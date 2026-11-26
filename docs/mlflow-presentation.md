@@ -30,11 +30,17 @@ Die abgeschlossene Faktorstudie umfasst weiterhin 32 Fits.
 Die nachfolgend beauftragten [Clipping-Gegenläufe](../reports/clipping_control/README.md)
 stehen in Experiment 5: sieben neue Fits ohne Clipping, jeweils mit Link zum
 ursprünglichen Clipping-Partner und eigenen Vergleichsmetriken. Zusammen mit
-53 vorhandenen Fits ergeben sich nach Abschluss 30 verschiedene Paare / 60 Fits.
-Die laufende Zahl neuer Runs erhöht den obigen historischen Stand; es werden
-keine vorhandenen Fits als neue Trainingsläufe importiert. Die vollständige
-Paarliste wird nach Abschluss und Prüfung als Artefakt an die sieben neuen Runs
-angehängt. Offene Fits sind kein fertiges Gesamtergebnis.
+53 vorhandenen Fits sind alle 30 verschiedenen Paare / 60 Fits abgeschlossen
+und unabhängig geprüft. Die vollständige Paarliste, Auswertung und Verifikation
+liegen an jedem der sieben neuen Runs unter `clipping-comparison-v1/` als Artefakte.
+Keine vorhandenen Fits wurden als neue Trainingsläufe importiert. Der abschließende
+Abgleich enthält sechs Experimente einschließlich Default und 194 gespeicherte
+Runs: die oben genannten 187 plus sieben erfolgreiche Kontrollen in Experiment 5.
+Die Inferenz-API ist wieder gestartet; das bisherige Standardmodell bleibt ausgewählt.
+
+Clipping ergibt im mittleren DE/EN-OOF-Wert +0,32 F1-Prozentpunkte beim bisherigen
+und −0,61 beim neuen Rezept. Beide bedingten 95%-Intervalle umfassen null.
+[Ergebnis und Einordnung](../reports/clipping_control/interpretation-v1.md).
 
 Die Oberfläche ist dieselbe MLflow-Version. Browserabhängige Einstellungen wie
 Tabellenspalten, Filter und Sprache können auf anderen Geräten abweichen.

@@ -1,0 +1,950 @@
+[
+  {
+    "id": "wikinews:de:83096",
+    "text_sha256": "9a052fcd60c029126d95bdae20a4200ef98966b566aeeac99b6301c197e0bc7b",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "neutral",
+    "scores": [
+      0.4368199110031128,
+      0.56088787317276,
+      0.0022922204807400703
+    ]
+  },
+  {
+    "id": "wikinews:de:80745",
+    "text_sha256": "f28fb997249d882b0be6218d4bb019ff86719c97d10ef9c32f255bb9203edd6e",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999996423721313,
+      1.416608164106492e-09,
+      3.0590220490012143e-07
+    ]
+  },
+  {
+    "id": "wikinews:de:85947",
+    "text_sha256": "f39e04a8631339d0c25a5df453169ece009bb7960c4e954c5d9a382af2a4977c",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9998599290847778,
+      1.6699361367500387e-05,
+      0.00012339251406956464
+    ]
+  },
+  {
+    "id": "wikinews:de:79162",
+    "text_sha256": "070bb52cbe79daae93fdd9c3a66a7ae7204ced90b8481ca5eaa6c3fb78763468",
+    "language": "de",
+    "reference": "positive",
+    "prediction": "neutral",
+    "scores": [
+      5.297080178934266e-07,
+      0.5621762275695801,
+      0.43782326579093933
+    ]
+  },
+  {
+    "id": "wikinews:de:80277",
+    "text_sha256": "6ffecf183ad2db5af4f3b1376f99882c23bc6aca5edd1d28c0311db599780e9d",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "neutral",
+    "scores": [
+      0.0007094325846992433,
+      0.998955488204956,
+      0.0003351122431922704
+    ]
+  },
+  {
+    "id": "wikinews:de:78121",
+    "text_sha256": "ab56eeb117d86c4b68efbfd881e87191a58f798d6ff91b935ffdf371c513c384",
+    "language": "de",
+    "reference": "neutral",
+    "prediction": "negative",
+    "scores": [
+      0.9323317408561707,
+      0.05960197001695633,
+      0.008066250011324883
+    ]
+  },
+  {
+    "id": "wikinews:de:79810",
+    "text_sha256": "fe191fd1e1d489aeecca9cc2ff07fa3f56cdcbe13ccb8c652cd6fc2cca3e52ce",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9998762607574463,
+      3.92737746324201e-07,
+      0.00012339453678578138
+    ]
+  },
+  {
+    "id": "wikinews:de:77546",
+    "text_sha256": "040ac037e03c9dab321f3e66db771a914d4dc2eee9a897aeb2939ef72ec98b83",
+    "language": "de",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      7.475870370399207e-05,
+      0.9987558126449585,
+      0.0011694227578118443
+    ]
+  },
+  {
+    "id": "wikinews:de:79391",
+    "text_sha256": "93d1f8da89a0ef2fad124921fec6e1aa6542970be052f98e3bff7862f94665c4",
+    "language": "de",
+    "reference": "neutral",
+    "prediction": "negative",
+    "scores": [
+      0.8976249694824219,
+      0.09460897743701935,
+      0.007765977643430233
+    ]
+  },
+  {
+    "id": "wikinews:de:82443",
+    "text_sha256": "268a70dbdc34275163542f43dbe23d6ed3e2e9a5ea675ffde383c1c7f9d71938",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999830722808838,
+      1.855360096669756e-07,
+      1.6701418644515797e-05
+    ]
+  },
+  {
+    "id": "wikinews:de:86648",
+    "text_sha256": "43a182bae48d35dfdda463e1a427690fc2543cf23ab34f2be9afd020d75fa583",
+    "language": "de",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      6.74505500342093e-08,
+      0.32082128524780273,
+      0.6791786551475525
+    ]
+  },
+  {
+    "id": "wikinews:de:77900",
+    "text_sha256": "c857c7d6fb0db170102dd8cd75cbcd06d2442f6ae2472b8c0b00e3a839c16b45",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999921321868896,
+      4.139905129818544e-08,
+      7.889262633398175e-06
+    ]
+  },
+  {
+    "id": "wikinews:de:80927",
+    "text_sha256": "336b7cdbb58037263bfbfd91826bac1f84f0eaf205ca28040cfa0ea8dafde6ff",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "neutral",
+    "scores": [
+      7.889045264164452e-06,
+      0.9999645948410034,
+      2.7535475965123624e-05
+    ]
+  },
+  {
+    "id": "wikinews:de:82203",
+    "text_sha256": "f23514a44d0c73cb22f0e0939de38a422af439e7df41208d3189c7b0d3256bb8",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999831914901733,
+      6.023473275718061e-08,
+      1.67014204635052e-05
+    ]
+  },
+  {
+    "id": "wikinews:de:85825",
+    "text_sha256": "40f280acb585ceb754c4ea7f8603c74b2cb27c80baa844509a9d168189edef9e",
+    "language": "de",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      5.852783488080604e-06,
+      0.04742559418082237,
+      0.952568531036377
+    ]
+  },
+  {
+    "id": "wikinews:de:81673",
+    "text_sha256": "6eca9dd6cfe8fa4634dc03829008f0ace266273ebce199fec28fd4d30e9f5290",
+    "language": "de",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      0.32012930512428284,
+      0.6777136921882629,
+      0.0021570143289864063
+    ]
+  },
+  {
+    "id": "wikinews:de:83606",
+    "text_sha256": "10df1e3b4d1fe3ea4cc473c19753232245ca456a01fd7bf80e988eb3aa7bfe97",
+    "language": "de",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      2.1444868252729066e-05,
+      3.726559498318238e-06,
+      0.9999748468399048
+    ]
+  },
+  {
+    "id": "wikinews:de:80019",
+    "text_sha256": "b50c40e9b9a344a48ff38aa031eed71ec64a7fd5f2a18a010894dd2081f48994",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.999933123588562,
+      2.1443975128931925e-05,
+      4.539689325611107e-05
+    ]
+  },
+  {
+    "id": "wikinews:de:81735",
+    "text_sha256": "b7695f60d8f995c94fd0bfc2b3797aa3191392ca35fd01a9a255387114d7928b",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999998807907104,
+      4.058651470462138e-10,
+      6.023573462243803e-08
+    ]
+  },
+  {
+    "id": "wikinews:de:77150",
+    "text_sha256": "71b5f44028cf9deb84d332bccffa166c41fa42b7e86be8bdba92005f9cbef4e7",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9996598958969116,
+      4.783490112458821e-06,
+      0.0003353485371917486
+    ]
+  },
+  {
+    "id": "wikinews:de:85227",
+    "text_sha256": "15595ded7161dbf3c5073d4ae5c2a20207807864d836e19b9ac8fa1e99ab282d",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9913280606269836,
+      9.527817746857181e-05,
+      0.008576667867600918
+    ]
+  },
+  {
+    "id": "wikinews:de:83300",
+    "text_sha256": "cc07389910c67bbed34241cad41ee1b66056f4ba0d11cde66493782e645ebf52",
+    "language": "de",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      1.855389228921922e-07,
+      9.422443554285564e-07,
+      0.9999988079071045
+    ]
+  },
+  {
+    "id": "wikinews:de:83018",
+    "text_sha256": "c9d856eeabd7c9b1cf20e0857594f85e0774b736b49973005ba2d0422a8dd5b6",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999959468841553,
+      3.059010680317442e-07,
+      3.7266381696099415e-06
+    ]
+  },
+  {
+    "id": "wikinews:de:80916",
+    "text_sha256": "676b5eed0c9225b7478801130921f00901e87d35be7fdadbe469baa454cf7eaf",
+    "language": "de",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999996423721313,
+      1.1032555979895164e-09,
+      3.0590220490012143e-07
+    ]
+  },
+  {
+    "id": "wikinews:de:82487",
+    "text_sha256": "fb5e0d67415e2faa6d12529536b22f9eed9972b876997ca4ef104dea5903a9e0",
+    "language": "de",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      5.565297556131554e-09,
+      0.9933071732521057,
+      0.006692850962281227
+    ]
+  },
+  {
+    "id": "wikinews:en:3068566",
+    "text_sha256": "2a66989298e00b505384ee1ee0041e961793115d13973833f02a557c01676133",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999998807907104,
+      4.5990550257002383e-10,
+      8.764247638737288e-08
+    ]
+  },
+  {
+    "id": "wikinews:en:2935340",
+    "text_sha256": "2928c33eca736048109e48c526468b20759fc48456d4221bf4493e73260575c6",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999996423721313,
+      2.6465729607849653e-09,
+      3.9278620533877984e-07
+    ]
+  },
+  {
+    "id": "wikinews:en:3083485",
+    "text_sha256": "293a2d95c35363a69e14fcbb30b63b4cb9ad3f059576b3a34d849434415876dd",
+    "language": "en",
+    "reference": "neutral",
+    "prediction": "positive",
+    "scores": [
+      2.5522122086840682e-05,
+      0.43781229853630066,
+      0.5621621012687683
+    ]
+  },
+  {
+    "id": "wikinews:en:3061369",
+    "text_sha256": "b4b933f70e66b161971e8db25911efb7e4bfe533a1e5baba114239aceba568d9",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999963045120239,
+      2.510989816073561e-08,
+      3.7266393064783188e-06
+    ]
+  },
+  {
+    "id": "wikinews:en:2837589",
+    "text_sha256": "ef9e4ab2244b416188f17dbbd0bc96b4dcf936fefc04b9607fe6aed98daf7e6f",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "neutral",
+    "scores": [
+      0.025081481784582138,
+      0.8305845856666565,
+      0.14433394372463226
+    ]
+  },
+  {
+    "id": "wikinews:en:2928189",
+    "text_sha256": "49b6b92d9543d94abe801e3a30845cce39b0ea9ab52b1cecbfed2f5d263148f1",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999781847000122,
+      3.05895639485243e-07,
+      2.1444941012305208e-05
+    ]
+  },
+  {
+    "id": "wikinews:en:3014767",
+    "text_sha256": "8553726558a84fc687e2d4ef9f9f07f29d4c49e580e14e0ddf114e583ddad0e4",
+    "language": "en",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      5.982201764709316e-05,
+      0.37751808762550354,
+      0.6224220991134644
+    ]
+  },
+  {
+    "id": "wikinews:en:2956513",
+    "text_sha256": "77b2ac6f5f95d59fdb758aaa5d74087640a6e5cf3c7c27a9a64492a528983209",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999998807907104,
+      1.1032559310564238e-09,
+      8.764247638737288e-08
+    ]
+  },
+  {
+    "id": "wikinews:en:2897700",
+    "text_sha256": "1e58bddc2d80327f9d42e3b022d099afe5fe2068a106841516b345066cada455",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.996752917766571,
+      7.460878987330943e-05,
+      0.0031724462751299143
+    ]
+  },
+  {
+    "id": "wikinews:en:3075210",
+    "text_sha256": "34412872ef298f2ec309e87e4dc670491bb925ba2eb84394b34671ef60dac7b1",
+    "language": "en",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      1.5126050129765645e-05,
+      0.6224499344825745,
+      0.377534955739975
+    ]
+  },
+  {
+    "id": "wikinews:en:2908138",
+    "text_sha256": "a9c5a16151286982eeb380d1bee42e2bc2575a95d85fc28106c84dd89e71fc33",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999829530715942,
+      3.927796399239014e-07,
+      1.670141500653699e-05
+    ]
+  },
+  {
+    "id": "wikinews:en:2858241",
+    "text_sha256": "4e1c839c9241d317f19ff43869221f46feffd92455c1a571d1227c9bfde45db0",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "neutral",
+    "scores": [
+      0.1457725465297699,
+      0.8388631343841553,
+      0.015364314429461956
+    ]
+  },
+  {
+    "id": "wikinews:en:2878210",
+    "text_sha256": "86b5e06f7da2790b0c91cccad37b9a60ea1bd15b648cbac8accea691792c02e1",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999998807907104,
+      5.211411857608539e-10,
+      1.4449801710725296e-07
+    ]
+  },
+  {
+    "id": "wikinews:en:3002822",
+    "text_sha256": "9155c4c87d582d350ccf090ca35ecbf0806e653206031c620a5db9da3ca0ff0c",
+    "language": "en",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      0.006599346175789833,
+      0.9794298410415649,
+      0.01397081557661295
+    ]
+  },
+  {
+    "id": "wikinews:en:2947232",
+    "text_sha256": "65accd1342c5c37c92c2aad78bc3d73be42f4f549f8a8f995134bab19ada8bf1",
+    "language": "en",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      1.1028861157669212e-09,
+      0.9996646642684937,
+      0.00033535013790242374
+    ]
+  },
+  {
+    "id": "wikinews:en:3014716",
+    "text_sha256": "c20239c0262b98282a3085adc16753d8e560f8bb3028ce61379f0164819671f3",
+    "language": "en",
+    "reference": "positive",
+    "prediction": "negative",
+    "scores": [
+      0.9597324728965759,
+      0.003054618136957288,
+      0.03721286728978157
+    ]
+  },
+  {
+    "id": "wikinews:en:3011831",
+    "text_sha256": "15b13c4bedcb2ad7c96a9c489c823512da860a72805bbb90d1c59bec4b1b6a9d",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999963045120239,
+      1.955560868793782e-08,
+      3.7266393064783188e-06
+    ]
+  },
+  {
+    "id": "wikinews:en:3013756",
+    "text_sha256": "d88a58990f4a6c4b0c84a71bee7de5a2190dcd1030bca6638f6c6be444d7a50a",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9997308850288391,
+      7.887201718403958e-06,
+      0.0002611882227938622
+    ]
+  },
+  {
+    "id": "wikinews:en:2823234",
+    "text_sha256": "87251e0ccb8011bcb21e0642634accf20ac47f86cae9cb7402b0bbec2c577feb",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999722242355347,
+      2.3823034212000493e-07,
+      2.7535686967894435e-05
+    ]
+  },
+  {
+    "id": "wikinews:en:2971892",
+    "text_sha256": "4585cad7820216c52efa86e114f6a4ac573ed80f56d85e5c6df055c6b56b0438",
+    "language": "en",
+    "reference": "positive",
+    "prediction": "neutral",
+    "scores": [
+      3.6406268577593437e-07,
+      0.5621762871742249,
+      0.4378233253955841
+    ]
+  },
+  {
+    "id": "wikinews:en:3044227",
+    "text_sha256": "cce3580375b6b0969cd47ed1ef37fbbb8f3733a211bbc4ed07768361744ca58b",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999815225601196,
+      1.760313807608327e-06,
+      1.6701391359674744e-05
+    ]
+  },
+  {
+    "id": "wikinews:en:2935252",
+    "text_sha256": "e2d4a7e3e83cbe09bf06106676480df793252a0154a852f88715a3c23cbe1774",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999938011169434,
+      5.315752460433032e-08,
+      6.144174221844878e-06
+    ]
+  },
+  {
+    "id": "wikinews:en:2909461",
+    "text_sha256": "555e398acd18d16ab1f282c997406470621928e37d4c497102fe1b2e5f906d6a",
+    "language": "en",
+    "reference": "positive",
+    "prediction": "negative",
+    "scores": [
+      0.989291250705719,
+      0.006665791850537062,
+      0.004043007269501686
+    ]
+  },
+  {
+    "id": "wikinews:en:2825388",
+    "text_sha256": "d2caed0271ebe383bb2995b5f633338686555b718aba23415c351bdaf61c4228",
+    "language": "en",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999868869781494,
+      6.02349530254287e-08,
+      1.300712665397441e-05
+    ]
+  },
+  {
+    "id": "wikinews:ja:29234",
+    "text_sha256": "a8cb4c5c94d6c3157ad3277a3b790eb10207c413341751418f2d579cc0c1510a",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.851709246635437,
+      0.11526631563901901,
+      0.03302435204386711
+    ]
+  },
+  {
+    "id": "wikinews:ja:43390",
+    "text_sha256": "cae4fe1e804b6ebfb5ad38bdce1bfcd562ebf8420c64a337f1b906913eff06e5",
+    "language": "ja",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      5.76961589615621e-10,
+      0.022977370768785477,
+      0.977022647857666
+    ]
+  },
+  {
+    "id": "wikinews:ja:43817",
+    "text_sha256": "0e812da0270822cca14fa6c77d6ac796064e2b60f01525a0a5839c1a280cf6d0",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999996423721313,
+      1.416608164106492e-09,
+      3.9278620533877984e-07
+    ]
+  },
+  {
+    "id": "wikinews:ja:21408",
+    "text_sha256": "8baedd5ee541a210ac9bd06f549ac240ca9bfb6fa7b6c52d9f45146617076b98",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9998797178268433,
+      7.484283560188487e-05,
+      4.539447036222555e-05
+    ]
+  },
+  {
+    "id": "wikinews:ja:27981",
+    "text_sha256": "b3cecc69da0525a2111ba84e587892e576f58f620c7dcc90f997a08df2c386c9",
+    "language": "ja",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      7.31265899958089e-05,
+      0.9769511818885803,
+      0.02297569066286087
+    ]
+  },
+  {
+    "id": "wikinews:ja:23401",
+    "text_sha256": "c23caca3d5be163be0558b94ac4d66809d11e757ad8c63bcc2d68bf5e4353039",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999998807907104,
+      1.6052277285183436e-09,
+      6.825602838489431e-08
+    ]
+  },
+  {
+    "id": "wikinews:ja:21714",
+    "text_sha256": "cdab521937e51b738239b55625e90dff45ef1dd7cb0bf9449c2edeb4e41577c4",
+    "language": "ja",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      0.0012378421379253268,
+      0.4993811249732971,
+      0.4993811249732971
+    ]
+  },
+  {
+    "id": "wikinews:ja:18117",
+    "text_sha256": "0debf155938e029e59bc89c87ef6890c961e8c41476bf43984e2124fccfb6251",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999024868011475,
+      1.3708254300581757e-06,
+      9.610228153178468e-05
+    ]
+  },
+  {
+    "id": "wikinews:ja:23302",
+    "text_sha256": "50d3294bcccc07e9246e749907fb204f1730c27edd6dc6929ad24374a8dca865",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999920129776001,
+      6.825548837241513e-08,
+      7.889261723903473e-06
+    ]
+  },
+  {
+    "id": "wikinews:ja:42925",
+    "text_sha256": "b0f4bae7cbe4d55b32e02d288448243cfa337c5d552417315bb9caf2e4c6f5ea",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9998490810394287,
+      2.7532296371646225e-05,
+      0.00012339117529336363
+    ]
+  },
+  {
+    "id": "wikinews:ja:25448",
+    "text_sha256": "f6608f066f8ffcfcf5c4e91754abc456f764257d9433ab86bfe3fa4435e2c7f1",
+    "language": "ja",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      1.522991688318598e-08,
+      4.2228334677929524e-06,
+      0.9999958276748657
+    ]
+  },
+  {
+    "id": "wikinews:ja:26948",
+    "text_sha256": "af180bbb35ac820cee4a07c7ae137cf68fc1d3b1c3eed28cd9a53767354cb0f9",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "neutral",
+    "scores": [
+      0.044648367911577225,
+      0.6984180212020874,
+      0.25693365931510925
+    ]
+  },
+  {
+    "id": "wikinews:ja:40251",
+    "text_sha256": "75b1a04aaf9cea62e2df4852e306a91d241170b28d17e1ac83539443dac88988",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999997615814209,
+      3.5817471211174734e-10,
+      2.3823690753488336e-07
+    ]
+  },
+  {
+    "id": "wikinews:ja:45055",
+    "text_sha256": "538bc97b41936ed0bce7bab6ab18e04b855cd2d9d0bd047948504c1efff0e94a",
+    "language": "ja",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      1.760174086484767e-06,
+      9.610224515199661e-05,
+      0.9999021291732788
+    ]
+  },
+  {
+    "id": "wikinews:ja:16917",
+    "text_sha256": "435a748cf10026b637b651ad5a82ba524a13e9c738f82915d360011d2dc1fe52",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9997257590293884,
+      1.300373060075799e-05,
+      0.0002611868840176612
+    ]
+  },
+  {
+    "id": "wikinews:ja:43407",
+    "text_sha256": "dd336975874a823eede0368189d5bcd6deb4ae46eed15438d135eb5ca8f6b9ff",
+    "language": "ja",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      1.8553878078364505e-07,
+      1.760342797751946e-06,
+      0.9999979734420776
+    ]
+  },
+  {
+    "id": "wikinews:ja:28471",
+    "text_sha256": "32393dcdae1733023b4f5d741d860771faf7a5793d029cab0b365cfb94fe56d0",
+    "language": "ja",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      1.6697058526915498e-05,
+      0.9997220635414124,
+      0.00026118592359125614
+    ]
+  },
+  {
+    "id": "wikinews:ja:41272",
+    "text_sha256": "03d02ada15dcb5fd8e2c7cd9a6310a6ba600b5ff5f5f5a4e3a8edeb553d1b4c6",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999963045120239,
+      1.5229923988613336e-08,
+      3.7266393064783188e-06
+    ]
+  },
+  {
+    "id": "wikinews:ja:18146",
+    "text_sha256": "c422b454da09ddaba496f4b4b2b988a88bbca43f153a62f3dfbac1b0fb90e7b5",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999996423721313,
+      9.23744636338597e-09,
+      3.0590220490012143e-07
+    ]
+  },
+  {
+    "id": "wikinews:ja:17493",
+    "text_sha256": "540f573a3a5437948530c5392e0babf2bc48b92ef9f4709ba08a298bf5528cf1",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999994039535522,
+      4.691161592518256e-08,
+      6.475948453044111e-07
+    ]
+  },
+  {
+    "id": "wikinews:ja:22499",
+    "text_sha256": "3352a04b2e152fb6784656ce512d0de9a919ccee40847a532c6dc3cad4e93a8c",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999985694885254,
+      1.1861103210719648e-08,
+      1.370957193103095e-06
+    ]
+  },
+  {
+    "id": "wikinews:ja:40462",
+    "text_sha256": "1daef6ca13203d6972236661f15ed935601a1059904cf960f7a845e2f36a9fc8",
+    "language": "ja",
+    "reference": "positive",
+    "prediction": "neutral",
+    "scores": [
+      1.2625865565496497e-05,
+      0.970675528049469,
+      0.029311861842870712
+    ]
+  },
+  {
+    "id": "wikinews:ja:17577",
+    "text_sha256": "5471eee05f89c02ff437cdfb0c34ae1648676c284b37a7a19ccc7eed2a3a9b1d",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999203681945801,
+      4.784736574947601e-06,
+      7.48458769521676e-05
+    ]
+  },
+  {
+    "id": "wikinews:ja:40222",
+    "text_sha256": "8444d24cfe50d3a13a103f1bc1bee3b1c0ce3ffb5382d63f0e9a08337016fb2e",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999868869781494,
+      1.4449614127443056e-07,
+      1.300712665397441e-05
+    ]
+  },
+  {
+    "id": "wikinews:ja:16796",
+    "text_sha256": "38274c60863c1efb2ef6404db274d47b88b8e597fea30effe53a7ad177877a95",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999996423721313,
+      4.363460703871169e-09,
+      3.0590220490012143e-07
+    ]
+  },
+  {
+    "id": "wikinews:ja:18157",
+    "text_sha256": "7ef2347ea46b7348696515271155eb5692863422e0e56ffae8be47bc5e3b0e27",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.999994158744812,
+      1.0676977808543597e-06,
+      4.78508991363924e-06
+    ]
+  },
+  {
+    "id": "wikinews:ja:30554",
+    "text_sha256": "f6b3ec4dde8d4f4ff993aea4a6fb2be01171d79292535e903645ab03e0e1666d",
+    "language": "ja",
+    "reference": "positive",
+    "prediction": "positive",
+    "scores": [
+      8.718497213067167e-08,
+      0.005220125429332256,
+      0.9947798252105713
+    ]
+  },
+  {
+    "id": "wikinews:ja:18657",
+    "text_sha256": "1ee5b892d4ac5e98002802f7d9a9e774687455d41fc520b362d203f97d578e48",
+    "language": "ja",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      2.6582680220599286e-05,
+      0.8519302010536194,
+      0.14804325997829437
+    ]
+  },
+  {
+    "id": "wikinews:ja:25701",
+    "text_sha256": "2e18bc671a87762c38480df9c9dcc99256c32e24ac38daf1cd1eb2705a21a527",
+    "language": "ja",
+    "reference": "negative",
+    "prediction": "negative",
+    "scores": [
+      0.9999998807907104,
+      6.3487992640887114e-09,
+      1.4449801710725296e-07
+    ]
+  },
+  {
+    "id": "wikinews:ja:44984",
+    "text_sha256": "b0285bfe7548b80393c5dbaf209daee258df72e87cf96f409c8ed087210196bd",
+    "language": "ja",
+    "reference": "neutral",
+    "prediction": "neutral",
+    "scores": [
+      0.020293984562158585,
+      0.862922191619873,
+      0.11678381264209747
+    ]
+  }
+]

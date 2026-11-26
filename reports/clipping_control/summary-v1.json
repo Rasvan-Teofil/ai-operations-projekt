@@ -1,21 +1,13 @@
 {
   "version": "gradient-clipping-controls-v1",
-  "updated_at": "2026-11-26T19:21:40.085792+00:00",
-  "state": "running",
-  "completed_new_fits": 0,
+  "updated_at": "2026-11-26T19:53:36.863029+00:00",
+  "state": "complete",
+  "completed_new_fits": 7,
   "expected_new_fits": 7,
-  "completed_pairs": 23,
+  "completed_pairs": 30,
   "expected_pairs": 30,
-  "distinct_successful_mlflow_run_ids": 53,
-  "missing": [
-    "reports/clipping_control/runs/f1-s20261110-baseline_no_clip.json",
-    "reports/clipping_control/runs/f1-s20261112-baseline_no_clip.json",
-    "reports/clipping_control/runs/f0-s20261112-baseline_no_clip.json",
-    "reports/clipping_control/runs/f2-s20261110-baseline_no_clip.json",
-    "reports/clipping_control/runs/f1-s20261111-baseline_no_clip.json",
-    "reports/clipping_control/runs/f2-s20261112-baseline_no_clip.json",
-    "reports/clipping_control/runs/f2-s20261111-baseline_no_clip.json"
-  ],
+  "distinct_successful_mlflow_run_ids": 60,
+  "missing": [],
   "protocol_sha256": "d280aac7a39cfc264f284d525e751c4d646fdc629e66f6420231d176921870d2",
   "pairs": [
     {
@@ -744,13 +736,26 @@
         "predictions": "reports/clipping_control/predictions/f1-s20261110-baseline_no_clip.json",
         "telemetry": "reports/clipping_control/telemetry/f1-s20261110-baseline_no_clip.json"
       },
-      "status": "pending",
+      "status": "complete",
       "with_mlflow_run_id": "9561f1a98b014d04ac4fd918cfc87ce8",
       "with_metrics": {
         "primary_score": 0.7520481310803891,
         "macro_f1_de": 0.6707629288274449,
         "macro_f1_en": 0.8333333333333334,
         "macro_f1_ja": 0.8602339181286549
+      },
+      "without_mlflow_run_id": "f2fea140891d49eeaa36ee0bbf5c8784",
+      "without_metrics": {
+        "primary_score": 0.7520481310803891,
+        "macro_f1_de": 0.6707629288274449,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.8195767195767196
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.04065719855193528
       }
     },
     {
@@ -863,13 +868,26 @@
         "predictions": "reports/clipping_control/predictions/f1-s20261112-baseline_no_clip.json",
         "telemetry": "reports/clipping_control/telemetry/f1-s20261112-baseline_no_clip.json"
       },
-      "status": "pending",
+      "status": "complete",
       "with_mlflow_run_id": "b4ce4ca422f04f009194773d5d6cdbb2",
       "with_metrics": {
         "primary_score": 0.8013509479026721,
         "macro_f1_de": 0.7693685624720108,
         "macro_f1_en": 0.8333333333333334,
         "macro_f1_ja": 0.8474012474012476
+      },
+      "without_mlflow_run_id": "149620bc340c41cc89155aae0929d8a5",
+      "without_metrics": {
+        "primary_score": 0.7768199233716475,
+        "macro_f1_de": 0.7203065134099617,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.7936507936507936
+      },
+      "with_minus_without": {
+        "primary_score": 0.024531024531024626,
+        "macro_f1_de": 0.04906204906204914,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.05375045375045395
       }
     },
     {
@@ -938,13 +956,26 @@
         "predictions": "reports/clipping_control/predictions/f0-s20261112-baseline_no_clip.json",
         "telemetry": "reports/clipping_control/telemetry/f0-s20261112-baseline_no_clip.json"
       },
-      "status": "pending",
+      "status": "complete",
       "with_mlflow_run_id": "eaea4062785a476187ad5e34e916710f",
       "with_metrics": {
         "primary_score": 0.7634199134199136,
         "macro_f1_de": 0.7222222222222223,
         "macro_f1_en": 0.8046176046176047,
         "macro_f1_ja": 0.8029568029568029
+      },
+      "without_mlflow_run_id": "ddac4be33fd44a0b8fb87ac0f2a413b4",
+      "without_metrics": {
+        "primary_score": 0.7634199134199136,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.7763532763532764
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.026603526603526495
       }
     },
     {
@@ -1013,13 +1044,26 @@
         "predictions": "reports/clipping_control/predictions/f2-s20261110-baseline_no_clip.json",
         "telemetry": "reports/clipping_control/telemetry/f2-s20261110-baseline_no_clip.json"
       },
-      "status": "pending",
+      "status": "complete",
       "with_mlflow_run_id": "947b885b41b74f0fad57a839fa9ef04c",
       "with_metrics": {
         "primary_score": 0.704136798088411,
         "macro_f1_de": 0.7610513739545998,
         "macro_f1_en": 0.6472222222222221,
         "macro_f1_ja": 0.7132132132132133
+      },
+      "without_mlflow_run_id": "de05a8e800cb48c1a4137e68f3dde52b",
+      "without_metrics": {
+        "primary_score": 0.704136798088411,
+        "macro_f1_de": 0.7610513739545998,
+        "macro_f1_en": 0.6472222222222221,
+        "macro_f1_ja": 0.7132132132132133
+      },
+      "with_minus_without": {
+        "primary_score": 0.0,
+        "macro_f1_de": 0.0,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.0
       }
     },
     {
@@ -1044,13 +1088,26 @@
         "predictions": "reports/clipping_control/predictions/f1-s20261111-baseline_no_clip.json",
         "telemetry": "reports/clipping_control/telemetry/f1-s20261111-baseline_no_clip.json"
       },
-      "status": "pending",
+      "status": "complete",
       "with_mlflow_run_id": "8c886c944fee4f3ab668d89dc123c0f9",
       "with_metrics": {
         "primary_score": 0.75,
         "macro_f1_de": 0.6666666666666666,
         "macro_f1_en": 0.8333333333333334,
         "macro_f1_ja": 0.8195767195767196
+      },
+      "without_mlflow_run_id": "ac32ec24642a4a49ada2ecf4cdbd2e7f",
+      "without_metrics": {
+        "primary_score": 0.7768199233716475,
+        "macro_f1_de": 0.7203065134099617,
+        "macro_f1_en": 0.8333333333333334,
+        "macro_f1_ja": 0.8195767195767196
+      },
+      "with_minus_without": {
+        "primary_score": -0.026819923371647514,
+        "macro_f1_de": -0.05363984674329503,
+        "macro_f1_en": 0.0,
+        "macro_f1_ja": 0.0
       }
     },
     {
@@ -1119,13 +1176,26 @@
         "predictions": "reports/clipping_control/predictions/f2-s20261112-baseline_no_clip.json",
         "telemetry": "reports/clipping_control/telemetry/f2-s20261112-baseline_no_clip.json"
       },
-      "status": "pending",
+      "status": "complete",
       "with_mlflow_run_id": "6ecff09f334842b89ae91727140f4f18",
       "with_metrics": {
         "primary_score": 0.6956711896228025,
         "macro_f1_de": 0.7610513739545998,
         "macro_f1_en": 0.6302910052910052,
         "macro_f1_ja": 0.7132132132132133
+      },
+      "without_mlflow_run_id": "7fdc8f1951bf4a36b8ee48e20a0bc311",
+      "without_metrics": {
+        "primary_score": 0.670801404853129,
+        "macro_f1_de": 0.7388250319284801,
+        "macro_f1_en": 0.6027777777777777,
+        "macro_f1_ja": 0.9051324051324051
+      },
+      "with_minus_without": {
+        "primary_score": 0.024869784769673497,
+        "macro_f1_de": 0.022226342026119617,
+        "macro_f1_en": 0.02751322751322749,
+        "macro_f1_ja": -0.19191919191919182
       }
     },
     {
@@ -1194,13 +1264,26 @@
         "predictions": "reports/clipping_control/predictions/f2-s20261111-baseline_no_clip.json",
         "telemetry": "reports/clipping_control/telemetry/f2-s20261111-baseline_no_clip.json"
       },
-      "status": "pending",
+      "status": "complete",
       "with_mlflow_run_id": "892eeffa39a848dda5f6237cd883bf66",
       "with_metrics": {
         "primary_score": 0.7172260236776365,
         "macro_f1_de": 0.7610513739545998,
         "macro_f1_en": 0.6734006734006733,
         "macro_f1_ja": 0.7132132132132133
+      },
+      "without_mlflow_run_id": "6d5583d163c34fd580775564f1a938cf",
+      "without_metrics": {
+        "primary_score": 0.7262566137566138,
+        "macro_f1_de": 0.8222222222222223,
+        "macro_f1_en": 0.6302910052910052,
+        "macro_f1_ja": 0.7132132132132133
+      },
+      "with_minus_without": {
+        "primary_score": -0.009030590078977219,
+        "macro_f1_de": -0.061170848267622535,
+        "macro_f1_en": 0.0431096681096681,
+        "macro_f1_ja": 0.0
       }
     },
     {
@@ -1249,9 +1332,291 @@
     }
   ],
   "cv_analysis": {
-    "status": "pending",
-    "available_cv_arms": 29,
-    "expected_cv_arms": 36
+    "status": "complete",
+    "recipes": {
+      "baseline": {
+        "per_seed": {
+          "20261110": {
+            "oof": {
+              "with": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.7637014825920373,
+                "macro_f1_ja": 0.7962092731829574,
+                "primary_score": 0.7431772209133528,
+                "accuracy": 0.825
+              },
+              "without": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.7637014825920373,
+                "macro_f1_ja": 0.7641325536062378,
+                "primary_score": 0.7431772209133528,
+                "accuracy": 0.8125
+              }
+            },
+            "with_minus_without": {
+              "primary_score": 0.0,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": 0.0,
+              "macro_f1_ja": 0.03207671957671965
+            },
+            "excluding_selection_fold_with_minus_without": {
+              "primary_score": 0.0,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": 0.0,
+              "macro_f1_ja": 0.021577418015774175
+            }
+          },
+          "20261111": {
+            "oof": {
+              "with": {
+                "macro_f1_de": 0.7120983052017534,
+                "macro_f1_en": 0.7757296466973886,
+                "macro_f1_ja": 0.7641325536062378,
+                "primary_score": 0.743913975949571,
+                "accuracy": 0.8125
+              },
+              "without": {
+                "macro_f1_de": 0.7604479811376362,
+                "macro_f1_en": 0.7319554508460056,
+                "macro_f1_ja": 0.7360279042522033,
+                "primary_score": 0.7462017159918208,
+                "accuracy": 0.8083333333333333
+              }
+            },
+            "with_minus_without": {
+              "primary_score": -0.002287740042249853,
+              "macro_f1_de": -0.0483496759358828,
+              "macro_f1_en": 0.04377419585138309,
+              "macro_f1_ja": 0.02810464935403445
+            },
+            "excluding_selection_fold_with_minus_without": {
+              "primary_score": -0.013527350630158308,
+              "macro_f1_de": -0.04856007760440273,
+              "macro_f1_en": 0.021505376344086002,
+              "macro_f1_ja": 0.0
+            }
+          },
+          "20261112": {
+            "oof": {
+              "with": {
+                "macro_f1_de": 0.7539853217272573,
+                "macro_f1_en": 0.761810653115001,
+                "macro_f1_ja": 0.792160581634266,
+                "primary_score": 0.7578979874211291,
+                "accuracy": 0.8333333333333334
+              },
+              "without": {
+                "macro_f1_de": 0.7271052702087184,
+                "macro_f1_en": 0.764927536231884,
+                "macro_f1_ja": 0.8226579520697168,
+                "primary_score": 0.7460164032203012,
+                "accuracy": 0.825
+              }
+            },
+            "with_minus_without": {
+              "primary_score": 0.011881584200827966,
+              "macro_f1_de": 0.026880051518538894,
+              "macro_f1_en": -0.0031168831168830735,
+              "macro_f1_ja": -0.030497370435450866
+            },
+            "excluding_selection_fold_with_minus_without": {
+              "primary_score": 0.022675025044196495,
+              "macro_f1_de": 0.03974780919203447,
+              "macro_f1_en": 0.0056022408963585235,
+              "macro_f1_ja": -0.0608961342294676
+            }
+          }
+        },
+        "mean_with_minus_without": {
+          "primary_score": 0.003197948052859371,
+          "macro_f1_de": -0.007156541472447968,
+          "macro_f1_en": 0.013552437578166673,
+          "macro_f1_ja": 0.009894666165101077
+        },
+        "mean_oof": {
+          "with": {
+            "primary_score": 0.7483297280946842,
+            "macro_f1_de": 0.7295788620545597,
+            "macro_f1_en": 0.7670805941348089,
+            "macro_f1_ja": 0.784167469474487
+          },
+          "without": {
+            "primary_score": 0.745131780041825,
+            "macro_f1_de": 0.7367354035270077,
+            "macro_f1_en": 0.7535281565566422,
+            "macro_f1_ja": 0.774272803309386
+          }
+        },
+        "excluding_selection_fold_mean_with_minus_without": {
+          "primary_score": 0.0030492248046793957,
+          "macro_f1_de": -0.0029374228041227544,
+          "macro_f1_en": 0.009035872413481508,
+          "macro_f1_ja": -0.01310623873789781
+        },
+        "conditional_group_bootstrap_95_intervals": {
+          "primary_score": [
+            -0.0213106653384107,
+            0.026092664095335734
+          ],
+          "macro_f1_de": [
+            -0.04108095345009595,
+            0.022431850456334203
+          ],
+          "macro_f1_en": [
+            -0.019418912901761686,
+            0.04985650732997735
+          ],
+          "macro_f1_ja": [
+            -0.022541658040270408,
+            0.04253228658407884
+          ]
+        },
+        "positive_clipping_evidence_under_fixed_rule": false
+      },
+      "candidate": {
+        "per_seed": {
+          "20261110": {
+            "oof": {
+              "with": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.7319554508460056,
+                "macro_f1_ja": 0.775798574185671,
+                "primary_score": 0.7273042050403369,
+                "accuracy": 0.8166666666666667
+              },
+              "without": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.761810653115001,
+                "macro_f1_ja": 0.771973896973897,
+                "primary_score": 0.7422318061748346,
+                "accuracy": 0.8208333333333333
+              }
+            },
+            "with_minus_without": {
+              "primary_score": -0.014927601134497759,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": -0.029855202268995407,
+              "macro_f1_ja": 0.0038246772117740413
+            },
+            "excluding_selection_fold_with_minus_without": {
+              "primary_score": -0.021319638966697863,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": -0.042639277933395725,
+              "macro_f1_ja": -0.025250999987842082
+            }
+          },
+          "20261111": {
+            "oof": {
+              "with": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.7595603094309508,
+                "macro_f1_ja": 0.7602455787939659,
+                "primary_score": 0.7411066343328095,
+                "accuracy": 0.825
+              },
+              "without": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.7614063338701019,
+                "macro_f1_ja": 0.771973896973897,
+                "primary_score": 0.7420296465523851,
+                "accuracy": 0.8208333333333333
+              }
+            },
+            "with_minus_without": {
+              "primary_score": -0.0009230122195755808,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": -0.0018460244391511615,
+              "macro_f1_ja": -0.01172831817993103
+            },
+            "excluding_selection_fold_with_minus_without": {
+              "primary_score": -0.010360457941103185,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": -0.02072091588220626,
+              "macro_f1_ja": -0.0176576576576577
+            }
+          },
+          "20261112": {
+            "oof": {
+              "with": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.7265563435776201,
+                "macro_f1_ja": 0.7547619047619047,
+                "primary_score": 0.7246046514061442,
+                "accuracy": 0.8166666666666667
+              },
+              "without": {
+                "macro_f1_de": 0.7226529592346683,
+                "macro_f1_en": 0.7315076228119707,
+                "macro_f1_ja": 0.8026936026936027,
+                "primary_score": 0.7270802910233195,
+                "accuracy": 0.8208333333333333
+              }
+            },
+            "with_minus_without": {
+              "primary_score": -0.0024756396171753403,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": -0.00495127923435057,
+              "macro_f1_ja": -0.047931697931697936
+            },
+            "excluding_selection_fold_with_minus_without": {
+              "primary_score": -0.013059292760680963,
+              "macro_f1_de": 0.0,
+              "macro_f1_en": -0.026118585521361926,
+              "macro_f1_ja": -0.08575605049289259
+            }
+          }
+        },
+        "mean_with_minus_without": {
+          "primary_score": -0.006108750990416227,
+          "macro_f1_de": 0.0,
+          "macro_f1_en": -0.01221750198083238,
+          "macro_f1_ja": -0.018611779633284975
+        },
+        "mean_oof": {
+          "with": {
+            "primary_score": 0.731005163593097,
+            "macro_f1_de": 0.7226529592346683,
+            "macro_f1_en": 0.7393573679515254,
+            "macro_f1_ja": 0.7636020192471805
+          },
+          "without": {
+            "primary_score": 0.7371139145835132,
+            "macro_f1_de": 0.7226529592346683,
+            "macro_f1_en": 0.7515748699323579,
+            "macro_f1_ja": 0.7822137988804655
+          }
+        },
+        "excluding_selection_fold_mean_with_minus_without": {
+          "primary_score": -0.014913129889494003,
+          "macro_f1_de": 0.0,
+          "macro_f1_en": -0.02982625977898797,
+          "macro_f1_ja": -0.04288823604613079
+        },
+        "conditional_group_bootstrap_95_intervals": {
+          "primary_score": [
+            -0.03427365037795516,
+            0.017538376561980523
+          ],
+          "macro_f1_de": [
+            0.0,
+            0.0
+          ],
+          "macro_f1_en": [
+            -0.06854730075591021,
+            0.035076753123961045
+          ],
+          "macro_f1_ja": [
+            -0.07623660350383392,
+            0.02043775469502287
+          ]
+        },
+        "positive_clipping_evidence_under_fixed_rule": false
+      }
+    },
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 20261126,
+    "independent_test_evidence": false,
+    "serving_selection_changed": false
   },
   "final_test_used": false,
   "serving_selection_changed": false
