@@ -1,0 +1,238 @@
+{
+  "version": "optimizer-candidate-v1",
+  "created_at": "2026-11-26T13:43:31.531716+00:00",
+  "status_at_freeze": "Before full-Train fit",
+  "purpose": "Exploratory full-Train model candidate, selected after the original Test study; no new Test evaluation",
+  "model_version": "article-qwen-lora-optimizer-v1",
+  "code_commit": "ead641312d47248828afdf1b3ac09a38ded85639",
+  "source_sha256": "090b8723e2aada59062b87df46cfe4c02b0a23643c957289de470d6d948a6f53",
+  "source_ablation_sha256": "908d0c6fed78fab617846bab5ca2223891f56969e9972a1744165b587db3ba2b",
+  "files_sha256": {
+    "data/next_stage/pilot/development-v2/train.csv": "059e0929a0e87478a6aef5f102590c37443bc0089c946a73837dbb1675736dc1",
+    "models/serving_selected.json": "7123def665f59ec178d41cac22537191296f35c31c6c2f5eec7ce31170455cf0",
+    "models/next_stage/final/qwen-lora/artifact.json": "e330155ba1c2ea19bd0927bdf9c115b9dcda975fbdbfcd89b78635de9fcdd429",
+    "reports/next_stage/final-test-evaluation.lock": "ec632942ef31ab6d88d4bb98e3964d3d11e8e38e789fe85685d6cefab6bb4c3f",
+    "reports/optimizer_ablation/protocol-v1.json": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+    "reports/optimizer_ablation/summary-v1.json": "c31d29aba896d9b7730529f041367b257f61a5d9a51b026c5ef588ac333bc36c",
+    "reports/optimizer_ablation/validation-v1.json": "348829bb5c927e07899760be2a093cdb9032b2df516026f8e348436f96c0bf74"
+  },
+  "base_artifact_sha256": "4a28bff16fc5b5b5cf24c0caf43442921f6ae5fb0d61055150d8613e606c5496",
+  "baseline_adapter_sha256": "e5ad4d771f834ab85a1f79356d1ade434814b19bd9f06ed6a6c9abcd5c858f03",
+  "baseline_adapter_path": "models/next_stage/final/qwen-adapter",
+  "baseline_version": "article-qwen-lora-v1",
+  "selected_recipe": {
+    "gradient_clip": 1.0,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.0,
+    "warmup_fraction": 0.0
+  },
+  "selection_development_mean": 0.7742238048689662,
+  "selection_rule": "Highest mean DE/EN development macro-F1 across both ablation seeds; exact ties prefer lower weight decay, then lower warmup, lower learning rate, finite clipping. Seed is fixed independently of scores.",
+  "ranking": [
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7742238048689662
+    },
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7742238048689662
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7685786435786437
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7634199134199136
+    },
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7634199134199136
+    },
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7634199134199136
+    },
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7634199134199136
+    },
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7634199134199136
+    },
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7634199134199136
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7569580802339424
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7569580802339424
+    },
+    {
+      "recipe": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7569580802339424
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.0
+      },
+      "mean_development_primary": 0.7456884513336127
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7424242424242425
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.0,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7372655122655124
+    },
+    {
+      "recipe": {
+        "gradient_clip": null,
+        "learning_rate": 5e-05,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1
+      },
+      "mean_development_primary": 0.7111111111111112
+    }
+  ],
+  "seed": 20261110,
+  "train_rows": 240,
+  "train_ids_sha256": "00aed30073029ca71dd9d3e7062fa4e78126c242046ee1d4b6a06c6fea46b11d",
+  "language_class_support": {
+    "de/negative": 45,
+    "de/neutral": 17,
+    "de/positive": 16,
+    "en/negative": 47,
+    "en/neutral": 10,
+    "en/positive": 14,
+    "ja/negative": 56,
+    "ja/neutral": 16,
+    "ja/positive": 19
+  },
+  "fixed": {
+    "epochs": 3,
+    "accumulation_articles": 16,
+    "optimizer_steps": 45,
+    "optimizer": "AdamW",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "lora_rank": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "v_proj"
+    ],
+    "precision": "BF16 base, FP32 adapters and AdamW states",
+    "scheduler": "linear decay",
+    "loss": "inverse-class weighted article A/B/C cross entropy; weights computed from all 240 Train rows",
+    "context": "Full articles, <=4096 article/4608 prompt tokens; reject overflow",
+    "checkpoint": "Final epoch only; no scoring or checkpoint selection during fitting",
+    "initialization": "Fresh original pretrained base plus fresh LoRA; no continuation or averaging of ablation adapters"
+  },
+  "evaluation": {
+    "final_test_used": false,
+    "independent_quality_score": null,
+    "former_development_rows_now_in_fit": true,
+    "smoke_only": true,
+    "smoke_texts": {
+      "de": "Die Rettungskräfte haben alle Vermissten lebend gefunden. Die Geretteten sind wieder bei ihren Familien.",
+      "en": "The council published the date and location of its next routine meeting. The agenda will follow next week.",
+      "ja": "工場で火災が発生し、複数の作業員が負傷した。生産は停止している。"
+    },
+    "warning": "The 0.7742 source development score is not a measured score for this full-Train artifact."
+  },
+  "serving_selection_changed": false,
+  "mlflow_experiment": "article-optimizer-candidate-v1",
+  "dependencies": {
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6",
+    "peft": "0.18.1",
+    "accelerate": "1.12.0",
+    "mlflow": "3.10.1",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3"
+  }
+}
