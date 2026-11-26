@@ -71,3 +71,10 @@ und Aktivierung separat prüfen. Ein Treiberzweigwechsel ist kein nachgewiesener
 Fix: Ein ähnlicher [Erfahrungsbericht bei NVIDIA](https://forums.developer.nvidia.com/t/three-rtx-5060-ti-gb206-randomly-fallen-off-the-bus-xid-79-154-at-any-load-level-no-pcie-aer-precursor-open-kernel-module-595-99-02/384551)
 meldet solche Ausfälle auch nach einem Treiberupdate. Daraus folgt keine
 bestätigte Ursache auf diesem Rechner.
+
+## Vertiefte Systemanalyse
+
+[GPU-Ausfälle und Ursachenprüfung](gpu-investigation-v1.md): vier belegte
+Ausfallereignisse derselben Karte seit April, vollständige privilegierte
+Lesediagnose, PCIe-/AER-Befunde, Recherche und geordneter Prüfpfad.
+Systemrohlogs bleiben lokal; kein Hardwaredefekt oder Firmwarefix wird behauptet.
