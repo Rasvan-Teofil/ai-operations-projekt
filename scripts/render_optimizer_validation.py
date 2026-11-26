@@ -78,7 +78,7 @@ def main():
     for r in summary['runs']:
         c=r['config'];table.append(','.join(map(str,[c['fold'],c['seed'],c['recipe'],*[r['metrics'][m] for m in metrics],r['evidence_origin'],r['mlflow_run_id']])))
     (OUT/'fold-results-v1.csv').write_text('\n'.join(table)+'\n')
-    plt.rcParams.update({'font.size':10,'svg.fonttype':'none'})
+    plt.rcParams.update({'font.size':10,'svg.fonttype':'none','svg.hashsalt':'optimizer-validation-v1'})
     fig,(ax,bx)=plt.subplots(1,2,figsize=(13,5.2),gridspec_kw={'width_ratios':[1.05,1]})
     colors=['#596773','#2463ad','#d28130'];x=np.arange(4);width=.23
     for i,recipe in enumerate(recipes):
@@ -94,7 +94,9 @@ def main():
     fig.suptitle('Optimizer-Validierung · 3 Folds × 3 Seeds × 3 Rezepte',fontsize=14)
     fig.text(.5,.02,'Explorative Train-CV nach Rezeptwahl; kein unabhängiger Test des 240-Artikel-Adapters. Punkte links: einzelne Seeds.',ha='center',fontsize=9)
     fig.tight_layout(rect=(0,.06,1,.93))
-    fig.savefig(OUT/'optimizer-validation-v1.svg');fig.savefig(OUT/'optimizer-validation-v1.png',dpi=160);plt.close(fig)
+    fig.savefig(OUT/'optimizer-validation-v1.svg',metadata={'Date':None})
+    svg=OUT/'optimizer-validation-v1.svg';svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
+    fig.savefig(OUT/'optimizer-validation-v1.png',dpi=160);plt.close(fig)
     print(clip_statement,recipe_statement)
 
 
