@@ -61,6 +61,8 @@ Clipping-Unterstützung verlangt gleichzeitig einen positiven mittleren DE/EN-Un
 
 Der bereits trainierte Adapter `article-qwen-lora-optimizer-v1` ist technisch funktionsfähig und bleibt optional über `article_qwen_lora_optimizer_v1` ausführbar. Seine Gewichte wurden durch diese Prüfung nicht verändert. Gemessen wurde die Trainingsrezeptur in 159/160/161-Artikel-Fits; die obigen F1-Werte sind keine direkt gemessene unabhängige Testgüte des auf allen 240 Artikeln trainierten Adapters.
 
+Das Ergebnis ist auch keine Empfehlung, Clipping im bisherigen Standard pauschal abzuschalten: dessen Variante ohne Clipping wurde hier nicht über alle Folds geprüft. Die isolierte Clipping-Kontrolle gilt für das neue Rezept; das bestehende Gesamtrezept bleibt im CV-Punktwert vor beiden neuen Varianten.
+
 Die ursprüngliche Auswahl und der frühere gemeinsame Test bleiben erhalten. Es gibt keinen nachträglichen Austausch der Testwerte. Ein unabhängiger Qualitätsnachweis für den Volltrain-Adapter erfordert eine gesondert geplante frische Evaluation.
 
 ## Was Clipping technisch beeinflusst
