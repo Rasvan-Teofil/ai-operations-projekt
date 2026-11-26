@@ -56,3 +56,45 @@ def test_pooled_oof_analysis_uses_paired_metadata_and_does_not_claim_test_eviden
     altered[next(iter(altered))][0]['reference']='different'
     with pytest.raises(ValueError,match='metadata differs'):paired_analysis(results,altered,ids,groups,bootstrap_samples=100)
     assert paired_analysis(results[:-1],predictions,ids,groups)['status']=='pending'
+
+
+def test_frozen_protocol_supports_run_setup_before_loading_any_model(monkeypatch,tmp_path):
+    """Exercise the real pre-fit logging path with no GPU or model load."""
+    import hashlib
+    import json
+    from pathlib import Path
+    import mlflow
+    import pandas as pd
+    import torch
+    from src.studies.optimizer_validation import runner
+    from src import next_stage_experiment as experiment
+    repo=Path(__file__).resolve().parents[1]
+    protocol=json.loads((repo/'reports/optimizer_validation/protocol-v1.json').read_text())
+    config=next(c for c in protocol['runs'] if c['fold']==1)
+    member=next(m for m in protocol['folds'] if m['fold']==1)
+    path=tmp_path/'train.csv'
+    pd.DataFrame([dict(id=i,group=i,language=('de','en','ja')[n%3],label=('negative','neutral','positive')[(n//3)%3],text='synthetic',text_sha256='synthetic') for n,i in enumerate(member['fit_ids']+member['dev_ids'])]).to_csv(path,index=False)
+    protocol['files_sha256']['train.csv']=hashlib.sha256(path.read_bytes()).hexdigest()
+    monkeypatch.setattr(runner,'ROOT',tmp_path);monkeypatch.setattr(runner,'OUT',tmp_path/'reports')
+    monkeypatch.setattr(runner,'ART',tmp_path/'models');monkeypatch.setattr(runner,'PROTOCOL',repo/'reports/optimizer_validation/protocol-v1.json')
+    monkeypatch.setattr(runner,'verify',lambda **kw:protocol)
+    monkeypatch.setattr(runner.subprocess,'check_output',lambda *args,**kw:'synthetic-code-commit')
+    monkeypatch.setattr(experiment,'TRAIN',path);monkeypatch.setattr(experiment,'gpu',lambda:'synthetic')
+    monkeypatch.setattr(torch.cuda,'mem_get_info',lambda:(16*1024**3,16*1024**3))
+    # Real grouping is separately checked above; this regression targets protocol/schema setup.
+    monkeypatch.setattr(runner,'validate_membership',lambda *args:None)
+    for name in ('set_tracking_uri','set_experiment','log_params','log_artifact'):
+        monkeypatch.setattr(mlflow,name,lambda *args,**kw:None)
+    tags={}
+    monkeypatch.setattr(mlflow,'set_tags',lambda value:tags.update(value))
+    class Context:
+        def __enter__(self):
+            from types import SimpleNamespace
+            return SimpleNamespace(info=SimpleNamespace(run_id='synthetic'))
+        def __exit__(self,*args):return False
+    monkeypatch.setattr(mlflow,'start_run',lambda **kw:Context())
+    def no_model():raise RuntimeError('intentional stop before model load')
+    monkeypatch.setattr(experiment,'lora',no_model)
+    with pytest.raises(RuntimeError,match='intentional stop before model load'):runner.one(config['id'])
+    assert tags['train_sha256']==protocol['files_sha256']['train.csv']
+    assert tags['fold']=='1'

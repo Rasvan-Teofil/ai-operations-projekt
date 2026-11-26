@@ -88,7 +88,11 @@ def verify(check_base=False):
     from src.studies.optimizer_ablation.runner import verify as original_verify
     from src.tracking import fingerprint
     p=json.loads(PROTOCOL.read_text());original_verify()
-    if p['source_sha256']!=source_hash() or p['frozen_runtime_sha256']!=code_hash() or p['runs']!=configurations():
+    if p['source_sha256']!=source_hash():
+        amendment=json.loads((OUT/'engineering-amendment-v1.json').read_text())
+        if (amendment['original_protocol_sha256']!=sha(PROTOCOL) or amendment['original_source_sha256']!=p['source_sha256']
+                or amendment['corrected_source_sha256']!=source_hash()):raise RuntimeError('Unrecorded source correction')
+    if p['frozen_runtime_sha256']!=code_hash() or p['runs']!=configurations():
         raise RuntimeError('Frozen validation source or configuration changed')
     for name,value in p['files_sha256'].items():
         if sha(ROOT/name)!=value:raise RuntimeError('Frozen validation input changed: '+name)
@@ -152,7 +156,7 @@ def one(run_id):
                          'model_family': 'Qwen-LoRA', 'label_status': 'Project-reviewed 2026-11-14; original annotation provenance retained',
                          'protocol_sha256': sha(PROTOCOL), 'source_sha256': source_hash(),
                          'git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
-                         'base_artifact_sha256': protocol['base_artifact_sha256'], 'train_sha256': protocol['train_sha256']})
+                         'base_artifact_sha256': protocol['base_artifact_sha256'], 'train_sha256': protocol['files_sha256'][str(TRAIN.relative_to(ROOT))]})
         mlflow.log_params(dict(config, gradient_clip='disabled' if config['gradient_clip'] is None else config['gradient_clip'],
                                fit_rows=len(fit), dev_rows=len(dev), epochs=3, batch_articles=16,
                                optimizer='AdamW', beta1=0.9, beta2=0.999, eps=1e-8))
