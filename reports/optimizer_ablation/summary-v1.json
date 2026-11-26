@@ -1,36 +1,113 @@
 {
-  "updated_at": "2026-11-26T09:23:58.797733+00:00",
-  "state": "blocked-gpu-xid-79-awaiting-reboot",
+  "updated_at": "2026-11-26T09:35:37.126646+00:00",
+  "state": "running",
   "expected_runs": 32,
-  "completed_runs": 0,
+  "completed_runs": 1,
   "mlflow_experiment": "article-optimizer-ablation-v1",
   "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
   "effects": {
     "primary_score": {
       "status": "pending",
-      "completed_runs": 0,
+      "completed_runs": 1,
       "expected_runs": 32
     },
     "macro_f1_de": {
       "status": "pending",
-      "completed_runs": 0,
+      "completed_runs": 1,
       "expected_runs": 32
     },
     "macro_f1_en": {
       "status": "pending",
-      "completed_runs": 0,
+      "completed_runs": 1,
       "expected_runs": 32
     },
     "macro_f1_ja": {
       "status": "pending",
-      "completed_runs": 0,
+      "completed_runs": 1,
       "expected_runs": 32
     },
     "development_nll": {
       "status": "pending",
-      "completed_runs": 0,
+      "completed_runs": 1,
       "expected_runs": 32
     }
   },
-  "runs": []
+  "runs": [
+    {
+      "config": {
+        "gradient_clip": 1.0,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_fraction": 0.1,
+        "seed": 20261110,
+        "block": "factorial",
+        "id": "run-01"
+      },
+      "completed_at": "2026-11-26T09:35:36.044280+00:00",
+      "mlflow_run_id": "9311802fd2ec4480a81e1c97d7f6c646",
+      "metrics": {
+        "accuracy": 0.8395061728395061,
+        "macro_f1": 0.7773365415338068,
+        "primary_score": 0.7634199134199136,
+        "mean_three_language_macro_f1": 0.7765988765988766,
+        "macro_f1_de": 0.7222222222222223,
+        "macro_f1_en": 0.8046176046176047,
+        "macro_f1_ja": 0.8029568029568029,
+        "negative_precision": 0.9375,
+        "negative_recall": 0.9183673469387755,
+        "positive_recall": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            45,
+            4,
+            0
+          ],
+          [
+            3,
+            9,
+            3
+          ],
+          [
+            0,
+            3,
+            14
+          ]
+        ],
+        "per_class": {
+          "negative": {
+            "precision": 0.9375,
+            "recall": 0.9183673469387755,
+            "f1": 0.9278350515463918,
+            "support": 49
+          },
+          "neutral": {
+            "precision": 0.5625,
+            "recall": 0.6,
+            "f1": 0.5806451612903226,
+            "support": 15
+          },
+          "positive": {
+            "precision": 0.8235294117647058,
+            "recall": 0.8235294117647058,
+            "f1": 0.8235294117647058,
+            "support": 17
+          }
+        },
+        "development_nll": 0.527040542912552,
+        "training_seconds": 247.074432403,
+        "loading_seconds": 2.2869295530000002,
+        "peak_training_allocated_bytes": 8792003584,
+        "mean_gradient_norm": 18.769577085971832,
+        "max_gradient_norm": 56.97381591796875,
+        "clip_fraction": 0.9666666666666667,
+        "mean_adapter_update_l2": 0.04132062902208418,
+        "final_train_loss": 0.5364424944505108
+      },
+      "protocol_sha256": "4743133cfbee69de1f2b5543f81d2c06d7fcde3a137e32dad173a95ba469c30a",
+      "adapter_sha256": "a945ad137185a5859e1f0072fd5f686c1b9e7db36358466b6777d7750311a0e6",
+      "predictions_sha256": "49251359ee468a48769fd2ec8953d60f88424adc69ef2b6618100ae9062d576c",
+      "telemetry_sha256": "64863e9497fcc71c501a77c477b6360bbd47cd73066dd79f330a909759860ab7",
+      "gpu": "NVIDIA GeForce RTX 5060 Ti, 16311 MiB, 424 MiB"
+    }
+  ]
 }

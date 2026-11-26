@@ -68,7 +68,7 @@ Momentaufnahme; MLflow und lokale Statusdateien enthalten den neuesten Stand.
 
 Der erste Versuch am 26. November 2026 scheiterte nach 10 Trainingsschritten
 am zeitgleich protokollierten GPU-Xid-79-Ausfall, vor jeder Entwicklungs-
-auswertung. [Aktueller Stand und einmalige Wiederaufnahme](../../../reports/optimizer_ablation/README.md#aktueller-ausführungsstand-26-november-2026).
+auswertung. [Aktueller Stand und einmalige Wiederaufnahme](../../../reports/optimizer_ablation/README.md#infrastrukturabbruch-vor-neustart-26-november-2026).
 Der Protokoll-/Quellcode-Hash bleibt unverändert: Die zusätzliche Wiederaufnahme-
 steuerung in `scripts/` ändert keine Trainingsbedingung. Ein neuer MLflow-Versuch
 ersetzt keinen fehlgeschlagenen Datensatz. Keine Wiederholungen bis zu einem
