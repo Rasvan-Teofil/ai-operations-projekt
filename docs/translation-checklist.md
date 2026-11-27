@@ -1,6 +1,6 @@
 # Translation Checklist for `main` (German → English)
 
-Status: draft, 2026-11-24. Based on `origin/main` at `2c612d8`.
+Status: draft, 2026-11-24, updated 2026-11-27. Based on `origin/main` at `2c612d8`; new files from `d87f370` added.
 Nothing translated yet. Waiting for Teo's OK (and coordination with Nick, who owns most of these files).
 
 Rule: translate originals in place, no parallel English copies. German example sentences for model tests, German article titles/quotes in data, and official institution names stay.
@@ -10,13 +10,17 @@ Method: files ranked by count of common German function words (heuristic, `git s
 ## A. Prose docs (translate by hand)
 
 Priority 1, examiner reads these first:
-- [ ] `README.md` (43) — draft ready: `docs/drafts/README.en-draft.md`
+- [ ] `README.md` (43) — draft ready: `docs/drafts/README.en-draft.md` (based on 2c612d8; outdated since main d87f370 added MLflow/optimizer/clipping sections)
 - [ ] `docs/project-overview.md` (31) — draft ready: `docs/drafts/project-overview.en-draft.md`
-- [ ] `docs/presentation-guide.md` (25)
+- [ ] `docs/presentation-guide.md` (25) — draft ready: `docs/drafts/presentation-guide.en-draft.md` (based on d87f370)
 - [ ] `docs/reproduce-full-article.md` (55)
 - [ ] `docs/next-stage.md` (171)
 - [ ] `docs/repository-structure.md` (39)
 - [ ] `docs/README.md` (12)
+- [ ] `docs/mlflow-presentation.md` (new on main, 26 Nov)
+- [ ] `reports/clipping_control/README.md` + `interpretation-v1.md` (new, 26 Nov; contains the professor quote)
+- [ ] `reports/optimizer_validation/README.md` (new, 26 Nov)
+- [ ] `reports/optimizer_ablation/README.md`, `reports/optimizer_candidate/README.md` + `model-card-v1.md` (new, 26 Nov)
 
 Priority 2:
 - [ ] `CONTRIBUTING.md` (28)
